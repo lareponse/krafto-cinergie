@@ -6,7 +6,7 @@ $routes = [
   ['GET', 'tags/ids/[*:ids]/labels.json', 'Tagging::labelsForIds', 'tag_ids'],
   ['GET', 'thesaurus/ids/[*:ids]/labels.json', 'Thesaurus::labelsForIds', 'thesaurus_label_for_ids'],
   ['GET', 'thesaurus/[a:field]/[*:term]', 'Thesaurus::filter', 'thesaurus_filter'],
-  ['GET', 'search/class/[a:className]/fields/[*:fields]/term/[*:term]/results.json', 'Search::className', 'model_search'],
+  ['GET', 'search/class/[a:className]/fields/[*:fields]/term/[*:term]/results.json', 'Search::byField', 'model_search'],
 
 ];
 

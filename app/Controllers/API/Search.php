@@ -13,7 +13,7 @@ class Search extends \HexMakina\kadro\Controllers\Kadro
         return false;
     }
 
-    public function className()
+    public function byField(): string
     {
         ['className' => $className, 'term' => $searchTerm, 'fields' => $fields] = array_map('urldecode', $this->router()->params());
         
