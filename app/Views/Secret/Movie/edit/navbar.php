@@ -77,7 +77,7 @@
 
     <div class="card-footer text-center">
 
+        <a href="<?= $controller->url('view')?>" class="btn btn-secondary">Retour</a>
     
-        <a href="<?= $controller->router()->hyp('dash_movie', ['id' => $controller->formModel()->getID()])?>" class="btn btn-secondary">Retour</a>
     </div>
 </div>
