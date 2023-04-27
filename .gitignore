@@ -1,0 +1,7 @@
+/lib/
+/vendor/
+composer.phar
+composer.lock
+/configs/database.php
+/doc/
+/public/images/

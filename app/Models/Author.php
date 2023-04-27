@@ -1,0 +1,54 @@
+<?php
+
+namespace App\Models;
+
+use HexMakina\BlackBox\Database\SelectInterface;
+use HexMakina\TightORM\TightModel;
+
+class Author extends TightModel
+{
+    use Abilities\HasSlug;
+
+    public function __toString()
+    {
+        return $this->get('label');
+    }
+
+    public function fullName() : string
+    {
+        return $this->get('label');
+    }
+
+    public function profilePicture(): string
+    {
+        return empty($this->get('legacy_photo_illu')) ? '' : 'https://www.cinergie.be' . $this->get('legacy_photo_illu');
+    }
+    
+    public function contactPoint(): string
+    {
+        return $this->get('email');
+    }
+
+    public static function query_retrieve($filters = [], $options = []): SelectInterface
+    {
+
+         //---- JOIN & FILTER SERVICE
+         $Query = parent::query_retrieve($filters, $options);
+
+
+        if(isset($filters['article']))
+        {
+            $Query->join(['article_author', 'article_author'], [
+                ['author', 'id', 'article_author', 'author_id'],
+                ['article_author', 'article_id', $filters['article']->getID()]
+            ]);
+        }
+        
+        if(isset($filters['isCollaborator']))
+        {
+            $Query->whereEQ('isCollaborator', 1);
+            $Query->orderBy('`rank`', 'ASC');
+        }
+        return $Query;
+    }
+}
