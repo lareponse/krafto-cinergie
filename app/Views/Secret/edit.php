@@ -2,7 +2,7 @@
 
 <div class="row">
     <?php 
-    $navbarPath = 'Secret::'.$controller->className().'/edit/navbar';
+    $navbarPath = 'Secret::'.$controller->className().'/edit/sidebar';
     if ($this->engine->exists($navbarPath)){
         ?><div class="col-md-4 col-xxl-3"><?=$this->insert($navbarPath) ?></div><?php
     }
