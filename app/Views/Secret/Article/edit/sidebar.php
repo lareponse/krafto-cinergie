@@ -54,6 +54,6 @@
 
     <div class="card-footer text-center">
     
-        <a href="<?= $controller->url('view')?>" class="btn btn-secondary">Retour</a>
+        <a href="<?= $controller->loadModel() ? $controller->url('view') : $controller->url('list')?>" class="btn btn-secondary">Retour</a>
     </div>
 </div>

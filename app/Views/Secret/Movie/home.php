@@ -13,7 +13,7 @@
             <input class="form-control list-search mw-md-300px ms-md-auto mt-5 mt-md-0 mb-3 mb-md-0" type="search" placeholder="Chercher">
 
         
-            <a href="<?=$controller->router()->hyp('dash_movie_new')?>" class="btn btn-primary ms-md-4">
+            <a href="<?=$controller->url('new') ?>" class="btn btn-primary ms-md-4">
                 Nouveau
             </a>
         </div>

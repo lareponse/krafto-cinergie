@@ -16,13 +16,14 @@
             ?>
             <input class="form-control list-search mw-md-300px ms-md-auto mt-5 mt-md-0 mb-3 mb-md-0" type="search" placeholder="Chercher">
 
-            <a href="<?= $controller->router()->hyp('dash_article_new') ?>" class="btn btn-primary ms-md-4">Nouveau</a>
+            <a href="<?=$controller->urlFor('Article', 'new') ?>" class="btn btn-primary ms-md-4">
+                Nouveau
+            </a>
         </div>
 
         <?php
         if (isset($filters)) {
             $this->insert('Secret::_partials/time-nav', ['filters' => $filters, 'firstYear' => 1996, 'modelType' => $controller->modelClassName()::model_type()]);
-
         }
         ?>
     </div>
