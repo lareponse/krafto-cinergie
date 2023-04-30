@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col">
                         <h5 class="text-uppercase text-muted fw-semibold mb-2">Organisations</h5>
-                        <h2 class="mb-0"><?= $count_organisations; ?></h2>
+                        <h2 class="mb-0"><?= $counters['organisations']; ?></h2>
                     </div>
                     <div class="col-auto">
                         <?= $this->icon('organisations', 30, ['class' => 'text-primary']); ?>
@@ -23,7 +23,7 @@
                 <div class="row">
                     <div class="col">
                         <h5 class="text-uppercase text-muted fw-semibold mb-2">Partenaires</h5>
-                        <h2 class="mb-0"><?= $count_partners; ?></h2>
+                        <h2 class="mb-0"><?= $counters['partners']; ?></h2>
                     </div>
                     <div class="col-auto">
                         <?= $this->icon('partners', 30, ['class' => 'text-primary']); ?>
@@ -40,7 +40,7 @@
                 <div class="row">
                     <div class="col">
                         <h5 class="text-uppercase text-muted fw-semibold mb-2">Inactifs</h5>
-                        <h2 class="mb-0"><?= $count_inactives; ?></h2>
+                        <h2 class="mb-0"><?= $counters['inactives']; ?></h2>
                     </div>
                     <div class="col-auto">
                         <?= $this->icon('disable', 30, ['class' => 'text-primary']); ?>
@@ -57,7 +57,7 @@
                 <div class="row">
                     <div class="col">
                         <h5 class="text-uppercase text-muted fw-semibold mb-2">Non Listé</h5>
-                        <h2 class="mb-0"><?= $count_unlisted; ?></h2>
+                        <h2 class="mb-0"><?= $counters['unlisted']; ?></h2>
                     </div>
                     <div class="col-auto">
                         <?= $this->icon('disable', 30, ['class' => 'text-primary']); ?>
