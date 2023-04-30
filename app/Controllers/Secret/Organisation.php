@@ -21,7 +21,7 @@ class Organisation extends Krafto
     {
         $filters = $this->router()->params();
         $organisations = $this->modelClassName()::filter($filters);
-        $this->viewport('organisations', $organisations);
+        $this->viewport('listing', $organisations);
         $this->viewport('count_organisations', $this->modelClassName()::raw('select count(id) FROM organisation')->fetchColumn());
         $this->viewport('count_partners', $this->modelClassName()::raw('select count(id) FROM organisation where isPartner = 1')->fetchColumn());
         $this->viewport('count_inactives', $this->modelClassName()::raw('select count(id) FROM organisation where active = 0')->fetchColumn());
