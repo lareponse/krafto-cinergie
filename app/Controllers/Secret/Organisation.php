@@ -11,27 +11,43 @@ class Organisation extends Krafto
     use \App\Controllers\Abilities\HasImages;
     use \App\Controllers\Abilities\FindBySlug;
 
+    
     public function activeSection(): string
     {
-      return 'Fiche';
+        return 'Fiche';
     }
 
 
     public function home()
     {
+        if (!$this->router()->params('FiltersOnFirstChar')) {
+            $this->router()->hop($this->urlFor($this->className(), 'list', null, ['FiltersOnFirstChar' => 'A']));
+        }
+
         $filters = $this->router()->params();
+
         $organisations = $this->modelClassName()::filter($filters);
-        $this->viewport('listing', $organisations);
-        $this->viewport('count_organisations', $this->modelClassName()::raw('select count(id) FROM organisation')->fetchColumn());
-        $this->viewport('count_partners', $this->modelClassName()::raw('select count(id) FROM organisation where isPartner = 1')->fetchColumn());
-        $this->viewport('count_inactives', $this->modelClassName()::raw('select count(id) FROM organisation where active = 0')->fetchColumn());
-        $this->viewport('count_unlisted', $this->modelClassName()::raw('select count(id) FROM organisation where isListed = 0')->fetchColumn());
+
         $this->viewport('filters', $filters);
+        $this->viewport('listing', $organisations);
+        $this->viewport('counters', $this->counters());
+    }
+
+    private function counters()
+    {
+        $counting = 'select count(id) FROM organisation';
+        $counters = ['organisations' => null, 'partners' => 'isPartner = 1', 'inactives' => 'active = 0', 'unlisted' => 'isListed = 0'];
+
+        return array_map(function ($condition) use ($counting) {
+            $query = $counting . ($condition ? ' where ' . $condition : '');
+            return $this->modelClassName()::raw($query)->fetchColumn();
+        }, $counters);
+
     }
 
     public function view()
     {
-        if(is_null($this->loadModel())){
+        if (is_null($this->loadModel())) {
             $this->router()->hop('dash_organisations');
         }
 
@@ -40,9 +56,9 @@ class Organisation extends Krafto
         $this->viewport('movies', Movie::filter(['organisation' => $this->loadModel()], ['eager' => false]));
     }
 
-    public function edit():void
+    public function edit(): void
     {
-        if(is_null($this->loadModel()))
+        if (is_null($this->loadModel()))
             $this->router()->hop('dash_organisations');
     }
 }

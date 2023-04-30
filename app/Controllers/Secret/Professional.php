@@ -16,8 +16,8 @@ class Professional extends Krafto
 
     public function home()
     {
-        if(!$this->router()->params('letter')){
-            $this->router()->hop($this->defaultHop());
+        if (!$this->router()->params('FiltersOnFirstChar')) {
+            $this->router()->hop($this->urlFor($this->className(), 'list', null, ['FiltersOnFirstChar' => 'A']));
         }
 
         $listing = $this->modelClassName()::filter($this->router()->params());
@@ -29,7 +29,7 @@ class Professional extends Krafto
     public function view()
     {
         if(is_null($this->loadModel())){
-            $this->router()->hop($this->defaultHop());
+            $this->router()->hop('dash_professionals');
         }
         $this->viewport('articles', Article::filter(['professional' => $this->loadModel()], ['eager' => false]));
         $this->viewport('movies', Movie::filter(['professional' => $this->loadModel()], ['eager' => false]));
@@ -49,13 +49,5 @@ class Professional extends Krafto
         return 'personne';
     }
     
-    public function defaultHop($model=null): string
-    {
-        if($model){
-            return $this->router()->hyp('dash_record', ['controller' => $this->className(), 'id' => $model->getID()]);
-        }
-
-        return $this->router()->hyp('dash_records', ['controller' => $this->className()]).'?letter=A';
-    }
 
 }

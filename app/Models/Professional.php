@@ -13,6 +13,9 @@ class Professional extends TightModel
     use Abilities\HasTags;
     use Abilities\HasPraxis;
 
+    use Abilities\FiltersOnFirstChar;
+
+
     public function tagIds(): array{
         return [];
     }
@@ -33,9 +36,8 @@ class Professional extends TightModel
         //---- JOIN & FILTER SERVICE
         $Query = parent::query_retrieve($filters, $options);
 
-        if(isset($filters['letter']) && $filters['letter'] !== 'AZ')
-        {
-            $Query->whereLike('lastname', $filters['letter'].'%', $Query->table());
+        if(isset($filters['FiltersOnFirstChar'])){
+            self::applyFirstCharFilter($filters['FiltersOnFirstChar'], $Query, 'lastname');
         }
 
         if(isset($filters['movie']))

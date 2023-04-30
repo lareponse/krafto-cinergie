@@ -14,6 +14,9 @@ class Organisation extends TightModel
     use Abilities\HasTags;
     use Abilities\HasPraxis;
 
+    use Abilities\FiltersOnFirstChar;
+
+
     public function tagIds(): array{
         return [];
     }
@@ -36,17 +39,8 @@ class Organisation extends TightModel
             $Query->selectAlso(["GROUP_CONCAT(DISTINCT tag.id) as praxis_ids"]);
         }
 
-        if(isset($filters['letter']))
-        {
-            if($filters['letter'] == '09')
-            {
-                $Query->whereBindField($Query->table(), 'label', 'REGEXP', "^[0-9]+");
-            }
-            elseif($filters['letter'] !== 'AZ')
-            {
-                $Query->whereLike('label', $filters['letter'].'%', $Query->table());
-            }
-            $Query->orderBy([$Query->table(), 'label', 'ASC']);
+        if(isset($filters['FiltersOnFirstChar'])){
+            self::applyFirstCharFilter($filters['FiltersOnFirstChar'], $Query, 'label');
         }
 
         if(isset($filters['segment']))

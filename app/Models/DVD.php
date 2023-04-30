@@ -10,6 +10,8 @@ class DVD extends TightModel
     use Abilities\HasCompletion;
     use Abilities\HasSlug;
 
+    use Abilities\FiltersOnFirstChar;
+
     public function __toString()
     {
         
@@ -32,17 +34,10 @@ class DVD extends TightModel
             ]);
         }
 
-        if(isset($filters['letter'])){
-            if($filters['letter'] == '09')
-            {
-                $Query->whereBindField($Query->table(), 'label', 'REGEXP', "^[0-9]+");
-            }
-            elseif($filters['letter'] !== 'AZ')
-            {
-                $Query->whereLike('label', $filters['letter'].'%', $Query->table());
-            }
-            $Query->orderBy([$Query->table(), 'label', 'ASC']);
+        if(isset($filters['FiltersOnFirstChar'])){
+            self::applyFirstCharFilter($filters['FiltersOnFirstChar'], $Query, 'label');
         }
+
 
         return $Query;
     }
