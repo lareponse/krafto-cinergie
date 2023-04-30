@@ -21,7 +21,7 @@
 
         <?php
         if (isset($filters)) {
-            $this->insert('Secret::_partials/time-nav', ['filters' => $filters, 'firstYear' => 2010, 'modelType' => $controller->modelClassName()::model_type()]);
+            $this->insert('Secret::_partials/filters/FiltersOnYearAndMonth', ['filters' => $filters, 'firstYear' => 2010, 'modelType' => $controller->modelClassName()::model_type()]);
         }
         ?>
     </div>

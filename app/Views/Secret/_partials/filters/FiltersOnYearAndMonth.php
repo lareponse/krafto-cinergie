@@ -9,7 +9,6 @@
 
     $link_template = '<a href="%s" class="btn btn-sm %s m-1 p-1 px-2">%s</a>';
     foreach (array_reverse(range($firstYear, $lastYear)) as $year) {
-        // $href = $controller->router()->hyp('dash_records', ['controller' => $controller->className()]).'?year='.$year;
         $href = $controller->url('list', ['year' => $year]);
 
         $class = $filters['year'] == $year ? 'btn-secondary' : 'btn-outline-secondary';
