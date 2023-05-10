@@ -10,7 +10,7 @@
                         <h2 class="mb-0"><?= $counters['organisations']; ?></h2>
                     </div>
                     <div class="col-auto">
-                        <?= $this->icon('organisations', 30, ['class' => 'text-primary']); ?>
+                        <?= $this->icon('relations', 30, ['class' => 'text-primary']); ?>
                     </div>
                 </div>
             </div>

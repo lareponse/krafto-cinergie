@@ -6,8 +6,15 @@
             <div class="card-body p-7">
                 <div class="row align-items-center h-100">
                     <div class="col-auto d-flex ms-auto ms-md-0">
+
                         <div class="avatar avatar-circle avatar-xxl">
-                            <img src="/<?= $controller->loadModel()->get('legacy_photo')?>" alt="..." class="avatar-img" width="112" height="112">
+                        <?php
+                            if (empty($controller->loadModel()->get('legacy_photo')))
+                                echo $this->icon('relations', 60, ['class' => 'avatar-img']);
+                            else {
+                                echo $this->DOM()::img($controller->loadModel()->get('legacy_photo'), 'photo du professionel', ['class' => 'avatar-img', 'width' => 112, 'height' => 112]);
+                            }
+                        ?>
                         </div>
                     </div>
 

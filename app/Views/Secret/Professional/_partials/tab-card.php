@@ -8,7 +8,7 @@
         <div class="avatar avatar-xl avatar-circle">
             <?php
             if (empty($model->get('legacy_photo')))
-                echo $this->icon('cinema-chair', 60, ['class' => 'avatar-img']);
+                echo $this->icon('professional', 60, ['class' => 'avatar-img']);
             else {
                 echo $this->DOM()::img($model->get('legacy_photo'), 'photo du professionel', ['class' => 'avatar-img']);
             }
