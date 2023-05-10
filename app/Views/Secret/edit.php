@@ -9,7 +9,7 @@
 
     ?>
     <div class="col">
-        <form action="<?= $controller->router()->hyp('dash_'.strtolower($controller->className()).'_save');?>" method="POST" novalidate>
+        <form action="<?= $controller->router()->hyp('dash_record_save', ['controller' => $controller->className()]);?>" method="POST" novalidate>
         <input type="hidden" name="id" value="<?= $controller->formModel()->getID();?>" />
         <?=$this->section('content')?>
         </form>
