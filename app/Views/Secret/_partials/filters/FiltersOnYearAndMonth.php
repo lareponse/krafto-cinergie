@@ -8,43 +8,40 @@
 
     foreach (range($lastYear, $lastDecade, 1) as $year) {
         $href = $controller->url('list', ['year' => $year]);
-        $class = $filters['year'] == $year ? 'btn-primary' : 'btn-outline-primary';
-        echo '<a href="' . $href . '" class="btn btn mx-1 ' . $class . '">' . $year . '</a>';
+        $class = $filters['year'] == $year ? 'btn' : 'btn-outline';
+        printf('<a href="%s" class="btn %s-primary mx-1">%d</a>', $href,$class,$year);
     }
 
     foreach (range($lastDecade, $firstDecade, 10) as $decade) {
         $startYear = $decade - 10;
 
-        $class = 'btn-outline-primary';
+        $class = 'btn-outline';
         $label = $startYear;
 
         if ($filters['year'] >= $startYear && $filters['year'] < $decade) {
-            $class = 'btn-primary';
+            $class = 'btn';
             $label = $filters['year'];
         }
 
-        echo '<a type="button" class="btn ' . $class . ' dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">' . $label . '</a>';
+        printf('<a type="button" class="btn %s-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">%s</a>', $class,$label);
         echo '<ul class="dropdown-menu">';
         foreach (range($decade - 1, $startYear, 1) as $year) {
             $href = $controller->url('list', ['year' => $year]);
             $class = $filters['year'] == $year ? 'bg-primary text-light fw-bold' : '';
-            echo '<li><a class="dropdown-item justify-content-center ' . $class . '" href="' . $href . '">' . $year . '</a></li>';
+            printf('<li><a class="dropdown-item justify-content-center %s" href="%s">%d</a></li>', $class, $href, $year);
         }
         echo '</ul>';
     }
-
     ?>
 </div>
 
 
 <div class="mt-3 text-left" role="group" aria-label="Button group with nested dropdown">
     <?php
-
     foreach (range(1, 12) as $month) {
         $href = $controller->url('list', ['year' => $filters['year'], 'month' => $month]);
-        $class = $filters['month'] == $month ? 'btn-secondary' : 'btn-outline-secondary';
-        echo '<a href="' . $href . '" class="btn btn-sm mx-1 ' . $class . '">' . $month . '</a>';
+        $class = $filters['month'] == $month ? 'btn' : 'btn-outline';
+        printf('<a href="%s" class="btn %s-secondary  m-1 p-1 px-3">%d</a>', $href, $class, $month);
     }
-
     ?>
 </div>
