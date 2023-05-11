@@ -1,14 +1,13 @@
 <div class="card border-0 flex-fill w-100" data-list='{"valueNames": ["title", {"name": "publication", "attr": "data-publication"}, "type"], "page": 10}' id="articleTable">
 
     <div class="card-header border-0">
-
         <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-end">
             <?php
             if (isset($filters)) {
             ?>
                 <h2 class="card-header-title h4 text-uppercase">
-                    Articles publiés en 
-                    <span class="otto-date" otto-format="<?= urlencode(json_encode(['month' => 'long', 'year' => 'numeric']))?>"><?= $filters['year'] ?? '' ?>-<?= $filters['month'] ?? '' ?></span> 
+                    Articles publiés en
+                    <span class="otto-date" otto-format="<?= urlencode(json_encode(['month' => 'long', 'year' => 'numeric'])) ?>"><?= $filters['year'] ?? '' ?>-<?= $filters['month'] ?? '' ?></span>
                     (<?= count($listing) ?>)
                 </h2>
             <?php
@@ -16,7 +15,7 @@
             ?>
             <input class="form-control list-search mw-md-300px ms-md-auto mt-5 mt-md-0 mb-3 mb-md-0" type="search" placeholder="Chercher">
 
-            <a href="<?=$controller->urlFor('Article', 'new') ?>" class="btn btn-primary ms-md-4">
+            <a href="<?= $controller->urlFor('Article', 'new') ?>" class="btn btn-primary ms-md-4">
                 Nouveau
             </a>
         </div>
@@ -32,7 +31,6 @@
         <table class="table table-clickable align-middle table-hover table-nowrap mb-0">
             <thead class="thead-light">
                 <tr>
-
                     <th>
                         <a href="javascript: void(0);" class="text-muted list-sort" data-sort="title">
                             Titre
@@ -55,7 +53,7 @@
                 <?php
                 foreach ($listing as $model) {
                 ?>
-                    <tr data-action="<?= $controller->urlFor('Article', 'view', $model)?>">
+                    <tr data-action="<?= $controller->urlFor('Article', 'view', $model) ?>">
 
                         <td class="title">
                             <div class="d-flex align-items-center">
