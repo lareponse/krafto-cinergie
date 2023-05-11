@@ -12,6 +12,7 @@ class Relation extends Krafto
         [$parent_key, $child_key] = [$parent . '_id', $child . '_id'];
         [$parent_key => $parent_id, $child_key . 's' => $child_ids] = $this->router()->submitted();
 
+
         $res = $this->findRelationalTable($parent, $child);
         if (is_array($res)) {
             return $res; //errors
@@ -25,7 +26,7 @@ class Relation extends Krafto
             $dat_ass = [$parent_key => $parent_id, $child_key => $c_id];
             $res = $relation_table->insert($dat_ass)->run();
         }
-        $this->router()->hop('dash_' . $parent, ['id' => $parent_id]);
+        $this->router()->hopBack();
     }
 
     public function unlink()
