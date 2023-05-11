@@ -36,7 +36,7 @@ array_push($routes,
     ['GET',  '[a:controller]', '::home', 'records'],
     ['GET',  '[a:controller]/[i:id]', '::view', 'record'],
     ['POST',  '[a:controller]/[i:id]/upload', '::imageUpload', 'record_upload'],
-    ['POST',  '[a:controller]/[i:id]/images/supprimer', '::imageUnlink', 'record_image_unlink'],
+    ['POST',  '[a:controller]/[i:id]/images/supprimer', '::imageUnlink', 'relation_image_unlink'],
 
     ['GET',  '[a:controller]/nouveau', '::new', 'record_new'],
     ['GET',  '[a:controller]/[i:id]/modifier', '::edit', 'record_edit'],

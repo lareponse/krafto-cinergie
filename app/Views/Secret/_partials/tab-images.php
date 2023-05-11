@@ -25,7 +25,7 @@
                 </div>
                 <div class="controls">
 
-                    <?php //$route = $controller->router()->hyp('dash_'.$controller->modelType().'_image_unlink', ['controller' => $controller->className(), 'id' => $controller->loadModel()->getID()]); ?>
+                    <?php $route = $controller->router()->hyp('relation_image_unlink', ['controller' => $controller->className(), 'id' => $controller->loadModel()->getID()]); ?>
 
                     <form action="<?= $route ?>" method="POST" class="control">
                         <input type="hidden" name="filename" value="<?= $image?>" />
