@@ -5,10 +5,11 @@
         <ul class="list-unstyled mb-7">
             <?php 
             foreach($authors as $author){
+                $route_view = $controller->urlFor('Author', 'view', $author); 
                 ?>
                 <li class="py-2">
                     <?= $this->icon('author', 18, ['class' => 'me-2']) ?>
-                    <a href="<?=$controller->router()->hyp('dash_author', ['id' => $author->getID()]); ?>"><?= $author ?></a>
+                    <a href="<?=$route_view ?>"><?= $author ?></a>
                 </li>
                 <?php
             }

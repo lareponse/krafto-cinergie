@@ -8,7 +8,7 @@ function makeMenu($controller, $items){
 
 function makeMenuItem($controller, $param, $label){
     $item_pattern = '<li class="nav-item"><a href="%s" class="nav-link %s"><span>%s</span></a></li>';
-    $route = $controller->router()->hyp('dash_records', ['controller' => $param]);
+    $route = $controller->urlFor($param, 'list');
     $class = $controller->activeLink() == $param ? 'active' : '';
     return sprintf($item_pattern, $route, $class, $label);
 }
@@ -51,7 +51,7 @@ function makeMenuItem($controller, $param, $label){
             <!-- Navigation -->
             <ul class="navbar-nav mb-lg-7">
                 <li class="nav-item">
-                    <a class="nav-link <?= $controller->activeSection() == 'Article' ? 'active' : ''; ?>" href="<?= $controller->router()->hyp('dash_records', ['controller' => 'Article']); ?>">
+                    <a class="nav-link <?= $controller->activeSection() == 'Article' ? 'active' : ''; ?>" href="<?= $controller->urlFor('Article', 'list') ?>">
                         <?= $this->icon('text', 18, ['class' => 'nav-link-icon']); ?>
                         <span>Articles</span>
                     </a>

@@ -19,7 +19,7 @@
                         </span>
                         <div class="d-flex">
                         
-                            <a class="btn btn-primary btn-sm me-2" href="<?= $controller->url('edit') ?>">Modifier</a>
+                            <a class="btn btn-secondary btn-sm me-2" href="<?= $controller->url('edit') ?>">Modifier</a>
 
                             <?= $this->insert('Secret::_partials/orm/action_dropdown');?>
 

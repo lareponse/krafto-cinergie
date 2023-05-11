@@ -1,6 +1,6 @@
 <?php 
-$route_edit = $controller->router()->hyp('dash_movie_edit', ['id' => $model->getID()]); 
-$route_view = $controller->router()->hyp('dash_movie', ['id' => $model->getID()]); 
+$route_edit = $controller->urlFor('Movie', 'edit', $model); 
+$route_view = $controller->urlFor('Movie', 'view', $model); 
 ?>
 
 <div class="card">

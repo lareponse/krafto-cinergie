@@ -15,7 +15,7 @@ class Page extends Krafto
     public function slug()
     {
         $res = $this->modelClassName()::one('slug', $this->router()->params('slug'));
-        $this->router()->hop('dash_page_edit', ['id' => $res->getID()]);
+        $this->urlFor('Page', 'edit', $res);
     }
 
     
