@@ -27,13 +27,13 @@ class Contest extends TightModel implements EventInterface
         if(isset($filters['year']))
         {
             $bindname = $Query->addBinding('filters_year', $filters['year']);
-            $Query->whereWithBind('YEAR(`starts`) = '.$bindname, $filters['year']);
+            $Query->whereWithBind('YEAR(`starts`) = '.$bindname);
         }
 
         if(isset($filters['month']))
         {
             $bindname = $Query->addBinding('filters_month', $filters['month']);
-            $Query->whereWithBind('MONTH(`starts`) = '.$bindname, $filters['month']);
+            $Query->whereWithBind('MONTH(`starts`) = '.$bindname);
         }
         return $Query;
     }

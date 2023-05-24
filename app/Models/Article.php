@@ -18,13 +18,13 @@ class Article extends TightModel
         if(isset($filters['year']))
         {
             $bindname = $Query->addBinding('filters_year', $filters['year']);
-            $Query->whereWithBind('YEAR(`publication`) = '.$bindname, $filters['year']);
+            $Query->whereWithBind('YEAR(`publication`) = '.$bindname);
         }
 
         if(isset($filters['month']))
         {
             $bindname = $Query->addBinding('filters_month', $filters['month']);
-            $Query->whereWithBind('MONTH(`publication`) = '.$bindname, $filters['month']);
+            $Query->whereWithBind('MONTH(`publication`) = '.$bindname);
         }
 
         if(isset($filters['professional']))
