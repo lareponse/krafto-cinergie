@@ -94,4 +94,54 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
 
         return implode('<span class="separator">\\</span>', $bc);
     }
+
+    public function actionFor($action, $model, $extras = [])
+    {
+        
+        return $this->urlFor($model->className(), $model, $extras);
+    }
+
+    public function urlFor(string $class, string $action, $model=null, $extras = [])
+    {
+        $prefix = 'dash_record';
+        $name = '';
+
+        switch ($action) {
+            case 'view':
+                $name = $prefix;
+                break;
+
+            case 'list':
+                $name = $prefix . 's';
+                break;
+
+            default:
+                $name = $prefix . '_' . $action;
+                break;
+        }
+
+        $params = ['controller' => $class];
+        if ($model) {
+            $params['id'] = $model->getID();
+        }
+
+        $route_as_href = $this->router()->hyp($name, $params);
+
+        if (!empty($extras)) {
+
+            $extras = implode('&', array_map(function ($key, $value) {
+                return "$key=$value";
+            }, array_keys($extras), array_values($extras)));
+
+            $route_as_href .= '?' . $extras;
+        }
+
+        return $route_as_href;
+    }
+
+    public function url(string $action, $extras = []): string
+    {
+        return $this->urlFor($this->className(), $action, $this->loadModel(), $extras);
+
+    }
 }
