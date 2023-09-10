@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <g id="search" transform="translate(-9230.082 -13471.082)">
+    <circle id="circle" cx="20" cy="20" r="20" transform="translate(9230.082 13471.082)" fill="#fff"/>
+    <path id="search-2" data-name="search" d="M17.873,15.668,14.345,12.14a.849.849,0,0,0-.6-.248h-.577a7.358,7.358,0,1,0-1.274,1.274v.577a.849.849,0,0,0,.248.6l3.529,3.529a.846.846,0,0,0,1.2,0l1-1a.853.853,0,0,0,0-1.2ZM7.362,11.892a4.53,4.53,0,1,1,4.53-4.53A4.528,4.528,0,0,1,7.362,11.892Z" transform="translate(9241.566 13482.565)" fill="#d3121b"/>
+  </g>
+</svg>
