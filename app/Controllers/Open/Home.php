@@ -2,10 +2,7 @@
 
 namespace App\Controllers\Open;
 
-class Home extends \HexMakina\kadro\Controllers\Kadro
+class Home extends Kortex
 {
-  public function home()
-  {
-    dd(__FUNCTION__,__CLASS__);
-  }
+
 }
