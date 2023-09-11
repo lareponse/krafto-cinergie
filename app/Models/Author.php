@@ -8,6 +8,9 @@ use HexMakina\TightORM\TightModel;
 class Author extends TightModel
 {
     use Abilities\HasSlug;
+    use Abilities\HasProfilePicture;
+    use Abilities\HasSecrets;
+
 
     public function __toString()
     {
@@ -19,10 +22,7 @@ class Author extends TightModel
         return $this->get('label');
     }
 
-    public function profilePicture(): string
-    {
-        return empty($this->get('legacy_photo_illu')) ? '' : 'https://www.cinergie.be' . $this->get('legacy_photo_illu');
-    }
+
     
     public function contactPoint(): string
     {
