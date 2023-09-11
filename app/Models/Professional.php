@@ -12,9 +12,15 @@ class Professional extends TightModel
     use Abilities\HasSlug;
     use Abilities\HasTags;
     use Abilities\HasPraxis;
+    use Abilities\HasProfilePicture;
+    use Abilities\HasSecrets;
 
     use Abilities\FiltersOnFirstChar;
 
+    
+    public function profilePictureField():string {
+        return 'legacy_photo';
+    }
 
     public function tagIds(): array{
         return [];
@@ -30,11 +36,19 @@ class Professional extends TightModel
     {
         return $this->get('lastname').' '.$this->get('firstname');
     }
-
+    
     public static function query_retrieve($filters = [], $options = []): SelectInterface
     {
         //---- JOIN & FILTER SERVICE
         $Query = parent::query_retrieve($filters, $options);
+
+        $Query->selectAlso(["CONCAT(firstname,' ', lastname) as label"]);
+        if(isset($filters['fullname'])){
+            $bindname = $Query->addBinding('fullNameSearch', '%'.$filters['fullname'].'%');
+
+            $Query->whereWithBind('CONCAT(`professional`.`firstname`, \' \',`professional`.`lastname`) LIKE '.$bindname);
+
+        }
 
         if(isset($filters['FiltersOnFirstChar'])){
             self::applyFirstCharFilter($filters['FiltersOnFirstChar'], $Query, 'lastname');
@@ -65,13 +79,30 @@ class Professional extends TightModel
             ]);
         }
 
-        $Query->join(['professional_tag', 'praxis'], [['professional', 'id', 'praxis', 'professional_id']], 'LEFT OUTER');
-        $Query->join(['tag', 'tag'], [['tag', 'id', 'praxis', 'tag_id'], ['tag', 'parent_id', 91]], 'LEFT OUTER');
-        $Query->groupBy(['professional', 'id']);
-        $Query->selectAlso(["GROUP_CONCAT(DISTINCT tag.id) as praxis_ids"]);
-        $Query->selectAlso(["CONCAT(firstname,' ', lastname) as label"]);
-        $Query->orderBy(['lastname', 'asc']);
+        if(isset($filters['birthYearMin'])){
+            $year = (int)$filters['birthYearMin'];
+            $bindname = $Query->addBinding('filters_birthYearMin', $year);
+            $Query->whereWithBind('YEAR(`birth`) >= '.$bindname);
+        }
+        
+        if(isset($filters['gender'])){
+            $Query->whereEQ('gender', $filters['gender']);
+        }
 
+        if(!isset($options['eager']) || $options['eager'] !== false ){
+            $Query->join(['professional_tag', 'praxis'], [['professional', 'id', 'praxis', 'professional_id']], 'LEFT OUTER');
+            $Query->join(['tag', 'tag'], [['tag', 'id', 'praxis', 'tag_id'], ['tag', 'parent_id', 91]], 'LEFT OUTER');
+            $Query->groupBy(['professional', 'id']);
+            $Query->selectAlso(["GROUP_CONCAT(DISTINCT tag.id) as praxis_ids"]);
+
+            if(isset($filters['praxis_id'])){
+                $Query->whereEQ('tag_id', ((int)$filters['praxis_id']), 'praxis');
+            }
+        }
+
+
+        $Query->orderBy(['lastname', 'asc']);
+        // dd($Query);
         return $Query;
     }
 }
