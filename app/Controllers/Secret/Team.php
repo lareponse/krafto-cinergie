@@ -17,19 +17,14 @@ class Team extends Krafto
     {
         $this->viewport('title', 'L\'équipe');
         $people = $this->modelClassName()::filter([], ['order_by' => '`rank` ASC']);
-        $team = [
-            'equipe' => [],
-            'collaborateurs' => [],
-            'CA' => [],
-            'member' => [],
-            'observateurs' => []
-        ];
 
+        $team = [];
         foreach($people as $person){
             $team[$person->get('group')][$person->getID()]= $person;
         }
 
-        $team['collaborateurs'] = Author::filter(['isCollaborator' => 1]);
+        $team['collaborateur'] = Author::filter(['isCollaborator' => 1]);
+
         $this->viewport('team', $team);
     }
 }
