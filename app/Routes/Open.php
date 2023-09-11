@@ -4,14 +4,14 @@ $routes = [
   // legacy redirections
   ['GET', 'accueil', 'Home::home', 'home_legacy'],
   ['GET', 'actualites', 'Article::home', 'article_legacy'],
-
-
+  
+  
   // articles
-  ['GET', 'articles', 'Article::home', 'articles'],
-  ['GET', 'articles/[*:slug]', 'Article::article', 'article'],
+  ['GET', 'articles/[*:params]?', 'Article::articles', 'articles'],
+  ['GET', 'article/[*:slug]', 'Article::article', 'article'],
 
   // author
-  ['GET', 'auteurs', 'Author::home', 'authors'],
+  ['GET', 'auteurs', 'Author::authors', 'authors'],
   ['GET', 'auteurs/[*:slug]', 'Author::author', 'author'],
 
   // contests
@@ -28,37 +28,34 @@ $routes = [
   ['GET', 'podcast/play/S[a:season]/R[a:episode]', 'Glaneuses::episode', 'glaneuses_episode'],
 
   // movies
-  ['GET', 'film', 'Movie::home', 'movies'],
-  ['GET', 'film/recherche/[*:params]', 'Movie::search', 'movie_search'],
+  ['GET', 'films/[*:params]?', 'Movie::movies', 'movies'],
   ['GET', 'film/sortie-[i:year]/[i:page]?', 'Movie::movie', 'movie_by_year'],
   ['GET', 'film/sortie-annees-[i:year]/[i:page]?', 'Movie::movie', 'movie_by_years'],
   ['GET', 'film/sortie-avant-[i:year]/[i:page]?', 'Movie::movie', 'movie_before_year'],
   ['GET', 'film/[*:slug]', 'Movie::movie', 'movie'],
 
-  // organisations
-  ['GET', 'organisation', 'Organisation::home', 'organisations'],
-  ['GET|POST', 'organisation/ajout', 'Organisation::add', 'organisation_add'],
-  ['GET|POST', 'organisation/modifier/[*:slug]', 'Organisation::edit', 'organisation_edit'],
-  ['GET', 'organisation/activite/[*:praxis]', 'Organisation::search', 'organisation_by_praxis'],
-  ['GET', 'organisation/recherche/[*:params]', 'Organisation::search', 'organisation_search'],
-  ['GET', 'organisation/[*:slug]', 'Organisation::organisation', 'organisation'],
-
-  // pages
-  ['GET', 'a-propos/notre-histoire', 'Page::history', 'history'],
-  ['GET', 'a-propos/prix-cinergie', 'Page::price', 'price'],
-  ['GET', 'a-propos/contact', 'Page::contact', 'contact'],
-  ['GET', 'mentions-legales', 'Page::legal', 'legal'],
-
-  // partners
-  ['GET', 'partenaires', 'Partner::home', 'partners'],
-
   // professional
-  ['GET', 'personne', 'Professional::home', 'professionals'],
+  ['GET', 'personnes/[*:params]?', 'Professional::professionals', 'professionals'],
   ['GET|POST', 'personne/ajout', 'Professional::add', 'professional_add'],
   ['GET|POST', 'personne/modifier/[*:slug]', 'Professional::edit', 'professional_edit'],
   ['GET', 'personne/metier/[*:praxis]', 'Professional::search', 'professional_by_praxis'],
-  ['GET', 'personne/recherche/[*:params]', 'Professional::search', 'professional_search'],
   ['GET', 'personne/[*:slug]', 'Professional::professional', 'professional'],
+
+  // organisations
+  ['GET', 'organisations/[*:params]?', 'Organisation::organisations', 'organisations'],
+  ['GET|POST', 'organisation/ajout', 'Organisation::add', 'organisation_add'],
+  ['GET|POST', 'organisation/modifier/[*:slug]', 'Organisation::edit', 'organisation_edit'],
+  ['GET', 'organisation/activite/[*:praxis]', 'Organisation::search', 'organisation_by_praxis'],
+  ['GET', 'organisation/[*:slug]', 'Organisation::organisation', 'organisation'],
+
+  // pages
+  
+  ['GET', 'a-propos/notre-histoire', 'Page::history', 'history'],
+  ['GET', 'a-propos/prix-cinergie', 'Page::price', 'price'],
+  ['GET', 'a-propos/l-equipe', 'Page::team', 'team'],
+  ['GET', 'a-propos/contact', 'Page::contact', 'contact'],
+  ['GET', 'mentions-legales', 'Page::legal', 'legal'],
+
 
   // shop
   ['GET', 'boutique', 'Shop::home', 'shop'],
