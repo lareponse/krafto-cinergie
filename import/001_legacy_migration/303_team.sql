@@ -39,16 +39,16 @@ VALUES
 
 INSERT INTO `cinergie`.`team` (`rank`, `label`, `group`)
 VALUES
-(1, 'Martine Barbé', 'member'),
-(2, 'Jean-Jacques Bastien', 'member'),
-(3, 'Juliette Duret', 'member'),
-(4, 'Julie Frères', 'member'),
-(5, 'Jasna Krajinovic', 'member'),
-(6, 'François Lebovy', 'member'),
-(7, 'Marie-Hélène Massin', 'member'),
-(8, 'Philippe Van Kerk', 'member');
+(1, 'Martine Barbé', 'membre'),
+(2, 'Jean-Jacques Bastien', 'membre'),
+(3, 'Juliette Duret', 'membre'),
+(4, 'Julie Frères', 'membre'),
+(5, 'Jasna Krajinovic', 'membre'),
+(6, 'François Lebovy', 'membre'),
+(7, 'Marie-Hélène Massin', 'membre'),
+(8, 'Philippe Van Kerk', 'membre');
 
-INSERT INTO `cinergie`.`team` (`rank`, `label`, `group`, `comment`)
+INSERT INTO `cinergie`.`team` (`rank`, `label`, `group`, `title`)
 VALUES
-(1, 'Laura Nanchino', 'observateurs', 'Centre du cinéma de la fédération Wallonie-Bruxelles'),
-(2, 'Patrick Matthys', 'observateurs', 'SPFB');
+(1, 'Laura Nanchino', 'observateur', 'Observatrice du Centre du cinéma de la fédération Wallonie-Bruxelles'),
+(2, 'Patrick Matthys', 'observateur', 'Observateur de la COCOF');
