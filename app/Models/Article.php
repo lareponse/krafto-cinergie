@@ -9,6 +9,8 @@ class Article extends TightModel
 {
     use Abilities\HasSlug;
     use Abilities\IsActivable;
+    use Abilities\HasProfilePicture;
+
 
     public static function query_retrieve($filters = [], $options = []): SelectInterface
     {
