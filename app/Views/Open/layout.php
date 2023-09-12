@@ -7,25 +7,7 @@
 
 <body data-bs-spy="scroll" data-bs-target="#navigation">
 
-    <aside class="collapse" id="searchBAR">
-        <div class="bg-dark p-4">
-            <section class="container">
-                <div class="mx-auto w-50">
-                    <form class="search-form ms-2" action="/">
-                        <div class="input-group mb-3">
-                            <input type="search" value="" autocomplete="off" placeholder="Rechercher" name="s" class="form-control">
-                            <button class="btn btn-primary" type="submit" title="Rechercher">
-                                <i class="bi bi-search"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </section>
-        </div>
-    </aside>
-
     <?php $this->insert('Open::_partials/header') ?>
-
 
     <main id="content" class="">
         <?php if (isset($title)) {
