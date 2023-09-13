@@ -27,9 +27,8 @@ trait HasSlug
     
         // Remove duplicate -
         $text = preg_replace('~-+~', '-', $text);
-    
         if (empty($text)) {
-            throw new \Exception(__FUNCTION__.' returns empty slug');
+            throw new \Exception(__FUNCTION__.'() returns empty slug');
         }
     
         return $text;
