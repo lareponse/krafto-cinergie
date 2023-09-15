@@ -2,31 +2,38 @@
 
 namespace App\Controllers\Open;
 
+use \HexMakina\BlackBox\Database\SelectInterface;
 use \HexMakina\kadro\Models\Tag;
-use App\Models\Professional as Model;
-use App\Models\ProfessionalPraxis;
-
 use App\Controllers\Abilities\Paginator;
 
+use App\Models\Professional as Model;
 
 class Professional extends Kortex
 {
-    private const PRAXIS_PARENT_ID = 91;
-    private const ALLOWED_GENDERS = ['h','f','nb'];
-    
+    public const ALLOWED_GENDERS = [
+        'h' => 'Hommes',
+        'f' => 'Femmes',
+        'nb' => 'Autres'
+    ];
+
+    public const AGE_RANGES = [
+        '-20' => '&lt; 20 ans',
+        '20-30' => '20 &rarr; 30 ans',
+        '30-40' => '30 &rarr; 40 ans',
+        '40-50' => '40 &rarr; 50 ans',
+        '50-60' => '50 &rarr; 60 ans',
+        '60-' => '&gt; 60 ans'
+    ];
+
     public function professionals()
     {
-        $filters = array_merge($this->routerParamsAsFilters(), ['isListed' => '1']);
-        $options = ['order_by' => [['professional', 'lastname', 'ASC'], ['professional', 'firstname', 'ASC']]];
-
-
-        $paginator = new Paginator($this->router()->params('page'), $filters, $options);
+        $paginator = new Paginator($this->router()->params('page') ?? 1, $this->queryListing());
         $paginator->perPage(12);
         $paginator->setClass(Model::class);
 
-
         $this->viewport('paginator', $paginator);
-        $this->viewport('praxis', ProfessionalPraxis::all());
+        $this->viewport('praxis', Tag::filter(['parent' => 'professional_praxis']));
+
         $this->viewport('form_filters', $this->router()->params());
     }
 
@@ -34,36 +41,83 @@ class Professional extends Kortex
     {
         $slug = $this->router()->params('slug');
         $professional = Model::exists('slug', $slug);
-        dd($professional, $slug);
+
+        $this->viewport('professional', $professional);
     }
 
-    private function routerParamsAsFilters()
+    public function queryListing(): SelectInterface
     {
-        $filters = [];
-        if($this->router()->params('metier')){
-            $praxis_id = $this->router()->params('metier');
-            $professional_ids = (ProfessionalPraxis::professionalIds($praxis_id));
-            $filters['ids'] = $professional_ids;
+        $select = Model::table()->select();
+        $select->columns([
+            'professional.slug',
+            "CONCAT(professional.firstname, ' ', professional.lastname) as fullname",
+            'professional.profilePicture',
+            "GROUP_CONCAT(praxis.label SEPARATOR ', ') as praxes"
+        ]);
+
+        $select->join(['professional_tag', 'professional_tag'], [['professional_tag', 'professional_id', 'professional', 'id']], 'LEFT OUTER');
+        $select->join(['tag', 'praxis'], [['professional_tag', 'tag_id', 'praxis', 'id']], 'LEFT OUTER');
+
+        $select->whereEQ('isListed', 1);
+
+        $select->groupBy(['professional', 'id']);
+        $select->orderBy(['professional', 'lastname', 'ASC']);
+        $select->orderBy(['professional', 'firstname', 'ASC']);
+
+        return $this->routerParamsAsFilters($select);
+    }
+
+    /**
+     * Converts router parameters into filters for a database query.
+     *
+     * @param SelectInterface $query The database query object to apply filters to.
+     * @return SelectInterface The modified database query object with filters applied.
+     */
+    private function routerParamsAsFilters($query): SelectInterface
+    {
+
+        $this->applyFreeSearch($query, ['`professional`.`firstname`', '`professional`.`lastname`', '`professional`.`content`', '`professional`.`filmography`']);
+        
+        if ($this->router()->params('nom')) {
+            $isLike = '%' . $this->router()->params('nom') . '%';
+            $bindname = $query->addBinding('fullNameSearch', $isLike);
+            $query->whereWithBind('CONCAT(`professional`.`firstname`, \' \',`professional`.`lastname`) LIKE ' . $bindname);
         }
 
-        if(!empty($this->router()->params('genre')) && in_array($this->router()->params('genre'), self::ALLOWED_GENDERS)){
-            $filters['gender'] = $this->router()->params('genre'); 
+        if ($this->hasAllowedGender()) {
+            $query->whereEQ('gender', $this->router()->params('genre'));
         }
 
-        if($this->router()->params('tranche-age')){
-            $tranche = $this->router()->params('tranche-age');
-            
-            $now = new \DateTimeImmutable();
-            $interval = new \DateInterval('P'.$tranche.'Y');
-
-            $filters['birthYearMin'] = $now->sub($interval)->format('Y');
+        if ($this->hasAllowedAgeRange()) {
+            $currentYear = (int)date('Y');
+            list($min, $max) = explode('-', $this->router()->params('tranche-age'));
+            if (!empty($min)) {
+                $birthYearMin = $query->addBinding('filters_birthYearMin', $currentYear - abs($min));
+                $query->whereWithBind("YEAR(`birth`) <= $birthYearMin");
+            }
+    
+            if (!empty($max)) {
+                $birthYearMax = $query->addBinding('filters_birthYearMax', $currentYear - abs($max));
+                $query->whereWithBind("YEAR(`birth`) >= $birthYearMax");
+            }
         }
 
-        if($this->router()->params('nom')) {
-            $filters['fullname'] = $this->router()->params('nom');
+        if ($this->router()->params('metier')) {
+            $ids = Model::idsByPraxis($this->router()->params('metier'));
+            $query->whereNumericIn('id', $ids, $query->table());
         }
 
-        return $filters;
+        return $query;
+    }
+
+    private function hasAllowedGender(): bool
+    {
+        return !empty($this->router()->params('genre')) && isset(self::ALLOWED_GENDERS[$this->router()->params('genre')]);
+    }
+
+    private function hasAllowedAgeRange(): bool
+    {
+        return !empty($this->router()->params('tranche-age')) && isset(self::AGE_RANGES[$this->router()->params('tranche-age')]);
     }
 
 }

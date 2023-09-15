@@ -2,10 +2,12 @@
 
 namespace App\Controllers\Open;
 
+use \HexMakina\BlackBox\Database\SelectInterface;
 use \HexMakina\kadro\Models\Tag;
 
-use App\Models\Work as Model;
 use App\Controllers\Abilities\Paginator;
+
+use App\Models\Work as Model;
 
 class Work extends Kortex
 {
@@ -14,10 +16,9 @@ class Work extends Kortex
     public function prepare(): void
     {
         parent::prepare();
-
         $this->categories = Tag::filter(['parent' => 'work_category']);
     }
-    
+
     public function conclude(): void
     {
         $this->viewport('categories', $this->categories);
@@ -26,9 +27,7 @@ class Work extends Kortex
 
     public function works()
     {
-        $filters = array_merge($this->routerParamsAsFilters(), ['active' => '1', 'ongoing' => true]);
-
-        $paginator = new Paginator($this->router()->params('page'), $filters);
+        $paginator = new Paginator($this->router()->params('page') ?? 1, $this->queryListing());
         $paginator->perPage(10);
         $paginator->setClass(Model::class);
 
@@ -44,30 +43,69 @@ class Work extends Kortex
         $work = Model::exists('slug', $slug);
         $this->viewport('work', $work);
     }
-
-    private function routerParamsAsFilters()
+    
+    /**
+     * Constructs a database query for listing advertisements with specific columns and filters.
+     *
+     * @return SelectInterface The constructed database query object.
+     */
+    public function queryListing(): SelectInterface
     {
-        $filters = [];
+        $select = Model::table()->select([
+            'advertisement.`slug`',
+            'advertisement.`label`',
+            'advertisement.`starts`',
+            'advertisement.`isOffer`',
+            'advertisement.`isPaid`',
+            'tag.`label` as category_label'
+        ], 'advertisement');
 
-        if($this->router()->params('remun')){
-            $filters['isPaid'] = (int)($this->router()->params('remun') === 'oui');
+        $now = date('Y-m-d');
+        $startsAfter = $select->addBinding('startsAfter', $now);
+        $endsBefore = $select->addBinding('endsBefore', $now);
+        $select->whereWithBind(sprintf('starts >= %s AND ends IS NOT NULL AND (ends >= %s)', $startsAfter, $endsBefore));
+
+
+        $select->whereEQ('active', 1);
+
+        $select->join(['tag', 'tag'], [['advertisement', 'category_id', 'tag', 'id']], 'LEFT OUTER');
+
+        $select->orderBy(['starts', 'ASC']);
+
+        return $this->routerParamsAsFilters($select);
+    }
+
+    /**
+     * Converts router parameters into filters for a database query.
+     *
+     * @param SelectInterface $query The database query object to apply filters to.
+     * @return SelectInterface The modified database query object with filters applied.
+     */
+    private function routerParamsAsFilters($query): SelectInterface
+    {
+        // Check if 'remun' router parameter is set and use it to filter by 'isPaid'
+        if ($this->router()->params('remun')) {
+            $query->whereEQ('isPaid', (int)($this->router()->params('remun') === 'oui'));
         }
 
-        if($this->router()->params('types') && count($this->router()->params('types')) === 1){
+        // Check if 'types' router parameter is set and contains a single type, then filter by 'isOffer'
+        if ($this->router()->params('types') && count($this->router()->params('types')) === 1) {
             $type = $this->router()->params('types');
             $type = array_pop($type);
-            $filters['isOffer'] = (int)($type === 'proposition');
+            $query->whereEQ('isOffer', (int)($type === 'proposition'));
         }
 
-        if($this->router()->params('categories')){
-            foreach($this->categories as $category){
-                if(in_array($category->get('reference'), $this->router()->params('categories'))){
-                    $filters['type_ids'] []=  $category->getID();
+        // Check if 'categories' router parameter is set and filter by matching category IDs
+        if ($this->router()->params('categories')) {
+            $ids = [];
+            foreach ($this->categories as $category) {
+                if (in_array($category->get('reference'), $this->router()->params('categories'))) {
+                    $ids[] =  $category->getID();
                 }
             }
-
+            $query->whereNumericIn('category_id', $ids);
         }
-        
-        return $filters;
+
+        return $query;
     }
 }

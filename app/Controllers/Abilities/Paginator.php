@@ -2,30 +2,39 @@
 
 namespace App\Controllers\Abilities;
 
+use HexMakina\BlackBox\Database\SelectInterface;
+
 class Paginator
 {
     private const DEFAULT_CLICKABLE = 7;
 
     // Properties to store current page, next page, previous page,
     // last page, number of clickable pages, and the range of pages.
-    private $current, $next, $previous, $last, $clickable, $range, $perPage;
+    private $current, $next, $previous, $last, $clickable, $range, $perPage, $offset;
     
-    private $class, $filters, $options, $records, $total;
+    private $class, $records, $total;
+
+    private $query;
 
     // Constructor to initialize the Paginator object.
-    public function __construct($current_page, $filters = [], $options = [])
+    public function __construct(int $current_page, SelectInterface $query, $total=100)
     {
-        if(!is_numeric($current_page)){
-            $current_page = 1;
-        }
-        // Ensure that the current page is at least 1.
         $this->current = max(1, $current_page);
 
-        $this->filters = $filters;
-        $this->options = $options;
+        $this->query = $query;
+        $this->total = $this->totalRecords();
 
         // Store the number of clickable pages (default is 7).
         $this->clickable = self::DEFAULT_CLICKABLE;
+    }
+
+    public function offset(): int
+    {
+        if(!isset($this->offset)){
+            $this->offset = ($this->current() - 1) * $this->perPage();
+        }
+
+        return $this->offset;
     }
 
     public function perPage(int $number = null)
@@ -82,7 +91,7 @@ class Paginator
     public function last(): int
     {
         if(!isset($this->last)){
-            $this->last = ceil($this->recordCount()/$this->perPage());
+            $this->last = ceil($this->totalRecords()/$this->perPage());
         }
         return $this->last;
     }
@@ -122,26 +131,42 @@ class Paginator
         $this->class = $name;
     }
 
-    public function recordCount(): int
+    public function totalRecords(): int
     {
         if(!isset($this->total)){
-            $className = $this->class;
-            $this->total = $className::count($this->filters, ['eager' => false]);
+            $counter = clone $this->query;
+            $counter->setClause('order', null);
+            $counter->statement('SELECT COUNT(*) FROM ('.$counter->statement().') as subquery'); 
+
+            $total = $counter->retCol();
+            if($total === false)
+                throw new \Exception('UNABLE TO COMPUTE TOTAL RECORD FOR PAGINATION');
+                
+            $total = array_pop($total);
+            $this->total = (int)$total;
         }
 
         return $this->total;
     }
 
-    public function records()
+    public function records(): array
     {
-        if(!isset($this->records)){
-            $offset = ($this->current()-1) * $this->perPage();
-            $className = $this->class;
-            $options = array_merge(['limit' => [$this->perPage, $offset]], $this->options);
-            $this->records = $className::filter($this->filters, $options);
+        if(!isset($this->records)) {
+
+            $this->query->limit($this->perPage, $this->offset());
+            $this->records = $this->query->retObj($this->class);
         }
-        
         return $this->records;
     }
+
+    public function nowShowing(): array
+    {
+        $start = $this->offset()+1;
+        $last = min($this->offset()+$this->perPage(), $this->totalRecords());
+
+        return [$start,$last, $this->totalRecords()];
+
+    }
+
 }
 
