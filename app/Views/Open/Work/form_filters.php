@@ -9,7 +9,7 @@
                 ?>
                     <label class="control control-checkbox">
                         <?= $value ?>
-                        <input type="checkbox" <?= $checked ?> id="remun_<?= $key ?>" name="remun" value="<?= $key ?>">
+                        <input type="radio" <?= $checked ?> id="remun_<?= $key ?>" name="remun" value="<?= $key ?>">
                         <div class="control_indicator"></div>
                     </label>
                 <?php

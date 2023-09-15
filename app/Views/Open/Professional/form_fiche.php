@@ -1,5 +1,4 @@
-<form action="" class="form-horizontal" id="nouvelle-fiche-professionnel" method="post" role="form">
-
+<form action="<?= $controller->router()->hyp('professional_add')?>" class="form-horizontal" id="nouvelle-fiche-professionnel" method="POST" role="form">
     <section class="row mb-3">
         <label for="nom-fiche-professionnel" class="col-sm-2 col-form-label">Nom <span>*</span></label>
         <div class="col-sm-10">

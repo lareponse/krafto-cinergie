@@ -22,25 +22,14 @@ use \HexMakina\Marker\Form; ?>
     <select class="form-select" name="tranche-age">
         <option value="">Tout</option>
 
-        <?= Form::options([
-            '20' => '&lt; 20 ans',
-            '30' => '20 → 30 ans',
-            '40' => '30 → 40 ans',
-            '50' => '40 → 50 ans',
-            '60' => '50 → 60 ans',
-            '100' => '&gt; 60 ans'
-        ], $controller->router()->params('tranche-age')); ?>
+        <?= Form::options($controller::AGE_RANGES, $controller->router()->params('tranche-age')); ?>
     </select>
 
     <label class="form-label mt-3">Genre</label>
     <select class="form-select" name="genre">
         <option value="">Tout</option>
 
-        <?= Form::options([
-            'h' => 'Hommes',
-            'f' => 'Femmes',
-            'nb' => 'Autres'
-        ], $controller->router()->params('genre')); ?>
+        <?= Form::options($controller::ALLOWED_GENDERS, $controller->router()->params('genre')); ?>
     </select>
 
     <hr class="mt-4 mb-1">

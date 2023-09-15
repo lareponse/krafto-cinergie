@@ -31,21 +31,19 @@ use \HexMakina\Marker\Marker; ?>
             foreach ($paginator->records() as $work) {
             ?>
                 <article class="card shadow listing mb-4">
-                    <a href="<?=$controller->router()->hyp('work', ['slug' => $work->slug()])?>">
-                    </a>
-                    <div class="card-body"><a href="<?=$controller->router()->hyp('work', ['slug' => $work->slug()])?>">
+                    <a href="<?= $controller->router()->hyp('work', ['slug' => $work->slug()]) ?>">
+                        <div class="card-body">
                             <section class="card-text d-flex justify-content-between">
                                 <p><span class="categorie mb-2">
-                                    <?= $work->get('isPaid') ? 'Rémunéré' : 'Non rémunéré' ?></span>
-                                     • <span class="type"><?= $work->get('type_label')?></span>
-                                     • <span class="type"><?= $work->get('legacy_subject')?></span>
-                                    </p>
-                                <p><span class="date-casting text-primary otto-date"><?= $work->get('starts')?></span> <span class="date-casting text-primary otto-date"><?= $work->get('stops')?></span></p>
+                                        <?= $work->get('isPaid') ? 'Rémunéré' : 'Non rémunéré' ?></span>
+                                    &bull; <span class="type"><?= $work->get('isOffer') ? 'Proposition' : 'Demande'; ?></span>
+                                    &bull; <span class="type"><?= $work->get('category_label') ?></span>
+                                <p><span class="date-casting text-primary otto-date"><?= $work->get('starts') ?></span></p>
                             </section>
-                            <h5 class="card-title"><?= $work->get('legacy_title');?></h5>
-                        </a><a class="cta" href="<?=$controller->router()->hyp('work', ['slug' => $work->slug()])?>">Lire l'annonce</a>
-                    </div>
-
+                            <h5 class="card-title"><?= $work->get('label'); ?></h5>
+                            <div class="cta">Lire l'annonce</div>
+                        </div>
+                    </a>
                 </article>
             <?php
             }
@@ -53,7 +51,7 @@ use \HexMakina\Marker\Marker; ?>
             <?= $this->insert('Open::_partials/pagination', ['route' => 'works', 'paginator' => $paginator]); ?>
         </div>
         <aside class="col-lg-4 ps-lg-5" id="sidebar">
-            <?= $this->insert('Open::Article/latest', ['articles' => $latestArticles]);?>
+            <?= $this->insert('Open::Article/latest', ['articles' => $latestArticles]); ?>
         </aside>
     </section>
 
