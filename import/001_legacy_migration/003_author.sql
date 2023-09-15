@@ -8,15 +8,17 @@ CREATE TABLE `author` (
   `active` tinyint(1) NOT NULL DEFAULT '0',
   `slug` varchar(222) DEFAULT NULL COMMENT 'leg:urlparm',
   `rank` smallint UNSIGNED DEFAULT NULL COMMENT 'leg:tri',
+  
+  `profilePicture` varchar(255) DEFAULT NULL COMMENT 'leg:field04'
+  `url` varchar(255) DEFAULT NULL  COMMENT 'leg:field05',
 
   `label` varchar(24) DEFAULT NULL COMMENT 'leg:field01',
 
   `isCollaborator` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'displayed on equipe page',
-
+  `professional_slug` varchar(222) DEFAULT NULL,
+  
   `legacy_id` varchar(40) DEFAULT NULL,
   `legacy_user` varchar(13) DEFAULT NULL,
-  `legacy_photo_illu` varchar(54) DEFAULT NULL COMMENT 'leg:field04',
-  `legacy_url_repertoire` varchar(55) DEFAULT NULL COMMENT 'leg:field05'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -30,6 +32,8 @@ ALTER TABLE `author` ADD UNIQUE `author-slug-unique` (`slug`);
 ALTER TABLE `author` ADD INDEX(`label`);
 
 
+CREATE INDEX idx_active ON `author`(`active`);
+
 -- DATA
 TRUNCATE `cinergie`.`author`;
 
@@ -40,34 +44,38 @@ INSERT INTO `cinergie`.`author` (
   `active`,
   `slug`,
   `rank`,
+  `profilePicture`,
+  `url`,
 
   `label`,
 
   `isCollaborator`,
 
   `legacy_id`,
-  `legacy_user`,
-  `legacy_photo_illu`,
-  `legacy_url_repertoire`
+  `legacy_user`
 )
 SELECT
   CAST(REGEXP_SUBSTR(`id`, '[0-9]+$', 1) as UNSIGNED) as `id`,
 
   STR_TO_DATE(datestamp,'%Y-%m-%d %H:%i:%s') as `created_on`,
   `active` as `active`,
-  urlparms as `slug`,
-  tri as `rank`,
+  `urlparms` as `slug`,
+  `tri` as `rank`,
+  `field04` as `profilePicture`,
+  `field05` as `url`
 
-  field01 as `label`,
+  TRIM(`field01`) as `label`,
 
   `active` as `isCollaborator`,
 
   id as `legacy_id`,
-  user as `legacy_user`,
-  field04 as `legacy_photo_illu`,
-  field05 as `legacy_url_repertoire`
+  user as `legacy_user`
 
 FROM `a7_cinergie_beta`.`content_item`
 
-WHERE area = 'auteur' AND category = 'auteur'
-ORDER BY id;
+WHERE `area` = 'auteur' AND `category` = 'auteur'
+ORDER BY `id`;
+
+
+UPDATE `cinergie`.`author` SET `url` = null WHERE `url` = '';
+UPDATE `cinergie`.`author` SET `professional_slug` = REPLACE(`url`, 'https://www.cinergie.be/personne/', '');
