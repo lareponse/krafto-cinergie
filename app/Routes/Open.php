@@ -19,8 +19,8 @@ $routes = [
   ['GET', 'concours/[*:slug]', 'Contest::contest', 'contest'],
 
   // events
-  ['GET', 'agenda', 'Event::home', 'agenda'],
-  ['GET', 'agenda/mois-[i:year][i:month]', 'Event::home', 'agenda_month'],
+  ['GET', 'agenda', 'Event::agenda', 'agenda'],
+  ['GET', 'agenda/mois-[i:year][i:month]', 'Event::month', 'agenda_month'],
 
   // Glaneuses
   ['GET', 'podcast', 'Glaneuses::home', 'glaneuses'],
@@ -43,7 +43,7 @@ $routes = [
 
   // organisations
   ['GET', 'organisations/[*:params]?', 'Organisation::organisations', 'organisations'],
-  ['GET|POST', 'organisation/ajout', 'Organisation::add', 'organisation_add'],
+  ['POST', 'organisation/ajout', 'Organisation::add', 'organisation_add'],
   ['GET|POST', 'organisation/modifier/[*:slug]', 'Organisation::edit', 'organisation_edit'],
   ['GET', 'organisation/activite/[*:praxis]', 'Organisation::search', 'organisation_by_praxis'],
   ['GET', 'organisation/[*:slug]', 'Organisation::organisation', 'organisation'],
