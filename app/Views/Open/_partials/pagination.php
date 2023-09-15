@@ -1,7 +1,8 @@
-<?php if (!empty($paginator->records())) {
+<?php 
+if ($paginator->last() > 1) {
     $params = $controller->router()->params();
 ?>
-    <section class="my-5" id="pagination">
+    <section class="mt-5" id="pagination">
         <div class="precedent" id="call-to-action">
             <p>
                 <a class="cta" href="<?= $controller->router()->hyp($route) . '?' . http_build_query(array_merge($params, ['page' => $paginator->previous()])); ?>">Précédent</a>
@@ -38,5 +39,12 @@
             </p>
         </div>
     </section>
+    <small class="d-block text-center text-secondary text-small">
+    <?php
+    list($first, $last, $total) = $paginator->nowShowing();
+    printf('%d-%d sur %d', $first, $last, $total);
+    ?>
+    
+            </small>
 <?php
 }
