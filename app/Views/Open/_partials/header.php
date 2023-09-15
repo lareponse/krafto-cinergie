@@ -18,7 +18,7 @@
 <header class="navbar navbar-expand-xl py-3" id="header">
     <div class="container">
 
-        <a class="navbar-brand" href="index.php">
+        <a class="navbar-brand" href="<?=$controller->router()->hyp('home')?>">
             <img src="/public/assets/img/logo-cinergie.svg" alt="Logo CINERGIE" id="logo">
         </a>
 
