@@ -22,7 +22,20 @@ abstract class Kortex extends \HexMakina\kadro\Controllers\Kadro
         return isset($this->pageSlug);
     }
 
-
+    public function applyFreeSearch($query, $fields)
+    {
+        if ($this->router()->params('s')) {
+            $isLike = '%'.$this->router()->params('s').'%';
+    
+            $bindname = $query->addBinding('labelSearch', $isLike);
+            $orConditions = [];
+            foreach($fields as $searchField){
+                $orConditions[]= "$searchField LIKE $bindname";
+            }
+            $query->whereWithBind(implode(' OR ', $orConditions));
+        }
+        return $query;
+    }
     public function activeSection(): string
     {
         return $this->className();
@@ -159,4 +172,6 @@ abstract class Kortex extends \HexMakina\kadro\Controllers\Kadro
         return $this->urlFor($this->className(), $action, $this->loadModel(), $extras);
 
     }
+
+
 }
