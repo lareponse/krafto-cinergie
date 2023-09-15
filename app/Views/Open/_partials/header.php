@@ -1,10 +1,10 @@
-<aside class="collapse show" id="searchBAR" style="">
+<aside class="collapse" id="searchBAR" style="">
     <div class="bg-dark p-4">
         <section class="container">
             <div class="mx-auto w-50">
-                <form class="search-form ms-2" action="/">
+                <form class="search-form ms-2" action="<?= $controller->router()->hyp('search')?>">
                     <div class="input-group mb-3">
-                        <input type="search" value="" autocomplete="off" placeholder="Rechercher" name="s" class="form-control">
+                        <input type="search" value="" autocomplete="off" placeholder="Rechercher" name="s" class="form-control" value="<?=$controller->router()->params('s')?>" />
                         <button class="btn btn-primary" type="submit" title="Rechercher">
                             <i class="bi bi-search"></i>
                         </button>
