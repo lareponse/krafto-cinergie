@@ -16,6 +16,11 @@ class Article extends TightModel
     {
         //---- JOIN & FILTER SERVICE
         $Query = parent::query_retrieve($filters, $options);
+        
+        $Query->join(['article_author', 'hasWriten'], [['hasWriten','article_id', 'article', 'id']], 'LEFT OUTER');
+        $Query->join(['author', 'author'], [['hasWriten','author_id', 'author', 'id']], 'LEFT OUTER');
+        $Query->selectAlso('author.label as author_label');
+
 
         if(isset($filters['year']))
         {
