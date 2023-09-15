@@ -4,6 +4,7 @@ namespace App\Models;
 
 use HexMakina\BlackBox\Database\SelectInterface;
 use HexMakina\TightORM\TightModel;
+use App\Models\{Professional, Organisation};
 
 class Movie extends TightModel
 {
@@ -11,6 +12,7 @@ class Movie extends TightModel
     use Abilities\HasSlug;
     use Abilities\HasTags;
     use Abilities\FiltersOnFirstChar;
+    use Abilities\HasProfilePicture;
 
     public function fieldsForCompletion(): array
     {
@@ -37,21 +39,83 @@ class Movie extends TightModel
         return explode(',', $this->get('movie_thesaurus_ids'));
     }
 
+    public static function idsByOrganisationName(string $isLike): array
+    {
+        $res = Organisation::query_retrieve([
+            'active' => '1',
+            'fullname' => $isLike
+        ], [
+            'eager' => false
+        ])->columns(['id']);
+        $res = $res->retCol();
+
+        return self::idsByOrganisationIds($res);
+    }
+
+    public static function idsByProfessionalName(string $isLike, $praxis_id=null): array
+    {
+        $res = Professional::query_retrieve([
+            'active' => '1',
+            'fullname' => $isLike
+        ], [
+            'eager' => false
+        ])->columns(['id']);
+
+        $res = $res->retCol();
+
+        return self::idsByProfessionalIds($res, $praxis_id);
+    }
+
+    
+    public static function idsByProfessionalIds(array $ids, $praxis_id = null): array
+    {
+        $query = 'SELECT DISTINCT(`movie_professional`.`movie_id`) FROM `movie_professional`  WHERE `movie_professional`.`professional_id` IN ('.implode(',',$ids).')'; 
+        if(!is_null($praxis_id))
+            $query .= ' AND `movie_professional`.`praxis_id` = '.$praxis_id;
+        $query = self::raw($query);
+
+        return is_null($query) ? [] : $query->fetchAll(\PDO::FETCH_COLUMN);
+    }
+
+    public static function idsByOrganisationIds(array $ids): array
+    {
+        $query = 'SELECT DISTINCT(`movie_organisation`.`movie_id`) FROM `movie_organisation`  WHERE `movie_organisation`.`organisation_id` IN ('.implode(',',$ids).')'; 
+        $query = self::raw($query);
+
+        return is_null($query) ? [] : $query->fetchAll(\PDO::FETCH_COLUMN);
+    }
+
+    public static function idsByThemeId(int $id): array
+    {
+        $query = 'SELECT DISTINCT(`movie_tag`.`movie_id`) FROM `movie_tag`  WHERE `movie_tag`.`tag_id` = :tag_id'; 
+        $query = self::raw($query, ['tag_id' => $id]);
+        return is_null($query) ? [] : $query->fetchAll(\PDO::FETCH_COLUMN);
+    }
+    
     public static function query_retrieve($filters = [], $options = []): SelectInterface
     {
         //---- JOIN & FILTER SERVICE
         $Query = parent::query_retrieve($filters, $options);
-
-        if (!isset($options['without_tags'])) {
-            $Query->join(['movie_tag'], [['movie_tag', 'movie_id', 'movie', 'id']], 'LEFT OUTER');
-            $Query->groupBy('id');
-            $Query->selectAlso('GROUP_CONCAT(DISTINCT tag_id) as movie_theme_ids');
-        }
-
-        if (!isset($options['without_thesaurus'])) {
-            $Query->join(['movie_thesaurus'], [['movie_thesaurus', 'movie_id', 'movie', 'id']], 'LEFT OUTER');
-            $Query->groupBy('id');
-            $Query->selectAlso('GROUP_CONCAT(DISTINCT thesaurus_id) as movie_thesaurus_ids');
+        if (isset($options['eager']) && $options['eager'] === true){
+            if (!isset($options['without_tags'])) {
+                $Query->join(['movie_tag'], [['movie_tag', 'movie_id', 'movie', 'id']], 'LEFT OUTER');
+                $Query->groupBy('id');
+                $Query->selectAlso('GROUP_CONCAT(DISTINCT tag_id) as movie_theme_ids');
+            }
+    
+            // if(isset($options['with_director'])){
+            //     $Query->join(['movie_professional'], [['movie_professional', 'movie_id', 'movie', 'id']], 'LEFT OUTER');
+            //     $Query->join(['professional'], [['professional', 'id', 'movie_professional', 'movie_id']], 'LEFT OUTER');
+            //     $Query->whereEQ('praxis_id' , 117, 'movie_professional');
+            //     $Query->selectAlso("CONCAT(`professional`.`firstname`, ' ',`professional`.`lastname`) as director");
+            //     vd($Query);
+            // }
+    
+            if (!isset($options['without_thesaurus'])) {
+                $Query->join(['movie_thesaurus'], [['movie_thesaurus', 'movie_id', 'movie', 'id']], 'LEFT OUTER');
+                $Query->groupBy('id');
+                $Query->selectAlso('GROUP_CONCAT(DISTINCT thesaurus_id) as movie_thesaurus_ids');
+            }
         }
 
         if(isset($filters['FiltersOnFirstChar'])){
@@ -66,15 +130,24 @@ class Movie extends TightModel
             $Query->selectAlso('praxis_id as worked_as');
         }
 
-        if (isset($filters['organisation'])) {
-            $Query->join(['movie_organisation', 'movie_organisation'], [
-                ['movie', 'id', 'movie_organisation', 'movie_id'],
-                ['movie_organisation', 'organisation_id', $filters['organisation']->getID()]
-            ]);
+        // if (isset($filters['professional_label'])) {
+        //     $labelLike = '%'.$filters['professional_label'].'%';
+        //     $Query->join(['movie_professional', 'movie_professional'], [['movie', 'id', 'movie_professional', 'movie_id']]);
+        //     $Query->join(['professional', 'professional'], [['professional', 'id', 'movie_professional', 'professional_id']]);
+        //     $Query->selectAlso('CONCAT(`professional`.`firstname`, \' \',`professional`.`lastname`) as professional_label');
 
-            $Query->selectAlso('praxis_id as acted_as');
+        //     $bindname = $Query->addBinding('professional_fullname', $labelLike);
+        //     $Query->whereWithBind('CONCAT(`professional`.`firstname`, \' \',`professional`.`lastname`) LIKE '.$bindname);
+        // }
 
-        }
+
+        // if (isset($filters['organisation_label'])) {
+        //     $labelLike = '%'.$filters['organisation_label'].'%';
+        //     $Query->join(['movie_organisation', 'movie_organisation'], [['movie', 'id', 'movie_organisation', 'movie_id']]);
+        //     $Query->join(['organisation', 'organisation'], [['organisation', 'id', 'movie_organisation', 'organisation_id']]);
+        //     // $Query->selectAlso('organisation.label as organisation_label');
+        //     $Query->whereLike('label', $labelLike, 'organisation');
+        // }
 
         if (isset($filters['article'])) {
             $Query->join(['article_movie', 'article_movie'], [
@@ -92,7 +165,8 @@ class Movie extends TightModel
         }
 
         $Query->orderBy([$Query->table(), 'released', 'DESC']);
-
         return $Query;
     }
+
+
 }
