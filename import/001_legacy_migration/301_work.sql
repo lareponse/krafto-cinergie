@@ -25,14 +25,12 @@ CREATE TABLE `work` (
   `work_ip` varchar(255) DEFAULT NULL COMMENT 'leg:field10',
   `work_timestamp` timestamp NULL DEFAULT NULL COMMENT 'leg:field11',
 
-  `type_id` int DEFAULT NULL COMMENT 'FK tag',
+  `category_id` int DEFAULT NULL COMMENT 'FK tag',
 
   `legacy_id` varchar(40) DEFAULT NULL,
   `legacy_title` varchar(190) DEFAULT NULL,
   `legacy_user` varchar(13) DEFAULT NULL,
-  `legacy_category` varchar(12) DEFAULT NULL,
-  `legacy_theme` varchar(17) DEFAULT NULL COMMENT 'process into type_id',
-  `legacy_subject` varchar(17) DEFAULT NULL
+  `legacy_theme` varchar(17) DEFAULT NULL COMMENT 'process into category_id'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- PRIMARY
@@ -44,7 +42,7 @@ ALTER TABLE `work` ADD UNIQUE `work-slug-unique` (`slug`);
 
 -- FK
 
-ALTER TABLE `work` ADD CONSTRAINT `work-hasTagType` FOREIGN KEY (`type_id`) REFERENCES `tag` (`id`);
+ALTER TABLE `work` ADD CONSTRAINT `work-hasCategoryTag` FOREIGN KEY (`category_id`) REFERENCES `tag` (`id`);
 
 -- DATA
 
@@ -75,14 +73,12 @@ INSERT INTO `cinergie`.`work` (
   `work_ip`,
   `work_timestamp`,
 
-  `type_id`,
+  `category_id`,
 
   `legacy_id`,
   `legacy_title`,
   `legacy_user`,
-  `legacy_category`,
-  `legacy_theme`,
-  `legacy_subject`
+  `legacy_theme`
 )
 SELECT
   CAST(REGEXP_SUBSTR(`content_item`.`id`, '[0-9]+$', 1) as UNSIGNED) as `id`,
@@ -109,14 +105,12 @@ SELECT
   `field10` as `work_ip`,
   `field11` as `work_timestamp`,
 
-  `tag`.`id` as `type_id`,
+  `tag`.`id` as `category_id`,
 
   `content_item`.`id` as `legacy_id`,
   `title` as `legacy_title`,
   `user` as `legacy_user`,
-  `category` as `legacy_category`,
-  `theme` as `legacy_theme`,
-  `subject` as `legacy_subject`
+  `theme` as `legacy_theme`
 
 FROM `a7_cinergie_beta`.`content_item`
 LEFT OUTER JOIN `tag` ON `tag`.`reference` = `content_item`.`theme`
