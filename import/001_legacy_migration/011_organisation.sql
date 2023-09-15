@@ -45,7 +45,8 @@ CREATE TABLE `cinergie`.`organisation` (
 
   `updated_on` datetime NULL COMMENT 'leg:maj',
 
-  `legacy_photo` varchar(255) DEFAULT NULL
+  `profilePicture` varchar(255) DEFAULT NULL COMMENT 'leg:legacy_photo'
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- PRIMARY
@@ -90,7 +91,7 @@ INSERT INTO `cinergie`.`organisation` (
 
   `updated_on`,
 
-  `legacy_photo`
+  `profilePicture`
 )
 SELECT
  `id` as `id`,
@@ -122,7 +123,7 @@ SELECT
  `inAnnuaire` as `isListed`,
 
  `maj` as `updated_on`,
- TRIM(`photo`) as `legacy_photo`
+ TRIM(`photo`) as `profilePicture`
 
 FROM `a7_cinergie_beta`.`organisation`;
 

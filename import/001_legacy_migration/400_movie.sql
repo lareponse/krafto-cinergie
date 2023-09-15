@@ -5,6 +5,7 @@ CREATE TABLE `cinergie`.`movie` (
   `id` int NOT NULL,
 
   `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
   `slug` varchar(222) DEFAULT NULL COMMENT 'leg:urlparms',
 
   `label` varchar(255) DEFAULT NOT NULL COMMENT 'leg:nom',
@@ -22,9 +23,9 @@ CREATE TABLE `cinergie`.`movie` (
   `comment` text COMMENT 'leg:autre, TODO distinct avalues',
   `casting` text COMMENT 'TODO parse ?',
   `url_trailer` varchar(255) DEFAULT NULL COMMENT 'leg:bande_annonce',
+  `profilePicture` varchar(255) DEFAULT NULL COMMENT 'leg:photo',
 
   `legacy_origine` varchar(255) DEFAULT NULL COMMENT 'leg:origine, TODO parse to Countries',
-  `legacy_photo` varchar(255) DEFAULT NULL COMMENT 'leg:photo',
   `legacy_maj` char(19) DEFAULT NULL COMMENT 'leg:maj'
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -36,6 +37,10 @@ ALTER TABLE `movie` MODIFY `id` int NOT NULL AUTO_INCREMENT;
 -- INDEX
 ALTER TABLE `movie` ADD UNIQUE(`slug`);
 ALTER TABLE `movie` ADD KEY `movie-hasTagGenre` (`genre_id`);
+
+CREATE INDEX idx_active ON `movie`(`active`);
+CREATE INDEX idx_released ON `movie`(`released`);
+
 
 -- FK
 ALTER TABLE `movie`
@@ -52,6 +57,7 @@ INSERT INTO `cinergie`.`movie` (
   `id`,
 
   `slug`,
+  `active`,
 
   `label`,
   `content`,
@@ -65,6 +71,7 @@ INSERT INTO `cinergie`.`movie` (
   `comment`,
   `casting`,
   `url_trailer`,
+  `profilePicture`,
 
   `genre_id`,
   `metrage_id`,
@@ -81,12 +88,12 @@ SELECT
     `film`.`id` as `id`,
 
     `urlparms` as `slug`,
+    1 as `active`,
+    TRIM(`nom`) as `label`,
+    TRIM(`synopsis`) as `content`,
 
-    `nom` as `label`,
-    `synopsis` as `content`,
-
-    `nomvo` as `original_title`,
-    `duree` as `runtime`,
+    TRIM(`nomvo`) as `original_title`,
+    TRIM(`duree`) as `runtime`,
     `datesortie` as `released`,
 
     `site` as `url`,
@@ -94,12 +101,12 @@ SELECT
     `autre` as `comment`,
     `casting` as `casting`,
     `bande_annonce` as `url_trailer`,
+    `photo` as `profilePicture`,
 
     `itm_genre`.`id` as `genre_id`,
     `itm_metrage`.`id` as `metrage_id`,
 
-    `origine` as `legacy_origine`,
-    `photo` as `legacy_photo`,
+    TRIM(`origine`) as `legacy_origine`,
     `maj` as `legacy_maj`
 
 FROM `a7_cinergie_beta`.`film`

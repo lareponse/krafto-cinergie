@@ -38,7 +38,7 @@
 
     `updated_on` datetime NOT NULL COMMENT 'leg:maj',
 
-    `legacy_photo` varchar(200) DEFAULT NULL
+    `profilePicture` varchar(255) DEFAULT NULL COMMENT 'leg:legacy_photo'
 
   ) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
@@ -89,7 +89,7 @@
     `declic_texte`,
     `declic_signature`,
 
-    `legacy_photo`,
+    `profilePicture`,
     `updated_on`
   )
   SELECT
@@ -111,7 +111,8 @@
    TRIM(`mobile`) as `gsm`,
    TRIM(`site`) as `url`,
    TRIM(`email`),
-   `confidentiel` as `secret`,
+   TRIM(`confidentiel`) as  `secret`,
+
 
    TRIM(`pays`) as `country`,
    TRIM(`region`) as `province`,
@@ -125,7 +126,7 @@
    `declic_texte`,
    `declic_signature`,
 
-   `photo`as `legacy_photo`,
+   `photo`as `profilePicture`,
    `maj`as `updated_on`
 
   FROM `a7_cinergie_beta`.`personne`

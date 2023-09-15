@@ -5,10 +5,9 @@ CREATE TABLE `cinergie`.`article` (
 
   `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'leg:datestamp',
   `active` tinyint(1) NOT NULL DEFAULT '0',
-  `slug` varchar(222) DEFAULT NULL COMMENT 'leg:urlparm',
-  `rank` smallint UNSIGNED DEFAULT NULL,
-
-  `label` varchar(190) DEFAULT NULL COMMENT 'leg:field01',
+  `slug` varchar(222) NOT NULL COMMENT 'leg:urlparm',
+  `label` varchar(190) NOT NULL COMMENT 'leg:field01',
+  
   `content` mediumtext COMMENT 'leg:field06',
 
   `type_id` int DEFAULT NULL COMMENT 'FK tag, parse from legacy_subject',
@@ -18,12 +17,14 @@ CREATE TABLE `cinergie`.`article` (
   `embedVideo` text COMMENT 'leg:field07',
   `isArchived` tinyint(1) DEFAULT NULL COMMENT 'leg:field11',
   `isDiaporama` tinyint(1) DEFAULT NULL COMMENT 'leg:field10',
+  `rank` smallint UNSIGNED DEFAULT NULL,
+
+  `profilePicture` varchar(255) DEFAULT NULL COMMENT 'leg:field04',
 
   `legacy_id` varchar(40) DEFAULT NULL,
   `legacy_title` varchar(190) DEFAULT NULL,
   `legacy_authors` varchar(84) DEFAULT NULL COMMENT 'leg:field03',
   `legacy_author_ids` varchar(45) DEFAULT NULL COMMENT 'leg:field09',
-  `legacy_photo_illu` varchar(167) DEFAULT NULL COMMENT 'leg:field04',
   `legacy_user` varchar(13) DEFAULT NULL,
   `legacy_theme` varchar(17) DEFAULT NULL,
   `legacy_subject` varchar(17) DEFAULT NULL,
@@ -44,7 +45,9 @@ ALTER TABLE `cinergie`.`article` MODIFY `id` int NOT NULL AUTO_INCREMENT;
 -- INDEX
 
 ALTER TABLE `cinergie`.`article` ADD UNIQUE `article-slug-unique` (`slug`);
-ALTER TABLE `cinergie`.`article` ADD CONSTRAINT `article-hasArticle` FOREIGN KEY (`type_id`) REFERENCES `tag` (`id`);
+ALTER TABLE `cinergie`.`article` ADD CONSTRAINT `article-hasType` FOREIGN KEY (`type_id`) REFERENCES `tag` (`id`);
+
+CREATE INDEX idx_active ON `article`(`active`);
 
 -- DATA
 
@@ -67,6 +70,8 @@ INSERT INTO `cinergie`.`article` (
 
   `type_id`,
 
+  `profilePicture`,
+
   `legacy_id`,
   `legacy_theme`,
   `legacy_subject`,
@@ -87,23 +92,24 @@ SELECT
   urlparms as `slug`,
   tri as `rank`,
 
-  field01 as `label`,
-  field06 as `content`,
+  TRIM(field01) as `label`,
+  TRIM(field06) as `content`,
 
   STR_TO_DATE(field02, '%Y-%m-%d') as `publication`,
-  field05 as `abstract`,
+  TRIM(field05) as `abstract`,
   field07 as `embedVideo`,
   field10 = '1' as `isDiaporama`,
   field11 = '1' as `isArchived`,
 
   `tag`.`id` as `type_id`,
 
+  field04 as `profilePicture`,
+
   `content_item`.id as legacy_id,
   theme as legacy_theme,
   subject as legacy_subject,
   user as legacy_user,
   title as legacy_title,
-  field04 as legacy_photo_illu,
   field09 as legacy_author_ids,
   field03 as legacy_authors,
   field13 as legacy_field13,
