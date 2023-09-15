@@ -17,13 +17,17 @@ class Professional extends TightModel
 
     use Abilities\FiltersOnFirstChar;
 
-    
-    public function profilePictureField():string {
-        return 'legacy_photo';
-    }
 
     public function tagIds(): array{
         return [];
+    }
+
+    public static function idsByPraxis(int $praxis_id): array
+    {
+        $query = 'SELECT `professional_tag`.`professional_id` FROM `professional_tag`  WHERE `professional_tag`.`tag_id` = :tag_id'; 
+        $query = self::raw($query, ['tag_id' => $praxis_id]);
+
+        return $query->fetchAll(\PDO::FETCH_COLUMN);
     }
     
     public function fieldsForCompletion():array
@@ -34,7 +38,7 @@ class Professional extends TightModel
 
     public function fullName() : string
     {
-        return $this->get('lastname').' '.$this->get('firstname');
+        return empty($this->get('fullname')) ? $this->get('lastname').' '.$this->get('firstname') : $this->get('fullname');
     }
     
     public static function query_retrieve($filters = [], $options = []): SelectInterface
@@ -43,12 +47,6 @@ class Professional extends TightModel
         $Query = parent::query_retrieve($filters, $options);
 
         $Query->selectAlso(["CONCAT(firstname,' ', lastname) as label"]);
-        if(isset($filters['fullname'])){
-            $bindname = $Query->addBinding('fullNameSearch', '%'.$filters['fullname'].'%');
-
-            $Query->whereWithBind('CONCAT(`professional`.`firstname`, \' \',`professional`.`lastname`) LIKE '.$bindname);
-
-        }
 
         if(isset($filters['FiltersOnFirstChar'])){
             self::applyFirstCharFilter($filters['FiltersOnFirstChar'], $Query, 'lastname');
@@ -63,6 +61,7 @@ class Professional extends TightModel
             $Query->selectAlso('praxis_id as worked_as');
 
         }
+        
         if(isset($filters['organisation']))
         {
             $Query->join(['organisation_professional', 'organisation_professional'], [
@@ -79,17 +78,10 @@ class Professional extends TightModel
             ]);
         }
 
-        if(isset($filters['birthYearMin'])){
-            $year = (int)$filters['birthYearMin'];
-            $bindname = $Query->addBinding('filters_birthYearMin', $year);
-            $Query->whereWithBind('YEAR(`birth`) >= '.$bindname);
-        }
-        
-        if(isset($filters['gender'])){
-            $Query->whereEQ('gender', $filters['gender']);
-        }
 
-        if(!isset($options['eager']) || $options['eager'] !== false ){
+        
+
+        if(!isset($options['eager']) || $options['eager'] !== false){
             $Query->join(['professional_tag', 'praxis'], [['professional', 'id', 'praxis', 'professional_id']], 'LEFT OUTER');
             $Query->join(['tag', 'tag'], [['tag', 'id', 'praxis', 'tag_id'], ['tag', 'parent_id', 91]], 'LEFT OUTER');
             $Query->groupBy(['professional', 'id']);
@@ -100,9 +92,8 @@ class Professional extends TightModel
             }
         }
 
-
         $Query->orderBy(['lastname', 'asc']);
-        // dd($Query);
+        
         return $Query;
     }
 }

@@ -9,7 +9,7 @@ trait HasProfilePicture
     }
     
     public function profilePictureField():string {
-        return 'legacy_photo_illu';
+        return 'profilePicture';
     }
 
     public function profilePicture(): string
