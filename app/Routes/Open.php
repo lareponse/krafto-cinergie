@@ -15,12 +15,12 @@ $routes = [
   ['GET', 'auteurs/[*:slug]', 'Author::author', 'author'],
 
   // contests
-  ['GET', 'concours', 'Contest::home', 'contests'],
+  ['GET', 'concours', 'Contest::contests', 'contests'],
   ['GET', 'concours/[*:slug]', 'Contest::contest', 'contest'],
 
   // events
-  ['GET', 'agenda', 'Event::agenda', 'agenda'],
-  ['GET', 'agenda/mois-[i:year][i:month]', 'Event::month', 'agenda_month'],
+  ['GET', 'agenda', 'Event::events', 'events'],
+  ['GET', 'agenda/mois-[i:year][i:month]', 'Event::month', 'events_month'],
 
   // Glaneuses
   ['GET', 'podcast', 'Glaneuses::home', 'glaneuses'],

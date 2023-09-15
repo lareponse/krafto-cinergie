@@ -8,7 +8,7 @@ use DateTimeZone;
 class Event extends Kortex
 {
 
-    public function agenda()
+    public function events()
     {
         $current = new \DateTimeImmutable();
         // $date = new \DateTimeImmutable();

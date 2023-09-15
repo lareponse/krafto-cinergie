@@ -10,6 +10,8 @@ class Contest extends TightModel implements EventInterface
 {
     use \HexMakina\kadro\Models\Abilities\Event;
     use Abilities\HasSlug;
+    use Abilities\HasProfilePicture;
+
 
     public function __toString()
     {

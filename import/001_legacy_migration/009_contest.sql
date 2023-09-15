@@ -12,6 +12,8 @@ CREATE TABLE `contest` (
   `label` varchar(100) DEFAULT NULL COMMENT 'leg:field01',
   `content` text COMMENT 'leg:field06',
 
+  `profilePicture` varchar(255) DEFAULT NULL COMMENT 'leg:field04',
+
   `abstract` text COMMENT 'leg:field05',
   `question` varchar(255) DEFAULT NULL COMMENT 'leg:field07',
   `email` varchar(100) DEFAULT NULL COMMENT 'leg:field08',
@@ -20,7 +22,6 @@ CREATE TABLE `contest` (
   `stops` date DEFAULT NULL COMMENT 'leg:field03',
 
   `legacy_id` varchar(40) DEFAULT NULL,
-  `legacy_photo` varchar(255) DEFAULT NULL COMMENT 'leg:field04',
   `legacy_dicho_formulaire` tinyint(1) DEFAULT NULL COMMENT 'leg:field09',
   `legacy_field19` varchar(255) DEFAULT NULL,
   `legacy_field20` varchar(255) DEFAULT NULL
@@ -52,6 +53,8 @@ INSERT INTO `cinergie`.`contest` (
   `label`,
   `content`,
 
+  `profilePicture`,
+
   `abstract`,
   `question`,
   `email`,
@@ -60,7 +63,6 @@ INSERT INTO `cinergie`.`contest` (
   `stops`,
 
   `legacy_id`,
-  `legacy_photo`,
   `legacy_dicho_formulaire`,
   `legacy_field19`,
   `legacy_field20`
@@ -74,18 +76,19 @@ SELECT
   `urlparms` as `slug`,
   `tri` as `rank`,
 
-  `field01` as `label`,
-  `field06` as `content`,
+  TRIM(`field01`) as `label`,
+  TRIM(`field06`) as `content`,
 
-  `field05` as `abstract`,
-  `field07` as `question`,
-  `field08` as `email`,
+  TRIM(`field04`) as `profilePicture`,
+
+  TRIM(`field05`) as `abstract`,
+  TRIM(`field07`) as `question`,
+  TRIM(`field08`) as `email`,
 
   IF(`field02` IS NULL or `field02` = '' or `field02` LIKE '0000-00-00', null, STR_TO_DATE(`field02`,'%Y-%m-%d')) as `starts`,
   IF(`field03` IS NULL or `field03` = '' or `field03` LIKE '0000-00-00', null, STR_TO_DATE(`field03`,'%Y-%m-%d')) as `stops`,
 
   `id` as `legacy_id`,
-  `field04` as `legacy_photo`,
   IF(`field09`='', null, `field09`) as `legacy_dicho_formulaire`,
   `field19` as `legacy_field19`,
   `field20` as `legacy_field20`

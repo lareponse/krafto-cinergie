@@ -36,7 +36,7 @@
                     <a class="nav-link" href="<?= $controller->router()->hyp('articles'); ?>">Articles</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= $controller->router()->hyp('agenda'); ?>">Agenda</a>
+                    <a class="nav-link" href="<?= $controller->router()->hyp('events'); ?>">Agenda</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= $controller->router()->hyp('movies'); ?>">Filmoth&egrave;que</a>

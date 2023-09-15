@@ -4,7 +4,7 @@
         <section class="row">
             <div class="col-lg-3">
                 <p>
-                    <a href="https://www.cinergie.be">
+                    <a href="<?=$controller->router()->hyp('home');?>">
                         <img src="/public/assets/img/logo-cinergie.svg" alt="Logo CINERGIE" id="logo">
                     </a>
                 </p>
@@ -40,7 +40,7 @@
                             <ul>
                                 <li><a href="<?=$controller->router()->hyp('home');?>">Accueil</a></li>
                                 <li><a href="<?=$controller->router()->hyp('articles');?>">Articles</a></li>
-                                <li><a href="<?=$controller->router()->hyp('agenda');?>">Agenda</a></li>
+                                <li><a href="<?=$controller->router()->hyp('events');?>">Agenda</a></li>
                                 <li><a href="<?=$controller->router()->hyp('movies');?>">Filmoth&egrave;que</a></li>
                                 <li><a href="<?=$controller->router()->hyp('professionals');?>">Professionnels</a></li>
                                 <li><a href="<?=$controller->router()->hyp('organisations');?>">Organisations</a></li>
@@ -53,6 +53,7 @@
                         <nav class="navigation-footer">
                             <ul>
                                 <li><a href="https://www.cinergie.be/podcast">Podcast</a></li>
+                                <li><a href="<?=$controller->router()->hyp('contests');?>">Les concours</a></li>
                                 <li><a href="<?=$controller->router()->hyp('authors');?>">Nos auteurs</a></li>
                                 <li><a href="<?=$controller->router()->hyp('history');?>">Notre histoire</a></li>
                                 <li><a href="<?=$controller->router()->hyp('price');?>"">Prix Cinergie</a></li>
