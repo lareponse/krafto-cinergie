@@ -80,21 +80,21 @@
                     Nos partenaires
                 </h5>
                 <section id="partenaires">
-                    <article class="partenaire-item">
-                        <img src="/public/assets/img/partenaires/logo_maison_de_la_francite.png" >
-                    </article>
-                    <article class="partenaire-item">
-                        <img src="/public/assets/img/partenaires/iris_bruxelles.jpeg">
-                    </article>
-                    <article class="partenaire-item">
-                        <img src="/public/assets/img/partenaires/bruxelles-francophone.gif">
-                    </article>
-                    <article class="partenaire-item">
-                        <img src="/public/assets/img/partenaires/logofwb.jpeg">
-                    </article>
-                    <article class="partenaire-item">
+                    <a class="partenaire-item" href="https://www.maisondelafrancite.be/">
+                        <img src="/public/assets/img/partenaires/logo_maison_de_la_francite.png" alt="Maison de la Francité" />
+                    </a>
+                    <a class="partenaire-item" href="https://be.brussels/">
+                        <img src="/public/assets/img/partenaires/iris_bruxelles.jpeg" alt="Région de Bruxelles-Capitale - Administration Economie et Emploi" />
+                    </a>
+                    <a class="partenaire-item" href="https://ccf.brussels/wp-signup.php?new=www.spfb.brussels">
+                        <img src="/public/assets/img/partenaires/bruxelles-francophone.gif" alt="Service public francophone bruxellois" />
+                    </a>
+                    <a class="partenaire-item" href="https://audiovisuel.cfwb.be/">
+                        <img src="/public/assets/img/partenaires/logofwb.jpeg" alt="Centre du Cinéma et de l'Audiovisuel de la Communauté Française" />
+                    </a>
+                    <a class="partenaire-item" href="https://lareponse.be">
                         <img src="https://avatars.githubusercontent.com/u/20891495?v=4" alt="La Réponse" />
-                    </article>
+                    </a>
                 </section>
             </div>
         </section>
