@@ -42,7 +42,7 @@ class Movie extends Kortex
         $this->viewport('organisations', $organisations);
 
         $this->viewport('articles', $this->relatedArticles($professionals, $organisations));
-        $this->viewport('photos', $this->relatedPhotos('film'));
+        $this->viewport('related_photos', $this->relatedPhotos('film'));
     }
 
 
