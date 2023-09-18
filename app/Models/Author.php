@@ -10,7 +10,9 @@ class Author extends TightModel
     use Abilities\HasSlug;
     use Abilities\HasProfilePicture;
     use Abilities\HasSecrets;
-
+    use Abilities\IsActivable;
+    
+    use Abilities\FiltersOnFirstChar;
 
     public function __toString()
     {
@@ -21,7 +23,6 @@ class Author extends TightModel
     {
         return $this->get('label');
     }
-
 
     
     public function contactPoint(): string
@@ -35,6 +36,10 @@ class Author extends TightModel
          //---- JOIN & FILTER SERVICE
          $Query = parent::query_retrieve($filters, $options);
 
+
+         if(isset($filters['FiltersOnFirstChar'])){
+            self::applyFirstCharFilter($filters['FiltersOnFirstChar'], $Query, 'label');
+        }
 
         if(isset($filters['article']))
         {

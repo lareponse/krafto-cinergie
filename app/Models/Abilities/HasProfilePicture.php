@@ -12,9 +12,17 @@ trait HasProfilePicture
         return 'profilePicture';
     }
 
+    public function hasProfilePicture(): bool
+    {
+        return !empty($this->get($this->profilePictureField()));
+    }
+
     public function profilePicture(): string
     {
-        return empty($this->get($this->profilePictureField())) ? $this->defaultProfilePicture() : '/public' . $this->get($this->profilePictureField());
+        return empty($this->get($this->profilePictureField())) 
+            ? $this->defaultProfilePicture() 
+            : 'https://www.cinergie.be' . $this->get($this->profilePictureField());
+            // : '/public' . $this->get($this->profilePictureField());
     }
 
 }
