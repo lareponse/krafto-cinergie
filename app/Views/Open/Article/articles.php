@@ -6,7 +6,7 @@
     <div class="mx-auto my-5 w-75">
         <form class="search-form" action="<?=$controller->router()->hyp('articles')?>">
             <div class="input-group mb-3">
-                <input type="search" value="" autocomplete="off" placeholder="Votre recherche..." name="s" class="form-control">
+                <input type="search" autocomplete="off" placeholder="Votre recherche..." name="s" value="<?= $controller->router()->params('s') ?>" class="form-control">
                 <button class="btn btn-primary" type="submit" title="Rechercher">
                     <i class="bi bi-search"></i>
                 </button>
