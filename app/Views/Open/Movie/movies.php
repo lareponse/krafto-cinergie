@@ -2,7 +2,7 @@
 
 use \HexMakina\Marker\Marker; ?>
 
-<?php $this->layout('Open::layout', ['title' => "Tous les films du cinéma belge"]) ?>
+<?php $this->layout('Open::layout', ['title' => $page->label()]) ?>
 
 <div class="container my-5">
     <section class="row">
@@ -17,7 +17,6 @@ use \HexMakina\Marker\Marker; ?>
                 else {
 
                     foreach ($paginator->records() as $record) {
-
                         ?>
                     <div class="col-lg-4 mb-5" id="film-item">
                         <article class="card shadow">
