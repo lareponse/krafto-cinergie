@@ -1,4 +1,5 @@
-<?php $this->layout('Open::layout', ['title' => $page->get('label')]) ?>
+<?php 
+$this->layout('Open::layout', ['title' => $page->get('label')]) ?>
 
 <div class="container my-5 pb-5" id="article-single">
 
@@ -8,8 +9,10 @@
                 <?= $page->get('abstract'); ?>
             </div>
         </section>
-        <?= $this->insert('Open::_partials/share_aside', ['label' => $page->get('label')]); ?>
 
+        <aside id="meta" class="col-lg-3 mb-5 order-3 order-sm-3 order-md-3 order-lg-2 offset-lg-1 shadow">
+            <?= $this->insert('Open::_partials/share_print')?>
+        </aside>
 
         <section class="w-75 mb-5 order-2 order-sm-2 order-md-2 order-lg-3 mx-auto text-justify">
 
@@ -17,6 +20,4 @@
             <?= $this->insert('Open::_partials/share_bottom', ['label' => $page->get('label')]); ?>
         </section>
 
-        <?= $this->insert('Open::_partials/related_articles', ['label' => $page->get('label')]); ?>
-    </div>
 </div>
