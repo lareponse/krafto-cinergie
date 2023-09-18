@@ -58,7 +58,7 @@ $routes = [
 
 
   // shop
-  ['GET', 'boutique', 'Shop::home', 'shop'],
+  ['GET', 'boutique', 'Shop::shop', 'shop'],
   ['GET|POST', 'boutique/commander', 'Shop::order', 'shop_order'],
 
   // works
