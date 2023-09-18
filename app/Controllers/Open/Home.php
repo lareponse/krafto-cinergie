@@ -11,18 +11,18 @@ class Home extends Kortex
         
     public function home()
     {
-        $query = $this->get('Controllers\\Open\\Article')->queryListing();
+        $query = Article::queryListing();
         $query->whereEQ('isDiaporama', '1');
         $this->viewport('articlesDiaporama', $query->retObj(Article::class));
         
-        $query = $this->get('Controllers\\Open\\Article')->queryListing();
+        $query = Article::queryListing();
         $query->whereEQ('isDiaporama', '0');
         $query->whereEQ('type_id', '50');
         $query->whereNotEmpty('embedVideo');
         $query->limit(3);
         $this->viewport('entrevuesFilmees', $query->retObj(Article::class));
 
-        $query = $this->get('Controllers\\Open\\Article')->queryListing();
+        $query = Article::queryListing();
         $query->whereEQ('isDiaporama', '0');
         $query->whereEmpty('embedVideo');
         $query->limit(3);
