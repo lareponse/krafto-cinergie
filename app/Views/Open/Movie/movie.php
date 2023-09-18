@@ -57,11 +57,7 @@ use \HexMakina\Marker\Marker; ?>
             <p><?= $record->get('content') ?></p>
         </section>
 
-        <section class="my-5" id="related-posts">
-            <div class="slide dots" id="single-post-slider">
-                <?=$this->insert('Open::Movie/related', ['articles' => $articles]);?>
-            </div>
-        </section>
+        <?=$this->insert('Open::_partials/related_articles', ['related_articles' => $articles]);?>
 
         <?php
         if (!empty($record->get('url_trailer'))) {
@@ -74,18 +70,19 @@ use \HexMakina\Marker\Marker; ?>
         <?php
         }
         ?>
-        <section class="row" id="galerie">
-            <h2 class="pb-0">Galerie photos</h2>
-            <hr />
-            <?= $this->insert('Open::Movie/photos', ['photos' => $controller->relatedPhotos()]);?>
-        </section>
 
-        <section id="equipe-belge">
+        <?= $this->insert('Open::_partials/photos', ['photos' => $related_photos]); ?>
+
+        <?php
+        if((count($professionals) + count($organisations)) > 1){
+            ?>
+            <section id="equipe-belge">
             <h2 class="pb-0">L'équipe belge</h2>
             <hr />
             <?= $this->insert('Open::Movie/worked_on', ['professional' => $professionals, 'organisation' => $organisations]);?>
         </section>
-
+            <?php
+        }
+        ?>
     </article>
-
 </div>

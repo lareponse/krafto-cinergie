@@ -7,7 +7,7 @@ use \HexMakina\Marker\Marker; ?>
 <div class="container my-5 pb-5" id="organisation-single">
     <article class="w-75 mx-auto">
 
-        <h1>Faustine Cros</h1>
+        <h1><?= $record ?></h1>
         <hr class="my-4">
 
         <div class="share" id="share">
@@ -22,157 +22,34 @@ use \HexMakina\Marker\Marker; ?>
 
         <section class="row g-0 mt-4">
 
-            <div class="col-lg-5">
-                <img class="img-fluid w-100" src="https://www.cinergie.be/picture/organisation/600x/images/organisation/_q/quadrature-du-cercle-la/lqdc-logotype-rgb.jpg" alt="organisation">
+            <div class="col-lg-5 col-md-4">
+                <img class="img-fluid w-100" src="<?= $record->profilePicture() ?>" alt="organisation">
             </div>
 
-            <div class="col-lg-7 ps-lg-5" id="infos">
-                <p class="text-primary"><b>Association culturelle, Association professionnelle</b></p>
-                <p><b>Ville :</b> ...</p>
-                <p><b>Province :</b> ...</p>
-                <p><b>Pays :</b> Belgique</p>
-                <p><b>Téléphone :</b> +32 486 98 26 45</p>
-                <p><b>Email :</b> <a href="mailto:info@laquadratureducercle.be">info@laquadratureducercle.be</a></p>
-                <p>
-                    <a class="cta" href="https://www.laquadratureducercle.be" target="_blank">
-                        <b>Site web</b>
-                    </a>
-                </p>
+            <div class="col-lg-7 ps-lg-5 col-md-8" id="infos">
+                <p class="text-primary"><strong><?= implode(', ', $praxes); ?></strong></p>
+                <?= $this->insert('Open::_partials/contact_info', ['contact' => $record]); ?>
             </div>
 
         </section>
 
+        <?php
+        if (!empty($record->get('content'))) {
+        ?>
+            <section id="bio" class="my-5">
+                <h2 class="pb-0">Présentation</h2>
+                <hr>
+                <p><?= $record->get('content') ?></p>
+            </section>
+        <?php
+        }
+        ?>
 
-        <section id="bio" class="my-5">
-            <h2 class="pb-0">Présentation</h2>
-            <hr>
-            <p>
-                Réseau de programmateurs cinéma dans le secteur non-marchand de la Fédération Wallonie-Bruxelles, constitué
-                de près de 50 membres actifs au sein de centres culturels, cinémas de proximité, ciné-clubs, associations
-                d'éducation aux médias...
-            </p>
-        </section>
+        <?= $this->insert('Open::_partials/photos', ['photos' => $related_photos]); ?>
 
+        <?= $this->insert('Open::Professional/filmotheque', ['movies' => $related_movies]); ?>
     </article>
 
-    <section class="my-5" id="related-posts">
-        <div class="slide dots" id="single-post-slider">
-            <article class="card paysage mr-4 mb-4 slick-slide" tabindex="-1" role="tabpanel" id="slick-slide00" aria-describedby="slick-slide-control00" style="width: 242px;" data-slick-index="0" aria-hidden="true">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <a href="article-single.php" tabindex="-1">
-                            <img src="https://www.cinergie.be/images/actualite/film/_0/1985/1985--4-.jpg" class="card-img-left img-fluid rounded-start" alt="...">
-                        </a>
-                    </div>
-
-                    <div class="col-md-8">
-                        <a href="article-single.php" tabindex="-1">
-                        </a>
-                        <div class="card-body"><a href="article-single.php" tabindex="-1">
-                                <p class="date">16 janvier 2023</p>
-                                <h5 class="card-title">L'ambitieuse série 1985</h5>
-                            </a><a href="" class="cta" tabindex="-1">Lire l'article</a>
-                        </div>
-
-                    </div>
-
-                </div>
-            </article>
-            <article class="card paysage mr-4 mb-4 slick-slide" tabindex="-1" role="tabpanel" id="slick-slide01" style="width: 242px;" data-slick-index="1" aria-hidden="true">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="https://www.cinergie.be/images/actualite/film/_0/1985/1985--4-.jpg" class="card-img-left img-fluid rounded-start" alt="...">
-                    </div>
-
-                    <div class="col-md-8">
-                        <a href="article-single.php" tabindex="-1">
-                        </a>
-                        <div class="card-body"><a href="article-single.php" tabindex="-1">
-                                <p class="date">16 janvier 2023</p>
-                                <h5 class="card-title">L'ambitieuse série 1985</h5>
-                            </a><a href="" class="cta" tabindex="-1">Lire l'article</a>
-                        </div>
-
-                    </div>
-
-                </div>
-            </article>
-            <article class="card paysage mr-4 mb-4 slick-slide" tabindex="-1" role="tabpanel" id="slick-slide02" aria-describedby="slick-slide-control01" style="width: 242px;" data-slick-index="2" aria-hidden="true">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="https://www.cinergie.be/images/actualite/film/_0/1985/1985--4-.jpg" class="card-img-left img-fluid rounded-start" alt="...">
-                    </div>
-
-                    <div class="col-md-8">
-                        <a href="article-single.php" tabindex="-1">
-                        </a>
-                        <div class="card-body"><a href="article-single.php" tabindex="-1">
-                                <p class="date">16 janvier 2023</p>
-                                <h5 class="card-title">L'ambitieuse série 1985</h5>
-                            </a><a href="" class="cta" tabindex="-1">Lire l'article</a>
-                        </div>
-
-                    </div>
-
-                </div>
-            </article>
-            <article class="card paysage mr-4 mb-4 slick-slide slick-active" tabindex="-1" role="tabpanel" id="slick-slide03" style="width: 242px;" data-slick-index="3" aria-hidden="false">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="https://www.cinergie.be/images/actualite/film/_0/1985/1985--4-.jpg" class="card-img-left img-fluid rounded-start" alt="...">
-                    </div>
-
-                    <div class="col-md-8">
-                        <a href="article-single.php" tabindex="0">
-                        </a>
-                        <div class="card-body"><a href="article-single.php" tabindex="0">
-                                <p class="date">16 janvier 2023</p>
-                                <h5 class="card-title">L'ambitieuse série 1985</h5>
-                            </a><a href="" class="cta" tabindex="0">Lire l'article</a>
-                        </div>
-
-                    </div>
-
-                </div>
-            </article>
-            <article class="card paysage mr-4 mb-4 slick-slide slick-current slick-active" tabindex="0" role="tabpanel" id="slick-slide04" aria-describedby="slick-slide-control02" style="width: 242px;" data-slick-index="4" aria-hidden="false">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="https://www.cinergie.be/images/actualite/film/_0/1985/1985--4-.jpg" class="card-img-left img-fluid rounded-start" alt="...">
-                    </div>
-
-                    <div class="col-md-8">
-                        <a href="article-single.php" tabindex="0">
-                        </a>
-                        <div class="card-body"><a href="article-single.php" tabindex="0">
-                                <p class="date">16 janvier 2023</p>
-                                <h5 class="card-title">L'ambitieuse série 1985</h5>
-                            </a><a href="" class="cta" tabindex="0">Lire l'article</a>
-                        </div>
-
-                    </div>
-
-                </div>
-            </article>
-        </div>
-</div>
-<ul class="slick-dots" style="" role="tablist">
-    <li class="" role="presentation"><button type="button" role="tab" id="slick-slide-control00" aria-controls="slick-slide00" aria-label="1 of 3" tabindex="-1">1</button></li>
-    <li class="" role="presentation"><button type="button" role="tab" id="slick-slide-control01" aria-controls="slick-slide02" aria-label="2 of 3" tabindex="-1">2</button></li>
-    <li role="presentation" class="slick-active"><button type="button" role="tab" id="slick-slide-control02" aria-controls="slick-slide04" aria-label="3 of 3" tabindex="-1">3</button></li>
-</ul>
-</div>
-</section>
-
-<article class="w-75 mx-auto">
-
-    <section class="row" id="galerie">
-        <?= $this->insert('Open::_partials/slider_photo'); ?>
-    </section>
-
-    <section class="row my-5" id="filmographie">
-        <?= $this->insert('Open::_partials/slider_movie'); ?>
-    </section>
 
     <div class="text-center">
         <a class="cta" data-bs-toggle="modal" data-bs-target="#modal-update-organisation">
@@ -332,5 +209,4 @@ use \HexMakina\Marker\Marker; ?>
         </div>
     </div>
 
-</article>
 </div>

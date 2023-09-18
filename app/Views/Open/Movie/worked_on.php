@@ -16,7 +16,7 @@ foreach (['professional' => $professionals, 'organisation' => $organisations] as
                 <h4><a href="<?= $href ?>"><?= $item; ?></a></h4>
             </div>
             <div class="distributeur col-lg-3">
-                <p><?= $item->get('praxes'); ?></p>
+                <p><?= str_replace(', ', '<br>', $item->get('praxes')); ?></p>
             </div>
         </div>
 <?php

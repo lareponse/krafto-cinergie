@@ -1,10 +1,9 @@
 <?php $this->layout('Open::layout') ?>
 
-
 <div class="container my-5 pb-5" id="professionnel-single">
     <article class="w-75 mx-auto">
 
-        <h1>Faustine Cros</h1>
+        <h1><?= $record ?></h1>
         <hr class="my-4">
 
         <div class="share" id="share">
@@ -19,239 +18,45 @@
         <section class="row g-0 mt-4">
 
             <div class="col-lg-5">
-                <img class="img-fluid w-100" src="https://www.cinergie.be/picture/personne/original/images/personne/_c/cros-faustine/photo.jpg" alt="professionnel">
+                <img class="img-fluid w-100" src="<?= $record->profilePicture() ?>" alt="professionnel">
             </div>
 
             <div class="col-lg-7 ps-lg-5" id="infos">
-                <p class="text-primary"><b><span class="text-dark">Métier :</span> Monteuse image, Réalisatrice</b></p>
-                <p><b>Ville :</b> 3000 Leuven</p>
-                <p><b>Province :</b> Région flamande</p>
-                <p><b>Pays :</b> Belgique</p>
-                <p><b>Email :</b> faustine.cros2@gmail.com</p>
-                <p><b>Date de naissance :</b> 17/12/1988</p>
-                <p>
-                    <a class="cta" href="https://www.youtube.com/watch?time_continue=1&amp;v=YhIgHXCJ7E8" target="_blank">
-                        <b>Site web</b>
-                    </a>
-                </p>
+                <p class="text-primary"><strong><?= implode(', ', $praxes); ?></strong></p>
+
+                <?= $this->insert('Open::_partials/contact_info', ['contact' => $record]); ?>
             </div>
         </section>
+        <?php
+        if (!empty($record->get('content'))) {
+        ?>
+            <section id="bio" class="my-5">
+                <h2 class="pb-0">Biographie</h2>
+                <hr>
+                <p><?= $record->get('content') ?></p>
+            </section>
+        <?php
+        }
+        ?>
 
-        <section id="bio" class="my-5">
-            <h2 class="pb-0">Biographie</h2>
-            <hr>
-            <p>
-                Faustine Cros est une jeune monteuse et réalisatrice française établie en
-                Belgique. Elle étudie le montage à l'INSAS. Dans son travail, elle joue
-                avec des formes hybrides entre documentaire, fiction, expérimental,
-                questionnant ainsi les genres et leur limites. Elle travaille comme
-                monteuse sur de nombreux projets de court métrages, long métrages et clip.
-                Son court métrage "La Détesteuse" fait avec ses films de famille, à fait
-                le tour du monde dans de nombreux festivals. Actuellement elle développe
-                son premier long métrage "La belle vie" inspiré de son film de fin
-                d'étude, avec Julie Frère chez Dérives.
-            </p>
-        </section>
+        <?= $this->insert('Open::_partials/photos', ['photos' => $related_photos]); ?>
 
-        <section class="row" id="galerie">
-            <?= $this->insert('Open::_partials/slider_photo'); ?>
-        </section>
+        <?php
+        if (!empty($record->get('filmography'))) {
+        ?>
+            <section class="my-5">
+                <h2 class="pb-0">Filmographie</h2>
+                <hr>
+                <p><?= $record->get('filmography') ?></p>
+            </section>
+        <?php
+        }
+        ?>
 
-        <section class="my-5" id="filmographie">
-            <h2 class="pb-0">Filmographie</h2>
-            <hr>
-            <div id="filmotheque">
-                <div class="slide arrow slick-initialized slick-slider" id="single-post-slider"><button class="slick-prev slick-arrow" aria-label="Previous" type="button" aria-disabled="false" style="">Previous</button>
-                    <div class="slick-list draggable">
-                        <div class="slick-track" style="opacity: 1; width: 1566px; transform: translate3d(-1044px, 0px, 0px); transition: transform 1000ms ease 0s;">
-                            <div class="col-lg-4 slick-slide" id="film-item" data-slick-index="0" aria-hidden="true" tabindex="-1" style="width: 144px;">
-                                <article class="card shadow">
-                                    <div class="card-body">
-                                        <a href="boutique-single.php" tabindex="-1">
-                                            <img src="https://www.cinergie.be/images/film/_a/algorithms-of-beauty/algorithms-still-2.jpg" class="card-img-top mb-3" alt="...">
-                                        </a>
-                                        <div class="p-3">
-                                            <a href="boutique-single.php" tabindex="-1">
-                                                <div class="meta">
-                                                    <p class="date"><small class="text-secondary">2022</small></p>
-                                                    <p class="categorie"><small class="text-primary">Documentaire</small></p>
-                                                </div>
-                                                <h5 class="card-title">Algorithms of Beauty</h5>
-                                                <p class="auteur">Milena Trivier</p>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="col-lg-4 slick-slide" id="film-item" data-slick-index="1" aria-hidden="true" tabindex="-1" style="width: 144px;">
-                                <article class="card shadow">
-                                    <div class="card-body">
-                                        <a href="" tabindex="-1">
-                                            <img src="https://www.cinergie.be/images/film/_i/interdit-aux-chiens-et-aux-italiens/luigi_et_cesira.jpg" class="card-img-top mb-3" alt="...">
-                                        </a>
-                                        <div class="p-3">
-                                            <a href="boutique-single.php" tabindex="-1">
-                                                <div class="meta">
-                                                    <p class="date"><small class="text-secondary">2022</small></p>
-                                                    <p class="categorie"><small class="text-primary">Animation</small></p>
-                                                </div>
-                                                <h5 class="card-title">Interdit aux chiens et aux italiens</h5>
-                                                <p class="auteur">alain Ughetto</p>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="col-lg-4 slick-slide" id="film-item" data-slick-index="2" aria-hidden="true" tabindex="-1" style="width: 144px;">
-                                <article class="card shadow">
-                                    <div class="card-body">
-                                        <a href="" tabindex="-1">
-                                            <img src="https://www.cinergie.be/images/film/_b/bleu-du-caftan-le/le-bleu-du-caftan_02.jpg" class="card-img-top mb-3" alt="...">
-                                        </a>
-                                        <div class="p-3">
-                                            <a href="boutique-single.php" tabindex="-1">
-                                                <div class="meta">
-                                                    <p class="date"><small class="text-secondary">2022</small></p>
-                                                    <p class="categorie"><small class="text-primary">Fiction</small></p>
-                                                </div>
-                                                <h5 class="card-title">Le Bleu du caftan</h5>
-                                                <p class="auteur">Maryam Touzani</p>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="col-lg-4 slick-slide" id="film-item" data-slick-index="3" aria-hidden="true" tabindex="0" style="width: 144px;">
-                                <article class="card shadow">
-                                    <div class="card-body">
-                                        <a href="" tabindex="0">
-                                            <img src="https://www.cinergie.be/images/film/_a/algorithms-of-beauty/algorithms-still-2.jpg" class="card-img-top mb-3" alt="...">
-                                        </a>
-                                        <div class="p-3">
-                                            <a href="boutique-single.php" tabindex="0">
-                                                <div class="meta">
-                                                    <p class="date"><small class="text-secondary">2022</small></p>
-                                                    <p class="categorie"><small class="text-primary">Documentaire</small></p>
-                                                </div>
-                                                <h5 class="card-title">Algorithms of Beauty</h5>
-                                                <p class="auteur">Milena Trivier</p>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="col-lg-4 slick-slide" id="film-item" data-slick-index="4" aria-hidden="true" tabindex="0" style="width: 144px;">
-                                <article class="card shadow">
-                                    <div class="card-body">
-                                        <a href="" tabindex="0">
-                                            <img src="https://www.cinergie.be/images/film/_i/interdit-aux-chiens-et-aux-italiens/luigi_et_cesira.jpg" class="card-img-top mb-3" alt="...">
-                                        </a>
-                                        <div class="p-3">
-                                            <a href="boutique-single.php" tabindex="0">
-                                                <div class="meta">
-                                                    <p class="date"><small class="text-secondary">2022</small></p>
-                                                    <p class="categorie"><small class="text-primary">Animation</small></p>
-                                                </div>
-                                                <h5 class="card-title">Interdit aux chiens et aux italiens</h5>
-                                                <p class="auteur">alain Ughetto</p>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="col-lg-4 slick-slide" id="film-item" data-slick-index="5" aria-hidden="true" tabindex="0" style="width: 144px;">
-                                <article class="card shadow">
-                                    <div class="card-body">
-                                        <a href="" tabindex="0">
-                                            <img src="https://www.cinergie.be/images/film/_b/bleu-du-caftan-le/le-bleu-du-caftan_02.jpg" class="card-img-top mb-3" alt="...">
-                                        </a>
-                                        <div class="p-3">
-                                            <a href="boutique-single.php" tabindex="0">
-                                                <div class="meta">
-                                                    <p class="date"><small class="text-secondary">2022</small></p>
-                                                    <p class="categorie"><small class="text-primary">Fiction</small></p>
-                                                </div>
-                                                <h5 class="card-title">Le Bleu du caftan</h5>
-                                                <p class="auteur">Maryam Touzani</p>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="col-lg-4 slick-slide slick-current slick-active" id="film-item" data-slick-index="6" aria-hidden="false" tabindex="-1" style="width: 144px;">
-                                <article class="card shadow">
-                                    <div class="card-body">
-                                        <a href="" tabindex="-1">
-                                            <img src="https://www.cinergie.be/images/film/_a/algorithms-of-beauty/algorithms-still-2.jpg" class="card-img-top mb-3" alt="...">
-                                        </a>
-                                        <div class="p-3">
-                                            <a href="boutique-single.php" tabindex="-1">
-                                                <div class="meta">
-                                                    <p class="date"><small class="text-secondary">2022</small></p>
-                                                    <p class="categorie"><small class="text-primary">Documentaire</small></p>
-                                                </div>
-                                                <h5 class="card-title">Algorithms of Beauty</h5>
-                                                <p class="auteur">Milena Trivier</p>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="col-lg-4 slick-slide slick-active" id="film-item" data-slick-index="7" aria-hidden="false" tabindex="-1" style="width: 144px;">
-                                <article class="card shadow">
-                                    <div class="card-body">
-                                        <a href="" tabindex="-1">
-                                            <img src="https://www.cinergie.be/images/film/_i/interdit-aux-chiens-et-aux-italiens/luigi_et_cesira.jpg" class="card-img-top mb-3" alt="...">
-                                        </a>
-                                        <div class="p-3">
-                                            <a href="boutique-single.php" tabindex="-1">
-                                                <div class="meta">
-                                                    <p class="date"><small class="text-secondary">2022</small></p>
-                                                    <p class="categorie"><small class="text-primary">Animation</small></p>
-                                                </div>
-                                                <h5 class="card-title">Interdit aux chiens et aux italiens</h5>
-                                                <p class="auteur">alain Ughetto</p>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="col-lg-4 slick-slide slick-active" id="film-item" data-slick-index="8" aria-hidden="false" tabindex="-1" style="width: 144px;">
-                                <article class="card shadow">
-                                    <div class="card-body">
-                                        <a href="" tabindex="-1">
-                                            <img src="https://www.cinergie.be/images/film/_b/bleu-du-caftan-le/le-bleu-du-caftan_02.jpg" class="card-img-top mb-3" alt="...">
-                                        </a>
-                                        <div class="p-3">
-                                            <a href="boutique-single.php" tabindex="-1">
-                                                <div class="meta">
-                                                    <p class="date"><small class="text-secondary">2022</small></p>
-                                                    <p class="categorie"><small class="text-primary">Fiction</small></p>
-                                                </div>
-                                                <h5 class="card-title">Le Bleu du caftan</h5>
-                                                <p class="auteur">Maryam Touzani</p>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                        </div>
-                    </div>
+        <?= $this->insert('Open::Professional/filmotheque', ['movies' => $related_movies]); ?>
 
 
-
-
-
-
-
-
-
-                    <button class="slick-next slick-arrow slick-disabled" aria-label="Next" type="button" style="" aria-disabled="true">Next</button>
-                </div>
-            </div>
-        </section>
-
-        <div class="text-center">
+        <div class="text-center mt-5">
             <a class="cta" data-bs-toggle="modal" data-bs-target="#modal-update-fiche-professionnel">
                 Une erreur, une modification? Dites-le nous !
             </a>
