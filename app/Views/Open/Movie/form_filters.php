@@ -52,8 +52,7 @@
     <label for="" class="form-label">Trier par</label>
 
     <select class="form-select" name="order_by">
-        <option value="released">Date de sortie</option>
-        <option value="label">Titre</option>
+        <?= Form::options($order_by,$controller->router()->params('order_by')); ?>
     </select>
 
     <footer>
