@@ -13,13 +13,16 @@ class Organisation extends TightModel
     use Abilities\IsActivable;
     use Abilities\HasTags;
     use Abilities\HasPraxis;
+    use Abilities\HasProfilePicture;
+
 
     use Abilities\FiltersOnFirstChar;
-
 
     public function tagIds(): array{
         return [];
     }
+
+
     public function fieldsForCompletion():array
     {
         return [
@@ -32,15 +35,15 @@ class Organisation extends TightModel
         //---- JOIN & FILTER SERVICE
         $Query = parent::query_retrieve($filters, $options);
 
-        if(!isset($options['without_tags'])){
-            $Query->join(['organisation_tag', 'praxis'], [['organisation', 'id', 'praxis', 'organisation_id']], 'LEFT OUTER');
-            $Query->join(['tag', 'tag'], [['tag', 'id', 'praxis', 'tag_id'], ['tag', 'parent_id', 219]], 'LEFT OUTER');
-            $Query->groupBy(['organisation', 'id']);
-            $Query->selectAlso(["GROUP_CONCAT(DISTINCT tag.id) as praxis_ids"]);
-        }
+
 
         if(isset($filters['FiltersOnFirstChar'])){
             self::applyFirstCharFilter($filters['FiltersOnFirstChar'], $Query, 'label');
+        }
+
+        
+        if(isset($filters['fullname'])){
+            $Query->whereLike('label','%'.$filters['fullname'] . '%', $Query->table());
         }
 
         if(isset($filters['segment']))
@@ -89,7 +92,28 @@ class Organisation extends TightModel
             ]);
         }
 
+        if(!isset($options['eager']) || $options['eager'] !== false){
+            $Query->join(['organisation_tag', 'praxis'], [['organisation', 'id', 'praxis', 'organisation_id']], 'LEFT OUTER');
+            $Query->join(['tag', 'tag'], [['tag', 'id', 'praxis', 'tag_id'], ['tag', 'parent_id', 219]], 'LEFT OUTER');
+            $Query->groupBy(['organisation', 'id']);
+            $Query->selectAlso(["GROUP_CONCAT(DISTINCT tag.id) as praxis_ids"]);
+
+            if(isset($filters['praxis_id'])){
+                $Query->whereEQ('tag_id', ((int)$filters['praxis_id']), 'praxis');
+            }
+        }
+
+        $Query->orderBy(['label', 'asc']);
 
         return $Query;
+    }
+
+
+    public static function idsByPraxis(int $praxis_id): array
+    {
+        $query = 'SELECT `organisation_tag`.`organisation_id` FROM `organisation_tag`  WHERE `organisation_tag`.`tag_id` = :tag_id'; 
+        $query = self::raw($query, ['tag_id' => $praxis_id]);
+
+        return $query->fetchAll(\PDO::FETCH_COLUMN);
     }
 }
