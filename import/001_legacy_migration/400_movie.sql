@@ -8,7 +8,7 @@ CREATE TABLE `cinergie`.`movie` (
   `active` tinyint(1) NOT NULL DEFAULT '0',
   `slug` varchar(222) DEFAULT NULL COMMENT 'leg:urlparms',
 
-  `label` varchar(255) DEFAULT NOT NULL COMMENT 'leg:nom',
+  `label` varchar(255) NOT NULL COMMENT 'leg:nom',
   `content` text COMMENT 'leg:synopsis',
 
   `original_title` varchar(255) DEFAULT NULL COMMENT 'leg:nomvo',
@@ -76,12 +76,7 @@ INSERT INTO `cinergie`.`movie` (
   `genre_id`,
   `metrage_id`,
 
-  `unesco_id`,
-  `unesco_bis_id`,
-  `unesco_ter_id`,
-
   `legacy_origine`,
-  `legacy_photo`,
   `legacy_maj`
 )
 SELECT

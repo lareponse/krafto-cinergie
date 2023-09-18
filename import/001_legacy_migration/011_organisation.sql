@@ -150,7 +150,7 @@ INSERT INTO `cinergie`.`organisation` (
   `isPartner` ,
   `created_on`,
 
-  `legacy_photo`
+  `profilePicture`
 )
 SELECT
   `active` as `active`,
@@ -163,7 +163,7 @@ SELECT
   1 as `isPartner`,
   STR_TO_DATE(datestamp,'%Y-%m-%d %H:%i:%s') as `created_on`,
 
-  field01 as `legacy_photo`
+  field01 as `profilePicture`
 
 FROM `a7_cinergie_beta`.`content_item`
 WHERE area = 'partenaire' AND category = 'partenaire'

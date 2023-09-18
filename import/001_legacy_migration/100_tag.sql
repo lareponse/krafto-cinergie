@@ -132,3 +132,26 @@ SELECT
 FROM `a7_cinergie_beta`.`layout_theme`
 WHERE `area` ='annonce'
 ORDER BY `description` ASC;
+
+
+
+INSERT INTO `tag` (`id`, `parent_id`, `reference`, `label`, `content`, `rank`) 
+VALUES (NULL, NULL, 'work_payment', 'Rémunéré ou pas ?', NULL, NULL);
+
+SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE reference='work_payment');
+-- Insert tag from layout_subject
+INSERT INTO `tag` (`parent_id`, `reference`, `label`)
+VALUES 
+  (@parent_id, 'work_paid', 'Rémunéré'),
+  (@parent_id, 'work_free', 'Non rémunéré');
+
+
+INSERT INTO `tag` (`id`, `parent_id`, `reference`, `label`, `content`, `rank`) 
+VALUES (NULL, NULL, 'work_proposal', 'Proposition ou demande ?', NULL, NULL);
+
+SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE reference='work_proposal');
+-- Insert tag from layout_subject
+INSERT INTO `tag` (`parent_id`, `reference`, `label`)
+VALUES 
+  (@parent_id, 'work_offer', 'Proposition'),
+  (@parent_id, 'work_request', 'Demande');

@@ -77,7 +77,6 @@ INSERT INTO `cinergie`.`article` (
   `legacy_subject`,
   `legacy_user`,
   `legacy_title`,
-  `legacy_photo_illu`,
   `legacy_author_ids`,
   `legacy_authors`,
   `legacy_field13`,

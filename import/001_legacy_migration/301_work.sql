@@ -15,7 +15,7 @@ CREATE TABLE `work` (
   `isOffer` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'parsed: subject=demande',
   `isPaid` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'leg:field09',
   `starts` date DEFAULT NULL COMMENT 'leg:field03',
-  `ends` date DEFAULT NULL COMMENT 'leg:field04',
+  `stops` date DEFAULT NULL COMMENT 'leg:field04',
 
   `identity` varchar(255) DEFAULT NULL COMMENT 'leg:field05',
   `phone` varchar(255) DEFAULT NULL COMMENT 'leg:field06',
@@ -63,7 +63,7 @@ INSERT INTO `cinergie`.`work` (
   `isPaid`,
 
   `starts`,
-  `ends`,
+  `stops`,
 
   `identity`,
   `phone`,
@@ -95,7 +95,7 @@ SELECT
   `field09` as `isPaid`,
 
   IF(`field03` IS NULL or `field03` = '', null, STR_TO_DATE(`field03`,'%Y-%m-%d')) as `starts`,
-  IF(`field04` IS NULL or `field04` = '', null, STR_TO_DATE(`field04`,'%Y-%m-%d')) as `ends`,
+  IF(`field04` IS NULL or `field04` = '', null, STR_TO_DATE(`field04`,'%Y-%m-%d')) as `stops`,
 
   `field05` as `identity`,
   `field06` as `phone`,

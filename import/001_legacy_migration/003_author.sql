@@ -9,16 +9,16 @@ CREATE TABLE `author` (
   `slug` varchar(222) DEFAULT NULL COMMENT 'leg:urlparm',
   `rank` smallint UNSIGNED DEFAULT NULL COMMENT 'leg:tri',
   
-  `profilePicture` varchar(255) DEFAULT NULL COMMENT 'leg:field04'
+  `profilePicture` varchar(255) DEFAULT NULL COMMENT 'leg:field04',
   `url` varchar(255) DEFAULT NULL  COMMENT 'leg:field05',
 
-  `label` varchar(24) DEFAULT NULL COMMENT 'leg:field01',
+  `label` varchar(100) DEFAULT NULL COMMENT 'leg:field01',
 
   `isCollaborator` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'displayed on equipe page',
   `professional_slug` varchar(222) DEFAULT NULL,
   
   `legacy_id` varchar(40) DEFAULT NULL,
-  `legacy_user` varchar(13) DEFAULT NULL,
+  `legacy_user` varchar(13) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -62,7 +62,7 @@ SELECT
   `urlparms` as `slug`,
   `tri` as `rank`,
   `field04` as `profilePicture`,
-  `field05` as `url`
+  `field05` as `url`,
 
   TRIM(`field01`) as `label`,
 
