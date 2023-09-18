@@ -2,7 +2,7 @@
 
 use \HexMakina\Marker\Marker; ?>
 
-<?php $this->layout('Open::layout', ['title' => "Le répertoire des professionnels du cinéma belge"]) ?>
+<?php $this->layout('Open::layout', ['title' => $page->label()]) ?>
 
 <div class="container my-5">
     <section class="row">
