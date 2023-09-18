@@ -50,7 +50,7 @@
     <section class="w-75 mb-5 order-2 order-sm-2 order-md-2 order-lg-3 mx-auto text-justify">
       <?= $article->get('content'); ?>
 
-      <?= $this->insert('Open::_partials/share_bottom', ['label' => $article->get('label')]); ?>
+      <?= $this->insert('Open::_partials/share_print', ['label' => $article->get('label')]); ?>
     </section>
 
 

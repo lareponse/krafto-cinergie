@@ -37,7 +37,7 @@ $this->layout('Open::layout', ['title' => $page->get('label')])
         <section class="w-75 mb-5 order-2 order-sm-2 order-md-2 order-lg-3 mx-auto text-justify">
 
             <?php echo $page->get('content'); ?>
-            <?= $this->insert('Open::_partials/share_bottom', ['label' => $page->get('label')]); ?>
+            <?= $this->insert('Open::_partials/share_print', ['label' => $page->get('label')]); ?>
 
         </section>
     </div>
