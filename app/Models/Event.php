@@ -21,6 +21,16 @@ class Event extends TightModel implements EventInterface
         return 'starts';
     }
 
+    public function link()
+    {
+        if(!empty($this->get('url_internal'))){
+            return $this->get('url_internal');
+        }
+        if(!empty($this->get('url_site'))){
+            return $this->get('url_site');
+        }
+    }
+
     public static function query_retrieve($filters = [], $options = []): SelectInterface
     {
         $Query = parent::query_retrieve($filters, $options);
