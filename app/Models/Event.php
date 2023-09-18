@@ -34,7 +34,7 @@ class Event extends TightModel implements EventInterface
     public static function query_retrieve($filters = [], $options = []): SelectInterface
     {
         $Query = parent::query_retrieve($filters, $options);
-
+   
         if(isset($filters['year']))
         {
             $bindname = $Query->addBinding('filters_year', $filters['year']);

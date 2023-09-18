@@ -14,13 +14,17 @@ class Event extends Kortex
 
     public function events()
     {
-
-        $formatter = new \IntlDateFormatter('fr_FR', \IntlDateFormatter::NONE, \IntlDateFormatter::NONE, null, null, 'MMMM');
-
         $currentDate = new DateTimeImmutable();
 
+        $filters = [
+            'year' => $this->router()->params('year') ?? $currentDate->format('Y'), 
+            'month' => $this->router()->params('month') ?? $currentDate->format('m')
+        ];
+        
+        $formatter = new \IntlDateFormatter('fr_FR', \IntlDateFormatter::NONE, \IntlDateFormatter::NONE, null, null, 'MMMM');
+        
         if($this->router()->params('year') && $this->router()->params('month')){
-            $currentDate = $currentDate->setDate($this->router()->params('year'), $this->router()->params('month'), 1);
+            $currentDate = $currentDate->setDate($filters['year'], $filters['month'], 1);
         }
 
         $current = [
@@ -48,8 +52,8 @@ class Event extends Kortex
         $this->viewport('previous', $previous);
         $this->viewport('next', $next);
 
-        $events = Model::filter($this->router()->params());
-
+        
+        $events = Model::filter($filters);
         $this->viewport('events', $events);
 
     }
