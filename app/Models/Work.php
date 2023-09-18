@@ -23,6 +23,16 @@ class Work extends TightModel implements EventInterface
         return 'starts';
     }
 
+    public function isOffer(): bool
+    {
+        return (bool)$this->get('isOffer');
+    }
+    
+    public function isPaid(): bool
+    {
+        return (bool)$this->get('isPaid');
+    }
+    
     public static function query_retrieve($filters = [], $options = []): SelectInterface
     {
         $Query = parent::query_retrieve($filters, $options);
@@ -43,8 +53,8 @@ class Work extends TightModel implements EventInterface
             $now = $now->format('Y-m-d');
 
             $startsAfter = $Query->addBinding('startsAfter', $now);
-            $endsBefore = $Query->addBinding('endsBefore', $now);
-            $Query->whereWithBind(sprintf('starts >= %s AND ends IS NOT NULL AND ends >= %s', $startsAfter, $endsBefore));
+            $stopsBefore = $Query->addBinding('stopsBefore', $now);
+            $Query->whereWithBind(sprintf('starts >= %s AND stops IS NOT NULL AND stops >= %s', $startsAfter, $stopsBefore));
         }
 
         if(isset($filters['year']))

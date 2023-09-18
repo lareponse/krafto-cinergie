@@ -22,6 +22,18 @@ class Work extends Kortex
     public function conclude(): void
     {
         $this->viewport('categories', $this->categories);
+
+        $work_payment = [];
+        foreach(Tag::filter(['parent' => 'work_payment']) as $tag)
+            $work_payment[$tag->reference()] = $tag;
+        $this->viewport('work_payment', $work_payment);
+
+        $work_proposal = [];
+        foreach(Tag::filter(['parent' => 'work_proposal']) as $tag)
+            $work_proposal[$tag->reference()] = $tag;
+
+        $this->viewport('work_proposal', $work_proposal);
+
         parent::conclude();
     }
 
@@ -32,18 +44,12 @@ class Work extends Kortex
         $paginator->setClass(Model::class);
 
         $latest = $this->get('Controllers\\Open\\Article')->latest();
+        
         $this->viewport('latestArticles', $latest);
-
         $this->viewport('paginator', $paginator);
     }
 
-    public function work()
-    {
-        $slug = $this->router()->params('slug');
-        $work = Model::exists('slug', $slug);
-        $this->viewport('work', $work);
-    }
-    
+     
     /**
      * Constructs a database query for listing advertisements with specific columns and filters.
      *
@@ -62,8 +68,8 @@ class Work extends Kortex
 
         $now = date('Y-m-d');
         $startsAfter = $select->addBinding('startsAfter', $now);
-        $endsBefore = $select->addBinding('endsBefore', $now);
-        $select->whereWithBind(sprintf('starts >= %s AND ends IS NOT NULL AND (ends >= %s)', $startsAfter, $endsBefore));
+        $stopsBefore = $select->addBinding('stopsBefore', $now);
+        $select->whereWithBind(sprintf('starts >= %s AND stops IS NOT NULL AND (stops >= %s)', $startsAfter, $stopsBefore));
 
 
         $select->whereEQ('active', 1);
@@ -85,14 +91,14 @@ class Work extends Kortex
     {
         // Check if 'remun' router parameter is set and use it to filter by 'isPaid'
         if ($this->router()->params('remun')) {
-            $query->whereEQ('isPaid', (int)($this->router()->params('remun') === 'oui'));
+            $query->whereEQ('isPaid', (int)($this->router()->params('remun') === 'work_paid'));
         }
 
         // Check if 'types' router parameter is set and contains a single type, then filter by 'isOffer'
         if ($this->router()->params('types') && count($this->router()->params('types')) === 1) {
             $type = $this->router()->params('types');
             $type = array_pop($type);
-            $query->whereEQ('isOffer', (int)($type === 'proposition'));
+            $query->whereEQ('isOffer', (int)($type === 'work_offer'));
         }
 
         // Check if 'categories' router parameter is set and filter by matching category IDs
