@@ -22,7 +22,7 @@ class Professional extends TightModel
 
 
     public function __toString(){
-        return $this->get('fullname');
+        return $this->fullName();
     }
 
     public static function queryListing(): SelectInterface
