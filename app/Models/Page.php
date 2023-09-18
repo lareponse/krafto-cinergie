@@ -11,13 +11,24 @@ class Page extends TightModel
 
     public function __toString()
     {
-        
+        return $this->label();
     }
 
-    public static function query_retrieve($filters = [], $options = []): SelectInterface
+    public function label(): string
     {
-        $Query = parent::query_retrieve($filters, $options);
-
-        return $Query;
+        return $this->get('label') ?? '';
     }
+
+    public function abstract(): string
+    {
+        return $this->get('abstract') ?? '';
+
+    }
+
+    public function content(): string
+    {
+        return $this->get('labecontentl') ?? '';
+
+    }
+
 }
