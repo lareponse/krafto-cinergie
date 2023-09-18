@@ -12,7 +12,7 @@ $routes = [
 
   // author
   ['GET', 'auteurs', 'Author::authors', 'authors'],
-  ['GET', 'auteurs/[*:slug]', 'Author::author', 'author'],
+  ['GET', 'auteur/[*:slug]', 'Author::author', 'author'],
 
   // contests
   ['GET', 'concours', 'Contest::contests', 'contests'],
@@ -20,7 +20,7 @@ $routes = [
 
   // events
   ['GET', 'agenda', 'Event::events', 'events'],
-  ['GET', 'agenda/mois-[i:year][i:month]', 'Event::month', 'events_month'],
+  ['GET', 'agenda/[i:year]/[i:month]', 'Event::events', 'events_month'],
 
   // Glaneuses
   ['GET', 'podcast', 'Glaneuses::home', 'glaneuses'],
@@ -36,7 +36,7 @@ $routes = [
 
   // professional
   ['GET', 'personnes/[*:params]?', 'Professional::professionals', 'professionals'],
-  ['GET|POST', 'personne/ajout', 'Professional::add', 'professional_add'],
+  ['POST', 'personne/ajout', 'Professional::add', 'professional_add'],
   ['GET|POST', 'personne/modifier/[*:slug]', 'Professional::edit', 'professional_edit'],
   ['GET', 'personne/metier/[*:praxis]', 'Professional::search', 'professional_by_praxis'],
   ['GET', 'personne/[*:slug]', 'Professional::professional', 'professional'],
