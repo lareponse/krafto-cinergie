@@ -7,6 +7,7 @@ use \HexMakina\kadro\Models\Tag;
 
 use App\Controllers\Abilities\Paginator;
 use App\Models\Organisation as Model;
+use App\Models\{Movie, Praxis};
 
 
 class Organisation extends Kortex
@@ -25,7 +26,21 @@ class Organisation extends Kortex
         $this->viewport('form_filters', $this->router()->params());
     }
 
+    public function organisation()
+    {
 
+        $movieIds = Movie::idsByOrganisationIds([$this->record()->getID()]);
+        if(!empty($movieIds)){
+            $query = Movie::queryListing();
+            $query->whereNumericIn('id', $movieIds, $query->table());
+            $related_movies = $query->retObj(Movie::class);
+        }
+
+        $this->viewport('praxes', Praxis::forProfessional($this->record()));
+        $this->viewport('related_movies', $related_movies ?? []);
+        $this->viewport('related_photos', $this->relatedPhotos('organisation'));
+
+    }
 
     /**
      * Converts router parameters into filters for a database query.
