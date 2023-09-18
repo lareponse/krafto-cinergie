@@ -46,7 +46,6 @@ class Movie extends TightModel
         $select->groupBy(['movie','released']);
         $select->groupBy(['movie','profilePicture']);
         $select->groupBy(['movie_genre','label']);
-
         
         return $select;
     }
@@ -97,10 +96,8 @@ class Movie extends TightModel
         ], [
             'eager' => false
         ]);
-        vd($res);
 
         $res = $res->columns(['id']);
-        dd($res);
         $res = $res->retCol();
 
         return self::idsByProfessionalIds($res, $praxis_id);
