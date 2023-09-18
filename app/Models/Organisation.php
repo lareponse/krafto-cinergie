@@ -14,6 +14,7 @@ class Organisation extends TightModel
     use Abilities\HasTags;
     use Abilities\HasPraxis;
     use Abilities\HasProfilePicture;
+    use Abilities\HasSecrets;
 
 
     use Abilities\FiltersOnFirstChar;
