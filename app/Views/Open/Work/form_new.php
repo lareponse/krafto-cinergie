@@ -1,14 +1,14 @@
-<form action="" class="form-horizontal" id="nouvelle-annonce" method="post" role="form">
+<form action="" class="form-horizontal" id="nouvelle-annonce" method="POST" role="form">
 
     <section class="row mb-3">
         <label for="remunere" class="col-sm-2 col-form-label">Rémunéré? <span>*</span></label>
         <div class="col-sm-10">
             <div class="d-flex">
-                <input type="radio" id="remun-oui" name="remun" value="oui">
+                <input type="radio" id="remun-oui" name="remunere" value="work_paid">
                 <span class="ms-2 text-lable">Oui</span>
             </div>
             <div class="d-flex">
-                <input type="radio" id="remun-non" name="remun" value="non">
+                <input type="radio" id="remun-non" name="remunere" value="work_free">
                 <span class="ms-2 text-lable">Non</span>
             </div>
         </div>
@@ -30,7 +30,7 @@
                 <span class="ms-2 text-lable">Divers</span>
             </div>
             <div class="d-flex">
-                <input type="radio" id="categorie-annonce" name="categorie-annonce" value="jo b"><span class="ms-2 text-lable">Job</span>
+                <input type="radio" id="categorie-annonce" name="categorie-annonce" value="job"><span class="ms-2 text-lable">Job</span>
             </div>
             <div class="d-flex">
                 <input type="radio" id="categorie-annonce" name="categorie-annonce" value="stage">
@@ -98,10 +98,7 @@
 
     <section class="row">
         <p class="mb-0">
-            <small>Les champs marqués
-                <span style="color:#eb0101; font-size: 30px;"><sub>*</sub></span> sont
-                obligatoires</small>
+            <small>Les champs marqués <span style="color:#eb0101; font-size: 30px;"><sub>*</sub></span> sont obligatoires</small>
         </p>
     </section>
-
 </form>

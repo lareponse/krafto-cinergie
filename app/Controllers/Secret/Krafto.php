@@ -38,7 +38,6 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
     public function conclude(): void
     {
         parent::conclude();
-
         if (is_null($this->template)) {
             $fallback = 'Secret::' . $this->className() . '/' . $this->router()->targetMethod();
             $this->template = $fallback;
