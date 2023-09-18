@@ -3,7 +3,7 @@ namespace App\Models\Abilities;
 
 trait HasSlug
 {
-    public function slugify($text): string
+    public function slugify(string $text): string
     {
         $text = html_entity_decode($text, ENT_QUOTES, 'UTF-8');
 
@@ -39,7 +39,7 @@ trait HasSlug
     public function slug():string
     {
         if(empty($this->get('slug')))
-            $this->set('slug', $this->slugify($this->get('label')));
+            $this->set('slug', $this->slugify($this));
 
         return $this->get('slug');
     }
