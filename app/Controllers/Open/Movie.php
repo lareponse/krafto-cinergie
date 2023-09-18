@@ -3,14 +3,19 @@
 namespace App\Controllers\Open;
 
 use HexMakina\BlackBox\Database\SelectInterface;
-use \HexMakina\kadro\Models\Tag;
+use HexMakina\Crudites\Crudites;
+use HexMakina\kadro\Models\Tag;
+use HexMakina\LocalFS\FileSystem;
+
 use App\Controllers\Abilities\Paginator;
 
 use App\Models\Movie as Model;
-use App\Models\{Professional, Organisation, DVD};
+use App\Models\{Professional, Organisation, DVD, Article};
 
 class Movie extends Kortex
 {
+    protected $pageSlug = 'movies';
+
     public function movies()
     {
         $paginator = new Paginator($this->router()->params('page') ?? 1, $this->queryListing());
@@ -20,6 +25,7 @@ class Movie extends Kortex
         $this->viewport('genres', Tag::filter(['parent' => 'movie_genre']));
         $this->viewport('metrages', Tag::filter(['parent' => 'movie_footage']));
         $this->viewport('themes', Tag::filter(['parent' => 'movie_theme']));
+        $this->viewport('order_by', ['released' => 'Date de sortie', 'label' => 'Titre']);
         $this->viewport('paginator', $paginator);
 
         $this->viewport('form_filters', $this->router()->params());
@@ -27,11 +33,71 @@ class Movie extends Kortex
 
     public function movie()
     {
-        $movie = Model::exists('slug', $this->router()->params('slug'));
-        $dvd = DVD::filter(['movie' => $movie]);
+        $professionals = Professional::byMovie($this->record());
+        $organisations = Organisation::byMovie($this->record());
+        $this->viewport('dvd', DVD::filter(['movie' => $this->record()]));
+        $this->viewport('tags', $this->record()->tags()); // TODO: only themes
+        $this->viewport('professionals', $professionals);
+        $this->viewport('organisations', $organisations);
 
-        $this->viewport('movie', $movie);
-        $this->viewport('dvd', $dvd);
+        $this->viewport('articles', $this->relatedArticles($professionals, $organisations));
+        $this->viewport('photos', $this->relatedPhotos($professionals, $organisations));
+    }
+
+
+    // TODO improve related articles spread over different org and pro
+    public function relatedArticles($professionals, $organisations): array
+    {
+        $ret = [];
+        
+        $articleIds = [];
+        
+        $res = Crudites::inspect('article_movie')->select(['article_id'])->whereEQ('movie_id', $this->record()->getID())->retCol();
+        $articleIds = array_merge($articleIds, $res);
+
+        if(!empty($professionals)){
+            $ids = array_map(function($item) { return $item->getID(); }, $professionals);
+            $res = Crudites::inspect('article_professional')->select(['DISTINCT(article_id)'])->whereNumericIn('professional_id', $ids)->limit(300)->retCol();
+            $articleIds = array_merge($articleIds, $res);
+        }
+
+        if(!empty($organisations)) {
+            $ids = array_map(function ($item) { return $item->getID(); }, $organisations);
+            $res = Crudites::inspect('article_organisation')->select(['DISTINCT(article_id)'])->whereNumericIn('organisation_id', $ids)->limit(30)->retCol();
+
+            $articleIds = array_merge($articleIds, $res);
+        }
+
+        $query = $this->get('App\\Controllers\\Open\\Article')->queryListing();
+        $res = $query->whereNumericIn('id', array_unique($articleIds))->retObj(Article::class);
+        
+        if($res)
+            $ret = $res;
+
+        return $ret;
+    }
+
+    public function relatedPhotos(): array
+    {
+        $slug = $this->record()->slug();
+        $letter = $slug[0];
+        $directory = sprintf('film/_%s/%s',  $letter, $slug);
+        $path = sprintf('%s/%s', $this->get('settings.folders.images'), $directory);
+
+        $urls = [];
+
+        if(FileSystem::exists($path)){
+            $fs = new FileSystem($path);
+            foreach($fs->filenames() as $filename){
+                if($filename === '.' || $filename == '..')
+                    continue;
+        
+                // $names []= sprintf('%s/%s/%s', $this->get('settings.urls.images'), $directory, $filename);
+                $urls []= sprintf('%s/%s/%s', 'https://www.cinergie.be/images', $directory, $filename);
+            }
+
+        }
+        return $urls;
     }
 
     public function queryListing(): SelectInterface
@@ -43,15 +109,15 @@ class Movie extends Kortex
             'movie.released', 
             'movie.profilePicture', 
             'movie_genre.label as genre', 
-            "GROUP_CONCAT(professional.firstname, ' ', professional.lastname SEPARATOR ', ') as directors"
+            "GROUP_CONCAT(director.firstname, ' ', director.lastname SEPARATOR ', ') as directors"
         ]);
 
         $select->join(['tag','movie_genre'], [['movie', 'genre_id', 'movie_genre','id']], 'LEFT OUTER');
-        $select->join(['movie_professional', 'movie_professional'], [
-            ['movie_professional', 'movie_id', 'movie','id'],
-            ['movie_professional', 'praxis_id', 151]
+        $select->join(['movie_professional', 'withDirectors'], [
+            ['withDirectors', 'movie_id', 'movie','id'],
+            ['withDirectors', 'praxis_id', Professional::DIRECTOR_TAG_ID]
         ], 'LEFT OUTER');
-        $select->join(['professional'], [['movie_professional', 'professional_id', 'professional','id']], 'LEFT OUTER');
+        $select->join(['professional', 'director'], [['withDirectors', 'professional_id', 'director','id']], 'LEFT OUTER');
         
         $select->whereEQ('active', 1);
 
@@ -94,7 +160,7 @@ class Movie extends Kortex
         }
 
         if ($this->router()->params('director')) {
-            $idFilters['director'] = Model::idsByProfessionalName($this->router()->params('director'), 151);
+            $idFilters['director'] = Model::idsByProfessionalName($this->router()->params('director'), Professional::DIRECTOR_TAG_ID);
         }
 
         if ($this->router()->params('organisation')) {
@@ -106,7 +172,7 @@ class Movie extends Kortex
         }
 
         if ($this->router()->params('theme')) {
-            $idFilters['professional'] = Model::idsByThemeId($this->router()->params('theme'));
+            $idFilters['theme'] = Model::idsByThemeId($this->router()->params('theme'));
         }
 
         if(!empty($idFilters)){
@@ -126,6 +192,7 @@ class Movie extends Kortex
         $direction = ($order_by == 'released') ? 'DESC' : 'ASC';
         $query->orderBy([$order_by, $direction]);
 
+        // dd($query);
         return $query;
 
     }

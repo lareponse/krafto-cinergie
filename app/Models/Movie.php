@@ -14,6 +14,11 @@ class Movie extends TightModel
     use Abilities\FiltersOnFirstChar;
     use Abilities\HasProfilePicture;
 
+    public function __toString()
+    {
+        return $this->get('label');
+    }
+
     public function fieldsForCompletion(): array
     {
         return [
@@ -59,8 +64,11 @@ class Movie extends TightModel
             'fullname' => $isLike
         ], [
             'eager' => false
-        ])->columns(['id']);
+        ]);
+        vd($res);
 
+        $res = $res->columns(['id']);
+        dd($res);
         $res = $res->retCol();
 
         return self::idsByProfessionalIds($res, $praxis_id);
@@ -96,6 +104,14 @@ class Movie extends TightModel
     {
         //---- JOIN & FILTER SERVICE
         $Query = parent::query_retrieve($filters, $options);
+
+        $Query->join(['movie_professional', 'withDirectors'], [
+            ['withDirectors', 'movie_id', 'movie','id'],
+            ['withDirectors', 'praxis_id', Professional::DIRECTOR_TAG_ID]
+        ], 'LEFT OUTER');
+
+        $Query->join(['professional', 'director'], [['withDirectors', 'professional_id', 'director','id']], 'LEFT OUTER');
+
         if (isset($options['eager']) && $options['eager'] === true){
             if (!isset($options['without_tags'])) {
                 $Query->join(['movie_tag'], [['movie_tag', 'movie_id', 'movie', 'id']], 'LEFT OUTER');
@@ -167,6 +183,7 @@ class Movie extends TightModel
         $Query->orderBy([$Query->table(), 'released', 'DESC']);
         return $Query;
     }
+
 
 
 }

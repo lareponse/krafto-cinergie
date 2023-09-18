@@ -18,6 +18,10 @@ class Organisation extends TightModel
 
     use Abilities\FiltersOnFirstChar;
 
+    public function __toString(){
+        return $this->get('label');
+    }
+
     public function tagIds(): array{
         return [];
     }
@@ -28,6 +32,28 @@ class Organisation extends TightModel
         return [
             'label', 'content', 'abbrev', 'filmography',
             ['tel','gsm', 'fax'], 'email', 'url','country','province','zip', 'city', 'street'];
+    }
+
+
+    public static function byMovie(Movie $movie) : array
+    {
+        $ret = [];
+        $select = self::table()->select();
+        $select->columns([
+            'organisation.id',
+            'organisation.slug',
+            'organisation.label',
+            'organisation.profilePicture',
+            "GROUP_CONCAT(praxis.label SEPARATOR ', ') as praxes"
+        ]);
+
+        $select->join(['movie_organisation', 'workedOn'], [['workedOn','organisation_id', 'organisation', 'id'],['workedOn', 'movie_id', $movie->getID()]], 'INNER');
+        $select->join(['tag', 'praxis'], [['workedOn','praxis_id', 'praxis', 'id'],], 'INNER');
+        $select->groupBy(['organisation', 'id']);
+
+        $ret = $select->retObj(self::class);
+
+        return $ret;
     }
 
     public static function query_retrieve($filters = [], $options = []): SelectInterface

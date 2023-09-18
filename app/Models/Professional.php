@@ -18,10 +18,61 @@ class Professional extends TightModel
     use Abilities\FiltersOnFirstChar;
 
 
+    public const DIRECTOR_TAG_ID = 151;
+
+
+    public function __toString(){
+        return $this->get('fullname');
+    }
+
+    public static function queryListing(): SelectInterface
+    {
+        $select = self::table()->select();
+        $select->columns([
+            'professional.slug',
+            "CONCAT(professional.firstname, ' ', professional.lastname) as fullname",
+            'professional.profilePicture',
+            "GROUP_CONCAT(praxis.label SEPARATOR ', ') as praxes"
+        ]);
+
+        $select->join(['professional_tag', 'professional_tag'], [['professional_tag', 'professional_id', 'professional', 'id']], 'LEFT OUTER');
+        $select->join(['tag', 'praxis'], [['professional_tag', 'tag_id', 'praxis', 'id']], 'LEFT OUTER');
+
+        $select->whereEQ('isListed', 1);
+
+        $select->groupBy(['professional', 'id']);
+        $select->orderBy(['professional', 'lastname', 'ASC']);
+        $select->orderBy(['professional', 'firstname', 'ASC']);
+
+        return $select;
+    }
+
+    public static function byMovie(Movie $movie) : array
+    {
+        $ret = [];
+        $select = self::table()->select();
+        $select->columns([
+            'professional.id',
+            'professional.slug',
+            "CONCAT(professional.firstname, ' ', professional.lastname) as fullname",
+            'professional.profilePicture',
+            "GROUP_CONCAT(praxis.label SEPARATOR ', ') as praxes"
+        ]);
+
+        $select->join(['movie_professional', 'workedOn'], [['workedOn','professional_id', 'professional', 'id'],['workedOn', 'movie_id', $movie->getID()]], 'INNER');
+        $select->join(['tag', 'praxis'], [['workedOn','praxis_id', 'praxis', 'id'],], 'INNER');
+        $select->groupBy(['professional', 'id']);
+
+        $ret = $select->retObj(self::class);
+
+        return $ret;
+    }
+
     public function tagIds(): array{
         return [];
     }
 
+    
     public static function idsByPraxis(int $praxis_id): array
     {
         $query = 'SELECT `professional_tag`.`professional_id` FROM `professional_tag`  WHERE `professional_tag`.`tag_id` = :tag_id'; 
@@ -59,9 +110,17 @@ class Professional extends TightModel
                 ['movie_professional', 'movie_id', $filters['movie']->getID()]
             ]);
             $Query->selectAlso('praxis_id as worked_as');
-
         }
-        
+
+        if(isset($filters['fullname'])){
+            
+            $isLike = '%' . $filters['fullname'] . '%';
+            $bindname = $Query->addBinding('fullNameSearch', $isLike);
+            $Query->whereWithBind('CONCAT(`professional`.`firstname`, \' \',`professional`.`lastname`) LIKE ' . $bindname);
+
+            // $Query->whereLike("CONCAT(firstname,' ', lastname)",'%'.$filters['fullname'] . '%', $Query->table());
+        }
+
         if(isset($filters['organisation']))
         {
             $Query->join(['organisation_professional', 'organisation_professional'], [
@@ -77,9 +136,6 @@ class Professional extends TightModel
                 ['article_professional', 'article_id', $filters['article']->getID()]
             ]);
         }
-
-
-        
 
         if(!isset($options['eager']) || $options['eager'] !== false){
             $Query->join(['professional_tag', 'praxis'], [['professional', 'id', 'praxis', 'professional_id']], 'LEFT OUTER');
