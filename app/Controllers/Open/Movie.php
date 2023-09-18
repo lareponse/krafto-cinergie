@@ -42,7 +42,7 @@ class Movie extends Kortex
         $this->viewport('organisations', $organisations);
 
         $this->viewport('articles', $this->relatedArticles($professionals, $organisations));
-        $this->viewport('photos', $this->relatedPhotos($professionals, $organisations));
+        $this->viewport('photos', $this->relatedPhotos('film'));
     }
 
 
@@ -78,28 +78,28 @@ class Movie extends Kortex
         return $ret;
     }
 
-    public function relatedPhotos(): array
-    {
-        $slug = $this->record()->slug();
-        $letter = $slug[0];
-        $directory = sprintf('film/_%s/%s',  $letter, $slug);
-        $path = sprintf('%s/%s', $this->get('settings.folders.images'), $directory);
+    // public function relatedPhotos(): array
+    // {
+    //     $slug = $this->record()->slug();
+    //     $letter = $slug[0];
+    //     $directory = sprintf('film/_%s/%s',  $letter, $slug);
+    //     $path = sprintf('%s/%s', $this->get('settings.folders.images'), $directory);
 
-        $urls = [];
+    //     $urls = [];
 
-        if(FileSystem::exists($path)){
-            $fs = new FileSystem($path);
-            foreach($fs->filenames() as $filename){
-                if($filename === '.' || $filename == '..')
-                    continue;
+    //     if(FileSystem::exists($path)){
+    //         $fs = new FileSystem($path);
+    //         foreach($fs->filenames() as $filename){
+    //             if($filename === '.' || $filename == '..')
+    //                 continue;
         
-                // $names []= sprintf('%s/%s/%s', $this->get('settings.urls.images'), $directory, $filename);
-                $urls []= sprintf('%s/%s/%s', 'https://www.cinergie.be/images', $directory, $filename);
-            }
+    //             // $names []= sprintf('%s/%s/%s', $this->get('settings.urls.images'), $directory, $filename);
+    //             $urls []= sprintf('%s/%s/%s', 'https://www.cinergie.be/images', $directory, $filename);
+    //         }
 
-        }
-        return $urls;
-    }
+    //     }
+    //     return $urls;
+    // }
 
    
     /**
@@ -108,7 +108,7 @@ class Movie extends Kortex
      * @param SelectInterface $query The database query object to apply filters to.
      * @return SelectInterface The modified database query object with filters applied.
      */
-    private function routerParamsAsFilters($query): SelectInterface
+    private function routerParamsAsFilters($query, $filters = []): SelectInterface
     {
         $this->applyFreeSearch($query, ['`movie`.`label`', '`movie`.`content`', '`movie`.`comment`', '`movie`.`casting`']);
 

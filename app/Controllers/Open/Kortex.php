@@ -2,8 +2,9 @@
 
 namespace App\Controllers\Open;
 
-use HexMakina\LeMarchand\Configuration;
 use League\Plates\Template\Template;
+use HexMakina\LeMarchand\Configuration;
+use HexMakina\LocalFS\FileSystem;
 
 use App\Models\Page;
 
@@ -102,8 +103,8 @@ abstract class Kortex extends \HexMakina\kadro\Controllers\Kadro
                 return $this->router()->url();
 
             case 'title':
-                if($this->hasRecord()) return $this->record->__toString();
-                if($this->hasPage()) return $this->page->label();
+                if($this->hasRecord()) return $this->record()->__toString();
+                if($this->hasPage()) return $this->page()->label();
                 break;
 
             case 'description':
@@ -116,6 +117,28 @@ abstract class Kortex extends \HexMakina\kadro\Controllers\Kadro
 
         }
         return $this->get('settings.app.name');
+    }
+
+    public function relatedPhotos(string $type): array
+    {
+        $slug = $this->record()->slug();
+        $letter = $slug[0];
+        $directory = sprintf('%s/_%s/%s', $type, $letter, $slug);
+        $path = sprintf('%s/%s', $this->get('settings.folders.images'), $directory);
+
+        $urls = [];
+
+        if(FileSystem::exists($path)){
+            $fs = new FileSystem($path);
+            foreach($fs->filenames() as $filename){
+                if($filename === '.' || $filename == '..')
+                    continue;
+        
+                // $names []= sprintf('%s/%s/%s', $this->get('settings.urls.images'), $directory, $filename);
+                $urls []= sprintf('%s/%s/%s', 'https://www.cinergie.be/images', $directory, $filename);
+            }
+        }
+        return $urls;
     }
 
     protected function applyFreeSearch($query, $fields)
