@@ -129,6 +129,13 @@ abstract class Kortex extends \HexMakina\kadro\Controllers\Kadro
                 $orConditions[]= "$searchField LIKE $bindname";
             }
             $query->whereWithBind(implode(' OR ', $orConditions));
+            
+            $orderCase = 'CASE ';
+            foreach($fields as $order => $field){
+                $orderCase .= sprintf(PHP_EOL.'WHEN %s LIKE %s THEN %d ', $field, $bindname, $order+1);
+            }
+            $orderCase .= PHP_EOL.'END';
+            $query->orderBy($orderCase);
         }
         return $query;
     }
