@@ -32,6 +32,15 @@ $settings = array(
   'env' => require_once('env.php'),
   'api' => require_once('api.php'),
 );
+
+
+$settings ['kortex'] = [
+    'meta' => [
+      'image' => '/public/assets/img/logo-cinergie.svg'
+    ]
+];
+
+
 $server = require_once 'database.php'; // needed for LeMarchand wiring
 
 $settings['HexMakina\LeMarchand\LeMarchand'] = [

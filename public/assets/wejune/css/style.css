@@ -472,6 +472,18 @@ small.frais {
    border-color: #D3121B;
 }
 
+.text-agenda-1 {
+   color: #000000;
+}
+
+.text-agenda-2 {
+   color: #ea9909;
+}
+
+.text-agenda-3 {
+   color: #a6a6a6;
+}
+
 
 /* === FILMOTHEQUE : CARD */
 #filmotheque .meta {
@@ -485,7 +497,6 @@ small.frais {
 
 #filmotheque h5 {
    font-size: 1.1rem;
-   min-height: 53px;
 }
 
 #filmotheque .auteur {
@@ -635,6 +646,12 @@ article.boutique .commander:hover {
    width: 100%;
    padding: 12px;
    line-height: 15px;
+}
+
+.white-btn {
+   border: solid 1.5px var(--bs-primary);
+   text-transform: uppercase;
+   width: 100%;
 }
 
 .add-btn i {
