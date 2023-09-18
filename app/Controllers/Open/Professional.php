@@ -27,7 +27,8 @@ class Professional extends Kortex
 
     public function professionals()
     {
-        $paginator = new Paginator($this->router()->params('page') ?? 1, $this->queryListing());
+        $query = $this->routerParamsAsFilters(Model::queryListing());
+        $paginator = new Paginator($this->router()->params('page') ?? 1, $query);
         $paginator->perPage(12);
         $paginator->setClass(Model::class);
 
@@ -45,27 +46,7 @@ class Professional extends Kortex
         $this->viewport('professional', $professional);
     }
 
-    public function queryListing(): SelectInterface
-    {
-        $select = Model::table()->select();
-        $select->columns([
-            'professional.slug',
-            "CONCAT(professional.firstname, ' ', professional.lastname) as fullname",
-            'professional.profilePicture',
-            "GROUP_CONCAT(praxis.label SEPARATOR ', ') as praxes"
-        ]);
 
-        $select->join(['professional_tag', 'professional_tag'], [['professional_tag', 'professional_id', 'professional', 'id']], 'LEFT OUTER');
-        $select->join(['tag', 'praxis'], [['professional_tag', 'tag_id', 'praxis', 'id']], 'LEFT OUTER');
-
-        $select->whereEQ('isListed', 1);
-
-        $select->groupBy(['professional', 'id']);
-        $select->orderBy(['professional', 'lastname', 'ASC']);
-        $select->orderBy(['professional', 'firstname', 'ASC']);
-
-        return $this->routerParamsAsFilters($select);
-    }
 
     /**
      * Converts router parameters into filters for a database query.
