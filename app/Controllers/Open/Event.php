@@ -5,19 +5,52 @@ namespace App\Controllers\Open;
 use DateTimeImmutable;
 use DateTimeZone;
 
+use \App\Models\Event as Model;
+
 class Event extends Kortex
 {
 
+    protected $pageSlug = 'events';
+
     public function events()
     {
-        $current = new \DateTimeImmutable();
-        // $date = new \DateTimeImmutable();
-        // $date->setDate($current->format('Y'), $current->format('m'), 1);
+
         $formatter = new \IntlDateFormatter('fr_FR', \IntlDateFormatter::NONE, \IntlDateFormatter::NONE, null, null, 'MMMM');
-        // Format the date
-        $month = $formatter->format($current);
+
+        $currentDate = new DateTimeImmutable();
+
+        if($this->router()->params('year') && $this->router()->params('month')){
+            $currentDate = $currentDate->setDate($this->router()->params('year'), $this->router()->params('month'), 1);
+        }
+
+        $current = [
+            'month_string' => $formatter->format($currentDate),
+            'month' => $currentDate->format('m'),
+            'year' => $currentDate->format('Y')
+        ];
+        
+        $previousMonth = $currentDate->modify('-1 month');
+        $previous = [
+            'month_string' => $formatter->format($previousMonth),
+            'month' => $previousMonth->format('m'),
+            'year' => $previousMonth->format('Y')
+        ];
+
+        $nextMonth = $currentDate->modify('+1 month');
+        $next = [
+            'month_string' => $formatter->format($nextMonth),
+            'month' => $nextMonth->format('m'),
+            'year' => $nextMonth->format('Y')
+        ];
+
+
         $this->viewport('current', $current);
-        $this->viewport('current_month', ucfirst($month));
-        $this->viewport('current_year', $current->format('Y'));
+        $this->viewport('previous', $previous);
+        $this->viewport('next', $next);
+
+        $events = Model::filter($this->router()->params());
+
+        $this->viewport('events', $events);
+
     }
 }
