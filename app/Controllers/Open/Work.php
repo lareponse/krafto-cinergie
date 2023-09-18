@@ -39,7 +39,8 @@ class Work extends Kortex
 
     public function works()
     {
-        $paginator = new Paginator($this->router()->params('page') ?? 1, $this->queryListing());
+        $query = $this->routerParamsAsFilters(Model::queryListing());
+        $paginator = new Paginator($this->router()->params('page') ?? 1, $query);
         $paginator->perPage(10);
         $paginator->setClass(Model::class);
 
@@ -47,38 +48,6 @@ class Work extends Kortex
         
         $this->viewport('latestArticles', $latest);
         $this->viewport('paginator', $paginator);
-    }
-
-     
-    /**
-     * Constructs a database query for listing advertisements with specific columns and filters.
-     *
-     * @return SelectInterface The constructed database query object.
-     */
-    public function queryListing(): SelectInterface
-    {
-        $select = Model::table()->select([
-            'advertisement.`slug`',
-            'advertisement.`label`',
-            'advertisement.`starts`',
-            'advertisement.`isOffer`',
-            'advertisement.`isPaid`',
-            'tag.`label` as category_label'
-        ], 'advertisement');
-
-        $now = date('Y-m-d');
-        $startsAfter = $select->addBinding('startsAfter', $now);
-        $stopsBefore = $select->addBinding('stopsBefore', $now);
-        $select->whereWithBind(sprintf('starts >= %s AND stops IS NOT NULL AND (stops >= %s)', $startsAfter, $stopsBefore));
-
-
-        $select->whereEQ('active', 1);
-
-        $select->join(['tag', 'tag'], [['advertisement', 'category_id', 'tag', 'id']], 'LEFT OUTER');
-
-        $select->orderBy(['starts', 'ASC']);
-
-        return $this->routerParamsAsFilters($select);
     }
 
     /**

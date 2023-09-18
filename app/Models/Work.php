@@ -33,6 +33,38 @@ class Work extends TightModel implements EventInterface
         return (bool)$this->get('isPaid');
     }
     
+         
+    /**
+     * Constructs a database query for listing advertisements with specific columns and filters.
+     *
+     * @return SelectInterface The constructed database query object.
+     */
+    public static function queryListing(): SelectInterface
+    {
+        $select = self::table()->select([
+            'advertisement.`slug`',
+            'advertisement.`label`',
+            'advertisement.`starts`',
+            'advertisement.`isOffer`',
+            'advertisement.`isPaid`',
+            'tag.`label` as category_label'
+        ], 'advertisement');
+
+        $now = date('Y-m-d');
+        $startsAfter = $select->addBinding('startsAfter', $now);
+        $stopsBefore = $select->addBinding('stopsBefore', $now);
+        $select->whereWithBind(sprintf('starts >= %s AND stops IS NOT NULL AND (stops >= %s)', $startsAfter, $stopsBefore));
+
+
+        $select->whereEQ('active', 1);
+
+        $select->join(['tag', 'tag'], [['advertisement', 'category_id', 'tag', 'id']], 'LEFT OUTER');
+
+        $select->orderBy(['starts', 'ASC']);
+
+        return $select;
+    }
+
     public static function query_retrieve($filters = [], $options = []): SelectInterface
     {
         $Query = parent::query_retrieve($filters, $options);

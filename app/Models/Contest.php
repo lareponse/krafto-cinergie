@@ -48,7 +48,7 @@ class Contest extends TightModel implements EventInterface
 
         $select->orderBy(['starts', 'ASC']);
 
-        return $this->routerParamsAsFilters($select);
+        return $select;
     }
 
     public static function query_retrieve($filters = [], $options = []): SelectInterface

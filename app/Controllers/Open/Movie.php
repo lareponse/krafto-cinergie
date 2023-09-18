@@ -18,7 +18,8 @@ class Movie extends Kortex
 
     public function movies()
     {
-        $paginator = new Paginator($this->router()->params('page') ?? 1, $this->queryListing());
+        $query = $this->routerParamsAsFilters(Model::queryListing());
+        $paginator = new Paginator($this->router()->params('page') ?? 1, $query);
         $paginator->perPage(12);
         $paginator->setClass(Model::class);
 
@@ -57,13 +58,13 @@ class Movie extends Kortex
 
         if(!empty($professionals)){
             $ids = array_map(function($item) { return $item->getID(); }, $professionals);
-            $res = Crudites::inspect('article_professional')->select(['DISTINCT(article_id)'])->whereNumericIn('professional_id', $ids)->limit(300)->retCol();
+            $res = Crudites::inspect('article_professional')->select(['DISTINCT(article_id)'])->whereNumericIn('professional_id', $ids)->limit(7)->retCol();
             $articleIds = array_merge($articleIds, $res);
         }
 
         if(!empty($organisations)) {
             $ids = array_map(function ($item) { return $item->getID(); }, $organisations);
-            $res = Crudites::inspect('article_organisation')->select(['DISTINCT(article_id)'])->whereNumericIn('organisation_id', $ids)->limit(30)->retCol();
+            $res = Crudites::inspect('article_organisation')->select(['DISTINCT(article_id)'])->whereNumericIn('organisation_id', $ids)->limit(7)->retCol();
 
             $articleIds = array_merge($articleIds, $res);
         }
@@ -100,37 +101,7 @@ class Movie extends Kortex
         return $urls;
     }
 
-    public function queryListing(): SelectInterface
-    {
-        $select = Model::table()->select();
-        $select->columns([
-            'movie.slug', 
-            'movie.label', 
-            'movie.released', 
-            'movie.profilePicture', 
-            'movie_genre.label as genre', 
-            "GROUP_CONCAT(director.firstname, ' ', director.lastname SEPARATOR ', ') as directors"
-        ]);
-
-        $select->join(['tag','movie_genre'], [['movie', 'genre_id', 'movie_genre','id']], 'LEFT OUTER');
-        $select->join(['movie_professional', 'withDirectors'], [
-            ['withDirectors', 'movie_id', 'movie','id'],
-            ['withDirectors', 'praxis_id', Professional::DIRECTOR_TAG_ID]
-        ], 'LEFT OUTER');
-        $select->join(['professional', 'director'], [['withDirectors', 'professional_id', 'director','id']], 'LEFT OUTER');
-        
-        $select->whereEQ('active', 1);
-
-        $select->groupBy(['movie', 'slug']);
-        $select->groupBy(['movie', 'label']);
-        $select->groupBy(['movie','released']);
-        $select->groupBy(['movie','profilePicture']);
-        $select->groupBy(['movie_genre','label']);
-
-        
-        return $this->routerParamsAsFilters($select);
-    }
-    
+   
     /**
      * Converts router parameters into filters for a database query.
      *

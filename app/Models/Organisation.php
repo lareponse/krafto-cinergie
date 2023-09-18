@@ -26,6 +26,28 @@ class Organisation extends TightModel
         return [];
     }
 
+    public static function queryListing(): SelectInterface
+    {
+        $select = self::table()->select();
+        $select->columns([
+            '`organisation`.`slug`',
+            "`organisation`.`label`",
+            '`organisation`.`profilePicture`',
+            "GROUP_CONCAT(praxis.label SEPARATOR ', ') as praxes"
+        ]);
+
+        $select->join(['organisation_tag', 'organisation_tag'], [['organisation_tag', 'organisation_id', 'organisation', 'id']], 'LEFT OUTER');
+        $select->join(['tag', 'praxis'], [['organisation_tag', 'tag_id', 'praxis', 'id']], 'LEFT OUTER');
+
+        $select->whereEQ('active', 1);
+        $select->whereEQ('isListed', 1);
+
+        $select->groupBy(['organisation', 'id']);
+
+        $select->orderBy(['organisation', 'label', 'ASC']);
+        return $select;
+    }
+
 
     public function fieldsForCompletion():array
     {

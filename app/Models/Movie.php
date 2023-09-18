@@ -19,6 +19,38 @@ class Movie extends TightModel
         return $this->get('label');
     }
 
+
+    public static function queryListing(): SelectInterface
+    {
+        $select = self::table()->select();
+        $select->columns([
+            'movie.slug', 
+            'movie.label', 
+            'movie.released', 
+            'movie.profilePicture', 
+            'movie_genre.label as genre', 
+            "GROUP_CONCAT(director.firstname, ' ', director.lastname SEPARATOR ', ') as directors"
+        ]);
+
+        $select->join(['tag','movie_genre'], [['movie', 'genre_id', 'movie_genre','id']], 'LEFT OUTER');
+        $select->join(['movie_professional', 'withDirectors'], [
+            ['withDirectors', 'movie_id', 'movie','id'],
+            ['withDirectors', 'praxis_id', Professional::DIRECTOR_TAG_ID]
+        ], 'LEFT OUTER');
+        $select->join(['professional', 'director'], [['withDirectors', 'professional_id', 'director','id']], 'LEFT OUTER');
+        
+        $select->whereEQ('active', 1);
+
+        $select->groupBy(['movie', 'slug']);
+        $select->groupBy(['movie', 'label']);
+        $select->groupBy(['movie','released']);
+        $select->groupBy(['movie','profilePicture']);
+        $select->groupBy(['movie_genre','label']);
+
+        
+        return $select;
+    }
+
     public function fieldsForCompletion(): array
     {
         return [

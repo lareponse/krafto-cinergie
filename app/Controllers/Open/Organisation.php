@@ -14,7 +14,8 @@ class Organisation extends Kortex
     
     public function organisations()
     {
-        $paginator = new Paginator($this->router()->params('page') ?? 1, $this->queryListing());
+        $query = $this->routerParamsAsFilters(Model::queryListing());
+        $paginator = new Paginator($this->router()->params('page') ?? 1, $query);
         $paginator->perPage(12);
         $paginator->setClass(Model::class);
 
@@ -24,27 +25,7 @@ class Organisation extends Kortex
         $this->viewport('form_filters', $this->router()->params());
     }
 
-    public function queryListing(): SelectInterface
-    {
-        $select = Model::table()->select();
-        $select->columns([
-            '`organisation`.`slug`',
-            "`organisation`.`label`",
-            '`organisation`.`profilePicture`',
-            "GROUP_CONCAT(praxis.label SEPARATOR ', ') as praxes"
-        ]);
 
-        $select->join(['organisation_tag', 'organisation_tag'], [['organisation_tag', 'organisation_id', 'organisation', 'id']], 'LEFT OUTER');
-        $select->join(['tag', 'praxis'], [['organisation_tag', 'tag_id', 'praxis', 'id']], 'LEFT OUTER');
-
-        $select->whereEQ('active', 1);
-        $select->whereEQ('isListed', 1);
-
-        $select->groupBy(['organisation', 'id']);
-
-        $select->orderBy(['organisation', 'label', 'ASC']);
-        return $this->routerParamsAsFilters($select);
-    }
 
     /**
      * Converts router parameters into filters for a database query.
