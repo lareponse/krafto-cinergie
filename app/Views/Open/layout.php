@@ -38,6 +38,7 @@
     <script src="/public/assets/wejune/js/lightbox.min.js"></script>
     <script src="/public/assets/wejune/js/script.js"></script>
     <script src="/public/assets/js/otto-format.js"></script>
+    <script src="/public/assets/js/otto-web.js"></script>
 
 </body>
 
