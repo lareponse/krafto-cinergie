@@ -10,6 +10,9 @@ use App\Models\Article as Model;
 
 class Article extends Kortex
 {
+    protected $pageSlug = 'articles';
+
+
     public function articles()
     {
         $paginator = new Paginator($this->router()->params('page') ?? 1, $this->queryListing());
