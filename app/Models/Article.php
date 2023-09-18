@@ -41,7 +41,7 @@ class Article extends TightModel
         $Query = parent::query_retrieve($filters, $options);
         $Query->join(['article_author', 'hasWriten'], [['hasWriten', 'article_id', 'article', 'id']], 'LEFT OUTER');
         $Query->join(['author', 'author'], [['hasWriten', 'author_id', 'author', 'id']], 'LEFT OUTER');
-        $Query->selectAlso('author.label as author_label');
+        $Query->selectAlso(['author.label as author_label', 'author.slug as author_slug']);
 
         if (isset($filters['hasEmbedVideo'])) {
             $Query->whereNotEmpty('embedVideo');

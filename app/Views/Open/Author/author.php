@@ -3,7 +3,7 @@
 <div class="container pt-4 pb-5" id="auteur-single">
    <article class="w-75 mx-auto">
 
-      <h1><?= $author->fullName()?></h1>
+      <h1><?= $record->fullName()?></h1>
       <hr class="my-4">
 
       <div class="share" id="share">
@@ -19,7 +19,7 @@
       <section class="row g-0 mt-4">
 
          <div class="col-lg-5">
-            <img class="img-fluid w-100" src="<?= $author->profilePicture()?>" alt="professionnel">
+            <img class="img-fluid w-100" src="<?= $record->profilePicture()?>" alt="professionnel">
          </div>
          <?php
          if(isset($professional)){
@@ -47,7 +47,7 @@
                <a href="<?=$controller->router()->hyp('article', ['slug' => $article->slug()])?>">
                   <div class="row g-0">
                      <div class="col-md-4">
-                        <img src="https://www.cinergie.be/<?=$article->get('legacy_photo_illu');?>" class="card-img-left img-fluid rounded-start" alt="...">
+                        <img src="<?=$article->profilePicture();?>" class="card-img-left img-fluid rounded-start" alt="...">
                      </div>
                      <div class="col-md-8">
                         <div class="card-body">

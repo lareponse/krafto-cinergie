@@ -17,19 +17,15 @@ class Author extends Kortex
 
     public function author()
     {
-        $slug = $this->router()->params('slug');
-        $author = Model::exists(['slug' => $slug]);
-        
-        if(is_null($author))
+        if(is_null($this->record()))
             $this->router()->hopBack();
         
-        if($author->get('professional_slug')){
-            $professional = Professional::exists(['slug' => $author->get('professional_slug')]);
+        if($this->record()->get('professional_slug')){
+            $professional = Professional::exists(['slug' => $this->record()->get('professional_slug')]);
             $this->viewport('professional', $professional);
         }
-        $articles = Article::filter(['active' => '1', 'author' => $author], ['order_by' => ['article', 'publication', 'DESC']]);
+        $articles = Article::filter(['active' => '1', 'author' => $this->record()], ['order_by' => ['article', 'publication', 'DESC']]);
 
-        $this->viewport('author', $author);
         $this->viewport('articles', $articles);
     }
 }
