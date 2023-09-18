@@ -23,6 +23,34 @@ class Contest extends TightModel implements EventInterface
         return 'starts';
     }
 
+        /**
+     * Constructs a database query for listing contests with specific columns and filters.
+     *
+     * @return SelectInterface The constructed database query object.
+     */
+    public static function queryListing(): SelectInterface
+    {
+        $select = Model::table()->select([
+            'contest.`slug`',
+            'contest.`label`',
+            'contest.`starts`',
+            'contest.`stops`'
+        ], 'contest');
+
+        $now = date('Y-m-d');
+        $startsAfter = $select->addBinding('startsAfter', $now);
+        $stopsBefore = $select->addBinding('stopsBefore', $now);
+        $select->whereWithBind(sprintf('starts >= %s AND stops IS NOT NULL AND (stops >= %s)', $startsAfter, $stopsBefore));
+
+
+        $select->whereEQ('active', 1);
+
+
+        $select->orderBy(['starts', 'ASC']);
+
+        return $this->routerParamsAsFilters($select);
+    }
+
     public static function query_retrieve($filters = [], $options = []): SelectInterface
     {
         $Query = parent::query_retrieve($filters, $options);
