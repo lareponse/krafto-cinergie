@@ -25,7 +25,7 @@
         <?php if (!empty($article->get('author_label'))) {
         ?>
           <li class=""><i class="bi bi-person-fill icon"></i></i>
-            <a href="#auteur-link"><?= $article->get('author_label'); ?></a>
+            <a href="<?=$controller->router()->hyp('author', ['slug' => $article->get('author_slug')])?>"><?= $article->get('author_label'); ?></a>
           </li>
         <?php
         }
