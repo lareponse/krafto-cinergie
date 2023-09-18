@@ -39,8 +39,7 @@ class Search extends Kortex
 
     private function articles():Paginator
     {
-        $controller = $this->get('Controllers\\Open\\Article');
-        $query = $controller->queryListing();
+        $query = Article::queryListing();
         $query->selectAlso('article.abstract');
 
         $paginator = new Paginator($this->router()->params('page') ?? 1, $query);

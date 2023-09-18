@@ -15,7 +15,8 @@ class Article extends Kortex
 
     public function articles()
     {
-        $paginator = new Paginator($this->router()->params('page') ?? 1, $this->queryListing());
+        $query = $this->routerParamsAsFilters(Model::queryListing());
+        $paginator = new Paginator($this->router()->params('page') ?? 1, $query);
         $paginator->perPage(12);
         $paginator->setClass(Model::class);
 
@@ -33,25 +34,7 @@ class Article extends Kortex
         return Model::filter(['active' => '1'], ['limit' => 5, 'order_by' => ['article', 'publication', 'desc']]);
     }
 
-    public function queryListing(): SelectInterface
-    {
-        $select = Model::table()->select();
-        $select->columns([
-            'article.slug', 
-            'article.label', 
-            'article.publication', 
-            'article.profilePicture',
-            'tag.`label` as type_label'
-
-        ]);
-
-        $select->whereEQ('active', 1);
-
-        $select->join(['tag', 'tag'], [['article', 'type_id', 'tag', 'id']], 'LEFT OUTER');
-        $select->orderBy(['publication', 'DESC']);
-
-        return $this->routerParamsAsFilters($select);
-    }
+   
 
     private function routerParamsAsFilters($query): SelectInterface
     {
@@ -60,6 +43,8 @@ class Article extends Kortex
         if ($this->router()->params('ac')) {
             $query->whereNumericIn('type_id', $this->router()->params('ac'));
         }
+
+        $query->orderBy(['publication', 'DESC']);
 
         return $query;
     }

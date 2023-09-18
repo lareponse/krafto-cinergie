@@ -68,7 +68,7 @@ class Movie extends Kortex
             $articleIds = array_merge($articleIds, $res);
         }
 
-        $query = $this->get('App\\Controllers\\Open\\Article')->queryListing();
+        $query = Article::queryListing();
         $res = $query->whereNumericIn('id', array_unique($articleIds))->retObj(Article::class);
         
         if($res)
