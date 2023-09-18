@@ -7,21 +7,9 @@ use \App\Models\{Organisation,Team, Author};
 
 class Page extends Kortex
 {
-
-    public function requiresOperator(): bool
-    {
-        return false;
-    }
-
-    public function home()
-    {
-        vd(__FUNCTION__, __CLASS__);
-    }
-
     public function history()
     {
         $this->pageSlug = 'notre-histoire';
-
     }
 
     public function price()
@@ -29,6 +17,11 @@ class Page extends Kortex
         $this->pageSlug = 'price';
     }
 
+    public function legal()
+    {
+        $this->pageSlug = 'mentions-legales';
+    }
+    
     public function contact()
     {
         $this->pageSlug = 'contact';
@@ -50,8 +43,5 @@ class Page extends Kortex
         $this->viewport('team', $team);
     }
 
-    public function legal()
-    {
-        $this->pageSlug = 'mentions-legales';
-    }
+
 }
