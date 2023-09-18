@@ -7,6 +7,7 @@ use \HexMakina\kadro\Models\Tag;
 use App\Controllers\Abilities\Paginator;
 
 use App\Models\Professional as Model;
+use App\Models\{Movie,Praxis};
 
 class Professional extends Kortex
 {
@@ -40,10 +41,17 @@ class Professional extends Kortex
 
     public function professional()
     {
-        $slug = $this->router()->params('slug');
-        $professional = Model::exists('slug', $slug);
+        $movieIds = Movie::idsByProfessionalIds([$this->record()->getID()]);
+        if(!empty($movieIds)){
+            $query = Movie::queryListing();
+            $query->whereNumericIn('id', $movieIds, $query->table());
+            $related_movies = $query->retObj(Movie::class);
+        }
 
-        $this->viewport('professional', $professional);
+        $this->viewport('related_movies', $related_movies ?? []);
+        $this->viewport('related_photos', $this->relatedPhotos('personne'));
+
+        $this->viewport('praxes', Praxis::forProfessional($this->record()));
     }
 
 
