@@ -27,7 +27,7 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="modal-nouvelle-fiche-professionnel" tabindex="-1" aria-labelledby="modal-nouvelle-fiche-professionnel-label" aria-hidden="true">
+    <form action="<?= $controller->router()->hyp('professional_add')?>" method="POST" class="modal fade" id="modal-nouvelle-fiche-professionnel" tabindex="-1" aria-labelledby="modal-nouvelle-fiche-professionnel-label" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-scrollable">
             <div class="modal-content shadow-lg">
                 <div class="modal-header">
@@ -51,5 +51,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 </aside>
