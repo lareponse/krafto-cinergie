@@ -25,56 +25,8 @@
          if(isset($professional)){
             ?>
          <div class="col-lg-7 ps-lg-5" id="infos">
-            <p class="text-primary"><strong>
-            <?= implode(', ', $professional->praxis());?></strong></p>
-            <?php if($professional->canDisplay('zip') || $professional->canDisplay('city')){
-
-               ?><p><strong>Ville :</strong> <?=$professional->canDisplay('zip') ? $professional->get('zip').' ' : ''?><?=$professional->canDisplay('city') ? $professional->get('city'): '' ?></p><?php
-            }
-            ?>
-            <?php if (!$professional->isSecret('province'))
-            {
-               ?><p><strong>Province :</strong> <?=$professional->get('province')?></p><?php
-            }
-            ?>
-
-            <?php if ($professional->canDisplay('country'))
-            {
-               ?><p><strong>Pays :</strong> <?=$professional->get('country')?></p><?php
-            }
-            ?>
-            <?php if ($professional->canDisplay('email'))
-            {
-               ?><p><strong>Email :</strong> <?=$professional->get('email')?></p><?php
-            }
-            ?>
-       
-            <?php if ($professional->canDisplay('gsm'))
-            {
-               ?><p><strong>GSM :</strong> <?=$professional->get('mobile')?></p><?php
-            }
-            ?>
-            <?php if ($professional->canDisplay('tel'))
-            {
-               ?><p><strong>Tel :</strong> <?=$professional->get('tel')?></p><?php
-            }
-            ?>            
-            <?php if ($professional->canDisplay('fax'))
-            {
-               ?><p><strong>Fax :</strong> <?=$professional->get('fax')?></p><?php
-            }
-            ?>
-            <?php if ($professional->canDisplay('birth'))
-            {
-               ?><p><strong>Date de naissance :</strong> <?= $professional->get('birth')?></p><?php
-            }
-            ?>
-
-            <p>
-               <a class="cta" href="<?=$professional->get('url')?>" target="_blank">
-                  <strong>Site web</strong>
-               </a>
-            </p>
+            <p class="text-primary"><strong><?= implode(', ', $professional->praxis());?></strong></p>
+            <?= $this->insert('Open::_partials/contact_info', ['contact' => $professional]);?>
          </div>
             <?php
          }
