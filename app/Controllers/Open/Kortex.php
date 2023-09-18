@@ -11,18 +11,114 @@ abstract class Kortex extends \HexMakina\kadro\Controllers\Kadro
 {
     protected $template = null;
     protected $pageSlug = null;
+    protected $page = null;
+    protected $record = null;
+    protected $section = null;
 
     public function requiresOperator(): bool
     {
         return false;
     }
 
-    public function hasPage(): ?string
+    public function prepare(): void
     {
-        return isset($this->pageSlug);
+        parent::prepare();
+        if($this->router()->params('slug'))
+        {
+            $className = 'App\\Models\\'.(new \ReflectionClass(static::class))->getShortName();
+            $this->record = $className::exists('slug', $this->router()->params('slug'));
+        }
     }
 
-    public function applyFreeSearch($query, $fields)
+    public function conclude(): void
+    {
+        $this->viewport('page', $this->page());
+        $this->viewport('record', $this->record());
+
+        if (is_null($this->template)) {
+            $fallback = 'Open::' . $this->className() . '/' . $this->router()->targetMethod();
+            $this->template = $fallback;
+        }
+        
+        echo $this->display($this->template);
+
+        parent::conclude();
+        die;
+    }
+
+    public function hasRecord(): bool
+    {
+        return isset($this->record);
+    }
+
+    public function hasPage(): bool
+    {
+        return isset($this->page);
+    }
+
+    public function record()
+    {
+        if(!isset($this->record) && $this->router()->params('slug')){
+            $className = 'App\\Models\\'.(new \ReflectionClass(static::class))->getShortName();
+            $this->record = $className::exists('slug', $this->router()->params('slug'));
+        }
+        return $this->record;
+    }
+
+    public function page()
+    {
+        if(!isset($this->page)){
+            if(!isset($this->pageSlug)){
+                $this->pageSlug= $this->router()->targetMethod();
+            }
+
+            $this->page = Page::exists(['slug' => $this->pageSlug]);
+        }
+        return $this->page;
+    }
+
+    public function activeSection(): string
+    {
+        return $this->className();
+    }
+
+    public function activeLink(): string
+    {
+        return $this->className();
+    }
+
+    public function setTemplate($template): void
+    {
+        $this->template = $template;
+    }
+
+    public function meta($prop) : string
+    {
+        switch($prop){
+            case 'type': 
+                return $this->hasRecord()? 'article' : 'website';
+
+            case 'url': 
+                return $this->router()->url();
+
+            case 'title':
+                if($this->hasRecord()) return $this->record->__toString();
+                if($this->hasPage()) return $this->page->label();
+                break;
+
+            case 'description':
+                if($this->hasRecord()) return $this->record->__toString();
+                if($this->hasPage()) return $this->page->label();
+                break;
+
+            case 'image':
+                return $this->router()->webHost().$this->get('settings.kortex.meta.image');
+
+        }
+        return $this->get('settings.app.name');
+    }
+
+    protected function applyFreeSearch($query, $fields)
     {
         if ($this->router()->params('s')) {
             $isLike = '%'.$this->router()->params('s').'%';
@@ -36,142 +132,5 @@ abstract class Kortex extends \HexMakina\kadro\Controllers\Kadro
         }
         return $query;
     }
-    public function activeSection(): string
-    {
-        return $this->className();
-    }
-
-    public function activeLink(): string
-    {
-        return $this->className();
-    }
-
-
-    public function setTemplate($template): void
-    {
-        $this->template = $template;
-    }
-
-    public function home()
-    {
-    }
-
-    public function conclude(): void
-    {
-
-        
-        if($this->hasPage()){
-            $page = Page::one(['slug' => $this->pageSlug]);
-            $this->viewport('page', $page);
-        }
-        
-        if (is_null($this->template)) {
-            $fallback = 'Open::' . $this->className() . '/' . $this->router()->targetMethod();
-            $this->template = $fallback;
-        }
-        
-        // $title = $this->breadcrumb();
-        // $this->viewport('title', $title);
-        echo $this->display($this->template);
-
-        parent::conclude();
-        die;
-    }
-
-    protected function breadcrumb($prefix = [], $suffix = []): string
-    {
-        $bc = is_array($prefix) ? $prefix : [];
-
-        $category = $this->className();
-        switch ($category) {
-            case 'home':
-                $category = null;
-                break;
-            case 'Movie':
-                $category = 'Films';
-                break;
-            case 'Professional':
-                $category = 'Professionels';
-                break;
-            case 'Organisation':
-                $category = 'Organisations';
-                break;
-        }
-        if (!is_null($category))
-            $bc[] = $category;
-
-
-        $action_label = $this->router()->targetMethod();
-        switch ($action_label) {
-            case 'home':
-                $action_label = null;
-                break;
-            case 'view':
-                $action_label = 'consulter';
-                break;
-            case 'edit':
-                $action_label = 'modifier';
-                break;
-        }
-        if (!is_null($action_label))
-            $bc[] = $action_label;
-
-        if (is_array($suffix)) {
-            $bc = array_merge($bc, $suffix);
-        }
-
-        return implode('<span class="separator">\\</span>', $bc);
-    }
-
-    public function actionFor($action, $model, $extras = [])
-    {
-        
-        return $this->urlFor($model->className(), $model, $extras);
-    }
-
-    public function urlFor(string $class, string $action, $model=null, $extras = [])
-    {
-        $prefix = 'dash_record';
-        $name = '';
-
-        switch ($action) {
-            case 'view':
-                $name = $prefix;
-                break;
-
-            case 'list':
-                $name = $prefix . 's';
-                break;
-
-            default:
-                $name = $prefix . '_' . $action;
-                break;
-        }
-
-        $params = ['controller' => $class];
-        if ($model) {
-            $params['id'] = $model->getID();
-        }
-
-        $route_as_href = $this->router()->hyp($name, $params);
-
-        if (!empty($extras)) {
-
-            $extras = implode('&', array_map(function ($key, $value) {
-                return "$key=$value";
-            }, array_keys($extras), array_values($extras)));
-
-            $route_as_href .= '?' . $extras;
-        }
-
-        return $route_as_href;
-    }
-
-    public function url(string $action, $extras = []): string
-    {
-        return $this->urlFor($this->className(), $action, $this->loadModel(), $extras);
-
-    }
-
-
+   
 }
