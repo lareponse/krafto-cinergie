@@ -1,10 +1,10 @@
 <?php
-
-use \HexMakina\Marker\Form; ?>
-
+use \HexMakina\Marker\{Marker,Form}; 
+?>
 <section class="row mt-4 mb-2 recherche-page">
 
     <section id="filtres-checkbox">
+
         <form action="<?= $controller->router()->hyp('search'); ?> class=" mt-3">
             <?= Form::hidden('tab', 'org'); ?>
 
@@ -26,7 +26,37 @@ use \HexMakina\Marker\Form; ?>
 
     </section>
 
-
-    <p><?= $messageNoResults?></p>
-
+    <?php
+    if (empty($organisations->records())) {
+        echo Marker::strong($messageNoResults);
+    } else {
+        foreach ($organisations->records() as $record) {
+    ?>
+            <article class="card shadow p-0 listing mb-3 px-lg-0">
+                <div class="row g-0">
+                    <div class="col-2 d-flex justify-content-center align-items-center">
+                        <img src="<?= $record->profilePicture(); ?>" class="img-fluid" style="height:200px" alt="Photo de <?= $record; ?>">
+                    </div>
+                    <div class="col-10">
+                        <a href="<?= $controller->router()->hyp('organisation', ['slug' => $record->slug()]) ?>">
+                            <div class="row card-body">
+                                <div class="col-12 col-sm-6 col-md-8">
+                                    <h5 class="card-title mb-0"><?= $record ?></h5>
+                                </div>
+                                <div class="col-6 col-md-4">
+                                    <p class="text-right">20 juillet 2023</p>
+                                </div>
+                                <div class="details">
+                                    <p class="card-text text-secondary"><small><?= mb_substr(strip_tags($record->get('content')), 0, 400) ?>...</small></p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </article>
+    <?php
+        }
+        echo $this->insert('Open::_partials/pagination', ['route' => 'search', 'paginator' => $organisations]);
+    }
+    ?>
 </section>

@@ -34,11 +34,17 @@ class Article extends Kortex
         return Model::filter(['active' => '1'], ['limit' => 5, 'order_by' => ['article', 'publication', 'desc']]);
     }
 
-   
 
-    private function routerParamsAsFilters($query): SelectInterface
+    public function routerParamsAsFilters($query): SelectInterface
     {
-        $this->applyFreeSearch($query, ['`article`.`label`', '`article`.`content`', '`article`.`abstract`']);
+        if(!empty($this->router()->params('s'))){
+
+            $this->freeSearchFor(
+                $this->router()->params('s'), 
+                ['`article`.`label`', '`article`.`content`', '`article`.`abstract`'],
+                $query
+            );
+        }
 
         if ($this->router()->params('ac')) {
             $query->whereNumericIn('type_id', $this->router()->params('ac'));

@@ -62,11 +62,16 @@ class Professional extends Kortex
      * @param SelectInterface $query The database query object to apply filters to.
      * @return SelectInterface The modified database query object with filters applied.
      */
-    private function routerParamsAsFilters($query): SelectInterface
+    public function routerParamsAsFilters($query): SelectInterface
     {
+        if(!empty($this->router()->params('s'))){
 
-        $this->applyFreeSearch($query, ['`professional`.`firstname`', '`professional`.`lastname`', '`professional`.`content`', '`professional`.`filmography`']);
-        
+            $this->freeSearchFor(
+                $this->router()->params('s'), 
+                ['`professional`.`firstname`', '`professional`.`lastname`', '`professional`.`content`', '`professional`.`filmography`'],
+                $query
+            );
+        }
         if ($this->router()->params('nom')) {
             $isLike = '%' . $this->router()->params('nom') . '%';
             $bindname = $query->addBinding('fullNameSearch', $isLike);

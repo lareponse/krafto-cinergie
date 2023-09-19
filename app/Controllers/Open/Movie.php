@@ -78,29 +78,6 @@ class Movie extends Kortex
         return $ret;
     }
 
-    // public function relatedPhotos(): array
-    // {
-    //     $slug = $this->record()->slug();
-    //     $letter = $slug[0];
-    //     $directory = sprintf('film/_%s/%s',  $letter, $slug);
-    //     $path = sprintf('%s/%s', $this->get('settings.folders.images'), $directory);
-
-    //     $urls = [];
-
-    //     if(FileSystem::exists($path)){
-    //         $fs = new FileSystem($path);
-    //         foreach($fs->filenames() as $filename){
-    //             if($filename === '.' || $filename == '..')
-    //                 continue;
-        
-    //             // $names []= sprintf('%s/%s/%s', $this->get('settings.urls.images'), $directory, $filename);
-    //             $urls []= sprintf('%s/%s/%s', 'https://www.cinergie.be/images', $directory, $filename);
-    //         }
-
-    //     }
-    //     return $urls;
-    // }
-
    
     /**
      * Converts router parameters into filters for a database query.
@@ -108,10 +85,17 @@ class Movie extends Kortex
      * @param SelectInterface $query The database query object to apply filters to.
      * @return SelectInterface The modified database query object with filters applied.
      */
-    private function routerParamsAsFilters($query, $filters = []): SelectInterface
+    public function routerParamsAsFilters($query): SelectInterface
     {
-        $this->applyFreeSearch($query, ['`movie`.`label`', '`movie`.`content`', '`movie`.`comment`', '`movie`.`casting`']);
+        if(!empty($this->router()->params('s'))){
+            $this->freeSearchFor(
+                $this->router()->params('s'), 
+                ['`movie`.`label`', '`movie`.`content`', '`movie`.`comment`', '`movie`.`casting`'],
+                $query
+            );
+        }
 
+        
         $idFilters = [];
         if ($this->router()->params('label')) {
             $isLike = '%'.$this->router()->params('label').'%';
@@ -163,9 +147,8 @@ class Movie extends Kortex
         $direction = ($order_by == 'released') ? 'DESC' : 'ASC';
         $query->orderBy([$order_by, $direction]);
 
-        // dd($query);
-        return $query;
 
+        return $query;
     }
 
 

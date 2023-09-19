@@ -39,8 +39,9 @@ class Search extends Kortex
 
     private function articles():Paginator
     {
-        $query = Article::queryListing();
-        $query->selectAlso('article.abstract');
+        $query = Article::queryListing()->selectAlso('`article`.`abstract`');
+
+        $this->get('Controllers\Open\Article')->routerParamsAsFilters($query);
 
         $paginator = new Paginator($this->router()->params('page') ?? 1, $query);
         $paginator->perPage(12);
@@ -51,7 +52,10 @@ class Search extends Kortex
 
     private function movies(): Paginator
     {
-        $paginator = new Paginator($this->router()->params('page') ?? 1, Movie::queryListing());
+        $query = Movie::queryListing();
+        $this->get('Controllers\Open\Movie')->routerParamsAsFilters($query);
+        
+        $paginator = new Paginator($this->router()->params('page') ?? 1, $query);
         $paginator->perPage(12);
         $paginator->setClass(Movie::class);
 
@@ -60,7 +64,10 @@ class Search extends Kortex
 
     private function professionals(): Paginator
     {
-        $paginator = new Paginator($this->router()->params('page') ?? 1, Professional::queryListing());
+        $query = Professional::queryListing();
+        $this->get('Controllers\Open\Professional')->routerParamsAsFilters($query);
+
+        $paginator = new Paginator($this->router()->params('page') ?? 1, $query);
         $paginator->perPage(12);
         $paginator->setClass(Professional::class);
 
@@ -69,7 +76,10 @@ class Search extends Kortex
 
     private function organisations(): Paginator
     {
-        $paginator = new Paginator($this->router()->params('page') ?? 1, Organisation::queryListing());
+        $query = Organisation::queryListing();
+        $this->get('Controllers\Open\Organisation')->routerParamsAsFilters($query);
+
+        $paginator = new Paginator($this->router()->params('page') ?? 1, $query);
         $paginator->perPage(12);
         $paginator->setClass(Organisation::class);
 

@@ -48,10 +48,16 @@ class Organisation extends Kortex
      * @param SelectInterface $query The database query object to apply filters to.
      * @return SelectInterface The modified database query object with filters applied.
      */
-    private function routerParamsAsFilters($query): SelectInterface
+    public function routerParamsAsFilters($query): SelectInterface
     {
-        $this->applyFreeSearch($query, ['`organisation`.`label`', '`organisation`.`content`', '`organisation`.`filmography`']);
-
+        if(!empty($this->router()->params('s'))){
+            $this->freeSearchFor(
+                $this->router()->params('s'), 
+                ['`organisation`.`label`', '`organisation`.`content`', '`organisation`.`filmography`'],
+                $query
+            );
+        }
+        
         if ($this->router()->params('nom')) {
             $isLike = '%' . $this->router()->params('nom') . '%';
             $bindname = $query->addBinding('fullNameSearch', $isLike);
@@ -62,10 +68,8 @@ class Organisation extends Kortex
         if($this->router()->params('activites')){
             $ids = Model::idsByPraxis($this->router()->params('activites'));
             $query->whereNumericIn('id', $ids, $query->table());
-            
-            // $praxis_id = $this->router()->params('activites');
-            // $filters['ids'] = Model::idsByPraxis($praxis_id);
         }
+
         return $query;
     }
 }

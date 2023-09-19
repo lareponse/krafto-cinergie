@@ -141,26 +141,29 @@ abstract class Kortex extends \HexMakina\kadro\Controllers\Kadro
         return $urls;
     }
 
-    protected function applyFreeSearch($query, $fields)
+    protected function freeSearchFor($term, $fields, $query)
     {
-        if ($this->router()->params('s')) {
-            $isLike = '%'.$this->router()->params('s').'%';
-    
-            $bindname = $query->addBinding('labelSearch', $isLike);
-            $orConditions = [];
-            foreach($fields as $searchField){
-                $orConditions[]= "$searchField LIKE $bindname";
-            }
-            $query->whereWithBind(implode(' OR ', $orConditions));
-            
-            $orderCase = 'CASE ';
-            foreach($fields as $order => $field){
-                $orderCase .= sprintf(PHP_EOL.'WHEN %s LIKE %s THEN %d ', $field, $bindname, $order+1);
-            }
-            $orderCase .= PHP_EOL.'END';
-            $query->orderBy($orderCase);
+        $bindname = $query->addBinding('labelSearch', '%'.$term.'%');
+        $orConditions = [];
+        foreach($fields as $searchField){
+            $orConditions[]= "$searchField LIKE $bindname";
         }
+        $query->whereWithBind(implode(' OR ', $orConditions));
+        
+        $orderCase = 'CASE ';
+        foreach($fields as $order => $field){
+            $orderCase .= sprintf(PHP_EOL.'WHEN %s LIKE %s THEN %d ', $field, $bindname, $order+1);
+        }
+        $orderCase .= PHP_EOL.'END';
+        $query->orderBy($orderCase);
+        $query->selectAlso($fields);
+
+        if(!empty($query->clause('group'))){
+            foreach($fields as $field){
+                $query->addClause('group', $field);
+            }
+        }
+
         return $query;
     }
-   
 }

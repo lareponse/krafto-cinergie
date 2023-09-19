@@ -20,12 +20,11 @@ class Article extends TightModel
     {
         $select = self::table()->select();
         $select->columns([
-            'article.slug', 
-            'article.label', 
-            'article.publication', 
-            'article.profilePicture',
-            'tag.`label` as type_label'
-
+            '`article`.`slug`', 
+            '`article`.`label`', 
+            '`article`.`publication`', 
+            '`article`.`profilePicture`',
+            '`tag`.`label` as type_label'
         ]);
 
         $select->whereEQ('active', 1);

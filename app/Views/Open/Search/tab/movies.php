@@ -1,7 +1,6 @@
 <?php
-
-use \HexMakina\Marker\Form; ?>
-
+use \HexMakina\Marker\{Marker,Form}; 
+?>
 <section class="row mt-4 mb-2 recherche-page">
 
     <section id="filtres-checkbox">
@@ -55,32 +54,37 @@ use \HexMakina\Marker\Form; ?>
 
     </section>
     <?php
-    foreach ($movies->records() as $result) {
+    if (empty($movies->records())) {
+        echo Marker::strong($messageNoResults);
+    } else {
+        foreach ($movies->records() as $record) {
     ?>
-        <article class="card shadow p-0 listing mb-3 px-lg-0">
-            <div class="row g-0">
-                <div class="col-2 d-flex justify-content-center align-items-center">
-                    <i class="bi bi-film"></i>
+            <article class="card shadow p-0 listing mb-3 px-lg-0">
+                <div class="row g-0">
+                    <div class="col-2 d-flex justify-content-center align-items-center">
+                        <i class="bi bi-film"></i>
+                    </div>
+                    <div class="col-10">
+                        <a href="<?= $controller->router()->hyp('movie', ['slug' => $record->slug()])?>">
+                            <div class="row card-body">
+                                <div class="col-12 col-sm-6 col-md-8">
+                                    <h5 class="card-title mb-0"><?= $record ?></h5>
+                                </div>
+                                <div class="col-6 col-md-4">
+                                    <p class="text-right otto-date"><?= $record->get('publication'); ?></p>
+                                </div>
+                                <div class="details">
+                                    <p class="card-text text-secondary"><small><?= mb_substr(strip_tags($record->get('content')), 0, 400) ?>...</small></p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-                <div class="col-10">
-                    <a href="#">
-                        <div class="row card-body">
-                            <div class="col-12 col-sm-6 col-md-8">
-                                <h5 class="card-title mb-0">Bouli Lanners dans Une affaire de principe d’Antoine Raimbault</h5>
-                            </div>
-                            <div class="col-6 col-md-4">
-                                <p class="text-right otto-date"><?= $result->get('publication'); ?></p>
-                            </div>
-                            <div class="details">
-                                <p class="card-text text-secondary"><small>Bouli Lanners, Thomas VDB et Céleste Brunnquell au casting du second long du réalisateur de Une intime conviction. Une production Agat Films et Memento qui sera vendue par Charades....</small></p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </article>
+            </article>
     <?php
+        }
+
+        echo $this->insert('Open::_partials/pagination', ['route' => 'search', 'paginator' => $organisations]);
     }
     ?>
-
 </section>

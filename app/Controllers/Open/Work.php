@@ -56,7 +56,7 @@ class Work extends Kortex
      * @param SelectInterface $query The database query object to apply filters to.
      * @return SelectInterface The modified database query object with filters applied.
      */
-    private function routerParamsAsFilters($query): SelectInterface
+    public function routerParamsAsFilters($query): SelectInterface
     {
         // Check if 'remun' router parameter is set and use it to filter by 'isPaid'
         if ($this->router()->params('remun')) {
