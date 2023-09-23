@@ -35,10 +35,19 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
         $this->setTemplate('new');
     }
 
+    public function editBySlug()
+    {
+        $res = $this->modelClassName()::exists(['slug' => $this->router()->params('slug')]);
+        if(!is_null($res)){
+            $this->router()->hop('dash_record_edit', ['controller' => $this->className(), 'id' => $res->getID()]);
+        }
+    }
+
     public function conclude(): void
     {
         parent::conclude();
-        if (is_null($this->template)) {
+
+        if(is_null($this->template)) {
             $fallback = 'Secret::' . $this->className() . '/' . $this->router()->targetMethod();
             $this->template = $fallback;
         }
@@ -125,7 +134,6 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
         }
 
         $route_as_href = $this->router()->hyp($name, $params);
-
         if (!empty($extras)) {
 
             $extras = implode('&', array_map(function ($key, $value) {
@@ -137,6 +145,7 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
 
         return $route_as_href;
     }
+
 
     public function url(string $action, $extras = []): string
     {
