@@ -10,7 +10,7 @@ abstract class ShopProduct extends Krafto
 
     public function activeSection(): string
     {
-      return 'Boutique';
+      return 'Shop';
     }
 
     public function home()
