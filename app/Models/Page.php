@@ -8,6 +8,7 @@ use HexMakina\TightORM\TightModel;
 class Page extends TightModel
 {
     use Abilities\HasSlug;
+    use Abilities\IsActivable;
 
     public function __toString()
     {
