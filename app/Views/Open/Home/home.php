@@ -107,13 +107,13 @@
                 <div class="col-lg-4" id="article-item">
                     <article class="card mb-4 shadow">
                         <a href="article-single.php">
-                            <img src="https://www.cinergie.be/images/actualite/film/_0/1985/1985--4-.jpg" class="card-img-top" alt="...">
+                            <img src="<?= $article->profilePicture() ?>" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
                             <a href="#" class="btn btn-sm btn-primary taxo-cat">Catégorie</a>
                             <a href="article-single.php">
-                                <p class="date otto-date"><?= $article->get('publication')?></p>
-                                <h5 class="card-title"><?= $article->get('label')?></h5>
+                                <p class="date otto-date"><?= $article->get('publication') ?></p>
+                                <h5 class="card-title"><?= $article->get('label') ?></h5>
                                 <a class="cta cta-card">Lire l'article</a>
                             </a>
                         </div>
@@ -126,7 +126,7 @@
 
         <aside class="my-5 mx-auto text-center" id="call-to-action">
             <p>
-                <a class="cta" href="<?=$controller->router()->hyp('articles')?>">Plus d'actualit&eacute;</a>
+                <a class="cta" href="<?= $controller->router()->hyp('articles') ?>">Plus d'actualit&eacute;</a>
             </p>
         </aside>
     </section>
@@ -141,71 +141,53 @@
                     <br>avec le cin&eacute;ma belge
                 </h3>
                 <?php
-                foreach($events as $event){
-                    ?>
-                        <article class="card listing mb-3">
-                            <div class="row g-0">
-                                <div class="col-md-4" id="date">
-                                    <span>10</span>
-                                    <span>NOV</span>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><?= $event->get('label')?></h5>
-                                        <p class="card-text">jusqu'au <span class="text-primary otto-date"><?= $event->get('stops')?></span></p>
-                                    </div>
+                foreach ($events as $event) {
+                ?>
+                    <article class="card listing mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-4" id="date">
+                                <span>10</span>
+                                <span>NOV</span>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?= $event->get('label') ?></h5>
+                                    <p class="card-text">jusqu'au <span class="text-primary otto-date"><?= $event->get('stops') ?></span></p>
                                 </div>
                             </div>
-                        </article>
-                    <?php
+                        </div>
+                    </article>
+                <?php
                 }
                 ?>
                 <aside class="my-5" id="call-to-action">
-                    <a class="cta" href="<?=$controller->router()->hyp('events')?>">Consulter l'agenda</a>
+                    <a class="cta" href="<?= $controller->router()->hyp('events') ?>">Consulter l'agenda</a>
                 </aside>
             </div>
+            
             <div class="offset-lg-1 col-lg-5">
                 <h3 class="line-left overflow h4">
                     <span class="text-primary">Les petites annonces</span>
                     <br>du cin&eacute;ma belge
                 </h3>
                 <?php
-                foreach($works as $work){
-                    ?>
-                      <article class="card listing mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title"><?=$work->get('label')?></h5>
-                        <p class="card-text d-flex justify-content-between">
-                            <span class="type">rémunéré</span>
-                            <span class="text-primary">13 Novembre 2022</span>
-                        </p>
-                    </div>
-                </article>
-                    <?php
+                foreach ($works as $work) {
+                ?>
+                    <article class="card listing mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title"><?= $work ?></h5>
+                            <p class="card-text d-flex justify-content-between">
+                                <span class="type"><?= $work->get('category_label'); ?></span>
+                                <span class="text-primary otto-date"><?= $work->get('starts') ?></span>
+                            </p>
+                        </div>
+                    </article>
+                <?php
                 }
                 ?>
- 
-                <article class="card listing mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Comédiens et comédiennes pour pièce de théâtre</h5>
-                        <p class="card-text d-flex justify-content-between">
-                            <span class="type">rémunéré</span>
-                            <span class="text-primary">13 Novembre 2022</span>
-                        </p>
-                    </div>
-                </article>
-                <article class="card listing mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Comédiens et comédiennes pour pièce de théâtre</h5>
-                        <p class="card-text d-flex justify-content-between">
-                            <span class="type">rémunéré</span>
-                            <span class="text-primary">13 Novembre 2022</span>
-                        </p>
-                    </div>
-                </article>
 
                 <aside class="my-5" id="call-to-action">
-                    <a class="cta" href="<?=$controller->router()->hyp('works')?>">Plus d'annonces</a>
+                    <a class="cta" href="<?= $controller->router()->hyp('works') ?>">Plus d'annonces</a>
                 </aside>
             </div>
         </section>

@@ -2,7 +2,7 @@
 
 namespace App\Controllers\Open;
 
-use App\Models\{Article, Contest, Event};
+use App\Models\{Article, Contest, Event, Work};
 
 class Home extends Kortex
 {
@@ -34,9 +34,7 @@ class Home extends Kortex
         $events = Event::filter(['active' => '1'], ['limit' => '3', 'order_by' => [['event', 'starts', 'ASC']]]);
         $this->viewport('events', $events);
 
-        $works = [];
+        $works = Work::filter(['active' => '1'], ['limit' => '5', 'order_by' => [['work', 'starts', 'ASC']]]);
         $this->viewport('works', $works);
-
-
     }
 }
