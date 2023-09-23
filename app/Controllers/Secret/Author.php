@@ -14,6 +14,11 @@ class Author extends Krafto
       return 'Page';
     }
 
+    public function activeLink(): string
+    {
+        return 'authors';
+    }
+    
     public function home()
     {
         if (!$this->router()->params('FiltersOnFirstChar')) {
