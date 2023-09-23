@@ -6,7 +6,8 @@ $settings = array(
   'app' => [
 		'name' => 'Cinergie',
 		'production_host' => 'cinergie.be',
-    'session_start_options' => ['session_name' => 'krafto-cinergie'],
+    'session_start_options' => ['session_name' => 'krafto-cinergie']
+
 	],
 
   'locale' => [
@@ -30,7 +31,7 @@ $settings = array(
 	),
 
   'env' => require_once('env.php'),
-  'api' => require_once('api.php'),
+  'api' => require_once('api.php')
 );
 
 
