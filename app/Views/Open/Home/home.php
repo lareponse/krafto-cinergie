@@ -5,6 +5,8 @@
     <section id="banner">
         <?php
         foreach ($articlesDiaporama as $article) {
+            $href = $controller->router()->hyp('article', ['slug' => $article->slug()]);
+
         ?>
             <article class="card slide">
                 <img src="<?= $article->profilePicture() ?>" class="card-img" alt="<?= $article->get('label'); ?> - <?= $article->get('author_label'); ?>">
@@ -14,7 +16,7 @@
                     <p class="card-text">
                         <?= substr(strip_tags($article->get('abstract')), 0, 400); ?>...
                     </p>
-                    <p><a href="<?= $controller->router()->hyp('article', ['slug' => $article->slug()]) ?>" class="btn btn-primary">En savoir plus</a></p>
+                    <p><a href="<?= $href ?>" class="btn btn-primary">En savoir plus</a></p>
                 </div>
                 <div class="card carrousel card-img-overlay">
                 </div>
@@ -34,18 +36,19 @@
         <section class="row">
             <?php
             foreach ($entrevuesFilmees as $article) {
+                $href = $controller->router()->hyp('article', ['slug' => $article->slug()]);
             ?>
                 <div class="col-lg-4" id="article-item">
                     <article class="card mb-4 shadow">
-                        <a href="<?= $controller->router()->hyp('article', ['slug' => $article->slug()]) ?>">
+                        <a href="<?= $href ?>">
                             <img src="<?= $article->profilePicture() ?>" class="card-img-top" alt="<?= $article->get('label'); ?> - <?= $article->get('author_label'); ?>">
                         </a>
                         <div class="card-body">
-                            <a href="<?= $controller->router()->hyp('article', ['slug' => $article->slug()]) ?>" class="btn btn-sm btn-primary taxo-cat">Catégorie</a>
-                            <a href="<?= $controller->router()->hyp('article', ['slug' => $article->slug()]) ?>">
+                            <a href="<?= $href ?>" class="btn btn-sm btn-primary taxo-cat">Catégorie</a>
+                            <a href="<?= $href ?>">
                                 <p class="date otto-date"><?= $article->get('publication'); ?></p>
                                 <h5 class="card-title"><?= $article->get('label'); ?></h5>
-                                <a href="<?= $controller->router()->hyp('article', ['slug' => $article->slug()]) ?>" class="cta cta-card">Lire l'article</a>
+                                <a href="<?= $href ?>" class="cta cta-card">Lire l'article</a>
                             </a>
                         </div>
                     </article>
@@ -103,15 +106,17 @@
         <section class="row">
             <?php
             foreach ($sousLaLoupe as $article) {
+                $href = $controller->router()->hyp('article', ['slug' => $article->slug()]);
+
             ?>
                 <div class="col-lg-4" id="article-item">
                     <article class="card mb-4 shadow">
-                        <a href="article-single.php">
+                        <a href="<?= $href ?>">
                             <img src="<?= $article->profilePicture() ?>" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
-                            <a href="#" class="btn btn-sm btn-primary taxo-cat">Catégorie</a>
-                            <a href="article-single.php">
+                            <a href="<?= $href ?>" class="btn btn-sm btn-primary taxo-cat">Catégorie</a>
+                            <a href="<?= $href ?>">
                                 <p class="date otto-date"><?= $article->get('publication') ?></p>
                                 <h5 class="card-title"><?= $article->get('label') ?></h5>
                                 <a class="cta cta-card">Lire l'article</a>
