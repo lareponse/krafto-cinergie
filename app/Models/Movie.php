@@ -174,6 +174,13 @@ class Movie extends TightModel
             $Query->selectAlso('praxis_id as worked_as');
         }
 
+        if (isset($filters['organisation'])) {
+            $Query->join(['movie_organisation', 'movie_organisation'], [
+                ['movie', 'id', 'movie_organisation', 'movie_id'],
+                ['movie_organisation', 'organisation_id', $filters['organisation']->getID()]
+            ]);
+            $Query->selectAlso('praxis_id as acted_as');
+        }
         // if (isset($filters['professional_label'])) {
         //     $labelLike = '%'.$filters['professional_label'].'%';
         //     $Query->join(['movie_professional', 'movie_professional'], [['movie', 'id', 'movie_professional', 'movie_id']]);
