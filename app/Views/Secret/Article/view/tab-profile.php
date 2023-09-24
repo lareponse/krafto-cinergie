@@ -10,7 +10,7 @@
                 <h2 class="h3">Abstract</h2>
                 <?php
                 if(empty($controller->loadModel()->get('abstract'))){
-                    ?><a class="btn btn-sm btn-warning" href="<?= $controller->url('new')?>">Ajouter</a><?php
+                    ?><a class="btn btn-sm btn-warning" href="<?= $controller->url('edit')?>">Ajouter</a><?php
                 }
                 else{
                     echo $controller->loadModel()->get('abstract');

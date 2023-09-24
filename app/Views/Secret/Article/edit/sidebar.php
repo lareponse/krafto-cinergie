@@ -9,7 +9,7 @@
                     </span>
                     <input type="file" name="avatar" class="d-none">
                 </label>
-                <img src="<?= $controller->formModel()->get('legacy_photo')?>" alt="..." class="avatar-img" width="112" height="112">
+                <img src="<?= $controller->formModel()->profilePicture()?>" alt="..." class="avatar-img" width="112" height="112">
             </div>
 
             <h3 class="mb-0"><?= $controller->formModel()->get('firstname');?> <?= $controller->formModel()->get('lastname');?></h3>

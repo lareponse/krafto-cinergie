@@ -2,7 +2,7 @@
 
     <div class="card-body text-center">
         <div >
-            <img src="/<?= $partner->get('legacy_photo') ?>" alt="..." class="avatar-img">
+            <img src="/<?= $partner->profilePicture() ?>" alt="..." class="avatar-img">
         </div>
 
         
