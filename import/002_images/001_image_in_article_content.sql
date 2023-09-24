@@ -1,53 +1,428 @@
+
 UPDATE article 
-SET content = REPLACE(content, '/images/actualite/webzine/film/', '/public/images/film/')
+SET content = REPLACE(content, '/images/actualite/webzine/film/', '/images/film/')
 WHERE content LIKE '%/images/actualite/webzine/film/%';
 
 UPDATE article 
-SET content = REPLACE(content, '/images/webzine/film/', '/public/images/film/')
+SET content = REPLACE(content, '/images/webzine/film/', '/images/film/')
 WHERE content LIKE '%/images/webzine/film/%';
 
+UPDATE article 
+SET content = REPLACE(content, '/images/webzine/personne/', '/images/personne/')
+WHERE content LIKE '%/images/webzine/personne/%';
 
 UPDATE article 
-SET content = REPLACE(content, '/images/actualite/film/', '/public/images/film/')
+SET content = REPLACE(content, '/images/actualite/film/', '/images/film/')
 WHERE content LIKE '%/images/actualite/film/%';
 
+UPDATE article 
+SET content = REPLACE(content, '/images/actualite/personne/', '/images/personne/')
+WHERE content LIKE '%/images/actualite/personne/%';
 
 UPDATE article 
-SET content = REPLACE(content, 'src="/images/film/_', 'src="/public/images/film/_')
-WHERE content LIKE '%src="/images/film/_%';
-
+SET content = REPLACE(content, '/images/actualite/organisation/', '/images/organisation/')
+WHERE content LIKE '%/images/actualite/organisation/%';
 
 UPDATE article 
-SET content = REPLACE(content, '/public/images/', '/images/')
-WHERE content LIKE '%public/images/%';
+SET content = REPLACE(content, '/images/actualite/breve/', '/images/breve/')
+WHERE content LIKE '%/images/actualite/breve/%';
 
-
-
-
-UPDATE article
-SET legacy_photo_illu = REPLACE(legacy_photo_illu, '/images/webzine/personne/', '/images/personne/')
-WHERE legacy_photo_illu LIKE '%/images/webzine/personne/%';
-
-UPDATE article
-SET legacy_photo_illu = REPLACE(legacy_photo_illu, '/images/webzine/organisation/', '/images/organisation/')
-WHERE legacy_photo_illu LIKE '%/images/webzine/organisation/%';
-
-UPDATE article
-SET legacy_photo_illu = REPLACE(legacy_photo_illu, '/images/webzine/film/', '/images/film/')
-WHERE legacy_photo_illu LIKE '%/images/webzine/film/%';
+UPDATE article 
+SET content = REPLACE(content, '/images/webzine/organisation/', '/images/organisation/')
+WHERE content LIKE '%/images/webzine/organisation/%';
 
 
 UPDATE article
-SET legacy_photo_illu = REPLACE(legacy_photo_illu, '/images/actualite/personne/', '/images/personne/')
-WHERE legacy_photo_illu LIKE '%/images/actualite/personne/%';
+SET profilePicture = REPLACE(profilePicture, '/images/webzine/personne/', '/images/personne/')
+WHERE profilePicture LIKE '/images/webzine/personne/%';
 
 UPDATE article
-SET legacy_photo_illu = REPLACE(legacy_photo_illu, '/images/actualite/organisation/', '/images/organisation/')
-WHERE legacy_photo_illu LIKE '%/images/actualite/organisation/%';
+SET profilePicture = REPLACE(profilePicture, '/images/webzine/organisation/', '/images/organisation/')
+WHERE profilePicture LIKE '/images/webzine/organisation/%';
 
 UPDATE article
-SET legacy_photo_illu = REPLACE(legacy_photo_illu, '/images/actualite/film/', '/images/film/')
-WHERE legacy_photo_illu LIKE '%/images/actualite/film/%';
+SET profilePicture = REPLACE(profilePicture, '/images/webzine/film/', '/images/film/')
+WHERE profilePicture LIKE '/images/webzine/film/%';
+
+UPDATE article
+SET profilePicture = REPLACE(profilePicture, '/images/actualite/personne/', '/images/personne/')
+WHERE profilePicture LIKE '/images/actualite/personne/%';
+
+UPDATE article
+SET profilePicture = REPLACE(profilePicture, '/images/actualite/organisation/', '/images/organisation/')
+WHERE profilePicture LIKE '/images/actualite/organisation/%';
+
+UPDATE article
+SET profilePicture = REPLACE(profilePicture, '/images/actualite/film/', '/images/film/')
+WHERE profilePicture LIKE '/images/actualite/film/%';
 
 
+UPDATE article
+SET profilePicture = REPLACE(profilePicture, '/images/actualite/breve/', '/images/breve/')
+WHERE profilePicture LIKE '/images/actualite/breve/%';
 
+
+UPDATE article SET content = REPLACE(content, '/images/personne/_p/popovitch_mirko_dragolioub/mp0.png', '/images/personne/_p/popovitch-mirko-dragolioub/mp0.png') WHERE content LIKE '%/images/personne/_p/popovitch_mirko_dragolioub/mp0.png%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_d/delvaux_andre//tendances-delvaux.jpg', '/images/personne/_d/delvaux-andre/tendances-delvaux.jpg') WHERE content LIKE '%/images/personne/_d/delvaux_andre//tendances-delvaux.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_b/baillif_olga/olga3.jpg', '/images/personne/_b/baillif-olga/olga3.jpg') WHERE content LIKE '%/images/personne/_b/baillif_olga/olga3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_b/baillif_olga/olga1.jpg', '/images/personne/_b/baillif-olga/olga1.jpg') WHERE content LIKE '%/images/personne/_b/baillif_olga/olga1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_t/troukens_francois/troukens1.jpg', '/images/personne/_t/troukens-francois/troukens1.jpg') WHERE content LIKE '%/images/personne/_t/troukens_francois/troukens1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_t/troukens_francois/troukens2.jpg', '/images/personne/_t/troukens-francois/troukens2.jpg') WHERE content LIKE '%/images/personne/_t/troukens_francois/troukens2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_t/troukens_francois/troukens5.jpg', '/images/personne/_t/troukens-francois/troukens5.jpg') WHERE content LIKE '%/images/personne/_t/troukens_francois/troukens5.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_p/part_sauvage_la/tournage_la_part_sauvage2.jpg', '/images/film/_p/part-sauvage-la/tournage-la-part-sauvage2.jpg') WHERE content LIKE '%/images/film/_p/part_sauvage_la/tournage_la_part_sauvage2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_p/part_sauvage_la/tournage_la_part_sauvage4.jpg', '/images/film/_p/part-sauvage-la/tournage-la-part-sauvage4.jpg') WHERE content LIKE '%/images/film/_p/part_sauvage_la/tournage_la_part_sauvage4.jpg%';
+
+UPDATE article SET content = REPLACE(content, '/images/personne/_w/wil_delphine/del4.jpg', '/images/personne/_w/wil-delphine/del4.jpg') WHERE content LIKE '%/images/personne/_w/wil_delphine/del4.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_w/wil_delphine/del3.jpg', '/images/personne/_w/wil-delphine/del3.jpg') WHERE content LIKE '%/images/personne/_w/wil_delphine/del3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_a/au_cul_du_loup/09400024.jpg', '/images/film/_a/au-cul-du-loup/09400024.jpg') WHERE content LIKE '%/images/film/_a/au_cul_du_loup/09400024.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_t/treve_saison_2_la/tournage15_06_17_latreve_copy_alicekhol_hd-56.jpg', '/images/film/_t/treve-saison-2-la/tournage15-06-17-latreve-copy-alicekhol-hd-56.jpg') WHERE content LIKE '%/images/film/_t/treve_saison_2_la/tournage15_06_17_latreve_copy_alicekhol_hd-56.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_t/treve_saison_2_la/20228784_10155559971597460_5413295552607436680_n.jpg', '/images/film/_t/treve-saison-2-la/20228784-10155559971597460-5413295552607436680-n.jpg') WHERE content LIKE '%/images/film/_t/treve_saison_2_la/20228784_10155559971597460_5413295552607436680_n.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_t/treve_saison_2_la/tournage15_06_17_latreve_copy_alicekhol_hd-61.jpg', '/images/film/_t/treve-saison-2-la/tournage15-06-17-latreve-copy-alicekhol-hd-61.jpg') WHERE content LIKE '%/images/film/_t/treve_saison_2_la/tournage15_06_17_latreve_copy_alicekhol_hd-61.jpg%';
+
+UPDATE article SET content = REPLACE(content, '/images/film/_m/my_queen_karo/photo2.jpg', '/images/film/_m/my-queen-karo/photo2.jpg') WHERE content LIKE '%/images/film/_m/my_queen_karo/photo2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_r/rue_santa_fe/18821573.jpg', '/images/film/_r/rue-santa-fe/18821573.jpg') WHERE content LIKE '%/images/film/_r/rue_santa_fe/18821573.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_r/rue_santa_fe/18821576.jpg', '/images/film/_r/rue-santa-fe/18821576.jpg') WHERE content LIKE '%/images/film/_r/rue_santa_fe/18821576.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_d/deegen_sandrine/sandrine1.jpg', '/images/personne/_d/deegen-sandrine/sandrine1.jpg') WHERE content LIKE '%/images/personne/_d/deegen_sandrine/sandrine1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_d/deegen_sandrine/sandrine2.jpg', '/images/personne/_d/deegen-sandrine/sandrine2.jpg') WHERE content LIKE '%/images/personne/_d/deegen_sandrine/sandrine2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_d/deegen_sandrine/sandrine3.jpg', '/images/personne/_d/deegen-sandrine/sandrine3.jpg') WHERE content LIKE '%/images/personne/_d/deegen_sandrine/sandrine3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_d/deegen_sandrine/sandrine4.jpg', '/images/personne/_d/deegen-sandrine/sandrine4.jpg') WHERE content LIKE '%/images/personne/_d/deegen_sandrine/sandrine4.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_c/cineastes_a_tout_prix/cineaste.jpg', '/images/film/_c/cineastes-a-tout-prix/cineaste.jpg') WHERE content LIKE '%/images/film/_c/cineastes_a_tout_prix/cineaste.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_v/vlaeminckx_jean_michel/jm_nb.jpg', '/images/personne/_v/vlaeminckx-jean-michel/jm_nb.jpg') WHERE content LIKE '%/images/personne/_v/vlaeminckx_jean_michel/jm_nb.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_v/vlaeminckx_jean_michel/visions.jpg', '/images/personne/_v/vlaeminckx-jean-michel/visions.jpg') WHERE content LIKE '%/images/personne/_v/vlaeminckx_jean_michel/visions.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_v/vlaeminckx_jean_michel/jane.jpg', '/images/personne/_v/vlaeminckx-jean-michel/jane.jpg') WHERE content LIKE '%/images/personne/_v/vlaeminckx_jean_michel/jane.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_z/zeno_thierry/photo_recente.jpg', '/images/personne/_z/zeno-thierry/photo-recente.jpg') WHERE content LIKE '%/images/personne/_z/zeno_thierry/photo_recente.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_d/degelin_emile/degelin-0.jpg', '/images/personne/_d/degelin-emile/degelin-0.jpg') WHERE content LIKE '%/images/personne/_d/degelin_emile/degelin-0.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_c/coppin_christian/christian02_1000.jpg', '/images/personne/_c/coppin-christian/christian02-1000.jpg') WHERE content LIKE '%/images/personne/_c/coppin_christian/christian02_1000.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_c/coppin_christian/coppin_3.jpg', '/images/personne/_c/coppin-christian/coppin-3.jpg') WHERE content LIKE '%/images/personne/_c/coppin_christian/coppin_3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_c/coppin_christian/coppin_2.jpg', '/images/personne/_c/coppin-christian/coppin-2.jpg') WHERE content LIKE '%/images/personne/_c/coppin_christian/coppin_2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_j/je_me_tue_a_le_dire/je_me_tue3.jpg', '/images/film/_j/je-me-tue-a-le-dire/je-me-tue3.jpg') WHERE content LIKE '%/images/film/_j/je_me_tue_a_le_dire/je_me_tue3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_a/aanrijding_in_moscou/cover.jpg', '/images/film/_a/aanrijding-in-moscou/cover.jpg') WHERE content LIKE '%/images/film/_a/aanrijding_in_moscou/cover.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_e/eleve_libre/eleve_libre.jpg', '/images/film/_e/eleve-libre/eleve_libre.jpg') WHERE content LIKE '%/images/film/_e/eleve_libre/eleve_libre.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_t/t_es_morte_helene/morte.jpg', '/images/film/_t/t-es-morte-helene/morte.jpg') WHERE content LIKE '%/images/film/_t/t_es_morte_helene/morte.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_c/corbisier_ivan/aaeaaqaaaaaaaaamaaaajdhhmzrmmgvmlwixzjetndkxny1imzbiltvmnwjhy2u0ywy2na.jpg', '/images/personne/_c/corbisier-ivan/aaeaaqaaaaaaaaamaaaajdhhmzrmmgvmlwixzjetndkxny1imzbiltvmnwjhy2u0ywy2na.jpg') WHERE content LIKE '%/images/personne/_c/corbisier_ivan/aaeaaqaaaaaaaaamaaaajdhhmzrmmgvmlwixzjetndkxny1imzbiltvmnwjhy2u0ywy2na.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_f/film_de_l_ete_le/image2.png', '/images/film/_f/film-de-l-ete-le/image2.png') WHERE content LIKE '%/images/film/_f/film_de_l_ete_le/image2.png%';
+UPDATE article SET content = REPLACE(content, '/images/film/_u/une_pensee_sauvage/cover.jpg', '/images/film/_u/une-pensee-sauvage/cover.jpg') WHERE content LIKE '%/images/film/_u/une_pensee_sauvage/cover.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_s/se_fondre/cover.jpg', '/images/film/_s/se-fondre/cover.jpg') WHERE content LIKE '%/images/film/_s/se_fondre/cover.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_t/tortue_rouge_la/tortue2.jpg', '/images/film/_t/tortue-rouge-la/tortue2.jpg') WHERE content LIKE '%/images/film/_t/tortue_rouge_la/tortue2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_g/grand_loup_petit_loup/1.jpg', '/images/film/_g/grand-loup-petit-loup/1.jpg') WHERE content LIKE '%/images/film/_g/grand_loup_petit_loup/1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_a/adoration_fabrice_du_welz/adoration3.jpg', '/images/film/_a/adoration-fabrice-du-welz/adoration3.jpg') WHERE content LIKE '%/images/film/_a/adoration_fabrice_du_welz/adoration3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_b/banquet_des_fraudeurs_le/1.jpg', '/images/film/_b/banquet-des-fraudeurs-le/1.jpg') WHERE content LIKE '%/images/film/_b/banquet_des_fraudeurs_le/1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_b/banquet_des_fraudeurs_le/5.jpg', '/images/film/_b/banquet-des-fraudeurs-le/5.jpg') WHERE content LIKE '%/images/film/_b/banquet_des_fraudeurs_le/5.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_d/dequenne_emilie/emilie4.jpg', '/images/personne/_d/dequenne-emilie/emilie4.jpg') WHERE content LIKE '%/images/personne/_d/dequenne_emilie/emilie4.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_d/dequenne_emilie/emilie3.jpg', '/images/personne/_d/dequenne-emilie/emilie3.jpg') WHERE content LIKE '%/images/personne/_d/dequenne_emilie/emilie3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_l/lafosse_joachim/lafosse7.jpg', '/images/personne/_l/lafosse-joachim/lafosse7.jpg') WHERE content LIKE '%/images/personne/_l/lafosse_joachim/lafosse7.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_l/lafosse_joachim/lafosse5.jpg', '/images/personne/_l/lafosse-joachim/lafosse5.jpg') WHERE content LIKE '%/images/personne/_l/lafosse_joachim/lafosse5.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_t/troch_fien/troch1.jpg', '/images/personne/_t/troch-fien/troch1.jpg') WHERE content LIKE '%/images/personne/_t/troch_fien/troch1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_t/troch_fien/troch2.jpg', '/images/personne/_t/troch-fien/troch2.jpg') WHERE content LIKE '%/images/personne/_t/troch_fien/troch2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_c/comeliau_axel/axel3.jpg', '/images/personne/_c/comeliau-axel/axel3.jpg') WHERE content LIKE '%/images/personne/_c/comeliau_axel/axel3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_c/comeliau_axel/axel2.jpg', '/images/personne/_c/comeliau-axel/axel2.jpg') WHERE content LIKE '%/images/personne/_c/comeliau_axel/axel2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_b/brandenbourger_laurent/laurent1.jpg', '/images/personne/_b/brandenbourger-laurent/laurent1.jpg') WHERE content LIKE '%/images/personne/_b/brandenbourger_laurent/laurent1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_b/brandenbourger_laurent/laurent2.jpg', '/images/personne/_b/brandenbourger-laurent/laurent2.jpg') WHERE content LIKE '%/images/personne/_b/brandenbourger_laurent/laurent2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_b/brandenbourger_laurent/laurent3.jpg', '/images/personne/_b/brandenbourger-laurent/laurent3.jpg') WHERE content LIKE '%/images/personne/_b/brandenbourger_laurent/laurent3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_l/laffont_jerome/laffont4.png', '/images/personne/_l/laffont-jerome/laffont4.png') WHERE content LIKE '%/images/personne/_l/laffont_jerome/laffont4.png%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_l/laffont_jerome/laffont3.jpg', '/images/personne/_l/laffont-jerome/laffont3.jpg') WHERE content LIKE '%/images/personne/_l/laffont_jerome/laffont3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_l/laffont_jerome/laffont5.jpg', '/images/personne/_l/laffont-jerome/laffont5.jpg') WHERE content LIKE '%/images/personne/_l/laffont_jerome/laffont5.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_l/lafosse_joachim/capture_d_rsquo_ecran_2016-01-26_a_10_29_04.png', '/images/personne/_l/lafosse-joachim/capture-d-rsquo-ecran-2016-01-26-a-10-29-04.png') WHERE content LIKE '%/images/personne/_l/lafosse_joachim/capture_d_rsquo_ecran_2016-01-26_a_10_29_04.png%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_l/lafosse_joachim/capture_d_rsquo_ecran_2016-01-26_a_10_28_27.png', '/images/personne/_l/lafosse-joachim/capture-d-rsquo-ecran-2016-01-26-a-10-28-27.png') WHERE content LIKE '%/images/personne/_l/lafosse_joachim/capture_d_rsquo_ecran_2016-01-26_a_10_28_27.png%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_b/brumagne_marie/brum2.jpg', '/images/personne/_b/brumagne-marie/brum2.jpg') WHERE content LIKE '%/images/personne/_b/brumagne_marie/brum2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_d/dardenne_jean_pierre/freres3.jpg', '/images/personne/_d/dardenne-jean-pierre/freres3.jpg') WHERE content LIKE '%/images/personne/_d/dardenne_jean_pierre/freres3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_f/fille_inconnue_la/la_fille2.jpg', '/images/film/_f/fille-inconnue-la/la-fille2.jpg') WHERE content LIKE '%/images/film/_f/fille_inconnue_la/la_fille2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_f/fille_inconnue_la/lafille5.jpg', '/images/film/_f/fille-inconnue-la/lafille5.jpg') WHERE content LIKE '%/images/film/_f/fille_inconnue_la/lafille5.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_p/paris_pieds_nus/abel_et_gordon.jpg', '/images/film/_p/paris-pieds-nus/abel-et-gordon.jpg') WHERE content LIKE '%/images/film/_p/paris_pieds_nus/abel_et_gordon.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_p/paris_pieds_nus/paris1.jpg', '/images/film/_p/paris-pieds-nus/paris1.jpg') WHERE content LIKE '%/images/film/_p/paris_pieds_nus/paris1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_p/paris_pieds_nus/paris3.jpg', '/images/film/_p/paris-pieds-nus/paris3.jpg') WHERE content LIKE '%/images/film/_p/paris_pieds_nus/paris3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_r/rue_santa_fe/18821576.jpg', '/images/film/_r/rue-santa-fe/18821576.jpg') WHERE content LIKE '%/images/film/_r/rue_santa_fe/18821576.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_r/rue_santa_fe/18821573.jpg', '/images/film/_r/rue-santa-fe/18821573.jpg') WHERE content LIKE '%/images/film/_r/rue_santa_fe/18821573.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_w/winter_grace/grace3.jpg', '/images/personne/_w/winter-grace/grace3.jpg') WHERE content LIKE '%/images/personne/_w/winter_grace/grace3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_w/winter_grace/grace5.jpg', '/images/personne/_w/winter-grace/grace5.jpg') WHERE content LIKE '%/images/personne/_w/winter_grace/grace5.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_p/plantier_luc/luc1.jpg', '/images/personne/_p/plantier-luc/luc1.jpg') WHERE content LIKE '%/images/personne/_p/plantier_luc/luc1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_w/winter_grace/grace4.jpg', '/images/personne/_w/winter-grace/grace4.jpg') WHERE content LIKE '%/images/personne/_w/winter_grace/grace4.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_b/belvaux_lucas/lucas.jpg', '/images/personne/_b/belvaux-lucas/lucas.jpg') WHERE content LIKE '%/images/personne/_b/belvaux_lucas/lucas.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_c/chez_nous/chez_nous1.jpg', '/images/film/_c/chez-nous/chez-nous1.jpg') WHERE content LIKE '%/images/film/_c/chez_nous/chez_nous1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_c/chez_nous/chez_nous7.jpg', '/images/film/_c/chez-nous/chez-nous7.jpg') WHERE content LIKE '%/images/film/_c/chez_nous/chez_nous7.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_l/lang_rachel/rachel2.jpg', '/images/personne/_l/lang-rachel/rachel2.jpg') WHERE content LIKE '%/images/personne/_l/lang_rachel/rachel2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_d/durmaz_guldem/guldem1.jpg', '/images/personne/_d/durmaz-guldem/guldem1.jpg') WHERE content LIKE '%/images/personne/_d/durmaz_guldem/guldem1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_d/durmaz_guldem/guldem2.jpg', '/images/personne/_d/durmaz-guldem/guldem2.jpg') WHERE content LIKE '%/images/personne/_d/durmaz_guldem/guldem2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_d/durmaz_guldem/guldem3.jpg', '/images/personne/_d/durmaz-guldem/guldem3.jpg') WHERE content LIKE '%/images/personne/_d/durmaz_guldem/guldem3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_r/rey_isabelle/isabelle1.jpg', '/images/personne/_r/rey-isabelle/isabelle1.jpg') WHERE content LIKE '%/images/personne/_r/rey_isabelle/isabelle1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_v/vie_est_la_la/2.jpg', '/images/film/_v/vie-est-la-la/2.jpg') WHERE content LIKE '%/images/film/_v/vie_est_la_la/2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_r/rey_isabelle/isabelle2.jpg', '/images/personne/_r/rey-isabelle/isabelle2.jpg') WHERE content LIKE '%/images/personne/_r/rey_isabelle/isabelle2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_v/vie_est_la_la/la_vie_est_la2.jpg', '/images/film/_v/vie-est-la-la/la-vie-est-la2.jpg') WHERE content LIKE '%/images/film/_v/vie_est_la_la/la_vie_est_la2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_g/grands_travaux/image__1_.png', '/images/film/_g/grands-travaux/image--1-.png') WHERE content LIKE '%/images/film/_g/grands_travaux/image__1_.png%';
+UPDATE article SET content = REPLACE(content, '/images/film/_g/grands_travaux/grands_2.jpg', '/images/film/_g/grands-travaux/grands-2.jpg') WHERE content LIKE '%/images/film/_g/grands_travaux/grands_2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_g/grands_travaux/grands_1.jpg', '/images/film/_g/grands-travaux/grands-1.jpg') WHERE content LIKE '%/images/film/_g/grands_travaux/grands_1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_g/gilmet_alexandre/gilmet__2_.jpg', '/images/personne/_g/gilmet-alexandre/gilmet--2-.jpg') WHERE content LIKE '%/images/personne/_g/gilmet_alexandre/gilmet__2_.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_s/sojcher_frederic/sojcher_septembre_2016.jpg', '/images/personne/_s/sojcher-frederic/sojcher-septembre-2016.jpg') WHERE content LIKE '%/images/personne/_s/sojcher_frederic/sojcher_septembre_2016.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_j/jabon_luc/jabon_et_sojcher.jpg', '/images/personne/_j/jabon-luc/jabon-et-sojcher.jpg') WHERE content LIKE '%/images/personne/_j/jabon_luc/jabon_et_sojcher.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_j/jabon_luc/jabon_septembre_2016.jpg', '/images/personne/_j/jabon-luc/jabon-septembre-2016.jpg') WHERE content LIKE '%/images/personne/_j/jabon_luc/jabon_septembre_2016.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_f/francois_claude/claude4.jpg', '/images/personne/_f/francois-claude/claude4.jpg') WHERE content LIKE '%/images/personne/_f/francois_claude/claude4.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_f/francois_claude/claude2.jpg', '/images/personne/_f/francois-claude/claude2.jpg') WHERE content LIKE '%/images/personne/_f/francois_claude/claude2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_t/teirlinck_nathalie/nath1.jpg', '/images/personne/_t/teirlinck-nathalie/nath1.jpg') WHERE content LIKE '%/images/personne/_t/teirlinck_nathalie/nath1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_t/teirlinck_nathalie/nath2.jpg', '/images/personne/_t/teirlinck-nathalie/nath2.jpg') WHERE content LIKE '%/images/personne/_t/teirlinck_nathalie/nath2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_m/mazzanti_nicola/nicola_mazzanti__photo_thierry_du_bois_.jpg', '/images/personne/_m/mazzanti-nicola/nicola-mazzanti--photo-thierry-du-bois-.jpg') WHERE content LIKE '%/images/personne/_m/mazzanti_nicola/nicola_mazzanti__photo_thierry_du_bois_.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_c/chambre_vide_la/la_chambre_vide_5_s.jpg', '/images/film/_c/chambre-vide-la/la-chambre-vide-5-s.jpg') WHERE content LIKE '%/images/film/_c/chambre_vide_la/la_chambre_vide_5_s.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_c/chambre_vide_la/la_chambre_vide_4.jpg', '/images/film/_c/chambre-vide-la/la-chambre-vide-4.jpg') WHERE content LIKE '%/images/film/_c/chambre_vide_la/la_chambre_vide_4.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_c/chambre_vide_la/la_chambre_vide_3.jpg', '/images/film/_c/chambre-vide-la/la-chambre-vide-3.jpg') WHERE content LIKE '%/images/film/_c/chambre_vide_la/la_chambre_vide_3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_c/chambre_vide_la/la_chambre_vide_1.jpg', '/images/film/_c/chambre-vide-la/la-chambre-vide-1.jpg') WHERE content LIKE '%/images/film/_c/chambre_vide_la/la_chambre_vide_1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_t/troukens_francois/francois1.jpg', '/images/personne/_t/troukens-francois/francois1.jpg') WHERE content LIKE '%/images/personne/_t/troukens_francois/francois1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_l/logie_philippe/Philippe_6.jpg', '/images/personne/_l/logie-philippe/Philippe-6.jpg') WHERE content LIKE '%/images/personne/_l/logie_philippe/Philippe_6.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_l/logie_philippe/Philippe_5.jpg', '/images/personne/_l/logie-philippe/Philippe-5.jpg') WHERE content LIKE '%/images/personne/_l/logie_philippe/Philippe_5.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_g/gilmet_alexandre/gilmet__2_.jpg', '/images/personne/_g/gilmet-alexandre/gilmet--2-.jpg') WHERE content LIKE '%/images/personne/_g/gilmet_alexandre/gilmet__2_.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_r/robinson_crusoe/robinson_crusoe_6.jpg', '/images/film/_r/robinson-crusoe/robinson-crusoe-6.jpg') WHERE content LIKE '%/images/film/_r/robinson_crusoe/robinson_crusoe_6.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_s/stassen_ben/ben_stassen1.jpg', '/images/personne/_s/stassen-ben/ben-stassen1.jpg') WHERE content LIKE '%/images/personne/_s/stassen_ben/ben_stassen1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_k/kesteloot_vincent/vincent_kesteloot1.jpg', '/images/personne/_k/kesteloot-vincent/vincent-kesteloot1.jpg') WHERE content LIKE '%/images/personne/_k/kesteloot_vincent/vincent_kesteloot1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_r/rosier_valery/val1.jpg', '/images/personne/_r/rosier-valery/val1.jpg') WHERE content LIKE '%/images/personne/_r/rosier_valery/val1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_r/rosier_valery/val3.jpg', '/images/personne/_r/rosier-valery/val3.jpg') WHERE content LIKE '%/images/personne/_r/rosier_valery/val3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_l/lienard_benedicte/lienard.jpg', '/images/personne/_l/lienard-benedicte/lienard.jpg') WHERE content LIKE '%/images/personne/_l/lienard_benedicte/lienard.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_c/chant_des_hommes_le/3.jpg', '/images/film/_c/chant-des-hommes-le/3.jpg') WHERE content LIKE '%/images/film/_c/chant_des_hommes_le/3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_l/lanners_bouli/lanners3.jpg', '/images/personne/_l/lanners-bouli/lanners3.jpg') WHERE content LIKE '%/images/personne/_l/lanners_bouli/lanners3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_p/premiers_les_derniers_les/max_michael1.jpg', '/images/film/_p/premiers-les-derniers-les/max-michael1.jpg') WHERE content LIKE '%/images/film/_p/premiers_les_derniers_les/max_michael1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_l/lanners_bouli/lanners5.jpg', '/images/personne/_l/lanners-bouli/lanners5.jpg') WHERE content LIKE '%/images/personne/_l/lanners_bouli/lanners5.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_d/donck_matthieu/mathieu_donck1.jpg', '/images/personne/_d/donck-matthieu/mathieu-donck1.jpg') WHERE content LIKE '%/images/personne/_d/donck_matthieu/mathieu_donck1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_d/donck_matthieu/mathieu_donck2.jpg', '/images/personne/_d/donck-matthieu/mathieu-donck2.jpg') WHERE content LIKE '%/images/personne/_d/donck_matthieu/mathieu_donck2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_t/treve_la/la_treve_3.jpg', '/images/film/_t/treve-la/la-treve-3.jpg') WHERE content LIKE '%/images/film/_t/treve_la/la_treve_3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_c/cosme_catherine/cosme2.jpg', '/images/personne/_c/cosme-catherine/cosme2.jpg') WHERE content LIKE '%/images/personne/_c/cosme_catherine/cosme2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_e/e_legal/elagal3.jpg', '/images/film/_e/e-legal/elagal3.jpg') WHERE content LIKE '%/images/film/_e/e_legal/elagal3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_e/e_legal/elegal0.jpg', '/images/film/_e/e-legal/elegal0.jpg') WHERE content LIKE '%/images/film/_e/e_legal/elegal0.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_e/e_legal/elegal2.jpg', '/images/film/_e/e-legal/elegal2.jpg') WHERE content LIKE '%/images/film/_e/e_legal/elegal2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_b/blanc_yoann/yoann2.jpg', '/images/personne/_b/blanc-yoann/yoann2.jpg') WHERE content LIKE '%/images/personne/_b/blanc_yoann/yoann2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_b/blanc_yoann/yoann4.jpg', '/images/personne/_b/blanc-yoann/yoann4.jpg') WHERE content LIKE '%/images/personne/_b/blanc_yoann/yoann4.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_u/unite_42/unite3.jpg', '/images/film/_u/unite-42/unite3.jpg') WHERE content LIKE '%/images/film/_u/unite_42/unite3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_u/unite_42/unite4.jpg', '/images/film/_u/unite-42/unite4.jpg') WHERE content LIKE '%/images/film/_u/unite_42/unite4.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_t/the_broken_circle_breakdown/1-tbcb_still_01_VeerleSpiegels.jpg.jpg', '/images/film/_t/the-broken-circle-breakdown/1-tbcb-still-01-VeerleSpiegels.jpg.jpg') WHERE content LIKE '%/images/film/_t/the_broken_circle_breakdown/1-tbcb_still_01_VeerleSpiegels.jpg.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_m/mirage_d_amour/Fata_morgana.jpg', '/images/film/_m/mirage-d-amour/Fata-morgana.jpg') WHERE content LIKE '%/images/film/_m/mirage_d_amour/Fata_morgana.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_u/uce_volkan/volkan3.jpg', '/images/personne/_u/uce-volkan/volkan3.jpg') WHERE content LIKE '%/images/personne/_u/uce_volkan/volkan3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_u/uce_volkan/volkan1.jpg', '/images/personne/_u/uce-volkan/volkan1.jpg') WHERE content LIKE '%/images/personne/_u/uce_volkan/volkan1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_j/jabon_luc/luc4.jpg', '/images/personne/_j/jabon-luc/luc4.jpg') WHERE content LIKE '%/images/personne/_j/jabon_luc/luc4.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_j/jabon_luc/les_survivants.jpg', '/images/personne/_j/jabon-luc/les-survivants.jpg') WHERE content LIKE '%/images/personne/_j/jabon_luc/les_survivants.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_j/jabon_luc/luc9.jpg', '/images/personne/_j/jabon-luc/luc9.jpg') WHERE content LIKE '%/images/personne/_j/jabon_luc/luc9.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_j/jabon_luc/rongione_les_survivants.jpg', '/images/personne/_j/jabon-luc/rongione-les-survivants.jpg') WHERE content LIKE '%/images/personne/_j/jabon_luc/rongione_les_survivants.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_r/rien_n_est_pardonne/zineb.jpg', '/images/film/_r/rien-n-est-pardonne/zineb.jpg') WHERE content LIKE '%/images/film/_r/rien_n_est_pardonne/zineb.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_r/rien_n_est_pardonne/rien.jpg', '/images/film/_r/rien-n-est-pardonne/rien.jpg') WHERE content LIKE '%/images/film/_r/rien_n_est_pardonne/rien.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_b/ben_yadir_nabil/yadir1.jpg', '/images/personne/_b/ben-yadir-nabil/yadir1.jpg') WHERE content LIKE '%/images/personne/_b/ben_yadir_nabil/yadir1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_b/ben_yadir_nabil/yadir2.jpg', '/images/personne/_b/ben-yadir-nabil/yadir2.jpg') WHERE content LIKE '%/images/personne/_b/ben_yadir_nabil/yadir2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_b/ben_yadir_nabil/yadir6.jpg', '/images/personne/_b/ben-yadir-nabil/yadir6.jpg') WHERE content LIKE '%/images/personne/_b/ben_yadir_nabil/yadir6.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_s/sojcher_frederic/sojcher1.jpg', '/images/personne/_s/sojcher-frederic/sojcher1.jpg') WHERE content LIKE '%/images/personne/_s/sojcher_frederic/sojcher1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_s/sojcher_frederic/sojcher2.jpg', '/images/personne/_s/sojcher-frederic/sojcher2.jpg') WHERE content LIKE '%/images/personne/_s/sojcher_frederic/sojcher2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_a/au_nom_du_fils/cover.jpg', '/images/film/_a/au-nom-du-fils/cover.jpg') WHERE content LIKE '%/images/film/_a/au_nom_du_fils/cover.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_p/promesse_la/promesse.jpg', '/images/film/_p/promesse-la/promesse.jpg') WHERE content LIKE '%/images/film/_p/promesse_la/promesse.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_m/message_from_the_king/message.jpg', '/images/film/_m/message-from-the-king/message.jpg') WHERE content LIKE '%/images/film/_m/message_from_the_king/message.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_m/message_from_the_king/from.jpg', '/images/film/_m/message-from-the-king/from.jpg') WHERE content LIKE '%/images/film/_m/message_from_the_king/from.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_m/message_from_the_king/king.jpg', '/images/film/_m/message-from-the-king/king.jpg') WHERE content LIKE '%/images/film/_m/message_from_the_king/king.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_s/seron_xavier/seron1.jpg', '/images/personne/_s/seron-xavier/seron1.jpg') WHERE content LIKE '%/images/personne/_s/seron_xavier/seron1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_s/seron_xavier/seron2.jpg', '/images/personne/_s/seron-xavier/seron2.jpg') WHERE content LIKE '%/images/personne/_s/seron_xavier/seron2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_s/seron_xavier/seron3.jpg', '/images/personne/_s/seron-xavier/seron3.jpg') WHERE content LIKE '%/images/personne/_s/seron_xavier/seron3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_b/bouse_la/la_bouse3.jpg', '/images/film/_b/bouse-la/la-bouse3.jpg') WHERE content LIKE '%/images/film/_b/bouse_la/la_bouse3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_b/bouse_la/img_9351.jpg', '/images/film/_b/bouse-la/img-9351.jpg') WHERE content LIKE '%/images/film/_b/bouse_la/img_9351.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_h/hella_patrick/hella2.jpg', '/images/personne/_h/hella-patrick/hella2.jpg') WHERE content LIKE '%/images/personne/_h/hella_patrick/hella2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_h/hella_patrick/hella3.jpg', '/images/personne/_h/hella-patrick/hella3.jpg') WHERE content LIKE '%/images/personne/_h/hella_patrick/hella3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_c/castadot_frederic/13524459_10153608638556003_6536828981360099791_n.jpg', '/images/personne/_c/castadot-frederic/13524459-10153608638556003-6536828981360099791-n.jpg') WHERE content LIKE '%/images/personne/_c/castadot_frederic/13524459_10153608638556003_6536828981360099791_n.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_c/castadot_frederic/12916119_10153730887274753_857901876577820473_o.jpg', '/images/personne/_c/castadot-frederic/12916119-10153730887274753-857901876577820473-o.jpg') WHERE content LIKE '%/images/personne/_c/castadot_frederic/12916119_10153730887274753_857901876577820473_o.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_g/galloping_mind/natali_broods.jpg', '/images/film/_g/galloping-mind/natali-broods.jpg') WHERE content LIKE '%/images/film/_g/galloping_mind/natali_broods.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_m/maurel_valentina/valentina1.jpg', '/images/personne/_m/maurel-valentina/valentina1.jpg') WHERE content LIKE '%/images/personne/_m/maurel_valentina/valentina1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_m/maurel_valentina/valentina2.jpg', '/images/personne/_m/maurel-valentina/valentina2.jpg') WHERE content LIKE '%/images/personne/_m/maurel_valentina/valentina2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_g/gabriels_bjorn/bjorn_8687.jpg', '/images/personne/_g/gabriels-bjorn/bjorn-8687.jpg') WHERE content LIKE '%/images/personne/_g/gabriels_bjorn/bjorn_8687.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_g/grulois_christine/grulois1.jpg', '/images/personne/_g/grulois-christine/grulois1.jpg') WHERE content LIKE '%/images/personne/_g/grulois_christine/grulois1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_g/grulois_christine/grulois2.jpg', '/images/personne/_g/grulois-christine/grulois2.jpg') WHERE content LIKE '%/images/personne/_g/grulois_christine/grulois2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_f/fine_equipe_la/capture_d_rsquo_ecran_2017-10-03_a_12_54_04.png', '/images/film/_f/fine-equipe-la/capture-d-rsquo-ecran-2017-10-03-a-12-54-04.png') WHERE content LIKE '%/images/film/_f/fine_equipe_la/capture_d_rsquo_ecran_2017-10-03_a_12_54_04.png%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_m/moon_howe_sarah/sarah2.jpg', '/images/personne/_m/moon-howe-sarah/sarah2.jpg') WHERE content LIKE '%/images/personne/_m/moon_howe_sarah/sarah2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_c/celui_qui_sait_saura_qui_je_suis/celui1.jpg', '/images/film/_c/celui-qui-sait-saura-qui-je-suis/celui1.jpg') WHERE content LIKE '%/images/film/_c/celui_qui_sait_saura_qui_je_suis/celui1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_m/moon_howe_sarah/sarah3.jpg', '/images/personne/_m/moon-howe-sarah/sarah3.jpg') WHERE content LIKE '%/images/personne/_m/moon_howe_sarah/sarah3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_d/du_welz_fabrice/capture_d_rsquo_ecran_2017-10-31_a_16_44_18.jpg', '/images/personne/_d/du-welz-fabrice/capture-d-rsquo-ecran-2017-10-31-a-16-44-18.jpg') WHERE content LIKE '%/images/personne/_d/du_welz_fabrice/capture_d_rsquo_ecran_2017-10-31_a_16_44_18.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_d/du_welz_fabrice/img_7542.jpg', '/images/personne/_d/du-welz-fabrice/img-7542.jpg') WHERE content LIKE '%/images/personne/_d/du_welz_fabrice/img_7542.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_g/grando_coline/coline.jpg', '/images/personne/_g/grando-coline/coline.jpg') WHERE content LIKE '%/images/personne/_g/grando_coline/coline.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_p/place_de_l_homme_la/homme2.jpg', '/images/film/_p/place-de-l-homme-la/homme2.jpg') WHERE content LIKE '%/images/film/_p/place_de_l_homme_la/homme2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_m/michelet_laurent/capture_d_rsquo_ecran_2017-10-31_a_17_01_30.jpg', '/images/personne/_m/michelet-laurent/capture-d-rsquo-ecran-2017-10-31-a-17-01-30.jpg') WHERE content LIKE '%/images/personne/_m/michelet_laurent/capture_d_rsquo_ecran_2017-10-31_a_17_01_30.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_m/michelet_laurent/capture_d_rsquo_ecran_2017-10-31_a_17_03_14.jpg', '/images/personne/_m/michelet-laurent/capture-d-rsquo-ecran-2017-10-31-a-17-03-14.jpg') WHERE content LIKE '%/images/personne/_m/michelet_laurent/capture_d_rsquo_ecran_2017-10-31_a_17_03_14.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_d/dode_hoek/dode.jpg', '/images/film/_d/dode-hoek/dode.jpg') WHERE content LIKE '%/images/film/_d/dode_hoek/dode.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_n/nicolas_laura/laura1.jpg', '/images/personne/_n/nicolas-laura/laura1.jpg') WHERE content LIKE '%/images/personne/_n/nicolas_laura/laura1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_n/nicolas_laura/laura2.jpg', '/images/personne/_n/nicolas-laura/laura2.jpg') WHERE content LIKE '%/images/personne/_n/nicolas_laura/laura2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_d/dellisse_luc/dellisse1.png', '/images/personne/_d/dellisse-luc/dellisse1.png') WHERE content LIKE '%/images/personne/_d/dellisse_luc/dellisse1.png%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_d/dellisse_luc/dellisse2.png', '/images/personne/_d/dellisse-luc/dellisse2.png') WHERE content LIKE '%/images/personne/_d/dellisse_luc/dellisse2.png%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_d/dellisse_luc/dellisse3.png', '/images/personne/_d/dellisse-luc/dellisse3.png') WHERE content LIKE '%/images/personne/_d/dellisse_luc/dellisse3.png%';
+UPDATE article SET content = REPLACE(content, '/images/film/_r/rester_vivants/tahrir.png', '/images/film/_r/rester-vivants/tahrir.png') WHERE content LIKE '%/images/film/_r/rester_vivants/tahrir.png%';
+UPDATE article SET content = REPLACE(content, '/images/film/_r/rester_vivants/soleyfa.jpg', '/images/film/_r/rester-vivants/soleyfa.jpg') WHERE content LIKE '%/images/film/_r/rester_vivants/soleyfa.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_r/rester_vivants/eman.jpg', '/images/film/_r/rester-vivants/eman.jpg') WHERE content LIKE '%/images/film/_r/rester_vivants/eman.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_r/rester_vivants/ammar.jpg', '/images/film/_r/rester-vivants/ammar.jpg') WHERE content LIKE '%/images/film/_r/rester_vivants/ammar.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_a/abel_thierry/abel1.jpg', '/images/personne/_a/abel-thierry/abel1.jpg') WHERE content LIKE '%/images/personne/_a/abel_thierry/abel1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_r/rabadan_ines/rabadan3.jpg', '/images/personne/_r/rabadan-ines/rabadan3.jpg') WHERE content LIKE '%/images/personne/_r/rabadan_ines/rabadan3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_n/noms_n_habitent_nulle_part_les/dvdoc_noms.jpg', '/images/film/_n/noms-n-habitent-nulle-part-les/dvdoc-noms.jpg') WHERE content LIKE '%/images/film/_n/noms_n_habitent_nulle_part_les/dvdoc_noms.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_s/slock_jean_luc/slock2.jpg', '/images/personne/_s/slock-jean-luc/slock2.jpg') WHERE content LIKE '%/images/personne/_s/slock_jean_luc/slock2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_s/sartor_freddy/sartor.jpg', '/images/personne/_s/sartor-freddy/sartor.jpg') WHERE content LIKE '%/images/personne/_s/sartor_freddy/sartor.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_s/sartor_freddy/photo.jpg', '/images/personne/_s/sartor-freddy/photo.jpg') WHERE content LIKE '%/images/personne/_s/sartor_freddy/photo.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_s/sartor_freddy/sartor2.jpg', '/images/personne/_s/sartor-freddy/sartor2.jpg') WHERE content LIKE '%/images/personne/_s/sartor_freddy/sartor2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_d/duculot_pierre/duculot3.jpg', '/images/personne/_d/duculot-pierre/duculot3.jpg') WHERE content LIKE '%/images/personne/_d/duculot_pierre/duculot3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_d/duculot_pierre/duculot1.jpg', '/images/personne/_d/duculot-pierre/duculot1.jpg') WHERE content LIKE '%/images/personne/_d/duculot_pierre/duculot1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_d/duculot_pierre/duculot4.jpg', '/images/personne/_d/duculot-pierre/duculot4.jpg') WHERE content LIKE '%/images/personne/_d/duculot_pierre/duculot4.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_d/de_premier/de-premier-2016-erik-van-looy-3_447-photo-420.jpg', '/images/film/_d/de-premier/de-premier-2016-erik-van-looy-3-447-photo-420.jpg') WHERE content LIKE '%/images/film/_d/de_premier/de-premier-2016-erik-van-looy-3_447-photo-420.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_d/de_premier/image1.jpg', '/images/film/_d/de-premier/image1.jpg') WHERE content LIKE '%/images/film/_d/de_premier/image1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_u/une_vie_contre_l_oubli/une_vie_3.jpg', '/images/film/_u/une-vie-contre-l-oubli/une-vie-3.jpg') WHERE content LIKE '%/images/film/_u/une_vie_contre_l_oubli/une_vie_3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_u/une_vie_contre_l_oubli/une_vie_2.jpg', '/images/film/_u/une-vie-contre-l-oubli/une-vie-2.jpg') WHERE content LIKE '%/images/film/_u/une_vie_contre_l_oubli/une_vie_2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_u/une_vie_contre_l_oubli/une_vie.jpg', '/images/film/_u/une-vie-contre-l-oubli/une-vie.jpg') WHERE content LIKE '%/images/film/_u/une_vie_contre_l_oubli/une_vie.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_b/barons_les/photo3.jpg', '/images/film/_b/barons-les/photo3.jpg') WHERE content LIKE '%/images/film/_b/barons_les/photo3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_p/papiers_d_armenie/papiers_d_armenie3.jpg', '/images/film/_p/papiers-d-armenie/papiers-d-armenie3.jpg') WHERE content LIKE '%/images/film/_p/papiers_d_armenie/papiers_d_armenie3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_a/anna_et_vincent/photo-anna-boch-mementoproduction.jpg', '/images/film/_a/anna-et-vincent/photo-anna-boch-mementoproduction.jpg') WHERE content LIKE '%/images/film/_a/anna_et_vincent/photo-anna-boch-mementoproduction.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_g/guru_une_famille_hijra/cover.jpg', '/images/film/_g/guru-une-famille-hijra/cover.jpg') WHERE content LIKE '%/images/film/_g/guru_une_famille_hijra/cover.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_t/terre_abandonnee_la/terre2.jpg', '/images/film/_t/terre-abandonnee-la/terre2.jpg') WHERE content LIKE '%/images/film/_t/terre_abandonnee_la/terre2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_t/terre_abandonnee_la/terre3.jpg', '/images/film/_t/terre-abandonnee-la/terre3.jpg') WHERE content LIKE '%/images/film/_t/terre_abandonnee_la/terre3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_i/inside_the_labyrinth/inside1.jpg', '/images/film/_i/inside-the-labyrinth/inside1.jpg') WHERE content LIKE '%/images/film/_i/inside_the_labyrinth/inside1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_s/spit_n_split/spit.jpg', '/images/film/_s/spit-n-split/spit.jpg') WHERE content LIKE '%/images/film/_s/spit_n_split/spit.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_c/coeur_regulier_le/coeur_regulier1.jpg', '/images/film/_c/coeur-regulier-le/coeur-regulier1.jpg') WHERE content LIKE '%/images/film/_c/coeur_regulier_le/coeur_regulier1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_c/coeur_regulier_le/coeur_regulier4.jpg', '/images/film/_c/coeur-regulier-le/coeur-regulier4.jpg') WHERE content LIKE '%/images/film/_c/coeur_regulier_le/coeur_regulier4.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_v/vita_brevis/vita_brevis_thierry_knauff_02.jpg', '/images/film/_v/vita-brevis/vita-brevis-thierry-knauff-02.jpg') WHERE content LIKE '%/images/film/_v/vita_brevis/vita_brevis_thierry_knauff_02.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_c/chant_des_hommes_le/1.jpg', '/images/film/_c/chant-des-hommes-le/1.jpg') WHERE content LIKE '%/images/film/_c/chant_des_hommes_le/1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_c/chant_des_hommes_le/3.jpg', '/images/film/_c/chant-des-hommes-le/3.jpg') WHERE content LIKE '%/images/film/_c/chant_des_hommes_le/3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_d/des_nouvelles_de_la_planete_mars/des_nouvelles_de_la_planete_mars1.jpg', '/images/film/_d/des-nouvelles-de-la-planete-mars/des-nouvelles-de-la-planete-mars1.jpg') WHERE content LIKE '%/images/film/_d/des_nouvelles_de_la_planete_mars/des_nouvelles_de_la_planete_mars1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_w/welcome_home/welcome3.jpg', '/images/film/_w/welcome-home/welcome3.jpg') WHERE content LIKE '%/images/film/_w/welcome_home/welcome3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_w/welcome_home/welcome-home2.jpg', '/images/film/_w/welcome-home/welcome-home2.jpg') WHERE content LIKE '%/images/film/_w/welcome_home/welcome-home2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_n/nkosi_coiffure/1.jpg', '/images/film/_n/nkosi-coiffure/1.jpg') WHERE content LIKE '%/images/film/_n/nkosi_coiffure/1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_t/tranche_de_campagne/tranche_de_campagne.jpg', '/images/film/_t/tranche-de-campagne/tranche-de-campagne.jpg') WHERE content LIKE '%/images/film/_t/tranche_de_campagne/tranche_de_campagne.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_o/oser_la_greve_sous_l_occupation_mai_juin_1941/osez_la_greve_3.jpg', '/images/film/_o/oser-la-greve-sous-l-occupation-mai-juin-1941/osez-la-greve-3.jpg') WHERE content LIKE '%/images/film/_o/oser_la_greve_sous_l_occupation_mai_juin_1941/osez_la_greve_3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_o/oser_la_greve_sous_l_occupation_mai_juin_1941/osez_la_greve_2.jpg', '/images/film/_o/oser-la-greve-sous-l-occupation-mai-juin-1941/osez-la-greve-2.jpg') WHERE content LIKE '%/images/film/_o/oser_la_greve_sous_l_occupation_mai_juin_1941/osez_la_greve_2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_e/economie_du_couple_l/economie2.jpg', '/images/film/_e/economie-du-couple-l/economie2.jpg') WHERE content LIKE '%/images/film/_e/economie_du_couple_l/economie2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_e/economie_du_couple_l/economie5.jpg', '/images/film/_e/economie-du-couple-l/economie5.jpg') WHERE content LIKE '%/images/film/_e/economie_du_couple_l/economie5.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_d/diamant_noir/daimant2.jpg', '/images/film/_d/diamant-noir/daimant2.jpg') WHERE content LIKE '%/images/film/_d/diamant_noir/daimant2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_d/diamant_noir/diamant3.jpg', '/images/film/_d/diamant-noir/diamant3.jpg') WHERE content LIKE '%/images/film/_d/diamant_noir/diamant3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_b/blue_birth/blue-birth-01.jpg', '/images/film/_b/blue-birth/blue-birth-01.jpg') WHERE content LIKE '%/images/film/_b/blue_birth/blue-birth-01.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_b/blue_birth/blue-birth-04.jpg', '/images/film/_b/blue-birth/blue-birth-04.jpg') WHERE content LIKE '%/images/film/_b/blue_birth/blue-birth-04.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_s/shadow_world/reagan-gun-shadow-world.png', '/images/film/_s/shadow-world/reagan-gun-shadow-world.png') WHERE content LIKE '%/images/film/_s/shadow_world/reagan-gun-shadow-world.png%';
+UPDATE article SET content = REPLACE(content, '/images/film/_s/shadow_world/shadowworld_grimonprez_sectiondetail_476x268.jpg', '/images/film/_s/shadow-world/shadowworld-grimonprez-sectiondetail-476x268.jpg') WHERE content LIKE '%/images/film/_s/shadow_world/shadowworld_grimonprez_sectiondetail_476x268.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_s/shadow_world/swap0093_m_get_74351473_master_default_14655.jpg', '/images/film/_s/shadow-world/swap0093-m-get-74351473-master-default-14655.jpg') WHERE content LIKE '%/images/film/_s/shadow_world/swap0093_m_get_74351473_master_default_14655.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_h/home_fien_troch/home-0101-valide.jpg', '/images/film/_h/home-fien-troch/home-0101-valide.jpg') WHERE content LIKE '%/images/film/_h/home_fien_troch/home-0101-valide.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_h/home_fien_troch/home-0051-valide.jpg', '/images/film/_h/home-fien-troch/home-0051-valide.jpg') WHERE content LIKE '%/images/film/_h/home_fien_troch/home-0051-valide.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_d/deuxieme_nuit_la/la-deuxieme-nuit-1-1024x765.jpg', '/images/film/_d/deuxieme-nuit-la/la-deuxieme-nuit-1-1024x765.jpg') WHERE content LIKE '%/images/film/_d/deuxieme_nuit_la/la-deuxieme-nuit-1-1024x765.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_d/deuxieme_nuit_la/la-deuxieme-nuit-2.jpg', '/images/film/_d/deuxieme-nuit-la/la-deuxieme-nuit-2.jpg') WHERE content LIKE '%/images/film/_d/deuxieme_nuit_la/la-deuxieme-nuit-2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_i/i_u2019m_not_your_negro/iamnotyournegro-jamesbaldwin01.jpg', '/images/film/_i/i-u2019m-not-your-negro/iamnotyournegro-jamesbaldwin01.jpg') WHERE content LIKE '%/images/film/_i/i_u2019m_not_your_negro/iamnotyournegro-jamesbaldwin01.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_i/i_u2019m_not_your_negro/negro1.jpg', '/images/film/_i/i-u2019m-not-your-negro/negro1.jpg') WHERE content LIKE '%/images/film/_i/i_u2019m_not_your_negro/negro1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_i/i_u2019m_not_your_negro/sans_titre-1_copie.jpg', '/images/film/_i/i-u2019m-not-your-negro/sans-titre-1-copie.jpg') WHERE content LIKE '%/images/film/_i/i_u2019m_not_your_negro/sans_titre-1_copie.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_c/chant_de_geppino/competnat-chant.gif', '/images/film/_c/chant-de-geppino/competnat-chant.gif') WHERE content LIKE '%/images/film/_c/chant_de_geppino/competnat-chant.gif%';
+UPDATE article SET content = REPLACE(content, '/images/film/_a/avec_ma_mere_a_la_mer/avecmamerealamer-poster.jpg', '/images/film/_a/avec-ma-mere-a-la-mer/avecmamerealamer-poster.jpg') WHERE content LIKE '%/images/film/_a/avec_ma_mere_a_la_mer/avecmamerealamer-poster.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_m/mea_culpa/competnat-meaculpa.gif', '/images/film/_m/mea-culpa/competnat-meaculpa.gif') WHERE content LIKE '%/images/film/_m/mea_culpa/competnat-meaculpa.gif%';
+UPDATE article SET content = REPLACE(content, '/images/film/_v/venus_noire/19545806.jpg', '/images/film/_v/venus-noire/19545806.jpg') WHERE content LIKE '%/images/film/_v/venus_noire/19545806.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_b/beyond_the_steppes/affiche.gif', '/images/film/_b/beyond-the-steppes/affiche.gif') WHERE content LIKE '%/images/film/_b/beyond_the_steppes/affiche.gif%';
+UPDATE article SET content = REPLACE(content, '/images/film/_h/hors_limites_le_cinema_de_jaco_van_dormael/59_2.jpg', '/images/film/_h/hors-limites-le-cinema-de-jaco-van-dormael/59-2.jpg') WHERE content LIKE '%/images/film/_h/hors_limites_le_cinema_de_jaco_van_dormael/59_2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_f/fille_inconnue_la/la_fille3.jpg', '/images/film/_f/fille-inconnue-la/la-fille3.jpg') WHERE content LIKE '%/images/film/_f/fille_inconnue_la/la_fille3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_f/fille_inconnue_la/lafille4.jpg', '/images/film/_f/fille-inconnue-la/lafille4.jpg') WHERE content LIKE '%/images/film/_f/fille_inconnue_la/lafille4.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_r/reve_de_nikolay_le/nikolay_1.jpg', '/images/film/_r/reve-de-nikolay-le/nikolay-1.jpg') WHERE content LIKE '%/images/film/_r/reve_de_nikolay_le/nikolay_1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_r/reve_de_nikolay_le/nikolay_18.jpg', '/images/film/_r/reve-de-nikolay-le/nikolay-18.jpg') WHERE content LIKE '%/images/film/_r/reve_de_nikolay_le/nikolay_18.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_a/apres_la_mort_apres_la_vie/apmapv_image_3.jpg', '/images/film/_a/apres-la-mort-apres-la-vie/apmapv-image-3.jpg') WHERE content LIKE '%/images/film/_a/apres_la_mort_apres_la_vie/apmapv_image_3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_m/my_first_highway/mfh_plage_allonge_2.jpg', '/images/film/_m/my-first-highway/mfh-plage-allonge-2.jpg') WHERE content LIKE '%/images/film/_m/my_first_highway/mfh_plage_allonge_2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_m/my_first_highway/my_first.jpg', '/images/film/_m/my-first-highway/my-first.jpg') WHERE content LIKE '%/images/film/_m/my_first_highway/my_first.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_p/paris_pieds_nus/paris5.jpg', '/images/film/_p/paris-pieds-nus/paris5.jpg') WHERE content LIKE '%/images/film/_p/paris_pieds_nus/paris5.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_p/paris_pieds_nus/paris7.jpg', '/images/film/_p/paris-pieds-nus/paris7.jpg') WHERE content LIKE '%/images/film/_p/paris_pieds_nus/paris7.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_o/on_the_edge_of_happiness/3.jpg', '/images/film/_o/on-the-edge-of-happiness/3.jpg') WHERE content LIKE '%/images/film/_o/on_the_edge_of_happiness/3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_o/on_the_edge_of_happiness/2.jpg', '/images/film/_o/on-the-edge-of-happiness/2.jpg') WHERE content LIKE '%/images/film/_o/on_the_edge_of_happiness/2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_c/chevaliers_blancs_les/photo4.jpg', '/images/film/_c/chevaliers-blancs-les/photo4.jpg') WHERE content LIKE '%/images/film/_c/chevaliers_blancs_les/photo4.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_c/chevaliers_blancs_les/photo3.jpg', '/images/film/_c/chevaliers-blancs-les/photo3.jpg') WHERE content LIKE '%/images/film/_c/chevaliers_blancs_les/photo3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_m/memoire_de_missionnaires/pere_swusten_amp_co_1927-1939_.jpg', '/images/film/_m/memoire-de-missionnaires/pere-swusten-amp-co-1927-1939-.jpg') WHERE content LIKE '%/images/film/_m/memoire_de_missionnaires/pere_swusten_amp_co_1927-1939_.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_m/memoire_de_missionnaires/5_reflexion_gerard.jpg', '/images/film/_m/memoire-de-missionnaires/5-reflexion-gerard.jpg') WHERE content LIKE '%/images/film/_m/memoire_de_missionnaires/5_reflexion_gerard.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_e/el_color_del_camaleon/1486654650unspecified1.jpg', '/images/film/_e/el-color-del-camaleon/1486654650unspecified1.jpg') WHERE content LIKE '%/images/film/_e/el_color_del_camaleon/1486654650unspecified1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_e/el_color_del_camaleon/1486654692unspecified12.jpg', '/images/film/_e/el-color-del-camaleon/1486654692unspecified12.jpg') WHERE content LIKE '%/images/film/_e/el_color_del_camaleon/1486654692unspecified12.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_s/sur_le_piste_de_yu_bin/yu_bin1.jpg', '/images/film/_s/sur-le-piste-de-yu-bin/yu-bin1.jpg') WHERE content LIKE '%/images/film/_s/sur_le_piste_de_yu_bin/yu_bin1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_s/sur_le_piste_de_yu_bin/yu_bin2.jpg', '/images/film/_s/sur-le-piste-de-yu-bin/yu-bin2.jpg') WHERE content LIKE '%/images/film/_s/sur_le_piste_de_yu_bin/yu_bin2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_b/baden_baden/baden_baden_5.jpg', '/images/film/_b/baden-baden/baden-baden-5.jpg') WHERE content LIKE '%/images/film/_b/baden_baden/baden_baden_5.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_o/oeil_du_cyclope_l/small_1.png', '/images/film/_o/oeil-du-cyclope-l/small-1.png') WHERE content LIKE '%/images/film/_o/oeil_du_cyclope_l/small_1.png%';
+UPDATE article SET content = REPLACE(content, '/images/film/_a/a_peine_j_ouvre_les_yeux/392885.jpg', '/images/film/_a/a-peine-j-ouvre-les-yeux/392885.jpg') WHERE content LIKE '%/images/film/_a/a_peine_j_ouvre_les_yeux/392885.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_a/a_peine_j_ouvre_les_yeux/390697.jpg', '/images/film/_a/a-peine-j-ouvre-les-yeux/390697.jpg') WHERE content LIKE '%/images/film/_a/a_peine_j_ouvre_les_yeux/390697.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_b/belle_de_nuit_griselidis_real_autoportraits/belle-de-nuit-griselidis-real-autoportraits---marie-eve-de-grave.jpg', '/images/film/_b/belle-de-nuit-griselidis-real-autoportraits/belle-de-nuit-griselidis-real-autoportraits---marie-eve-de-grave.jpg') WHERE content LIKE '%/images/film/_b/belle_de_nuit_griselidis_real_autoportraits/belle-de-nuit-griselidis-real-autoportraits---marie-eve-de-grave.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_b/belle_de_nuit_griselidis_real_autoportraits/belledenuit_400.jpg', '/images/film/_b/belle-de-nuit-griselidis-real-autoportraits/belledenuit-400.jpg') WHERE content LIKE '%/images/film/_b/belle_de_nuit_griselidis_real_autoportraits/belledenuit_400.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_r/rhythm_intervals/rhythm-intervals1.jpg', '/images/film/_r/rhythm-intervals/rhythm-intervals1.jpg') WHERE content LIKE '%/images/film/_r/rhythm_intervals/rhythm-intervals1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_r/rhythm_intervals/rhythm-intervals1__1_.jpg', '/images/film/_r/rhythm-intervals/rhythm-intervals1--1-.jpg') WHERE content LIKE '%/images/film/_r/rhythm_intervals/rhythm-intervals1__1_.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_s/secret_de_la_chambre_noire_le/secret3.jpg', '/images/film/_s/secret-de-la-chambre-noire-le/secret3.jpg') WHERE content LIKE '%/images/film/_s/secret_de_la_chambre_noire_le/secret3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_s/secret_de_la_chambre_noire_le/secret2.jpg', '/images/film/_s/secret-de-la-chambre-noire-le/secret2.jpg') WHERE content LIKE '%/images/film/_s/secret_de_la_chambre_noire_le/secret2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_c/chez_nous/chez_nous2.jpg', '/images/film/_c/chez-nous/chez-nous2.jpg') WHERE content LIKE '%/images/film/_c/chez_nous/chez_nous2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_c/chez_nous/chez_nous4.jpg', '/images/film/_c/chez-nous/chez-nous4.jpg') WHERE content LIKE '%/images/film/_c/chez_nous/chez_nous4.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_k/kill_me_please/kill_me.jpg', '/images/film/_k/kill-me-please/kill-me.jpg') WHERE content LIKE '%/images/film/_k/kill_me_please/kill_me.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_m/monde_en_scene_le/s1345_monde_en_sceieune.jpg', '/images/film/_m/monde-en-scene-le/s1345-monde-en-sceieune.jpg') WHERE content LIKE '%/images/film/_m/monde_en_scene_le/s1345_monde_en_sceieune.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_a/allez_raconte/image1.jpg', '/images/film/_a/allez-raconte/image1.jpg') WHERE content LIKE '%/images/film/_a/allez_raconte/image1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_t/tortue_rouge_la/tortue4.jpg', '/images/film/_t/tortue-rouge-la/tortue4.jpg') WHERE content LIKE '%/images/film/_t/tortue_rouge_la/tortue4.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_t/tortue_rouge_la/tortue7.jpg', '/images/film/_t/tortue-rouge-la/tortue7.jpg') WHERE content LIKE '%/images/film/_t/tortue_rouge_la/tortue7.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_d/dossier_b/dessin.jpg', '/images/film/_d/dossier-b/dessin.jpg') WHERE content LIKE '%/images/film/_d/dossier_b/dessin.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/personne/_l/lanners_bouli/bouli.jpg', '/images/personne/_l/lanners-bouli/bouli.jpg') WHERE content LIKE '%/images/personne/_l/lanners_bouli/bouli.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_j/je_veux_etre_actrice/image3.jpg', '/images/film/_j/je-veux-etre-actrice/image3.jpg') WHERE content LIKE '%/images/film/_j/je_veux_etre_actrice/image3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_j/je_veux_etre_actrice/image1.jpg', '/images/film/_j/je-veux-etre-actrice/image1.jpg') WHERE content LIKE '%/images/film/_j/je_veux_etre_actrice/image1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_h/habitants_les/iadhabitants.jpg', '/images/film/_h/habitants-les/iadhabitants.jpg') WHERE content LIKE '%/images/film/_h/habitants_les/iadhabitants.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_v/vivement_ce_soir/vive.jpg', '/images/film/_v/vivement-ce-soir/vive.jpg') WHERE content LIKE '%/images/film/_v/vivement_ce_soir/vive.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_f/fils_de_joseph_le/le_fils_de_joseph3.jpg', '/images/film/_f/fils-de-joseph-le/le-fils-de-joseph3.jpg') WHERE content LIKE '%/images/film/_f/fils_de_joseph_le/le_fils_de_joseph3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_t/trust_in_me/image2.jpg', '/images/film/_t/trust-in-me/image2.jpg') WHERE content LIKE '%/images/film/_t/trust_in_me/image2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_t/trust_in_me/image1.jpg', '/images/film/_t/trust-in-me/image1.jpg') WHERE content LIKE '%/images/film/_t/trust_in_me/image1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_e/entre_flore_et_thalie/entreflo.jpg', '/images/film/_e/entre-flore-et-thalie/entreflo.jpg') WHERE content LIKE '%/images/film/_e/entre_flore_et_thalie/entreflo.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_c/champ_des_visions_le/le-champ-des-visions_4602_252380le-champ-des-visions51.jpg', '/images/film/_c/champ-des-visions-le/le-champ-des-visions-4602-252380le-champ-des-visions51.jpg') WHERE content LIKE '%/images/film/_c/champ_des_visions_le/le-champ-des-visions_4602_252380le-champ-des-visions51.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_c/compostelle_le_chemin_de_la_vie/compo10.jpg', '/images/film/_c/compostelle-le-chemin-de-la-vie/compo10.jpg') WHERE content LIKE '%/images/film/_c/compostelle_le_chemin_de_la_vie/compo10.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_c/compostelle_le_chemin_de_la_vie/compo11.jpg', '/images/film/_c/compostelle-le-chemin-de-la-vie/compo11.jpg') WHERE content LIKE '%/images/film/_c/compostelle_le_chemin_de_la_vie/compo11.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_c/compostelle_le_chemin_de_la_vie/compo6.jpg', '/images/film/_c/compostelle-le-chemin-de-la-vie/compo6.jpg') WHERE content LIKE '%/images/film/_c/compostelle_le_chemin_de_la_vie/compo6.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_d/dode_hoek/anglemort_dodehoek_01.jpg', '/images/film/_d/dode-hoek/anglemort-dodehoek-01.jpg') WHERE content LIKE '%/images/film/_d/dode_hoek/anglemort_dodehoek_01.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_d/dode_hoek/dode.jpg', '/images/film/_d/dode-hoek/dode.jpg') WHERE content LIKE '%/images/film/_d/dode_hoek/dode.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_s/saint_amour/saint4.jpg', '/images/film/_s/saint-amour/saint4.jpg') WHERE content LIKE '%/images/film/_s/saint_amour/saint4.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_s/saint_amour/saint10.jpg', '/images/film/_s/saint-amour/saint10.jpg') WHERE content LIKE '%/images/film/_s/saint_amour/saint10.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_p/premiers_les_derniers_les/les-premiers-les-derniers-photo-5652fa8103ec6.jpg', '/images/film/_p/premiers-les-derniers-les/les-premiers-les-derniers-photo-5652fa8103ec6.jpg') WHERE content LIKE '%/images/film/_p/premiers_les_derniers_les/les-premiers-les-derniers-photo-5652fa8103ec6.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_w/whose_peace_will_it_be/whose_peace_fragment.jpg', '/images/film/_w/whose-peace-will-it-be/whose-peace-fragment.jpg') WHERE content LIKE '%/images/film/_w/whose_peace_will_it_be/whose_peace_fragment.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_w/whose_peace_will_it_be/whose_peace.jpg', '/images/film/_w/whose-peace-will-it-be/whose-peace.jpg') WHERE content LIKE '%/images/film/_w/whose_peace_will_it_be/whose_peace.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_s/scenariste_le/scenariste.jpg', '/images/film/_s/scenariste-le/scenariste.jpg') WHERE content LIKE '%/images/film/_s/scenariste_le/scenariste.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_v/voodoo_the_origins/hqdefault.jpg', '/images/film/_v/voodoo-the-origins/hqdefault.jpg') WHERE content LIKE '%/images/film/_v/voodoo_the_origins/hqdefault.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_b/bateau_du_pere_le/poster.jpg', '/images/film/_b/bateau-du-pere-le/poster.jpg') WHERE content LIKE '%/images/film/_b/bateau_du_pere_le/poster.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_e/effets_de_serres/Effets_de_serres_04.jpg', '/images/film/_e/effets-de-serres/Effets-de-serres-04.jpg') WHERE content LIKE '%/images/film/_e/effets_de_serres/Effets_de_serres_04.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_e/enchanteurs_les/enchanteurs2.jpg', '/images/film/_e/enchanteurs-les/enchanteurs2.jpg') WHERE content LIKE '%/images/film/_e/enchanteurs_les/enchanteurs2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_e/enchanteurs_les/enchanteurs3.jpg', '/images/film/_e/enchanteurs-les/enchanteurs3.jpg') WHERE content LIKE '%/images/film/_e/enchanteurs_les/enchanteurs3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_f/funerailles_de_l_art_de_mourir/imagefuneraille2.jpg', '/images/film/_f/funerailles-de-l-art-de-mourir/imagefuneraille2.jpg') WHERE content LIKE '%/images/film/_f/funerailles_de_l_art_de_mourir/imagefuneraille2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_f/funerailles_de_l_art_de_mourir/funerailles-1.jpg', '/images/film/_f/funerailles-de-l-art-de-mourir/funerailles-1.jpg') WHERE content LIKE '%/images/film/_f/funerailles_de_l_art_de_mourir/funerailles-1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_a/a_chacun_son_cinema/a_chacun_son_cinema_claire_milis.jpg', '/images/film/_a/a-chacun-son-cinema/a-chacun-son-cinema-claire-milis.jpg') WHERE content LIKE '%/images/film/_a/a_chacun_son_cinema/a_chacun_son_cinema_claire_milis.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_c/comme_des_lions/comme_des_lions.jpg', '/images/film/_c/comme-des-lions/comme_des_lions.jpg') WHERE content LIKE '%/images/film/_c/comme_des_lions/comme_des_lions.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_r/route_du_pain_la/rdp_1.jpg', '/images/film/_r/route-du-pain-la/rdp-1.jpg') WHERE content LIKE '%/images/film/_r/route_du_pain_la/rdp_1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_r/route_du_pain_la/rdp_4.jpg', '/images/film/_r/route-du-pain-la/rdp-4.jpg') WHERE content LIKE '%/images/film/_r/route_du_pain_la/rdp_4.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_0/27_fois_le_temps/27_2.jpg', '/images/film/_0/27-fois-le-temps/27-2.jpg') WHERE content LIKE '%/images/film/_0/27_fois_le_temps/27_2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_0/27_fois_le_temps/27_3.jpg', '/images/film/_0/27-fois-le-temps/27-3.jpg') WHERE content LIKE '%/images/film/_0/27_fois_le_temps/27_3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_q/quand_le_vent_est_au_ble/ble2.jpg', '/images/film/_q/quand-le-vent-est-au-ble/ble2.jpg') WHERE content LIKE '%/images/film/_q/quand_le_vent_est_au_ble/ble2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_j/je_me_tue_a_le_dire/Je-me-tue-a-le-dire2.jpg', '/images/film/_j/je-me-tue-a-le-dire/Je-me-tue-a-le-dire2.jpg') WHERE content LIKE '%/images/film/_j/je_me_tue_a_le_dire/Je-me-tue-a-le-dire2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_j/je_me_tue_a_le_dire/je_me_tue_a_le_dire4.jpg', '/images/film/_j/je-me-tue-a-le-dire/je-me-tue-a-le-dire4.jpg') WHERE content LIKE '%/images/film/_j/je_me_tue_a_le_dire/je_me_tue_a_le_dire4.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_h/histoire_de_lire/photo-2.jpg', '/images/film/_h/histoire-de-lire/photo-2.jpg') WHERE content LIKE '%/images/film/_h/histoire_de_lire/photo-2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_u/un_homme_a_la_mer/cover.jpg', '/images/film/_u/un-homme-a-la-mer/cover.jpg') WHERE content LIKE '%/images/film/_u/un_homme_a_la_mer/cover.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_a/a_family_affair/a_family_affair3.jpg', '/images/film/_a/a-family-affair/a-family-affair3.jpg') WHERE content LIKE '%/images/film/_a/a_family_affair/a_family_affair3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_h/heure_bleue_l/lheure_bleue.jpg', '/images/film/_h/heure-bleue-l/lheure-bleue.jpg') WHERE content LIKE '%/images/film/_h/heure_bleue_l/lheure_bleue.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_v/vers_une_inconditionnelle_liberte/vers_une_inconditionnelle_liberte.jpg', '/images/film/_v/vers-une-inconditionnelle-liberte/vers-une-inconditionnelle-liberte.jpg') WHERE content LIKE '%/images/film/_v/vers_une_inconditionnelle_liberte/vers_une_inconditionnelle_liberte.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_p/pelerins_de_bouge_les/563472094_1280x720.jpg', '/images/film/_p/pelerins-de-bouge-les/563472094-1280x720.jpg') WHERE content LIKE '%/images/film/_p/pelerins_de_bouge_les/563472094_1280x720.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_p/pelerins_de_bouge_les/pelerins.jpg', '/images/film/_p/pelerins-de-bouge-les/pelerins.jpg') WHERE content LIKE '%/images/film/_p/pelerins_de_bouge_les/pelerins.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_a/another_planet/another_planet___film_still_01_grande.jpg', '/images/film/_a/another-planet/another-planet---film-still-01-grande.jpg') WHERE content LIKE '%/images/film/_a/another_planet/another_planet___film_still_01_grande.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_a/another_planet/another_planet___film_still_20_grande.jpg', '/images/film/_a/another-planet/another-planet---film-still-20-grande.jpg') WHERE content LIKE '%/images/film/_a/another_planet/another_planet___film_still_20_grande.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_w/when_the_day_had_no_name/1488191666874_0570x0400_1488191686160.jpg', '/images/film/_w/when-the-day-had-no-name/1488191666874-0570x0400-1488191686160.jpg') WHERE content LIKE '%/images/film/_w/when_the_day_had_no_name/1488191666874_0570x0400_1488191686160.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_w/when_the_day_had_no_name/grave1.jpg', '/images/film/_w/when-the-day-had-no-name/grave1.jpg') WHERE content LIKE '%/images/film/_w/when_the_day_had_no_name/grave1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_p/part_sauvage_la/la_part1.jpg', '/images/film/_p/part-sauvage-la/la-part1.jpg') WHERE content LIKE '%/images/film/_p/part_sauvage_la/la_part1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_p/part_sauvage_la/la_part2.jpg', '/images/film/_p/part-sauvage-la/la-part2.jpg') WHERE content LIKE '%/images/film/_p/part_sauvage_la/la_part2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_d/drole_de_pere/drole_de_pere.jpg', '/images/film/_d/drole-de-pere/drole-de-pere.jpg') WHERE content LIKE '%/images/film/_d/drole_de_pere/drole_de_pere.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_d/drole_de_pere/droledepere2-800x498.jpg', '/images/film/_d/drole-de-pere/droledepere2-800x498.jpg') WHERE content LIKE '%/images/film/_d/drole_de_pere/droledepere2-800x498.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_a/arno_dancing_inside_my_head/333198_source.jpg', '/images/film/_a/arno-dancing-inside-my-head/333198-source.jpg') WHERE content LIKE '%/images/film/_a/arno_dancing_inside_my_head/333198_source.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_a/arno_dancing_inside_my_head/ed65a16c4a5754e79021b036ffc2929c-1485335445.jpg', '/images/film/_a/arno-dancing-inside-my-head/ed65a16c4a5754e79021b036ffc2929c-1485335445.jpg') WHERE content LIKE '%/images/film/_a/arno_dancing_inside_my_head/ed65a16c4a5754e79021b036ffc2929c-1485335445.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_m/mademoiselle_zallinger/mademoiselle_zallinger_-_prunelle_rulens.jpg', '/images/film/_m/mademoiselle-zallinger/mademoiselle-zallinger---prunelle-rulens.jpg') WHERE content LIKE '%/images/film/_m/mademoiselle_zallinger/mademoiselle_zallinger_-_prunelle_rulens.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_e/even_lovers_get_the_blues/even_lovers_get.jpg', '/images/film/_e/even-lovers-get-the-blues/even-lovers-get.jpg') WHERE content LIKE '%/images/film/_e/even_lovers_get_the_blues/even_lovers_get.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_l/lucas_etc/lucas1.jpg', '/images/film/_l/lucas-etc/lucas1.jpg') WHERE content LIKE '%/images/film/_l/lucas_etc/lucas1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_l/lucas_etc/lucas11.jpg', '/images/film/_l/lucas-etc/lucas11.jpg') WHERE content LIKE '%/images/film/_l/lucas_etc/lucas11.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_l/lucas_etc/lucas3.jpg', '/images/film/_l/lucas-etc/lucas3.jpg') WHERE content LIKE '%/images/film/_l/lucas_etc/lucas3.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_l/lucas_etc/lucas9.jpg', '/images/film/_l/lucas-etc/lucas9.jpg') WHERE content LIKE '%/images/film/_l/lucas_etc/lucas9.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_l/lucas_etc/lucas7.jpg', '/images/film/_l/lucas-etc/lucas7.jpg') WHERE content LIKE '%/images/film/_l/lucas_etc/lucas7.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_l/lucas_etc/lucas2.jpg', '/images/film/_l/lucas-etc/lucas2.jpg') WHERE content LIKE '%/images/film/_l/lucas_etc/lucas2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_l/lucas_etc/lucas6.jpg', '/images/film/_l/lucas-etc/lucas6.jpg') WHERE content LIKE '%/images/film/_l/lucas_etc/lucas6.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_l/lucas_etc/lucas5.jpg', '/images/film/_l/lucas-etc/lucas5.jpg') WHERE content LIKE '%/images/film/_l/lucas_etc/lucas5.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_l/lucas_etc/lucas4.jpg', '/images/film/_l/lucas-etc/lucas4.jpg') WHERE content LIKE '%/images/film/_l/lucas_etc/lucas4.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_l/lucas_etc/lucas10.jpg', '/images/film/_l/lucas-etc/lucas10.jpg') WHERE content LIKE '%/images/film/_l/lucas_etc/lucas10.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_l/lions_les/les_lions.jpg', '/images/film/_l/lions-les/les-lions.jpg') WHERE content LIKE '%/images/film/_l/lions_les/les_lions.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_m/muet_comme_une_carpe/carpe.jpg', '/images/film/_m/muet-comme-une-carpe/carpe.jpg') WHERE content LIKE '%/images/film/_m/muet_comme_une_carpe/carpe.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_t/tasse_de_the/tassedethe1.jpg', '/images/film/_t/tasse-de-the/tassedethe1.jpg') WHERE content LIKE '%/images/film/_t/tasse_de_the/tassedethe1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_p/perfect_darkness/91-perfect-darkness.jpg', '/images/film/_p/perfect-darkness/91-perfect-darkness.jpg') WHERE content LIKE '%/images/film/_p/perfect_darkness/91-perfect-darkness.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_c/ce_qui_demeure/ce_qui_demeure.jpg', '/images/film/_c/ce-qui-demeure/ce-qui-demeure.jpg') WHERE content LIKE '%/images/film/_c/ce_qui_demeure/ce_qui_demeure.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_j/jeune_karl_marx_le/karl2.jpg', '/images/film/_j/jeune-karl-marx-le/karl2.jpg') WHERE content LIKE '%/images/film/_j/jeune_karl_marx_le/karl2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_j/jeune_karl_marx_le/karl1.jpg', '/images/film/_j/jeune-karl-marx-le/karl1.jpg') WHERE content LIKE '%/images/film/_j/jeune_karl_marx_le/karl1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_o/oublis_regrets_et_repentirs/oublis.jpg', '/images/film/_o/oublis-regrets-et-repentirs/oublis.jpg') WHERE content LIKE '%/images/film/_o/oublis_regrets_et_repentirs/oublis.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_s/seven_sisters/what-happened-to-monday-cover.jpg', '/images/film/_s/seven-sisters/what-happened-to-monday-cover.jpg') WHERE content LIKE '%/images/film/_s/seven_sisters/what-happened-to-monday-cover.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_o/otez_moi_d_un_doute/otez7.jpg', '/images/film/_o/otez-moi-d-un-doute/otez7.jpg') WHERE content LIKE '%/images/film/_o/otez_moi_d_un_doute/otez7.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_o/otez_moi_d_un_doute/otez2.jpg', '/images/film/_o/otez-moi-d-un-doute/otez2.jpg') WHERE content LIKE '%/images/film/_o/otez_moi_d_un_doute/otez2.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_d/drole_d_oiseau/trailer_drole.jpg', '/images/film/_d/drole-d-oiseau/trailer-drole.jpg') WHERE content LIKE '%/images/film/_d/drole_d_oiseau/trailer_drole.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_f/fidele_le/fidele1.jpg', '/images/film/_f/fidele-le/fidele1.jpg') WHERE content LIKE '%/images/film/_f/fidele_le/fidele1.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_f/fidele_le/fidele5.jpg', '/images/film/_f/fidele-le/fidele5.jpg') WHERE content LIKE '%/images/film/_f/fidele_le/fidele5.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_e/eternels_les/3-eternels.jpg', '/images/film/_e/eternels-les/3-eternels.jpg') WHERE content LIKE '%/images/film/_e/eternels_les/3-eternels.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_e/eternels_les/2-eternels.jpg', '/images/film/_e/eternels-les/2-eternels.jpg') WHERE content LIKE '%/images/film/_e/eternels_les/2-eternels.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_e/eternels_les/4-eternels.jpg', '/images/film/_e/eternels-les/4-eternels.jpg') WHERE content LIKE '%/images/film/_e/eternels_les/4-eternels.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_t/tango_ya_ba_wendo/26115.jpg', '/images/film/_t/tango-ya-ba-wendo/26115.jpg') WHERE content LIKE '%/images/film/_t/tango_ya_ba_wendo/26115.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_w/where_is_rocky_ii/ok_whereisrockyii.jpg', '/images/film/_w/where-is-rocky-ii/ok-whereisrockyii.jpg') WHERE content LIKE '%/images/film/_w/where_is_rocky_ii/ok_whereisrockyii.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_w/where_is_rocky_ii/premiere-where-is-rocky-ii---pierre-bismuth.jpg', '/images/film/_w/where-is-rocky-ii/premiere-where-is-rocky-ii---pierre-bismuth.jpg') WHERE content LIKE '%/images/film/_w/where_is_rocky_ii/premiere-where-is-rocky-ii---pierre-bismuth.jpg%';
+UPDATE article SET content = REPLACE(content, '/images/film/_p/promesse_de_l_aube_la/aube.png', '/images/film/_p/promesse-de-l-aube-la/aube.png') WHERE content LIKE '%/images/film/_p/promesse_de_l_aube_la/aube.png%';
+UPDATE article SET content = REPLACE(content, '/images/film/_p/promesse_de_l_aube_la/promesse.jpg', '/images/film/_p/promesse-de-l-aube-la/promesse.jpg') WHERE content LIKE '%/images/film/_p/promesse_de_l_aube_la/promesse.jpg%';
