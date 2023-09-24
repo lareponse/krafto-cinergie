@@ -13,6 +13,7 @@ class Home extends Kortex
     {
         $query = Article::queryListing();
         $query->whereEQ('isDiaporama', '1');
+        $query->limit(7);
         $this->viewport('articlesDiaporama', $query->retObj(Article::class));
         
         $query = Article::queryListing();
