@@ -2,9 +2,9 @@
 
 $routes = [
   // legacy redirections
-  ['GET', 'accueil', 'Home::home', 'home_legacy'],
-  ['GET', 'actualites', 'Article::home', 'article_legacy'],
-  
+  ['GET', 'accueil', 'Home::home', 'legacy_home'],
+  ['GET', 'actualites', 'Article::home', 'legacy_article'],
+  ['GET', 'images/[*:path]', 'Image::legacy', 'legacy_image_path'],
   
   // articles
   ['GET', 'articles/[*:params]?', 'Article::articles', 'articles'],

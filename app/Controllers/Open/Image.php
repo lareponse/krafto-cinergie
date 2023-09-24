@@ -2,7 +2,7 @@
 
 namespace App\Controllers\Open;
 
-class Images extends Home
+class Image extends Home
 {
     public function legacy()
     {
@@ -23,10 +23,6 @@ class Images extends Home
         exit;
     }
 
-    private function subPath()
-    {
-
-    }
     private function possibleFileNames($parts)
     {
         return array_unique([
