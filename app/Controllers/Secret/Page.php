@@ -17,14 +17,6 @@ class Page extends Krafto
 
     }
 
-    public function home()
-    {
-        $listing = $this->modelClassName()::filter($this->router()->params());
-        $this->viewport('listing', $listing);
-        $this->viewport('filters', $this->router()->params());
-    }
-
-
     public function conclude(): void
     {
         if(empty($this->viewport('title')) && $this->loadModel()){

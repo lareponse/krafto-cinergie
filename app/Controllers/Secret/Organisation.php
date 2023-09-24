@@ -9,7 +9,6 @@ class Organisation extends Krafto
 {
     use \App\Controllers\Abilities\HasORM;
     use \App\Controllers\Abilities\HasImages;
-    use \App\Controllers\Abilities\FindBySlug;
 
     
     public function activeSection(): string
@@ -24,12 +23,8 @@ class Organisation extends Krafto
             $this->router()->hop($this->urlFor($this->className(), 'list', null, ['FiltersOnFirstChar' => 'A']));
         }
 
-        $filters = $this->router()->params();
+        parent::home();
 
-        $organisations = $this->modelClassName()::filter($filters);
-
-        $this->viewport('filters', $filters);
-        $this->viewport('listing', $organisations);
         $this->viewport('counters', $this->counters());
     }
 

@@ -12,10 +12,4 @@ class Partner extends Krafto
         return 'Page';
     }
     
-    public function home()
-    {
-        $filters = empty($this->router()->params()) ? [] : $this->router()->params();
-        $this->viewport('partners', $this->modelClassName()::filter($filters));
-        $this->viewport('filters', $filters);
-    }
 }

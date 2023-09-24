@@ -18,10 +18,7 @@ abstract class ShopProduct extends Krafto
         if (!$this->router()->params('FiltersOnFirstChar')) {
             $this->router()->hop($this->urlFor($this->className(), 'list', null, ['FiltersOnFirstChar' => '*']));
         }
-
-        $listing = $this->modelClassName()::filter($this->router()->params());
-        $this->viewport('listing', $listing);
-        $this->viewport('filters', $this->router()->params());
+        parent::home();
     }
 
 }

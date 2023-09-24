@@ -103,6 +103,16 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
         return implode('<span class="separator">\\</span>', $bc);
     }
 
+    public function home()
+    {
+
+        
+        $listing = $this->modelClassName()::filter($this->router()->params());
+        $this->viewport('listing', $listing);
+        $this->viewport('filters', $this->router()->params());
+    }
+
+
     public function actionFor($action, $model, $extras = [])
     {
         

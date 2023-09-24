@@ -11,7 +11,7 @@ class Professional extends Krafto
 
     public function activeSection(): string
     {
-      return 'Fiche';
+        return 'Fiche';
     }
 
     public function home()
@@ -19,16 +19,14 @@ class Professional extends Krafto
         if (!$this->router()->params('FiltersOnFirstChar')) {
             $this->router()->hop($this->urlFor($this->className(), 'list', null, ['FiltersOnFirstChar' => 'A']));
         }
-
-        $listing = $this->modelClassName()::filter($this->router()->params());
-        $this->viewport('listing', $listing);
-        $this->viewport('filters', $this->router()->params());
+        
+        parent::home();
     }
 
 
     public function view()
     {
-        if(is_null($this->loadModel())){
+        if (is_null($this->loadModel())) {
             $this->router()->hop('dash_professionals');
         }
         $this->viewport('articles', Article::filter(['professional' => $this->loadModel()], ['eager' => false]));
@@ -36,18 +34,15 @@ class Professional extends Krafto
         $this->viewport('organisations', Organisation::filter(['professional' => $this->loadModel()], ['eager' => false]));
     }
 
-    public function edit():void
+    public function edit(): void
     {
-        if(is_null($this->loadModel()))
+        if (is_null($this->loadModel()))
             $this->router()->hop('dash_professionals');
-
     }
-    
+
     // trait HasImages
     public function imagesClassPath()
     {
         return 'personne';
     }
-    
-
 }

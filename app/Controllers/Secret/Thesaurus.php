@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Secret;
 
+use App\Models\Thesaurus as Model;
 
 class Thesaurus extends Krafto
 {
@@ -12,4 +13,12 @@ class Thesaurus extends Krafto
         return 'Settings';
     }
 
+    public function home()
+    {
+        if (!$this->router()->params('FiltersOnFirstChar')) {
+            $this->router()->hop($this->urlFor($this->className(), 'list', null, ['FiltersOnFirstChar' => 'A']));
+        }
+        
+        parent::home();
+    }
 }

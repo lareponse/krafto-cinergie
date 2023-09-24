@@ -31,9 +31,7 @@ class Movie extends Krafto
             $this->router()->hop($this->urlFor($this->className(), 'list', null, ['FiltersOnFirstChar' => 'A']));
         }
 
-        $listing = $this->modelClassName()::filter($this->router()->params());
-        $this->viewport('listing', $listing);
-        $this->viewport('filters', $this->router()->params());
+        parent::home()
     }
 
     public function view()
@@ -48,10 +46,8 @@ class Movie extends Krafto
         $this->viewport('organisations', Organisation::filter(['movie' => $this->loadModel()], ['eager' => false]));
     }
 
-    public function edit():void
+    public function alter():void
     {
-        if(is_null($this->loadModel()))
-            $this->router()->hop('dash_movies');
 
     }
     
