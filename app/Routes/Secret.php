@@ -1,10 +1,7 @@
 <?php
 $routes = [];
-$route_prefix = 'dash';
-$controller_prefix = 'Secret';
 
 // CUSTOM ROUTES
-
 array_push($routes,
     ['GET', 'pages/prix_cinergie', 'Page::award', 'page_cinergie_award'],
     ['GET', 'pages/equipe', 'Page::team', 'page_team'],
@@ -20,9 +17,6 @@ array_push($routes,
     ['POST', 'relations/unlink', 'Relation::unlink', 'relation_unlink'],
 );
 
-array_push($routes,
-    ['POST', 'upload', 'Upload::upload', 'upload_file']
-);
 
 array_push($routes,
     ['GET', 'image/[*:reference]/supprimer', 'Image::delete', 'image_delete'],
@@ -34,20 +28,26 @@ array_push($routes,
 // GENERIC CRUD ROUTES
 array_push($routes,
     ['GET',  '[a:controller]', '::home', 'records'],
+    ['GET',  '[a:controller]/new', '::alter', 'record_new'],
     ['GET',  '[a:controller]/[i:id]', '::view', 'record'],
+    ['GET',  '[a:controller]/[i:id]/edit', '::alter', 'record_edit'],
+    
+    ['GET',  '[a:controller]/[*:slug]/modifier', '::editBySlug', 'record_edit_by_slug'],
+    
+    ['POST',  '[a:controller]/[i:id]/toggle', '::toggle', 'record_toggle'],
+    ['POST', '[a:controller]/supprimer', '::delete', 'record_delete'],
+    ['POST', '[a:controller]/enregistrer', '::save', 'record_save'],
+
     ['POST',  '[a:controller]/[i:id]/upload', '::imageUpload', 'record_upload'],
     ['POST',  '[a:controller]/[i:id]/images/supprimer', '::imageUnlink', 'relation_image_unlink'],
 
-    ['GET',  '[a:controller]/nouveau', '::new', 'record_new'],
-    ['GET',  '[a:controller]/[i:id]/modifier', '::edit', 'record_edit'],
-    ['GET',  '[a:controller]/[*:slug]/modifier', '::editBySlug', 'record_edit_by_slug'],
-    ['GET',  '[a:controller]/[i:id]/toggle', '::toggle', 'record_toggle'],
-
-    ['POST', '[a:controller]/supprimer', '::delete', 'record_delete'],
-    ['POST', '[a:controller]/enregistrer', '::save', 'record_save']
+    ['GET',  '[a:controller]/[i:id]/images/setProfile/[*:path]', '::setProfilePicture', 'record_set_profile_picture'],
+    ['GET',  '[a:controller]/[i:id]/images/unsetProfile', '::unsetProfilePicture', 'record_unset_profile_picture']
+    
 );
 
-
+$route_prefix = 'dash';
+$controller_prefix = 'Secret';
 
 array_walk($routes, function (&$v, $k) use ($route_prefix, $controller_prefix) {
     $v[1] = $route_prefix . '/' . $v[1];
