@@ -16,16 +16,4 @@ class Contest extends Kortex
         $this->viewport('contests', $contests);
     }
 
-
-    /**
-     * Converts router parameters into filters for a database query.
-     *
-     * @param SelectInterface $query The database query object to apply filters to.
-     * @return SelectInterface The modified database query object with filters applied.
-     */
-    private function routerParamsAsFilters($query): SelectInterface
-    {
-
-        return $query;
-    }
 }
