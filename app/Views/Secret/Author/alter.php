@@ -10,16 +10,12 @@
     </div>
 </div>
 
-
-
-
 <div class="card border-0 scroll-mt-3" id="PublicationSection">
     <div class="card-header">
         <h2 class="h3 mb-0">Publication</h2>
     </div>
 
     <div class="card-body">
-
         <ul class="list-group list-group-flush">
             <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                 <div class="me-2">
@@ -39,8 +35,6 @@
                     <input class="form-check-input" type="checkbox" role="switch" id="isPartner" name="isPartner" <?= $controller->formModel()->get('isCollaborator') ? 'checked="checked"' : '' ?>">
                 </div>
             </li>
-
-
         </ul>
 
         <div class="row my-4">
@@ -61,13 +55,7 @@
             <div class="col-lg-4">
                 <input disabled type="text" class="form-control" id="created_on" name="created_on" value="<?= $controller->formModel()->get('created_on') ?>">
             </div>
-            <div class="col-lg-2">
-                <label for="updated_on" class="col-form-label">Mise à jour</label>
-            </div>
 
-            <div class="col-lg-4">
-                <input disabled type="text" class="form-control" id="updated_on" name="updated_on" value="<?= $controller->formModel()->get('updated_on') ?>">
-            </div>
         </div>
 
         <div class="d-flex justify-content-end mt-5">
