@@ -7,7 +7,6 @@ CREATE TABLE `thesaurus` (
   `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `active` tinyint(1) NOT NULL DEFAULT '0',
   `slug` varchar(222) DEFAULT NULL COMMENT 'leg:urlparm',
-  `rank` smallint UNSIGNED DEFAULT NULL COMMENT 'leg:tri',
 
   `label` varchar(255) NOT NULL,
 
@@ -29,7 +28,6 @@ INSERT INTO `cinergie`.`thesaurus` (
   `created_on`,
   `active`,
   `slug`,
-  `rank`,
 
   `label`,
 
@@ -39,7 +37,6 @@ SELECT
   STR_TO_DATE(datestamp,'%Y-%m-%d %H:%i:%s') as `created_on`,
   `active` as `active`,
   IF(urlparms='', null, urlparms) as `slug`,
-  tri as `rank`,
 
   title as `label`,
 
