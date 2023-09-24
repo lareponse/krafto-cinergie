@@ -20,11 +20,11 @@
 </div>
 <div class="row mb-4">
     <div class="col-lg-3">
-        <label for="legacy_photo" class="col-form-label">legacy_photo</label>
+        <label for="profilePicture" class="col-form-label">Photo principale</label>
     </div>
 
     <div class="col-lg">
-        <input type="text" class="form-control" id="legacy_photo" name="legacy_photo" value="<?= $controller->formModel()->get('legacy_photo') ?>">
+        <input type="text" class="form-control" id="profilePicture" name="profilePicture" value="<?= $controller->formModel()->profilePicturePath() ?>">
     </div>
 </div>
 

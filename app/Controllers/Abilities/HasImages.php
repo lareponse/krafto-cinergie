@@ -78,30 +78,45 @@ trait HasImages
         $targetDir = $this->buildPathTo($this->loadModel()->slug());
         $context['targetDir'] = $targetDir;
     
-        if($this->validTargetDirector($targetDir, $context))
-        {
-            foreach($_FILES['file']['name'] as $i => $filename)
-            {
-                $temporary_filename = $_FILES['file']['tmp_name'][$i];
+        $res = $this->validTargetDirector($targetDir, $context);
+        if($res !== true) {
+            $this->addError($res);
+            return $this->errors();
+        }
 
-                $targetFile = $this->buildPathTo($this->loadModel()->slug(),basename($filename));
-                
-                // Move the uploaded file to the target directory
-                vd($temporary_filename, $targetFile);
-                if(move_uploaded_file($temporary_filename, $targetFile) === false){
-                    $context = [
-                        'failed-for-filename' => $filename, 
-                        'target' => $targetFile,
-                        '$_FILES' => $_FILES,
-                    ];
-                    $this->addError('UPLOAD_FAILURE', $context);
-                }
+        foreach($_FILES['file']['name'] as $i => $filename)
+        {
+            $temporary_filename = $_FILES['file']['tmp_name'][$i];
+
+            $targetFile = $this->buildPathTo($this->loadModel()->slug(),basename($filename));
+            
+            // Move the uploaded file to the target directory
+            vd($temporary_filename, $targetFile);
+            if(move_uploaded_file($temporary_filename, $targetFile) === false){
+                $context = [
+                    'failed-for-filename' => $filename, 
+                    'target' => $targetFile,
+                    '$_FILES' => $_FILES,
+                ];
+                $this->addError('UPLOAD_FAILURE', $context);
             }
         }
 
-        vd($this->errors(), 'errors');
-
         return $this->errors();
+    }
+
+    public function setProfilePicture()
+    {
+        $this->loadModel()->set('profilePicture', $this->router()->params('path'));
+        $this->loadModel()->save(0);
+        $this->router()->hopBack();
+    }
+
+    public function unsetProfilePicture()
+    {
+        $this->loadModel()->set('profilePicture', null);
+        $this->loadModel()->save(0);
+        $this->router()->hopBack();
     }
 
     public function allowedExtension($extension): bool

@@ -14,15 +14,17 @@ trait HasProfilePicture
 
     public function hasProfilePicture(): bool
     {
-        return !empty($this->get($this->profilePictureField()));
+        return !empty($this->profilePicturePath());
+    }
+
+    public function profilePicturePath(): string
+    {
+        return $this->get($this->profilePictureField()) ?? '';
     }
 
     public function profilePicture(): string
     {
-        return empty($this->get($this->profilePictureField())) 
-            ? $this->defaultProfilePicture() 
-            : 'https://www.cinergie.be' . $this->get($this->profilePictureField());
-            // : '/public' . $this->get($this->profilePictureField());
+        return $this->hasProfilePicture() ? $this->profilePicturePath() : $this->defaultProfilePicture();
     }
 
 }
