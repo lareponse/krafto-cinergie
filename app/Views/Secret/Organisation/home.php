@@ -4,11 +4,15 @@
 
 
 <div class="card border-0 flex-fill w-100" data-list='{"valueNames": ["fullName","email","gsm"], "page": 10}' id="filesTable">
-    <div class="card-header border-0">
-        <?= isset($filters) ? $this->insert('Secret::_partials/filters/FiltersOnFirstChar', ['count' => count($listing)]) : '' ?>
-
-    </div>
-
+    <?php
+    if(!$controller->router()->params('segment')){
+        ?>
+        <div class="card-header border-0">
+            <?= isset($filters) ? $this->insert('Secret::_partials/filters/FiltersOnFirstChar', ['count' => count($listing)]) : '' ?>
+        </div>
+        <?php
+    }
+    ?>
     <div class="table-responsive">
         <table class="table table-clickable align-middle table-hover table-nowrap mb-0">
             <thead class="thead-light">

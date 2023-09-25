@@ -1,12 +1,12 @@
 <div class="row">
 
-    <div class="col-sm-6 col-xxl-3 d-flex">
-        <a href="<?= $controller->router()->hyp('dash_organisations', ['segment' => 'partenaires']); ?>" class="card border-0 flex-fill w-100">
+    <div class="col-sm-6 col-lg-4 col-xl-3 d-flex">
+        <a href="<?= $controller->router()->hyp('dash_records', ['controller'=>$controller->className()]); ?>" class="card border-0 flex-fill w-100">
 
             <div class="card-body">
                 <div class="row">
                     <div class="col">
-                        <h5 class="text-uppercase text-muted fw-semibold mb-2">Organisations</h5>
+                        <h5 class="text-uppercase text-muted fw-semibold mb-2">Total</h5>
                         <h2 class="mb-0"><?= $counters['organisations']; ?></h2>
                     </div>
                     <div class="col-auto">
@@ -17,7 +17,7 @@
         </a>
     </div>
 
-    <div class="col-sm-6 col-xxl-3 d-flex">
+    <div class="col-sm-6 col-lg-4 col-xl-3 d-flex">
         <a href="<?= $controller->router()->hyp('dash_organisations_by_segment', ['segment' => 'partenaires']); ?>" class="card border-0 flex-fill w-100">
             <div class="card-body">
                 <div class="row">
@@ -33,7 +33,7 @@
         </a>
     </div>
 
-    <div class="col-sm-6 col-xxl-3 d-flex">
+    <div class="col-sm-6 col-lg-4 col-xl-3 d-flex">
         <a href="<?= $controller->router()->hyp('dash_organisations_by_segment', ['segment' => 'inactives']); ?>" class="card border-0 flex-fill w-100">
 
             <div class="card-body">
@@ -50,7 +50,7 @@
         </a>
     </div>
 
-    <div class="col-sm-6 col-xxl-3 d-flex">
+    <div class="col-sm-6 col-lg-4 col-xl-3 d-flex">
         <a href="<?= $controller->router()->hyp('dash_organisations_by_segment', ['segment' => 'unlisted']); ?>" class="card border-0 flex-fill w-100">
 
             <div class="card-body">
@@ -61,6 +61,40 @@
                     </div>
                     <div class="col-auto">
                         <?= $this->icon('disable', 30, ['class' => 'text-primary']); ?>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 col-xl-3 d-flex">
+        <a href="<?= $controller->router()->hyp('dash_organisations_by_segment', ['segment' => 'withoutContent']); ?>" class="card border-0 flex-fill w-100">
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h5 class="text-uppercase text-muted fw-semibold mb-2">Sans contenu</h5>
+                        <h2 class="mb-0"><?= $counters['withoutContent']; ?></h2>
+                    </div>
+                    <div class="col-auto">
+                        <?= $this->icon('text', 30, ['class' => 'text-primary']); ?>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 col-xl-3 d-flex">
+        <a href="<?= $controller->router()->hyp('dash_organisations_by_segment', ['segment' => 'withoutProfilePicture']); ?>" class="card border-0 flex-fill w-100">
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h5 class="text-uppercase text-muted fw-semibold mb-2">Sans photo</h5>
+                        <h2 class="mb-0"><?= $counters['withoutProfilePicture']; ?></h2>
+                    </div>
+                    <div class="col-auto">
+                        <?= $this->icon('profilePicture', 30, ['class' => 'text-primary']); ?>
                     </div>
                 </div>
             </div>

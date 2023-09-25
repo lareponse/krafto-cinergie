@@ -31,10 +31,18 @@ class Organisation extends Krafto
     private function counters()
     {
         $counting = 'select count(id) FROM organisation';
-        $counters = ['organisations' => null, 'partners' => 'isPartner = 1', 'inactives' => 'active = 0', 'unlisted' => 'isListed = 0'];
+        $counters = [
+            'organisations' => null, 
+            'partners' => 'isPartner = 1', 
+            'inactives' => 'active = 0',
+            'unlisted' => 'isListed = 0',
+            'withoutProfilePicture' => "(TRIM(profilePicture) = '' OR profilePicture IS NULL)",
+            'withoutContent' => "(TRIM(content) = '' OR content IS NULL)"
+        ];
 
         return array_map(function ($condition) use ($counting) {
             $query = $counting . ($condition ? ' where ' . $condition : '');
+            // vd($query);
             return $this->modelClassName()::raw($query)->fetchColumn();
         }, $counters);
 
@@ -51,9 +59,9 @@ class Organisation extends Krafto
         $this->viewport('movies', Movie::filter(['organisation' => $this->loadModel()], ['eager' => false]));
     }
 
-    public function edit(): void
+    public function alter(): void
     {
-        if (is_null($this->loadModel()))
-            $this->router()->hop('dash_organisations');
+        // if (is_null($this->loadModel()))
+        //     $this->router()->hopURL($this->url('list'));
     }
 }

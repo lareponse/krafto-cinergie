@@ -102,13 +102,23 @@ class Organisation extends TightModel
                     $Query->whereEQ('isPartner', 1);
                     $Query->orderBy([$Query->table(), 'rank', 'ASC']);
                 break;
+                
                 case 'inactives':
                     $Query->whereNotEQ('active',1);
                     $Query->orderBy([$Query->table(), 'rank', 'ASC']);
                 break;
+
                 case 'unlisted':
                     $Query->whereNotEQ('isListed', 1);
                     $Query->orderBy([$Query->table(), 'rank', 'ASC']);
+                break;
+
+                case 'withoutContent':
+                    $Query->whereEmpty('content');
+                break;
+
+                case 'withoutProfilePicture':
+                    $Query->whereEmpty('profilePicture');
                 break;
             }
 
