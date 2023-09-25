@@ -112,7 +112,15 @@ $settings['urls'] = [
 ];
 
 $settings['images'] = [
-  'allowedExtensions' => ['jpg', 'jpeg', 'png', 'gif']
+  'allowedMIMETypes' => [
+    'image/jpeg',
+    'image/png',
+    'image/gif',
+    'image/webp',
+    'image/tiff',
+    'image/bmp',
+    'image/svg+xml'
+  ]
 ];
 
 $settings['import']['directory'] = DOCUMENT_ROOT.'/import/';

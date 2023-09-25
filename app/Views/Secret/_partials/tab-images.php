@@ -13,26 +13,27 @@
 
     <?php
     foreach ($images as $image) {
-        $path = $controller->buildURLTo($controller->loadModel()->slug(), $image);
+        $path = $controller->buildRelativeLocator($image);
     ?>
         <div class="col-md-6 col-xl-3">
             
             <!-- Card -->
             <div class="card border-0">
   
-                <div href="<?= '@' ?>" class="card-body card-image-background  cursor-move" style="background-image:url('<?= $path; ?>');">
+                <div href="<?= '@' ?>" class="card-body card-image-background  cursor-move" style="background-image:url('<?= $fileManager->absoluteURLFor($path); ?>');">
                 </div>
 
                 <div class="controls">
                     <?php 
-                    $route = $controller->router()->hyp('relation_image_unlink', ['controller' => $controller->className(), 'id' => $controller->loadModel()->getID()]); 
+                    $route = $controller->router()->hyp('dash_relation_image_unlink', ['controller' => $controller->className(), 'id' => $controller->loadModel()->getID()]); 
                     ?>
                     <form action="<?= $route ?>" method="POST" class="control">
                         <input type="hidden" name="filename" value="<?= $image?>" />
-                        <button type="submit" href="#" class="icon text-primary p-1"><?= $this->icon('delete', 18);?></button>
+                        <button type="submit" class="icon text-primary p-1"><?= $this->icon('delete', 18);?></button>
                     </form>
 
                     <?php
+                    
                     if($controller->loadModel()->hasProfilePicture() && $controller->loadModel()->profilePicturePath() === $path){
                         $class = 'text-success';
                         $href = $controller->router()->hyp('dash_record_unset_profile_picture', ['controller' => $controller->className(), 'id' => $controller->loadModel()->getID()]);
