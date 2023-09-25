@@ -21,6 +21,7 @@ array_push($routes,
 array_push($routes,
     ['GET', 'image/[*:reference]/supprimer', 'Image::delete', 'image_delete'],
     ['GET', 'image/[*:reference]/detail', 'Image::delete', 'image_view'],
+    ['GET', 'images/deadlinks/[a:controller]', 'Image::deadlinks', 'images_deadlinks']
 );
 
 
@@ -38,7 +39,7 @@ array_push($routes,
     ['POST', '[a:controller]/supprimer', '::delete', 'record_delete'],
     ['POST', '[a:controller]/enregistrer', '::save', 'record_save'],
 
-    ['POST',  '[a:controller]/[i:id]/upload', '::imageUpload', 'record_upload'],
+    ['POST',  '[a:controller]/[i:id]/upload', '::dropzoneUpload', 'record_upload'],
     ['POST',  '[a:controller]/[i:id]/images/supprimer', '::imageUnlink', 'relation_image_unlink'],
 
     ['GET',  '[a:controller]/[i:id]/images/setProfile/[*:path]', '::setProfilePicture', 'record_set_profile_picture'],
