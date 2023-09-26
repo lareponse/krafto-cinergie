@@ -3,6 +3,8 @@
 namespace App\Controllers\Secret;
 
 use App\Models\Article;
+use App\Controllers\Abilities\Imagine;
+use App\Controllers\Abilities\FileManager;
 
 class Image extends Krafto
 {
@@ -13,10 +15,41 @@ class Image extends Krafto
 
     }
 
+    public function alternates()
+    {
+        $testPictures = [
+            // 'film/_s/sur-le-champ/sur-le-champs-affiche.jpg',
+            'film/_x/x-film-autopsie-d-une-enquete/cover.jpg',
+            'personne/_j/jacob-marine/marine_jacob.jpg',
+            'personne/_j/jacob-marine/13001204_1790519544509377_5333094279074092783_n.jpg'
+        ];
+
+        $rootpath = $this->get('settings.folders.images');
+
+        $formats = [
+            'thumbnail' => ['width' => 250, 'height' => 250],
+            'article-card' => ['width' => 400, 'height' => 250],
+            'slick-slide' => ['width' => 250, 'height' => 280, 'fill' => 'FFFFFF'],
+            'single-film' => ['width' => 540, 'height' => 360, 'fill' => 'FFFFFF'],
+            'single-professional' => ['width' => 400, 'height' => 450, 'fill' => '000000'],
+            'single-organisation' => ['width' => 400, 'height' => 400, 'fill' => '000000'],
+            'single-article' => ['width' => 1300, 'height' => 600, 'fill' => '000000'],
+            'banner' => ['width' => 1920, 'height' => 650, 'fill' => '000000'],
+        ];
+
+        $fileManager = new FileManager($rootpath);
+
+        foreach($testPictures as $testPicture){
+            $imageResizer = new Imagine($fileManager, $testPicture);
+            $imageResizer->setSaveDirectory($rootpath . '/generated');
+            $imageResizer->createAlternateVersions($formats);
+        }
+        die('STOP');
+
+    }
     public function deadlinks()
     {
         $articles = Article::queryListing();
-        // $articles->columns(['article.id, article.label, article.content, article.slug, article.legacy_id']);
         $articles->selectAlso(['article.content', 'article.id']);
         $articles->whereLike('content', '%src="%');
         // $articles->limit(100,0);

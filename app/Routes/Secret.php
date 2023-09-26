@@ -21,7 +21,10 @@ array_push($routes,
 array_push($routes,
     ['GET', 'image/[*:reference]/supprimer', 'Image::delete', 'image_delete'],
     ['GET', 'image/[*:reference]/detail', 'Image::delete', 'image_view'],
-    ['GET', 'images/deadlinks/[a:controller]', 'Image::deadlinks', 'images_deadlinks']
+    ['GET', 'images/deadlinks/[a:controller]', 'Image::deadlinks', 'images_deadlinks'],
+    ['GET', 'images/alternates', 'Image::alternates', 'images_alternates']
+    
+
 );
 
 
