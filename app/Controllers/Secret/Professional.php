@@ -41,7 +41,7 @@ class Professional extends Krafto
     }
 
     // trait HasImages
-    public function imagesClassPath()
+    public function imagesDirectory()
     {
         return 'personne';
     }

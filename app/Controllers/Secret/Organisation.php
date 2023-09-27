@@ -64,4 +64,8 @@ class Organisation extends Krafto
         // if (is_null($this->loadModel()))
         //     $this->router()->hopURL($this->url('list'));
     }
+
+    public function imagesDirectory(){
+        return 'organisation';
+    }
 }

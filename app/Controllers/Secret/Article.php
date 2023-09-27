@@ -4,12 +4,11 @@ namespace App\Controllers\Secret;
 
 use App\Models\{Author, Professional, Organisation, Movie};
 
-class Article extends Krafto
+class Article extends Krafto 
 {
     use \App\Controllers\Abilities\HasORM;
     use \App\Controllers\Abilities\HasSlug;
     use \App\Controllers\Abilities\HasImages;
-
     use \App\Controllers\Abilities\FiltersOnYearAndMonth;
 
     public function view()
@@ -18,5 +17,9 @@ class Article extends Krafto
         $this->viewport('professionals', Professional::filter(['article' => $this->loadModel()], ['eager' => false]));
         $this->viewport('movies', Movie::filter(['article' => $this->loadModel()], ['eager' => false]));
         $this->viewport('organisations', Organisation::filter(['article' => $this->loadModel()], ['eager' => false]));
+    }
+
+    public function imagesDirectory(){
+        return 'article';
     }
 }
