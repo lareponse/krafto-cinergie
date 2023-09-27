@@ -31,7 +31,7 @@ class Movie extends Krafto
             $this->router()->hop($this->urlFor($this->className(), 'list', null, ['FiltersOnFirstChar' => 'A']));
         }
 
-        parent::home()
+        parent::home();
     }
 
     public function view()
@@ -46,13 +46,7 @@ class Movie extends Krafto
         $this->viewport('organisations', Organisation::filter(['movie' => $this->loadModel()], ['eager' => false]));
     }
 
-    public function alter():void
-    {
-
-    }
-    
-    // trait HasImages
-    public function imagesClassPath(){
+    public function imagesDirectory(){
         return 'film';
     }
 
