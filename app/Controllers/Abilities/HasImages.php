@@ -13,7 +13,7 @@ trait HasImages
     abstract public function imagesDirectory(): string;
     
 
-    public function HasImages__Traitor_after_view()
+    public function HasImages__Traitor_after_view(){
         $controller = $this->get('Controllers\\Secret\\Image');
         $directory = $controller->buildRelativeLocator($this);
         $fs = new FileSystem($controller->imagesRootPath());
