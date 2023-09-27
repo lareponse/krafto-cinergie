@@ -90,7 +90,13 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
                 $action_label = 'consulter';
                 break;
             case 'edit':
-                $action_label = 'modifier';
+            case 'alter':
+                if($this->loadModel()){
+                    $action_label = 'Modification';
+                }
+                else{
+                    $action_label = 'Création';
+                }
                 break;
         }
         if (!is_null($action_label))
@@ -105,13 +111,10 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
 
     public function home()
     {
-
-        
         $listing = $this->modelClassName()::filter($this->router()->params());
         $this->viewport('listing', $listing);
         $this->viewport('filters', $this->router()->params());
     }
-
 
     public function actionFor($action, $model, $extras = [])
     {
