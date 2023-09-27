@@ -47,7 +47,7 @@ $routes = [
   ['GET', 'organisations/[*:params]?', 'Organisation::organisations', 'organisations'],
   ['POST', 'organisation/ajout', 'Organisation::add', 'organisation_add'],
   ['GET|POST', 'organisation/modifier/[*:slug]', 'Organisation::edit', 'organisation_edit'],
-  ['GET', 'organisation/activite/[*:praxis]', 'Organisation::search', 'organisation_by_praxis'],
+  // ['GET', 'organisation/activite/[*:praxis]', 'Organisation::search', 'organisation_by_praxis'],
   ['GET', 'organisation/[*:slug]', 'Organisation::organisation', 'organisation'],
 
   // pages
