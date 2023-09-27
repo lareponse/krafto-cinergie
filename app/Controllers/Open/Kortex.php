@@ -37,7 +37,7 @@ abstract class Kortex extends \HexMakina\kadro\Controllers\Kadro
         $this->viewport('record', $this->record());
 
         if (is_null($this->template)) {
-            $fallback = 'Open::' . $this->className() . '/' . $this->router()->targetMethod();
+            $fallback = 'Open::' . $this->className() . DIRECTORY_SEPARATOR . $this->router()->targetMethod();
             $this->template = $fallback;
         }
         
