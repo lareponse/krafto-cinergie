@@ -2,12 +2,18 @@
 
 namespace App\Controllers\Abilities;
 
+use \HexMakina\LocalFS\FileSystem;
+use HexMakina\LocalFS\File;
 
 class FileUploader
 {
     private $uploadDirectory;
     private $errors;
+
+    // array of allowed MIME types for file upload, indexed by MIME type
     private $allowedMimeTypes;
+
+    private FileSystem $fileSystem;
 
     /**
      * Constructs a new FileUploader instance.
@@ -23,15 +29,19 @@ class FileUploader
      * @throws \InvalidArgumentException Thrown if the directory could not be validated.
      * 
      */
-
-    public function __construct(string $targetDirectory, array $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif'])
+    public function __construct(FileSystem $fileSystem, string $targetDirectory)
     {
-        $this->ensureWritableDirectory($targetDirectory);
-
-        $this->uploadDirectory = $targetDirectory;
-        $this->allowedMimeTypes = $allowedMimeTypes;
+        $this->fileSystem = $fileSystem;
+        $this->uploadDirectory = $this->fileSystem->absolutePathFor($targetDirectory);
+        $this->fileSystem->ensureWritablePath($this->uploadDirectory);
 
         $this->errors = [];
+    }
+
+    // add setter for allowedMimeTypes
+    public function setAllowedMIMETypes(array $allowedMimeTypes): void
+    {
+        $this->allowedMimeTypes = $allowedMimeTypes;
     }
 
     public function errors(): array
@@ -202,7 +212,7 @@ class FileUploader
      */
     private function sanitizeFilepath(string $finalUniqueName): string
     {
-        $finalPath = $this->uploadDirectory . '/' . $finalUniqueName;
+        $finalPath = $this->uploadDirectory . DIRECTORY_SEPARATOR . $finalUniqueName;
         $realPath = realpath(dirname($finalPath));
         if (strpos($realPath, realpath($this->uploadDirectory)) !== 0) {
             throw new \InvalidArgumentException('POTENTIAL_DIRECTORY_TRAVERSAL_ATTACK');
@@ -223,8 +233,11 @@ class FileUploader
      */
     private function sanitizeFilename(string $baseName): string
     {
-        $transliterated = iconv('UTF-8', 'ASCII//TRANSLIT', $baseName);
-        return preg_replace("/[^a-zA-Z0-9\-\_]/", "-", $transliterated);
+        $res = iconv('UTF-8', 'ASCII//TRANSLIT', $baseName);
+        $res = mb_strtolower($res);
+        $res = preg_replace("/[^a-zA-Z0-9\-\_]/", "-", $res);
+
+        return $res;
     }
 
     /**
@@ -260,61 +273,14 @@ class FileUploader
      * @param string $tmpName The temporary name of the uploaded file.
      * @return bool True if the MIME type is allowed, false otherwise.
      */
-    private function hasAllowedMIMEType(string $tmpName): bool
+    private function hasAllowedMIMEType(string $absolutePath): bool
     {
         if (empty($this->allowedMimeTypes)) {
             return true;
         }
-        return in_array($this->getMIMEType($tmpName), $this->allowedMimeTypes);
-    }
 
-    /**
-     * Retrieves the MIME type of an uploaded file.
-     *
-     * This method uses the 'fileinfo' extension to identify the MIME type of the file specified by its 
-     * temporary name.
-     *
-     * @param string $tmpName The temporary name of the uploaded file.
-     * @return string The MIME type of the file.
-     */
-    private function getMIMEType(string $tmpName): string
-    {
-        $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        $mimeType = finfo_file($finfo, $tmpName);
-        finfo_close($finfo);
+        $file = new File($absolutePath);
 
-        return $mimeType;
-    }
-
-    /**
-     * Ensures that the specified target directory is writable.
-     *
-     * This method validates the target directory by performing three checks:
-     * 1. It attempts to create the directory if it does not already exist.
-     * 2. It checks if the target is actually a directory.
-     * 3. It checks if the directory is writable.
-     *
-     * Exceptions are thrown if any of these checks fail.
-     *
-     * @param string $targetDir The path of the directory to validate.
-     * @return bool True if the directory is writable, false otherwise.
-     * @throws \InvalidArgumentException Thrown if the directory could not be validated.
-     */
-    private function ensureWritableDirectory(string $targetDir): bool
-    {
-        // Create the folder if it doesn't exist
-        if (!file_exists($targetDir) && mkdir($targetDir, 0755, true) === false) {
-            throw new \InvalidArgumentException('UNABLE_TO_CREATE_MISSING_TARGET_DIRECTORY');
-        }
-
-        if (!is_dir($targetDir)) {
-            throw new \InvalidArgumentException('TARGET_DIRECTORY_NOT_A_DIRECTORY');
-        }
-
-        if (!is_writable($targetDir)) {
-            throw new \InvalidArgumentException('TARGET_DIRECTORY_NOT_WRITABLE');
-        }
-
-        return true;
+        return isset($this->allowedMimeTypes[$file->getMIMEType()]);
     }
 }
