@@ -2,41 +2,75 @@
 
 namespace App\Controllers\Abilities;
 
-use App\Controllers\Abilities\FileManager;
+use \HexMakina\LocalFS\{FileSystem, File};
 
 class Imagine
 {
+    private const DEFAULT_FILL = '000000';
 
-    const DEFAULT_FILL = '000000';
+    private const SUPPORTED_MIME = [
+        'image/jpeg' => 'imagecreatefromjpeg',
+        'image/png' => 'imagecreatefrompng',
+        'image/gif' => 'imagecreatefromgif',
+        'image/webp' => 'imagecreatefromwebp',
+        'image/avif' => 'imagecreatefromavif',
+        'image/bmp' => 'imagecreatefrombmp',
+        'image/xbm' => 'imagecreatefromxbm',
+        'image/xpm' => 'imagecreatefromxpm',
+    ];
+
     private $originalImage;
-    private $fileManager;
+    private File $file;
+
+    private $fileSystem;
     private $pathToOriginalImage;
-    private $saveDirectory; // new property to hold the directory to save the generated images
+    private $quality = null;
 
-    public function __construct(FileManager $fileManager, $pathToOriginalImage)
+    public function __construct(FileSystem $fileSystem, $pathToOriginalImage)
     {
-        $this->fileManager = $fileManager;
+        $this->fileSystem = $fileSystem;
         $this->pathToOriginalImage = $pathToOriginalImage;
-        $this->originalImage = imagecreatefromjpeg($this->fileManager->absolutePathFor($pathToOriginalImage));
+        $this->file = new File($this->fileSystem->absolutePathFor($pathToOriginalImage));
+
+        $this->originalImage = $this->createImageResource();
     }
 
-    public function setSaveDirectory($directory)
-    { // new setter method to set the save directory
+    /**
+     * Creates an image resource from the given path to the original image.
+     *
+     * @return resource The image resource.
+     * @throws \Exception If the image type is not supported.
+     */
 
-        $this->saveDirectory = $directory;
+    private function createImageResource()
+    {
+        $mimeType = $this->file->getMIMEType(true);
+
+        if (!isset(self::SUPPORTED_MIME[$mimeType]))
+            throw new \InvalidArgumentException('UNSUPPORTED_IMAGE_TYPE');
+
+        $image = self::SUPPORTED_MIME[$mimeType]($this->file->path());
+
+        if($image === false)
+            throw new \InvalidArgumentException('UNSUPPORTED_IMAGE_TYPE');
+
+        return $image;
     }
 
-    
+
+    public function setQuality(int $percentage)
+    {
+        $this->quality = $percentage;
+    }
 
     public function createAlternateVersions($dimensions)
     {
         $originalImage = $this->originalImage;
         $originalWidth = imagesx($originalImage);
         $originalHeight = imagesy($originalImage);
-        // vd("$originalWidth x $originalHeight", $this->pathToOriginalImage);
     
-        $originalImageName = pathinfo($this->pathToOriginalImage, PATHINFO_FILENAME) . '.' . pathinfo($this->pathToOriginalImage, PATHINFO_EXTENSION);
-        $this->saveImage($originalImage, $originalImageName);
+        // $originalImageName = pathinfo($this->pathToOriginalImage, PATHINFO_FILENAME) . '.' . pathinfo($this->pathToOriginalImage, PATHINFO_EXTENSION);
+        // $this->saveImage($originalImage, $originalImageName);
 
         foreach ($dimensions as $format => $dimension) {
             $expectedWidth = $dimension['width'];
@@ -46,14 +80,12 @@ class Imagine
             list($newWidth, $newHeight) = $this->calculateNewDimensions($originalWidth, $originalHeight, $dimension);
             
             $newImage = $this->resizeImage($originalImage, $newWidth, $newHeight);
-            // $savePath = "{$originalImageName}_{$newWidth}x{$newHeight}_resized.jpg";
-            // $this->saveImage($newImage, $savePath);
             // if the new width or new height matches the original width or height, but the other dimension is bigger than the expected dimension, crop the image
             if (($newWidth == $expectedWidth && $newHeight > $expectedHeight) || ($newHeight == $expectedHeight && $newWidth > $expectedWidth)) {
                 $newImage = $this->cropImage($newImage, $newWidth, $newHeight, $dimension);
                 $newWidth = imagesx($newImage);
                 $newHeight = imagesy($newImage);
-                vd("$newWidth x $newHeight", 'cropped');
+                // vd("$newWidth x $newHeight", 'cropped');
             }
             else{
                 // if the new width or new height matches the expected width or height, but the other dimenson is smaller than the expected dimension, slap it on black background that has the expected dimension
@@ -76,11 +108,12 @@ class Imagine
         $basename = pathinfo($this->pathToOriginalImage, PATHINFO_FILENAME);
         $dirname = pathinfo($this->pathToOriginalImage, PATHINFO_DIRNAME);
         $savePath = "{$dirname}/{$basename}/{$format}.jpg";
-        $savePath = $this->fileManager->absolutePathFor($savePath);
+        $absoluteSavePath = $this->fileSystem->absolutePathFor($savePath);
 
-        $this->fileManager->ensureWritablePath($savePath, $this->fileManager->rootDirectory());
-        imagejpeg($newImage, $savePath);
+        $this->fileSystem->ensureWritablePath($absoluteSavePath, $this->fileSystem->root());
+        imagejpeg($newImage, $absoluteSavePath);
     }
+
     // write resizeImage method to resize image according to new dimensions
     private function resizeImage($originalImage, $newWidth, $newHeight)
     {
@@ -178,8 +211,6 @@ class Imagine
         
         return $newImage;
     }
-
-
 
     private function addBackground($image, int $width, int $height, string $hexFill)
     {
