@@ -15,29 +15,22 @@ trait HasORM
     {
         // handles POST requests
         if ($this->router()->submits()) {
+            // quickly fixes booleans/checkboxes
             $datass = $this->fixMissingBooleans($this->router()->submitted());
+            
+            // imports all data into model
             $this->formModel()->import($datass);
 
-            $pk_values = $this->modelClassName()::table()->primaryKeysMatch($this->router()->submitted());
-            $this->load_model = $this->modelClassName()::exists($pk_values);
-
-            if (is_null($this->load_model)) {
-                $pk_values = $this->modelClassName()::table()->primaryKeysMatch($this->router()->params());
-                $this->load_model = $this->modelClassName()::exists($pk_values);
-            }
         } elseif ($this->router()->requests()) {
-            $pk_values = $this->modelClassName()::table()->primaryKeysMatch($this->router()->params());
-            $this->load_model = $this->modelClassName()::exists($pk_values);
-
             if (!is_null($this->loadModel())) {
                 $this->formModel(clone $this->loadModel());
             }
         }
     }
 
+
     public function HasORMTraitor_conclude(): void
     {
-        ddt('here');
         $this->viewport('model_type', $this->modelClassName()::model_type());
     }
 
@@ -60,6 +53,16 @@ trait HasORM
 
     public function loadModel()
     {
+        if(is_null($this->load_model))
+        {
+            // identify and load a hypothetical record using POST data
+            if($this->router()->submits())
+                $this->load_model = $this->modelClassName()::fatch($this->router()->submitted());
+            // if no POST data, try to load a record using the router's params
+            if(is_null($this->load_model))
+                $this->load_model = $this->modelClassName()::fatch($this->router()->params());
+        }
+
         return $this->load_model;
     }
 
@@ -75,14 +78,18 @@ trait HasORM
         return $post_data;
     }
 
+    public function alter()
+    {
+    }
+
     public function save()
     {
         $model = $this->persist_model($this->formModel());
         if (empty($this->errors())) {
-            $this->router()->hop('dash_' . get_class($model)::model_type(), ['id' => $model->getID()]);
+            $this->router()->hop('dash_record', ['controller' => $this->className(), 'id' => $model->getID()]);
+
         } else {
-            dd($this->errors());
-            // should go back to edit $this->edit();
+            $this->setTemplate('alter');
         }
     }
 
