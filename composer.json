@@ -5,14 +5,16 @@
           "HexMakina\\kadro\\"      : "lib/kadro/src/",
           "HexMakina\\LeMarchand\\" : "lib/LeMarchand/src/",
           "HexMakina\\Lezer\\"      : "lib/Lezer/",
-          "HexMakina\\Traitor\\"      : "lib/Traitor/src",
+          "HexMakina\\Traitor\\"    : "lib/Traitor/src",
           "HexMakina\\Crudites\\"   : "lib/Crudites/src/",
           "HexMakina\\TightORM\\"   : "lib/TightORM/src/",
           "HexMakina\\StateAgent\\" : "lib/StateAgent/src/",
           "HexMakina\\Marker\\"     : "lib/Marker/src/",
           "HexMakina\\BlackBox\\"   : "lib/BlackBox/",
           "HexMakina\\LogLaddy\\"   : "lib/LogLaddy/src/",
+          "HexMakina\\LocalFS\\"    : "lib/LocalFS/",
           "HexMakina\\Hopper\\"     : "lib/Hopper/",
+          "HexMakina\\Deadites\\"   : "lib/Deadites/src",
           "HexMakina\\Debugger\\"   : "lib/Debugger/"
       }
   },
