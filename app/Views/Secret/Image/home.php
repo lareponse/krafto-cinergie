@@ -14,7 +14,7 @@
 <div class="row">
 
     <div class="col-sm-6 col-lg-4 col-xl-3 d-flex">
-        <a href="<?= $controller->router()->hyp('dash_images_deadlinks', ['controller' => 'Article']); ?>" class="card border-0 flex-fill w-100">
+        <a href="<?= $controller->router()->hyp('dash_images_deadlinks', ['externalController' => 'Article']); ?>" class="card border-0 flex-fill w-100">
             <div class="card-body">
                 <div class="row">
                     <div class="col">
@@ -30,7 +30,7 @@
     </div>
     <div class="col-sm-6 col-lg-4 col-xl-3 d-flex">
 
-        <a href="<?= $controller->router()->hyp('dash_images_deadlinks', ['controller' => 'Organisation']); ?>" class="card border-0 flex-fill w-100">
+        <a href="<?= $controller->router()->hyp('dash_images_deadlinks', ['externalController' => 'Organisation']); ?>" class="card border-0 flex-fill w-100">
 
             <div class="card-body">
                 <div class="row">
@@ -48,7 +48,7 @@
     </div>
     <div class="col-sm-6 col-lg-4 col-xl-3 d-flex">
 
-        <a href="<?= $controller->router()->hyp('dash_images_deadlinks', ['controller' => 'Professional']); ?>" class="card border-0 flex-fill w-100">
+        <a href="<?= $controller->router()->hyp('dash_images_deadlinks', ['externalController' => 'Professional']); ?>" class="card border-0 flex-fill w-100">
 
             <div class="card-body">
                 <div class="row">
