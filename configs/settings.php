@@ -113,13 +113,14 @@ $settings['urls'] = [
 
 $settings['images'] = [
   'allowedMIMETypes' => [
-    'image/jpeg',
-    'image/png',
-    'image/gif',
-    'image/webp',
-    'image/tiff',
-    'image/bmp',
-    'image/svg+xml'
+    'image/jpeg' => 'imagecreatefromjpeg',
+    'image/png' => 'imagecreatefrompng',
+    'image/gif' => 'imagecreatefromgif',
+    'image/webp' => 'imagecreatefromwebp',
+    'image/avif' => 'imagecreatefromavif',
+    'image/bmp' => 'imagecreatefrombmp',
+    'image/xbm' => 'imagecreatefromxbm',
+    'image/xpm' => 'imagecreatefromxpm',
   ]
 ];
 

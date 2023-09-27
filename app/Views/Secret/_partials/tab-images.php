@@ -13,25 +13,30 @@
 
     <?php
     foreach ($images as $image) {
-        $path = $controller->buildRelativeLocator($image);
+        $path = $directory . '/'.$image;
+        $url = $controller->get('settings.urls.images');
     ?>
         <div class="col-md-6 col-xl-3">
             
             <!-- Card -->
             <div class="card border-0">
   
-                <div href="<?= '@' ?>" class="card-body card-image-background  cursor-move" style="background-image:url('<?= $fileManager->absoluteURLFor($path); ?>');">
+                <div href="<?= '@' ?>" class="card-body card-image-background  cursor-move" style="background-image:url('<?= $url.'/'.$path; ?>');">
                 </div>
 
                 <div class="controls">
                     <?php 
-                    $route = $controller->router()->hyp('dash_relation_image_unlink', ['controller' => $controller->className(), 'id' => $controller->loadModel()->getID()]); 
+                    $route_params = [
+                        'controller' => $controller->className(), 
+                        'slug' => $controller->loadModel()->slug(), 
+                        'filename' => $image
+                    ];
+                    $route = $controller->router()->hyp('image_delete', $route_params); 
                     ?>
                     <form action="<?= $route ?>" method="POST" class="control">
                         <input type="hidden" name="filename" value="<?= $image?>" />
                         <button type="submit" class="icon text-primary p-1"><?= $this->icon('delete', 18);?></button>
                     </form>
-
                     <?php
                     
                     if($controller->loadModel()->hasProfilePicture() && $controller->loadModel()->profilePicturePath() === $path){
@@ -47,7 +52,14 @@
                     }
                     ?>
                     <a href="<?= $href?>" class="control <?= $class ?> p-1"><?= $this->icon('profilePicture', 18, ['title' => $title]);?></a>
-                    <a href="#" class="control text-secondary p-1"><?= $this->icon('eye', 18);?></a>
+                    <?php
+                    $route_params = [
+                        'controller' => $controller->className(), 
+                        'slug' => $controller->loadModel()->slug(),
+                        'filename' => $image
+                    ];
+                    ?>
+                    <a href="<?=$controller->router()->hyp('dash_image_details', $route_params)?>" class="control text-secondary p-1"><?= $this->icon('eye', 18);?></a>
                 </div>
             </div>
         </div>

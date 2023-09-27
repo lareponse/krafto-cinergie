@@ -19,12 +19,13 @@ array_push($routes,
 
 
 array_push($routes,
-    ['GET', 'image/[*:reference]/supprimer', 'Image::delete', 'image_delete'],
-    ['GET', 'image/[*:reference]/detail', 'Image::delete', 'image_view'],
-    ['GET', 'images/deadlinks/[a:controller]', 'Image::deadlinks', 'images_deadlinks'],
-    ['GET', 'images/alternates', 'Image::alternates', 'images_alternates']
-    
+    ['GET', 'image/details/[a:externalController]/slug/[*:slug]/file/[*:filename]', 'Image::details', 'image_details'],
+    ['POST', 'image/delete/[a:externalController]/slug/[*:slug]/file/[*:filename]', 'Image::delete', 'image_delete'],
 
+    ['GET', 'images/deadlinks/[a:externalController]', 'Image::deadlinks', 'images_deadlinks'],
+    ['GET', 'images/alternates', 'Image::alternates', 'images_alternates'],
+
+    ['POST',  '[a:controller]/[i:id]/upload', 'Image::dropzoneUpload', 'image_upload'],
 );
 
 
@@ -42,8 +43,6 @@ array_push($routes,
     ['POST', '[a:controller]/supprimer', '::delete', 'record_delete'],
     ['POST', '[a:controller]/enregistrer', '::save', 'record_save'],
 
-    ['POST',  '[a:controller]/[i:id]/upload', '::dropzoneUpload', 'record_upload'],
-    ['POST',  '[a:controller]/[i:id]/images/supprimer', '::imageUnlink', 'relation_image_unlink'],
 
     ['GET',  '[a:controller]/[i:id]/images/setProfile/[*:path]', '::setProfilePicture', 'record_set_profile_picture'],
     ['GET',  '[a:controller]/[i:id]/images/unsetProfile', '::unsetProfilePicture', 'record_unset_profile_picture']

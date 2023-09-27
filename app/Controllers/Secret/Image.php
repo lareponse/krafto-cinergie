@@ -4,27 +4,61 @@ namespace App\Controllers\Secret;
 
 use App\Models\Article;
 use App\Controllers\Abilities\Imagine;
-use App\Controllers\Abilities\FileManager;
+use App\Controllers\Abilities\FileUploader;
+use \HexMakina\LocalFS\FileSystem;
+use \HexMakina\Deadites\Deadites;
 
 class Image extends Krafto
 {
-    private $queries = [];
+    private $fileSystem;
+
+    private $externalController = null;
+    private $slug = null;
 
     public function home()
     {
+
+    }
+    
+    public function imagesRootURL(): string
+    {
+        return $this->get('settings.urls.images');
+    }
+
+    public function imagesRootPath(): string
+    {
+        return $this->get('settings.folders.images');
+    }
+
+    public function fileSystem(): FileSystem
+    {
+        if (is_null($this->fileSystem))
+            $this->fileSystem = new FileSystem($this->get('settings.folders.images'));
+
+        return $this->fileSystem;
+    }
+
+    public function details()
+    {
+        $controller = $this->router()->params('controller');
+        $controller = $this->get('App\\Controllers\\Secret\\' . $controller);
+        $slug = $this->router()->params('slug');
+        $directory = $this->buildRelativeLocator($controller, $slug);
+        // $filename = $this->router()->params('filename');
+        dd($directory);
+        // $this->viewport('filename', $filename);
+        // $this->viewport('alternates', $files);
 
     }
 
     public function alternates()
     {
         $testPictures = [
-            // 'film/_s/sur-le-champ/sur-le-champs-affiche.jpg',
-            'film/_x/x-film-autopsie-d-une-enquete/cover.jpg',
-            'personne/_j/jacob-marine/marine_jacob.jpg',
-            'personne/_j/jacob-marine/13001204_1790519544509377_5333094279074092783_n.jpg'
+            'movie/_s/sur-le-champ/sur-le-champs-affiche.jpg',
+            'movie/_x/x-film-autopsie-d-une-enquete/cover.jpg',
+            'professional/_j/jacob-marine/marine_jacob.jpg',
+            'professional/_j/jacob-marine/13001204_1790519544509377_5333094279074092783_n.jpg'
         ];
-
-        $rootpath = $this->get('settings.folders.images');
 
         $formats = [
             'thumbnail' => ['width' => 250, 'height' => 250],
@@ -37,33 +71,61 @@ class Image extends Krafto
             'banner' => ['width' => 1920, 'height' => 650, 'fill' => '000000'],
         ];
 
-        $fileManager = new FileManager($rootpath);
-
-        foreach($testPictures as $testPicture){
-            $imageResizer = new Imagine($fileManager, $testPicture);
-            $imageResizer->setSaveDirectory($rootpath . '/generated');
+        foreach ($testPictures as $testPicture) {
+            $imageResizer = new Imagine($this->fileSystem(), $testPicture);
             $imageResizer->createAlternateVersions($formats);
         }
         die('STOP');
-
     }
+
+    public function dropzoneUpload()
+    {
+        $controller = $this->router()->params('controller');
+        $controller = $this->get('App\\Controllers\\Secret\\' . $controller);
+
+        $uploader = new FileUploader($this->fileSystem(), $this->buildRelativeLocator($controller));
+
+        $uploader->setAllowedMIMETypes($this->get('settings.images.allowedMIMETypes'));
+        $uploader->handleUpload($_FILES);
+
+        $response = [];
+
+        // dd($uploader->errors());
+
+        header('Content-Type: application/json');
+
+        if (empty($uploader->errors())) {
+            http_response_code(200);
+            $response = ["status" => "success", "message" => "Tous les fichiers ont été téléversés"];
+        } else {
+            http_response_code(400);
+            foreach ($uploader->errors() as $message) {
+                $response[] = ["status" => "error", "message" => $message];
+            }
+        }
+
+        echo json_encode($response);
+        die;
+    }
+
     public function deadlinks()
     {
         $articles = Article::queryListing();
         $articles->selectAlso(['article.content', 'article.id']);
         $articles->whereLike('content', '%src="%');
-        // $articles->limit(100,0);
+        $articles->limit(1, 0);
         $articles->orderBy('id DESC');
         $articles = $articles->retObj(Article::class);
 
         $errors = [];
         $countErrors = 0;
         $articleWithErrors = [];
+        $urlChecker = new Deadites();
         foreach ($articles as $article) {
             $html = $article->get('content');
             if (!empty($html)) {
-                $res = $this->verifyImagesInHTML($html, $article);
-                if(!empty($res)){
+                $res = $urlChecker->verifyImagesInHTML($html);
+                if (!empty($res)) {
                     $articleWithErrors[$article->getID()] = $article;
                     $errors[$article->getID()] = $res;
                     $countErrors += count($res);
@@ -75,108 +137,60 @@ class Image extends Krafto
         $this->viewport('countErrors', $countErrors);
     }
 
-    // Function to verify image URIs in HTML content
-    private function verifyImagesInHTML($html, $article): array
+
+    /**
+     * Builds a relative locator for an image file.
+     *
+     * @param string|null $file optional filename to include in the locator.
+     * @return string The relative locator for the image file.
+     * @throws \Exception If the external controller or slug is not set.
+     */
+    public function buildRelativeLocator($externalController=null, string $file = null): string
     {
-        $articleId = $article->getID();
-        $errors = [];
-        // Use regular expression to find image URLs in HTML content
-        $pattern = '/<img[^>]+src="([^"]+)"/';
+        if(!is_null($externalController))
+            $this->externalController = $externalController;
+            
+        if (is_null($this->externalController()))
+            throw new \Exception('NO_EXTERNAL_CONTROLLER');
 
-        $errors = [];
-        if (preg_match_all($pattern, $html, $matches)) {
-            $imageUrls = $matches[1];
-            foreach ($imageUrls as $imgUrl) {
-                if (strpos($imgUrl, 'data:image') === 0) {
-                    $errors []= "$articleId has data:image";
-                    continue;
-                }
+        if (is_null($this->slug()))
+            throw new \Exception('NO_SLUG');
 
-                $imgUrl = html_entity_decode($imgUrl);
+        $pathComponents = [];
 
-                $headers = $this->getHeaders($imgUrl);
-                $status = $this->checkStatusCode($headers);
-                if ($status === 200) {
-                    continue;
-                }
+        // Get the images directory from the external controller, if available
+        $pathComponents[] = $this->externalController()->imagesDirectory();
 
-                if ($status === 301) {
-                    $redirectUrl = $headers["Location"];
-                    $headers = $this->getHeaders($redirectUrl);
-                    $redirectStatus = $this->checkStatusCode($headers);
-                
-                    if ($redirectStatus !== 200) {
-                        $errors[]= "301 > $redirectStatus $redirectUrl";
-                    }
+        // Add the slug prefix to the path
+        $pathComponents[] = sprintf('_%s', (is_numeric($prefix = substr($this->slug(), 0, 1)) ? 0 : $prefix));
 
-                    continue;
-                }
+        // Add the slug to the path
+        $pathComponents[] = $this->slug();
 
-                // if (strpos($imgUrl, '/images/personne/') === 0 || strpos($imgUrl, '/images/film/') === 0) {
-                //     $this->generateCorrectionQuery($imgUrl);
-                // }
-                $errors []= "$status $imgUrl";
-
-            }
+        // Add the file to the path, if provided
+        if (!is_null($file)) {
+            $pathComponents[] = $file;
         }
 
-        return $errors;
+        // Join the path components with the directory separator
+        return implode(DIRECTORY_SEPARATOR, $pathComponents);
     }
 
-    // Function to check the status code of a URL
-    private function checkStatusCode($headers)
+    private function externalController()
     {
-        return (int) substr($headers[0], 9, 3); // Extract status code (e.g., 200, 301)
+        if (is_null($this->externalController) && $this->router()->params('externalController')) {
+            $controller = $this->router()->params('externalController');
+            $controller = $this->get('App\\Controllers\\Secret\\' . $controller);
+            $this->externalController = $controller;
+        }
+
+        return $this->externalController;
     }
 
-    private function getHeaders($path, $host = 'http://dev.cinergie'): array
+    private function slug()
     {
-        // Check if $path starts with 'http://' or 'https://'
-        if (strpos($path, 'http') !== 0)
-            $path = $host . $path;
+        $this->slug = $this->slug ?? $this->router()->params('slug') ?? $this->externalController()->loadModel()->slug();
 
-        try {
-            $headers = get_headers($path, true);
-            return $headers;
-        } catch (\Throwable $t) {
-            dd($t);
-        }
-    }
-
-    private function generateCorrectionQuery($imgUrl)
-    {
-        $root = '/var/www/dev.engine/krafto-cinergie/public';
-        // echo(PHP_EOL."ISSUE WITH $imgUrl");
-        $fix = null;
-
-        $parts = pathinfo($imgUrl);
-        $dirs = explode('/', $parts['dirname']);
-
-
-        if (!isset($dirs[4]) || strpos($dirs[4], '_') === false) {
-            return false;
-        }
-
-        $dirs[4] =  str_replace('_', '-', $dirs[4]);
-
-        $relativePath = implode('/', $dirs) . '/' . $parts['basename'];
-        $absolutePath = $root . $relativePath;
-
-        // echo PHP_EOL."TRYING $absolutePath";
-        if (file_exists($absolutePath)) {
-            // echo(PHP_EOL.'CORRECTION is ' . $relativePath);
-            $fix = $relativePath;
-        } else {
-            $relativePath = implode('/', $dirs) . '/' . str_replace('_', '-', $parts['basename']);
-            $absolutePath = $root . $relativePath;
-            // echo PHP_EOL."TRYING $absolutePath";
-            if (file_exists($absolutePath)) {
-                // echo(PHP_EOL.'CORRECTION is ' . $relativePath);
-                $fix = $relativePath;
-            }
-        }
-
-        if (!is_null($fix))
-            $this->queries[] = "UPDATE article SET content = REPLACE(content, '$imgUrl', '$fix') WHERE content LIKE '%$imgUrl%';";
+        return $this->slug;
     }
 }
