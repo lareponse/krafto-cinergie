@@ -93,9 +93,11 @@
                     <a class="partenaire-item" href="https://audiovisuel.cfwb.be/">
                         <img src="/public/assets/img/partenaires/logofwb.jpeg" alt="Centre du Cinéma et de l'Audiovisuel de la Communauté Française" />
                     </a>
-                    <a class="partenaire-item" href="https://lareponse.be">
+        <?php
+        /*            <a class="partenaire-item" href="https://lareponse.be">
                         <img src="https://avatars.githubusercontent.com/u/20891495?v=4" alt="La Réponse" />
                     </a>
+                    */?>
                 </section>
             </div>
         </section>

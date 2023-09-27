@@ -18,7 +18,7 @@
         <?php
         foreach ($paginator->records() as $article) {
         ?>
-            <div class="col-lg-4 article-item" id="">
+            <div class="col-lg-4 " id="article-item">
                 <article class="card mb-4 shadow">
                     <a href="<?= $controller->router()->hyp('article', ['slug' => $article->slug()]);?>">
                         <img src="<?= $article->profilePicture(); ?>" class="card-img-top" alt="Photo pour l'article <?=$article->get('label')?>">

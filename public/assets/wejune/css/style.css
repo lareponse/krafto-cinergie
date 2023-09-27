@@ -484,6 +484,25 @@ small.frais {
    color: #a6a6a6;
 }
 
+.text-agenda-4 {
+   color: #d3339a;
+}
+
+.text-agenda-5 {
+   color: #4f51cc;
+}
+
+.text-agenda-6 {
+   color: #d1001d;
+}
+
+.text-agenda-7 {
+   color: #00712b;
+}
+
+.text-agenda-8 {
+   color: #3a87ad;
+}
 
 /* === FILMOTHEQUE : CARD */
 #filmotheque .meta {
@@ -497,6 +516,7 @@ small.frais {
 
 #filmotheque h5 {
    font-size: 1.1rem;
+   min-height: 53px;
 }
 
 #filmotheque .auteur {
@@ -572,7 +592,7 @@ article.boutique .commander:hover {
 
 /* ---- MODAL ----- */
 
-.modal-header, .modal-footer {
+.modal-header {
    background-color: #000000;
    border: none;
 }
@@ -759,7 +779,7 @@ article.boutique .commander:hover {
 
 /* ------ PAGES ----- */
 /* PAGE : ACCUEIL */
-#concours-du-moment #concours-item img {
+#concoursdm .concours img {
    max-height: 380px;
    object-fit: cover;
    border-radius: 0.7rem;
@@ -1143,11 +1163,11 @@ button.navbar-toggler:focus {
       max-width: 1600px;
    }
 
-   #article-single aside#meta {
+   /*#article-single aside#meta {
       border-radius: 0px !important;
       box-shadow: none !important;
       padding: 0;
-   }
+   }*/
 }
 
 @media screen and (min-width: 769px) {
@@ -1160,11 +1180,11 @@ button.navbar-toggler:focus {
       border-radius: 0.7rem 0 0;
    }
 
-   div.article-item .card h5.card-title {
+   div#article-item .card h5.card-title {
       min-height: 60px;
    }
 
-   div.article-item .card img,
+   div#article-item .card img,
    div#professionnel-item .card img,
    div#auteur-item .card img,
    div#film-item .card img {
