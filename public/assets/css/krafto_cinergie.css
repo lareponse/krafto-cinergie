@@ -47,3 +47,8 @@ iframe{
 .nav-tabs .nav-item {
     margin: 0 0.75rem 0 0;
 }
+
+.otto-form-listing .input-group .form-control{
+    background:#FFF;
+    font-size:1.1em;
+}
