@@ -213,8 +213,9 @@ class FileUploader
     private function sanitizeFilepath(string $finalUniqueName): string
     {
         $finalPath = $this->uploadDirectory . DIRECTORY_SEPARATOR . $finalUniqueName;
-        $realPath = realpath(dirname($finalPath));
-        if (strpos($realPath, realpath($this->uploadDirectory)) !== 0) {
+        $realPath = dirname($finalPath);
+        vd($realPath);
+        if (strpos($realPath, $this->uploadDirectory) !== 0) {
             throw new \InvalidArgumentException('POTENTIAL_DIRECTORY_TRAVERSAL_ATTACK');
         }
 

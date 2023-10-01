@@ -5,7 +5,7 @@ namespace App\Controllers\Secret;
 use App\Models\Article;
 use App\Controllers\Abilities\Imagine;
 use App\Controllers\Abilities\FileUploader;
-use \HexMakina\LocalFS\FileSystem;
+use \HexMakina\LocalFS\{FileSystem, File};
 use \HexMakina\Deadites\Deadites;
 
 class Image extends Krafto
@@ -49,6 +49,30 @@ class Image extends Krafto
         // $this->viewport('filename', $filename);
         // $this->viewport('alternates', $files);
 
+    }
+
+    public function delete()
+    {
+        $controller = $this->externalController();
+        $filename = $this->router()->params('filename');
+        $relativePath = $this->buildRelativeLocator($controller, $filename);
+        $path = $this->fileSystem()->absolutePathFor($relativePath);
+        $file = new File($path);
+
+        
+        if(FileSystem::remove($path) === false){
+            //add error message
+            $this->router()->hopBack();
+        }
+        
+        if(empty($this->fileSystem()->list($this->buildRelativeLocator())))
+        {
+            $dir = $file->getFilePath()->dir();
+            vd($dir);
+            FileSystem::remove($dir);
+        }
+        
+        $this->router()->hopBack();
     }
 
     public function alternates()

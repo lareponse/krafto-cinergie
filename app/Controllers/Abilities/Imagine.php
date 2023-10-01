@@ -107,10 +107,12 @@ class Imagine
     {
         $basename = pathinfo($this->pathToOriginalImage, PATHINFO_FILENAME);
         $dirname = pathinfo($this->pathToOriginalImage, PATHINFO_DIRNAME);
-        $savePath = "{$dirname}/{$basename}/{$format}.jpg";
-        $absoluteSavePath = $this->fileSystem->absolutePathFor($savePath);
+        
+        $saveFile = "{$format}.jpg";
+        $saveDirectory = "{$dirname}/{$basename}";
+        $absoluteSavePath = $this->fileSystem->absolutePathFor($saveDirectory);
 
-        $this->fileSystem->ensureWritablePath($absoluteSavePath, $this->fileSystem->root());
+        $this->fileSystem->ensureWritablePath($saveDirectory, $saveFile);
         imagejpeg($newImage, $absoluteSavePath);
     }
 

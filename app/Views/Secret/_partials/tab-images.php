@@ -27,11 +27,11 @@
                 <div class="controls">
                     <?php 
                     $route_params = [
-                        'controller' => $controller->className(), 
+                        'externalController' => $controller->className(), 
                         'slug' => $controller->loadModel()->slug(), 
                         'filename' => $image
                     ];
-                    $route = $controller->router()->hyp('image_delete', $route_params); 
+                    $route = $controller->router()->hyp('dash_image_delete', $route_params); 
                     ?>
                     <form action="<?= $route ?>" method="POST" class="control">
                         <input type="hidden" name="filename" value="<?= $image?>" />
