@@ -29,6 +29,18 @@
             </div>
         </div>
 
+        <div class="row mb-4">
+            <div class="col-lg-3">
+                <label for="publication" class="col-form-label">Catégorie</label>
+            </div>
+
+            <div class="col-lg">
+                <?= $this->Form()::select('type_id', $types, $controller->formModel()->get('type_id'), ['class'=>'form-control']);?>
+                <div class="invalid-feedback">Please add your full name</div>
+            </div>
+        </div>
+
+
         <div class="d-flex justify-content-end mt-5">
             <button type="submit" class="btn btn-primary">Enregistrer</button>
         </div>

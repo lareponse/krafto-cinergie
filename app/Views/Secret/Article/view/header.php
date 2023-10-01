@@ -28,74 +28,44 @@
 
                     <div class="col-12 col-md-auto ms-auto text-center mt-8 mt-md-0">
                         <div class="hstack d-inline-flex">
-                            
+
                             <?php
+                            $buttons = [
+                                [
+                                    'field' => 'active',
+                                    'true_title' => 'Rendre invisible sur site',
+                                    'false_title' => 'Rendre visible sur le site',
+                                    'icon' => 'recordIsLive',
+                                ],
+                                [
+                                    'field' => 'isDiaporama',
+                                    'true_title' => 'Retirer du diaporama',
+                                    'false_title' => 'Ajouter au diaporama',
+                                    'icon' => 'slider',
+                                ],
+                                [
+                                    'field' => 'isArchived',
+                                    'true_title' => 'Retirer des archives',
+                                    'false_title' => 'Ajouter aux archives',
+                                    'icon' => 'archive',
+                                ],
+                            ];
+
+                            foreach ($buttons as $button) {
                                 $class = 'mb-0 ';
-                                if($controller->loadModel()->get('isActive')){
-                                    $title = 'Rendre invisible sur site';
-                                    $class .= 'text-success';
-                                }
-                                else
-                                {
-                                    $title = "Rendre visible sur le site";
-                                    $class .= 'text-warning';
-                                }
-                                $icon = $this->icon('recordIsLive', 24, ['title' => $title]);
+                                $title = $controller->loadModel()->get($button['field']) ? $button['true_title'] : $button['false_title'];
+                                $class .= $controller->loadModel()->get($button['field']) ? 'text-success' : 'text-warning';
+                                $icon = $button['icon'];
                                 $action = $controller->router()->hyp('dash_record_toggle', [
                                     'controller' => 'Article',
                                     'id' => $controller->loadModel()->getID(),
-                                    'field' => 'active'
+                                    'field' => $button['field'],
                                 ]);
-                                printf('<form action="%s" method="POST"><button type="submit" class="btn %s">%s</button></form>', $action, $class, $icon);
-
+                                printf('<form action="%s" method="POST"><button type="submit" class="btn %s" title="%s">%s</button></form>', $action, $class, $title, $this->icon($icon, 24));
+                                echo '<div class="vr"></div>';
+                            }
                             ?>
 
-
-                            <div class="vr"></div>
-                            
-                            <?php
-                                $class = 'mb-0 ';
-                                if($controller->loadModel()->get('isDiaporama')){
-                                    $title = 'Retirer du diaporama';
-                                    $class .= 'text-success';
-                                }
-                                else
-                                {
-                                    $title = "Ajouter au diaporama";
-                                    $class .= 'text-warning';
-                                }
-                                $icon = $this->icon('slider', 24, ['title' => $title]);
-                                $action = $controller->router()->hyp('dash_record_toggle', [
-                                    'controller' => 'Article',
-                                    'id' => $controller->loadModel()->getID(),
-                                    'field' => 'isDiaporama'
-                                ]);
-                                printf('<form action="%s" method="POST"><button type="submit" class="btn %s">%s</button></form>', $action, $class, $icon);
-
-                            ?>
-
-                            <div class="vr"></div>
-                            
-                            <?php
-                                $class = 'mb-0 ';
-                                if($controller->loadModel()->get('isArchived')){
-                                    $title = 'Retirer des archives';
-                                    $class .= 'text-success';
-                                }
-                                else
-                                {
-                                    $title = "Ajouter aux archives";
-                                    $class .= 'text-warning';
-                                }
-                                $icon = $this->icon('archive', 24, ['title' => $title]);
-                                $action = $controller->router()->hyp('dash_record_toggle', [
-                                    'controller' => 'Article',
-                                    'id' => $controller->loadModel()->getID(),
-                                    'field' => 'isArchived'
-                                ]);
-
-                                printf('<form action="%s" method="POST"><button type="submit" class="btn %s">%s</button></form>', $action, $class, $icon);
-                            ?>
                         </div>
                     </div>
                 </div>

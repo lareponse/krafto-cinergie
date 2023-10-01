@@ -14,7 +14,7 @@ $fields = ['label'];
         if (empty($authors)) {
             echo $this->DOM()::strong("Pas d'auteurs");
         } else {
-            echo '<ul class="list-unstyled mb-7">';
+            echo '<ul class="list-unstyled mb-3">';
             foreach ($authors as $author) {
         ?>
                 <li class="mt-2">
@@ -32,30 +32,23 @@ $fields = ['label'];
             echo '</ul>';
         }
         ?>
-
     </div>
-    <form method="POST" action="<?= $controller->router()->hyp('dash_relation_link', ['parent' => $parent, 'child' => $child]) ?>">
+    
+    <div class="card-footer">
+        <form method="POST" action="<?= $controller->router()->hyp('dash_relation_link', ['parent' => $parent, 'child' => $child]) ?>">
         <input type="hidden" name="<?= $controller->modelClassName()::model_type(); ?>_id" value="<?= $controller->loadModel()->getID() ?>">
-
-        <div class="card-body">
             <div class="w-100 otto-link">
                 <ul class="list-group otto-list mb-3" otto-ids="<?= strtolower($className); ?>_ids[]"></ul>
                 <input class="form-control list-search ms-md-auto mb-md-0 otto-search" type="search" placeholder="Ajouter" otto-search-fields="<?= implode(',', $fields) ?>" otto-entity="<?= $className; ?>">
                 <ul class="list-group list-group-flush otto-suggestions"></ul>
             </div>
 
-        </div>
-        <div class="card-footer d-flex align-items-center justify-content-between">
-            <span class="fs-5 text-secondary text-truncate">Confirmer pour enregistrer</span>
-            <button type="submit" class="btn btn-primary btn-sm">Confirmer</a>
-        </div>
-    </form>
-
-</div>
-
-
-<div class="card border-0 pt-3">
-    <div class="card-body pt-0">
-        <?php $this->insert('Secret::_partials/legacy_view', ['model' => $controller->loadModel()]) ?>
+            <div class="mt-3 d-flex align-items-center justify-content-between">
+                <span class="fs-5 text-secondary text-truncate">Confirmer pour enregistrer</span>
+                <button type="submit" class="btn btn-primary btn-sm">Confirmer</a>
+            </div>
+        </form>
     </div>
 </div>
+
+<?php $this->insert('Secret::_partials/legacy_view', ['model' => $controller->loadModel()]) ?>
