@@ -11,13 +11,16 @@ $menu ??= [
 
 $currentSection ??= 'articles';
 
-$active = 'active'; // first run is active
+$activeTab = $controller->router()->params('tab') ?? 'profile';
+
 foreach($menu as $tab => $title){
     if($tab == $currentSection)
         continue;
+
+    $activeClass = $activeTab == $tab ? 'active' : ''; // first run is active
     ?>
     <li class="nav-item" role="presentation">
-        <a href="javascript: void(0);" class="nav-link d-flex align-items-center <?=$active?>" id="<?=$tab?>-tab" data-bs-toggle="tab" data-bs-target="#<?=$tab?>" role="tab" aria-controls="<?=$tab?>" aria-selected="true">
+        <a href="javascript: void(0);" class="nav-link d-flex align-items-center <?=$activeClass?>" id="<?=$tab?>-tab" data-bs-toggle="tab" data-bs-target="#<?=$tab?>" role="tab" aria-controls="<?=$tab?>" aria-selected="true">
             <?php
             echo $title;
             $label = '';
@@ -30,7 +33,6 @@ foreach($menu as $tab => $title){
         </a>
     </li>
     <?php
-    $active=null; // only first run is active
 }
 ?>
 </ul>

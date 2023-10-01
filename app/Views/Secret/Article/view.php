@@ -4,11 +4,16 @@
 
 <div class="tab-content pt-6" id="viewPageContent">
 
-    <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    <?php 
+    $activeTab = $controller->router()->params('tab') ?? 'profile';
+    $activeClasses = 'show active';
+    ?>
+
+    <div class="tab-pane fade <?= $activeTab === 'profile' ? $activeClasses : ''?>" id="profile" role="tabpanel" aria-labelledby="profile-tab">
         <?php $this->insert('Secret::Article/view/tab-profile') ?>
     </div>
 
-    <div class="tab-pane fade" id="professionals" role="tabpanel" aria-labelledby="professionals-tab">
+    <div class="tab-pane fade <?= $activeTab === 'professionals' ? $activeClasses : ''?>" id="professionals" role="tabpanel" aria-labelledby="professionals-tab">
         <?php $this->insert('Secret::_partials/otto/otto-link', [
             'cards' => $professionals,
             'className' => 'Professional',
@@ -19,7 +24,7 @@
         ]) ?>
     </div>
 
-    <div class="tab-pane fade" id="movies" role="tabpanel" aria-labelledby="movies-tab">
+    <div class="tab-pane fade <?= $activeTab === 'movies' ? $activeClasses : ''?>" id="movies" role="tabpanel" aria-labelledby="movies-tab">
         <?php $this->insert('Secret::_partials/otto/otto-link', [
             'cards' => $movies,
             'className' => 'Movie',
@@ -29,7 +34,7 @@
         ]) ?>
     </div>
 
-    <div class="tab-pane fade" id="organisations" role="tabpanel" aria-labelledby="organisations-tab">
+    <div class="tab-pane fade <?= $activeTab === 'organisations' ? $activeClasses : ''?>" id="organisations" role="tabpanel" aria-labelledby="organisations-tab">
         <?php $this->insert('Secret::_partials/otto/otto-link', [
             'cards' => $organisations, 
             'className' => 'Organisation', 
