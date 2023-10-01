@@ -1,6 +1,5 @@
 <?php $this->layout('Secret::dashboard') ?>
 
-
 <div class="card border-0 flex-fill w-100" data-list='{"valueNames": ["fullName","price","active"], "page": 10}' id="filesTable">
     <div class="card-header border-0">
         <?= isset($filters) ? $this->insert('Secret::_partials/filters/FiltersOnFirstChar', ['count' => count($listing)]) : '' ?>
@@ -32,7 +31,7 @@
                 <?php
                 foreach ($listing as $model) {
                 ?>
-                    <tr data-action="<?= $controller->urlFor('DVD', 'view', $model) ?>">
+                    <tr data-action="<?= $controller->urlFor($controller->className(), 'edit', $model) ?>">
 
                         <td class="fullName">
                             <strong><?= $model->get('label'); ?></strong>

@@ -2,23 +2,31 @@
 $routes = [];
 
 // CUSTOM ROUTES
-array_push($routes,
+array_push(
+    $routes,
     ['GET', 'pages/prix_cinergie', 'Page::award', 'page_cinergie_award'],
     ['GET', 'pages/equipe', 'Page::team', 'page_team'],
     ['GET', 'pages/[*:slug]', 'Page::slug', 'page_slug']
 );
 
-array_push($routes,
+array_push(
+    $routes,
     ['GET', 'organisations/segment/[a:segment]', 'Organisation::home', 'organisations_by_segment'],
 );
 
-array_push($routes,
+array_push(
+    $routes,
+    ['GET', 'Merchandise/segment/[a:segment]', 'Merchandise::home', 'merchandises_by_segment'],
+);
+array_push(
+    $routes,
     ['POST', 'relations/[a:parent]/[a:child]', 'Relation::link', 'relation_link'],
     ['POST', 'relations/unlink', 'Relation::unlink', 'relation_unlink'],
 );
 
 
-array_push($routes,
+array_push(
+    $routes,
     ['GET', 'image/details/[a:externalController]/slug/[*:slug]/file/[*:filename]', 'Image::details', 'image_details'],
     ['POST', 'image/delete/[a:externalController]/slug/[*:slug]/file/[*:filename]', 'Image::delete', 'image_delete'],
 
@@ -31,14 +39,14 @@ array_push($routes,
 
 
 // GENERIC CRUD ROUTES
-array_push($routes,
-    ['GET',  '[a:controller]', '::home', 'records'],
+array_push(
+    $routes,
     ['GET',  '[a:controller]/new', '::alter', 'record_new'],
     ['GET',  '[a:controller]/[i:id]', '::view', 'record'],
     ['GET',  '[a:controller]/[i:id]/edit', '::alter', 'record_edit'],
-    
     ['GET',  '[a:controller]/[*:slug]/modifier', '::editBySlug', 'record_edit_by_slug'],
-    
+    ['GET',  '[a:controller]/[*:params]?', '::home', 'records'],
+
     ['POST', '[a:controller]/[i:id]/toggle/[a:field]', '::toggle', 'record_toggle'],
     ['POST', '[a:controller]/supprimer', '::delete', 'record_delete'],
     ['POST', '[a:controller]/enregistrer', '::save', 'record_save'],
@@ -46,7 +54,7 @@ array_push($routes,
 
     ['GET',  '[a:controller]/[i:id]/images/setProfile/[*:path]', '::setProfilePicture', 'record_set_profile_picture'],
     ['GET',  '[a:controller]/[i:id]/images/unsetProfile', '::unsetProfilePicture', 'record_unset_profile_picture']
-    
+
 );
 
 $route_prefix = 'dash';
@@ -58,6 +66,6 @@ array_walk($routes, function (&$v, $k) use ($route_prefix, $controller_prefix) {
     $v[3] = $route_prefix . '_' . $v[3];
 });
 
-array_unshift($routes, ['GET', 'dash', $controller_prefix.'\\Home::home', 'dashboard']);
+array_unshift($routes, ['GET', 'dash', $controller_prefix . '\\Home::home', 'dashboard']);
 
 return $routes;

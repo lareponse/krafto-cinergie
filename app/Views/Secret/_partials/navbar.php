@@ -24,9 +24,9 @@ $menu = [
             ]
         ],
         'Shop' => ['label' => 'Boutique', 'icon' => 'euro',
-            'subs' => [
-                'DVD' => ['label' => 'DVDs'],
-                'Book' => ['label' => 'Livres']
+            'subs' => [ 
+                'DVD' => ['label' => 'DVDs', 'href' => $controller->router()->hyp('dash_records', ['controller' => 'Merchandise']).'?segment=DVD'],
+                'Book' => ['label' => 'Livres', 'href' => $controller->router()->hyp('dash_records', ['controller' => 'Merchandise']).'?segment=Book']
             ]
         ]
     ],
