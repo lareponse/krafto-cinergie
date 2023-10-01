@@ -39,7 +39,7 @@ array_push($routes,
     
     ['GET',  '[a:controller]/[*:slug]/modifier', '::editBySlug', 'record_edit_by_slug'],
     
-    ['POST',  '[a:controller]/[i:id]/toggle', '::toggle', 'record_toggle'],
+    ['POST', '[a:controller]/[i:id]/toggle/[a:field]', '::toggle', 'record_toggle'],
     ['POST', '[a:controller]/supprimer', '::delete', 'record_delete'],
     ['POST', '[a:controller]/enregistrer', '::save', 'record_save'],
 

@@ -7,7 +7,7 @@
                 <div class="row align-items-center h-100">
                     <div class="col-auto d-flex ms-auto ms-md-0">
                         <div class="avatar avatar-circle avatar-xxl">
-                            <img src="<?= $controller->loadModel()->profilePicture() ?>" alt="..." class="avatar-img" width="112" height="112">
+                            <img src="/images/<?= $controller->loadModel()->profilePicture() ?>" alt="..." class="avatar-img" width="112" height="112">
                         </div>
                     </div>
 
@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="col-12 col-md-auto ms-auto text-center mt-8 mt-md-0">
-                        <div class="hstack d-inline-flex gap-6">
+                        <div class="hstack d-inline-flex">
                             
                             <?php
                                 $class = 'mb-0 ';
@@ -41,7 +41,13 @@
                                     $class .= 'text-warning';
                                 }
                                 $icon = $this->icon('recordIsLive', 24, ['title' => $title]);
-                                echo $this->DOM()::a('#', $icon, ['class' => $class]);
+                                $action = $controller->router()->hyp('dash_record_toggle', [
+                                    'controller' => 'Article',
+                                    'id' => $controller->loadModel()->getID(),
+                                    'field' => 'active'
+                                ]);
+                                printf('<form action="%s" method="POST"><button type="submit" class="btn %s">%s</button></form>', $action, $class, $icon);
+
                             ?>
 
 
@@ -59,7 +65,13 @@
                                     $class .= 'text-warning';
                                 }
                                 $icon = $this->icon('slider', 24, ['title' => $title]);
-                                echo $this->DOM()::a('#', $icon, ['class' => $class]);
+                                $action = $controller->router()->hyp('dash_record_toggle', [
+                                    'controller' => 'Article',
+                                    'id' => $controller->loadModel()->getID(),
+                                    'field' => 'isDiaporama'
+                                ]);
+                                printf('<form action="%s" method="POST"><button type="submit" class="btn %s">%s</button></form>', $action, $class, $icon);
+
                             ?>
 
                             <div class="vr"></div>
@@ -76,7 +88,13 @@
                                     $class .= 'text-warning';
                                 }
                                 $icon = $this->icon('archive', 24, ['title' => $title]);
-                                echo $this->DOM()::a('#', $icon, ['class' => $class]);
+                                $action = $controller->router()->hyp('dash_record_toggle', [
+                                    'controller' => 'Article',
+                                    'id' => $controller->loadModel()->getID(),
+                                    'field' => 'isArchived'
+                                ]);
+
+                                printf('<form action="%s" method="POST"><button type="submit" class="btn %s">%s</button></form>', $action, $class, $icon);
                             ?>
                         </div>
                     </div>

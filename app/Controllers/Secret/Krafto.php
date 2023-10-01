@@ -43,6 +43,13 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
         }
     }
 
+    public function toggle()
+    {
+        $field = $this->router()->params('field');
+        $res = $this->modelClassName()::toggleBoolean($this->modelClassName()::table(), $field, $this->loadModel()->getID());
+        $this->router()->hopBack();
+    }
+
     public function conclude(): void
     {
         parent::conclude();
