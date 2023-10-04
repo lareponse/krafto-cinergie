@@ -9,11 +9,12 @@ use HexMakina\kadro\Models\Interfaces\EventInterface;
 class Event extends TightModel implements EventInterface
 {
     use \HexMakina\kadro\Models\Abilities\Event;
+    use Abilities\IsActivable;
     use Abilities\HasSlug;
 
     public function __toString()
     {
-        return $this->get('label');
+        return $this->get('label') ?? $this->get('id') ?? '';
     }
     
     public function event_field(): string

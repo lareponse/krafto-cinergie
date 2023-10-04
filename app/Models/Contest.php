@@ -23,7 +23,17 @@ class Contest extends TightModel implements EventInterface
         return 'starts';
     }
 
-        /**
+    public function isRunning(): bool
+    {
+        return empty($this->get('stops')) || (date('Y-m-d') <= $this->get('stops'));
+    }
+
+    public function canShowForm(): bool
+    {
+        return !empty($this->get('canShowForm')) && $this->isRunning();
+    }
+    
+    /**
      * Constructs a database query for listing contests with specific columns and filters.
      *
      * @return SelectInterface The constructed database query object.

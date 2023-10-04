@@ -6,14 +6,14 @@ CREATE TABLE `event` (
 
   `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `active` tinyint(1) NOT NULL DEFAULT '0',
-  `slug` varchar(222) DEFAULT NULL COMMENT 'leg:urlparm',
-  `rank` smallint UNSIGNED DEFAULT NULL COMMENT 'leg:tri',
+  `slug` varchar(222) NOT NULL COMMENT 'leg:urlparm',
+  `label` varchar(890) NOT NULL COMMENT 'leg:field01',
 
-  `label` varchar(890) DEFAULT NULL COMMENT 'leg:field01',
   `content` text COMMENT 'new column',
 
   `starts` date DEFAULT NULL COMMENT 'leg:field02',
   `stops` date DEFAULT NULL COMMENT 'leg:field03',
+  `rank` smallint UNSIGNED DEFAULT NULL COMMENT 'leg:tri',
 
   `url_site` varchar(552) DEFAULT NULL COMMENT 'leg:field05',
   `url_internal` varchar(255) DEFAULT NULL COMMENT 'leg:field06',
@@ -48,12 +48,12 @@ INSERT INTO `cinergie`.`event` (
   `created_on`,
   `active`,
   `slug`,
-  `rank`,
-
   `label`,
 
   `starts`,
   `stops`,
+  `rank`,
+  
   `url_site`,
   `url_internal`,
 
@@ -68,12 +68,13 @@ SELECT
   STR_TO_DATE(datestamp,'%Y-%m-%d %H:%i:%s') as `created_on`,
   `active` as `active`,
   `urlparms` as `slug`,
-  `tri` as `rank`,
+  IF(`field01` IS NULL or TRIM(`field01`) = '', title, TRIM(`field01`)) as `label`,
 
-  TRIM(`field01`) as `label`,
 
   IF(`field02` IS NULL or `field02` = '', null, STR_TO_DATE(`field02`,'%Y-%m-%d')) as `starts`,
   IF(`field03` IS NULL or `field03` = '', null, STR_TO_DATE(`field03`,'%Y-%m-%d')) as `stops`,
+  `tri` as `rank`,
+
   TRIM(`field05`) as `url_site`,
   TRIM(`field06`) as `url_internal`,
 
