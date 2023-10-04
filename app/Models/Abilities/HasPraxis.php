@@ -20,6 +20,8 @@ trait HasPraxis
     {
         if(!empty($this->get('praxis_ids')))
             return explode(',',$this->get('praxis_ids'));
+            
+        return [];
     }
 
 }
