@@ -3,6 +3,7 @@
 namespace App\Controllers\Secret;
 
 use HexMakina\kadro\Models\Tag;
+use App\Models\Article;
 
 class Event extends Krafto
 {
@@ -14,6 +15,16 @@ class Event extends Krafto
     public function activeSection(): string
     {
         return 'Event';
+    }
+
+    public function alter()
+    {
+        $query = Article::queryListing();
+        $query->join(['article_event', 'article_event'],  [['article_event', 'article_id', 'article', 'id']], 'LEFT OUTER');
+        $query->whereEQ('event_id', $this->loadModel()->getID(), 'article_event');
+
+        $articles = $query->retObj(Article::class);
+        $this->viewport('articles', $articles);
     }
 
     public function conclude(): void

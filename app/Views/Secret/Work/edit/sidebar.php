@@ -18,8 +18,7 @@
                 <img src="<?= $controller->formModel()->profilePicture() ?>" alt="..." class="avatar-img" width="112" height="112">
             </div>
 
-            <h3 class="mb-0"><?= $controller->formModel()->get('firstname'); ?> <?= $controller->formModel()->get('lastname'); ?></h3>
-            
+            <h3 class="mb-0"><?= $controller->formModel()->get('label'); ?></h3>
         </div>
 
         <!-- Divider -->
@@ -27,49 +26,35 @@
     </div>
 
     <ul class="scrollspy mb-5" id="account" data-scrollspy='{"offset": "30"}'>
-        <li class="active">
-            <a href="#SignalétiqueSection" class="d-flex align-items-center py-3">
-                <?= $this->icon('identity', 14, ['class' => 'me-3']); ?> Signalétique
-            </a>
+
+        <li>
+            <a href="#signaletiqueSection" class="d-flex align-items-center py-3"><?= $this->icon('info', 14, ['class' => 'me-2']); ?> Signalétique</a>
         </li>
 
         <li>
-            <a href="#jobSection" class="d-flex align-items-center py-3">
-                <?= $this->icon('praxis', 14, ['class' => 'me-3']); ?> Métiers
-            </a>
+            <a href="#annonceurSection" class="d-flex align-items-center py-3"><?= $this->icon('author', 14, ['class' => 'me-2']); ?> Annonceur</a>
         </li>
 
         <li>
-            <a href="#ContactSection" class="d-flex align-items-center py-3">
-                <?= $this->icon('phone', 14, ['class' => 'me-3']); ?> Contact
-            </a>
-        </li>
-        <li>
-            <a href="#AdresseSection" class="d-flex align-items-center py-3">
-                <?= $this->icon('origine', 14, ['class' => 'me-3']); ?> Adresse
-            </a>
+            <a href="#contentSection" class="d-flex align-items-center py-3"><?= $this->icon('text', 14, ['class' => 'me-2']); ?> Contenu</a>
         </li>
 
         <li>
-            <a href="#BiographieSection" class="d-flex align-items-center py-3">
-                <?= $this->icon('text', 14, ['class' => 'me-3']); ?> Biographie
-            </a>
+            <a href="#publicationSection" class="d-flex align-items-center py-3"><?= $this->icon('info', 14, ['class' => 'me-2']); ?> Publication</a>
         </li>
 
         <li>
-            <a href="#FilmographieSection" class="d-flex align-items-center py-3">
-                <?= $this->icon('text', 14, ['class' => 'me-3']); ?> Filmographie
-            </a>
+            <a href="#relatedSection" class="d-flex align-items-center py-3"><?= $this->icon('relations', 14, ['class' => 'me-2']); ?> Articles liés</a>
         </li>
 
         <li>
-            <a href="#deleteSection" class="d-flex align-items-center py-3">
-                <?= $this->icon('delete', 14, ['class' => 'me-3']); ?> Supprimer
-            </a>
+            <a href="#deleteSection" class="d-flex align-items-center py-3"><?= $this->icon('delete', 14, ['class' => 'me-2']); ?> Supprimer</a>
         </li>
+
     </ul>
 
     <div class="card-footer text-center">
-        <a href="<?= $controller->url('view') ?>" class="btn btn-secondary">Retour</a>
+
+        <a href="<?= $controller->url('list') ?>" class="btn btn-secondary">Retour</a>
     </div>
 </div>

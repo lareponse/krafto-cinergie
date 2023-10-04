@@ -9,6 +9,8 @@ use HexMakina\kadro\Models\Interfaces\EventInterface;
 class Contest extends TightModel implements EventInterface
 {
     use \HexMakina\kadro\Models\Abilities\Event;
+
+    use Abilities\IsActivable;
     use Abilities\HasSlug;
     use Abilities\HasProfilePicture;
 

@@ -13,21 +13,51 @@
             </div>
 
             <div class="col-lg">
-                <input type="text" class="form-control" id="label" name="label" value="<?= $controller->formModel()->get('label') ?>">
+                <input type="text" class="form-control" id="label" name="label" value="<?= $this->e($controller->formModel()->get('label')) ?>">
                 <div class="invalid-feedback">Please add your full name</div>
             </div>
         </div>
 
         <div class="row mb-4">
             <div class="col-lg-3">
-                <label for="publication" class="col-form-label">Sortie</label>
+                <label for="publication" class="col-form-label">Publication & Fin</label>
             </div>
 
             <div class="col-lg">
-                <input type="date" class="form-control" id="publication" name="publication" value="<?= $controller->formModel()->get('publication') ?>">
+                <input type="date" class="form-control" id="starts" name="starts" value="<?= $controller->formModel()->get('starts') ?>">
+                <div class="invalid-feedback">Please add your full name</div>
+            </div>
+
+            <div class="col-lg">
+                <input type="date" class="form-control" id="stops" name="stops" value="<?= $controller->formModel()->get('stops') ?>">
                 <div class="invalid-feedback">Please add your full name</div>
             </div>
         </div>
+
+
+        <div class="row mb-4">
+            <div class="col-lg-3">
+                <label for="label" class="col-form-label">Email</label>
+            </div>
+
+            <div class="col-lg">
+                <input type="email" class="form-control" id="email" name="email" value="<?= $this->e($controller->formModel()->get('email')) ?>">
+                <div class="invalid-feedback">Please add your email</div>
+            </div>
+        </div>
+
+
+        <div class="row mb-4">
+            <div class="col-lg-3">
+                <label for="label" class="col-form-label">Photo</label>
+            </div>
+
+            <div class="col-lg">
+                <input type="file" class="form-control" id="profilePicture" name="profilePicture" value="<?= $this->e($controller->formModel()->get('profilePicture')) ?>">
+                <div class="invalid-feedback">Please add your email</div>
+            </div>
+        </div>
+        
 
         <div class="d-flex justify-content-end mt-5">
             <button type="submit" class="btn btn-primary">Enregistrer</button>
@@ -35,9 +65,10 @@
     </div>
 </div>
 
+
+<?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'question', 'title' => 'Question', 'id' => 'questionSection']) ?>
 <?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'abstract', 'title' => 'Abstract', 'id' => 'abstractSection']) ?>
 <?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'content', 'title' => 'Contenu', 'id' => 'contentSection']) ?>
-<?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'embedVideo', 'title' => 'Vidéo', 'id' => 'videoSection']) ?>
 
 <div class="card border-0 scroll-mt-3" id="publicationSection">
     <div class="card-header">
@@ -58,24 +89,6 @@
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                 <div class="me-2">
-                    <h3 class="h4 mb-0">Archivé</h3>
-                    <p class="small text-muted mb-0">Présent dans les premiers résultats de recherche ?</p>
-                </div>
-                <div class="form-check form-switch mb-0">
-                    <input class="form-check-input" type="checkbox" role="switch" id="isArchived" name="isArchived" <?= $controller->formModel()->get('isArchived') ? 'checked="checked"' : '' ?>">
-                </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                <div class="me-2">
-                    <h3 class="h4 mb-0">Diaporama</h3>
-                    <p class="small text-muted mb-0">Présent dans le diaporama de la page d'accueil ?</p>
-                </div>
-                <div class="form-check form-switch mb-0">
-                    <input class="form-check-input" type="checkbox" role="switch" id="isDiaporama" name="isDiaporama" <?= $controller->formModel()->get('isDiaporama') ? 'checked="checked"' : '' ?>">
-                </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                <div class="me-2">
                     <h3 class="h4 mb-0">Ordre</h3>
                     <p class="small text-muted mb-0">Tri</p>
                 </div>
@@ -83,7 +96,6 @@
                     <input type="number" class="form-control" id="rank" name="rank" value="<?= $controller->formModel()->get('rank') ?>">
                 </div>
             </li>
-
         </ul>
 
         <div class="row mb-4">
@@ -100,9 +112,6 @@
     </div>
 
 </div>
-
-<?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'comment', 'title' => 'Commentaires', 'id' => 'commentSection']) ?>
-
 
 <?= $this->start('deleteForm'); ?>
 <?= $this->insert('Secret::deleteForm') ?>

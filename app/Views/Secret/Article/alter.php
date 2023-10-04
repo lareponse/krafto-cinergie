@@ -13,7 +13,7 @@
             </div>
 
             <div class="col-lg">
-                <input type="text" class="form-control" id="label" name="label" value="<?= $controller->formModel()->get('label') ?>">
+                <input type="text" class="form-control" id="label" name="label" required value="<?= $controller->formModel()->get('label') ?>">
                 <div class="invalid-feedback">Please add your full name</div>
             </div>
         </div>

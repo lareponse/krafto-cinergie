@@ -1,5 +1,6 @@
 <?php $this->layout('Secret::edit') ?>
 
+
 <div class="card border-0 scroll-mt-3" id="signaletiqueSection">
     <div class="card-header">
         <h2 class="h3 mb-0">Signalétique</h2>
@@ -45,37 +46,93 @@
             </div>
         </div>
 
-
         <div class="row mb-4">
             <div class="col-lg-3">
-                <label for="url_internal" class="col-form-label">
-                    <?php
-                    $label = 'URL Interne';
-                    $url = $controller->formModel()->get('url_internal');
-                    echo empty($url) ? $label : $this->DOM()::a($url, $label, ['target' => '_blank'])
-                    ?>
-                </label>
+                <label for="label" class="col-form-label">Offre ?</label>
             </div>
 
             <div class="col-lg">
-                <input type="text" class="form-control" id="url_internal" name="laurl_internalbel" value="<?= $this->e($controller->formModel()->get('url_internal')) ?>">
+                <div class="form-check form-switch mb-0">
+                    <input class="form-check-input" type="checkbox" role="switch" id="active" name="active" <?= $controller->formModel()->isOffer() ? 'checked="checked"' : '' ?>">
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-lg-3">
+                <label for="label" class="col-form-label">Rémunéré ?</label>
+            </div>
+
+            <div class="col-lg">
+                <div class="form-check form-switch mb-0">
+                    <input class="form-check-input" type="checkbox" role="switch" id="active" name="active" <?= $controller->formModel()->isPaid() ? 'checked="checked"' : '' ?>">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row mb-4">
+            <div class="col-lg-3">
+                <label for="label" class="col-form-label">Photo</label>
+            </div>
+
+            <div class="col-lg">
+                <input type="file" class="form-control" id="profilePicture" name="profilePicture" value="<?= $this->e($controller->formModel()->get('profilePicture')) ?>">
+                <div class="invalid-feedback">Please add your email</div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end mt-5">
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+        </div>
+    </div>
+</div>
+
+<div class="card border-0 scroll-mt-3" id="annonceurSection">
+    <div class="card-header">
+        <h2 class="h3 mb-0">Annonceur</h2>
+    </div>
+
+    <div class="card-body">
+
+        <div class="row mb-4">
+            <div class="col-lg-3">
+                <label for="identity" class="col-form-label">Identité</label>
+            </div>
+
+            <div class="col-lg">
+                <input type="text" class="form-control" id="identity" name="identity" value="<?= $this->e($controller->formModel()->get('identity')) ?>">
                 <div class="invalid-feedback">Please add your full name</div>
             </div>
         </div>
 
         <div class="row mb-4">
             <div class="col-lg-3">
-                <label for="url_site" class="col-form-label">
-                    <?php
-                    $label = 'URL Externe';
-                    $url = $controller->formModel()->get('url_site');
-                    echo empty($url) ? $label : $this->DOM()::a($url, $label, ['target' => '_blank'])
-                    ?>
-                </label>
+                <label class="col-form-label">Email & Phone</label>
             </div>
 
             <div class="col-lg">
-                <input type="text" class="form-control" id="url_site" name="url_site" value="<?= $this->e($controller->formModel()->get('url_site')) ?>">
+                <input type="email" class="form-control" id="startemails" name="email" value="<?= $controller->formModel()->get('email') ?>">
+                <div class="invalid-feedback">Please add your full name</div>
+            </div>
+
+            <div class="col-lg">
+                <input type="text" class="form-control" id="phone" name="phone" value="<?= $controller->formModel()->get('phone') ?>">
+                <div class="invalid-feedback">Please add your full name</div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-lg-3">
+                <label class="col-form-label">Tracabilité</label>
+            </div>
+
+            <div class="col-lg">
+                <input type="email" class="form-control" id="work_ip" name="work_ip" value="<?= $controller->formModel()->get('work_ip') ?>">
+                <div class="invalid-feedback">Please add your full name</div>
+            </div>
+
+            <div class="col-lg">
+                <input type="text" class="form-control" id="work_timestamp" name="work_timestamp" value="<?= $controller->formModel()->get('work_timestamp') ?>">
                 <div class="invalid-feedback">Please add your full name</div>
             </div>
         </div>
@@ -87,22 +144,6 @@
 </div>
 
 <?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'content', 'title' => 'Contenu', 'id' => 'contentSection']) ?>
-
-<div class="card border-0 scroll-mt-3" id="publicationSection">
-    <div class="card-header">
-        <h2 class="h3 mb-0">Articles</h2>
-    </div>
-    <div class="card-body">
-
-        <?php $this->insert('Secret::_partials/otto/otto-link', [
-            'cards' => $articles,
-            'className' => 'Article',
-            'parent' => 'event',
-            'child' => 'article',
-            'fields' => ['label']
-        ]) ?>
-    </div>
-</div>
 
 <div class="card border-0 scroll-mt-3" id="publicationSection">
     <div class="card-header">
@@ -130,7 +171,6 @@
                     <input type="number" class="form-control" id="rank" name="rank" value="<?= $controller->formModel()->get('rank') ?>">
                 </div>
             </li>
-
         </ul>
 
         <div class="row mb-4">
@@ -147,6 +187,28 @@
     </div>
 
 </div>
+
+
+<div class="card border-0 scroll-mt-3" id="relatedSection">
+    <div class="card-header">
+        <h2 class="h3 mb-0">Articles liés</h2>
+    </div>
+
+    <div class="card-body">
+
+    <div class="tab-pane fade" id="organisations" role="tabpanel" aria-labelledby="organisations-tab">
+        <?php $this->insert('Secret::_partials/otto/otto-link', [
+            'cards' => $articles,
+            'className' => 'Article', 
+            'parent' => 'event',
+            'child' => 'article',
+            'fields' => ['label']
+        ]) ?>
+    </div>
+    </div>
+
+</div>
+
 
 <?= $this->start('deleteForm'); ?>
 <?= $this->insert('Secret::deleteForm') ?>
