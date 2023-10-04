@@ -88,8 +88,8 @@ SELECT
   `urlparms` as `slug`,
   `tri` as `rank`,
 
-  `field01` as `label`,
-  `field02` as `content`,
+  TRIM(`field01`) as `label`,
+  TRIM(`field02`) as `content`,
 
   IF(`subject` = 'demande', 0, 1) as `isOffer`,
   `field09` as `isPaid`,
@@ -97,12 +97,12 @@ SELECT
   IF(`field03` IS NULL or `field03` = '', null, STR_TO_DATE(`field03`,'%Y-%m-%d')) as `starts`,
   IF(`field04` IS NULL or `field04` = '', null, STR_TO_DATE(`field04`,'%Y-%m-%d')) as `stops`,
 
-  `field05` as `identity`,
-  `field06` as `phone`,
-  `field07` as `email`,
-  `field08` as `url`,
+  TRIM(`field05`) as `identity`,
+  TRIM(`field06`) as `phone`,
+  TRIM(`field07`) as `email`,
+  TRIM(`field08`) as `url`,
 
-  `field10` as `work_ip`,
+  TRIM(`field10`) as `work_ip`,
   `field11` as `work_timestamp`,
 
   `tag`.`id` as `category_id`,
