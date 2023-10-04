@@ -94,6 +94,8 @@ FROM `a7_cinergie_beta`.`layout_subject`
 WHERE `area` ='actualite'
 ORDER BY `description` ASC;
 
+-- REMOVE unused tags https://github.com/HexMakina/krafto-cinergie/issues/23
+DELETE FROM `tag` WHERE `parent_id` = @parent_id AND `reference` IN ('aide_a_la_production', 'musique_de_film');
 
 
 -- DATA :: Event type theme from layout_subject
