@@ -11,11 +11,10 @@ use \HexMakina\Crudites\{Crudites};
 
 try
 {
-
   // eval allow to catch SyntaxErrors
   eval('$settings = require_once("configs/settings.php");');
   $app = new \HexMakina\kadro\kadro($settings);
-
+  
   //--- Setup routes
   $app->container()->get('HexMakina\BlackBox\RouterInterface')->addRoutes(
     require_once 'app/Routes/routes.php'
@@ -23,10 +22,9 @@ try
   //--- Setup database
   $database = $app->container()->get('HexMakina\BlackBox\Database\DatabaseInterface');
   Crudites::setDatabase($database); // removable ?
-
+  
   //--- Handle the request
   $app->container()->get('Controllers\Reception')->welcome(new Host(), $app->container());
-
 }
 catch(\HexMakina\Hopper\RouterException $e)
 {
@@ -40,11 +38,11 @@ catch(\HexMakina\kadro\Auth\AccessRefusedException $e)
 }
 catch(\Throwable $e)
 {
-  header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
-
   if(isset($app) && $app->isDevelopment()){
     ddt($e);
   }
+
+  header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
 
   $message = '';
   if($e instanceof \PDOException){
@@ -58,9 +56,10 @@ catch(\Throwable $e)
 }
 finally
 {
+
   if(isset($app))
     $app->container()->get('HexMakina\BlackBox\StateAgentInterface')->resetMessages();
 
-  echo("<!-- krafto by https://HexMakina.be -->");
+  echo("<!-- krafto by https://lareponse.be -->");
   echo(sprintf("\n<!-- %0.4fms-->", (hrtime(true) - $start_time)/1e+6));
 }
