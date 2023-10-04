@@ -87,7 +87,8 @@
   }
 </script>
 <!-- Favicon -->
-<link rel="icon" href="/public/assets/dashly/favicon/favicon.ico" sizes="any">
+
+<link rel="icon" href="https://www.cinergie.be/images/favicon.ico" sizes="any">
 
 <!-- Demo script -->
 <script>
