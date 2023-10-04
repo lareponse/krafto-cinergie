@@ -20,6 +20,7 @@ class Article extends TightModel
     {
         $select = self::table()->select();
         $select->columns([
+            '`article`.`id`', 
             '`article`.`slug`', 
             '`article`.`label`', 
             '`article`.`publication`', 
