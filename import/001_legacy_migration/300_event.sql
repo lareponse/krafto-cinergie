@@ -14,18 +14,15 @@ CREATE TABLE `event` (
 
   `starts` date DEFAULT NULL COMMENT 'leg:field02',
   `stops` date DEFAULT NULL COMMENT 'leg:field03',
+
   `url_site` varchar(552) DEFAULT NULL COMMENT 'leg:field05',
   `url_internal` varchar(255) DEFAULT NULL COMMENT 'leg:field06',
 
   `type_id` int DEFAULT NULL COMMENT 'FK tag',
 
-  `legacy_id` varchar(40) DEFAULT NULL,
-  `legacy_title` varchar(190) DEFAULT NULL,
-  `legacy_category` varchar(12) DEFAULT NULL,
-  `legacy_theme` varchar(17) DEFAULT NULL,
-  `legacy_subject` varchar(17) DEFAULT NULL,
   `legacy_user` varchar(13) DEFAULT NULL,
-  `legacy_parm_cat_event` varchar(14) DEFAULT NULL COMMENT 'leg:field04'
+  `legacy_title` varchar(190) DEFAULT NULL
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- PRIMARY
@@ -62,14 +59,8 @@ INSERT INTO `cinergie`.`event` (
 
   `type_id`,
 
-  `legacy_id`,
-  `legacy_title`,
-  `legacy_category`,
-  `legacy_theme`,
-  `legacy_subject`,
   `legacy_user`,
-
-  `legacy_parm_cat_event`
+  `legacy_title`
 )
 SELECT
   CAST(REGEXP_SUBSTR(`content_item`.`id`, '[0-9]+$', 1) as UNSIGNED) as `id`,
@@ -79,23 +70,18 @@ SELECT
   `urlparms` as `slug`,
   `tri` as `rank`,
 
-  `field01` as `label`,
+  TRIM(`field01`) as `label`,
 
   IF(`field02` IS NULL or `field02` = '', null, STR_TO_DATE(`field02`,'%Y-%m-%d')) as `starts`,
   IF(`field03` IS NULL or `field03` = '', null, STR_TO_DATE(`field03`,'%Y-%m-%d')) as `stops`,
-  `field05` as `url_site`,
-  `field06` as `url_internal`,
+  TRIM(`field05`) as `url_site`,
+  TRIM(`field06`) as `url_internal`,
 
   `tag`.`id` as `type_id`,
 
-  `content_item`.`id` as `legacy_id`,
-  `title` as `legacy_title`,
-  `category` as `legacy_category`,
-  `theme` as `legacy_theme`,
-  `subject` as `legacy_subject`,
-  `user` as `legacy_user`,
+  TRIM(`user`) as `legacy_user`,
+  TRIM(`title`) as `legacy_title`
 
-  `field04` as `legacy_parm_cat_event`
 
 FROM `a7_cinergie_beta`.`content_item`
 LEFT OUTER JOIN `tag` ON `tag`.`reference` = `content_item`.`subject`
