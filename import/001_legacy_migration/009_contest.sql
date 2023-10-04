@@ -12,20 +12,16 @@ CREATE TABLE `contest` (
   `label` varchar(100) DEFAULT NULL COMMENT 'leg:field01',
   `content` text COMMENT 'leg:field06',
 
+  `starts` date DEFAULT NULL COMMENT 'leg:field02',
+  `stops` date DEFAULT NULL COMMENT 'leg:field03',
+
   `profilePicture` varchar(255) DEFAULT NULL COMMENT 'leg:field04',
 
   `abstract` text COMMENT 'leg:field05',
   `question` varchar(255) DEFAULT NULL COMMENT 'leg:field07',
   `email` varchar(100) DEFAULT NULL COMMENT 'leg:field08',
 
-  `starts` date DEFAULT NULL COMMENT 'leg:field02',
-  `stops` date DEFAULT NULL COMMENT 'leg:field03',
-
-  `legacy_id` varchar(40) DEFAULT NULL,
-  `legacy_dicho_formulaire` tinyint(1) DEFAULT NULL COMMENT 'leg:field09',
-  `legacy_field19` varchar(255) DEFAULT NULL,
-  `legacy_field20` varchar(255) DEFAULT NULL
-
+  `canShowForm` tinyint(1) DEFAULT '1' COMMENT 'leg:field09'
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -61,11 +57,10 @@ INSERT INTO `cinergie`.`contest` (
 
   `starts`,
   `stops`,
+  `canShowForm`,
 
-  `legacy_id`,
-  `legacy_dicho_formulaire`,
-  `legacy_field19`,
-  `legacy_field20`
+  `legacy_user`
+
 
 )
 SELECT
@@ -87,11 +82,9 @@ SELECT
 
   IF(`field02` IS NULL or `field02` = '' or `field02` LIKE '0000-00-00', null, STR_TO_DATE(`field02`,'%Y-%m-%d')) as `starts`,
   IF(`field03` IS NULL or `field03` = '' or `field03` LIKE '0000-00-00', null, STR_TO_DATE(`field03`,'%Y-%m-%d')) as `stops`,
+  IF(`field09` IS NULL or `field09` = '' or `field09` <> 1 , 0, 1) as `canShowForm`,
 
-  `id` as `legacy_id`,
-  IF(`field09`='', null, `field09`) as `legacy_dicho_formulaire`,
-  `field19` as `legacy_field19`,
-  `field20` as `legacy_field20`
+  TRIM(`user`) as `legacy_user`,
 
 FROM `a7_cinergie_beta`.`content_item`
 
