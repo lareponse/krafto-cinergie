@@ -5,6 +5,7 @@ namespace App\Controllers\Secret;
 class Merchandise extends Krafto
 {
     use \App\Controllers\Abilities\HasORM;
+    use \App\Controllers\Abilities\EditOnly;
 
     public function activeSection(): string
     {
@@ -18,11 +19,5 @@ class Merchandise extends Krafto
         }
         parent::home();
     }
-
-    public function view()
-    {
-        $this->router()->hop('dash_record_edit', ['controller' => $this->className(), 'id' => $this->router()->params('id')]);
-    }
-
 
 }
