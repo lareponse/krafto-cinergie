@@ -89,6 +89,11 @@ trait HasORM
             $this->router()->hop('dash_record', ['controller' => $this->className(), 'id' => $model->getID()]);
 
         } else {
+            $StateAgent = $this->get('HexMakina\BlackBox\StateAgentInterface');
+
+            foreach($this->errors() as $err){
+                $StateAgent->addMessage('warning', $err);
+            }
             $this->setTemplate('alter');
         }
     }
@@ -96,13 +101,14 @@ trait HasORM
     public function persist_model($model)
     {
         $this->errors = $model->save($this->operator()->getId()); // returns [errors]
+
         if (empty($this->errors())) {
-            $this->logger()->notice(json_encode(['CRUDITES_INSTANCE_ALTERED', ['MODEL_' . get_class($model)::model_type() . '_INSTANCE']]));
+            $this->logger()->notice('CRUDITES_INSTANCE_ALTERED');
             return $model;
         }
 
-        foreach ($this->errors() as $field => $error_msg) {
-            $this->logger()->warning(json_encode([$error_msg, [$field]]));
+        foreach ($this->errors() as $cruditeError) {
+            $this->logger()->warning($cruditeError->__toString());
         }
 
         return null;

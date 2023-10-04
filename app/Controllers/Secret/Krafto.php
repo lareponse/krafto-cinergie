@@ -61,9 +61,15 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
 
         $title = $this->breadcrumb();
         $this->viewport('title', $title);
-        echo $this->display($this->template);
-        die;
+        // return $this->template;
+        // echo $this->display($this->template);
+        
     }
+
+    protected function find_template($engine, $template_name): string
+    {
+        return parent::find_template($engine, $this->template);
+   }
 
     protected function breadcrumb($prefix = [], $suffix = []): string
     {
