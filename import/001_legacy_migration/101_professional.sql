@@ -98,11 +98,11 @@
 
    TRIM(`nom`) as `lastname`,
    TRIM(`prenom`) as `firstname`,
-   `information` as `content`,
+   TRIM(`information`) as `content`,
 
-   `filmographie` as `filmography`,
+   TRIM(`filmographie`) as `filmography`,
 
-   IF(TRIM(`genre`)='', null, `genre`) as `gender`,
+   IF(TRIM(`genre`)='', null, TRIM(`genre`)) as `gender`,
    IF(DATE(`datenaiss`) IS NULL or `datenaiss` LIKE '%-00', null, `datenaiss`) as `birth`,
    IF(DATE(`datedeces`) IS NULL or `datedeces` LIKE '%-00', null, `datedeces`) as `death`,
 
