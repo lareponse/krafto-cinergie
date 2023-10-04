@@ -10,6 +10,8 @@ use HexMakina\kadro\Models\Interfaces\EventInterface;
 class Work extends TightModel implements EventInterface
 {
     use \HexMakina\kadro\Models\Abilities\Event;
+    use Abilities\IsActivable;
+    use Abilities\HasProfilePicture;
     use Abilities\HasSlug;
 
 
