@@ -32,7 +32,7 @@
             </div>
 
             <div class="col-lg">
-                <input type="text" class="form-control" id="url" name="url" value="<?= $controller->formModel()->get('legacy_photo') ?>">
+                <input type="text" class="form-control" id="url" name="url" value="<?= $controller->formModel()->profilePicturePath() ?>">
             </div>
         </div>
         <div class="row mb-4">
