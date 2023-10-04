@@ -129,12 +129,14 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
         $this->viewport('filters', $this->router()->params());
     }
 
-    public function actionFor($action, $model, $extras = [])
-    {
-        
-        return $this->urlFor($model->className(), $model, $extras);
-    }
 
+
+    public function url(string $action, $extras = []): string
+    {
+        return $this->urlFor($this->className(), $action, $this->loadModel(), $extras);
+
+    }
+    
     public function urlFor(string $class, string $action, $model=null, $extras = [])
     {
         $prefix = 'dash_record';
@@ -153,13 +155,14 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
                 $name = $prefix . '_' . $action;
                 break;
         }
-
+        
         $params = ['controller' => $class];
         if ($model) {
             $params['id'] = $model->getID();
         }
 
         $route_as_href = $this->router()->hyp($name, $params);
+
         if (!empty($extras)) {
 
             $extras = implode('&', array_map(function ($key, $value) {
@@ -172,10 +175,4 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
         return $route_as_href;
     }
 
-
-    public function url(string $action, $extras = []): string
-    {
-        return $this->urlFor($this->className(), $action, $this->loadModel(), $extras);
-
-    }
 }

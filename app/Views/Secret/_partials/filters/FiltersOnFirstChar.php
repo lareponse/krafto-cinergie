@@ -17,9 +17,7 @@ $menu = array_merge(['.' => '#!.', '09' => '0-9'], $menu, ['*' => 'Tous']);
     }
     ?>
 
-    <a href="<?= $controller->url('new') ?>" class="btn btn-primary btn-sm ms-md-4">
-        Nouveau
-    </a>
+    <a href="<?= $controller->url('new') ?>" class="btn btn-primary btn-sm ms-md-4">Nouveau</a>
 </nav>
 
 

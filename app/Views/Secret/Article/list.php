@@ -14,11 +14,8 @@
             }
             ?>
             <input class="form-control list-search mw-md-300px ms-md-auto mt-5 mt-md-0 mb-3 mb-md-0" type="search" placeholder="Chercher">
-
-            <a href="<?= $controller->urlFor('Article', 'new') ?>" class="btn btn-primary ms-md-4">
-                Nouveau
-            </a>
-        </div>
+            <a href="<?= $controller->url('new');?>" class="btn btn-primary ms-md-4">Nouveau</a>
+            </div>
 
         <?php
         if (isset($filters)) {
@@ -53,7 +50,7 @@
                 <?php
                 foreach ($listing as $model) {
                 ?>
-                    <tr data-action="<?= $controller->urlFor('Article', 'view', $model) ?>">
+                    <tr data-action="<?= $controller->urlFor('Article', 'edit', $model) ?>">
 
                         <td class="title">
                             <div class="d-flex align-items-center">
