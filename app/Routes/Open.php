@@ -63,11 +63,11 @@ $routes = [
   ['GET', 'boutique', 'Shop::shop', 'shop'],
   ['GET|POST', 'boutique/commander', 'Shop::order', 'shop_order'],
 
-  // works
-  ['GET', 'annonces', 'Work::works', 'works'],
-  ['GET', 'annonces/categorie/[*:category]', 'Work::search', 'work_by_category'],
-  ['GET', 'annonces/recherche/[*:params]', 'Work::search', 'work_search'],
-  ['GET', 'annonce/[*:slug]', 'Work::work', 'work'],
+  // jobs
+  ['GET', 'annonces', 'Job::jobs', 'jobs'],
+  ['GET', 'annonces/categorie/[*:category]', 'Job::search', 'job_by_category'],
+  ['GET', 'annonces/recherche/[*:params]', 'Job::search', 'job_search'],
+  ['GET', 'annonce/[*:slug]', 'Job::job', 'job'],
 
   // search engine
   ['GET', 'recherche/[*:params]?', 'Search::search', 'search'],

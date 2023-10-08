@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close  btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-5">
-                <?= $this->insert('Open::Work/form_new'); ?>
+                <?= $this->insert('Open::Job/form_new'); ?>
             </div>
             <div class="modal-footer">
                 <input class="btn btn-primary" type="submit" name="submit-nouvelle-annonce" value="Envoyer">

@@ -7,7 +7,7 @@ use HexMakina\BlackBox\Database\SelectInterface;
 use HexMakina\TightORM\TightModel;
 use HexMakina\kadro\Models\Interfaces\EventInterface;
 
-class Work extends TightModel implements EventInterface
+class Job extends TightModel implements EventInterface
 {
     use \HexMakina\kadro\Models\Abilities\Event;
     use Abilities\IsActivable;

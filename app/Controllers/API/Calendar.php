@@ -2,7 +2,7 @@
 
 namespace App\Controllers\API;
 
-use \App\Models\{Contest, Work, Event};
+use \App\Models\{Contest, Job, Event};
 
 class Calendar extends \HexMakina\kadro\Controllers\Kadro
 {

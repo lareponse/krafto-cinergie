@@ -44,7 +44,7 @@
                                 <li><a href="<?=$controller->router()->hyp('movies');?>">Filmoth&egrave;que</a></li>
                                 <li><a href="<?=$controller->router()->hyp('professionals');?>">Professionnels</a></li>
                                 <li><a href="<?=$controller->router()->hyp('organisations');?>">Organisations</a></li>
-                                <li><a href="<?=$controller->router()->hyp('work');?>">Castings & Jobs</a></li>
+                                <li><a href="<?=$controller->router()->hyp('jobs');?>">Castings & Jobs</a></li>
                                 <li><a href="<?=$controller->router()->hyp('shop');?>">Boutique</a></li>
                             </ul>
                         </nav>

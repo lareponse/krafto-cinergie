@@ -3,9 +3,8 @@
 namespace App\Controllers\Secret;
 
 use HexMakina\kadro\Models\Tag;
-use App\Models\Article;
 
-class Work extends Krafto
+class Job extends Krafto
 {
     use \App\Controllers\Abilities\HasORM;
     use \App\Controllers\Abilities\FiltersOnYearAndMonth;
@@ -21,7 +20,7 @@ class Work extends Krafto
 
     public function conclude(): void
     {
-        $this->viewport('types', Tag::filter(['parent' => 'work_category']));
+        $this->viewport('types', Tag::filter(['parent' => 'job_category']));
         parent::conclude();
     }
 }

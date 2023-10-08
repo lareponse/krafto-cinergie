@@ -119,10 +119,10 @@ ORDER BY `description` ASC;
 
 
 -- DATA :: Event type theme from layout_subject
-INSERT INTO `cinergie`.`tag` (`label`, `reference`) VALUES ('Catégorie', 'work_category');
+INSERT INTO `cinergie`.`tag` (`label`, `reference`) VALUES ('Catégorie', 'job_category');
 
 -- Get parent tag ID
-SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE reference='work_category');
+SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE reference='job_category');
 
 -- Insert tag from layout_subject
 INSERT INTO `tag` (`parent_id`, `reference`, `label`, `content`)
@@ -138,22 +138,22 @@ ORDER BY `description` ASC;
 
 
 INSERT INTO `tag` (`id`, `parent_id`, `reference`, `label`, `content`, `rank`) 
-VALUES (NULL, NULL, 'work_payment', 'Rémunéré ou pas ?', NULL, NULL);
+VALUES (NULL, NULL, 'job_payment', 'Rémunéré ou pas ?', NULL, NULL);
 
-SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE reference='work_payment');
+SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE reference='job_payment');
 -- Insert tag from layout_subject
 INSERT INTO `tag` (`parent_id`, `reference`, `label`)
 VALUES 
-  (@parent_id, 'work_paid', 'Rémunéré'),
-  (@parent_id, 'work_free', 'Non rémunéré');
+  (@parent_id, 'job_paid', 'Rémunéré'),
+  (@parent_id, 'job_free', 'Non rémunéré');
 
 
 INSERT INTO `tag` (`id`, `parent_id`, `reference`, `label`, `content`, `rank`) 
-VALUES (NULL, NULL, 'work_proposal', 'Proposition ou demande ?', NULL, NULL);
+VALUES (NULL, NULL, 'job_proposal', 'Proposition ou demande ?', NULL, NULL);
 
-SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE reference='work_proposal');
+SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE reference='job_proposal');
 -- Insert tag from layout_subject
 INSERT INTO `tag` (`parent_id`, `reference`, `label`)
 VALUES 
-  (@parent_id, 'work_offer', 'Proposition'),
-  (@parent_id, 'work_request', 'Demande');
+  (@parent_id, 'job_offer', 'Proposition'),
+  (@parent_id, 'job_request', 'Demande');

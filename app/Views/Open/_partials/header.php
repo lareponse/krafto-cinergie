@@ -48,7 +48,7 @@
                     <a class="nav-link" href="<?= $controller->router()->hyp('organisations'); ?>">Organisations</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= $controller->router()->hyp('works'); ?>">Castings & Jobs</a>
+                    <a class="nav-link" href="<?= $controller->router()->hyp('jobs'); ?>">Castings & Jobs</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= $controller->router()->hyp('shop'); ?>">Boutique</a>

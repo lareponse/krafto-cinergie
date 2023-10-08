@@ -2,7 +2,7 @@
 
 namespace App\Controllers\Open;
 
-use App\Models\{Article, Contest, Event, Work};
+use App\Models\{Article, Contest, Event, Job};
 
 class Home extends Kortex
 {
@@ -33,10 +33,10 @@ class Home extends Kortex
             ->orderBy([['event', 'starts', 'ASC']]);
         
         
-        $works = Work::queryListing()
+        $jobs = Job::queryListing()
             ->whereEQ('active', '1')
             ->limit(5)
-            ->orderBy([['work', 'starts', 'ASC']]);
+            ->orderBy([['job', 'starts', 'ASC']]);
         
         $this->viewport('articlesDiaporama', $articlesDiaporama->retObj(Article::class));
         $this->viewport('entrevuesFilmees', $entrevuesFilmees->retObj(Article::class));
@@ -44,6 +44,6 @@ class Home extends Kortex
 
         $this->viewport('contests', Contest::queryListing()->retObj(Contest::class));
         $this->viewport('events', $events->retObj(Event::class));
-        $this->viewport('works', $works->retObj(Work::class));
+        $this->viewport('jobs', $jobs->retObj(Job::class));
     }
 }

@@ -4,7 +4,7 @@
             <p class="h5 mb-3">Rémunéré</p>
             <div class="control-group">
             <?php
-                foreach (['work_paid' => 'Oui', 'work_free' => 'Non'] as $key => $value) {
+                foreach (['job_paid' => 'Oui', 'job_free' => 'Non'] as $key => $value) {
                     $checked = $key === $controller->router()->params('remun') ? 'checked="checked"' : '';
                 ?>
                     <label class="control control-checkbox">
@@ -23,7 +23,7 @@
             <p class="h5 mb-3">Types</p>
             <div class="control-group">
                 <?php
-                foreach ($work_proposal as $key => $value) {
+                foreach ($job_proposal as $key => $value) {
                     $checked = in_array($key, $controller->router()->params('types') ?? []) ? 'checked="checked"' : '';
                 ?>
 

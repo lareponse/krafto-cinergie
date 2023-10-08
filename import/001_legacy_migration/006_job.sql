@@ -1,7 +1,7 @@
 -- STRUCTURE
-DROP TABLE IF EXISTS `cinergie`.`work`;
+DROP TABLE IF EXISTS `cinergie`.`job`;
 
-CREATE TABLE `work` (
+CREATE TABLE `job` (
   `id` int NOT NULL COMMENT 'parsed and cast from legacy id',
 
   `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -22,8 +22,8 @@ CREATE TABLE `work` (
   `email` varchar(255) DEFAULT NULL COMMENT 'leg:field07',
   `url` varchar(255) DEFAULT NULL COMMENT 'leg:field08',
 
-  `work_ip` varchar(255) DEFAULT NULL COMMENT 'leg:field10',
-  `work_timestamp` timestamp NULL DEFAULT NULL COMMENT 'leg:field11',
+  `job_ip` varchar(255) DEFAULT NULL COMMENT 'leg:field10',
+  `job_timestamp` timestamp NULL DEFAULT NULL COMMENT 'leg:field11',
 
   `category_id` int DEFAULT NULL COMMENT 'FK tag',
 
@@ -34,21 +34,21 @@ CREATE TABLE `work` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- PRIMARY
-ALTER TABLE `work` ADD PRIMARY KEY (`id`);
-ALTER TABLE `work` MODIFY `id` int NOT NULL AUTO_INCREMENT;
+ALTER TABLE `job` ADD PRIMARY KEY (`id`);
+ALTER TABLE `job` MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 -- INDEX
-ALTER TABLE `work` ADD UNIQUE `work-slug-unique` (`slug`);
+ALTER TABLE `job` ADD UNIQUE `job-slug-unique` (`slug`);
 
 -- FK
 
-ALTER TABLE `work` ADD CONSTRAINT `work-hasCategoryTag` FOREIGN KEY (`category_id`) REFERENCES `tag` (`id`);
+ALTER TABLE `job` ADD CONSTRAINT `job-hasCategoryTag` FOREIGN KEY (`category_id`) REFERENCES `tag` (`id`);
 
 -- DATA
 
-TRUNCATE `cinergie`.`work`;
+TRUNCATE `cinergie`.`job`;
 
-INSERT INTO `cinergie`.`work` (
+INSERT INTO `cinergie`.`job` (
   `id`,
 
   `created_on`,
@@ -70,8 +70,8 @@ INSERT INTO `cinergie`.`work` (
   `email`,
   `url`,
 
-  `work_ip`,
-  `work_timestamp`,
+  `job_ip`,
+  `job_timestamp`,
 
   `category_id`,
 
@@ -102,8 +102,8 @@ SELECT
   TRIM(`field07`) as `email`,
   TRIM(`field08`) as `url`,
 
-  TRIM(`field10`) as `work_ip`,
-  `field11` as `work_timestamp`,
+  TRIM(`field10`) as `job_ip`,
+  `field11` as `job_timestamp`,
 
   `tag`.`id` as `category_id`,
 

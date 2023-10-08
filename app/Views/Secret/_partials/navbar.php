@@ -19,7 +19,7 @@ $menu = [
             'icon' => 'calendar',
             'subs' => [
                 'Event' => ['label' => 'Agenda'],
-                'Work' => ['label' => 'Annonces'],
+                'Job' => ['label' => 'Annonces'],
                 'Contest' => ['label' => 'Concours']
             ]
         ],

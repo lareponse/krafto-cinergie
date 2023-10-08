@@ -22,10 +22,10 @@ SELECT IF(
 (SELECT count(id) FROM cinergie.`event`) as count_new,
 (SELECT count(id) FROM `a7_cinergie_beta`.content_item WHERE category = 'agenda') as count_old;
 
--- work
+-- job
 SELECT IF(
-(SELECT count(id) FROM cinergie.`work`) = (SELECT count(id) FROM `a7_cinergie_beta`.content_item WHERE category = 'annonce'), 'OK', 'NOK') as work_count_same,
-(SELECT count(id) FROM cinergie.`work`) as count_new,
+(SELECT count(id) FROM cinergie.`job`) = (SELECT count(id) FROM `a7_cinergie_beta`.content_item WHERE category = 'annonce'), 'OK', 'NOK') as job_count_same,
+(SELECT count(id) FROM cinergie.`job`) as count_new,
 (SELECT count(id) FROM `a7_cinergie_beta`.content_item WHERE category = 'annonce') as count_old;
 
 -- article
