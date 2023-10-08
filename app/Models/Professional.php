@@ -29,10 +29,11 @@ class Professional extends TightModel
     {
         $select = self::table()->select();
         $select->columns([
-            'professional.slug',
-            "CONCAT(professional.firstname, ' ', professional.lastname) as fullname",
-            'professional.profilePicture',
-            "GROUP_CONCAT(praxis.label SEPARATOR ', ') as praxes"
+            'id',
+            'slug',
+            'fullname' => ["CONCAT(professional.firstname, ' ', professional.lastname)"],
+            'profilePicture',
+            'praxes' => ["GROUP_CONCAT(praxis.label SEPARATOR ', ')"]
         ]);
 
         $select->join(['professional_tag', 'professional_tag'], [['professional_tag', 'professional_id', 'professional', 'id']], 'LEFT OUTER');
@@ -50,19 +51,12 @@ class Professional extends TightModel
     public static function byMovie(Movie $movie) : array
     {
         $ret = [];
-        $select = self::table()->select();
-        $select->columns([
-            'professional.id',
-            'professional.slug',
-            "CONCAT(professional.firstname, ' ', professional.lastname) as fullname",
-            'professional.profilePicture',
-            "GROUP_CONCAT(praxis.label SEPARATOR ', ') as praxes"
-        ]);
-
+        // $select = self::table()->select();
+        $select = self::queryListing();
         $select->join(['movie_professional', 'workedOn'], [['workedOn','professional_id', 'professional', 'id'],['workedOn', 'movie_id', $movie->getID()]], 'INNER');
-        $select->join(['tag', 'praxis'], [['workedOn','praxis_id', 'praxis', 'id'],], 'INNER');
-        $select->groupBy(['professional', 'id']);
+        $select->join(['tag', 'workedOnAs'], [['workedOn','praxis_id', 'workedOnAs', 'id']], 'INNER');
 
+        $select->groupBy(['professional', 'id']);
         $ret = $select->retObj(self::class);
 
         return $ret;
@@ -99,6 +93,15 @@ class Professional extends TightModel
 
         $Query->selectAlso(["CONCAT(firstname,' ', lastname) as label"]);
 
+        $Query->join(['professional_tag', 'praxis'], [['praxis', 'professional_id', 'professional', 'id']], 'LEFT OUTER');
+        $Query->join(['tag', 'tag'], [['tag', 'id', 'praxis', 'tag_id'], ['tag', 'parent_id', 97]], 'LEFT OUTER');
+        $Query->groupBy(['professional', 'id']);
+        $Query->selectAlso(["GROUP_CONCAT(DISTINCT tag.id) as praxis_ids"]);
+
+        if(isset($filters['praxis_id'])){
+            $Query->whereEQ('tag_id', ((int)$filters['praxis_id']), 'praxis');
+        }
+
         if(isset($filters['FiltersOnFirstChar'])){
             self::applyFirstCharFilter($filters['FiltersOnFirstChar'], $Query, 'lastname');
         }
@@ -117,8 +120,6 @@ class Professional extends TightModel
             $isLike = '%' . $filters['fullname'] . '%';
             $bindname = $Query->addBinding('fullNameSearch', $isLike);
             $Query->whereWithBind('CONCAT(`professional`.`firstname`, \' \',`professional`.`lastname`) LIKE ' . $bindname);
-
-            // $Query->whereLike("CONCAT(firstname,' ', lastname)",'%'.$filters['fullname'] . '%', $Query->table());
         }
 
         if(isset($filters['organisation']))
@@ -136,20 +137,13 @@ class Professional extends TightModel
                 ['article_professional', 'article_id', $filters['article']->getID()]
             ]);
         }
-
+        
         if(!isset($options['eager']) || $options['eager'] !== false){
-            $Query->join(['professional_tag', 'praxis'], [['professional', 'id', 'praxis', 'professional_id']], 'LEFT OUTER');
-            $Query->join(['tag', 'tag'], [['tag', 'id', 'praxis', 'tag_id'], ['tag', 'parent_id', 91]], 'LEFT OUTER');
-            $Query->groupBy(['professional', 'id']);
-            $Query->selectAlso(["GROUP_CONCAT(DISTINCT tag.id) as praxis_ids"]);
 
-            if(isset($filters['praxis_id'])){
-                $Query->whereEQ('tag_id', ((int)$filters['praxis_id']), 'praxis');
-            }
+
         }
 
         $Query->orderBy(['lastname', 'asc']);
-        
         return $Query;
     }
 }

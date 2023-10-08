@@ -44,23 +44,21 @@ class Work extends TightModel implements EventInterface
     public static function queryListing(): SelectInterface
     {
         $select = self::table()->select([
-            'advertisement.`slug`',
-            'advertisement.`label`',
-            'advertisement.`starts`',
-            'advertisement.`isOffer`',
-            'advertisement.`isPaid`',
-            'tag.`label` as category_label'
-        ], 'advertisement');
+            'slug',
+            'label',
+            'starts',
+            'isOffer',
+            'isPaid',
+            'category_label' => ['tag', 'label']
+        ]);
 
         $now = date('Y-m-d');
         $startsAfter = $select->addBinding('startsAfter', $now);
         $stopsBefore = $select->addBinding('stopsBefore', $now);
         $select->whereWithBind(sprintf('starts >= %s AND stops IS NOT NULL AND (stops >= %s)', $startsAfter, $stopsBefore));
+        
 
-
-        $select->whereEQ('active', 1);
-
-        $select->join(['tag', 'tag'], [['advertisement', 'category_id', 'tag', 'id']], 'LEFT OUTER');
+        $select->join(['tag', 'tag'], [[$select->table(), 'category_id', 'tag', 'id']], 'LEFT OUTER');
 
         $select->orderBy(['starts', 'ASC']);
 

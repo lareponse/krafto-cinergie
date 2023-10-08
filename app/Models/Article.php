@@ -20,13 +20,22 @@ class Article extends TightModel
     {
         $select = self::table()->select();
         $select->columns([
-            '`article`.`id`', 
-            '`article`.`slug`', 
-            '`article`.`label`', 
-            '`article`.`publication`', 
-            '`article`.`profilePicture`',
-            '`tag`.`label` as type_label'
-        ]);
+                'id', 'slug', 'label', 'publication', 'profilePicture',
+                'type_label' => ['tag', 'label']
+            ]
+        );
+
+        $select->whereEQ('active', 1);
+
+        $select->join(['tag', 'tag'], [['article', 'type_id', 'tag', 'id']], 'LEFT OUTER');
+
+        return $select;
+    }
+
+    public static function queryRecord(): SelectInterface
+    {
+        $select = self::queryListing();
+        $select->selectAlso('*');
 
         $select->whereEQ('active', 1);
 
@@ -38,10 +47,14 @@ class Article extends TightModel
     public static function query_retrieve($filters = [], $options = []): SelectInterface
     {
         //---- JOIN & FILTER SERVICE
-        $Query = parent::query_retrieve($filters, $options);
-        $Query->join(['article_author', 'hasWriten'], [['hasWriten', 'article_id', 'article', 'id']], 'LEFT OUTER');
-        $Query->join(['author', 'author'], [['hasWriten', 'author_id', 'author', 'id']], 'LEFT OUTER');
-        $Query->selectAlso(['author.label as author_label', 'author.slug as author_slug']);
+        $Query = self::queryRecord();
+
+        $Query->join(['article_author', 'writtenBy'], [['writtenBy', 'article_id', 'article', 'id']], 'LEFT OUTER');
+        $Query->join(['author', 'author'], [['writtenBy', 'author_id', 'author', 'id']], 'LEFT OUTER');
+        $Query->groupBy(['article', 'id']);
+
+        // $Query->selectAlso(["GROUP_CONCAT(author.label SEPARATOR ', ') as writtenBy", "GROUP_CONCAT(author.slug SEPARATOR ', ') as writtenBySlugs"]);
+        $Query->selectAlso(['writtenBy' => ["GROUP_CONCAT(author.label SEPARATOR ', ')"], 'writtenBySlugs' => ["GROUP_CONCAT(author.slug SEPARATOR ', ')"]]);
 
         if (isset($filters['hasEmbedVideo'])) {
             $Query->whereNotEmpty('embedVideo');
@@ -58,23 +71,23 @@ class Article extends TightModel
         }
 
         if (isset($filters['professional'])) {
-            $Query->join(['article_professional', 'article_professional'], [
-                ['article', 'id', 'article_professional', 'article_id'],
-                ['article_professional', 'article_id', $filters['professional']->getID()]
+            $Query->join(['article_professional', 'related'], [
+                ['article', 'id', 'related', 'article_id'],
+                ['related', 'professional_id', $filters['professional']->getID()]
             ]);
         }
 
         if (isset($filters['organisation'])) {
-            $Query->join(['article_organisation', 'article_organisation'], [
-                ['article', 'id', 'article_organisation', 'article_id'],
-                ['article_organisation', 'organisation_id', $filters['organisation']->getID()]
+            $Query->join(['article_organisation', 'related'], [
+                ['article', 'id', 'related', 'article_id'],
+                ['related', 'organisation_id', $filters['organisation']->getID()]
             ]);
         }
 
         if (isset($filters['movie'])) {
-            $Query->join(['article_movie', 'article_movie'], [
-                ['article', 'id', 'article_movie', 'article_id'],
-                ['article_movie', 'movie_id', $filters['movie']->getID()]
+            $Query->join(['article_movie', 'related'], [
+                ['article', 'id', 'related', 'article_id'],
+                ['related', 'movie_id', $filters['movie']->getID()]
             ]);
         }
 
@@ -83,9 +96,9 @@ class Article extends TightModel
                 ['article', 'id', 'article_movie', 'article_id']
             ]);
 
-            $Query->join(['movie_dvd', 'movie_dvd'], [
-                ['article_movie', 'movie_id', 'movie_dvd', 'movie_id'],
-                ['movie_dvd', 'dvd_id', $filters['DVD']->getID()]
+            $Query->join(['movie_dvd', 'related'], [
+                ['article_movie', 'movie_id', 'related', 'movie_id'],
+                ['related', 'dvd_id', $filters['DVD']->getID()]
             ]);
         }
 
@@ -96,9 +109,11 @@ class Article extends TightModel
             ]);
         }
 
+        if (isset($filters['content'])) {
+            $Query->whereFilterContent($filters['content']);
+        }
 
         $Query->orderBy('publication DESC');
-
         return $Query;
     }
 }

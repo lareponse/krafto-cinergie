@@ -63,11 +63,11 @@ class Organisation extends TightModel
         $ret = [];
         $select = self::table()->select();
         $select->columns([
-            'organisation.id',
-            'organisation.slug',
-            'organisation.label',
-            'organisation.profilePicture',
-            "GROUP_CONCAT(praxis.label SEPARATOR ', ') as praxes"
+            'id',
+            'slug',
+            'label',
+            'profilePicture',
+            'praxes' => ["GROUP_CONCAT(praxis.label SEPARATOR ', ')"]
         ]);
 
         $select->join(['movie_organisation', 'workedOn'], [['workedOn','organisation_id', 'organisation', 'id'],['workedOn', 'movie_id', $movie->getID()]], 'INNER');

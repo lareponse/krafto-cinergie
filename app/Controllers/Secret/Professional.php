@@ -30,7 +30,7 @@ class Professional extends Krafto
             $this->router()->hop('dash_professionals');
         }
         $this->viewport('articles', Article::filter(['professional' => $this->loadModel()], ['eager' => false]));
-        $this->viewport('movies', Movie::filter(['professional' => $this->loadModel()], ['eager' => false]));
+        $this->viewport('movies', Movie::filter(['model' => $this->loadModel()], ['eager' => false]));
         $this->viewport('organisations', Organisation::filter(['professional' => $this->loadModel()], ['eager' => false]));
     }
 

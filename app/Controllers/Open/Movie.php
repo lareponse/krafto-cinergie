@@ -10,7 +10,7 @@ use HexMakina\LocalFS\FileSystem;
 use App\Controllers\Abilities\Paginator;
 
 use App\Models\Movie as Model;
-use App\Models\{Professional, Organisation, DVD, Article};
+use App\Models\{Professional, Organisation, DVD, Article, Merchandise};
 
 class Movie extends Kortex
 {
@@ -36,10 +36,12 @@ class Movie extends Kortex
     {
         $professionals = Professional::byMovie($this->record());
         $organisations = Organisation::byMovie($this->record());
-        $this->viewport('dvd', DVD::filter(['movie' => $this->record()]));
+        $merchandise = Merchandise::filter(['movie' => $this->record()]);
+        
         $this->viewport('tags', $this->record()->tags()); // TODO: only themes
         $this->viewport('professionals', $professionals);
         $this->viewport('organisations', $organisations);
+        $this->viewport('merchandise', $merchandise);
 
         $this->viewport('articles', $this->relatedArticles($professionals, $organisations));
         $this->viewport('related_photos', $this->relatedPhotos('film'));
@@ -58,13 +60,14 @@ class Movie extends Kortex
 
         if(!empty($professionals)){
             $ids = array_map(function($item) { return $item->getID(); }, $professionals);
-            $res = Crudites::inspect('article_professional')->select(['DISTINCT(article_id)'])->whereNumericIn('professional_id', $ids)->limit(7)->retCol();
+            $res = Crudites::inspect('article_professional')->select(['articleIds' => ['DISTINCT(article_id)']])->whereNumericIn('professional_id', $ids)->limit(7);
+            $res = $res->retCol();
             $articleIds = array_merge($articleIds, $res);
         }
 
         if(!empty($organisations)) {
             $ids = array_map(function ($item) { return $item->getID(); }, $organisations);
-            $res = Crudites::inspect('article_organisation')->select(['DISTINCT(article_id)'])->whereNumericIn('organisation_id', $ids)->limit(7)->retCol();
+            $res = Crudites::inspect('article_organisation')->select(['articleIds' => ['DISTINCT(article_id)']])->whereNumericIn('organisation_id', $ids)->limit(7)->retCol();
 
             $articleIds = array_merge($articleIds, $res);
         }

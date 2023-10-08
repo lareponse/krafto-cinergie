@@ -23,23 +23,6 @@ class Merchandise extends TightModel
         return ['label', 'content', 'price', 'isActive', 'deliveryBe', 'deliveryEu'];
     }
 
-
-    // public static function queryListing(): SelectInterface
-    // {
-    //     $select = self::table()->select();
-    //     $select->columns([
-    //         '`merchandise`.`slug`',
-    //         "`merchandise`.`label`",
-    //         '`merchandise`.`price`'
-    //     ]);
-
-
-    //     $select->whereEQ('isActive', 1);
-
-    //     $select->orderBy(['merchandise', 'label', 'ASC']);
-    //     return $select;
-    // }
-
     public static function query_retrieve($filters = [], $options = []): SelectInterface
     {
         $Query = parent::query_retrieve($filters, $options);

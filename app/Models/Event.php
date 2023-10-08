@@ -32,6 +32,33 @@ class Event extends TightModel implements EventInterface
         }
     }
 
+    /**
+     * Constructs a database query for listing events with specific columns and filters.
+     *
+     * @return SelectInterface The constructed database query object.
+     */
+    public static function queryListing(): SelectInterface
+    {
+        $select = self::table()->select([
+            'slug',
+            'label',
+            'starts',
+            'category_label' => ['tag', 'label']
+        ]);
+
+        $now = date('Y-m-d');
+        $startsAfter = $select->addBinding('startsAfter', $now);
+        $stopsBefore = $select->addBinding('stopsBefore', $now);
+        $select->whereWithBind(sprintf('starts >= %s AND stops IS NOT NULL AND (stops >= %s)', $startsAfter, $stopsBefore));
+        
+
+        $select->join(['tag', 'tag'], [['event', 'type_id', 'tag', 'id']], 'LEFT OUTER');
+
+        $select->orderBy(['starts', 'ASC']);
+
+        return $select;
+    }
+
     public static function query_retrieve($filters = [], $options = []): SelectInterface
     {
         $Query = parent::query_retrieve($filters, $options);
