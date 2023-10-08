@@ -128,7 +128,7 @@ abstract class Kortex extends \HexMakina\kadro\Controllers\Kadro
 
         $urls = [];
 
-        if(FileSystem::exists($path)){
+        if(file_exists($path)){
             $fs = new FileSystem($path);
             foreach($fs->filenames() as $filename){
                 if($filename === '.' || $filename == '..')
