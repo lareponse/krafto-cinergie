@@ -84,7 +84,7 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
                 $category = 'Films';
                 break;
             case 'Professional':
-                $category = 'Professionels';
+                $category = 'Professionnels';
                 break;
             case 'Organisation':
                 $category = 'Organisations';
