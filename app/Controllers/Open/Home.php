@@ -11,31 +11,39 @@ class Home extends Kortex
         
     public function home()
     {
-        $query = Article::queryListing();
-        $query->whereEQ('isDiaporama', '1');
-        $query->limit(7);
-        $this->viewport('articlesDiaporama', $query->retObj(Article::class));
+        $articlesDiaporama = Article::queryListing()
+            ->whereEQ('isDiaporama', '1')
+            ->limit(7);
         
-        $query = Article::queryListing();
-        $query->whereEQ('isDiaporama', '0');
-        $query->whereEQ('type_id', '50');
-        $query->whereNotEmpty('embedVideo');
-        $query->limit(3);
-        $this->viewport('entrevuesFilmees', $query->retObj(Article::class));
+        $entrevuesFilmees = Article::queryListing()
+            ->whereEQ('isDiaporama', '0')
+            ->whereEQ('type_id', '50')
+            ->whereNotEmpty('embedVideo')
+            ->limit(3);
 
-        $query = Article::queryListing();
-        $query->whereEQ('isDiaporama', '0');
-        $query->whereEmpty('embedVideo');
-        $query->limit(3);
-        $this->viewport('sousLaLoupe', $query->retObj(Article::class));
+        $sousLaLoupe = Article::queryListing()
+            ->whereEQ('isDiaporama', '0')
+            ->whereEmpty('embedVideo')
+            ->limit(3);
+            
+            
+        $events = Event::queryListing()
+            ->whereEQ('active', '1')
+            ->limit(3)
+            ->orderBy([['event', 'starts', 'ASC']]);
+        
+        
+        $works = Work::queryListing()
+            ->whereEQ('active', '1')
+            ->limit(5)
+            ->orderBy([['work', 'starts', 'ASC']]);
+        
+        $this->viewport('articlesDiaporama', $articlesDiaporama->retObj(Article::class));
+        $this->viewport('entrevuesFilmees', $entrevuesFilmees->retObj(Article::class));
+        $this->viewport('sousLaLoupe', $sousLaLoupe->retObj(Article::class));
 
-        $contests = Contest::filter(['active' => '1', ['order_by' => [['contest', 'starts', 'ASC']]]]);
-        $this->viewport('contests', $contests);
-
-        $events = Event::filter(['active' => '1'], ['limit' => '3', 'order_by' => [['event', 'starts', 'ASC']]]);
-        $this->viewport('events', $events);
-
-        $works = Work::filter(['active' => '1'], ['limit' => '5', 'order_by' => [['work', 'starts', 'ASC']]]);
-        $this->viewport('works', $works);
+        $this->viewport('contests', Contest::queryListing()->retObj(Contest::class));
+        $this->viewport('events', $events->retObj(Event::class));
+        $this->viewport('works', $works->retObj(Work::class));
     }
 }
