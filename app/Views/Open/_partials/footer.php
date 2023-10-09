@@ -66,17 +66,8 @@
             </div>
 
             <div class="col-lg-4">
-                <form class="newsletter-form ms-2" action="/">
-                    <h4 class="text-primary text-center text-lg-end">
-                        Inscrivez-vous à notre newsletter!
-                    </h4>
-                    <div class="input-group mb-3">
-                        <input type="search" value="" autocomplete="off" placeholder="Votre adresse e-mail" name="s" class="form-control">
-                        <button class="btn btn-primary" type="submit" title="S'abonner">
-                            S'inscrire
-                        </button>
-                    </div>
-                </form>
+                <?= $this->insert('Open::_partials/form_brevo')?>
+
                 <h5 class="text-center text-lg-end mt-5 text-uppercase">
                     Nos partenaires
                 </h5>
