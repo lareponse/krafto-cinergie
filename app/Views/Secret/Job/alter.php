@@ -37,11 +37,11 @@
 
         <div class="row mb-4">
             <div class="col-lg-3">
-                <label for="type_id" class="col-form-label">Catégorie</label>
+                <label for="category_id" class="col-form-label">Catégorie</label>
             </div>
 
             <div class="col-lg">
-                <?= $this->Form()::select('type_id', $types, $controller->formModel()->get('type_id'), ['class' => 'form-control']); ?>
+                <?= $this->Form()::select('category_id', $types, $controller->formModel()->get('category_id'), ['class' => 'form-control']); ?>
                 <div class="invalid-feedback">Please add your full name</div>
             </div>
         </div>
@@ -53,7 +53,7 @@
 
             <div class="col-lg">
                 <div class="form-check form-switch mb-0">
-                    <input class="form-check-input" type="checkbox" role="switch" id="active" name="active" <?= $controller->formModel()->isOffer() ? 'checked="checked"' : '' ?>">
+                    <input class="form-check-input" type="checkbox" role="switch" id="isOffer" name="isOffer" <?= $controller->formModel()->isOffer() ? 'checked="checked"' : '' ?>">
                 </div>
             </div>
         </div>
@@ -64,7 +64,7 @@
 
             <div class="col-lg">
                 <div class="form-check form-switch mb-0">
-                    <input class="form-check-input" type="checkbox" role="switch" id="active" name="active" <?= $controller->formModel()->isPaid() ? 'checked="checked"' : '' ?>">
+                    <input class="form-check-input" type="checkbox" role="switch" id="isPaid" name="isPaid" <?= $controller->formModel()->isPaid() ? 'checked="checked"' : '' ?>">
                 </div>
             </div>
         </div>
@@ -188,26 +188,6 @@
 
 </div>
 
-
-<div class="card border-0 scroll-mt-3" id="relatedSection">
-    <div class="card-header">
-        <h2 class="h3 mb-0">Articles liés</h2>
-    </div>
-
-    <div class="card-body">
-
-    <div class="tab-pane fade" id="organisations" role="tabpanel" aria-labelledby="organisations-tab">
-        <?php $this->insert('Secret::_partials/otto/otto-link', [
-            'cards' => $articles,
-            'className' => 'Article', 
-            'parent' => 'event',
-            'child' => 'article',
-            'fields' => ['label']
-        ]) ?>
-    </div>
-    </div>
-
-</div>
 
 
 <?= $this->start('deleteForm'); ?>
