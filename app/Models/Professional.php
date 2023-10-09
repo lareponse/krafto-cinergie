@@ -42,8 +42,8 @@ class Professional extends TightModel
         $select->whereEQ('isListed', 1);
 
         $select->groupBy(['professional', 'id']);
-        $select->orderBy(['professional', 'lastname', 'ASC']);
-        $select->orderBy(['professional', 'firstname', 'ASC']);
+        $select->orderBy(['lastname', 'ASC']);
+        $select->orderBy(['firstname', 'ASC']);
 
         return $select;
     }

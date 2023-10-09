@@ -30,20 +30,21 @@ class Home extends Kortex
         $events = Event::queryListing()
             ->whereEQ('active', '1')
             ->limit(3)
-            ->orderBy([['event', 'starts', 'ASC']]);
+            ->orderBy(['starts', 'ASC']);
         
         
-        $jobs = Job::queryListing()
-            ->whereEQ('active', '1')
-            ->limit(5)
-            ->orderBy([['job', 'starts', 'ASC']]);
-        
+        $jobs = Job::queryListingWithEvent(
+            Job::queryListing()->whereEQ('active', '1')->limit(5)->orderBy(['starts', 'DESC']),
+            new \DateTimeImmutable('-1 month'), new \DateTimeImmutable('+2 month')
+        );
+        $jobs = $jobs->retObj(Job::class);
+            
         $this->viewport('articlesDiaporama', $articlesDiaporama->retObj(Article::class));
         $this->viewport('entrevuesFilmees', $entrevuesFilmees->retObj(Article::class));
         $this->viewport('sousLaLoupe', $sousLaLoupe->retObj(Article::class));
 
         $this->viewport('contests', Contest::queryListing()->retObj(Contest::class));
         $this->viewport('events', $events->retObj(Event::class));
-        $this->viewport('jobs', $jobs->retObj(Job::class));
+        $this->viewport('jobs', $jobs);
     }
 }

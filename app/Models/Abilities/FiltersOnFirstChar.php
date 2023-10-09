@@ -25,6 +25,6 @@ trait FiltersOnFirstChar
                 break;
         }
 
-        $Query->orderBy([$Query->table(), $column, 'ASC']);
+        $Query->orderBy([$column, 'ASC']);
     }
 }

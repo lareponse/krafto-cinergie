@@ -44,15 +44,15 @@ class Merchandise extends TightModel
             switch($filters['segment']){
                 case 'dvd':
                     $Query->whereEQ('isBook', 0);
-                    $Query->orderBy([$Query->table(), 'rank', 'ASC']);
                 break;
                 
                 case 'book':
                     $Query->whereNotEQ('isBook',1);
-                    $Query->orderBy([$Query->table(), 'rank', 'ASC']);
                 break;
             }
 
+            $Query->orderBy(['rank', 'ASC']);
+                    
         }
         return $Query;
     }

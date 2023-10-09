@@ -222,7 +222,7 @@ class Movie extends TightModel
             }
         }
 
-        $Query->orderBy([$Query->table(), 'released', 'DESC']);
+        $Query->orderBy(['released', 'DESC']);
         return $Query;
     }
 }

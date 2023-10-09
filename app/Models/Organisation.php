@@ -45,7 +45,7 @@ class Organisation extends TightModel
 
         $select->groupBy(['organisation', 'id']);
 
-        $select->orderBy(['organisation', 'label', 'ASC']);
+        $select->orderBy(['label', 'ASC']);
         return $select;
     }
 
@@ -100,17 +100,17 @@ class Organisation extends TightModel
             switch($filters['segment']){
                 case 'partenaires':
                     $Query->whereEQ('isPartner', 1);
-                    $Query->orderBy([$Query->table(), 'rank', 'ASC']);
+                    $Query->orderBy(['rank', 'ASC']);
                 break;
                 
                 case 'inactives':
                     $Query->whereNotEQ('active',1);
-                    $Query->orderBy([$Query->table(), 'rank', 'ASC']);
+                    $Query->orderBy(['rank', 'ASC']);
                 break;
 
                 case 'unlisted':
                     $Query->whereNotEQ('isListed', 1);
-                    $Query->orderBy([$Query->table(), 'rank', 'ASC']);
+                    $Query->orderBy(['rank', 'ASC']);
                 break;
 
                 case 'withoutContent':
