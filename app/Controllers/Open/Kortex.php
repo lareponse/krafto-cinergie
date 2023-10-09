@@ -166,4 +166,33 @@ abstract class Kortex extends \HexMakina\kadro\Controllers\Kadro
 
         return $query;
     }
+    public function captureClient(): string
+    {
+        // Initialize an empty array to hold the captured information
+        $clientInfo = array();
+
+        // List of relevant $_SERVER keys
+        $relevant_keys = array(
+            'REMOTE_ADDR', 
+            'HTTP_USER_AGENT', 
+            'HTTP_ACCEPT', 
+            'HTTP_ACCEPT_LANGUAGE', 
+            'HTTP_ACCEPT_ENCODING', 
+            'HTTP_CONNECTION', 
+            'HTTP_REFERER', 
+            'REMOTE_PORT', 
+            'REMOTE_HOST', 
+            'HTTPS'
+        );
+
+        // Loop through the list and capture available data
+        foreach($relevant_keys as $key) {
+            $clientInfo[$key] = $_SERVER[$key] ?? null;
+        }
+
+        // Convert the array to a JSON object
+        $jsonData = json_encode($clientInfo, JSON_PRETTY_PRINT);
+
+        return $jsonData;
+    }
 }
