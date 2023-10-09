@@ -4,7 +4,7 @@ $menu ??= [
     'profile' => 'Fiche',     
     'articles' => 'Article',
     'movies' => 'Film',
-    'professionals' => 'Professionel',
+    'professionals' => 'Professionnel',
     'organisations' => 'Organisation',
     'images' => 'Images'
 ];
