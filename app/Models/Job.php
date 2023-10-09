@@ -52,16 +52,29 @@ class Job extends TightModel implements EventInterface
             'category_label' => ['tag', 'label']
         ]);
 
-        $now = date('Y-m-d');
-        $startsAfter = $select->addBinding('startsAfter', $now);
-        $stopsBefore = $select->addBinding('stopsBefore', $now);
-        $select->whereWithBind(sprintf('starts >= %s AND stops IS NOT NULL AND (stops >= %s)', $startsAfter, $stopsBefore));
+
         
 
         $select->join(['tag', 'tag'], [[$select->table(), 'category_id', 'tag', 'id']], 'LEFT OUTER');
 
         $select->orderBy(['starts', 'ASC']);
 
+        return $select;
+    }
+
+    public static function queryListingWithEvent($select, \DateTimeImmutable $starts, \DateTimeImmutable $stops)
+    {
+        $starts = $select->addBinding('starts', $starts->format('Y-m-d'));
+        $stops = $select->addBinding('stops', $stops->format('Y-m-d'));
+
+        $clauses = [
+            'startsBetween' => "starts BETWEEN $starts AND $stops",
+            'stopsBetween' => "stops BETWEEN $starts AND $stops",
+            'ongoing' => "starts < $starts AND stops > $starts"
+        ];
+        
+        $select->whereWithBind(sprintf('(%s)', implode(') OR (', $clauses)));
+        
         return $select;
     }
 

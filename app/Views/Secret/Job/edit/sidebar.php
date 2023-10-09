@@ -44,10 +44,6 @@
         </li>
 
         <li>
-            <a href="#relatedSection" class="d-flex align-items-center py-3"><?= $this->icon('relations', 14, ['class' => 'me-2']); ?> Articles liés</a>
-        </li>
-
-        <li>
             <a href="#deleteSection" class="d-flex align-items-center py-3"><?= $this->icon('delete', 14, ['class' => 'me-2']); ?> Supprimer</a>
         </li>
 
