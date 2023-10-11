@@ -8,7 +8,7 @@ foreach (['professional' => $professionals, 'organisation' => $organisations] as
 
             <div class="logo-equipe col-lg-2">
                 <a href="<?= $href ?>">
-                    <img src="<?= $item->profilePicture() ?>" alt="Belfilm" class="img-fluid w-100">
+                    <img src="<?= $item->profilePicture() ?>" alt="" class="img-fluid w-100">
                 </a>
             </div>
 
@@ -16,7 +16,13 @@ foreach (['professional' => $professionals, 'organisation' => $organisations] as
                 <h4><a href="<?= $href ?>"><?= $item; ?></a></h4>
             </div>
             <div class="distributeur col-lg-3">
-                <p><?= str_replace(', ', '<br>', $item->get('praxes')); ?></p>
+                <p>
+                    <?php 
+                    foreach($item->praxisIds() as $id) {
+                        echo '<span class="d-block" otto-tag-id="'.$id.'">'.$id.'</span>';
+                    }
+                    ?>
+                </p>
             </div>
         </div>
 <?php

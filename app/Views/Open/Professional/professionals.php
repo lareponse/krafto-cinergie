@@ -23,8 +23,13 @@ use \HexMakina\Marker\Marker; ?>
                                     <div class="card-body">
                                         <img src="<?= $record->profilePicture(); ?>" class="card-img-top mb-3" alt="Photo de <?= $record->fullName(); ?>">
                                         <div class="p-3">
-                                            <h5 class="card-title"><?= $record->fullName(); ?></h5>
-                                            <p class="card-text"><small class="text-secondary"><?= $record->get('praxes'); ?></small></p>
+                                            <h5 class="card-title"><?= $record; ?></h5>
+                                            <p class="card-text">
+                                                <?php
+                                                foreach($record->praxisIds() as $id) {
+                                                    echo '<small class="text-secondary" otto-tag-id="'.$id.'">'.$id.'</small>';
+                                                }
+                                                ?>
                                         </div>
                                     </div>
                                 </a>

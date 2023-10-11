@@ -1,6 +1,9 @@
 <?php $this->layout('Open::layout');
 
-use \HexMakina\Marker\Marker; ?>
+use \HexMakina\Marker\Marker;
+
+$collection_href = $controller->router()->hyp('movies');
+?>
 
 <div class="container my-5 pb-5" id="boutique-single">
     <article class="mx-auto">
@@ -26,37 +29,66 @@ use \HexMakina\Marker\Marker; ?>
             </div>
 
             <div class="col-lg-7 ps-lg-5" id="infos">
-                <p class="text-primary"><b><span class="text-dark">de </span> HARDCODED</b></p>
-                <p><b>Date de sortie :</b> <?= $record->get('released') ?></p>
+                <?php if(!empty($record->get('directors'))){
+                    ?>
+                    <p class="text-primary"><b><span class="text-dark">de </span> <?=$record->get('directors')?></b></p>
+                    <?php
+                }
+                ?>
+                <?php if (!empty($record->get('released'))) {
+                    $href = $controller->router()->withFreeParams($collection_href, ['released' => $record->get('released')]);
+                    ?><p><b>Date de sortie :</b> <a href="<?= $href?>"><?= $record->get('released') ?></a></p><?php
+                }   
+                
+                ?>
 
-                <p><b>Pays :</b> <?= $record->get('legacy_origine') ?></p>
-                <p><b>Genre :</b> <?= $tags[$record->get('genre_id')]; ?></p>
+                <?php if (!empty($record->get('legacy_origine'))) {
+                    ?><p><b>Pays :</b> <?= $record->get('legacy_origine') ?></p><?php
+                }
+                ?>
+                <p><b>Genre :</b> 
+                <?php
+                $href = $controller->router()->withFreeParams($collection_href, ['type' => $record->get('genre_id')]);
+                ?>
+                
+                <a href="<?=$href?>" otto-tag-id="<?= $record->get('genre_id');?>"><?= $record->get('genre_id');?></a>
+                
+                <p><b>Metrage :</b> 
+                <?php
+                $href = $controller->router()->withFreeParams($collection_href, ['metrage' => $record->get('metrage_id')]);
+                ?>
+                <a href="<?=$href?>" otto-tag-id="<?= $record->get('metrage_id');?>"><?= $record->get('metrage_id');?></a>
+                
                 <p><b>Durée :</b> <?= $record->get('runtime') ?></p>
-                <br>
                 <?= $record->get('casting') ?>
 
                 <?php
-                if ($dvd) {
+                foreach ($merchandise as $merch) {
                 ?>
                     <p class="mt-5">
-                    <aside class="input-group big" id="commander-boutique">
-                        <button class="form-control">
-                            Commander </button>
-                        <span class="input-group-text" id="prix">HARDCODE &euro;</span>
-                    </aside>
+                        <aside class="input-group big" id="commander-boutique">
+                            <button class="form-control"><?=$merch->get('isBook')? 'Livre' : 'DVD'?></button>
+                            <span class="input-group-text" id="prix">Boutique</span>
+                        </aside>
                     </p>
                 <?php
                 }
                 ?>
             </div>
         </section>
-
+            
+        <?php
+        if (!empty($record->get('content'))) {
+        ?>
         <section id="bio" class="my-5">
             <h2 class="pb-0">Synopsis</h2>
             <hr />
             <p><?= $record->get('content') ?></p>
         </section>
-
+        <?php
+        }
+        ?>
+        
         <?=$this->insert('Open::_partials/related_articles', ['related_articles' => $articles]);?>
 
         <?php

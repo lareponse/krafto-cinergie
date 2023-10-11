@@ -1,28 +1,74 @@
-document.addEventListener("DOMContentLoaded", function () {
+class ottoTagLabel {
+    constructor() {
+        this.cache = new Map();
+        this.tags = document.querySelectorAll('[otto-tag-id]');
+    }
 
-    let tags = document.getElementsByClassName('otto-tag-label');
+    init() {
+        if(this.tags.length === 0) {
+            return;
+        }
 
-    let ids = new Set()
-    for (let tag of tags) {
-        let id = tag.getAttribute('otto-id')
-        if (id !== null) {
-            ids.add(id)
+        this.loadCacheFromLocalStorage();
+        const missingIds = this.getMissingIds();
+        if (missingIds.length === 0) {
+            this.searchAndReplace();
+        } else {
+            this.loadAndReplace(missingIds);
         }
     }
 
-    // `ids` now contains a unique collection of `otto-id` attribute values
-    // console.log(ids)
+    loadCacheFromLocalStorage() {
+        const cacheJson = localStorage.getItem('otto-tag-labels');
+        if (cacheJson !== null) {
+            try {
+                this.cache = new Map(JSON.parse(cacheJson));
+            } catch (e) {
+                console.error('Failed to parse cache JSON:', e);
+            }
+        }
+    }
 
-    ids = Array.from(ids)
-    ids = JSON.stringify(ids)
-    fetch('/api/tags/ids/' + encodeURIComponent(ids) + '/labels.json')
-        .then(r => r.json())
-        .then(tags => {
-            tags.forEach(tag => {
-                let elts = Array.from(document.querySelectorAll(`.otto-tag-label[otto-id='${tag.id}']`));
-                elts.forEach(elt => {
-                    elt.innerText = tag.label;
+    getMissingIds() {
+        const missingIds = new Set();
+        for (const tag of this.tags) {
+            const id = tag.getAttribute('otto-tag-id');
+            if (!this.cache.has(id) && !missingIds.has(id)) {
+                missingIds.add(id);
+                console.log('cache miss', id);
+            }
+        }
+        return Array.from(missingIds);
+    }
+
+    loadAndReplace(missingIds) {
+        const url = `/api/tags/ids/${encodeURIComponent(JSON.stringify(missingIds))}/labels.json`;
+        fetch(url)
+            .then(response => response.json())
+            .then(loaded => {
+                loaded.forEach(tag => {
+                    this.cache.set(tag.id, tag.label);
                 });
+
+                localStorage.setItem('otto-tag-labels', JSON.stringify(Array.from(this.cache.entries())));
+
+                this.searchAndReplace();
             });
-        });
-})
+    }
+
+    searchAndReplace() {
+        for (const tag of this.tags) {
+            const id = tag.getAttribute('otto-tag-id');
+            if (this.cache.has(id)) {
+                tag.innerText = this.cache.get(id);
+            } else {
+                console.error('missing id in cache', id);
+            }
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const labeler = new ottoTagLabel();
+    labeler.init();
+});

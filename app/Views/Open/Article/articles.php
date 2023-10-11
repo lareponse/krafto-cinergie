@@ -26,9 +26,9 @@
                     </a>
                     <div class="card-body">
                         <?php
-                        if(!empty($article->get('type_label'))){
+                        if(!empty($article->get('type_id'))){
                             ?>
-                            <a href="<?= $controller->router()->hyp('article', ['slug' => $article->slug()]);?>" class="btn btn-sm btn-primary taxo-cat"><?= $article->get('type_label')?></a>
+                            <a href="<?= $controller->router()->hyp('article', ['slug' => $article->slug()]);?>" class="btn btn-sm btn-primary taxo-cat" otto-tag-id="<?= $article->get('type_id')?>"><?= $article->get('type_id')?></a>
                             <?php
                         }
                         ?>

@@ -28,7 +28,7 @@ use \HexMakina\Marker\Marker; ?>
                                     <a href="<?=$controller->router()->hyp('movie', ['slug' => $record->slug()])?>">
                                         <div class="meta">
                                             <p class="date"><small class="text-secondary"><?= $record->get('released');?></small></p>
-                                            <p class="categorie"><small class="text-primary"><?= $record->get('genre');?></small></p>
+                                            <p class="categorie"><small class="text-primary" otto-tag-id="<?= $record->get('genre_id');?>"><?= $record->get('genre_id');?></small></p>
                                         </div>
                                         <h5 class="card-title"><?= $record->get('label');?></h5>
                                         <p class="auteur"><?= $record->get('directors');?></p>
