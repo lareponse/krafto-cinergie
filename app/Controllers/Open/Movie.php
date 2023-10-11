@@ -34,8 +34,8 @@ class Movie extends Kortex
 
     public function movie()
     {
-        $professionals = Professional::byMovie($this->record());
-        $organisations = Organisation::byMovie($this->record());
+        $professionals = Professional::queryListing([], ['withMoviePraxis' => $this->record()])->retObj(Professional::class);
+        $organisations = Organisation::queryListing([], ['withMoviePraxis' => $this->record()])->retObj(Organisation::class);
         $merchandise = Merchandise::filter(['movie' => $this->record()]);
         
         $this->viewport('tags', $this->record()->tags()); // TODO: only themes
@@ -54,7 +54,7 @@ class Movie extends Kortex
         $ret = [];
         
         $articleIds = [];
-        
+
         $res = Crudites::inspect('article_movie')->select(['article_id'])->whereEQ('movie_id', $this->record()->getID())->retCol();
         $articleIds = array_merge($articleIds, $res);
 
@@ -72,13 +72,16 @@ class Movie extends Kortex
             $articleIds = array_merge($articleIds, $res);
         }
 
-        $query = Article::queryListing();
-        $res = $query->whereNumericIn('id', array_unique($articleIds))->retObj(Article::class);
-        
-        if($res)
-            $ret = $res;
+        $articleIds = array_unique($articleIds);
+        if(empty($articleIds)){
+            return [];
+        }
 
-        return $ret;
+        $query = Article::queryListing();
+        $query = $query->whereNumericIn('id', $articleIds);
+        $res = $query->retObj(Article::class);
+
+        return $res ? $res : $ret;
     }
 
    

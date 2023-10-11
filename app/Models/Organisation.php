@@ -27,24 +27,27 @@ class Organisation extends TightModel
         return [];
     }
 
-    public static function queryListing(): SelectInterface
+    public static function queryListing($filters=[], $options=[]): SelectInterface
     {
         $select = self::table()->select();
-        $select->columns([
-            '`organisation`.`slug`',
-            "`organisation`.`label`",
-            '`organisation`.`profilePicture`',
-            "GROUP_CONCAT(praxis.label SEPARATOR ', ') as praxes"
-        ]);
+        $select->columns(['id', 'slug', 'label', 'profilePicture']);
+    
+        if(isset($options['withPraxis'])) {
+            $select->join(['organisation_tag', 'organisation_tag'], [['organisation_tag', 'organisation_id', 'organisation', 'id']], 'LEFT OUTER');
+            $select->selectAlso(['praxis_ids' => ["GROUP_CONCAT(DISTINCT organisation_tag.tag_id SEPARATOR ', ')"]]);    
+        }
+        elseif(isset($options['withMoviePraxis'])){
+            $movie = $options['withMoviePraxis'];
+            $select->join(['movie_organisation', 'workedOn'], [['workedOn','organisation_id', 'organisation', 'id'],['workedOn', 'movie_id', $movie->getID()]], 'INNER');
+            $select->selectAlso(['praxis_ids' => ["GROUP_CONCAT(DISTINCT workedOn.praxis_id SEPARATOR ', ')"]]);
+        }
 
-        $select->join(['organisation_tag', 'organisation_tag'], [['organisation_tag', 'organisation_id', 'organisation', 'id']], 'LEFT OUTER');
-        $select->join(['tag', 'praxis'], [['organisation_tag', 'tag_id', 'praxis', 'id']], 'LEFT OUTER');
-
-        $select->whereEQ('active', 1);
-        $select->whereEQ('isListed', 1);
+        if(!isset($options['listAll']) || $options['listAll'] !== true){
+            $select->whereEQ('active', 1);
+            $select->whereEQ('isListed', 1);
+        }
 
         $select->groupBy(['organisation', 'id']);
-
         $select->orderBy(['label', 'ASC']);
         return $select;
     }
@@ -55,28 +58,6 @@ class Organisation extends TightModel
         return [
             'label', 'content', 'abbrev', 'filmography',
             ['tel','gsm', 'fax'], 'email', 'url','country','province','zip', 'city', 'street'];
-    }
-
-
-    public static function byMovie(Movie $movie) : array
-    {
-        $ret = [];
-        $select = self::table()->select();
-        $select->columns([
-            'id',
-            'slug',
-            'label',
-            'profilePicture',
-            'praxes' => ["GROUP_CONCAT(praxis.label SEPARATOR ', ')"]
-        ]);
-
-        $select->join(['movie_organisation', 'workedOn'], [['workedOn','organisation_id', 'organisation', 'id'],['workedOn', 'movie_id', $movie->getID()]], 'INNER');
-        $select->join(['tag', 'praxis'], [['workedOn','praxis_id', 'praxis', 'id'],], 'INNER');
-        $select->groupBy(['organisation', 'id']);
-
-        $ret = $select->retObj(self::class);
-
-        return $ret;
     }
 
     public static function query_retrieve($filters = [], $options = []): SelectInterface

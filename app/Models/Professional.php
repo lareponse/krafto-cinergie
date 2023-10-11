@@ -25,41 +25,34 @@ class Professional extends TightModel
         return $this->fullName();
     }
 
-    public static function queryListing(): SelectInterface
+    public static function queryListing($filter=[], $options=[]): SelectInterface
     {
         $select = self::table()->select();
         $select->columns([
             'id',
             'slug',
-            'fullname' => ["CONCAT(professional.firstname, ' ', professional.lastname)"],
-            'profilePicture',
-            'praxes' => ["GROUP_CONCAT(praxis.label SEPARATOR ', ')"]
+            'label' => ["CONCAT(professional.firstname, ' ', professional.lastname)"],
+            'profilePicture'
         ]);
 
-        $select->join(['professional_tag', 'professional_tag'], [['professional_tag', 'professional_id', 'professional', 'id']], 'LEFT OUTER');
-        $select->join(['tag', 'praxis'], [['professional_tag', 'tag_id', 'praxis', 'id']], 'LEFT OUTER');
-
-        $select->whereEQ('isListed', 1);
+        if(isset($options['withPraxis'])){
+            $select->join(['professional_tag', 'professional_tag'], [['professional_tag', 'professional_id', 'professional', 'id']], 'LEFT OUTER');
+            $select->selectAlso(['praxis_ids' => ["GROUP_CONCAT(DISTINCT professional_tag.tag_id SEPARATOR ', ')"]]);    
+        }
+        elseif(isset($options['withMoviePraxis'])){
+            $movie = $options['withMoviePraxis'];
+            $select->join(['movie_professional', 'workedOn'], [['workedOn','professional_id', 'professional', 'id'],['workedOn', 'movie_id', $movie->getID()]], 'INNER');
+            $select->selectAlso(['praxis_ids' => ["GROUP_CONCAT(DISTINCT workedOn.praxis_id SEPARATOR ', ')"]]);
+        }
+        
+        if(!isset($options['listAll']) || $options['listAll'] !== true)
+            $select->whereEQ('isListed', 1);
 
         $select->groupBy(['professional', 'id']);
         $select->orderBy(['lastname', 'ASC']);
         $select->orderBy(['firstname', 'ASC']);
 
         return $select;
-    }
-
-    public static function byMovie(Movie $movie) : array
-    {
-        $ret = [];
-        // $select = self::table()->select();
-        $select = self::queryListing();
-        $select->join(['movie_professional', 'workedOn'], [['workedOn','professional_id', 'professional', 'id'],['workedOn', 'movie_id', $movie->getID()]], 'INNER');
-        $select->join(['tag', 'workedOnAs'], [['workedOn','praxis_id', 'workedOnAs', 'id']], 'INNER');
-
-        $select->groupBy(['professional', 'id']);
-        $ret = $select->retObj(self::class);
-
-        return $ret;
     }
 
     public function tagIds(): array{
@@ -83,7 +76,7 @@ class Professional extends TightModel
 
     public function fullName() : string
     {
-        return empty($this->get('fullname')) ? $this->get('lastname').' '.$this->get('firstname') : $this->get('fullname');
+        return empty($this->get('label')) ? $this->get('lastname').' '.$this->get('firstname') : $this->get('label');
     }
     
     public static function query_retrieve($filters = [], $options = []): SelectInterface
