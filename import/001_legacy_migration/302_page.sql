@@ -103,7 +103,7 @@ VALUES (NULL, CURRENT_TIMESTAMP, '1', 'organisations', 'Le répertoire des organ
 INSERT INTO `page` (`id`, `created_on`, `active`, `slug`, `label`, `content`, `abstract`, `legacy_id`, `legacy_title`, `legacy_user`) 
 VALUES (NULL, CURRENT_TIMESTAMP, '1', 'professionals', 'Le répertoire des professionnels du cinéma belge', NULL, NULL, NULL, NULL, NULL);
 
-INSERT INTO `page` (`id`, `created_on`, `active`, `slug`, `label`, `content`, `abstract`, `legacy_id`, `legacy_title`, `legacy_user`) ;
+INSERT INTO `page` (`id`, `created_on`, `active`, `slug`, `label`, `content`, `abstract`, `legacy_id`, `legacy_title`, `legacy_user`)
 VALUES (NULL, CURRENT_TIMESTAMP, '1', 'contests', 'Les concours organisés par Cinergie !', 'Aucun concours n\'est organisé pour le moment, mais revenez prochainement …', NULL, NULL, NULL, NULL);
 
 INSERT INTO `page` (`id`, `created_on`, `active`, `slug`, `label`, `content`, `abstract`, `legacy_id`, `legacy_title`, `legacy_user`) 

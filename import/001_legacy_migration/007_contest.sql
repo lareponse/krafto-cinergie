@@ -21,7 +21,8 @@ CREATE TABLE `contest` (
   `question` varchar(255) DEFAULT NULL COMMENT 'leg:field07',
   `email` varchar(100) DEFAULT NULL COMMENT 'leg:field08',
 
-  `canShowForm` tinyint(1) DEFAULT '1' COMMENT 'leg:field09'
+  `canShowForm` tinyint(1) DEFAULT '1' COMMENT 'leg:field09',
+  `legacy_user` varchar(13) DEFAULT NULL
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -60,8 +61,6 @@ INSERT INTO `cinergie`.`contest` (
   `canShowForm`,
 
   `legacy_user`
-
-
 )
 SELECT
   CAST(REGEXP_SUBSTR(`id`, '[0-9]+$', 1) as UNSIGNED) as `id`,
@@ -84,7 +83,7 @@ SELECT
   IF(`field03` IS NULL or `field03` = '' or `field03` LIKE '0000-00-00', null, STR_TO_DATE(`field03`,'%Y-%m-%d')) as `stops`,
   IF(`field09` IS NULL or `field09` = '' or `field09` <> 1 , 0, 1) as `canShowForm`,
 
-  TRIM(`user`) as `legacy_user`,
+  TRIM(`user`) as `legacy_user`
 
 FROM `a7_cinergie_beta`.`content_item`
 

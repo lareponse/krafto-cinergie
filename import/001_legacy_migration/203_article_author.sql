@@ -62,6 +62,3 @@ ALTER TABLE `article_author`
 ALTER TABLE `article_author`
   ADD CONSTRAINT `article_author-hasArticle` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
   ADD CONSTRAINT `article_author-hasAuthor` FOREIGN KEY (`author_id`) REFERENCES `author` (`id`);
-
-
--- RELATION article
