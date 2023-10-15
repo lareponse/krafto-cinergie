@@ -5,12 +5,13 @@ INSERT INTO `cinergie`.`tag` (`label`, `reference`) VALUES ('Métiers', 'profess
 SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `reference`='professional_praxis' AND parent_id IS NULL);
 
 -- Insert tag from categoriep
-INSERT INTO `cinergie`.`tag` (`reference`,`label`, `content`, `parent_id`)
+INSERT INTO `cinergie`.`tag` (`reference`,`label`, `content`, `parent_id`, `legacy_id`)
 SELECT
- CONCAT('pro_praxis_', `categoriep`.`id`) as `reference`,
+ CONCAT('pro-praxis-', `categoriep`.`id`) as `reference`,
  `nom` as `label`,
  `description` as `content`,
- @parent_id
+ @parent_id,
+ `categoriep`.`id` as `legacy_id`
 FROM `a7_cinergie_beta`.`categoriep`
 ORDER BY `nom`;
 

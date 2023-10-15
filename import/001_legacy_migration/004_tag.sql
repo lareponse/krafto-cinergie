@@ -4,12 +4,14 @@ DROP TABLE IF EXISTS `tag`;
 CREATE TABLE `tag` (
   `id` int NOT NULL,
   `parent_id` int DEFAULT NULL COMMENT 'FK tag',
-  `reference` varchar(30) NOT NULL,
+  `reference` varchar(75) NOT NULL,
 
   `label` varchar(255) NOT NULL,
   `content` text COLLATE utf8mb4_general_ci,
 
-  `rank` smallint DEFAULT NULL
+  `rank` smallint DEFAULT NULL,
+  `legacy_id` varchar(30) DEFAULT NULL
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- PRIMARY
@@ -35,11 +37,13 @@ INSERT INTO `cinergie`.`tag` (`label`, `reference`) VALUES ('Thème du film', 'm
 SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE reference='movie_theme');
 
 -- Insert tag from categoriep
-INSERT INTO `tag` (`label`, `reference`, `parent_id`)
+INSERT INTO `tag` (`label`, `reference`, `parent_id`, `legacy_id`)
 SELECT
 `text` as `label`,
 SUBSTR(id, 27) as `reference`,
-@parent_id
+@parent_id, 
+SUBSTR(id, 27) as `legacy_id`
+
 FROM `a7_cinergie_beta`.`publisher_fixed_text`
 WHERE `id` LIKE 'publisher_parm_theme_film_%'
 ORDER BY `text` ASC;
@@ -84,12 +88,14 @@ INSERT INTO `cinergie`.`tag` (`label`, `reference`) VALUES ('Catégorie', 'artic
 SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE reference='article_category');
 
 -- Insert tag from layout_subject
-INSERT INTO `tag` (`parent_id`, `reference`, `label`, `content`)
+INSERT INTO `tag` (`parent_id`, `reference`, `label`, `content`, `legacy_id`)
 SELECT
   @parent_id,
-  `id` as `reference`,
+  CONCAT('article-cat-', `id`) as `reference`,
   `description` as `label`,
-  `attr02` as `content`
+  `attr02` as `content`,
+  `id` as `legacy_id`
+
 FROM `a7_cinergie_beta`.`layout_subject`
 WHERE `area` ='actualite'
 ORDER BY `description` ASC;
@@ -105,14 +111,15 @@ INSERT INTO `cinergie`.`tag` (`label`, `reference`) VALUES ('Catégorie', 'event
 SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE reference='event_category');
 
 -- Insert tag from layout_subject
-INSERT INTO `tag` (`parent_id`, `reference`, `label`, `content`)
+INSERT INTO `tag` (`parent_id`, `reference`, `label`, `content`, `legacy_id`)
 SELECT
   @parent_id,
-  `id` as `reference`,
+  CONCAT('event-cat-', `id`) as `reference`,
   `description` as `label`,
-`attr02` as `content`
+  `attr02` as `content`,
+  `id` as `legacy_id`
 FROM `a7_cinergie_beta`.`layout_subject`
-WHERE `area` ='agenda'
+WHERE `area` = 'agenda'
 ORDER BY `description` ASC;
 
 
@@ -125,12 +132,14 @@ INSERT INTO `cinergie`.`tag` (`label`, `reference`) VALUES ('Catégorie', 'job_c
 SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE reference='job_category');
 
 -- Insert tag from layout_subject
-INSERT INTO `tag` (`parent_id`, `reference`, `label`, `content`)
+INSERT INTO `tag` (`parent_id`, `reference`, `label`, `content`, `legacy_id`)
 SELECT
   @parent_id,
-  `id` as `reference`,
+  CONCAT('job-cat-', `id`) as `reference`,
   `description` as `label`,
-  `attr02` as `content`
+  `attr02` as `content`,
+  `id` as `legacy_id`
+
 FROM `a7_cinergie_beta`.`layout_theme`
 WHERE `area` ='annonce'
 ORDER BY `description` ASC;
@@ -144,8 +153,8 @@ SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE reference='job_payment')
 -- Insert tag from layout_subject
 INSERT INTO `tag` (`parent_id`, `reference`, `label`)
 VALUES 
-  (@parent_id, 'job_paid', 'Rémunéré'),
-  (@parent_id, 'job_free', 'Non rémunéré');
+  (@parent_id, 'job-paid', 'Rémunéré'),
+  (@parent_id, 'job-free', 'Non rémunéré');
 
 
 INSERT INTO `tag` (`id`, `parent_id`, `reference`, `label`, `content`, `rank`) 
@@ -155,5 +164,5 @@ SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE reference='job_proposal'
 -- Insert tag from layout_subject
 INSERT INTO `tag` (`parent_id`, `reference`, `label`)
 VALUES 
-  (@parent_id, 'job_offer', 'Proposition'),
-  (@parent_id, 'job_request', 'Demande');
+  (@parent_id, 'job-offer', 'Proposition'),
+  (@parent_id, 'job-request', 'Demande');
