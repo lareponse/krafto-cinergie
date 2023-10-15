@@ -11,8 +11,8 @@ CREATE TABLE `event` (
 
   `content` text COMMENT 'new column',
 
-  `starts` date DEFAULT NULL COMMENT 'leg:field02',
-  `stops` date DEFAULT NULL COMMENT 'leg:field03',
+  `starts` date NOT NULL COMMENT 'leg:field02',
+  `stops` date NOT NULL COMMENT 'leg:field03',
   `rank` smallint UNSIGNED DEFAULT NULL COMMENT 'leg:tri',
 
   `url_site` varchar(552) DEFAULT NULL COMMENT 'leg:field05',
@@ -71,8 +71,8 @@ SELECT
   IF(`field01` IS NULL or TRIM(`field01`) = '', title, TRIM(`field01`)) as `label`,
 
 
-  IF(`field02` IS NULL or `field02` = '', null, STR_TO_DATE(`field02`,'%Y-%m-%d')) as `starts`,
-  IF(`field03` IS NULL or `field03` = '', null, STR_TO_DATE(`field03`,'%Y-%m-%d')) as `stops`,
+  IF(`field02` IS NULL or `field02` = '', STR_TO_DATE(datestamp,'%Y-%m-%d %H:%i:%s'), STR_TO_DATE(`field02`,'%Y-%m-%d')) as `starts`,
+  IF(`field03` IS NULL or `field03` = '', STR_TO_DATE(datestamp,'%Y-%m-%d %H:%i:%s'), STR_TO_DATE(`field03`,'%Y-%m-%d')) as `stops`,
   `tri` as `rank`,
 
   TRIM(`field05`) as `url_site`,
