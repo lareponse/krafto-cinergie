@@ -7,7 +7,7 @@ set_include_path(implode(PATH_SEPARATOR, [get_include_path(),  __DIR__.'/']));
 
 use \HexMakina\kadro\Auth\{Operator as Host};
 use \HexMakina\kadro\Auth\{AccessRefusedException};
-use \HexMakina\Crudites\{Crudites};
+use \HexMakina\Crudites\Crudites;
 
 try
 {
@@ -21,8 +21,8 @@ try
   );
   //--- Setup database
   $database = $app->container()->get('HexMakina\BlackBox\Database\DatabaseInterface');
-  Crudites::setDatabase($database); // removable ?
   
+  Crudites::setDatabase($database); // removable ?
   //--- Handle the request
   $app->container()->get('Controllers\Reception')->welcome(new Host(), $app->container());
 }
@@ -39,7 +39,7 @@ catch(\HexMakina\kadro\Auth\AccessRefusedException $e)
 catch(\Throwable $e)
 {
   if(isset($app) && $app->isDevelopment()){
-    ddt($e);
+    ddt($e, '$app->isDevelopment()');
   }
 
   header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
