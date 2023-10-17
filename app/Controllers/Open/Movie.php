@@ -18,7 +18,7 @@ class Movie extends Kortex
 
     public function movies()
     {
-        $query = $this->routerParamsAsFilters(Model::queryListing());
+        $query = $this->routerParamsAsFilters(Model::queryListing([], ['withDirectors' => true]));
         $paginator = new Paginator($this->router()->params('page') ?? 1, $query);
         $paginator->perPage(12);
         $paginator->setClass(Model::class);
@@ -55,19 +55,19 @@ class Movie extends Kortex
         
         $articleIds = [];
 
-        $res = Crudites::inspect('article_movie')->select(['article_id'])->whereEQ('movie_id', $this->record()->getID())->retCol();
+        $res = self::database()->inspect('article_movie')->select(['article_id'])->whereEQ('movie_id', $this->record()->getID())->retCol();
         $articleIds = array_merge($articleIds, $res);
 
         if(!empty($professionals)){
             $ids = array_map(function($item) { return $item->getID(); }, $professionals);
-            $res = Crudites::inspect('article_professional')->select(['articleIds' => ['DISTINCT(article_id)']])->whereNumericIn('professional_id', $ids)->limit(7);
+            $res = self::database()->inspect('article_professional')->select(['articleIds' => ['DISTINCT(article_id)']])->whereNumericIn('professional_id', $ids)->limit(7);
             $res = $res->retCol();
             $articleIds = array_merge($articleIds, $res);
         }
 
         if(!empty($organisations)) {
             $ids = array_map(function ($item) { return $item->getID(); }, $organisations);
-            $res = Crudites::inspect('article_organisation')->select(['articleIds' => ['DISTINCT(article_id)']])->whereNumericIn('organisation_id', $ids)->limit(7)->retCol();
+            $res = self::database()->inspect('article_organisation')->select(['articleIds' => ['DISTINCT(article_id)']])->whereNumericIn('organisation_id', $ids)->limit(7)->retCol();
 
             $articleIds = array_merge($articleIds, $res);
         }

@@ -60,14 +60,14 @@ class Job extends Kortex
     {
         // Check if 'remun' router parameter is set and use it to filter by 'isPaid'
         if ($this->router()->params('remun')) {
-            $query->whereEQ('isPaid', (int)($this->router()->params('remun') === 'job_paid'));
+            $query->whereEQ('isPaid', (int)($this->router()->params('remun') === 'job-paid'));
         }
 
         // Check if 'types' router parameter is set and contains a single type, then filter by 'isOffer'
         if ($this->router()->params('types') && count($this->router()->params('types')) === 1) {
             $type = $this->router()->params('types');
             $type = array_pop($type);
-            $query->whereEQ('isOffer', (int)($type === 'job_offer'));
+            $query->whereEQ('isOffer', (int)($type === 'job-offer'));
         }
 
         // Check if 'categories' router parameter is set and filter by matching category IDs

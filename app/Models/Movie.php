@@ -19,7 +19,7 @@ class Movie extends TightModel
         return $this->get('label');
     }
 
-    public static function queryListing(): SelectInterface
+    public static function queryListing($filters = [], $options = []): SelectInterface
     {
         $fieldForListing = [
             'id',
@@ -34,21 +34,17 @@ class Movie extends TightModel
         $select = self::table()->select();
         
         $select->columns($fieldForListing);
+        if(($options['withDirectors'] ?? false) !== false){
+            $select->join(['movie_professional', 'withDirectors'], [
+                ['withDirectors', 'movie_id', 'movie', 'id'],
+                ['withDirectors', 'praxis_id', Professional::DIRECTOR_TAG_ID]
+            ], 'LEFT OUTER');
+            $select->join(['professional', 'director'], [['withDirectors', 'professional_id', 'director', 'id']], 'LEFT OUTER');
+            $select->selectAlso(['directors' => ["GROUP_CONCAT(`director`.`firstname`, ' ', `director`.`lastname` SEPARATOR ', ')"]]);
+        }
         
         
-        $select->join(['movie_professional', 'withDirectors'], [
-            ['withDirectors', 'movie_id', 'movie', 'id'],
-            ['withDirectors', 'praxis_id', Professional::DIRECTOR_TAG_ID]
-        ], 'LEFT OUTER');
-        $select->join(['professional', 'director'], [['withDirectors', 'professional_id', 'director', 'id']], 'LEFT OUTER');
-        $select->selectAlso(['directors' => ["GROUP_CONCAT(`director`.`firstname`, ' ', `director`.`lastname` SEPARATOR ', ')"]]);
-        
-        $select->join(['tag', 'movie_genre'], [['movie', 'genre_id', 'movie_genre', 'id']], 'LEFT OUTER');
-        $select->selectAlso(['genre' => ['movie_genre', 'label']]);
-
-        
-        
-        $select->whereEQ('active', 1);
+        $select->whereEQ('active', ($options['isActive'] ?? true) === true ? '1' : '0');
 
         $select->groupBy(['movie', 'id']);
         // $select->groupBy(['movie', 'slug']);
@@ -153,8 +149,8 @@ class Movie extends TightModel
     public static function query_retrieve($filters = [], $options = []): SelectInterface
     {
         //---- JOIN & FILTER SERVICE
-        // $Query = parent::query_retrieve($filters, $options);
-        $Query = self::queryRecord();
+        $Query = parent::query_retrieve($filters, $options);
+        // $Query = self::queryRecord();
   
         // if (isset($options['eager']) && $options['eager'] === true){
         //     if (!isset($options['without_tags'])) {

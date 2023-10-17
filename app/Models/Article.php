@@ -16,14 +16,16 @@ class Article extends TightModel
         return $this->get('label');
     }
 
-    public static function queryListing(): SelectInterface
+    public static function queryListing($filters = [], $options = []): SelectInterface
     {
         $select = self::table()->select();
         $select->columns([
                 'id', 'slug', 'label', 'publication', 'profilePicture', 'type_id'
             ]
         );
-        $select->whereEQ('active', 1);
+
+        $select->whereEQ('active', ($options['isActive'] ?? true) === true ? '1' : '0');
+
         return $select;
     }
 
@@ -31,8 +33,6 @@ class Article extends TightModel
     {
         $select = self::queryListing();
         $select->selectAlso('*');
-
-        $select->whereEQ('active', 1);
 
         $select->join(['tag', 'tag'], [['article', 'type_id', 'tag', 'id']], 'LEFT OUTER');
 
