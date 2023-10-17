@@ -13,7 +13,7 @@ CREATE TABLE `cinergie`.`article` (
   `type_id` int DEFAULT NULL COMMENT 'FK tag, parse from legacy_subject',
 
   `abstract` text COMMENT 'leg:field05',
-  `publication` date DEFAULT NULL COMMENT 'leg:field02',
+  `publication` date NOT NULL COMMENT 'leg:field02',
   `embedVideo` text COMMENT 'leg:field07',
   `isArchived` tinyint(1) DEFAULT NULL COMMENT 'leg:field11',
   `isDiaporama` tinyint(1) DEFAULT NULL COMMENT 'leg:field10',
