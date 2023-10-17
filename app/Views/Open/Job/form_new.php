@@ -4,11 +4,11 @@
         <label for="remunere" class="col-sm-2 col-form-label">Rémunéré? <span>*</span></label>
         <div class="col-sm-10">
             <div class="d-flex">
-                <input type="radio" id="remun-oui" name="remunere" value="job_paid">
+                <input type="radio" id="remun-oui" name="remunere" value="job-paid">
                 <span class="ms-2 text-lable">Oui</span>
             </div>
             <div class="d-flex">
-                <input type="radio" id="remun-non" name="remunere" value="job_free">
+                <input type="radio" id="remun-non" name="remunere" value="job-free">
                 <span class="ms-2 text-lable">Non</span>
             </div>
         </div>
