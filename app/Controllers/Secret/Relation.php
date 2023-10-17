@@ -2,30 +2,30 @@
 
 namespace App\Controllers\Secret;
 
+use HexMakina\BlackBox\Database\TableInterface;
 use HexMakina\Crudites\{Crudites, CruditesException};
 
 class Relation extends Krafto
 {
+
     public function link()
     {
-        ['parent' => $parent, 'child' => $child] = $this->router()->params();
-        [$parent_key, $child_key] = [$parent . '_id', $child . '_id'];
-        [$parent_key => $parent_id, $child_key . 's' => $child_ids] = $this->router()->submitted();
+        $database = $this->get('HexMakina\BlackBox\Database\DatabaseInterface');
 
-
-        $res = $this->findRelationalTable($parent, $child);
-        if (is_array($res)) {
-            return $res; //errors
+        foreach($this->router()->submitted() as $key => $value){
+            $$key = $value;
         }
 
-        $relation_table = $res;
-        $dat_ass = [];
-
-        // $relation_table->delete([$parent_key => $parent_id])->run();
-        foreach ($child_ids as $c_id) {
-            $dat_ass = [$parent_key => $parent_id, $child_key => $c_id];
-            $res = $relation_table->insert($dat_ass)->run();
+        $relation = $database->relations()->getRelation($relation);
+        if(!is_null($relation)){
+            $relation->set($parent_id, $children_ids);
         }
+        else{
+            vd($this->router()->submitted());
+            dd('hasAndBelongsToMany', 'NO RELATION FOUND');
+        }
+
+
         $this->router()->hopBack();
     }
 
@@ -67,18 +67,17 @@ class Relation extends Krafto
         $this->router()->hopBack();
     }
 
-    private function findRelationalTable($parent, $child)
+    private function findRelationalTable($parent, $child): TableInterface
     {
         $table_names = [$parent . '_' . $child, $child . '_' . $parent];
         foreach ($table_names as $table_name) {
             try {
-                $relation_table = Crudites::inspect($table_name);
+                $relation_table = Crudites::database()->inspect($table_name);
                 return $relation_table;
             } catch (CruditesException $e) {
-                $errors[$table_name] =  $e->getMessage();
             }
         }
 
-        return $errors;
+        throw new CruditesException('FAILED_TO_GUESS_RELATIONAL_TABLE');
     }
 }

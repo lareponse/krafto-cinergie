@@ -1,14 +1,17 @@
 document.addEventListener("DOMContentLoaded", function() {
 
     document.querySelectorAll('.otto-link input.otto-search').forEach(function(search) {
-
+        console.log(search)
         search.addEventListener('input', (e) => {
-
+            console.log(e.target);
             const searchTerm = e.target.value
             const className = e.target.getAttribute('otto-entity')
+            console.log(className);
             const fields = e.target.getAttribute('otto-search-fields')
-            const url = '/api/search/class/' + className + '/fields/'+encodeURI(JSON.stringify(fields.split(',')))+'/term/' + searchTerm + '/results.json'
+            const url = '/api/search/handle/' + encodeURI(className) + '/fields/'+encodeURI(JSON.stringify(fields.split(',')))+'/term/' + searchTerm + '/results.json'
+
             console.log(url)
+
             fetch(url)
                 .then(response => response.json())
                 .then(results => {
@@ -26,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 const makeSuggestion = (result) => {
     let {id, label} = result
-    
+    console.log(id, label)
     let item = document.createElement('li')
     item.className = 'list-group-item d-flex justify-content-between align-items-center'
     item.innerHTML = label

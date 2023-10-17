@@ -20,7 +20,7 @@ array_push(
 );
 array_push(
     $routes,
-    ['POST', 'relations/[a:parent]/[a:child]', 'Relation::link', 'relation_link'],
+    ['POST', 'relations/link', 'Relation::link', 'relation_link'],
     ['POST', 'relations/unlink', 'Relation::unlink', 'relation_unlink'],
 );
 
@@ -44,7 +44,7 @@ array_push(
     ['GET',  '[a:controller]/new', '::alter', 'record_new'],
     ['GET',  '[a:controller]/[i:id]', '::view', 'record'],
     ['GET',  '[a:controller]/[i:id]/edit', '::alter', 'record_edit'],
-    ['GET',  '[a:controller]/[*:slug]/modifier', '::editBySlug', 'record_edit_by_slug'],
+    ['GET',  '[a:controller]/modifier/[*:slug]', '::editBySlug', 'record_edit_by_slug'],
     ['GET',  '[a:controller]/[*:params]?', '::home', 'records'],
 
     ['POST', '[a:controller]/[i:id]/toggle/[a:field]', '::toggle', 'record_toggle'],
