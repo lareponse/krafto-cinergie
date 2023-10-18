@@ -1,13 +1,15 @@
 <ul class="nav nav-tabs">
 <?php
 $menu ??= [
-    'profile' => 'Fiche',     
+    'profile' => 'Fiche',
     'articles' => 'Article',
     'movies' => 'Film',
     'professionals' => 'Professionnel',
     'organisations' => 'Organisation',
     'images' => 'Images'
 ];
+
+$menu = array_merge($menu, $extras ?? []);
 
 $currentSection ??= 'articles';
 

@@ -14,7 +14,7 @@
                 <div class="card-body p-3 pt-0">
                     <div class="w-100 otto-link">
                         <ul class="list-group otto-list mb-3" otto-ids="children_ids[]"></ul>
-                        <input class="form-control list-search ms-md-auto mb-md-0 otto-search" type="search" placeholder="Ajouter" otto-search-fields="<?= implode(',', $searchFields) ?>" otto-entity="<?= $searchEntity ?>">
+                        <input class="form-control list-search ms-md-auto mb-md-0 otto-search" type="search" placeholder="Ajouter" otto-entity="<?= $searchEntity ?>">
                         <ul class="list-group list-group-flush otto-suggestions"></ul>
                     </div>
                 </div>

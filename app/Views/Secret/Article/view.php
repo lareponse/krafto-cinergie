@@ -1,6 +1,10 @@
 <?php $this->layout('Secret::view') ?>
 
-<?= $this->insert('Secret::_partials/tab/pampoi-nav', ['currentSection' => 'articles'])?>
+<?= $this->insert('Secret::_partials/tab/pampoi-nav', [
+    'currentSection' => 'articles', 
+    'extras' => [
+        'authors' => 'Auteurs'
+    ]])?>
 
 <div class="tab-content pt-6" id="viewPageContent">
 
@@ -18,8 +22,7 @@
             'parent' => $controller->loadModel(),
             'relation' => 'article-hasAndBelongsToMany-movie',
 
-            'searchEntity' => 'App\Models\Movie',
-            'searchFields' => ['label'],
+            'searchEntity' => 'Movie',
 
             'children' => $movies,
             'childrenTemplate' => 'Secret::Movie/_partials/tab-card'
@@ -31,8 +34,7 @@
             'parent' => $controller->loadModel(),
             'relation' => 'article-hasAndBelongsToMany-professional',
 
-            'searchEntity' => 'App\Models\Professional',
-            'searchFields' => ['firstname', 'lastname'],
+            'searchEntity' => 'Professional',
             
             'children' => $professionals,
             'childrenTemplate' => 'Secret::Professional/_partials/tab-card'
@@ -46,8 +48,7 @@
             'parent' => $controller->loadModel(),
             'relation' => 'article-hasAndBelongsToMany-organisation',
 
-            'searchEntity' => 'App\Models\Organisation',
-            'searchFields' => ['label'],
+            'searchEntity' => 'Organisation',
 
             'children' => $organisations, 
             'childrenTemplate' => 'Secret::Organisation/_partials/tab-card'
@@ -57,4 +58,18 @@
     <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
         <?php $this->insert('Secret::_partials/tab-images', ['images' => $images]) ?>
     </div>
+
+
+    <div class="tab-pane fade <?= $activeTab === 'authors' ? $activeClasses : ''?>" id="authors" role="tabpanel" aria-labelledby="authors-tab">
+    <?php $this->insert('Secret::_partials/otto/otto-link', [
+                'parent' => $controller->loadModel(),
+                'relation' => 'article-hasAndBelongsToMany-author',
+
+                'searchEntity' => 'Author',
+
+                'children' => $authors,
+                'childrenTemplate' => 'Secret::Author/_partials/tab-card'
+            ]) ?>
+    </div>
+
 </div>

@@ -1,7 +1,8 @@
+
 <div class="row">
     <div class="col-md-4 col-xxl-3">
-        <?php $this->insert('Secret::Article/view/tab-profile-sidebar') ?>
-    </div>
+        <?php $this->insert('Secret::_partials/legacy_view', ['model' => $controller->loadModel()]) ?>
+      </div>
 
     <div class="col">
         

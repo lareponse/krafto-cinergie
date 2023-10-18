@@ -1,14 +1,13 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
 
-    document.querySelectorAll('.otto-link input.otto-search').forEach(function(search) {
-        console.log(search)
+    document.querySelectorAll('.otto-link input.otto-search').forEach(function (search) {
+        // console.log(search)
         search.addEventListener('input', (e) => {
-            console.log(e.target);
             const searchTerm = e.target.value
             const className = e.target.getAttribute('otto-entity')
-            console.log(className);
-            const fields = e.target.getAttribute('otto-search-fields')
-            const url = '/api/search/handle/' + encodeURI(className) + '/fields/'+encodeURI(JSON.stringify(fields.split(',')))+'/term/' + searchTerm + '/results.json'
+            console.log(className)
+            
+            const url = '/api/id-label/' + encodeURI(className) + '/term/' + searchTerm
 
             console.log(url)
 
@@ -28,8 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
 })
 
 const makeSuggestion = (result) => {
-    let {id, label} = result
-    console.log(id, label)
+    let { id, label } = result
     let item = document.createElement('li')
     item.className = 'list-group-item d-flex justify-content-between align-items-center'
     item.innerHTML = label
@@ -37,8 +35,8 @@ const makeSuggestion = (result) => {
     item.addEventListener('click', (e) => {
         let container = e.target.parentNode.parentNode;
         let selectedList = container.querySelector('.otto-list')
-        let listItem = makeListItem(id, label,selectedList.getAttribute('otto-ids'))
-        
+        let listItem = makeListItem(id, label, selectedList.getAttribute('otto-ids'))
+
         selectedList.appendChild(listItem)
         selectedList.classList.add('mt-3')
         container.querySelector('.otto-suggestions').innerHTML = ''
@@ -48,7 +46,14 @@ const makeSuggestion = (result) => {
     return item
 }
 
+const removeFromExisting = (target) => {
+    do {
+        target = target.parentNode
+    } while (target.tagName != 'LI')
+    target.remove()
+}
 
+// Declare the makeListItem function only once
 const makeListItem = (id, label, inputName) => {
     // Create the text node for the label
     label = document.createTextNode(label)
@@ -80,11 +85,4 @@ const makeListItem = (id, label, inputName) => {
     li.appendChild(a);
 
     return li
-}
-
-const removeFromExisting = (target) => {
-    do {
-        target = target.parentNode
-    } while (target.tagName != 'LI')
-    target.remove()
 }
