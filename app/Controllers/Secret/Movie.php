@@ -39,8 +39,17 @@ class Movie extends Krafto
         if(is_null($this->loadModel())){
             $this->router()->hop('dash_movies');
         }
+        
+        $relations = $this->get('HexMakina\BlackBox\Database\DatabaseInterface')->relations();
 
-            // dd($this->loadModel()->tagIds());
+        $relation = $relations->getRelation('movie-hasAndBelongsToMany-tag');
+        $themes = $relation->getIds($this->loadModel()->getID());
+        $this->viewport('themes', $themes);
+
+        $relation = $relations->getRelation('movie-hasAndBelongsToMany-thesaurus');
+        $thesaurus = $relation->getIds($this->loadModel()->getID());
+        $this->viewport('thesaurus', $thesaurus);
+
         $this->viewport('articles', Article::filter(['movie' => $this->loadModel()], ['eager' => false]));
         $this->viewport('professionals', Professional::filter(['movie' => $this->loadModel()], ['eager' => false]));
         $this->viewport('organisations', Organisation::filter(['movie' => $this->loadModel()], ['eager' => false]));
