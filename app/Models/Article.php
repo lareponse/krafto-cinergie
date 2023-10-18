@@ -24,7 +24,7 @@ class Article extends TightModel
             ]
         );
 
-        $select->whereEQ('active', ($options['isActive'] ?? true) === true ? '1' : '0');
+        $select = self::activableQuery($select, $options['isActive'] ?? 1);
 
         return $select;
     }
