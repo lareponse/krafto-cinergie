@@ -1,75 +1,9 @@
-<?php $this->layout('Secret::view') ?>
+<?php 
 
-<?= $this->insert('Secret::_partials/tab/pampoi-nav', [
-    'currentSection' => 'articles', 
-    'extras' => [
-        'authors' => 'Auteurs'
-    ]])?>
-
-<div class="tab-content pt-6" id="viewPageContent">
-
-    <?php 
-    $activeTab = $controller->router()->params('tab') ?? 'profile';
-    $activeClasses = 'show active';
-    ?>
-
-    <div class="tab-pane fade <?= $activeTab === 'profile' ? $activeClasses : ''?>" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-        <?php $this->insert('Secret::Article/view/tab-profile') ?>
-    </div>
-
-    <div class="tab-pane fade <?= $activeTab === 'movies' ? $activeClasses : ''?>" id="movies" role="tabpanel" aria-labelledby="movies-tab">
-        <?php $this->insert('Secret::_partials/otto/otto-link', [
-            'parent' => $controller->loadModel(),
-            'relation' => 'article-hasAndBelongsToMany-movie',
-
-            'searchEntity' => 'Movie',
-
-            'children' => $movies,
-            'childrenTemplate' => 'Secret::Movie/_partials/tab-card'
-        ]) ?>
-    </div>
-
-    <div class="tab-pane fade <?= $activeTab === 'professionals' ? $activeClasses : ''?>" id="professionals" role="tabpanel" aria-labelledby="professionals-tab">
-        <?php $this->insert('Secret::_partials/otto/otto-link', [
-            'parent' => $controller->loadModel(),
-            'relation' => 'article-hasAndBelongsToMany-professional',
-
-            'searchEntity' => 'Professional',
-            
-            'children' => $professionals,
-            'childrenTemplate' => 'Secret::Professional/_partials/tab-card'
-
-        ]) ?>
-    </div>
-
-
-    <div class="tab-pane fade <?= $activeTab === 'organisations' ? $activeClasses : ''?>" id="organisations" role="tabpanel" aria-labelledby="organisations-tab">
-        <?php $this->insert('Secret::_partials/otto/otto-link', [
-            'parent' => $controller->loadModel(),
-            'relation' => 'article-hasAndBelongsToMany-organisation',
-
-            'searchEntity' => 'Organisation',
-
-            'children' => $organisations, 
-            'childrenTemplate' => 'Secret::Organisation/_partials/tab-card'
-        ]) ?>
-    </div>
-        
-    <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
-        <?php $this->insert('Secret::_partials/tab-images', ['images' => $images]) ?>
-    </div>
-
-
-    <div class="tab-pane fade <?= $activeTab === 'authors' ? $activeClasses : ''?>" id="authors" role="tabpanel" aria-labelledby="authors-tab">
-    <?php $this->insert('Secret::_partials/otto/otto-link', [
-                'parent' => $controller->loadModel(),
-                'relation' => 'article-hasAndBelongsToMany-author',
-
-                'searchEntity' => 'Author',
-
-                'children' => $authors,
-                'childrenTemplate' => 'Secret::Author/_partials/tab-card'
-            ]) ?>
-    </div>
-
-</div>
+$this->layout('Secret::view', ['relations' => [
+        'article-hasAndBelongsToMany-movie' => 'Movie',
+        'article-hasAndBelongsToMany-professional' => 'Professional',
+        'article-hasAndBelongsToMany-organisation' => 'Organisation',
+        'article-hasAndBelongsToMany-author' => 'Author',
+    ]
+]) ?>

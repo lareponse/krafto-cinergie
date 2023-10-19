@@ -3,7 +3,7 @@
 $routes = [
   ['GET', 'events/contests.json', 'Calendar::contests', 'event_contest'],
   ['GET', 'events/events.json/[*:params]?', 'Calendar::events', 'event_events'],
-  ['GET', 'tag/[a:context]/[*:context_value]/term/[a:term]/tags.json', 'Tagging::parentReference', 'tag_filter'],
+  ['GET', 'tag/[a:context]/[*:context_value]/term/[a:term]', 'Tagging::parentReference', 'tag_filter'],
   ['GET', 'tags/ids/[*:ids]/labels.json', 'Tagging::labelsForIds', 'tag_ids'],
   ['GET', 'thesaurus/ids/[*:ids]/labels.json', 'Thesaurus::labelsForIds', 'thesaurus_label_for_ids'],
   ['GET', 'thesaurus/[a:field]/[*:term]', 'Thesaurus::filter', 'thesaurus_filter'],

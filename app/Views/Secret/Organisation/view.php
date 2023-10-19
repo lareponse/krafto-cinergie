@@ -1,7 +1,12 @@
-<?php $this->layout('Secret::view') ?>
+<?php $this->layout('Secret::view', ['relations' => [
+        'organisation-hasAndBelongsToMany-article' => 'Article',
+        'organisation-hasAndBelongsToMany-movie' => 'Movie',
+        'organisation-hasAndBelongsToMany-professional' => 'Professional'
+    ]
+]) ?>
+<?php
 
-<?= $this->insert('Secret::_partials/tab/pampoi-nav', ['currentSection' => 'organisations'])?>
-
+/*
 <div class="tab-content pt-6" id="viewPageContent">
     <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
         <?php $this->insert('Secret::Organisation/view/tab-profile') ?>
@@ -36,3 +41,4 @@
         <?php $this->insert('Secret::_partials/tab-images', ['images' => $images]) ?>
     </div>
 </div>
+*/
