@@ -2,14 +2,14 @@
 
 <div class="row">
     <?php 
-    $navbarPath = 'Secret::'.$controller->className().'/edit/sidebar';
+    $navbarPath = 'Secret::'.$controller->urn().'/edit/sidebar';
     if ($this->engine->exists($navbarPath)){
         ?><div class="col-md-4 col-xxl-3"><?=$this->insert($navbarPath) ?></div><?php
     }
 
     ?>
     <div class="col">
-        <form action="<?= $controller->router()->hyp('dash_record_save', ['controller' => $controller->className()]);?>" method="POST" novalidate>
+        <form action="<?= $controller->router()->hyp('dash_record_save', ['controller' => $controller->urn()]);?>" method="POST" novalidate>
         <input type="hidden" name="id" value="<?= $controller->formModel()->getID();?>" />
         <?=$this->section('content')?>
         </form>

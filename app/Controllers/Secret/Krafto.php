@@ -14,14 +14,16 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
         return true;
     }
 
+    // by default
     public function activeSection(): string
     {
-        return $this->className();
+        return $this->urn();
     }
 
+    // by default
     public function activeLink(): string
     {
-        return $this->className();
+        return $this->urn();
     }
 
 
@@ -39,7 +41,7 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
     {
         $res = $this->modelClassName()::exists(['slug' => $this->router()->params('slug')]);
         if(!is_null($res)){
-            $this->router()->hop('dash_record_edit', ['controller' => $this->className(), 'id' => $res->getID()]);
+            $this->router()->hop('dash_record_edit', ['controller' => $this->urn(), 'id' => $res->getID()]);
         }
     }
 
@@ -55,7 +57,7 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
         parent::conclude();
 
         if(is_null($this->template)) {
-            $fallback = 'Secret::' . $this->className() . '/' . $this->router()->targetMethod();
+            $fallback = 'Secret::' . $this->urn() . '/' . $this->router()->targetMethod();
             $this->template = $fallback;
         }
 
@@ -75,7 +77,7 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
     {
         $bc = is_array($prefix) ? $prefix : [];
 
-        $category = $this->className();
+        $category = $this->urn();
         switch ($category) {
             case 'home':
                 $category = null;
@@ -133,7 +135,7 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
 
     public function url(string $action, $extras = []): string
     {
-        return $this->urlFor($this->className(), $action, $this->loadModel(), $extras);
+        return $this->urlFor($this->urn(), $action, $this->loadModel(), $extras);
 
     }
     

@@ -1,7 +1,7 @@
 <div class="row">
 
     <div class="col-sm-6 col-lg-4 col-xl-3 d-flex">
-        <a href="<?= $controller->router()->hyp('dash_records', ['controller'=>$controller->className()]); ?>" class="card border-0 flex-fill w-100">
+        <a href="<?= $controller->router()->hyp('dash_records', ['controller'=>$controller->urn()]); ?>" class="card border-0 flex-fill w-100">
 
             <div class="card-body">
                 <div class="row">

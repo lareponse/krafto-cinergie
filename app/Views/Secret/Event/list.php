@@ -54,7 +54,7 @@
                 foreach ($listing as $model) {
 
                 ?>
-                <tr data-action="<?= $controller->urlFor($controller->className(), 'edit', $model)?>">
+                <tr data-action="<?= $controller->urlFor($controller->urn(), 'edit', $model)?>">
 
 
                         <td class="title">
