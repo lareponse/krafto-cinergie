@@ -5,7 +5,7 @@ trait HasProfilePicture
 {
 
     public function defaultProfilePicture():string{
-        return 'https://api.dicebear.com/7.x/shapes/svg?seed=Jasmine&backgroundColor=000000&shape2Color=FF0000';
+        return '/images/cinergie-avatar.svg';
     }
     
     public function profilePictureField():string {
