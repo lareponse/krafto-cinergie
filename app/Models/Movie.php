@@ -47,12 +47,7 @@ class Movie extends TightModel
         $select->whereEQ('active', ($options['isActive'] ?? true) === true ? '1' : '0');
 
         $select->groupBy(['movie', 'id']);
-        // $select->groupBy(['movie', 'slug']);
-        // $select->groupBy(['movie', 'label']);
-        // $select->groupBy(['movie', 'runtime']);
-        // $select->groupBy(['movie', 'profilePicture']);
-        // $select->groupBy(['movie', 'genre_id']);
-        // $select->groupBy(['movie', 'metrage_id']);
+  
 
         return $select;
     }
