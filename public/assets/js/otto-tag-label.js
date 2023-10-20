@@ -30,9 +30,13 @@ class ottoTagLabel {
     }
 
     getMissingIds() {
-        const missingIds = new Set();
-        for (const tag of this.tags) {
-            const id = tag.getAttribute('otto-tag-id');
+        let missingIds = new Set();
+        let id;
+        for (let tag of this.tags) {
+            id = tag.getAttribute('otto-tag-id');
+            if(id == '')
+                continue;
+
             if (!this.cache.has(id) && !missingIds.has(id)) {
                 missingIds.add(id);
                 console.log('cache miss', id);
@@ -58,11 +62,16 @@ class ottoTagLabel {
 
     searchAndReplace() {
         for (const tag of this.tags) {
+            
             const id = tag.getAttribute('otto-tag-id');
+            if(id == '')
+                continue;
+
             if (this.cache.has(id)) {
                 tag.innerText = this.cache.get(id);
             } else {
-                console.error('missing id in cache', id);
+                console.error('missing id in cache:', id)
+                console.error(tag)
             }
         }
     }

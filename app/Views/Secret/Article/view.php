@@ -1,9 +1,9 @@
 <?php 
 
 $this->layout('Secret::view', ['relations' => [
-        'article-hasAndBelongsToMany-movie' => 'Movie',
-        'article-hasAndBelongsToMany-professional' => 'Professional',
-        'article-hasAndBelongsToMany-organisation' => 'Organisation',
-        'article-hasAndBelongsToMany-author' => 'Author',
+    'Movie' => 'article-hasAndBelongsToMany-movie',
+    'Professional' => 'article-hasAndBelongsToMany-professional',
+    'Organisation' => 'article-hasAndBelongsToMany-organisation',
+    'Author' => 'article-hasAndBelongsToMany-author'
     ]
 ]) ?>

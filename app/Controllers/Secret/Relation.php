@@ -12,17 +12,29 @@ class Relation extends Krafto
     {
         $database = $this->get('HexMakina\BlackBox\Database\DatabaseInterface');
 
-        foreach($this->router()->submitted() as $key => $value){
+        foreach ($this->router()->submitted() as $key => $value) {
             $$key = $value;
+        }
+        
+        if(!isset($parent_id) || !isset($relation)) {
+            throw new \InvalidArgumentException('MISSING_ARGUMENTS');
         }
 
         $relation = $database->relations()->getRelation($relation);
-        if(!is_null($relation)){
-            $relation->set($parent_id, $children_ids);
-        }
-        else{
-            vd($this->router()->submitted());
-            dd('hasAndBelongsToMany', 'NO RELATION FOUND');
+        if (!is_null($relation)) {
+
+            if (isset($children_ids)) { // many to many
+                $relation->link($parent_id, $children_ids);
+            } 
+            elseif (isset($qualifier_id)) { // many to many qualified
+                $relation->link($parent_id, [['qualified' => $qualified_id, 'qualifier' => $qualifier_id]]);
+            }
+            elseif (isset($child_id)) { // one to one
+                $relation->link($parent_id, $child_id);
+            }
+
+        } else {
+            dd($this->router()->submitted(), 'NO RELATION FOUND');
         }
 
 

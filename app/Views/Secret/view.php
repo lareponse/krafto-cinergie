@@ -11,7 +11,7 @@ try{
     echo '<!-- '.$e->getMessage()." ($path) -->";
 }
 
-vd($relations);
+// vd($relations);
 
 ?>
 <ul class="nav nav-tabs">
@@ -78,15 +78,19 @@ foreach($menu as $tab => $title){
     </div>
     
     <?php 
-    foreach($relations as $relation => $tab){
+    foreach($relations as $tab => $relation){
         ?>
             <div class="tab-pane fade <?= $activeTab === $urn ? $activeClasses : ''?>" id="<?=$tab?>" role="tabpanel" aria-labelledby="<?=$tab?>-tab">
-                <?php $this->insert('Secret::_partials/otto/otto-link', [
+                <?php 
+                $ottoTemplate = is_array($relation) ? 'Secret::_partials/otto/otto-link-qualified' : 'Secret::_partials/otto/otto-link';
+                ['relation' => $relation, 'data-filter-parent' => $qualifierRestriction] = is_array($relation) ? $relation : ['relation' => $relation, 'data-filter-parent' => null];
+                $this->insert($ottoTemplate, [
                     'parent' => $controller->loadModel(),
                     'relation' => $relation,
 
                     'searchEntity' => $tab,
-
+                    'placeholder' => 'Qualifié',
+                    'qualifierRestriction' => $qualifierRestriction,
                     'children' => $records[$tab] ?? [],
                     'childrenTemplate' => 'Secret::'.$tab.'/_partials/tab-card'
                 ]) ?>
@@ -107,6 +111,10 @@ foreach($menu as $tab => $title){
     document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll('.otto-link').forEach(container => {
             new OttoLink(container, []);
+        })
+
+        document.querySelectorAll('.otto-link-with-qualifier').forEach(container => {
+            new OttoLinkWithQualifier(container, []);
         })
     });
 </script>

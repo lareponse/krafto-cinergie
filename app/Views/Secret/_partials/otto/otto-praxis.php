@@ -19,11 +19,10 @@ $existing = json_encode(
     <input type="hidden" name="parent_id" value="<?= $parent->getID() ?>" />
 
 
-    <ul class="otto-list list-group list-group-flush list-group-compact mb-3"></ul>
-
+    <ul class="list-group list-group-flush list-group-compact mb-3 otto-list "></ul>
+    <ul class="list-group list-group-flush list-group-compact mb-3 otto-selected "></ul>
     <input class="otto-search form-control" type="search" placeholder="Ajouter" />
-
-    <ul class="otto-suggestions list-group"></ul>
+    <ul class="list-group otto-suggestions"></ul>
 
     <div class="my-3 d-flex align-items-center justify-content-between">
         <span class="fs-5 text-secondary text-truncate">Confirmer pour enregistrer</span>
