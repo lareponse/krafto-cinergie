@@ -23,7 +23,7 @@ class Article extends Krafto
     {
         $this->viewport('authors', Author::filter(['article' => $this->loadModel()], ['eager' => false]));
         $this->viewport('professionals', Professional::filter(['article' => $this->loadModel()], ['eager' => false]));
-        $this->viewport('movies', Movie::filter(['article' => $this->loadModel()], ['eager' => false]));
+        $this->viewport('movies', Movie::filter(['model' => $this->loadModel()], ['eager' => false]));
         $this->viewport('organisations', Organisation::filter(['article' => $this->loadModel()], ['eager' => false]));
     }
 

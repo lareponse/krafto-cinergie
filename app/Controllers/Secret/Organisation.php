@@ -56,7 +56,7 @@ class Organisation extends Krafto
 
         $this->viewport('articles', Article::filter(['organisation' => $this->loadModel()], ['eager' => false]));
         $this->viewport('professionals', Professional::filter(['organisation' => $this->loadModel()], ['eager' => false]));
-        $this->viewport('movies', Movie::filter(['organisation' => $this->loadModel()], ['eager' => false]));
+        $this->viewport('movies', Movie::filter(['model' => $this->loadModel()], ['eager' => false]));
     }
 
     public function alter(): void
