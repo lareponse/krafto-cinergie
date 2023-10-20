@@ -1,7 +1,7 @@
 <div class="share" id="share">
     <span>Partager sur</span>
     <span>
-        <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= urlencode($controller->router()->url()) ?>&text=<?= urlencode($page->label()) ?>">
+        <a target="_blank" href="https://twitter.com/intent/tweet?url=<?= urlencode($controller->router()->url()) ?>&text=<?= urlencode($page) ?>">
             <i class="bi bi-twitter-x icon"></i>
         </a>
 
