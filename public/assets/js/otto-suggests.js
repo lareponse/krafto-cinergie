@@ -1,3 +1,53 @@
+/**
+ * This file defines four controller classes: 
+ *      - OttoCompleteGeneric, 
+ *      - OttoTagList, 
+ *      - OttoLink,
+ *      - OttoLinkWithQualifier
+ * 
+ * and 3 UI classes:
+ *      - OttoCompleteUI,
+ *      - OttoCompleteHasAndBelongsToManyUI,
+ *      - OttoCompleteHasAndBelongsToManyQualifiedUI
+ * 
+ * 
+ * OttoCompleteGeneric 
+ *      Is an abstract class that defines the basic structure and functionality of the other three classes. 
+ *      It has a constructor that takes in a container element, an array of existing results, and a UI object. 
+ *      It also defines a handle method that takes in a URL and a list type, fetches data from the server,
+ *      and calls the suggest method of the UI object with the fetched results.
+ * 
+ * OttoTagList, OttoLink, and OttoLinkWithQualifier are concrete classes that inherit from OttoCompleteGeneric. 
+ *      They each have their own UI object that defines the specific UI elements and functionality for their respective use cases:
+ * 
+ * OttoTagList 
+ *      Used for autocompleting tags in a list. It listens for input events on search fields and fetches tag data from the server 
+ *      based on the search context and search term. It then displays the fetched results in a list and allows the user to select them.
+ * 
+ * OttoLink
+ *      Used for autocompleting links to other entities. It listens for input events on search fields and fetches entity data from the server
+ *      based on the search context and search term. It then displays the fetched results in a list and allows the user to select them.
+ * 
+ * OttoLinkWithQualifier 
+ *      Used for autocompleting links to other entities with a qualifier. 
+ *      It has two search fields, one for the main search term and one for the qualifier. 
+ *      It listens for input events on both search fields and fetches entity data from the server 
+ *      based on the search context and search term. 
+ * 
+ * It then displays the fetched results in a list and allows the user to select them, 
+ * with the selected result being added to the appropriate list based on the search field used.
+ * 
+ */
+
+
+/**
+ * OttoCompleteUI
+ * 
+ * This class defines the basic UI elements and functionality for all three use cases.
+ * It has a constructor that takes in a container element and defines a suggestions element.
+ * It also defines a createListItem method that takes in a result object and an input name and returns a list item element.
+ * 
+ */
 class OttoCompleteUI 
 {
     constructor(container) {
@@ -67,6 +117,13 @@ class OttoCompleteUI
 
 }
 
+/**
+ * OttoCompleteHasAndBelongsToManyUI
+ * 
+ * This class defines the UI elements and functionality for the OttoLink use case.
+ * It inherits from OttoCompleteUI and overrides the clickableSuggestion method to add a click event listener to the list item element.
+ * 
+ */
 class OttoCompleteHasAndBelongsToManyUI extends OttoCompleteUI
 {
     constructor(container) {
@@ -74,20 +131,29 @@ class OttoCompleteHasAndBelongsToManyUI extends OttoCompleteUI
         this.list = this.container.querySelector(".otto-list");
     }
 
-
-
     clickableSuggestion(result){
         let suggestion = this.createListItem(result)
         suggestion.addEventListener('click', (e) => {
-            e.target.classList.add('text-primary')
-            this.list.appendChild(e.target)
-            this.reset()
+            this.suggestionClicked(e);
         })
 
         return suggestion;
     }
+
+    suggestionClicked(e) {
+        e.target.classList.add('text-primary')
+        this.list.appendChild(e.target)
+        this.reset()
+    }
 }
 
+/**
+ * OttoCompleteHasAndBelongsToManyQualifiedUI
+ * 
+ * This class defines the UI elements and functionality for the OttoLinkWithQualifier use case.
+ * It inherits from OttoCompleteUI and overrides the clickableSuggestion method to add a click event listener to the list item element.
+ * 
+ */
 class OttoCompleteHasAndBelongsToManyQualifiedUI extends OttoCompleteUI
 {
     constructor(container) {
@@ -119,45 +185,48 @@ class OttoCompleteHasAndBelongsToManyQualifiedUI extends OttoCompleteUI
 
     }
 
-    clickableSuggestion(result, selectedList){
-        let inputName = selectedList === 'qualified'? 'qualified_id' : 'qualifier_id';
-
-        let suggestion = this.createListItem(result, inputName)
-        suggestion.addEventListener('click', (e) => {
-            
-            e.target.classList.add('text-primary')
-            if(selectedList === 'qualified')[
-                this.selectQualified(e.target)
-            ]
-            else {
-                this.selectQualifier(e.target)
-            }
-        })
+    clickableSuggestion(result, selectedList) {
+        let inputName = selectedList === 'qualified' ? 'qualified_id' : 'qualifier_id';
+        let suggestion = this.createListItem(result, inputName);
+        suggestion.addEventListener('click', (e) => this.suggestionClicked(e, selectedList));
 
         return suggestion;
     }
-    
-    selectQualified(element){
-        this.qualified.appendChild(element)
-        this.qualifiedSearch.value=''
-        this.qualifiedSearch.classList.add('d-none')
-        this.qualifiedSuggestions.innerHTML = ''
-        this.qualifiedSuggestions.classList.add('d-none')
 
+    suggestionClicked(e, selectedList) {
+        e.target.classList.add('text-primary');
+        if (selectedList === 'qualified') {
+            this.qualified.appendChild(e.target);
+            this.resetAndHideSuggestions(this.qualifiedSuggestions, this.qualifiedSearch);
+        } else {
+            this.qualifier.appendChild(e.target);
+            this.resetAndHideSuggestions(this.qualifierSuggestions, this.qualifierSearch);
+        }
     }
 
-    selectQualifier(element){
-        this.qualifier.appendChild(element)        
-        this.qualifierSearch.value=''
-        this.qualifierSearch.classList.add('d-none')
+    resetAndHideSuggestions(suggestions, search){
+        search.value=''
 
-        this.qualifierSuggestions.innerHTML = ''
-        this.qualifierSuggestions.classList.add('d-none')
+        while (suggestions.firstChild) {
+            suggestions.removeChild(suggestions.firstChild);
+        }
+        search.classList.add('d-none')
+        suggestions.classList.add('d-none')
     }
 
 }
 
-class OttoCompleteAbstract 
+
+/**
+ * OttoCompleteGeneric
+ * 
+ * This class defines the basic structure and functionality of the other three classes.
+ * It has a constructor that takes in a container element, an array of existing results, and a UI object.
+ * It also defines a handle method that takes in a URL and a list type, fetches data from the server,
+ * and calls the suggest method of the UI object with the fetched results.
+ * 
+ */
+class OttoCompleteGeneric 
 {
     
     constructor(container, existing, ui) {
@@ -181,40 +250,51 @@ class OttoCompleteAbstract
     }
 }
 
-
-class OttoTagList extends OttoCompleteAbstract 
+/**
+ * OttoTagList
+ * 
+ * This class defines the UI elements and functionality for the OttoTagList use case.
+ * It inherits from OttoCompleteGeneric and overrides the listen() method to add an input event listener to the search field.
+ * 
+ */
+class OttoTagList extends OttoCompleteGeneric 
 {
-
     constructor(container, existing, ui=null) {
         if(ui === null) {
             ui = new OttoCompleteHasAndBelongsToManyUI(container)
         }
+
         super(container, existing, ui)
     }
 
 
-    listen(){
-        let timeoutId;
+    listen() {
         this.ui.container.querySelectorAll(".otto-search").forEach((search) => {
-            search.addEventListener("input", (e) => {
-                clearTimeout(timeoutId);
-                timeoutId = setTimeout(() => {
-
-
-                    if(e.target.value.length < 3) 
-                        return
-
-                    const searchContextValue = e.target.parentNode.getAttribute("data-filter-parent")
-                    this.handle("/api/tag/parent/" + encodeURI(searchContextValue) + "/term/" + encodeURI(e.target.value))
-
-
-                }, 400);
-            });
+            search.addEventListener("input", this.handleInput.bind(this));
         });
+    }
+
+    handleInput(e) {
+        clearTimeout(this.timeoutId);
+        this.timeoutId = setTimeout(() => {
+            if (e.target.value.length < 3) {
+                return;
+            }
+
+            const searchContextValue = e.target.parentNode.getAttribute("data-filter-parent");
+            this.handle("/api/tag/parent/" + encodeURI(searchContextValue) + "/term/" + encodeURI(e.target.value));
+        }, 400);
     }
 }
 
-class OttoLink extends OttoCompleteAbstract
+/**
+ * OttoLink
+ * 
+ * This class defines the UI elements and functionality for the OttoLink use case.
+ * It inherits from OttoCompleteGeneric and overrides the listen() method to add an input event listener to the search field.
+ * 
+ */
+class OttoLink extends OttoCompleteGeneric
 {
 
     constructor(container, existing, ui=null) {
@@ -242,7 +322,14 @@ class OttoLink extends OttoCompleteAbstract
     }
 }
 
-class OttoLinkWithQualifier extends OttoCompleteAbstract
+/**
+ * OttoLinkWithQualifier
+ * 
+ * This class defines the UI elements and functionality for the OttoLinkWithQualifier use case.
+ * It inherits from OttoCompleteGeneric and overrides the listen() method to add an input event listener to the search fields.
+ */
+
+class OttoLinkWithQualifier extends OttoCompleteGeneric
 {
 
     constructor(container, existing, ui=null) {
@@ -280,25 +367,6 @@ class OttoLinkWithQualifier extends OttoCompleteAbstract
 
             }, 100)
         })
-        
-        // this.ui.container.querySelector(".otto-link-qualifier").forEach((search) => {
-        //     search.addEventListener("input", (e) => {
-        //         clearTimeout(timeoutId);
-        //         timeoutId = setTimeout(() => {
-
-
-        //             // if(e.target.value.length < 3) 
-        //             //     return
-
-        //             const searchContextValue = e.target.parentNode.getAttribute("data-filter-parent")
-        //             let url = "/api/tag/parent/" + encodeURI(searchContextValue) + "/term/" + encodeURI(e.target.value)
-        //             console.log('qualifier', url)
-
-        //             // this.handle(url)
-
-
-        //         }, 0);
-        //     });
-        // });
-    } 
+       
+    }
 }
