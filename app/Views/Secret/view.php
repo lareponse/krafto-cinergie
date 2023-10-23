@@ -11,30 +11,19 @@ try{
     echo '<!-- '.$e->getMessage()." ($path) -->";
 }
 
-// vd($relations);
-
 ?>
 <ul class="nav nav-tabs">
 <?php $this->section('nav-tabs-starts'); ?>
 <?php
 $menu = [
     'Profile' => 'Fiche',
-    'Article' => 'Article',
-    'Movie' => 'Film',
-    'Professional' => 'Professionnel',
-    'Organisation' => 'Organisation',
-    'Author' => 'Auteur',
+    'Article' => 'Articles',
+    'Movie' => 'Films',
+    'Professional' => 'Professionnels',
+    'Organisation' => 'Organisations',
+    'Author' => 'Auteurs',
     'images' => 'Images'
 ];
-
-$records = [
-    'Article' => $articles ?? false,
-    'Movie' => $movies ?? false,
-    'Professional' => $professionals ?? false,
-    'Organisation' => $organisations ?? false,
-    'Author' => $authors ?? false,
-];
-
 // $menu = array_merge($menu, $extras ?? []);
 
 $currentSection ??= 'Profile';
@@ -46,8 +35,16 @@ foreach($menu as $tab => $title){
     if($tab == $urn) // no self linking
         continue;
 
-    if(isset($records[$tab]) && $records[$tab] === false) // no empty tab
-        continue;
+    $relation_config = $relations[$tab] ?? null;
+    
+    $records = null;
+    $relation = null;
+    $context = null;
+    
+    if($relation_config){
+        ['relation' => $relation, 'data-filter-parent' => $qualifierRestriction] = is_array($relation_config) ? $relation_config : ['relation' => $relation_config, 'data-filter-parent' => null];
+        $records = $controller->viewport($relation);
+    }
 
 
     $activeClass = $activeTab == $tab ? 'active' : ''; // first run is active
@@ -56,8 +53,8 @@ foreach($menu as $tab => $title){
         <a href="javascript: void(0);" class="nav-link d-flex align-items-center <?=$activeClass?>" id="<?=$tab?>-tab" data-bs-toggle="tab" data-bs-target="#<?=$tab?>" role="tab" aria-controls="<?=$tab?>" aria-selected="true">
             <?php
             echo $title;
-            if (isset($records[$tab]) && is_array($records[$tab])){
-                echo $this->DOM()::span(''.count($records[$tab]), ['class' => 'badge text-bg-dark-soft rounded-circle d-inline-flex align-items-center justify-content-center w-20px h-20px ms-1']);
+            if (isset($records) && is_array($records)){
+                echo $this->DOM()::span(''.count($records), ['class' => 'badge text-bg-dark-soft rounded-circle d-inline-flex align-items-center justify-content-center w-20px h-20px ms-1']);
             }
             ?>
         </a>
@@ -84,6 +81,8 @@ foreach($menu as $tab => $title){
                 <?php 
                 $ottoTemplate = is_array($relation) ? 'Secret::_partials/otto/otto-link-qualified' : 'Secret::_partials/otto/otto-link';
                 ['relation' => $relation, 'data-filter-parent' => $qualifierRestriction] = is_array($relation) ? $relation : ['relation' => $relation, 'data-filter-parent' => null];
+                $records = $controller->viewport($relation);
+                
                 $this->insert($ottoTemplate, [
                     'parent' => $controller->loadModel(),
                     'relation' => $relation,
@@ -91,7 +90,7 @@ foreach($menu as $tab => $title){
                     'searchEntity' => $tab,
                     'placeholder' => 'Qualifié',
                     'qualifierRestriction' => $qualifierRestriction,
-                    'children' => $records[$tab] ?? [],
+                    'children' => $records ?? [],
                     'childrenTemplate' => 'Secret::'.$tab.'/_partials/tab-card'
                 ]) ?>
             </div>

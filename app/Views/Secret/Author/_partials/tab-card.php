@@ -1,4 +1,9 @@
-<?php $route = $controller->urlFor('Author', 'view', $model); ?>
+<?php 
+$article = new App\Models\Author();
+$article->import($model);
+$model = $article;
+
+$route = $controller->urlFor('Author', 'view', $model); ?>
 
 
 <div class="card border-0">

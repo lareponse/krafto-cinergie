@@ -1,5 +1,8 @@
-
-<?php $route = $controller->urlFor('Organisation', 'view', $model); ?>
+<?php 
+$article = new App\Models\Organisation();
+$article->import($model);
+$model = $article;
+$route = $controller->urlFor('Organisation', 'view', $model); ?>
 
 <div class="card border-0">
     <a href="<?= $route ?>" class="card-image-background" style="background-image:url('<?= $model->profilePicture(); ?>');"></a>

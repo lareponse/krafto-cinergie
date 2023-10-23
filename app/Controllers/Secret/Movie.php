@@ -3,6 +3,7 @@
 namespace App\Controllers\Secret;
 
 use App\Models\{Article, Professional, Organisation, Thesaurus};
+use \HexMakina\Crudites\Relation\ManyToMany;
 
 class Movie extends Krafto
 {
@@ -50,9 +51,14 @@ class Movie extends Krafto
         $thesaurus = $relation->getIds($this->loadModel()->getID());
         $this->viewport('thesaurus', $thesaurus);
 
-        $this->viewport('articles', Article::filter(['movie' => $this->loadModel()], ['eager' => false]));
-        $this->viewport('professionals', Professional::filter(['movie' => $this->loadModel()], ['eager' => false]));
-        $this->viewport('organisations', Organisation::filter(['movie' => $this->loadModel()], ['eager' => false]));
+        $relations = $this->get('HexMakina\BlackBox\Database\DatabaseInterface')->relations();
+
+        foreach($relations->relationsBySource('movie') as $urn => $relation){
+            if($relation instanceof ManyToMany){
+                $records = $relation->getTargets($this->loadModel()->getID());
+                $this->viewport($urn, $records);
+            }
+        }
     }
 
     public function imagesDirectory(){

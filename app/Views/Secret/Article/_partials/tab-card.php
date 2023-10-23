@@ -1,6 +1,9 @@
 <?php 
-$route_edit = $controller->urlFor($model->urn(), 'edit', $model); 
-$route_view = $controller->urlFor($model->urn(), 'view', $model); 
+$article = new App\Models\Article();
+$article->import($model);
+$model = $article;
+$route_edit = $controller->urlFor('Article', 'edit', $model);
+$route_view = $controller->urlFor('Article', 'view', $model); 
 ?>
 
 <div class="card">

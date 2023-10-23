@@ -4,7 +4,7 @@ namespace App\Controllers\Secret;
 
 use App\Models\{Author, Professional, Organisation, Movie};
 use HexMakina\kadro\Models\Tag;
-
+use \HexMakina\Crudites\Relation\ManyToMany;
 
 class Article extends Krafto 
 {
@@ -21,10 +21,16 @@ class Article extends Krafto
 
     public function view()
     {
-        $this->viewport('authors', Author::filter(['article' => $this->loadModel()], ['eager' => false]));
-        $this->viewport('professionals', Professional::filter(['article' => $this->loadModel()], ['eager' => false]));
-        $this->viewport('movies', Movie::filter(['model' => $this->loadModel()], ['eager' => false]));
-        $this->viewport('organisations', Organisation::filter(['article' => $this->loadModel()], ['eager' => false]));
+        $relations = $this->get('HexMakina\BlackBox\Database\DatabaseInterface')->relations();
+
+        // $article_relations = [];
+
+        foreach($relations->relationsBySource('article') as $urn => $relation){
+            if($relation instanceof ManyToMany){
+                $records = $relation->getTargets($this->loadModel()->getID());
+                $this->viewport($urn, $records);
+            }
+        }   
     }
 
     public function imagesDirectory(){
