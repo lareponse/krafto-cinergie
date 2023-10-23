@@ -1,6 +1,3 @@
-<?php
-// vd($relation, 'relation');
-?>
 <div class="row">
     <div class="col-md-6 col-xl-4 col-xxl-3">
         <form method="POST" action="<?= $controller->router()->hyp('dash_relation_link') ?>">
@@ -32,7 +29,7 @@
     <?php
     foreach ($children as $child) {
         echo '<div class="col-md-6 col-xl-4 col-xxl-3">';
-        $this->insert($childrenTemplate, ['model' => $child]);
+        $this->insert($childrenTemplate, ['source' => $parent, 'target' => $child, 'relation' => $relation]);
         echo '</div>';
     }
     ?>

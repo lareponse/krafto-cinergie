@@ -1,7 +1,6 @@
 <?php 
-$article = new App\Models\Author();
-$article->import($model);
-$model = $article;
+$model = new App\Models\Author();
+$model->import($target);
 
 $route = $controller->urlFor('Author', 'view', $model); ?>
 

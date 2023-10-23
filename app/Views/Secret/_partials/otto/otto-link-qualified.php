@@ -29,7 +29,7 @@
     <?php
     foreach ($children as $child) {
         echo '<div class="col-md-6 col-xl-4 col-xxl-3">';
-        $this->insert($childrenTemplate, ['model' => $child]);
+        $this->insert($childrenTemplate, ['source' => $controller->loadModel(), 'target' => $child, 'relation' => $relation]);
         echo '</div>';
     }
     ?>

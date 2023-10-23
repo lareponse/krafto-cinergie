@@ -1,7 +1,7 @@
 <?php 
-$article = new App\Models\Article();
-$article->import($model);
-$model = $article;
+$model = new App\Models\Article();
+$model->import($target);
+
 $route_edit = $controller->urlFor('Article', 'edit', $model);
 $route_view = $controller->urlFor('Article', 'view', $model); 
 ?>

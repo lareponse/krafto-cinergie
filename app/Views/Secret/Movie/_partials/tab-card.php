@@ -1,7 +1,7 @@
 <?php 
-$article = new App\Models\Movie();
-$article->import($model);
-$model = $article;
+$model = new App\Models\Movie();
+$model->import($target);
+
 $route_edit = $controller->urlFor('Movie', 'edit', $model); 
 $route_view = $controller->urlFor('Movie', 'view', $model); 
 ?>

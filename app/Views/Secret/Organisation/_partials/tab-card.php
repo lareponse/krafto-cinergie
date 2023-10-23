@@ -1,7 +1,7 @@
 <?php 
-$article = new App\Models\Organisation();
-$article->import($model);
-$model = $article;
+$model = new App\Models\Organisation();
+$model->import($target);
+
 $route = $controller->urlFor('Organisation', 'view', $model); ?>
 
 <div class="card border-0">
