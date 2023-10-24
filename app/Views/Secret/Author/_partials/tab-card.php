@@ -2,11 +2,9 @@
 $model = new App\Models\Author();
 $model->import($target);
 
-$route = $controller->urlFor('Author', 'view', $model); ?>
-
+$route = $controller->urlFor('Author', 'edit', $model); ?>
 
 <div class="card border-0">
-    <!-- <a href="<?= $route ?>" class="card-image-background" style="background-image:url('<?= $model->profilePicture(); ?>');"></a> -->
 
     <a href="<?= $route ?>" class="card-body text-center">
         <div class="avatar avatar-xl avatar-circle">
@@ -45,15 +43,13 @@ $route = $controller->urlFor('Author', 'view', $model); ?>
 
     <div class="card-footer d-flex align-items-center justify-content-between">
         <?php
-          $table = get_class($model)::model_type();
-          $table_b = get_class($controller->loadModel())::model_type();
-
-          printf('<form action="%s" method="POST">%s%s%s</form>', 
-              $controller->router()->hyp('dash_relation_unlink'),
-              $this->Form()::hidden($table, $model->getID()),
-              $this->Form()::hidden($table_b, $controller->loadModel()->getID()),
-              $this->DOM()::button('Détacher', ['class' => 'btn btn-outline-primary btn-sm'])
-          );
+            printf('<form action="%s" method="POST">', $controller->router()->hyp('dash_relation_unlink'));
+            echo $this->Form()::hidden('return_to', $controller->router()->url().'?tab=Author');
+            echo $this->Form()::hidden('relation', $relation);
+            echo $this->Form()::hidden('source', $controller->loadModel()->getID());
+            echo $this->Form()::hidden('target', $model->getID());
+            echo $this->DOM()::button('Détacher', ['class' => 'btn btn-outline-primary btn-sm']);
+            echo '</form>';
         ?>
       
         <a href="<?= $route ?>" class="btn btn-sm btn-secondary">Voir</a>

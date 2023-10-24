@@ -17,16 +17,20 @@ $route_view = $controller->urlFor('Movie', 'view', $model);
 
     <div class="card-footer d-flex align-items-center justify-content-between">
         
-        <form action="<?= $controller->router()->hyp('dash_relation_unlink') ?>" method="POST">
-            <input type="hidden" name="parent_id" value="" />
-            <input type="hidden" name="child_id" value="" />
-            <?= $this->DOM()::button('Détacher', ['class' => 'btn btn-outline-primary btn-sm'])?>
+        <?php
+            printf('<form action="%s" method="POST">', $controller->router()->hyp('dash_relation_unlink'));
+            echo $this->Form()::hidden('return_to', $controller->router()->url().'?tab=Movie');
+            echo $this->Form()::hidden('relation', $relation);
+            echo $this->Form()::hidden('source', $controller->loadModel()->getID());
+            echo $this->Form()::hidden('target', $model->getID());
+            echo $this->DOM()::button('Détacher', ['class' => 'btn btn-outline-primary btn-sm']);
+            echo '</form>';
+        ?>
             <button class="btn btn-outline-primary btn-sm d-flex align-items-center justify-content-between">
                 <span ><?= $model->get('praxis_ids');?></span>
                 <?= $this->icon('delete', 14, ['class' => 'ms-6']);?>
             </button>
 
-        </form>
         <a href="<?= $route_edit ?>" class="btn btn-sm btn-secondary">Modifier</a>
     </div>
 </div>
