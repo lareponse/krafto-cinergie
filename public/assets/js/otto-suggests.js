@@ -53,6 +53,7 @@ class OttoCompleteUI
     constructor(container) {
         this.container = container;
         this.suggestions = this.container.querySelector(".otto-suggestions");
+        this.search = this.container.querySelector('.otto-search');
     }
 
     createListItem({id, label}, inputName=null) {
@@ -83,11 +84,6 @@ class OttoCompleteUI
         this.suggestions.classList.remove("d-none")
     }
 
-    reset(){
-        this.suggestions.innerHTML = ''
-        this.container.querySelector('.otto-search').value = ''
-    }
-
     makeControls(id, li, inputName=null){
         return [
             Object.assign(document.createElement("input"), {
@@ -102,19 +98,22 @@ class OttoCompleteUI
                 innerHTML: 'x',
                 onclick: (e) => {
                     e.preventDefault();
-                    
                     let target = e.target.parentNode;
-                    
-                    do {
-                        target = target.parentNode
-                    } while (target.tagName != 'LI')
-                    
                     target.remove()
                 },
             })
         ]
     }
 
+    resetAndHideSuggestions(suggestions, search){
+        search.value=''
+
+        while (suggestions.firstChild) {
+            suggestions.removeChild(suggestions.firstChild);
+        }
+        search.classList.add('d-none')
+        suggestions.classList.add('d-none')
+    }
 }
 
 /**
@@ -134,7 +133,7 @@ class OttoCompleteHasAndBelongsToManyUI extends OttoCompleteUI
     clickableSuggestion(result){
         let suggestion = this.createListItem(result)
         suggestion.addEventListener('click', (e) => {
-            this.suggestionClicked(e);
+            this.suggestionClicked(e)
         })
 
         return suggestion;
@@ -143,7 +142,7 @@ class OttoCompleteHasAndBelongsToManyUI extends OttoCompleteUI
     suggestionClicked(e) {
         e.target.classList.add('text-primary')
         this.list.appendChild(e.target)
-        this.reset()
+        this.resetAndHideSuggestions(this.suggestions, this.search)
     }
 }
 
@@ -204,15 +203,7 @@ class OttoCompleteHasAndBelongsToManyQualifiedUI extends OttoCompleteUI
         }
     }
 
-    resetAndHideSuggestions(suggestions, search){
-        search.value=''
 
-        while (suggestions.firstChild) {
-            suggestions.removeChild(suggestions.firstChild);
-        }
-        search.classList.add('d-none')
-        suggestions.classList.add('d-none')
-    }
 
 }
 
