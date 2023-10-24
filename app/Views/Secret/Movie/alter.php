@@ -1,6 +1,5 @@
 <?php $this->layout('Secret::edit') ?>
 
-
 <div class="card border-0 scroll-mt-3" id="signaletique">
     <div class="card-header">
         <h2 class="h3 mb-0">Signalétique</h2>
@@ -147,110 +146,10 @@
 
 </div>
 
-<div class="card border-0 scroll-mt-3" id="synopsisSection">
-    <div class="card-header">
-        <h2 class="h3 mb-0">Synopsis</h2>
-    </div>
-
-    <div class="card-body">
-        <textarea class="form-control tinymce" id="content" name="content" rows="20"><?= $controller->formModel()->get('content');?></textarea>
-        <div class="invalid-feedback">Please tell something about yourself</div>
-
-        <div class="d-flex justify-content-end mt-5">
-
-        
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
-        </div>
-    </div>
-</div>
-
-<div class="card border-0 scroll-mt-3" id="castingSection">
-    <div class="card-header">
-        <h2 class="h3 mb-0">Casting</h2>
-    </div>
-
-    <div class="card-body">
-        <textarea class="form-control tinymce" id="casting" name="casting" rows="20"><?= $controller->formModel()->get('casting');?></textarea>
-        <div class="invalid-feedback">Please tell something about yourself</div>
-
-        <div class="d-flex justify-content-end mt-5">
-
-        
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
-        </div>
-    </div>
-</div>
-
-<div class="card border-0 scroll-mt-3" id="commentSection">
-    <div class="card-header">
-        <h2 class="h3 mb-0">Commentaires</h2>
-    </div>
-
-    <div class="card-body">
-        <textarea class="form-control tinymce" id="comment" name="comment" rows="20"><?= $controller->formModel()->get('comment');?></textarea>
-        <div class="invalid-feedback">Please tell something about yourself</div>
-
-        <div class="d-flex justify-content-end mt-5">
-
-        
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
-        </div>
-    </div>
-</div>
-
-<div class="card border-0 scroll-mt-3" id="thesaurusSection">
-    <div class="card-header">
-        <h2 class="h3 mb-0">Thésaurus</h2>
-    </div>
-    <div class="card-body">
-        <div class="row mb-4">
-            <?php $this->insert('Secret::Thesaurus/otto-complete', ['reference' =>'unesco_id', 'label' => 'Unesco 1', 'value' => $controller->formModel()->get('unesco_id')]) ?>
-        </div>
-        
-        <div class="row mb-4">
-            <?php $this->insert('Secret::Thesaurus/otto-complete', ['reference' =>'unesco_bis_id', 'label' => 'Unesco 2', 'value' => $controller->formModel()->get('unesco_bis_id')]) ?>
-        </div>
-
-        <div class="row mb-4">
-            <?php $this->insert('Secret::Thesaurus/otto-complete', ['reference' =>'unesco_ter_id', 'label' => 'Unesco 3', 'value' => $controller->formModel()->get('unesco_ter_id')]) ?>
-        </div>
-
-        <div class="d-flex justify-content-end mt-5">
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
-        </div>
-    </div>
-</div>
-
-<div class="card border-0 scroll-mt-3" id="themeSection">
-
-        
-    <div class="card-header">
-        <h2 class="h3 mb-0">Thèmes</h2>
-    </div>
-    <div class="card-body">
-        <div class="row mb-4">
-            <?php $this->insert('Secret::Thesaurus/otto-complete', ['reference' =>'unesco_id', 'label' => 'Unesco 1', 'value' => $controller->formModel()->get('unesco_id')]) ?>
-        </div>
-        
-        <div class="row mb-4">
-            <?php $this->insert('Secret::Thesaurus/otto-complete', ['reference' =>'unesco_bis_id', 'label' => 'Unesco 2', 'value' => $controller->formModel()->get('unesco_bis_id')]) ?>
-        </div>
-
-        <div class="row mb-4">
-            <?php $this->insert('Secret::Thesaurus/otto-complete', ['reference' =>'unesco_ter_id', 'label' => 'Unesco 3', 'value' => $controller->formModel()->get('unesco_ter_id')]) ?>
-        </div>
-
-        <div class="d-flex justify-content-end mt-5">
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
-        </div>
-    </div>
-</div>
+<?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'content', 'title' => 'Synopsis', 'id' => 'synopsisSection']) ?>
+<?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'casting', 'title' => 'Casting', 'id' => 'castingSection']) ?>
+<?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'comment', 'title' => 'Commentaires', 'id' => 'commentSection']) ?>
 
 <?= $this->start('deleteForm');?>
     <?= $this->insert('Secret::deleteForm')?>
 <?= $this->stop()?>
-
-
-<?php $this->unshift('scripts') ?>
-    <script src="/public/assets/js/otto-complete.js"></script>
-<?php $this->end() ?>

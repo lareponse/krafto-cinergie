@@ -55,19 +55,6 @@
         </li>
 
         <li>
-            <a href="#thesaurusSection" class="d-flex align-items-center py-3">
-            <?=$this->icon('tags', 14, ['class' => 'me-3']);?>
-                Thésaurus
-            </a>
-        </li>
-
-        <li>
-            <a href="#themeSection" class="d-flex align-items-center py-3">
-            <?=$this->icon('tags', 14, ['class' => 'me-3']);?>
-                Thèmes
-            </a>
-        </li>
-        <li>
             <a href="#deleteSection" class="d-flex align-items-center py-3">
             <?=$this->icon('delete', 14, ['class' => 'me-3']);?>
                 Supprimer
