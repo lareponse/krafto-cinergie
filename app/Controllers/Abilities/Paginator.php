@@ -135,9 +135,8 @@ class Paginator
     {
         if(!isset($this->total)){
             $counter = clone $this->query;
-            $counter->setClause('order', null);
+            $counter->setClause('orderBy', null);
             $counter->statement('SELECT COUNT(*) FROM ('.$counter->statement().') as subquery'); 
-
             $total = $counter->retCol();
             if($total === false)
                 throw new \Exception('UNABLE TO COMPUTE TOTAL RECORD FOR PAGINATION');
