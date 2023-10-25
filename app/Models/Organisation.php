@@ -121,7 +121,7 @@ class Organisation extends TightModel
                 ['movie_organisation', 'movie_id', $filters['movie']->getID()],
 
             ]);
-            $Query->selectAlso('GROUP_CONCAT(praxis_id) as worked_as');
+            $Query->selectAlso(['worked_as' => 'GROUP_CONCAT(praxis_id)']);
         }
 
         if(isset($filters['article']))

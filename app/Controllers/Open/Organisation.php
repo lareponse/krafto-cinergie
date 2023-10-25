@@ -53,7 +53,7 @@ class Organisation extends Kortex
         if(!empty($this->router()->params('s'))){
             $this->freeSearchFor(
                 $this->router()->params('s'), 
-                ['`organisation`.`label`', '`organisation`.`content`', '`organisation`.`filmography`'],
+                ['label', 'content', 'filmography'],
                 $query
             );
         }

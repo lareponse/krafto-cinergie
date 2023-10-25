@@ -32,7 +32,8 @@ class Article extends TightModel
     public static function queryRecord(): SelectInterface
     {
         $select = self::queryListing();
-        $select->selectAlso('*');
+        $select->selectAlso(['*']);
+
 
         $select->join(['tag', 'tag'], [['article', 'type_id', 'tag', 'id']], 'LEFT OUTER');
 
@@ -47,8 +48,7 @@ class Article extends TightModel
         $Query->join(['article_author', 'writtenBy'], [['writtenBy', 'article_id', 'article', 'id']], 'LEFT OUTER');
         $Query->join(['author', 'author'], [['writtenBy', 'author_id', 'author', 'id']], 'LEFT OUTER');
         $Query->groupBy(['article', 'id']);
-
-        // $Query->selectAlso(["GROUP_CONCAT(author.label SEPARATOR ', ') as writtenBy", "GROUP_CONCAT(author.slug SEPARATOR ', ') as writtenBySlugs"]);
+   
         $Query->selectAlso(['writtenBy' => ["GROUP_CONCAT(author.label SEPARATOR ', ')"], 'writtenBySlugs' => ["GROUP_CONCAT(author.slug SEPARATOR ', ')"]]);
 
         if (isset($filters['hasEmbedVideo'])) {

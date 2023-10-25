@@ -96,7 +96,7 @@ class Movie extends Kortex
         if(!empty($this->router()->params('s'))){
             $this->freeSearchFor(
                 $this->router()->params('s'), 
-                ['`movie`.`label`', '`movie`.`content`', '`movie`.`comment`', '`movie`.`casting`'],
+                ['label', 'content', 'comment', 'casting'],
                 $query
             );
         }

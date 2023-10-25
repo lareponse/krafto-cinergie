@@ -41,7 +41,7 @@ class Article extends Kortex
 
             $this->freeSearchFor(
                 $this->router()->params('s'), 
-                ['`article`.`label`', '`article`.`content`', '`article`.`abstract`'],
+                ['label', 'content', 'abstract'],
                 $query
             );
         }

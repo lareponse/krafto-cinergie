@@ -68,7 +68,7 @@ class Professional extends Kortex
 
             $this->freeSearchFor(
                 $this->router()->params('s'), 
-                ['`professional`.`firstname`', '`professional`.`lastname`', '`professional`.`content`', '`professional`.`filmography`'],
+                ['firstname', 'lastname', 'content', 'filmography'],
                 $query
             );
         }
