@@ -1,6 +1,6 @@
-<?php $this->layout('Secret::dashboard', ['title' => 'UNESCO']) ?>
+<?php $this->layout('Secret::dashboard', ['title' => 'Qualifiants']) ?>
 
-<div class="card border-0 flex-fill w-100" data-list='{"valueNames": ["slug", "label", "active"], "page": 20}' id="filesTable">
+<div class="card border-0 flex-fill w-100" data-list='{"valueNames": ["label", "reference", "parent", "active"], "page": 20}' id="filesTable">
     <div class="card-header border-0">
         <?= isset($filters) ? $this->insert('Secret::_partials/filters/FiltersOnFirstChar', ['count' => count($listing)]) : '' ?>
     </div>
@@ -9,13 +9,18 @@
             <thead class="thead-light">
                 <tr>
                     <th>
-                        <a href="javascript: void(0);" class="text-muted list-sort" data-sort="slug">
-                            Slug
+                        <a href="javascript: void(0);" class="text-muted list-sort" data-sort="reference">
+                            Nom
                         </a>
                     </th>
                     <th>
-                        <a href="javascript: void(0);" class="text-muted list-sort" data-sort="slug">
-                            Nom
+                        <a href="javascript: void(0);" class="text-muted list-sort" data-sort="reference">
+                            Référence
+                        </a>
+                    </th>
+                    <th>
+                        <a href="javascript: void(0);" class="text-muted list-sort" data-sort="parent">
+                            Parent
                         </a>
                     </th>
 
@@ -30,17 +35,21 @@
             <tbody class="list">
                 <?php
                 foreach ($listing as $model) {
+
+                    // vd($model);
                 ?>
-                    <tr>
-                        <td class="slug">
-                            <strong><?= $model->slug(); ?></strong>
-                        </td>
+                    <tr data-action="<?= $controller->urlFor($controller->urn(), 'edit', $model) ?>">
                         <td class="label">
                             <strong><?= $model; ?></strong>
                         </td>
+                        <td class="reference">
+                            <?= $model->get('reference'); ?>
+                        </td>
+                        <td class="parent">
+                            <strong><?= $model->get('parent_label'); ?></strong>
+                        </td>
 
                         <td class="active">
-                            <?= $model->isActive() ? 'Oui' : 'Non'; ?>
                         </td>
                     </tr>
                 <?php

@@ -18,6 +18,11 @@ class Thesaurus extends TightModel
         return $this->get('label');
     }
 
+    public static function queryListing($filters = [], $options = []): SelectInterface
+    {
+        return self::query_retrieve($filters, $options);
+    }
+    
     public static function query_retrieve($filters = [], $options = []): SelectInterface
     {
         $Query = parent::query_retrieve($filters, $options);

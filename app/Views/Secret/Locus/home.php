@@ -41,7 +41,7 @@
                 <?php
                 foreach ($listing as $model) {
                 ?>
-                    <tr data-action="<?= $controller->urlFor('Locus', 'edit', $model) ?>">
+                    <tr>
                     <td class="zip">
                             <strong><?= $model->get('zip'); ?></strong>
                         </td>

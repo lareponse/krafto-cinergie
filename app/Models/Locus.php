@@ -22,8 +22,9 @@ class Locus extends TightModel
         if(isset($filters['FiltersOnFirstChar'])){
             self::applyFirstCharFilter($filters['FiltersOnFirstChar'], $Query, 'locality');
         }
-
+        
         $Query->orderBy(['zip', 'ASC']);
+        
         return $Query;
     }
 }

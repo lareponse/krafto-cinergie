@@ -2,7 +2,7 @@
 
 namespace App\Controllers\Secret;
 
-class Thesaurus extends Krafto
+class Tag extends Krafto
 {
     use \App\Controllers\Abilities\HasORM;
 
