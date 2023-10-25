@@ -8,7 +8,7 @@ trait HasORM
     protected $form_model;
 
     // return the controller's class short name
-    abstract public function className();
+    abstract public function urn();
     abstract public function router();
 
     public function HasORMTraitor_prepare(): void
@@ -27,25 +27,33 @@ trait HasORM
             }
         }
     }
-
-
-    public function HasORMTraitor_conclude(): void
-    {
-        $this->viewport('model_type', $this->modelClassName()::model_type());
-    }
-
+    
     public function modelClassName(): string
     {
-        return '\\App\\Models\\' . $this->className();
+        return $this->get('\\App\\Models\\' . $this->urn() .'::class');
     }
 
     public function formModel($model = null)
     {
         if (!is_null($model)) {
             $this->form_model = $model;
-        } elseif (is_null($this->form_model)) {
-            $reflectionClass = new \ReflectionClass($this->modelClassName());
-            $this->form_model = $reflectionClass->newInstanceWithoutConstructor(); //That's it!
+        } 
+        elseif(is_null($this->form_model)){
+            if ($this->router()->requests() && !is_null($this->loadModel())) {
+                $this->formModel(clone $this->loadModel());
+            }
+            else {
+                $reflectionClass = new \ReflectionClass($this->modelClassName());
+                $this->form_model = $reflectionClass->newInstanceWithoutConstructor(); //That's it!
+            }
+
+            if ($this->router()->submits()) {
+                // quickly fixes booleans/checkboxes
+                $datass = $this->fixMissingBooleans($this->router()->submitted());
+                
+                // imports all data into model
+                $this->form_model->import($datass);
+            }
         }
 
         return $this->form_model;
@@ -86,7 +94,7 @@ trait HasORM
     {
         $model = $this->persist_model($this->formModel());
         if (empty($this->errors())) {
-            $this->router()->hop('dash_record', ['controller' => $this->className(), 'id' => $model->getID()]);
+            $this->router()->hop('dash_record', ['controller' => $this->urn(), 'id' => $model->getID()]);
 
         } else {
             $StateAgent = $this->get('HexMakina\BlackBox\StateAgentInterface');
