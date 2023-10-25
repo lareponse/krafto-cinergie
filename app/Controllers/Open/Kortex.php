@@ -166,6 +166,7 @@ abstract class Kortex extends \HexMakina\kadro\Controllers\Kadro
 
         return $query;
     }
+    
     public function captureClient(): string
     {
         // Initialize an empty array to hold the captured information

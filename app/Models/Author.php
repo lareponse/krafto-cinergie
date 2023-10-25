@@ -42,7 +42,7 @@ class Author extends TightModel
          $Query = parent::query_retrieve($filters, $options);
 
 
-         if(isset($filters['FiltersOnFirstChar'])){
+        if(isset($filters['FiltersOnFirstChar'])){
             self::applyFirstCharFilter($filters['FiltersOnFirstChar'], $Query, 'label');
         }
 

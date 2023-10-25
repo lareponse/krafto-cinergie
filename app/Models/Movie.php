@@ -145,29 +145,6 @@ class Movie extends TightModel
     {
         //---- JOIN & FILTER SERVICE
         $Query = parent::query_retrieve($filters, $options);
-        // $Query = self::queryRecord();
-  
-        // if (isset($options['eager']) && $options['eager'] === true){
-        //     if (!isset($options['without_tags'])) {
-        //         $Query->join(['movie_tag'], [['movie_tag', 'movie_id', 'movie', 'id']], 'LEFT OUTER');
-        //         $Query->groupBy('id');
-        //         $Query->selectAlso('GROUP_CONCAT(DISTINCT tag_id) as movie_theme_ids');
-        //     }
-
-        //     // if(isset($options['with_director'])){
-        //     //     $Query->join(['movie_professional'], [['movie_professional', 'movie_id', 'movie', 'id']], 'LEFT OUTER');
-        //     //     $Query->join(['professional'], [['professional', 'id', 'movie_professional', 'movie_id']], 'LEFT OUTER');
-        //     //     $Query->whereEQ('praxis_id' , 117, 'movie_professional');
-        //     //     $Query->selectAlso("CONCAT(`professional`.`firstname`, ' ',`professional`.`lastname`) as director");
-        //     //     vd($Query);
-        //     // }
-
-        //     if (!isset($options['without_thesaurus'])) {
-        //         $Query->join(['movie_thesaurus'], [['movie_thesaurus', 'movie_id', 'movie', 'id']], 'LEFT OUTER');
-        //         $Query->groupBy('id');
-        //         $Query->selectAlso('GROUP_CONCAT(DISTINCT thesaurus_id) as movie_thesaurus_ids');
-        //     }
-        // }
 
         if (isset($filters['FiltersOnFirstChar'])) {
             self::applyFirstCharFilter($filters['FiltersOnFirstChar'], $Query, 'label');
