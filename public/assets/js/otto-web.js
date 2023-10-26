@@ -25,7 +25,6 @@ class OttoWeb {
 
     emailLinks() {
         document.querySelectorAll('.otto-email').forEach(container => {
-            console.log(container)
             const email = container.innerHTML.trim()
             const emailElement = document.createElement('a')
             

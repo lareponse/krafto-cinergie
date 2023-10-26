@@ -29,9 +29,16 @@ class OttoLink extends OttoCompleteGeneric
                     if(e.target.value.length < 3) 
                         return
 
-                    const searchContextValue = e.target.getAttribute('otto-entity')
+                    const searchContextValue = e.target.getAttribute('otto-context')
 
-                    this.handle('/api/id-label/' + encodeURI(searchContextValue) + '/term/' + encodeURI(e.target.value))
+                    let endpoint = e.target.getAttribute('otto-endpoint')
+                    if(endpoint === null || endpoint === '') 
+                        endpoint = '/api/id-label/'
+                    else
+                        endpoint = '/api/' + endpoint + '/'
+                     
+                    this.handle(endpoint + encodeURI(searchContextValue) + '/term/' + encodeURI(e.target.value))
+
                 }, 400);
             })
         })

@@ -14,17 +14,14 @@ class Tagging extends \HexMakina\kadro\Controllers\Kadro
 
     public function parentReference()
     {
-
-        if($this->router()->params('context') === 'parent'){
-            $parent_reference = $this->router()->params('context_value');
-            $term = $this->router()->params('term');
-            $res = Tag::filter([
-                'parent' => $parent_reference, 
-                'content' => ['fields' => ['label'], 'term' => $term]]
-            );
-            header('Content-Type: application/json');
-            echo(json_encode(array_values($res)));
-        }
+        $parent_reference = $this->router()->params('context_value');
+        $term = $this->router()->params('term');
+        $res = Tag::filter([
+            'parent' => $parent_reference, 
+            'content' => ['fields' => ['label'], 'term' => $term]]
+        );
+        header('Content-Type: application/json');
+        echo(json_encode(array_values($res)));
 
         die;
     }
