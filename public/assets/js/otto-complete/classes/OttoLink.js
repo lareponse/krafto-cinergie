@@ -12,15 +12,16 @@ import OttoCompleteHasAndBelongsToManyUI from './OttoCompleteHasAndBelongsToMany
 class OttoLink extends OttoCompleteGeneric
 {
 
-    constructor(container, existing, ui=null) {
+    constructor(container, ui=null) {
         if(ui === null) {
             ui = new OttoCompleteHasAndBelongsToManyUI(container)
         }
-        super(container, existing, ui)
+        super(container, ui)
     }
 
     listen() {
         let timeoutId;
+        
         this.ui.container.querySelectorAll(".otto-search").forEach((search) => {
             search.addEventListener('input', (e) => {
                 clearTimeout(timeoutId);

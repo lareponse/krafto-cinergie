@@ -11,11 +11,11 @@ import OttoCompleteGeneric from './OttoCompleteGeneric.js';
 class OttoLinkWithQualifier extends OttoCompleteGeneric
 {
 
-    constructor(container, existing, ui=null) {
+    constructor(container, ui=null) {
         if(ui === null) {
             ui = new OttoCompleteHasAndBelongsToManyQualifiedUI(container)
         }
-        super(container, existing, ui)
+        super(container, ui)
     }
 
     listen(){
