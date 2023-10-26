@@ -7,6 +7,7 @@
  */
 
 import OttoCompleteUI from './OttoCompleteUI.js';
+import ListItem from './ListItem.js';
 
 class OttoCompleteHasAndBelongsToManyQualifiedUI extends OttoCompleteUI
 {
@@ -41,7 +42,9 @@ class OttoCompleteHasAndBelongsToManyQualifiedUI extends OttoCompleteUI
 
     clickableSuggestion(result, selectedList) {
         let inputName = selectedList === 'qualified' ? 'qualified_id' : 'qualifier_id';
-        let suggestion = this.createListItem(result, inputName);
+
+        let suggestion = new ListItem(result.label, result.id, inputName)
+        suggestion = suggestion.dom()
         suggestion.addEventListener('click', (e) => this.suggestionClicked(e, selectedList));
 
         return suggestion;
