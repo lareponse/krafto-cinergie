@@ -1,4 +1,4 @@
-class ottoTagLabel {
+class OttoTagLabel {
     constructor() {
         this.cache = new Map();
         this.tags = document.querySelectorAll('[otto-tag-id]');
@@ -78,6 +78,6 @@ class ottoTagLabel {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const labeler = new ottoTagLabel();
+    const labeler = new OttoTagLabel();
     labeler.init();
 });
