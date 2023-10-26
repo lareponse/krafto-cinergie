@@ -6,6 +6,9 @@
  * It also defines a createListItem method that takes in a result object and an input name and returns a list item element.
  * 
  */
+
+import ListItem from './ListItem.js';
+
 class OttoCompleteUI 
 {
     constructor(container) {
@@ -16,29 +19,12 @@ class OttoCompleteUI
         this.submit = this.container.querySelector('.otto-link-submit');
     }
 
-    createListItem({id, label}, inputName=null) {
-        let li = document.createElement("li")
-        li.setAttribute("class", "list-group-item d-flex justify-content-between align-items-center px-0 py-4")
-
-        let span = document.createElement("span")
-        span.innerText = label
-        
-        li.appendChild(span)
-
-        if(id !== null){
-            let [input, remove] = this.makeControls(id, li, inputName);
-            li.appendChild(input);
-            li.appendChild(remove);
-        }
-        return li;
-    }
-
     suggest(results, list=null) {
         this.suggestions.innerHTML = "";
 
-        let li;
         if(results.length == 0){
-            this.suggestions.appendChild(this.createListItem({'id': null, 'label':'Aucun résultat'}))
+            let notFound = new ListItem('Aucun résultat')   
+            this.suggestions.appendChild(notFound.dom())
         }
 
         results.map((result) => {
@@ -46,27 +32,6 @@ class OttoCompleteUI
         })
 
         this.suggestions.classList.remove("d-none")
-    }
-
-    makeControls(id, li, inputName=null){
-        return [
-            Object.assign(document.createElement("input"), {
-                type: "hidden",
-                name: inputName || "children_ids[]",
-                value: id,
-            })
-            ,
-            Object.assign(document.createElement("a"), {
-                href: "#",
-                class: "unlink",
-                innerHTML: 'x',
-                onclick: (e) => {
-                    e.preventDefault();
-                    let target = e.target.parentNode;
-                    target.remove()
-                },
-            })
-        ]
     }
 
     resetAndHideSuggestions(suggestions, search){
