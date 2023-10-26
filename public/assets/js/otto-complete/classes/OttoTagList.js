@@ -11,12 +11,12 @@ import OttoCompleteHasAndBelongsToManyUI from './OttoCompleteHasAndBelongsToMany
 
 class OttoTagList extends OttoCompleteGeneric 
 {
-    constructor(container, existing, ui=null) {
+    constructor(container, ui=null) {
         if(ui === null) {
             ui = new OttoCompleteHasAndBelongsToManyUI(container)
         }
 
-        super(container, existing, ui)
+        super(container, ui)
     }
 
 
