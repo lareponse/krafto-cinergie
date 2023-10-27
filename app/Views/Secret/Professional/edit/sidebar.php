@@ -34,12 +34,6 @@
         </li>
 
         <li>
-            <a href="#jobSection" class="d-flex align-items-center py-3">
-                <?= $this->icon('praxis', 14, ['class' => 'me-3']); ?> Métiers
-            </a>
-        </li>
-
-        <li>
             <a href="#ContactSection" class="d-flex align-items-center py-3">
                 <?= $this->icon('phone', 14, ['class' => 'me-3']); ?> Contact
             </a>
