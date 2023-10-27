@@ -4,6 +4,7 @@ namespace App\Controllers\Secret;
 
 use HexMakina\kadro\Models\Tag;
 use App\Models\{Organisation, Article, Movie};
+use \HexMakina\Crudites\Relation\ManyToMany;
 
 class Professional extends Krafto
 {
@@ -35,11 +36,16 @@ class Professional extends Krafto
             $this->router()->hop('dash_professionals');
         }
 
+        $relations = $this->get('HexMakina\BlackBox\Database\DatabaseInterface')->relations();
+        foreach($relations->relationsBySource('professional') as $urn => $relation){
+            if($relation instanceof ManyToMany){
+                $records = $relation->getTargets($this->loadModel()->getID());
+                $this->viewport($urn, $records);
+            }
+        }
+
         $this->viewport('praxis_ids', $this->praxisIds());
 
-        $this->viewport('articles', Article::filter(['professional' => $this->loadModel()], ['eager' => false]));
-        $this->viewport('movies', Movie::filter(['model' => $this->loadModel()], ['eager' => false]));
-        $this->viewport('organisations', Organisation::filter(['professional' => $this->loadModel()], ['eager' => false]));
     }
 
     public function edit(): void
