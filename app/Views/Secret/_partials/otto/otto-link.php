@@ -10,9 +10,9 @@ $records = $controller->viewport($relation) ?? [];
     <!-- hidden children inputs are spawned by js -->
 
     <div class="w-100">
-        <input class="form-control list-search ms-md-auto mb-md-0 otto-search" type="search" placeholder="Ajouter" otto-entity="<?= $searchEntity ?>">
+        <ul class="list-group list-group-flush otto-list"></ul>
+        <input class="form-control list-search ms-md-auto mb-md-0 otto-search" type="search" placeholder="Ajouter" otto-context="<?=$context?>" otto-endpoint="<?=$endpoint?>">
         <ul class="list-group list-group-flush otto-suggestions"></ul>
-        <ul class="list-group my-3 otto-list"></ul>
     </div>
 
     <div class="d-flex align-items-center justify-content-between d-none mt-2 otto-link-submit">

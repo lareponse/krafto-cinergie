@@ -24,15 +24,19 @@ class Professional extends Krafto
         parent::home();
     }
 
+    private function praxisIds(){
+        $relation = $this->databaseRelations()->getRelation('professional-hasAndBelongsToMany-tag');
+        return $relation->getIds($this->loadModel()->getID());
+    }
 
     public function view()
     {
         if (is_null($this->loadModel())) {
             $this->router()->hop('dash_professionals');
         }
-        $relation = get_class($this->loadModel())::database()->relations()->getRelation('professional-hasAndBelongsToMany-tag');
-        $praxis = $relation->getIds($this->loadModel()->getID());
-        $this->viewport('praxis', Tag::filter(['ids' => $praxis], ['eager' => false]));
+
+        $this->viewport('praxis_ids', $this->praxisIds());
+
         $this->viewport('articles', Article::filter(['professional' => $this->loadModel()], ['eager' => false]));
         $this->viewport('movies', Movie::filter(['model' => $this->loadModel()], ['eager' => false]));
         $this->viewport('organisations', Organisation::filter(['professional' => $this->loadModel()], ['eager' => false]));

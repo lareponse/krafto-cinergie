@@ -48,11 +48,18 @@ class Organisation extends Krafto
 
     }
 
+    private function praxisIds(){
+        $relation = $this->databaseRelations()->getRelation('organisation-hasAndBelongsToMany-tag');
+        return $relation->getIds($this->loadModel()->getID());
+    }
+
     public function view()
     {
         if (is_null($this->loadModel())) {
             $this->router()->hop('dash_organisations');
         }
+
+        $this->viewport('praxis_ids', $this->praxisIds());
 
         $this->viewport('articles', Article::filter(['organisation' => $this->loadModel()], ['eager' => false]));
         $this->viewport('professionals', Professional::filter(['organisation' => $this->loadModel()], ['eager' => false]));

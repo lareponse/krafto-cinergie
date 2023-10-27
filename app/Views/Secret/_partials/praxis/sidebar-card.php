@@ -1,19 +1,75 @@
+<?php
+
+$otto_config = [
+    'parent' => $controller->loadModel(),
+    'context' => $context,
+    'endpoint' => 'tag'
+];
+
+switch($context)
+{
+    case 'professional_praxis':
+        $otto_config = array_merge($otto_config, [
+            'relation' => 'professional-hasAndBelongsToMany-tag',
+            'placeholder' => 'Métier',
+            'title' => 'Métiers'
+        ]);
+    break;
+
+    case 'organisation_praxis':
+        $otto_config = array_merge($otto_config, [
+            'relation' => 'organisation-hasAndBelongsToMany-tag',
+            'placeholder' => 'Activité',
+            'title' => 'Activités'
+        ]);
+
+    break;
+
+    // case 'movie_theme':
+    //     $otto_config = [
+    //         'parent' => $controller->loadModel(),
+    //         'relation' => 'movie-hasAndBelongsToMany-tag',
+    //         'searchEntity' => 'Tag',
+    //         'placeholder' => 'Thème',
+    //         'qualifierRestriction' => 'movie_theme'
+    //     ];
+    //     break;
+
+    // case 'movie_thesaurus':
+    //     $otto_config = [
+    //         'parent' => $controller->loadModel(),
+    //         'relation' => 'movie-hasAndBelongsToMany-thesaurus',
+    //         'searchEntity' => 'Thesaurus',
+    //         'placeholder' => 'Thésaurus',
+    //         'qualifierRestriction' => 'movie_thesaurus'
+    //     ];
+    //     break;
+
+    default:
+        throw new \Exception('Partial::'.__FILE__.', unknown $context: '.($context ?? 'isNull'));
+} 
+?>
 <div class="card border-0 pt-3">
     <div class="card-body pt-0">
+        <h3 class="h6 small text-secondary text-uppercase mb-3"><?= $otto_config['title'] ?? 'Praxis' ?></h3>
+        <?php
+            foreach ($praxis_ids ?? [] as $id) {
+        ?>
+                <form method="POST" class="d-flex mb-2 align-items-center" action="<?= $controller->router()->hyp('dash_relation_unlink') ?>">
+                    <input type="hidden" name="relation" value="<?= $otto_config['relation'] ?>" />
+                    <input type="hidden" name="source" value="<?= $controller->loadModel()->getID() ?>" />
+                    <input type="hidden" name="target" value="<?= $id ?>" />
 
-    <h3 class="h6 small text-secondary text-uppercase mb-3">Métier(s)</h3>
-  
+                    <span otto-tag-id="<?= $id ?>"><?= $id ?></span>
+                    <button type="submit" class="btn btn-sm text-danger ms-auto pe-0">
+                        <?= $this->icon('delete', 14) ?>
+                    </button>
+                </form>
+        <?php
+            }
 
-    <?php $list_item = '<li class="py-2">%s %s</li>'; ?>
-        <?= $this->insert('Secret::_partials/otto/otto-praxis', [
-            'parent' => $controller->loadModel(),
-            'relation' => 'article-hasAndBelongsToMany-movie',
-
-            'childrenType' => 'tag',
-            'children' => $praxis,
-            'data-filter-parent' => 'professional_praxis',
-
-        ]); ?>
+        $this->insert('Secret::_partials/otto/otto-link', $otto_config)
+        ?>
 
     </div>
 </div>
