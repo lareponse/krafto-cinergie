@@ -1,31 +1,42 @@
-document.addEventListener("DOMContentLoaded", function () {
+class OttoFormat {
+    constructor(container) {
+        this.container = container;
+        this.dateText = container.innerText.trim();
+        this.date = new Date(this.dateText);
+        this.format = { dateStyle: "long" };
+    }
 
-    document.querySelectorAll('.otto-date').forEach(container => {
-
-        let dateText = container.innerText.trim();
-        if (dateText.length == 0) {
-            return;
-        }
-
-        let date = new Date(dateText);
-        if (isNaN(date)) {
-            return; // skip this one
-        }
-
-        let format = { dateStyle: "long" } // default
-
+    setFormat() {
         try {
-            if (container.getAttribute('otto-format')) {
-                let try_format = decodeURIComponent(container.getAttribute('otto-format'))
+            if (this.container.getAttribute('otto-format')) {
+                let try_format = decodeURIComponent(this.container.getAttribute('otto-format'))
                 try_format = JSON.parse(try_format);
-                format = try_format;
+                this.format = try_format;
             }
-            
-            container.innerText = new Intl.DateTimeFormat('fr-FR', format).format(date)
-        }
-        catch (exception) {
+        } catch (exception) {
             console.log(exception);
-            return; // exit the program
+            throw new Error('Invalid format');
         }
-    })
-})
+    }
+
+    formatDate() {
+        if (isNaN(this.date)) {
+            throw new Error('Invalid date');
+        }
+        this.container.innerText = new Intl.DateTimeFormat('fr-FR', this.format).format(this.date);
+    }
+
+    format() {
+        this.setFormat();
+        this.formatDate();
+    }
+
+    static searchAndFormat(selector){
+        document.querySelectorAll(selector).forEach(container => {
+            const formatter = new OttoFormat(container);
+            formatter.format();
+        });
+    }
+}
+
+export default OttoFormat;

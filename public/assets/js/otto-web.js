@@ -1,12 +1,6 @@
 class OttoWeb {
-    constructor() {
-        this.urlLinks();
-        this.emailLinks();
-        this.callLinks();
-    }
-
-    urlLinks() {
-        document.querySelectorAll('.otto-url').forEach(container => {
+    static urlLinks(selector = null) {
+        document.querySelectorAll(selector || '.otto-url').forEach(container => {
             const anchorElement = document.createElement('a');
             const url = container.innerHTML.trim();
 
@@ -23,11 +17,11 @@ class OttoWeb {
         });
     }
 
-    emailLinks() {
-        document.querySelectorAll('.otto-email').forEach(container => {
+    static emailLinks(selector = null) {
+        document.querySelectorAll(selector || '.otto-email').forEach(container => {
             const email = container.innerHTML.trim()
             const emailElement = document.createElement('a')
-            
+
             emailElement.textContent = email
             emailElement.href = 'javascript:void(0);'
             emailElement.addEventListener('click', function () {
@@ -44,8 +38,8 @@ class OttoWeb {
         });
     }
 
-    callLinks() {
-        document.querySelectorAll('.otto-phone').forEach(container => {
+    static callLinks(selector = null) {
+        document.querySelectorAll(selector || '.otto-phone').forEach(container => {
             const phoneNumber = container.innerHTML.trim();
             const phoneNormalized = phoneNumber.replace(/\s/g, '');
 
@@ -63,6 +57,4 @@ class OttoWeb {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    new OttoWeb();
-});
+export default OttoWeb;

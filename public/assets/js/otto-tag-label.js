@@ -1,3 +1,8 @@
+// document.addEventListener('DOMContentLoaded', () => {
+//     const labeler = new OttoTagLabel();
+//     labeler.init();
+// });
+
 class OttoTagLabel {
     constructor() {
         this.cache = new Map();
@@ -77,7 +82,4 @@ class OttoTagLabel {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const labeler = new OttoTagLabel();
-    labeler.init();
-});
+export default OttoTagLabel;
