@@ -7,6 +7,7 @@
  * 
  */
 class ListItem {
+
     constructor(label, id=null, inputName=null) {
         this.id = id;
         this.label = label;
@@ -18,7 +19,7 @@ class ListItem {
         let id = input.value;
         let label = span.innerText;
         
-        return new ListItem(label, id);
+        return new ListItem(label, id, input.getAttribute("name"));
     }
 
     dom() {
@@ -26,7 +27,7 @@ class ListItem {
         let span = document.createElement("span")
         let link = document.createElement("a")
         
-        li.setAttribute("class", "list-group-item d-flex justify-content-between align-items-center px-2 py-3")
+        li.setAttribute("class", "list-group-item d-flex justify-content-between align-items-center pe-1 ps-0 py-3")
         
         span.innerText = this.label
         
@@ -46,23 +47,27 @@ class ListItem {
         link.innerHTML = "x";
         link.addEventListener("click", (e) => {
             e.preventDefault();
-            console.log(e.target);
-            console.log(e.target.parentNode);
-            let target = e.target.parentNode;
-            target.remove();
+            ListItem.targetToLI(e.target).remove()
+            // target.remove();
         });
 
         return link;
     }
 
-    hiddenInput() {
+    hiddenInput(inputName=null, id=null) {
         return Object.assign(document.createElement("input"), {
             type: "hidden",
-            name: this.inputName || "children_ids[]",
-            value: this.id
+            name: inputName || this.inputName || "children_ids[]",
+            value: id || this.id
         })
     }
 
+    static targetToLI(target){
+        while(target.tagName !== 'LI') {
+            target = target.parentElement
+        }
+        return target
+    }
 
 
 }
