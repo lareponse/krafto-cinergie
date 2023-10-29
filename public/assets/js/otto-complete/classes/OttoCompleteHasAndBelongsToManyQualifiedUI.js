@@ -21,7 +21,12 @@ class OttoCompleteHasAndBelongsToManyQualifiedUI extends OttoCompleteUI
         this.qualifier = this.container.querySelector(".otto-link-qualifier .otto-result");
         this.qualifierSearch = this.container.querySelector(".otto-link-qualifier .otto-search");
         this.qualifierSuggestions = this.container.querySelector(".otto-link-qualifier .otto-suggestions");
+    }
 
+    listen(){
+        let timeoutId;
+        this.qualifiedSearch.addEventListener("input", function(e) {this.onSearch(e, timeoutId,  'qualified')}.bind(this));
+        this.qualifierSearch.addEventListener("input", function(e) {this.onSearch(e, timeoutId,  'qualifier')}.bind(this));
     }
 
     suggest(results, list=null) {
@@ -29,7 +34,8 @@ class OttoCompleteHasAndBelongsToManyQualifiedUI extends OttoCompleteUI
 
  
         if(results.length == 0){
-            this.suggestions.appendChild(this.createListItem({'id': null, 'label':'Aucun résultat'}))
+            let elt = new ListItem('Aucun résultat')
+            this.suggestions.appendChild(elt.dom())
         }
 
         results.map((result) => {
@@ -51,36 +57,56 @@ class OttoCompleteHasAndBelongsToManyQualifiedUI extends OttoCompleteUI
     }
 
     suggestionClicked(e, selectedList) {
-        let listItem = e.target;
-        while(listItem.tagName !== 'LI') {
-            listItem = listItem.parentElement
-        }
 
-        listItem.classList.add('text-primary');
-
+        let clickedElement = ListItem.targetToLI(e.target);
+        
         if (selectedList === 'qualified') {
-            this.qualified.appendChild(listItem);
+            let qualifiedListItem = ListItem.dom(clickedElement)
+            this.qualified.appendChild(qualifiedListItem.dom());
             this.resetAndHideSuggestions(this.qualifiedSuggestions, this.qualifiedSearch);
             this.qualifiedSearch.classList.add('d-none');
-        } else {
+        } 
+        else {
+            
             this.resetAndHideSuggestions(this.qualifierSuggestions, this.qualifierSearch);
-            
-            
-            let qualifiedItem = this.qualified.firstChild
-            console.log(qualifiedItem)
+            if(this.qualified.children.length !== 1){
+                console.log('nothing to qualify, please select a qualified first')
+                return;
+            }
 
-            // add the qualifier label to the qualified label, between brackets
-            let qualifierLabel = e.target.innerText;
-            let qualifiedLabel = this.qualified.firstChild.innerText;
-            let qualifiedLabelWithQualifier = qualifiedLabel + ' (' + qualifierLabel + ')';
-            console.log(qualifiedLabel, qualifierLabel, qualifiedLabelWithQualifier)
-            this.list.appendChild(this.qualified.querySelector('li'))
+            newElement = this.qualifiedListItem(clickedElement)
+
+            this.list.appendChild(newElement)
             this.list.classList.remove('d-none')
-            console.log(this.qualified);
-            // this.qualifier.appendChild(e.target);
+            this.emptyContainer(this.qualified)
+            this.qualifiedSearch.classList.remove('d-none')
+
         }
     }
 
+    qualifiedListItem(clickedElement)
+    {
+        let ret
+
+        let qualified_label = this.qualified.querySelector('span').innerText
+        let qualifier_label = clickedElement.querySelector('span').innerText
+        
+        let newItem = new ListItem(qualified_label + ' [' + qualifier_label + ']')
+
+        let qualified_id = this.qualified.querySelector('input').value
+        let qualifier_id = clickedElement.querySelector('input').value;
+
+        // select the hidden input with the name qualified_id
+        ret = newItem.dom()
+
+        // add hidden inputs
+        ret.appendChild(newItem.hiddenInput('qualifiers[' + qualified_id + ']', qualifier_id))
+
+        // add close control
+        ret.appendChild(newItem.closeControl())
+
+        return ret
+    }
 }
 
 export default OttoCompleteHasAndBelongsToManyQualifiedUI;
