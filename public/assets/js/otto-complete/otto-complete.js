@@ -6,7 +6,6 @@ import OttoCompleteHasAndBelongsToManyUI from './classes/OttoCompleteHasAndBelon
 import OttoCompleteHasAndBelongsToManyQualifiedUI from './classes/OttoCompleteHasAndBelongsToManyQualifiedUI.js';
 
 import OttoCompleteGeneric from './classes/OttoCompleteGeneric.js';
-import OttoTagList from './classes/OttoTagList.js';
 import OttoLink from './classes/OttoLink.js';
 import OttoLinkWithQualifier from './classes/OttoLinkWithQualifier.js';
 
@@ -16,7 +15,6 @@ export {
     OttoCompleteHasAndBelongsToManyUI,
     OttoCompleteHasAndBelongsToManyQualifiedUI,
     OttoCompleteGeneric,
-    OttoTagList,
     OttoLink,
     OttoLinkWithQualifier
 }
