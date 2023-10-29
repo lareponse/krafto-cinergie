@@ -1,4 +1,4 @@
-<?php 
+<?php
 $model = new App\Models\Professional();
 $model->import($target);
 
@@ -44,15 +44,20 @@ $route = $controller->urlFor('Professional', 'view', $model); ?>
 
     <div class="card-footer d-flex align-items-center justify-content-between">
         <?php
-          printf('<form action="%s" method="POST">', $controller->router()->hyp('dash_relation_unlink'));
-          echo $this->Form()::hidden('return_to', $controller->router()->url().'?tab=Professional');
-          echo $this->Form()::hidden('relation', $relation);
-          echo $this->Form()::hidden('source', $controller->loadModel()->getID());
-          echo $this->Form()::hidden('target', $model->getID());
-          echo $this->DOM()::button('Détacher', ['class' => 'btn btn-outline-primary btn-sm']);
-          echo '</form>';
+    
+        printf('<form action="%s" method="POST">', $controller->router()->hyp('dash_relation_unlink'));
+        echo $this->Form()::hidden('return_to', $controller->router()->url() . '?tab=Professional');
+        echo $this->Form()::hidden('relation', $relation);
+        echo $this->Form()::hidden('source', $controller->loadModel()->getID());
+        echo $this->Form()::hidden('target', $model->getID());
+        if($relationIsQualified){
+
+            echo $this->Form()::hidden('qualifier', $model->praxisIds());
+        }
+        echo $this->DOM()::button('Détacher', ['class' => 'btn btn-outline-primary btn-sm']);
+        echo '</form>';
         ?>
-      
+
         <a href="<?= $route ?>" class="btn btn-sm btn-secondary">Voir</a>
     </div>
 

@@ -4,7 +4,7 @@ $qualifierEndpoint = '/api/tag/'.$qualifierContext.'/term/';
 ?>
 <form class="otto-link-with-qualifier" method="POST" action="<?= $controller->router()->hyp('dash_relation_link') ?>">
     <input type="hidden" name="relation" value="<?= $relation ?>" />
-    <input type="hidden" name="parent_id" value="<?= $controller->loadModel()->getID() ?>">
+    <input type="hidden" name="source" value="<?= $controller->loadModel()->getID() ?>">
 
     <ul class="otto-list list-group my-3 list-group-flush d-none"></ul>
 
@@ -19,7 +19,7 @@ $qualifierEndpoint = '/api/tag/'.$qualifierContext.'/term/';
         <ul class="otto-suggestions list-group list-group-flush "></ul>
     </div>
 
-    <div class="d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center justify-content-between mt-3">
         <span class="fs-5 text-secondary text-truncate">Confirmer pour enregistrer</span>
         <button type="submit" class="btn btn-primary btn-sm">Confirmer</a>
     </div>

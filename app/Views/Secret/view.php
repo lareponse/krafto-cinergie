@@ -79,10 +79,18 @@ try {
         <div class="tab-pane fade <?= $activeTab === $linked_urn ? $activeClasses : '' ?>" id="<?= $linked_urn ?>" role="tabpanel" aria-labelledby="<?= $linked_urn ?>-tab">
 
             <?php
-            $ottoTemplate = is_array($relation) ? 'Secret::_partials/otto/otto-link-qualified' : 'Secret::_partials/otto/otto-link';
-            ['relation' => $relation, 'context' => $context] = is_array($relation) ? $relation : ['relation' => $relation, 'context' => $linked_urn];
+            $qualifiedRelation = is_array($relation);
+            
+            if ($qualifiedRelation) {
+                ['relation' => $relationName, 'context' => $context] = $relation;
+                $ottoTemplate = 'Secret::_partials/otto/otto-link-qualified';
+            } else {
+                $relationName = $relation;
+                $context = $linked_urn;
+                $ottoTemplate = 'Secret::_partials/otto/otto-link';
+            }
 
-            $records = $controller->viewport($relation) ?? [];
+            $records = $controller->viewport($relationName) ?? [];
             ?>
             <div class="row">
                 <div class="col-md-6 col-xl-4 col-xxl-3">
@@ -91,7 +99,7 @@ try {
                             <?php
                             $this->insert($ottoTemplate, [
                                 'parent' => $controller->loadModel(),
-                                'relation' => $relation,
+                                'relation' => $relationName,
                                 'context' => $linked_urn,
                                 'ottoLinkEndPoint' => '/api/id-label/' . $linked_urn . '/term/',
                                 'placeholder' => 'Qualifié',
@@ -105,7 +113,7 @@ try {
                 <?php
                 foreach ($records as $target) {
                     echo '<div class="col-md-6 col-xl-4 col-xxl-3">';
-                    $this->insert('Secret::' . $linked_urn . '/_partials/tab-card', ['source' => $controller->loadModel(), 'target' => $target, 'relation' => $relation]);
+                    $this->insert('Secret::' . $linked_urn . '/_partials/tab-card', ['source' => $controller->loadModel(), 'target' => $target, 'relation' => $relationName, 'relationIsQualified' => $qualifiedRelation]);
                     echo '</div>';
                 }
                 ?>
@@ -119,22 +127,22 @@ try {
 </div>
 
 <?php $this->unshift('scripts') ?>
-<script type="text/javascript">
-    let deleteIcon = '<?= $this->icon('delete') ?>';
-</script>
+    <script type="text/javascript">
+        let deleteIcon = '<?= $this->icon('delete') ?>';
+    </script>
 
-<script type="module" src="/public/assets/js/otto-complete/otto-complete.js"></script>
-<script type="module">
-    import {OttoLink, OttoLinkWithQualifier} from '/public/assets/js/otto-complete/otto-complete.js';
+    <script type="module" src="/public/assets/js/otto-complete/otto-complete.js"></script>
+    <script type="module">
+        import {OttoLink, OttoLinkWithQualifier} from '/public/assets/js/otto-complete/otto-complete.js';
 
-    document.addEventListener("DOMContentLoaded", () => {
-        document.querySelectorAll('.otto-link').forEach(container => {
-            new OttoLink(container);
-        })
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll('.otto-link').forEach(container => {
+                new OttoLink(container);
+            })
 
-        document.querySelectorAll('.otto-link-with-qualifier').forEach(container => {
-            new OttoLinkWithQualifier(container);
-        })
-    });
-</script>
+            document.querySelectorAll('.otto-link-with-qualifier').forEach(container => {
+                new OttoLinkWithQualifier(container);
+            })
+        });
+    </script>
 <?php $this->end() ?>

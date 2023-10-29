@@ -19,28 +19,26 @@ $route = $controller->urlFor('Organisation', 'view', $model); ?>
     </div>
     <div class="card-footer d-flex align-items-center justify-content-between">
         <?php 
-        if(!empty($model->get('worked_as'))){
-            echo implode('',array_map(function($praxis_id) use ($controller, $model){
-                return sprintf(
-                    '<form action="%s" method="POST">
-                     <input type="hidden" name="movie" value=%d" />
-                     <input type="hidden" name="organisation" value="%d" />
-                     <input type="hidden" name="praxis" value="%d" />
-                     <button class="btn btn-outline-secondary btn-sm d-flex align-items-center justify-content-between">
-                        %s
-                        <span class="otto-tag-label" otto-id="%d">%d</span>
-                     </button>
-                    </form>',
-                            $controller->router()->hyp('dash_relation_unlink'),
-                            $controller->loadModel()->getID(),
-                            $model->getID(),
-                            $praxis_id,
 
-                            $this->icon('delete', 14, ['class' => 'me-2']), 
-                            $praxis_id, 
-                            $praxis_id
-                );
-            }, explode(',',$model->get('worked_as'))));
+        $common_fields = $this->Form()::hidden('return_to', $controller->router()->url().'?tab=Organisation')
+        . $this->Form()::hidden('relation', $relation)
+        . $this->Form()::hidden('source', $controller->loadModel()->getID())
+        . $this->Form()::hidden('target', $model->getID());
+
+        if(!empty($model->get('praxis_ids'))){
+            $button = $this->DOM()::button($this->icon('delete', 14, ['class' => 'me-2']), ['class' => 'btn btn-sm text-danger ms-auto pe-0']);
+
+            echo '<div>';
+            foreach ($model->praxisIds() as $praxis_id) {
+                printf('<form class="d-flex mb-2 align-items-center" action="%s" method="POST">%s%s%s%s</form>', 
+                    $controller->router()->hyp('dash_relation_unlink')
+                    , $common_fields
+                    , $this->Form()::hidden('qualifier', $praxis_id)
+                    , $this->Form()::label('qualifier', $praxis_id, ['otto-tag-id' => $praxis_id])
+                    , $button
+            );
+            }
+            echo '</div>';
         }
         else
         {
