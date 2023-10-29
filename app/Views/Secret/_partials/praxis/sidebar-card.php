@@ -3,7 +3,7 @@
 $otto_config = [
     'parent' => $controller->loadModel(),
     'context' => $context,
-    'endpoint' => 'tag'
+    'ottoLinkEndPoint' => '/api/tag/'.$context.'/term'
 ];
 
 switch($context)

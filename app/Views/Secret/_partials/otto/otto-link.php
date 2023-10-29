@@ -1,4 +1,11 @@
 <?php
+foreach(['controller', 'parent', 'ottoLinkEndPoint', 'relation'] as $var)
+{
+    if(!isset($$var)){
+        throw new \InvalidArgumentException('Partial::'.__FILE__.', missing $'.$var);
+    }
+
+}
 
 $records = $controller->viewport($relation) ?? [];
 ?>
@@ -6,13 +13,13 @@ $records = $controller->viewport($relation) ?? [];
 <form class="otto-link" method="POST" action="<?= $controller->router()->hyp('dash_relation_link') ?>">
 
     <input type="hidden" name="relation" value="<?= $relation ?>" />
-    <input type="hidden" name="parent_id" value="<?= $parent->getID() ?>" />
+    <input type="hidden" name="source" value="<?= $parent->getID() ?>" />
     <!-- hidden children inputs are spawned by js -->
 
     <div class="w-100">
-        <ul class="list-group list-group-flush otto-list"></ul>
-        <input class="form-control list-search ms-md-auto mb-md-0 otto-search" type="search" placeholder="Ajouter" otto-context="<?=$context?>" otto-endpoint="<?=$endpoint?>">
-        <ul class="list-group list-group-flush otto-suggestions"></ul>
+        <ul class="otto-list list-group list-group-flush"></ul>
+        <input type="search" placeholder="Ajouter" otto-endpoint="<?=$ottoLinkEndPoint?>" class="otto-search form-control list-search ms-md-auto mb-md-0">
+        <ul class="otto-suggestions list-group list-group-flush"></ul>
     </div>
 
     <div class="d-flex align-items-center justify-content-between d-none mt-2 otto-link-submit">

@@ -37,8 +37,6 @@ $list_item = '<li class="py-2">%s %s</li>';
             ?>
         </ul>
 
-
-
         <h3 class="h6 small text-secondary text-uppercase mb-3">Mise à jour</h3>
         <div class="mb-7">
             <span class="humanDate"><?= $controller->loadModel()->get('legacy_maj') ?></span>
@@ -54,25 +52,23 @@ $list_item = '<li class="py-2">%s %s</li>';
         <?php
         foreach ($themes as $id) {
         ?>
-        <form method="POST" class="d-flex mb-2 align-items-center" action="<?= $controller->router()->hyp('dash_relation_unlink') ?>">
-            <input type="hidden" name="relation" value="movie-hasAndBelongsToMany-tag" />
-            <input type="hidden" name="source" value="<?= $controller->loadModel()->getID() ?>" />
-            <input type="hidden" name="target" value="<?= $id ?>" />
+            <form method="POST" class="d-flex mb-2 align-items-center" action="<?= $controller->router()->hyp('dash_relation_unlink') ?>">
+                <input type="hidden" name="relation" value="movie-hasAndBelongsToMany-tag" />
+                <input type="hidden" name="source" value="<?= $controller->loadModel()->getID() ?>" />
+                <input type="hidden" name="target" value="<?= $id ?>" />
 
-            <span otto-tag-id="<?= $id ?>"><?= $id ?></span>
-            <button type="submit" class="btn btn-sm text-danger ms-auto pe-0">
-                <?= $this->icon('delete', 14) ?>
-            </button>
-        </form>
-
+                <span otto-tag-id="<?= $id ?>"><?= $id ?></span>
+                <button type="submit" class="btn btn-sm text-danger ms-auto pe-0">
+                    <?= $this->icon('delete', 14) ?>
+                </button>
+            </form>
         <?php
         }
         $this->insert('Secret::_partials/otto/otto-link', [
             'parent' => $controller->loadModel(),
             'relation' => 'movie-hasAndBelongsToMany-tag',
-            'searchEntity' => 'Tag',
             'placeholder' => 'Thème',
-            'qualifierRestriction' => 'movie_theme'
+            'ottoLinkEndPoint' => '/api/tag/movie_theme/term/'
         ])
 
         ?>
@@ -106,8 +102,9 @@ $list_item = '<li class="py-2">%s %s</li>';
         $this->insert('Secret::_partials/otto/otto-link', [
             'parent' => $controller->loadModel(),
             'relation' => 'movie-hasAndBelongsToMany-thesaurus',
-            'searchEntity' => 'Thesaurus',
-            'placeholder' => 'Mot clé'
+            'context' => 'Thesaurus',
+            'placeholder' => 'Mot clé',
+            'ottoLinkEndPoint' => '/api/id-label/Thesaurus/term/'
         ])
         ?>
     </div>

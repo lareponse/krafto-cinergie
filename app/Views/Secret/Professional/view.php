@@ -2,7 +2,7 @@
 
 $relations = [
     'Article' => 'professional-hasAndBelongsToMany-article',
-    'Movie' => ['relation' => 'professional-hasAndBelongsToManyQualified-movie', 'data-filter-parent' => 'professional_praxis'],
+    'Movie' => ['relation' => 'professional-hasAndBelongsToManyQualified-movie', 'context' => 'professional_praxis'],
     'Organisation' => 'professional-hasAndBelongsToMany-organisation'
 ];
 

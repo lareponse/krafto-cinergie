@@ -1,11 +1,9 @@
 <?php
 $this->layout('Secret::dashboard');
 
-$urn = $controller->urn();
-
 
 try {
-    $path = 'Secret::' . $urn . '/view/header';
+    $path = 'Secret::' . $controller->urn() . '/view/header';
     echo $this->insert($path);
 } catch (\Throwable $e) {
     echo '<!-- ' . $e->getMessage() . " ($path) -->";
@@ -31,27 +29,27 @@ try {
     $activeTab = $controller->router()->params('tab') ?? 'Profile';
 
     $activeClasses = 'show active';
-    foreach ($menu as $tab => $title) {
+    foreach ($menu as $linked_urn => $title) {
 
-        if ($tab == $urn) // no self linking
+        if ($linked_urn == $controller->urn()) // no self linking
             continue;
 
-        $relation_config = $relations[$tab] ?? null;
+        $relation_config = $relations[$linked_urn] ?? null;
 
         $records = null;
         $relation = null;
         $context = null;
 
         if ($relation_config) {
-            ['relation' => $relation, 'data-filter-parent' => $qualifierRestriction] = is_array($relation_config) ? $relation_config : ['relation' => $relation_config, 'data-filter-parent' => null];
+            ['relation' => $relation, 'context' => $context] = is_array($relation_config) ? $relation_config : ['relation' => $relation_config, 'context' => null];
             $records = $controller->viewport($relation);
         }
 
 
-        $activeClass = $activeTab == $tab ? 'active' : ''; // first run is active
+        $activeClass = $activeTab == $linked_urn ? 'active' : ''; // first run is active
     ?>
         <li class="nav-item" role="presentation">
-            <a href="javascript: void(0);" class="nav-link d-flex align-items-center <?= $activeClass ?>" id="<?= $tab ?>-tab" data-bs-toggle="tab" data-bs-target="#<?= $tab ?>" role="tab" aria-controls="<?= $tab ?>" aria-selected="true">
+            <a href="javascript: void(0);" class="nav-link d-flex align-items-center <?= $activeClass ?>" id="<?= $linked_urn ?>-tab" data-bs-toggle="tab" data-bs-target="#<?= $linked_urn ?>" role="tab" aria-controls="<?= $linked_urn ?>" aria-selected="true">
                 <?php
                 echo $title;
                 if (isset($records) && is_array($records)) {
@@ -68,7 +66,7 @@ try {
 
 <div class="tab-content pt-6" id="viewPageContent">
     <div class="tab-pane fade <?= $activeTab === 'Profile' ? $activeClasses : '' ?>" id="Profile" role="tabpanel" aria-labelledby="Profile-tab">
-        <?php $this->insert('Secret::' . $urn . '/view/tab-profile') ?>
+        <?php $this->insert('Secret::' . $controller->urn() . '/view/tab-profile') ?>
     </div>
 
     <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
@@ -76,15 +74,15 @@ try {
     </div>
 
     <?php
-    foreach ($relations as $tab => $relation) {
+    foreach ($relations as $linked_urn => $relation) {
     ?>
-        <div class="tab-pane fade <?= $activeTab === $tab ? $activeClasses : '' ?>" id="<?= $tab ?>" role="tabpanel" aria-labelledby="<?= $tab ?>-tab">
+        <div class="tab-pane fade <?= $activeTab === $linked_urn ? $activeClasses : '' ?>" id="<?= $linked_urn ?>" role="tabpanel" aria-labelledby="<?= $linked_urn ?>-tab">
 
             <?php
             $ottoTemplate = is_array($relation) ? 'Secret::_partials/otto/otto-link-qualified' : 'Secret::_partials/otto/otto-link';
-            ['relation' => $relation, 'data-filter-parent' => $qualifierRestriction] = is_array($relation) ? $relation : ['relation' => $relation, 'data-filter-parent' => null];
-            $records = $controller->viewport($relation);
+            ['relation' => $relation, 'context' => $context] = is_array($relation) ? $relation : ['relation' => $relation, 'context' => $linked_urn];
 
+            $records = $controller->viewport($relation) ?? [];
             ?>
             <div class="row">
                 <div class="col-md-6 col-xl-4 col-xxl-3">
@@ -94,10 +92,11 @@ try {
                             $this->insert($ottoTemplate, [
                                 'parent' => $controller->loadModel(),
                                 'relation' => $relation,
-                                'searchEntity' => $tab,
+                                'context' => $linked_urn,
+                                'ottoLinkEndPoint' => '/api/id-label/' . $linked_urn . '/term/',
                                 'placeholder' => 'Qualifié',
-                                'qualifierRestriction' => $qualifierRestriction,
-                                'childrenTemplate' => 'Secret::' . $tab . '/_partials/tab-card'
+                                'qualifierContext' => $context,
+                                'childrenTemplate' => 'Secret::' . $linked_urn . '/_partials/tab-card'
                             ])
                             ?>
                         </div>
@@ -106,7 +105,7 @@ try {
                 <?php
                 foreach ($records as $target) {
                     echo '<div class="col-md-6 col-xl-4 col-xxl-3">';
-                    $this->insert('Secret::' . $tab . '/_partials/tab-card', ['source' => $controller->loadModel(), 'target' => $target, 'relation' => $relation]);
+                    $this->insert('Secret::' . $linked_urn . '/_partials/tab-card', ['source' => $controller->loadModel(), 'target' => $target, 'relation' => $relation]);
                     echo '</div>';
                 }
                 ?>
@@ -130,11 +129,11 @@ try {
 
     document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll('.otto-link').forEach(container => {
-            new OttoLink(container, []);
+            new OttoLink(container);
         })
 
         document.querySelectorAll('.otto-link-with-qualifier').forEach(container => {
-            new OttoLinkWithQualifier(container, []);
+            new OttoLinkWithQualifier(container);
         })
     });
 </script>
