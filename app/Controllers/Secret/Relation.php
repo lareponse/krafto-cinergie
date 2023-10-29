@@ -2,15 +2,38 @@
 
 namespace App\Controllers\Secret;
 
+use HexMakina\Crudites\Relation\AbstractRelation;
 use HexMakina\Crudites\Relation\DatabaseRelations;
 
 class Relation extends Krafto
 {
     private DatabaseRelations $relations;
+    private $relation;
+    private $source;
 
     public function prepare(): void
     {
+        if(!$this->router()->submits()){
+            throw new \Exception('HTTP_POST_REQUIRED');
+        }
+        
+        if(!$this->router()->submitted('source')){
+            throw new \Exception('MISSING_SOURCE_IDENTIFIER');
+        }
+        $this->source = $this->router()->submitted('source');
+
+
+        if(!$this->router()->submitted('relation')){
+            throw new \Exception('MISSING_RELATION_IDENTIFIER');
+        }
         $this->relations = $this->get('HexMakina\BlackBox\Database\DatabaseInterface')->relations();
+        $this->relation = $this->relations->getRelation($this->router()->submitted('relation'));
+
+        if(is_null($this->relation)){
+            throw new \InvalidArgumentException('INVALID_RELATION');
+        }
+
+        
     }
 
     public function link()
@@ -18,44 +41,70 @@ class Relation extends Krafto
         foreach ($this->router()->submitted() as $key => $value) {
             $$key = $value;
         }
+  
+        $errors = [];
+
+        if (isset($child_id)) { // one to one
+            $errors = $this->relation->link($this->source, $child_id);
+        }
+        elseif (isset($children_ids)) { // many to many
+            $errors = $this->relation->link($this->source, $children_ids);
+        } 
+        elseif (isset($qualifiers)) { // many to many qualified
+            foreach($qualifiers as $qualified_id => $qualifier_id){
+                $error = $this->relation->link($this->source, [[$qualified_id, $qualifier_id]]);
+                if(!empty($error)){
+                    $errors[] = $error;
+                }
+            }
+        }
         
-        if(!isset($parent_id) || !isset($relation)) {
-            throw new \InvalidArgumentException('MISSING_ARGUMENTS');
+
+        if(!empty($errors)){
+            // TODO message back to the user
         }
-
-        $relation = $this->relations->getRelation($relation);
-        if (!is_null($relation)) {
-
-            if (isset($children_ids)) { // many to many
-                $relation->link($parent_id, $children_ids);
-            } 
-            elseif (isset($qualifier_id)) { // many to many qualified
-                $relation->link($parent_id, [['qualified' => $qualified_id, 'qualifier' => $qualifier_id]]);
-            }
-            elseif (isset($child_id)) { // one to one
-                $relation->link($parent_id, $child_id);
-            }
-
-        } else {
-            dd($this->router()->submitted(), 'NO RELATION FOUND');
-        }
-
 
         $this->router()->hopBack();
     }
 
     public function unlink()
     {
-        foreach($this->router()->submitted() as $key => $value){
-            $$key = $value;
+        if(!$this->router()->submitted('source')){
+            throw new \Exception('MISSING_SOURCE_IDENTIFIER');
+        }
+        $this->source = $this->router()->submitted('source');
+
+        if(!$this->router()->submitted('target')){
+            throw new \Exception('MISSING_TARGET_IDENTIFIER');
+        }
+        $target = $this->router()->submitted('target');
+
+        $qualifier = null;
+
+        $ids = [$target];
+
+        if($this->relation instanceof \HexMakina\Crudites\Relation\ManyToManyQualified){
+            if(!$this->router()->submitted('qualifier')){
+                throw new \Exception('MISSING_QUALIFIER_IDENTIFIER');
+            }
+            array_push($ids, $this->router()->submitted('qualifier'));
         }
 
-        $relation = $this->relations->getRelation($relation);
-        $relation->unlink($source, [$target]);
+        $errors = $this->relation->unlink($this->source, [$ids]);
 
-        if(isset($return_to)){
-            $this->router()->hopURL($return_to);
+        if(!empty($errors)){
+            // TODO message back to the user
         }
+    }
+
+    public function conclude(): void
+    {
+        parent::conclude();
+
+        if($this->router()->submitted('return_to')){
+            $this->router()->hopURL($this->router()->submitted('return_to'));
+        }
+
         $this->router()->hopBack();
     }
 }
