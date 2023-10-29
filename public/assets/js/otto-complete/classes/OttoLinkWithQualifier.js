@@ -8,46 +8,23 @@
 import OttoCompleteHasAndBelongsToManyQualifiedUI from './OttoCompleteHasAndBelongsToManyQualifiedUI.js';
 import OttoCompleteGeneric from './OttoCompleteGeneric.js';
 
-class OttoLinkWithQualifier extends OttoCompleteGeneric
-{
-
-    constructor(container, ui=null) {
-        if(ui === null) {
-            ui = new OttoCompleteHasAndBelongsToManyQualifiedUI(container)
-        }
-        super(container, ui)
+class OttoLinkWithQualifier extends OttoCompleteGeneric {
+    constructor(container, ui = null) {
+        super(container, ui || new OttoCompleteHasAndBelongsToManyQualifiedUI(container))
     }
 
-    listen(){
-        let timeoutId;
-        
-        this.ui.qualifiedSearch.addEventListener("input", (e) => {
-            clearTimeout(timeoutId)
-            timeoutId = setTimeout(() => {
-                if(e.target.value.length < 3) 
-                    return
-                const searchContextValue = e.target.getAttribute('otto-entity')
-                let url = '/api/id-label/' + encodeURI(searchContextValue) + '/term/' + encodeURI(e.target.value)
+    listen() {
 
-                this.handle(url, 'qualified')
-            }, 100)
-        })
+        // console.log(this.ui.qualifiedSearch, this.ui.qualifierSearch)
+        this.ui.qualifiedSearch.addEventListener("input", function (e) {
+            this.onSearch(e, 'qualified')
+        }.bind(this));
 
-        this.ui.qualifierSearch.addEventListener("input", (e) => {
-            clearTimeout(timeoutId)
-            timeoutId = setTimeout(() => {
-                if(e.target.value.length < 3) 
-                    return
-
-                const searchContextValue = e.target.getAttribute("data-filter-parent")
-                let url = "/api/tag/parent/" + encodeURI(searchContextValue) + "/term/" + encodeURI(e.target.value)
-
-                this.handle(url, 'qualifier')
-
-            }, 100)
-        })
-       
+        this.ui.qualifierSearch.addEventListener("input", function (e) {
+            this.onSearch(e, 'qualifier')
+        }.bind(this));
     }
+
 }
 
-export default OttoLinkWithQualifier;
+export default OttoLinkWithQualifier
