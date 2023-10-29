@@ -10,17 +10,48 @@
 class OttoCompleteGeneric 
 {
     constructor(container, ui) {
-        this.container = container;
-        this.ui = ui;
-        this.listen();
+        this.container = container
+        this.ui = ui
+        this.results = []
+        this.listen()
     }
 
-    handle(url, list=null){
-        console.log(url, list)
-        fetch(url).then((response) => response.json()).then((results) => {
-            this.ui.suggest(results, list);
-        });
+    listen() {
+        let timeoutId;
+        this.ui.container.querySelectorAll(".otto-search").forEach((search) => {
+            search.addEventListener("input", function(e) {this.onSearch(e,  timeoutId)}.bind(this));
+        })
     }
+
+    onSearch(e, listName=null) {
+        if(!this.validSearch(e))
+            return
+
+        let endpoint = e.target.getAttribute('otto-endpoint')
+        
+        let url = endpoint + encodeURI(e.target.value)
+
+        this.handle(url, listName)
+    }
+
+    validSearch(e){
+        return e.target.value.length >= 3
+    }
+
+    handle(url, listName=null){
+        console.log(url, listName)
+        fetch(url)
+        .then((response) => response.json())
+        .then((results) => {
+            console.log(results)
+            this.results = results
+            this.ui.suggest(results, listName);
+        })
+    }
+
+
+
+    
 }
 
 export default OttoCompleteGeneric;
