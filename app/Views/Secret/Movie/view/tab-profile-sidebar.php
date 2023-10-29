@@ -39,7 +39,7 @@ $list_item = '<li class="py-2">%s %s</li>';
 
         <h3 class="h6 small text-secondary text-uppercase mb-3">Mise à jour</h3>
         <div class="mb-7">
-            <span class="humanDate"><?= $controller->loadModel()->get('legacy_maj') ?></span>
+            <span class="otto-date"><?= $controller->loadModel()->get('legacy_maj') ?></span>
         </div>
     </div>
 </div>
