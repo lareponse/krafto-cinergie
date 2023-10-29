@@ -11,7 +11,6 @@ import OttoCompleteHasAndBelongsToManyUI from './OttoCompleteHasAndBelongsToMany
 
 class OttoLink extends OttoCompleteGeneric
 {
-
     constructor(container, ui=null) {
         if(ui === null) {
             ui = new OttoCompleteHasAndBelongsToManyUI(container)
@@ -19,30 +18,6 @@ class OttoLink extends OttoCompleteGeneric
         super(container, ui)
     }
 
-    listen() {
-        let timeoutId;
-        
-        this.ui.container.querySelectorAll(".otto-search").forEach((search) => {
-            search.addEventListener('input', (e) => {
-                clearTimeout(timeoutId);
-                timeoutId = setTimeout(() => {
-                    if(e.target.value.length < 3) 
-                        return
-
-                    const searchContextValue = e.target.getAttribute('otto-context')
-
-                    let endpoint = e.target.getAttribute('otto-endpoint')
-                    if(endpoint === null || endpoint === '') 
-                        endpoint = '/api/id-label/'
-                    else
-                        endpoint = '/api/' + endpoint + '/'
-                     
-                    this.handle(endpoint + encodeURI(searchContextValue) + '/term/' + encodeURI(e.target.value))
-
-                }, 400);
-            })
-        })
-    }
 }
 
 export default OttoLink;
