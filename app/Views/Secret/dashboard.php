@@ -24,12 +24,16 @@
     
     <?= $this->section('scripts')?>
     <script type="module">
+      
       import OttoTagLabel from '/public/assets/js/otto/otto-tag-label.js';
       import OttoLink from '/public/assets/js/otto/otto-link.js';
       import OttoFormatDate from '/public/assets/js/otto/otto-format-date.js';
+      import OttoThesaurusLabel from '/public/assets/js/otto/otto-thesaurus-label.js';
 
       document.addEventListener("DOMContentLoaded", () => {
         
+        const ottoThesaurusLabel = new OttoThesaurusLabel();
+        ottoThesaurusLabel.fetchLabels();
 
         const ottoTagLabel = new OttoTagLabel()
         ottoTagLabel.init()

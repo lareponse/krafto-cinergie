@@ -9,7 +9,3 @@ $relations = [
 $this->layout('Secret::view', ['relations' => $relations]);
 
 ?>
-
-<?php $this->unshift('scripts') ?>
-    <script src="/public/assets/js/otto/otto-thesaurus-label.js"></script>
-<?php $this->end() ?>

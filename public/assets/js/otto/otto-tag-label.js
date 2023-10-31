@@ -51,7 +51,7 @@ class OttoTagLabel {
     }
 
     loadAndReplace(missingIds) {
-        const url = `/api/tags/ids/${encodeURIComponent(JSON.stringify(missingIds))}/labels.json`;
+        const url = `/api/id-label/Tag/ids/${encodeURIComponent(JSON.stringify(missingIds))}/`;
         fetch(url)
             .then(response => response.json())
             .then(loaded => {
