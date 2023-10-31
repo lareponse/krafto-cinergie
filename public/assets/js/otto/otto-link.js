@@ -1,4 +1,4 @@
-class OttoWeb {
+class OttoLink {
     static urlLinks(selector = null) {
         document.querySelectorAll(selector || '.otto-url').forEach(container => {
             const anchorElement = document.createElement('a');
@@ -57,4 +57,4 @@ class OttoWeb {
     }
 }
 
-export default OttoWeb;
+export default OttoLink;

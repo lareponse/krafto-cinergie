@@ -11,5 +11,5 @@ $this->layout('Secret::view', ['relations' => $relations]);
 ?>
 
 <?php $this->unshift('scripts') ?>
-    <script src="/public/assets/js/otto-thesaurus-label.js"></script>
+    <script src="/public/assets/js/otto/otto-thesaurus-label.js"></script>
 <?php $this->end() ?>

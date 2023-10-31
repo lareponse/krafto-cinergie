@@ -37,9 +37,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script src="/public/assets/wejune/js/lightbox.min.js"></script>
     <script src="/public/assets/wejune/js/script.js"></script>
-    <script src="/public/assets/js/otto-format.js"></script>
-    <script src="/public/assets/js/otto-web.js"></script>
-    <script src="/public/assets/js/otto-tag-label.js"></script>
+    <script src="/public/assets/js/otto/otto-format-date.js"></script>
+    <script src="/public/assets/js/otto/otto-link.js"></script>
+    <script src="/public/assets/js/otto/otto-tag-label.js"></script>
 
 </body>
 

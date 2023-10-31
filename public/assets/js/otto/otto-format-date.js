@@ -1,4 +1,4 @@
-class OttoFormat {
+class OttoFormatDate {
     constructor(container) {
         this.container = container;
         this.dateText = container.innerText.trim();
@@ -26,17 +26,13 @@ class OttoFormat {
         this.container.innerText = new Intl.DateTimeFormat('fr-FR', this.format).format(this.date);
     }
 
-    format() {
-        this.setFormat();
-        this.formatDate();
-    }
-
-    static searchAndFormat(selector){
+    static searchAndFormat(selector = '.otto-date'){
         document.querySelectorAll(selector).forEach(container => {
-            const formatter = new OttoFormat(container);
-            formatter.format();
+            const formatter = new OttoFormatDate(container);
+            formatter.setFormat();
+            formatter.formatDate();
         });
     }
 }
 
-export default OttoFormat;
+export default OttoFormatDate;

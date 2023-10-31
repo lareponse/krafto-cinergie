@@ -1,5 +1,5 @@
 /**
- * OttoCompleteGeneric
+ * AbstractRelation
  * 
  * This class defines the basic structure and functionality of the other three classes.
  * It has a constructor that takes in a container element and a UI object.
@@ -7,7 +7,7 @@
  * and calls the suggest method of the UI object with the fetched results.
  * 
  */
-class OttoCompleteGeneric 
+class AbstractRelation 
 {
     constructor(container, ui) {
         this.container = container
@@ -54,4 +54,4 @@ class OttoCompleteGeneric
     
 }
 
-export default OttoCompleteGeneric;
+export default AbstractRelation;

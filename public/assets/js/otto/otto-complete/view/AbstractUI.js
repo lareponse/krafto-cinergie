@@ -1,14 +1,14 @@
 /**
- * OttoCompleteUI
+ * AbstractUI
  * 
  * This class defines the basic UI elements and functionality for all three use cases.
  * It has a constructor that takes in a container element and defines a suggestions element.
  * 
  */
 
-import ListItem from './ListItem.js';
+import ListItem from '../model/ListItem.js';
 
-class OttoCompleteUI 
+class AbstractUI 
 {
     constructor(container) {
         this.container = container
@@ -55,4 +55,4 @@ class OttoCompleteUI
     }
 }
 
-export default OttoCompleteUI;
+export default AbstractUI;

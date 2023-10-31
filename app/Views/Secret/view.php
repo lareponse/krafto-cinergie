@@ -131,17 +131,16 @@ try {
         let deleteIcon = '<?= $this->icon('delete') ?>';
     </script>
 
-    <script type="module" src="/public/assets/js/otto-complete/otto-complete.js"></script>
     <script type="module">
-        import {OttoLink, OttoLinkWithQualifier} from '/public/assets/js/otto-complete/otto-complete.js';
+        import {OneToMany, OneToManyQualified} from '/public/assets/js/otto/otto-complete/otto-complete.js';
 
         document.addEventListener("DOMContentLoaded", () => {
             document.querySelectorAll('.otto-link').forEach(container => {
-                new OttoLink(container);
+                new OneToMany(container);
             })
 
             document.querySelectorAll('.otto-link-with-qualifier').forEach(container => {
-                new OttoLinkWithQualifier(container);
+                new OneToManyQualified(container);
             })
         });
     </script>

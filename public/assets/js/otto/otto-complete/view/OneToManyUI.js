@@ -1,15 +1,15 @@
 /**
- * OttoCompleteHasAndBelongsToManyUI
+ * OneToManyUI
  * 
- * This class defines the UI elements and functionality for the OttoLink use case.
- * It inherits from OttoCompleteUI and overrides the clickableSuggestion method to add a click event listener to the list item element.
+ * This class defines the UI elements and functionality for the OneToMany use case.
+ * It inherits from AbstractUI and overrides the clickableSuggestion method to add a click event listener to the list item element.
  * 
  */
 
-import OttoCompleteUI from './OttoCompleteUI.js';
-import ListItem from './ListItem.js';
+import AbstractUI from './AbstractUI.js';
+import ListItem from '../model/ListItem.js';
 
-class OttoCompleteHasAndBelongsToManyUI extends OttoCompleteUI
+class OneToManyUI extends AbstractUI
 {
     constructor(container) {
         super(container)
@@ -49,4 +49,4 @@ class OttoCompleteHasAndBelongsToManyUI extends OttoCompleteUI
     }
 }
 
-export default OttoCompleteHasAndBelongsToManyUI;
+export default OneToManyUI;

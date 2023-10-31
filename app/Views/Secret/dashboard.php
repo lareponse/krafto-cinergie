@@ -21,23 +21,24 @@
 
     <script type="text/javascript" src="/public/assets/dashly/js/theme.bundle.js"></script>
     <script type="text/javascript" src="/public/assets/js/cinergie.js"></script>
-    <script type="module" src="/public/assets/js/otto-format.js"></script>
-    <script type="module" src="/public/assets/js/otto-web.js"></script>
-    <script type="module" src="/public/assets/js/otto-tag-label.js"></script>
-    <script type="module" src="/public/assets/js/otto-complete/otto-complete.js"></script>
     
     <?= $this->section('scripts')?>
-    <script type="text/javascript">
+    <script type="module">
+      import OttoTagLabel from '/public/assets/js/otto/otto-tag-label.js';
+      import OttoLink from '/public/assets/js/otto/otto-link.js';
+      import OttoFormatDate from '/public/assets/js/otto/otto-format-date.js';
+
       document.addEventListener("DOMContentLoaded", () => {
         
+
         const ottoTagLabel = new OttoTagLabel()
         ottoTagLabel.init()
 
-        OttoWeb.urlLinks()
-        OttoWeb.emailLinks()
-        OttoWeb.callLinks()
+        OttoLink.urlLinks()
+        OttoLink.emailLinks()
+        OttoLink.callLinks()
 
-        OttoDateFormatter.searchAndFormat('.otto-date');
+        OttoFormatDate.searchAndFormat('.otto-date');
         
         <?= $this->section('onLoaded')?>
       });
