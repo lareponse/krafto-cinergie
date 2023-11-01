@@ -39,8 +39,18 @@
     <script src="/public/assets/wejune/js/script.js"></script>
     <script src="/public/assets/js/otto/otto-format-date.js"></script>
     <script src="/public/assets/js/otto/otto-link.js"></script>
-    <script src="/public/assets/js/otto/otto-tag-label.js"></script>
+    <script type="module">
+      
+      import OttoIdLabel from '/public/assets/js/otto/otto-id-label.js';
 
+      document.addEventListener("DOMContentLoaded", () => {
+        
+        const ottoIdLabel = new OttoIdLabel('.otto-id-label');
+        ottoIdLabel.replace();
+
+        <?= $this->section('onLoaded')?>
+      });
+    </script>
 </body>
 
 </html>

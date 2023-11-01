@@ -60,7 +60,7 @@ switch($context)
                     <input type="hidden" name="source" value="<?= $controller->loadModel()->getID() ?>" />
                     <input type="hidden" name="target" value="<?= $id ?>" />
 
-                    <span otto-tag-id="<?= $id ?>"><?= $id ?></span>
+                    <span class="otto-id-label" otto-urn="Tag:<?= $id ?>"><?= $id ?></span>
                     <button type="submit" class="btn btn-sm text-danger ms-auto pe-0">
                         <?= $this->icon('delete', 14) ?>
                     </button>

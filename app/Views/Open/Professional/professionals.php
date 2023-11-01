@@ -27,7 +27,7 @@ use \HexMakina\Marker\Marker; ?>
                                             <p class="card-text">
                                                 <?php
                                                 foreach($record->praxisIds() as $id) {
-                                                    echo '<small class="text-secondary" otto-tag-id="'.$id.'">'.$id.'</small>';
+                                                    echo '<small class="text-secondary" class="otto-id-label" otto-urn="Tag:'.$id.'">'.$id.'</small>';
                                                 }
                                                 ?>
                                         </div>

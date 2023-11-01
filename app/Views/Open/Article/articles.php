@@ -28,7 +28,7 @@
                         <?php
                         if(!empty($article->get('type_id'))){
                             ?>
-                            <a href="<?= $controller->router()->hyp('article', ['slug' => $article->slug()]);?>" class="btn btn-sm btn-primary taxo-cat" otto-tag-id="<?= $article->get('type_id')?>"><?= $article->get('type_id')?></a>
+                            <a href="<?= $controller->router()->hyp('article', ['slug' => $article->slug()]);?>" class="otto-id-label btn btn-sm btn-primary taxo-cat" otto-urn="Tag:<?= $article->get('type_id')?>"><?= $article->get('type_id')?></a>
                             <?php
                         }
                         ?>

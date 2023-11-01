@@ -28,7 +28,7 @@ $list_item = '<li class="py-2">%s %s</li>';
 
                         case 'metrage_id':
                         case 'genre_id':
-                            $label = $this->DOM()::span($label, ['otto-tag-id' => $label]);
+                            $label = $this->DOM()::span($label, ['class' => 'otto-id-label', 'otto-urn' => "Tag:$label"]);
                             break;
                     }
                     printf($list_item, $this->icon($icon, 14, ['class' => 'me-2']), $label);
@@ -57,7 +57,7 @@ $list_item = '<li class="py-2">%s %s</li>';
                 <input type="hidden" name="source" value="<?= $controller->loadModel()->getID() ?>" />
                 <input type="hidden" name="target" value="<?= $id ?>" />
 
-                <span otto-tag-id="<?= $id ?>"><?= $id ?></span>
+                <span class="otto-id-label" otto-urn="Tag:<?= $id ?>"><?= $id ?></span>
                 <button type="submit" class="btn btn-sm text-danger ms-auto pe-0">
                     <?= $this->icon('delete', 14) ?>
                 </button>
@@ -88,7 +88,7 @@ $list_item = '<li class="py-2">%s %s</li>';
                 <input type="hidden" name="source" value="<?= $controller->loadModel()->getID() ?>" />
                 <input type="hidden" name="target" value="<?= $id ?>" />
 
-                <span class="otto-thesaurus-label" otto-id="<?= $id ?>"><?= $id ?></span>
+                <span class="otto-id-label" otto-urn="Thesaurus:<?= $id ?>" otto-id="<?= $id ?>"><?= $id ?></span>
                 <button type="submit" class="btn btn-sm text-danger ms-auto pe-0">
                     <?= $this->icon('delete', 14) ?>
                 </button>

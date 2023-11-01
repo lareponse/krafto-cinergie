@@ -15,10 +15,10 @@
                         <h3 class="mb-0"><?= $controller->loadModel()->get('label'); ?></h3>
                         <span class="small text-secondary fw-bold d-block mb-4">
                             <?= $this->icon('calendar', 18); ?>
-                            <?= $controller->loadModel()->get('type_label') ?? 'sans type'; ?>, publication le <span class="otto-date"><?= $controller->loadModel()->get('publication'); ?></span>
+                            <span class="otto-id-label" otto-urn="Tag:<?= $controller->loadModel()->get('type_id'); ?>"><?= $controller->loadModel()->get('type_id') ?? 'sans type'; ?></span>, 
+                            publication le <span class="otto-date"><?= $controller->loadModel()->get('publication'); ?></span>
                         </span>
                         <div class="d-flex">
-
                             <a class="btn btn-secondary btn-sm me-2" href="<?= $controller->url('edit') ?>">Modifier</a>
 
                             <?= $this->insert('Secret::_partials/orm/action_dropdown'); ?>

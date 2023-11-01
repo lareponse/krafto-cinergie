@@ -51,13 +51,13 @@ $collection_href = $controller->router()->hyp('movies');
                 $href = $controller->router()->withFreeParams($collection_href, ['type' => $record->get('genre_id')]);
                 ?>
                 
-                <a href="<?=$href?>" otto-tag-id="<?= $record->get('genre_id');?>"><?= $record->get('genre_id');?></a>
+                <a href="<?=$href?>" class="otto-id-label" otto-urn="Tag:<?= $record->get('genre_id');?>"><?= $record->get('genre_id');?></a>
                 
                 <p><b>Metrage :</b> 
                 <?php
                 $href = $controller->router()->withFreeParams($collection_href, ['metrage' => $record->get('metrage_id')]);
                 ?>
-                <a href="<?=$href?>" otto-tag-id="<?= $record->get('metrage_id');?>"><?= $record->get('metrage_id');?></a>
+                <a href="<?=$href?>" class="otto-id-label" otto-urn="Tag:<?= $record->get('metrage_id');?>"><?= $record->get('metrage_id');?></a>
                 
                 <p><b>Durée :</b> <?= $record->get('runtime') ?></p>
                 <?= $record->get('casting') ?>

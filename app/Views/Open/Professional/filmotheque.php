@@ -20,7 +20,7 @@ if (!empty($movies)) {
                                     <a href="<?= $href ?>">
                                         <div class="meta">
                                             <p class="date"><small class="text-secondary"><?= $movie->get('released') ?></small></p>
-                                            <p class="categorie"><small class="text-primary" otto-tag-id="<?= $movie->get('genre_id')?>"><?= $movie->get('genre_id')?></small></p>
+                                            <p class="categorie"><small class="text-primary" class="otto-id-label" otto-urn="Tag:<?= $movie->get('genre_id')?>"><?= $movie->get('genre_id')?></small></p>
                                         </div>
                                         <h5 class="card-title"><?= $movie ?></h5>
                                         <p class="auteur"><?= $movie->get('directors') ?></p>
