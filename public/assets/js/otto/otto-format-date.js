@@ -1,36 +1,33 @@
 class OttoFormatDate {
-    constructor(container) {
-        this.container = container;
-        this.dateText = container.innerText.trim();
-        this.date = new Date(this.dateText);
-        this.format = { dateStyle: "long" };
-    }
 
-    setFormat() {
-        try {
-            if (this.container.getAttribute('otto-format')) {
-                let try_format = decodeURIComponent(this.container.getAttribute('otto-format'))
-                try_format = JSON.parse(try_format);
-                this.format = try_format;
+    static getFormat(container){
+        if (container.getAttribute('otto-format')) {
+            try {
+                let format = decodeURIComponent(container.getAttribute('otto-format'))
+                format = JSON.parse(format)
+                return format
+            } catch (exception) {
+                console.log(exception, this.container)
             }
-        } catch (exception) {
-            console.log(exception);
-            throw new Error('Invalid format');
         }
-    }
-
-    formatDate() {
-        if (isNaN(this.date)) {
-            throw new Error('Invalid date');
-        }
-        this.container.innerText = new Intl.DateTimeFormat('fr-FR', this.format).format(this.date);
+        return { dateStyle: "long" }
     }
 
     static searchAndFormat(selector = '.otto-date'){
+        let dateText, date, dateFormat
+
         document.querySelectorAll(selector).forEach(container => {
-            const formatter = new OttoFormatDate(container);
-            formatter.setFormat();
-            formatter.formatDate();
+            dateText = container.innerText.trim();
+
+            date = new Date(dateText);
+            
+            if (isNaN(date)) {
+                console.error('Invalid dateText', container.innerText)
+            }
+            else{
+                dateFormat = new Intl.DateTimeFormat('fr-FR', OttoFormatDate.getFormat(container))
+                container.innerText = dateFormat.format(date);
+            }
         });
     }
 }
