@@ -21,16 +21,18 @@ class Article extends Krafto
 
     public function view()
     {
-        $relations = $this->get('HexMakina\BlackBox\Database\DatabaseInterface')->relations();
+        if (is_null($this->loadModel())) {
+            $this->router()->hop('dash_professionals');
+        }
 
-        // $article_relations = [];
+        $relations = $this->get('HexMakina\BlackBox\Database\DatabaseInterface')->relations();
 
         foreach($relations->relationsBySource('article') as $urn => $relation){
             if($relation instanceof ManyToMany){
                 $records = $relation->getTargets($this->loadModel()->getID());
                 $this->viewport($urn, $records);
             }
-        }   
+        }
     }
 
     public function imagesDirectory(){
