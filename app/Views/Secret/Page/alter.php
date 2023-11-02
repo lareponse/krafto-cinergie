@@ -1,4 +1,4 @@
-<?php $this->layout('Secret::edit') ?>
+<?php $this->layout('Secret::alter') ?>
 
 <form action="" method="POST">
 

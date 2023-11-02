@@ -1,4 +1,4 @@
-<?php $this->layout('Secret::edit', ['title' => 'brols']) ?>
+<?php $this->layout('Secret::alter', ['title' => 'brols']) ?>
 
 <div class="card border-0 scroll-mt-3" id="SignalétiqueSection">
     <div class="card-header">
