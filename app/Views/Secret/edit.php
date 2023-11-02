@@ -2,11 +2,11 @@
 
 <div class="row">
     <?php 
-    $navbarPath = 'Secret::'.$controller->urn().'/edit/sidebar';
+    $navbarPath = 'Secret::'.$controller->urn().'/alter-side';
     if ($this->engine->exists($navbarPath)){
         ?><div class="col-md-4 col-xxl-3"><?=$this->insert($navbarPath) ?></div><?php
     }
-
+    
     ?>
     <div class="col">
         <form action="<?= $controller->router()->hyp('dash_record_save', ['controller' => $controller->urn()]);?>" method="POST" novalidate>
