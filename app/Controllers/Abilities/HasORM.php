@@ -122,4 +122,9 @@ trait HasORM
         return null;
     }
 
+    public function databaseRelations()
+    {
+        return $this->modelClassName()::database()->relations();
+    }
+
 }
