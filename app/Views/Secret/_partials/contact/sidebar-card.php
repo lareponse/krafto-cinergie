@@ -14,18 +14,32 @@
 
       foreach ($fields as $name => $icon) {
         if (!empty($controller->formModel()->get($name))) {
+          
           $label = $controller->formModel()->get($name);
-          switch ($name) {
-            case 'url':
-              $label = sprintf('<a href="%s">%s</a>', $label, parse_url($label, PHP_URL_HOST));
-              break;
+          $class = '';
 
+          switch ($name) {
+            case 'email':
+              $class = 'otto-email';
+              break;
+              
+            case 'url':
+              $class = 'otto-url';
+              break;
+            case 'tel':
+            case 'gsm':
+            case 'fax':
+              $class = 'otto-phone';
+              break;
             case 'metrage_id':
             case 'genre_id':
               $label = $tags[$label];
               break;
+              
+  
           }
-          printf($list_item, $this->icon($icon, 18, ['class' => 'me-2']), $label);
+
+          printf('<li class="py-2">%s %s</li>', $this->icon($icon, 18, ['class' => 'me-2']), $this->DOM()::span($label, ['class' => $class]));
         }
       } 
       ?>
