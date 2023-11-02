@@ -36,14 +36,10 @@
                 <?= $this->icon('address', 14, ['class' => 'me-3']); ?> Adresse
             </a>
         </li>
+
         <li>
-            <a href="#LégalSection" class="d-flex align-items-center py-3">
-                <?= $this->icon('address', 14, ['class' => 'me-3']); ?> Légal
-            </a>
-        </li>
-        <li>
-            <a href="#IntroSection" class="d-flex align-items-center py-3">
-                <?= $this->icon('text', 14, ['class' => 'me-3']); ?> Intro
+            <a href="#ContentSection" class="d-flex align-items-center py-3">
+                <?= $this->icon('text', 14, ['class' => 'me-3']); ?> Contenu
             </a>
         </li>
 
@@ -56,6 +52,12 @@
         <li>
             <a href="#PublicationSection" class="d-flex align-items-center py-3">
              <?= $this->icon('text', 14, ['class' => 'me-3']); ?> Publication
+            </a>
+        </li>
+
+        <li>
+            <a href="#LegalSection" class="d-flex align-items-center py-3">
+                <?= $this->icon('address', 14, ['class' => 'me-3']); ?> Légal
             </a>
         </li>
 
