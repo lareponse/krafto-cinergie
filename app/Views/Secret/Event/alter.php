@@ -94,13 +94,18 @@
     </div>
     <div class="card-body">
 
-        <?php $this->insert('Secret::_partials/otto/otto-link', [
-            'cards' => $articles,
-            'className' => 'Article',
-            'parent' => 'event',
-            'child' => 'article',
-            'fields' => ['label']
-        ]) ?>
+        <?php 
+        $linked_urn = 'Article';
+        $this->insert('Secret::_partials/otto/otto-complete/OneToMany', [
+            'parent' => $controller->loadModel(),
+            'relation' => 'event-hasAndBelongsToMany-article',
+            'context' => $linked_urn,
+            'ottoLinkEndPoint' => '/api/id-label/' . $linked_urn . '/term/',
+            'placeholder' => 'Qualifié',
+            'childrenTemplate' => 'Secret::' . $linked_urn . '/_partials/tab-card'
+        ]);
+
+        ?>
     </div>
 </div>
 
@@ -151,3 +156,18 @@
 <?= $this->start('deleteForm'); ?>
 <?= $this->insert('Secret::deleteForm') ?>
 <?= $this->stop() ?>
+
+<?php $this->unshift('scripts') ?>
+    <script type="module">
+        import OneToMany from '/public/assets/js/otto/otto-complete/OneToMany.js';
+
+        document.addEventListener("DOMContentLoaded", () => {
+            console.log(document.querySelectorAll('.otto-OneToMany'))
+
+            document.querySelectorAll('.otto-OneToMany').forEach(container => {
+                console.log(container)
+                new OneToMany(container);
+            })
+        });
+    </script>
+<?php $this->end() ?>
