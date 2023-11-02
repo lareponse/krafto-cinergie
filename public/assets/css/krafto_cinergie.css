@@ -53,5 +53,9 @@ iframe{
     font-size:1.1em;
 }
 
+/*
 .otto-suggestions li a,
-.otto-link-qualified li a{display:none;}
+.otto-OneToManyQualified li a{display:none;}
+*/
+
+.otto-suggestions li a{display:none;}

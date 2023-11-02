@@ -68,7 +68,7 @@ switch($context)
         <?php
             }
 
-        $this->insert('Secret::_partials/otto/otto-link', $otto_config)
+        $this->insert('Secret::_partials/otto/otto-complete/OneToMany', $otto_config)
         ?>
 
     </div>

@@ -10,7 +10,7 @@ foreach(['controller', 'parent', 'ottoLinkEndPoint', 'relation'] as $var)
 $records = $controller->viewport($relation) ?? [];
 ?>
 
-<form class="otto-link" method="POST" action="<?= $controller->router()->hyp('dash_relation_link') ?>">
+<form class="otto-OneToMany" method="POST" action="<?= $controller->router()->hyp('dash_relation_link') ?>">
 
     <input type="hidden" name="relation" value="<?= $relation ?>" />
     <input type="hidden" name="source" value="<?= $parent->getID() ?>" />

@@ -5,8 +5,8 @@
  * It inherits from AbstractRelation and overrides the listen() method to add an input event listener to the search fields.
  */
 
-import AbstractRelation from './AbstractRelation.js';
-import OneToManyQualifiedUI from '../view/OneToManyQualifiedUI.js';
+import AbstractRelation from './model/AbstractRelation.js';
+import OneToManyQualifiedUI from './view/OneToManyQualifiedUI.js';
 
 class OneToManyQualified extends AbstractRelation {
     constructor(container, ui = null) {
@@ -14,8 +14,7 @@ class OneToManyQualified extends AbstractRelation {
     }
 
     listen() {
-
-        // console.log(this.ui.qualifiedSearch, this.ui.qualifierSearch)
+        console.log(this.ui)
         this.ui.qualifiedSearch.addEventListener("input", function (e) {
             this.onSearch(e, 'qualified')
         }.bind(this));

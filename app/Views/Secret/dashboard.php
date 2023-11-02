@@ -28,7 +28,6 @@
       import OttoIdLabel from '/public/assets/js/otto/otto-id-label.js';
       import OttoLink from '/public/assets/js/otto/otto-link.js';
       import OttoFormatDate from '/public/assets/js/otto/otto-format-date.js';
-      import OttoThesaurusLabel from '/public/assets/js/otto/otto-thesaurus-label.js';
 
       document.addEventListener("DOMContentLoaded", () => {
         

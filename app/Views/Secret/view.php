@@ -83,11 +83,11 @@ try {
             
             if ($qualifiedRelation) {
                 ['relation' => $relationName, 'context' => $context] = $relation;
-                $ottoTemplate = 'Secret::_partials/otto/otto-link-qualified';
+                $ottoTemplate = 'Secret::_partials/otto/otto-complete/OneToManyQualified';
             } else {
                 $relationName = $relation;
                 $context = $linked_urn;
-                $ottoTemplate = 'Secret::_partials/otto/otto-link';
+                $ottoTemplate = 'Secret::_partials/otto/otto-complete/OneToMany';
             }
 
             $records = $controller->viewport($relationName) ?? [];
@@ -132,14 +132,15 @@ try {
     </script>
 
     <script type="module">
-        import {OneToMany, OneToManyQualified} from '/public/assets/js/otto/otto-complete/otto-complete.js';
+        import OneToMany from '/public/assets/js/otto/otto-complete/OneToMany.js';
+        import OneToManyQualified from '/public/assets/js/otto/otto-complete/OneToManyQualified.js';
 
         document.addEventListener("DOMContentLoaded", () => {
-            document.querySelectorAll('.otto-link').forEach(container => {
+            document.querySelectorAll('.otto-OneToMany').forEach(container => {
                 new OneToMany(container);
             })
 
-            document.querySelectorAll('.otto-link-with-qualifier').forEach(container => {
+            document.querySelectorAll('.otto-OneToManyQualified').forEach(container => {
                 new OneToManyQualified(container);
             })
         });

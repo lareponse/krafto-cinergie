@@ -64,7 +64,7 @@ $list_item = '<li class="py-2">%s %s</li>';
             </form>
         <?php
         }
-        $this->insert('Secret::_partials/otto/otto-link', [
+        $this->insert('Secret::_partials/otto/otto-complete/OneToMany', [
             'parent' => $controller->loadModel(),
             'relation' => 'movie-hasAndBelongsToMany-tag',
             'placeholder' => 'Thème',
@@ -99,7 +99,7 @@ $list_item = '<li class="py-2">%s %s</li>';
         </ul>
        
         <?php
-        $this->insert('Secret::_partials/otto/otto-link', [
+        $this->insert('Secret::_partials/otto/otto-complete/OneToMany', [
             'parent' => $controller->loadModel(),
             'relation' => 'movie-hasAndBelongsToMany-thesaurus',
             'context' => 'Thesaurus',

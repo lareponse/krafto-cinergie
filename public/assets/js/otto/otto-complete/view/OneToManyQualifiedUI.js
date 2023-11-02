@@ -14,13 +14,13 @@ class OneToManyQualifiedUI extends AbstractUI
     constructor(container) {
         super(container)
 
-        this.qualified = this.container.querySelector(".otto-link-qualified .otto-result");
-        this.qualifiedSearch = this.container.querySelector(".otto-link-qualified .otto-search");
-        this.qualifiedSuggestions = this.container.querySelector(".otto-link-qualified .otto-suggestions");
+        this.qualified = this.container.querySelector(".otto-OneToManyQualified-qualified .otto-result");
+        this.qualifiedSearch = this.container.querySelector(".otto-OneToManyQualified-qualified .otto-search");
+        this.qualifiedSuggestions = this.container.querySelector(".otto-OneToManyQualified-qualified .otto-suggestions");
 
-        this.qualifier = this.container.querySelector(".otto-link-qualifier .otto-result");
-        this.qualifierSearch = this.container.querySelector(".otto-link-qualifier .otto-search");
-        this.qualifierSuggestions = this.container.querySelector(".otto-link-qualifier .otto-suggestions");
+        this.qualifier = this.container.querySelector(".otto-OneToManyQualified-qualifier .otto-result");
+        this.qualifierSearch = this.container.querySelector(".otto-OneToManyQualified-qualifier .otto-search");
+        this.qualifierSuggestions = this.container.querySelector(".otto-OneToManyQualified-qualifier .otto-suggestions");
     }
 
     listen(){
@@ -74,7 +74,7 @@ class OneToManyQualifiedUI extends AbstractUI
                 return;
             }
 
-            newElement = this.qualifiedListItem(clickedElement)
+            let newElement = this.qualifiedListItem(clickedElement)
 
             this.list.appendChild(newElement)
             this.list.classList.remove('d-none')

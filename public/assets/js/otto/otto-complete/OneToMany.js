@@ -6,8 +6,8 @@
  * 
  */
 
-import AbstractRelation from './AbstractRelation.js';
-import OneToManyUI from '../view/OneToManyUI.js';
+import AbstractRelation from './model/AbstractRelation.js';
+import OneToManyUI from './view/OneToManyUI.js';
 
 class OneToMany extends AbstractRelation
 {
