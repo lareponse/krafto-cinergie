@@ -124,7 +124,6 @@
 
             <div class="col-lg">
                 <select class="form-select" name="genre_id" id="genre_id">
-                    <?php $this->insert('Secret::Movie/edit/options-genre', ['selected' => $controller->formModel()->get('genre_id')]) ?>
                 </select>
                 <div class="invalid-feedback">Please add your genre</div>
             </div>
@@ -137,7 +136,6 @@
 
             <div class="col-lg">
                 <select class="form-select" name="metrage_id" id="metrage_id">
-                    <?php $this->insert('Secret::Movie/edit/options-metrage', ['selected' => $controller->formModel()->get('metrage_id')]) ?>
                 </select>
                 <div class="invalid-feedback">Please add your metrage</div>
             </div>
