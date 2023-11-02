@@ -91,6 +91,11 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
             case 'Organisation':
                 $category = 'Organisations';
                 break;
+            case 'Event':
+            case 'Job':
+            case 'Contest':
+                $category = 'Evénements';
+                break;
         }
         if (!is_null($category))
             $bc[] = $category;
@@ -102,15 +107,15 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
                 $action_label = null;
                 break;
             case 'view':
-                $action_label = 'consulter';
+                $action_label = 'Consulter';
                 break;
             case 'edit':
             case 'alter':
                 if($this->loadModel()){
-                    $action_label = 'Modification';
+                    $action_label = 'Altérer';
                 }
                 else{
-                    $action_label = 'Création';
+                    $action_label = 'Créer';
                 }
                 break;
         }
