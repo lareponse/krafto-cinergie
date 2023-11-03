@@ -27,6 +27,8 @@ array_push(
 
 array_push(
     $routes,
+    ['GET|POST', 'delete/[*:authority]/[i:id]', 'Delete::delete', 'delete'],
+
     ['GET', 'image/details/[a:externalController]/slug/[*:slug]/file/[*:filename]', 'Image::details', 'image_details'],
     ['POST', 'image/delete/[a:externalController]/slug/[*:slug]/file/[*:filename]', 'Image::delete', 'image_delete'],
 
@@ -47,9 +49,11 @@ array_push(
     ['GET',  '[a:controller]/modifier/[*:slug]', '::editBySlug', 'record_edit_by_slug'],
     ['GET',  '[a:controller]/[*:params]?', '::home', 'records'],
 
+
     ['POST', '[a:controller]/[i:id]/toggle/[a:field]', '::toggle', 'record_toggle'],
     ['POST', '[a:controller]/supprimer', '::delete', 'record_delete'],
     ['POST', '[a:controller]/enregistrer', '::save', 'record_save'],
+
 
 
     ['GET',  '[a:controller]/[i:id]/images/setProfile/[*:path]', '::setProfilePicture', 'record_set_profile_picture'],
