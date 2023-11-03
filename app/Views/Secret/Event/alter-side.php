@@ -22,10 +22,14 @@
         <li>
             <a href="#publicationSection" class="d-flex align-items-center py-3"><?= $this->icon('info', 14, ['class' => 'me-2']); ?> Publication</a>
         </li>
-
+        <?php if ($controller->loadModel()){
+        ?>
         <li>
-            <a href="#deleteSection" class="d-flex align-items-center py-3"><?= $this->icon('delete', 14, ['class' => 'me-2']); ?> Supprimer</a>
+            <a href="<?= $controller->router()->hyp('dash_delete', ['authority' => $controller->loadModel()->authority(), 'id' => $controller->loadModel()->id()])?>" class="d-flex align-items-center py-3"><?= $this->icon('delete', 14, ['class' => 'me-2']); ?> Supprimer</a>
         </li>
+        <?php
+        }
+        ?>
     </ul>
     <div class="p-2">
         
@@ -33,38 +37,5 @@
 
     <div class="card-footer text-center">
         <a href="<?= $controller->loadModel() ? $controller->url('view') : $controller->url('list') ?>" class="btn btn-secondary">Retour</a>
-    </div>
-</div>
-<div class="card border-0 sticky-md-top top-10px">
-    <div class="card-body">
-    <h3 class="h6 small text-secondary text-uppercase mb-3">Articles</h3>
-        <ul class="list-unstyled">
-            <?php
-            foreach ($articles as $article) {
-            ?>
-                <form method="POST" class="d-flex mb-2 align-items-center" action="<?= $controller->router()->hyp('dash_relation_unlink') ?>">
-                    <input type="hidden" name="relation" value="event-hasAndBelongsToMany-article" />
-                    <input type="hidden" name="source" value="<?= $controller->loadModel()->getID() ?>" />
-                    <input type="hidden" name="target" value="<?= $article->getID() ?>" />
-
-                    <span><?= $article ?></span>
-                    <button type="submit" class="btn btn-sm text-danger ms-auto pe-0">
-                        <?= $this->icon('delete', 14) ?>
-                    </button>
-                </form>
-            <?php
-            }
-            ?>
-        </ul>
-
-        <?php
-        $this->insert('Secret::_partials/otto/otto-complete/OneToMany', [
-            'parent' => $controller->loadModel(),
-            'relation' => 'event-hasAndBelongsToMany-article',
-            'context' => 'Article',
-            'placeholder' => 'Mot clé',
-            'ottoLinkEndPoint' => '/api/id-label/Article/term/'
-        ])
-        ?>
     </div>
 </div>

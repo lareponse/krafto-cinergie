@@ -88,26 +88,6 @@
 
 <?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'content', 'title' => 'Contenu', 'id' => 'contentSection']) ?>
 
-<div class="card border-0 scroll-mt-3" id="publicationSection">
-    <div class="card-header">
-        <h2 class="h3 mb-0">Articles</h2>
-    </div>
-    <div class="card-body">
-
-        <?php 
-        $linked_urn = 'Article';
-        $this->insert('Secret::_partials/otto/otto-complete/OneToMany', [
-            'parent' => $controller->loadModel(),
-            'relation' => 'event-hasAndBelongsToMany-article',
-            'context' => $linked_urn,
-            'ottoLinkEndPoint' => '/api/id-label/' . $linked_urn . '/term/',
-            'placeholder' => 'Qualifié',
-            'childrenTemplate' => 'Secret::' . $linked_urn . '/_partials/tab-card'
-        ]);
-
-        ?>
-    </div>
-</div>
 
 <div class="card border-0 scroll-mt-3" id="publicationSection">
     <div class="card-header">
