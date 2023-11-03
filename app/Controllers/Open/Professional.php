@@ -41,7 +41,7 @@ class Professional extends Kortex
 
     public function professional()
     {
-        $movieIds = Movie::idsByProfessionalIds([$this->record()->getID()]);
+        $movieIds = Movie::idsByProfessionalIds([$this->record()->id()]);
         if(!empty($movieIds)){
             $query = Movie::queryListing();
             $query->whereNumericIn('id', $movieIds, $query->table());

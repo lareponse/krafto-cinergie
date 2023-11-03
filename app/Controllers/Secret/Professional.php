@@ -19,7 +19,7 @@ class Professional extends Krafto
     public function home()
     {
         if (!$this->router()->params('FiltersOnFirstChar')) {
-            $this->router()->hop($this->urlFor($this->urn(), 'list', null, ['FiltersOnFirstChar' => 'A']));
+            $this->router()->hop($this->urlFor($this->nid(), 'list', null, ['FiltersOnFirstChar' => 'A']));
         }
         
         parent::home();
@@ -27,7 +27,7 @@ class Professional extends Krafto
 
     private function praxisIds(){
         $relation = $this->databaseRelations()->getRelation('professional-hasAndBelongsToMany-tag');
-        return $relation->getIds($this->loadModel()->getID());
+        return $relation->getIds($this->loadModel()->id());
     }
 
     public function view()
@@ -39,7 +39,7 @@ class Professional extends Krafto
         $relations = $this->get('HexMakina\BlackBox\Database\DatabaseInterface')->relations();
         foreach($relations->relationsBySource('professional') as $urn => $relation){
             if($relation instanceof ManyToMany){
-                $records = $relation->getTargets($this->loadModel()->getID());
+                $records = $relation->getTargets($this->loadModel()->id());
                 $this->viewport($urn, $records);
             }
         }

@@ -3,7 +3,7 @@
 $otto_config = [
     'parent' => $controller->loadModel(),
     'context' => $context,
-    'ottoLinkEndPoint' => '/api/tag/'.$context.'/term'
+    'ottoLinkEndPoint' => '/api/tag/'.$context.'/term/'
 ];
 
 switch($context)
@@ -57,7 +57,7 @@ switch($context)
         ?>
                 <form method="POST" class="d-flex mb-2 align-items-center" action="<?= $controller->router()->hyp('dash_relation_unlink') ?>">
                     <input type="hidden" name="relation" value="<?= $otto_config['relation'] ?>" />
-                    <input type="hidden" name="source" value="<?= $controller->loadModel()->getID() ?>" />
+                    <input type="hidden" name="source" value="<?= $controller->loadModel()->id() ?>" />
                     <input type="hidden" name="target" value="<?= $id ?>" />
 
                     <span class="otto-id-label" otto-urn="Tag:<?= $id ?>"><?= $id ?></span>

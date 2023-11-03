@@ -159,14 +159,14 @@ class Movie extends TightModel
                 case Merchandise::class:
                     $Query->join(['movie_merchandise', 'merch'], [
                         ['movie', 'id', 'merch', 'movie_id'],
-                        ['merch', 'merchandise_id', $model->getID()]
+                        ['merch', 'merchandise_id', $model->id()]
                     ]);
                     break;
     
                 case Organisation::class:
                     $Query->join(['movie_organisation', 'actedAs'], [
                         ['movie', 'id', 'actedAs', 'movie_id'],
-                        ['actedAs', 'organisation_id', $model->getID()]
+                        ['actedAs', 'organisation_id', $model->id()]
                     ]);
                     $Query->selectAlso(['GROUP_CONCAT(actedAs.praxis_id) as actedAs']);
 
@@ -175,7 +175,7 @@ class Movie extends TightModel
                 case Professional::class:
                     $Query->join(['movie_professional', 'workedAs'], [
                         ['movie', 'id', 'workedAs', 'movie_id'],
-                        ['workedAs', 'professional_id', $model->getID()]
+                        ['workedAs', 'professional_id', $model->id()]
                     ]);
                     $Query->selectAlso(['GROUP_CONCAT(workedAs.praxis_id) as wordedAs']);
 
@@ -184,7 +184,7 @@ class Movie extends TightModel
                 case Article::class:
                     $Query->join(['article_movie', 'wroteAbout'], [
                         ['movie', 'id', 'wroteAbout', 'movie_id'],
-                        ['wroteAbout', 'article_id',  $model->getID()]
+                        ['wroteAbout', 'article_id',  $model->id()]
                     ]);
                     break;
             }

@@ -26,7 +26,7 @@ class Thesaurus extends \HexMakina\kadro\Controllers\Kadro
     {
         $ids = json_decode($this->router()->params('ids'));
         $res = Model::filter(['ids' => $ids]);
-        $res = array_map(function($tag){return ['id' => $tag->getID(), 'label' => $tag->__toString()];}, array_values($res));
+        $res = array_map(function($tag){return ['id' => $tag->id(), 'label' => $tag->__toString()];}, array_values($res));
         
         header('Content-Type: application/json');
         echo(json_encode($res));

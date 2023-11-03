@@ -4,7 +4,7 @@ namespace App\Controllers\Abilities;
 
 trait FiltersOnYearAndMonth
 {
-    abstract public function urn();
+    abstract public function nid();
     abstract public function router();
     abstract public function urlFor(string $class, string $action, $model=null, $extras = []);
 
@@ -15,7 +15,7 @@ trait FiltersOnYearAndMonth
     {
         // requires at least a year
         if (!$this->router()->params('year')) {
-            $this->router()->hop($this->urlFor($this->urn(), 'list', null, ['year' => date('Y'), 'month' => date('m')]));
+            $this->router()->hop($this->urlFor($this->nid(), 'list', null, ['year' => date('Y'), 'month' => date('m')]));
         }
         
         $filters = $this->router()->params();

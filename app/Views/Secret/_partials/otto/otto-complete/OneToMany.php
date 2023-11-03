@@ -13,7 +13,7 @@ $records = $controller->viewport($relation) ?? [];
 <form class="otto-OneToMany" method="POST" action="<?= $controller->router()->hyp('dash_relation_link') ?>">
 
     <input type="hidden" name="relation" value="<?= $relation ?>" />
-    <input type="hidden" name="source" value="<?= $parent->getID() ?>" />
+    <input type="hidden" name="source" value="<?= $parent->id() ?>" />
     <!-- hidden children inputs are spawned by js -->
 
     <div class="w-100">

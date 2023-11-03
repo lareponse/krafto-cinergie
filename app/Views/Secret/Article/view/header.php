@@ -57,8 +57,8 @@
                                 $class .= $controller->loadModel()->get($button['field']) ? 'text-success' : 'text-warning';
                                 $icon = $button['icon'];
                                 $action = $controller->router()->hyp('dash_record_toggle', [
-                                    'controller' => 'Article',
-                                    'id' => $controller->loadModel()->getID(),
+                                    'nid' => 'Article',
+                                    'id' => $controller->loadModel()->id(),
                                     'field' => $button['field'],
                                 ]);
                                 printf('<form action="%s" method="POST"><button type="submit" class="btn %s" title="%s">%s</button></form>', $action, $class, $title, $this->icon($icon, 24));

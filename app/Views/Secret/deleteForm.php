@@ -1,10 +1,17 @@
 <?php 
-$model = $model ?? $controller->formModel() ?? $controller->formModel();
+$model = $model ?? $controller->loadModel() ?? $controller->formModel();
 $route = $route ?? 'dash_'.$model->model_type().'_delete';
+
+if(empty($model->id())){
+    throw new \Exception('Cannot delete a model without an ID');
+}
+
 ?>
 
 <form method="POST" action="<?= $controller->router()->hyp($route)?>">
-<input type="hidden" name="id" value="<?= $model->getID();?>" />
+<input type="hidden" name="urn" value="<?= $model->nid();?>" />
+<input type="hidden" name="id" value="<?= $model->id();?>" />
+
 
 <div class="card border-0 scroll-mt-3" id="deleteSection">
     <div class="card-header">

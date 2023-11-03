@@ -29,7 +29,7 @@ class Organisation extends Kortex
     public function organisation()
     {
 
-        $movieIds = Movie::idsByOrganisationIds([$this->record()->getID()]);
+        $movieIds = Movie::idsByOrganisationIds([$this->record()->id()]);
         if(!empty($movieIds)){
             $query = Movie::queryListing();
             $query->whereNumericIn('id', $movieIds, $query->table());

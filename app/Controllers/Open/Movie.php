@@ -55,18 +55,18 @@ class Movie extends Kortex
         
         $articleIds = [];
 
-        $res = self::database()->inspect('article_movie')->select(['article_id'])->whereEQ('movie_id', $this->record()->getID())->retCol();
+        $res = self::database()->inspect('article_movie')->select(['article_id'])->whereEQ('movie_id', $this->record()->id())->retCol();
         $articleIds = array_merge($articleIds, $res);
 
         if(!empty($professionals)){
-            $ids = array_map(function($item) { return $item->getID(); }, $professionals);
+            $ids = array_map(function($item) { return $item->id(); }, $professionals);
             $res = self::database()->inspect('article_professional')->select(['articleIds' => ['DISTINCT(article_id)']])->whereNumericIn('professional_id', $ids)->limit(7);
             $res = $res->retCol();
             $articleIds = array_merge($articleIds, $res);
         }
 
         if(!empty($organisations)) {
-            $ids = array_map(function ($item) { return $item->getID(); }, $organisations);
+            $ids = array_map(function ($item) { return $item->id(); }, $organisations);
             $res = self::database()->inspect('article_organisation')->select(['articleIds' => ['DISTINCT(article_id)']])->whereNumericIn('organisation_id', $ids)->limit(7)->retCol();
 
             $articleIds = array_merge($articleIds, $res);

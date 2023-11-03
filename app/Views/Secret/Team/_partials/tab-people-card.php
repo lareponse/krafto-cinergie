@@ -33,9 +33,9 @@
 
 
     <div class="card-footer d-flex align-items-center justify-content-between">
-    <a href="<?= $controller->router()->hyp('dash_'.$person->model_type().'_toggle', ['id' => $person->getID()])?>" class="btn btn-secondary btn-sm">Toggle</a>
+    <a href="<?= $controller->router()->hyp('dash_'.$person->model_type().'_toggle', ['id' => $person->id()])?>" class="btn btn-secondary btn-sm">Toggle</a>
 
 
-        <a href="<?= $controller->router()->hyp('dash_'.$person->model_type(), ['id' => $person->getID()])?>" class="btn btn-primary btn-sm">Modifier</a>
+        <a href="<?= $controller->router()->hyp('dash_'.$person->model_type(), ['id' => $person->id()])?>" class="btn btn-primary btn-sm">Modifier</a>
     </div>
 </div>

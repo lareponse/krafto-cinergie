@@ -20,7 +20,7 @@ class Team extends Krafto
 
         $team = [];
         foreach($people as $person){
-            $team[$person->get('group')][$person->getID()]= $person;
+            $team[$person->get('group')][$person->id()]= $person;
         }
 
         $team['collaborateur'] = Author::filter(['isCollaborator' => 1]);

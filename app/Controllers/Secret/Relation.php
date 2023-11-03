@@ -90,7 +90,7 @@ class Relation extends Krafto
             array_push($ids, $this->router()->submitted('qualifier'));
         }
 
-        $errors = $this->relation->unlink($this->source, [$ids]);
+        $errors = $this->relation->unlink($this->source, $ids);
 
         if(!empty($errors)){
             // TODO message back to the user

@@ -31,7 +31,7 @@
                 <?php
                 foreach ($listing as $model) {
                 ?>
-                    <tr data-action="<?= $controller->urlFor($controller->urn(), 'edit', $model) ?>">
+                    <tr data-action="<?= $controller->urlFor($controller->nid(), 'edit', $model) ?>">
 
                         <td class="fullName">
                             <strong><?= $model->get('label'); ?></strong>

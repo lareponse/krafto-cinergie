@@ -41,7 +41,7 @@ class Professional extends TightModel
         }
         elseif(isset($options['withMoviePraxis'])){
             $movie = $options['withMoviePraxis'];
-            $select->join(['movie_professional', 'workedOn'], [['workedOn','professional_id', 'professional', 'id'],['workedOn', 'movie_id', $movie->getID()]], 'INNER');
+            $select->join(['movie_professional', 'workedOn'], [['workedOn','professional_id', 'professional', 'id'],['workedOn', 'movie_id', $movie->id()]], 'INNER');
             $select->selectAlso(['praxis_ids' => ["GROUP_CONCAT(DISTINCT workedOn.praxis_id SEPARATOR ', ')"]]);
         }
         
@@ -102,7 +102,7 @@ class Professional extends TightModel
         {
             $Query->join(['movie_professional', 'movie_professional'], [
                 ['professional', 'id', 'movie_professional', 'professional_id'],
-                ['movie_professional', 'movie_id', $filters['movie']->getID()]
+                ['movie_professional', 'movie_id', $filters['movie']->id()]
             ]);
             $Query->selectAlso(['worked_as' => 'praxis_id']);
         }
@@ -118,7 +118,7 @@ class Professional extends TightModel
         {
             $Query->join(['organisation_professional', 'organisation_professional'], [
                 ['professional', 'id', 'organisation_professional', 'professional_id'],
-                ['organisation_professional', 'organisation_id', $filters['organisation']->getID()]
+                ['organisation_professional', 'organisation_id', $filters['organisation']->id()]
             ]);
         }
 
@@ -126,7 +126,7 @@ class Professional extends TightModel
         {
             $Query->join(['article_professional', 'article_professional'], [
                 ['professional', 'id', 'article_professional', 'professional_id'],
-                ['article_professional', 'article_id', $filters['article']->getID()]
+                ['article_professional', 'article_id', $filters['article']->id()]
             ]);
         }
         

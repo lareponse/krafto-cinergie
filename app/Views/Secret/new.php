@@ -1,1 +1,1 @@
-<?php $this->layout('Secret::'.$controller->urn().'/edit') ?>
+<?php $this->layout('Secret::'.$controller->nid().'/edit') ?>

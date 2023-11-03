@@ -13,6 +13,6 @@
     <div class="card-footer d-flex align-items-center justify-content-between">
         <span class="fs-5 text-secondary text-truncate"></span>
 
-        <a href="<?= $controller->router()->hyp('dash_partner_edit', ['id' => $partner->getID()])?>" class="btn btn-primary btn-sm">Modifier</a>
+        <a href="<?= $controller->router()->hyp('dash_partner_edit', ['id' => $partner->id()])?>" class="btn btn-primary btn-sm">Modifier</a>
     </div>
 </div>

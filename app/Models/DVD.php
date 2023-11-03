@@ -30,7 +30,7 @@ class DVD extends TightModel
         {
             $Query->join(['movie_dvd', 'movie_dvd'], [
                 ['dvd', 'id', 'movie_dvd', 'dvd_id'],
-                ['movie_dvd', 'movie_id', $filters['movie']->getID()]
+                ['movie_dvd', 'movie_id', $filters['movie']->id()]
             ]);
         }
 

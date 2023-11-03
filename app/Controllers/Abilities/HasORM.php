@@ -8,7 +8,7 @@ trait HasORM
     protected $form_model;
 
     // return the controller's class short name
-    abstract public function urn();
+    abstract public function nid();
     abstract public function router();
 
     public function HasORMTraitor_prepare(): void
@@ -30,7 +30,7 @@ trait HasORM
     
     public function modelClassName(): string
     {
-        return $this->get('\\App\\Models\\' . $this->urn() .'::class');
+        return $this->get('\\App\\Models\\' . $this->nid() .'::class');
     }
 
     public function formModel($model = null)
@@ -94,7 +94,7 @@ trait HasORM
     {
         $model = $this->persist_model($this->formModel());
         if (empty($this->errors())) {
-            $this->router()->hop('dash_record', ['controller' => $this->urn(), 'id' => $model->getID()]);
+            $this->router()->hop('dash_record', ['nid' => $this->nid(), 'id' => $model->id()]);
 
         } else {
             $StateAgent = $this->get('HexMakina\BlackBox\StateAgentInterface');
@@ -108,7 +108,7 @@ trait HasORM
 
     public function persist_model($model)
     {
-        $this->errors = $model->save($this->operator()->getId()); // returns [errors]
+        $this->errors = $model->save($this->operator()->id()); // returns [errors]
 
         if (empty($this->errors())) {
             $this->logger()->notice('CRUDITES_INSTANCE_ALTERED');

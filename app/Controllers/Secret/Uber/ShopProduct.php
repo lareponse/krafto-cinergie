@@ -16,7 +16,7 @@ abstract class ShopProduct extends Krafto
     public function home()
     {
         if (!$this->router()->params('FiltersOnFirstChar')) {
-            $this->router()->hop($this->urlFor($this->urn(), 'list', null, ['FiltersOnFirstChar' => '*']));
+            $this->router()->hop($this->urlFor($this->nid(), 'list', null, ['FiltersOnFirstChar' => '*']));
         }
         parent::home();
     }

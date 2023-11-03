@@ -29,7 +29,7 @@ class Article extends Krafto
 
         foreach($relations->relationsBySource('article') as $urn => $relation){
             if($relation instanceof ManyToMany){
-                $records = $relation->getTargets($this->loadModel()->getID());
+                $records = $relation->getTargets($this->loadModel()->id());
                 $this->viewport($urn, $records);
             }
         }

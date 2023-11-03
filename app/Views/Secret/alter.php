@@ -2,20 +2,29 @@
 
 <div class="row">
     <?php 
-    $navbarPath = 'Secret::'.$controller->urn().'/alter-side';
+    $navbarPath = 'Secret::'.$controller->nid().'/alter-side';
     if ($this->engine->exists($navbarPath)){
         ?><div class="col-md-4 col-xxl-3"><?=$this->insert($navbarPath) ?></div><?php
     }
     
     ?>
     <div class="col">
-        <form action="<?= $controller->router()->hyp('dash_record_save', ['controller' => $controller->urn()]);?>" method="POST" novalidate>
-        <input type="hidden" name="id" value="<?= $controller->formModel()->getID();?>" />
+        <form action="<?= $controller->router()->hyp('dash_record_save', ['nid' => $controller->nid()]);?>" method="POST" novalidate>
+        <?php if ($controller->loadModel()){
+            ?>
+            <input type="hidden" name="id" value="<?= $controller->loadModel()->id();?>" />
+            <?php
+        }
+        ?>
+
         <?=$this->section('content')?>
         </form>
         
-        <?=$this->section('deleteForm')?>
-        
+        <?php if ($controller->loadModel()){
+            echo $this->insert('Secret::deleteForm');
+        }
+
+        ?>        
     </div>
 </div>
 

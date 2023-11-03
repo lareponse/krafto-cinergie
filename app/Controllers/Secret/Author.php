@@ -22,7 +22,7 @@ class Author extends Krafto
     public function home()
     {
         if (!$this->router()->params('FiltersOnFirstChar')) {
-            $this->router()->hop($this->urlFor($this->urn(), 'list', null, ['FiltersOnFirstChar' => 'A']));
+            $this->router()->hop($this->urlFor($this->nid(), 'list', null, ['FiltersOnFirstChar' => 'A']));
         }
 
         $listing = $this->modelClassName()::filter($this->router()->params());
@@ -47,7 +47,7 @@ class Author extends Krafto
     public function view()
     {
         if(is_null($this->loadModel())){
-            $this->router()->hop('records', ['controller'=>'Author']);
+            $this->router()->hop('records', ['nid'=>'Author']);
         }
         $this->viewport('articles', Article::filter(['professional' => $this->loadModel()], ['eager' => false]));
         $this->viewport('movies', Movie::filter(['professional' => $this->loadModel()], ['eager' => false]));
@@ -57,7 +57,7 @@ class Author extends Krafto
     public function edit():void
     {
         if(is_null($this->loadModel()))
-            $this->router()->hop('records', ['controller' => 'Author']);
+            $this->router()->hop('records', ['nid' => 'Author']);
 
     }
     

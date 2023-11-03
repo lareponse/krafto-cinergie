@@ -3,7 +3,7 @@ $this->layout('Secret::dashboard');
 
 
 try {
-    $path = 'Secret::' . $controller->urn() . '/view/header';
+    $path = 'Secret::' . $controller->nid() . '/view/header';
     echo $this->insert($path);
 } catch (\Throwable $e) {
     echo '<!-- ' . $e->getMessage() . " ($path) -->";
@@ -31,7 +31,7 @@ try {
     $activeClasses = 'show active';
     foreach ($menu as $linked_urn => $title) {
 
-        if ($linked_urn == $controller->urn()) // no self linking
+        if ($linked_urn == $controller->nid()) // no self linking
             continue;
 
         $relation_config = $relations[$linked_urn] ?? null;
@@ -66,7 +66,7 @@ try {
 
 <div class="tab-content pt-6" id="viewPageContent">
     <div class="tab-pane fade <?= $activeTab === 'Profile' ? $activeClasses : '' ?>" id="Profile" role="tabpanel" aria-labelledby="Profile-tab">
-        <?php $this->insert('Secret::' . $controller->urn() . '/view/tab-profile') ?>
+        <?php $this->insert('Secret::' . $controller->nid() . '/view/tab-profile') ?>
     </div>
 
     <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">

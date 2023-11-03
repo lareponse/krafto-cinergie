@@ -29,7 +29,7 @@ class Movie extends Krafto
     public function home()
     {
         if (!$this->router()->params('FiltersOnFirstChar')) {
-            $this->router()->hop($this->urlFor($this->urn(), 'list', null, ['FiltersOnFirstChar' => 'A']));
+            $this->router()->hop($this->urlFor($this->nid(), 'list', null, ['FiltersOnFirstChar' => 'A']));
         }
 
         parent::home();
@@ -44,18 +44,18 @@ class Movie extends Krafto
         $relations = $this->get('HexMakina\BlackBox\Database\DatabaseInterface')->relations();
 
         $relation = $relations->getRelation('movie-hasAndBelongsToMany-tag');
-        $themes = $relation->getIds($this->loadModel()->getID());
+        $themes = $relation->getIds($this->loadModel()->id());
         $this->viewport('themes', $themes);
 
         $relation = $relations->getRelation('movie-hasAndBelongsToMany-thesaurus');
-        $thesaurus = $relation->getIds($this->loadModel()->getID());
+        $thesaurus = $relation->getIds($this->loadModel()->id());
         $this->viewport('thesaurus', $thesaurus);
 
         $relations = $this->get('HexMakina\BlackBox\Database\DatabaseInterface')->relations();
 
         foreach($relations->relationsBySource('movie') as $urn => $relation){
             if($relation instanceof ManyToMany){
-                $records = $relation->getTargets($this->loadModel()->getID());
+                $records = $relation->getTargets($this->loadModel()->id());
                 $this->viewport($urn, $records);
             }
         }

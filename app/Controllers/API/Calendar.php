@@ -19,8 +19,8 @@ class Calendar extends \HexMakina\kadro\Controllers\Kadro
         $events = [];
         foreach($res as $event){
             $events[] = [
-                'id' => $event->getID(),
-                'url' => $this->router()->hyp('professional', ['id' => $event->getID()]),
+                'id' => $event->id(),
+                'url' => $this->router()->hyp('professional', ['id' => $event->id()]),
                 'title' => $event->event_label(),
                 'start' => $event->get($event->event_field()),
                 'end' => $event->get('ends'),

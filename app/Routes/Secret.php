@@ -35,7 +35,7 @@ array_push(
     ['GET', 'images/deadlinks/[a:externalController]', 'Image::deadlinks', 'images_deadlinks'],
     ['GET', 'images/alternates', 'Image::alternates', 'images_alternates'],
 
-    ['POST',  '[a:controller]/[i:id]/upload', 'Image::dropzoneUpload', 'image_upload'],
+    ['POST',  '[a:nid]/[i:id]/upload', 'Image::dropzoneUpload', 'image_upload'],
 );
 
 
@@ -43,21 +43,21 @@ array_push(
 // GENERIC CRUD ROUTES
 array_push(
     $routes,
-    ['GET',  '[a:controller]/new', '::alter', 'record_new'],
-    ['GET',  '[a:controller]/[i:id]', '::view', 'record'],
-    ['GET',  '[a:controller]/[i:id]/edit', '::alter', 'record_edit'],
-    ['GET',  '[a:controller]/modifier/[*:slug]', '::editBySlug', 'record_edit_by_slug'],
-    ['GET',  '[a:controller]/[*:params]?', '::home', 'records'],
+    ['GET',  '[a:nid]/new', '::alter', 'record_new'],
+    ['GET',  '[a:nid]/[i:id]', '::view', 'record'],
+    ['GET',  '[a:nid]/[i:id]/edit', '::alter', 'record_edit'],
+    ['GET',  '[a:nid]/modifier/[*:slug]', '::editBySlug', 'record_edit_by_slug'],
+    ['GET',  '[a:nid]/[*:params]?', '::home', 'records'],
 
 
-    ['POST', '[a:controller]/[i:id]/toggle/[a:field]', '::toggle', 'record_toggle'],
-    ['POST', '[a:controller]/supprimer', '::delete', 'record_delete'],
-    ['POST', '[a:controller]/enregistrer', '::save', 'record_save'],
+    ['POST', '[a:nid]/[i:id]/toggle/[a:field]', '::toggle', 'record_toggle'],
+    ['POST', '[a:nid]/supprimer', '::delete', 'record_delete'],
+    ['POST', '[a:nid]/enregistrer', '::save', 'record_save'],
 
 
 
-    ['GET',  '[a:controller]/[i:id]/images/setProfile/[*:path]', '::setProfilePicture', 'record_set_profile_picture'],
-    ['GET',  '[a:controller]/[i:id]/images/unsetProfile', '::unsetProfilePicture', 'record_unset_profile_picture']
+    ['GET',  '[a:nid]/[i:id]/images/setProfile/[*:path]', '::setProfilePicture', 'record_set_profile_picture'],
+    ['GET',  '[a:nid]/[i:id]/images/unsetProfile', '::unsetProfilePicture', 'record_unset_profile_picture']
 
 );
 

@@ -22,8 +22,8 @@ $route = $controller->urlFor('Organisation', 'view', $model); ?>
 
         $common_fields = $this->Form()::hidden('return_to', $controller->router()->url().'?tab=Organisation')
         . $this->Form()::hidden('relation', $relation)
-        . $this->Form()::hidden('source', $controller->loadModel()->getID())
-        . $this->Form()::hidden('target', $model->getID());
+        . $this->Form()::hidden('source', $controller->loadModel()->id())
+        . $this->Form()::hidden('target', $model->id());
 
         if(!empty($model->get('praxis_ids'))){
             $button = $this->DOM()::button($this->icon('delete', 14, ['class' => 'me-2']), ['class' => 'btn btn-sm text-danger ms-auto pe-0']);
@@ -45,8 +45,8 @@ $route = $controller->urlFor('Organisation', 'view', $model); ?>
             printf('<form action="%s" method="POST">', $controller->router()->hyp('dash_relation_unlink'));
             echo $this->Form()::hidden('return_to', $controller->router()->url().'?tab=Organisation');
             echo $this->Form()::hidden('relation', $relation);
-            echo $this->Form()::hidden('source', $controller->loadModel()->getID());
-            echo $this->Form()::hidden('target', $model->getID());
+            echo $this->Form()::hidden('source', $controller->loadModel()->id());
+            echo $this->Form()::hidden('target', $model->id());
             echo $this->DOM()::button('Détacher', ['class' => 'btn btn-outline-primary btn-sm']);
             echo '</form>';
         }

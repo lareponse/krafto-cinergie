@@ -27,7 +27,7 @@
                 <div class="controls">
                     <?php 
                     $route_params = [
-                        'externalController' => $controller->urn(), 
+                        'externalController' => $controller->nid(), 
                         'slug' => $controller->loadModel()->slug(), 
                         'filename' => $image
                     ];
@@ -41,12 +41,12 @@
                     
                     if($controller->loadModel()->hasProfilePicture() && $controller->loadModel()->profilePicturePath() === $path){
                         $class = 'text-success';
-                        $href = $controller->router()->hyp('dash_record_unset_profile_picture', ['controller' => $controller->urn(), 'id' => $controller->loadModel()->getID()]);
+                        $href = $controller->router()->hyp('dash_record_unset_profile_picture', ['nid' => $controller->nid(), 'id' => $controller->loadModel()->id()]);
                         $title = 'Retirer comme photo principale';
                     }
                     else{
                         $class ='text-secondary';
-                        $href = $controller->router()->hyp('dash_record_set_profile_picture', ['controller' => $controller->urn(), 'id' => $controller->loadModel()->getID(), 'path' => $path]);
+                        $href = $controller->router()->hyp('dash_record_set_profile_picture', ['nid' => $controller->nid(), 'id' => $controller->loadModel()->id(), 'path' => $path]);
                         $title = 'Définir comme photo principale';
 
                     }
@@ -54,7 +54,7 @@
                     <a href="<?= $href?>" class="control <?= $class ?> p-1"><?= $this->icon('profilePicture', 18, ['title' => $title]);?></a>
                     <?php
                     $route_params = [
-                        'controller' => $controller->urn(), 
+                        'nid' => $controller->nid(), 
                         'slug' => $controller->loadModel()->slug(),
                         'filename' => $image
                     ];

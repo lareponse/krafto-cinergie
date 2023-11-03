@@ -22,7 +22,7 @@ class Event extends Krafto
         if($this->loadModel()){
             $query = Article::queryListing();
             $query->join(['article_event', 'article_event'],  [['article_event', 'article_id', 'article', 'id']], 'LEFT OUTER');
-            $query->whereEQ('event_id', $this->loadModel()->getID(), 'article_event');
+            $query->whereEQ('event_id', $this->loadModel()->id(), 'article_event');
             
             $articles = $query->retObj(Article::class);
         }

@@ -75,7 +75,7 @@ class Job extends Kortex
             $ids = [];
             foreach ($this->categories as $category) {
                 if (in_array($category->get('reference'), $this->router()->params('categories'))) {
-                    $ids[] =  $category->getID();
+                    $ids[] =  $category->id();
                 }
             }
             $query->whereNumericIn('category_id', $ids);

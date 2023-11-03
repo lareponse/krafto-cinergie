@@ -37,7 +37,7 @@ abstract class Kortex extends \HexMakina\kadro\Controllers\Kadro
         $this->viewport('record', $this->record());
 
         if (is_null($this->template)) {
-            $fallback = 'Open::' . $this->urn() . DIRECTORY_SEPARATOR . $this->router()->targetMethod();
+            $fallback = 'Open::' . $this->nid() . DIRECTORY_SEPARATOR . $this->router()->targetMethod();
             $this->template = $fallback;
         }
         
@@ -80,12 +80,12 @@ abstract class Kortex extends \HexMakina\kadro\Controllers\Kadro
 
     public function activeSection(): string
     {
-        return $this->urn();
+        return $this->nid();
     }
 
     public function activeLink(): string
     {
-        return $this->urn();
+        return $this->nid();
     }
 
     public function setTemplate($template): void

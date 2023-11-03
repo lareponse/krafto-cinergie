@@ -50,7 +50,7 @@ class Author extends TightModel
         {
             $Query->join(['article_author', 'article_author'], [
                 ['author', 'id', 'article_author', 'author_id'],
-                ['article_author', 'article_id', $filters['article']->getID()]
+                ['article_author', 'article_id', $filters['article']->id()]
             ]);
         }
         

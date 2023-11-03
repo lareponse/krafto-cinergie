@@ -4,7 +4,7 @@ $qualifierEndpoint = '/api/tag/'.$qualifierContext.'/term/';
 ?>
 <form class="otto-OneToManyQualified" method="POST" action="<?= $controller->router()->hyp('dash_relation_link') ?>">
     <input type="hidden" name="relation" value="<?= $relation ?>" />
-    <input type="hidden" name="source" value="<?= $controller->loadModel()->getID() ?>">
+    <input type="hidden" name="source" value="<?= $controller->loadModel()->id() ?>">
 
     <ul class="otto-list list-group my-3 list-group-flush d-none"></ul>
 

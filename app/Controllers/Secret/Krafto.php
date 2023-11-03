@@ -17,13 +17,13 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
     // by default
     public function activeSection(): string
     {
-        return $this->urn();
+        return $this->nid();
     }
 
     // by default
     public function activeLink(): string
     {
-        return $this->urn();
+        return $this->nid();
     }
 
 
@@ -41,14 +41,14 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
     {
         $res = $this->modelClassName()::exists(['slug' => $this->router()->params('slug')]);
         if(!is_null($res)){
-            $this->router()->hop('dash_record_edit', ['controller' => $this->urn(), 'id' => $res->getID()]);
+            $this->router()->hop('dash_record_edit', ['nid' => $this->nid(), 'id' => $res->id()]);
         }
     }
 
     public function toggle()
     {
         $field = $this->router()->params('field');
-        $res = $this->modelClassName()::toggleBoolean($this->modelClassName()::table(), $field, $this->loadModel()->getID());
+        $res = $this->modelClassName()::toggleBoolean($this->modelClassName()::table(), $field, $this->loadModel()->id());
         $this->router()->hopBack();
     }
 
@@ -57,7 +57,7 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
         parent::conclude();
 
         if(is_null($this->template)) {
-            $fallback = 'Secret::' . $this->urn() . '/' . $this->router()->targetMethod();
+            $fallback = 'Secret::' . $this->nid() . '/' . $this->router()->targetMethod();
             $this->template = $fallback;
         }
 
@@ -77,7 +77,7 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
     {
         $bc = is_array($prefix) ? $prefix : [];
 
-        $category = $this->urn();
+        $category = $this->nid();
         switch ($category) {
             case 'home':
                 $category = null;
@@ -140,7 +140,7 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
 
     public function url(string $action, $extras = []): string
     {
-        return $this->urlFor($this->urn(), $action, $this->loadModel(), $extras);
+        return $this->urlFor($this->nid(), $action, $this->loadModel(), $extras);
 
     }
     
@@ -163,9 +163,9 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
                 break;
         }
         
-        $params = ['controller' => $class];
+        $params = ['nid' => $class];
         if ($model) {
-            $params['id'] = $model->getID();
+            $params['id'] = $model->id();
         }
 
         $route_as_href = $this->router()->hyp($name, $params);

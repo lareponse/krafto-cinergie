@@ -54,7 +54,7 @@ $list_item = '<li class="py-2">%s %s</li>';
         ?>
             <form method="POST" class="d-flex mb-2 align-items-center" action="<?= $controller->router()->hyp('dash_relation_unlink') ?>">
                 <input type="hidden" name="relation" value="movie-hasAndBelongsToMany-tag" />
-                <input type="hidden" name="source" value="<?= $controller->loadModel()->getID() ?>" />
+                <input type="hidden" name="source" value="<?= $controller->loadModel()->id() ?>" />
                 <input type="hidden" name="target" value="<?= $id ?>" />
 
                 <span class="otto-id-label" otto-urn="Tag:<?= $id ?>"><?= $id ?></span>
@@ -85,7 +85,7 @@ $list_item = '<li class="py-2">%s %s</li>';
 
             <form method="POST" class="d-flex mb-2 align-items-center" action="<?= $controller->router()->hyp('dash_relation_unlink') ?>">
                 <input type="hidden" name="relation" value="movie-hasAndBelongsToMany-thesaurus" />
-                <input type="hidden" name="source" value="<?= $controller->loadModel()->getID() ?>" />
+                <input type="hidden" name="source" value="<?= $controller->loadModel()->id() ?>" />
                 <input type="hidden" name="target" value="<?= $id ?>" />
 
                 <span class="otto-id-label" otto-urn="Thesaurus:<?= $id ?>" otto-id="<?= $id ?>"><?= $id ?></span>

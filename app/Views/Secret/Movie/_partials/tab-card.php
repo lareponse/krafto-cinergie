@@ -21,8 +21,8 @@ $route_view = $controller->urlFor('Movie', 'view', $model);
             printf('<form action="%s" method="POST">', $controller->router()->hyp('dash_relation_unlink'));
             echo $this->Form()::hidden('return_to', $controller->router()->url().'?tab=Movie');
             echo $this->Form()::hidden('relation', $relation);
-            echo $this->Form()::hidden('source', $controller->loadModel()->getID());
-            echo $this->Form()::hidden('target', $model->getID());
+            echo $this->Form()::hidden('source', $controller->loadModel()->id());
+            echo $this->Form()::hidden('target', $model->id());
             echo $this->DOM()::button('Détacher', ['class' => 'btn btn-outline-primary btn-sm']);
             echo '</form>';
         ?>

@@ -68,21 +68,21 @@ class Article extends TightModel
         if (isset($filters['professional'])) {
             $Query->join(['article_professional', 'related'], [
                 ['article', 'id', 'related', 'article_id'],
-                ['related', 'professional_id', $filters['professional']->getID()]
+                ['related', 'professional_id', $filters['professional']->id()]
             ]);
         }
 
         if (isset($filters['organisation'])) {
             $Query->join(['article_organisation', 'related'], [
                 ['article', 'id', 'related', 'article_id'],
-                ['related', 'organisation_id', $filters['organisation']->getID()]
+                ['related', 'organisation_id', $filters['organisation']->id()]
             ]);
         }
 
         if (isset($filters['movie'])) {
             $Query->join(['article_movie', 'related'], [
                 ['article', 'id', 'related', 'article_id'],
-                ['related', 'movie_id', $filters['movie']->getID()]
+                ['related', 'movie_id', $filters['movie']->id()]
             ]);
         }
 
@@ -93,14 +93,14 @@ class Article extends TightModel
 
             $Query->join(['movie_dvd', 'related'], [
                 ['article_movie', 'movie_id', 'related', 'movie_id'],
-                ['related', 'dvd_id', $filters['DVD']->getID()]
+                ['related', 'dvd_id', $filters['DVD']->id()]
             ]);
         }
 
         if (isset($filters['author'])) {
             $Query->join(['article_author', 'article_author'], [
                 ['article', 'id', 'article_author', 'article_id'],
-                ['article_author', 'author_id', $filters['author']->getID()],
+                ['article_author', 'author_id', $filters['author']->id()],
             ]);
         }
 

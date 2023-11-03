@@ -25,8 +25,8 @@ $menu = [
         ],
         'Shop' => ['label' => 'Boutique', 'icon' => 'euro',
             'subs' => [ 
-                'DVD' => ['label' => 'DVDs', 'href' => $controller->router()->hyp('dash_records', ['controller' => 'Merchandise']).'?segment=DVD'],
-                'Book' => ['label' => 'Livres', 'href' => $controller->router()->hyp('dash_records', ['controller' => 'Merchandise']).'?segment=Book']
+                'DVD' => ['label' => 'DVDs', 'href' => $controller->router()->hyp('dash_records', ['nid' => 'Merchandise']).'?segment=DVD'],
+                'Book' => ['label' => 'Livres', 'href' => $controller->router()->hyp('dash_records', ['nid' => 'Merchandise']).'?segment=Book']
             ]
         ]
     ],
@@ -36,7 +36,7 @@ $menu = [
         'Page' => ['label' => 'Pages', 'icon' => 'page',
             'subs' => [
                 'Page' => ['label' => 'Toutes les pages'],
-                'authors' => ['label' => 'Nos auteurs', 'href' => $controller->router()->hyp('dash_records', ['controller' => 'Author'])],
+                'authors' => ['label' => 'Nos auteurs', 'href' => $controller->router()->hyp('dash_records', ['nid' => 'Author'])],
                 'partners' => ['label' => 'Nos partenaires', 'href' => $controller->router()->hyp('dash_organisations_by_segment', ['segment' => 'partenaires'])],
                 'Team' => ['label' => 'Notre équipe'],
             ]

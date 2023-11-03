@@ -48,8 +48,8 @@ $route = $controller->urlFor('Professional', 'view', $model); ?>
         printf('<form action="%s" method="POST">', $controller->router()->hyp('dash_relation_unlink'));
         echo $this->Form()::hidden('return_to', $controller->router()->url() . '?tab=Professional');
         echo $this->Form()::hidden('relation', $relation);
-        echo $this->Form()::hidden('source', $controller->loadModel()->getID());
-        echo $this->Form()::hidden('target', $model->getID());
+        echo $this->Form()::hidden('source', $controller->loadModel()->id());
+        echo $this->Form()::hidden('target', $model->id());
         if($relationIsQualified){
 
             echo $this->Form()::hidden('qualifier', $model->praxisIds());

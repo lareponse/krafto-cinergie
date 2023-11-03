@@ -4,7 +4,7 @@
 foreach ($errorsByArticle as $id => $errors) 
 {
     $article = $articleWithErrors[$id];
-    echo '<h4><a href="'.$controller->router()->hyp('dash_record_edit', ['controller'=> 'Article', 'id' => $id]).'">'.$article.'</a> ('.$article->get('publication').')</h4>';
+    echo '<h4><a href="'.$controller->router()->hyp('dash_record_edit', ['nid'=> 'Article', 'id' => $id]).'">'.$article.'</a> ('.$article->get('publication').')</h4>';
     foreach($errors as $url => $errors)
     {
         echo '<p>'.$url.': '.implode('<br>', $errors).'</p>';

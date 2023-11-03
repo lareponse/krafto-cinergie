@@ -40,7 +40,7 @@ class Image extends Krafto
 
     public function details()
     {
-        $controller = $this->router()->params('controller');
+        $controller = $this->router()->params('nid');
         $controller = $this->get('App\\Controllers\\Secret\\' . $controller);
         $slug = $this->router()->params('slug');
         $directory = $this->buildRelativeLocator($controller, $slug);
@@ -104,7 +104,7 @@ class Image extends Krafto
 
     public function dropzoneUpload()
     {
-        $controller = $this->router()->params('controller');
+        $controller = $this->router()->params('nid');
         $controller = $this->get('App\\Controllers\\Secret\\' . $controller);
 
         $uploader = new FileUploader($this->fileSystem(), $this->buildRelativeLocator($controller));
@@ -150,8 +150,8 @@ class Image extends Krafto
             if (!empty($html)) {
                 $res = $urlChecker->verifyImagesInHTML($html);
                 if (!empty($res)) {
-                    $articleWithErrors[$article->getID()] = $article;
-                    $errors[$article->getID()] = $res;
+                    $articleWithErrors[$article->id()] = $article;
+                    $errors[$article->id()] = $res;
                     $countErrors += count($res);
                 }
             }

@@ -31,7 +31,7 @@ class Merchandise extends TightModel
         {
             $Query->join(['movie_merchandise', 'movie_merchandise'], [
                 ['movie_merchandise', 'merchandise_id', 'merchandise', 'id'],
-                ['movie_merchandise', 'movie_id', $filters['movie']->getID()]
+                ['movie_merchandise', 'movie_id', $filters['movie']->id()]
             ]);
         }
 
