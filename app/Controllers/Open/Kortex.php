@@ -3,7 +3,6 @@
 namespace App\Controllers\Open;
 
 use League\Plates\Template\Template;
-use HexMakina\LeMarchand\Configuration;
 use HexMakina\LocalFS\FileSystem;
 
 use App\Models\Page;

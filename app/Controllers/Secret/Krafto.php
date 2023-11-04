@@ -2,9 +2,6 @@
 
 namespace App\Controllers\Secret;
 
-use HexMakina\LeMarchand\Configuration;
-use League\Plates\Template\Template;
-
 abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
 {
     protected $template = null;
