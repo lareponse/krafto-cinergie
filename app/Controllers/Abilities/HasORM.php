@@ -10,81 +10,34 @@ trait HasORM
     // return the controller's class short name
     abstract public function nid();
     abstract public function router();
-
-    public function HasORMTraitor_prepare(): void
-    {
-        // handles POST requests
-        if ($this->router()->submits()) {
-            // quickly fixes booleans/checkboxes
-            $datass = $this->fixMissingBooleans($this->router()->submitted());
-            
-            // imports all data into model
-            $this->formModel()->import($datass);
-
-        } elseif ($this->router()->requests()) {
-            if (!is_null($this->loadModel())) {
-                $this->formModel(clone $this->loadModel());
-            }
-        }
-    }
-    
+    abstract public function logger();
+        
     public function modelClassName(): string
     {
-        return $this->get('\\App\\Models\\' . $this->nid() .'::class');
+        return '\\App\\Models\\' . $this->nid();
     }
 
-    public function formModel($model = null)
+    public function formModel($model = null): ? \HexMakina\BlackBox\ORM\ModelInterface
     {
-        if (!is_null($model)) {
+        // setter call ?
+        if (!is_null($model)) 
             $this->form_model = $model;
-        } 
-        elseif(is_null($this->form_model)){
-            if ($this->router()->requests() && !is_null($this->loadModel())) {
-                $this->formModel(clone $this->loadModel());
-            }
-            else {
-                $reflectionClass = new \ReflectionClass($this->modelClassName());
-                $this->form_model = $reflectionClass->newInstanceWithoutConstructor(); //That's it!
-            }
-
-            if ($this->router()->submits()) {
-                // quickly fixes booleans/checkboxes
-                $datass = $this->fixMissingBooleans($this->router()->submitted());
-                
-                // imports all data into model
-                $this->form_model->import($datass);
-            }
-        }
+        
+        elseif(is_null($this->form_model))
+            $this->form_model = $this->HasORM_autoFormModel();
+        
 
         return $this->form_model;
     }
 
-    public function loadModel()
+    public function loadModel(): ? \HexMakina\BlackBox\ORM\ModelInterface
     {
         if(is_null($this->load_model))
-        {
-            // identify and load a hypothetical record using POST data
-            if($this->router()->submits())
-                $this->load_model = $this->modelClassName()::fatch($this->router()->submitted());
-            // if no POST data, try to load a record using the router's params
-            if(is_null($this->load_model))
-                $this->load_model = $this->modelClassName()::fatch($this->router()->params());
-        }
+            $this->load_model = $this->HasORM_autoLoadModel();
 
         return $this->load_model;
     }
 
-    // this is weirdly out of place. needed but out of place
-    private function fixMissingBooleans($post_data = [])
-    {
-        foreach ($this->modelClassName()::table()->columns() as $col) {
-            if ($col->type()->isBoolean()) {
-                $post_data[$col->name()] = !empty($post_data[$col->name()]);
-            }
-        }
-
-        return $post_data;
-    }
 
     public function alter()
     {
@@ -92,39 +45,67 @@ trait HasORM
 
     public function save()
     {
-        $model = $this->persist_model($this->formModel());
-        if (empty($this->errors())) {
-            $this->router()->hop('dash_record', ['nid' => $this->nid(), 'id' => $model->id()]);
+        $errors = $this->formModel()->save($this->operator()->id()); // returns [errors]
 
-        } else {
-            $StateAgent = $this->get('HexMakina\BlackBox\StateAgentInterface');
+        if (empty($errors)) {
+            $this->logger()->notice('CRUDITES_INSTANCE_ALTERED');
+            $this->router()->hop('dash_record', ['nid' => $this->nid(), 'id' => $this->formModel()->id()]);
+        } 
+        else {
+            $this->errors = $errors;
 
             foreach($this->errors() as $err){
-                $StateAgent->addMessage('warning', $err);
+                $this->logger()->warning($err);
             }
             $this->setTemplate('alter');
         }
     }
 
-    public function persist_model($model)
-    {
-        $this->errors = $model->save($this->operator()->id()); // returns [errors]
-
-        if (empty($this->errors())) {
-            $this->logger()->notice('CRUDITES_INSTANCE_ALTERED');
-            return $model;
-        }
-
-        foreach ($this->errors() as $cruditeError) {
-            $this->logger()->warning($cruditeError->__toString());
-        }
-
-        return null;
-    }
-
     public function databaseRelations()
     {
         return $this->modelClassName()::database()->relations();
+    }
+
+
+    private function HasORM_autoFormModel()
+    {
+        // if GET request, and a model is loaded, clone it
+        if ($this->router()->requests() && !is_null($this->loadModel()))
+            return clone $this->loadModel();
+
+        $reflectionClass = new \ReflectionClass($this->modelClassName());
+        $fresh = $reflectionClass->newInstanceWithoutConstructor(); //That's it!
+
+        if ($this->router()->submits()) {
+            
+            $post_data = $this->router()->submitted();
+
+            // quickly fixes booleans/checkboxes
+            foreach ($this->modelClassName()::table()->columns() as $col) {
+                if ($col->type()->isBoolean()) {
+                    $post_data[$col->name()] = !empty($post_data[$col->name()]);
+                }
+            }
+            
+            // imports all data into model
+            $fresh->import($post_data);
+        }
+
+        return $fresh;
+    }
+
+    private function HasORM_autoLoadModel()
+    {
+        $load = null;
+        // identify and load a hypothetical record using POST data
+        if($this->router()->submits())
+            $load = $this->modelClassName()::fatch($this->router()->submitted());
+
+        // if not POST or no POST data matched, try to load a record using the router's params
+        if(is_null($load))
+            $load = $this->modelClassName()::fatch($this->router()->params());
+
+        return $load;
     }
 
 }
