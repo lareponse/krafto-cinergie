@@ -14,7 +14,6 @@ class OneToManyQualified extends AbstractRelation {
     }
 
     listen() {
-        console.log(this.ui)
         this.ui.qualifiedSearch.addEventListener("input", function (e) {
             this.onSearch(e, 'qualified')
         }.bind(this));
