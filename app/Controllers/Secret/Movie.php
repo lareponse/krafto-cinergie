@@ -3,7 +3,7 @@
 namespace App\Controllers\Secret;
 
 use App\Models\{Article, Professional, Organisation, Thesaurus};
-use \HexMakina\Crudites\Relation\ManyToMany;
+use \HexMakina\Crudites\Relation\OneToMany;
 
 class Movie extends Krafto
 {
@@ -54,7 +54,7 @@ class Movie extends Krafto
         $relations = $this->get('HexMakina\BlackBox\Database\DatabaseInterface')->relations();
 
         foreach($relations->relationsBySource('movie') as $urn => $relation){
-            if($relation instanceof ManyToMany){
+            if($relation instanceof OneToMany){
                 $records = $relation->getTargets($this->loadModel()->id());
                 $this->viewport($urn, $records);
             }

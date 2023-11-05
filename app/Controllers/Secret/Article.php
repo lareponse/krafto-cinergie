@@ -2,9 +2,8 @@
 
 namespace App\Controllers\Secret;
 
-use App\Models\{Author, Professional, Organisation, Movie};
 use HexMakina\kadro\Models\Tag;
-use \HexMakina\Crudites\Relation\ManyToMany;
+use HexMakina\Crudites\Relation\OneToMany;
 
 class Article extends Krafto 
 {
@@ -28,7 +27,7 @@ class Article extends Krafto
         $relations = $this->get('HexMakina\BlackBox\Database\DatabaseInterface')->relations();
 
         foreach($relations->relationsBySource('article') as $urn => $relation){
-            if($relation instanceof ManyToMany){
+            if($relation instanceof OneToMany){
                 $records = $relation->getTargets($this->loadModel()->id());
                 $this->viewport($urn, $records);
             }

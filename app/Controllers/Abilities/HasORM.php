@@ -97,13 +97,14 @@ trait HasORM
     private function HasORM_autoLoadModel()
     {
         $load = null;
+        
         // identify and load a hypothetical record using POST data
         if($this->router()->submits())
-            $load = $this->modelClassName()::fatch($this->router()->submitted());
+            $load = $this->modelClassName()::exists($this->router()->submitted());
 
         // if not POST or no POST data matched, try to load a record using the router's params
         if(is_null($load))
-            $load = $this->modelClassName()::fatch($this->router()->params());
+            $load = $this->modelClassName()::exists($this->router()->params());
 
         return $load;
     }

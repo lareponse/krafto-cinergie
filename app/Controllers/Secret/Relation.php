@@ -83,7 +83,7 @@ class Relation extends Krafto
 
         $ids = [$target];
 
-        if($this->relation instanceof \HexMakina\Crudites\Relation\ManyToManyQualified){
+        if($this->relation instanceof \HexMakina\Crudites\Relation\OneToManyQualified){
             if(!$this->router()->submitted('qualifier')){
                 throw new \Exception('MISSING_QUALIFIER_IDENTIFIER');
             }
