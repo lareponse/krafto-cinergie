@@ -7,8 +7,7 @@
         <textarea class="form-control tinymce" name="<?= $name?>" id="<?= $name?>" rows="<?= $rows ?? 4;?>"><?= $controller->formModel()->get($name); ?></textarea>
         <div class="invalid-feedback">Please tell something about yourself</div>
 
-        <div class="d-flex justify-content-end mt-5">
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
-        </div>
+        <?= $this->submitDashly(); ?>
+
     </div>
 </div>

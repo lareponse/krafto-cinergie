@@ -36,6 +36,4 @@
 </div>
 
 
-<div class="d-flex justify-content-end mt-5">
-    <button type="submit" class="btn btn-primary">Enregistrer</button>
-</div>
+<?= $this->submitDashly(); ?>
