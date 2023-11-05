@@ -1,14 +1,16 @@
 <?php $this->layout('Secret::dashboard') ?>
 
-<div class="row">
+<div class="row mb-7">
     <?php 
-    $navbarPath = 'Secret::'.$controller->nid().'/alter-side';
-    if ($this->engine->exists($navbarPath)){
-        ?><div class="col-md-4 col-xxl-3"><?=$this->insert($navbarPath) ?></div><?php
-    }
-    
+    if(!empty($sidemenu) && !empty($controller))
+        ?><div class="col-md-4 col-xxl-3">
+        <?= $this->insert('Secret::_partials/alter-side', ['sidemenu' => $sidemenu, 'controller' => $controller]);
+        ?></div><?php
+
     ?>
     <div class="col">
+        <?=$this->section('beforeForm')?>
+
         <form action="<?= $controller->router()->hyp('dash_record_save', ['nid' => $controller->nid()]);?>" method="POST" novalidate>
         <?php if ($controller->loadModel()){
             ?>
@@ -18,15 +20,13 @@
         ?>
 
         <?=$this->section('content')?>
-        </form>
-        
-        <?php if ($controller->loadModel()){
-            echo $this->insert('Secret::deleteForm');
-        }
 
-        ?>        
+        </form>
+        <?=$this->section('afterForm')?>
+        
     </div>
 </div>
+
 
 <?php $this->unshift('scripts') ?>
 <script src="/public/assets/js/tinymce/tinymce.min.js"></script>

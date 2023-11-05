@@ -1,4 +1,12 @@
-<?php $this->layout('Secret::alter') ?>
+<?php 
+$sidemenu = [
+    ['#signaletiqueSection', 'info', 'Signalétique'],
+    ['#contentSection', 'text', 'Contenu'],
+    ['#publicationSection', 'info', 'Publication']
+];
+
+$this->layout('Secret::alter', ['sidemenu' => $sidemenu]) 
+?>
 
 <div class="card border-0 scroll-mt-3" id="signaletiqueSection">
     <div class="card-header">
@@ -80,9 +88,8 @@
             </div>
         </div>
 
-        <div class="d-flex justify-content-end mt-5">
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
-        </div>
+        <?= $this->submitDashly(); ?>
+
     </div>
 </div>
 
@@ -133,9 +140,7 @@
 
 </div>
 
-<?= $this->start('deleteForm'); ?>
-<?= $this->insert('Secret::deleteForm') ?>
-<?= $this->stop() ?>
+
 
 <?php $this->unshift('scripts') ?>
     <script type="module">

@@ -57,11 +57,9 @@
                 <div class="invalid-feedback">Please add your email</div>
             </div>
         </div>
-        
 
-        <div class="d-flex justify-content-end mt-5">
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
-        </div>
+        <?= $this->submitDashly(); ?>
+
     </div>
 </div>
 
@@ -112,7 +110,3 @@
     </div>
 
 </div>
-
-<?= $this->start('deleteForm'); ?>
-<?= $this->insert('Secret::deleteForm') ?>
-<?= $this->stop() ?>

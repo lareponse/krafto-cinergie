@@ -1,6 +1,17 @@
-<?php $this->layout('Secret::alter') ?>
+<?php 
+$sidemenu = [
+    ['#signaletiqueSection', 'signaletique', 'Signalétique'],
+    ['#techniqueSection', 'technique', 'Technique'],
+    ['#synopsisSection', 'text', 'Synopsis'],
+    ['#castingSection', 'text', 'Casting'],
+    ['#publicationSection', 'info', 'Publication'],
+    ['#commentSection', 'comment', 'Commentaires']
+];
 
-<div class="card border-0 scroll-mt-3" id="signaletique">
+
+$this->layout('Secret::alter', ['sidemenu' => $sidemenu]) ?>
+
+<div class="card border-0 scroll-mt-3" id="signaletiqueSection">
     <div class="card-header">
         <h2 class="h3 mb-0">Signalétique</h2>
     </div>
@@ -83,9 +94,8 @@
         </div> 
 
 
-        <div class="d-flex justify-content-end mt-5">
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
-        </div>
+        <?= $this->submitDashly(); ?>
+
     </div>
 </div>
 
@@ -147,7 +157,3 @@
 <?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'content', 'title' => 'Synopsis', 'id' => 'synopsisSection']) ?>
 <?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'casting', 'title' => 'Casting', 'id' => 'castingSection']) ?>
 <?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'comment', 'title' => 'Commentaires', 'id' => 'commentSection']) ?>
-
-<?= $this->start('deleteForm');?>
-    <?= $this->insert('Secret::deleteForm')?>
-<?= $this->stop()?>

@@ -61,10 +61,8 @@
             </div>
         </div>
 
+        <?= $this->submitDashly(); ?>
 
-        <div class="d-flex justify-content-end mt-5">
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
-        </div>
     </div>
 </div>
 
@@ -114,16 +112,9 @@
                 <input disabled type="text" class="form-control" id="slug" name="slug" value="<?= $controller->formModel()->get('slug') ?>">
             </div>
         </div>
+        
+        <?= $this->submitDashly(); ?>
 
-
-
-        <div class="d-flex justify-content-end mt-5">
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
-        </div>
     </div>
 
 </div>
-
-<?= $this->start('deleteForm'); ?>
-<?= $this->insert('Secret::deleteForm') ?>
-<?= $this->stop() ?>

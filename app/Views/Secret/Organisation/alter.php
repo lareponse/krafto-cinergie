@@ -1,6 +1,17 @@
-<?php $this->layout('Secret::alter', ['title' => 'brols']) ?>
+<?php 
+$sidemenu = [
+    ['#signaletiqueSection', 'info', 'Signalétique'],
+    ['#ContactSection', 'contact', 'Contact'],
+    ['#AdresseSection', 'address', 'Adresse'],
+    ['#contentSection', 'text', 'Contenu'],
+    ['#FilmographieSection', 'text', 'Filmographie'],
+    ['#publicationSection', 'info', 'Publication'],
+    ['#LegalSection', 'address', 'Légal']
+];
+$this->layout('Secret::alter', ['sidemenu' => $sidemenu]) 
+?>
 
-<div class="card border-0 scroll-mt-3" id="SignalétiqueSection">
+<div class="card border-0 scroll-mt-3" id="signaletiqueSection">
     <div class="card-header">
         <h2 class="h3 mb-0">Signalétique</h2>
     </div>
@@ -38,9 +49,8 @@
 
 
 
-        <div class="d-flex justify-content-end mt-5">
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
-        </div>
+        <?= $this->submitDashly(); ?>
+
     </div>
 </div>
 
@@ -49,12 +59,12 @@
 
 <?= $this->insert('Secret::_partials/address/form-card', ['model' => $controller->formModel()]) ?>
 
-<?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'content', 'title' => 'Contenu', 'id' => 'ContentSection']) ?>
+<?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'content', 'title' => 'Contenu', 'id' => 'contentSection']) ?>
 
 <?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'filmography', 'title' => 'Filmographie', 'id' => 'FilmographieSection']) ?>
 
 
-<div class="card border-0 scroll-mt-3" id="PublicationSection">
+<div class="card border-0 scroll-mt-3" id="publicationSection">
     <div class="card-header">
         <h2 class="h3 mb-0">Publication</h2>
     </div>
@@ -127,10 +137,7 @@
                 <input disabled type="text" class="form-control" id="updated_on" name="updated_on" value="<?= $controller->formModel()->get('updated_on') ?>">
             </div>
         </div>
-
-        <div class="d-flex justify-content-end mt-5">
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
-        </div>
+        <?= $this->submitDashly(); ?>
     </div>
 
 </div>
@@ -185,7 +192,3 @@
         </div>
     </div>
 </div>
-
-<?= $this->start('deleteForm'); ?>
-<?= $this->insert('Secret::deleteForm') ?>
-<?= $this->stop() ?>
