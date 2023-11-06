@@ -22,14 +22,14 @@ $csv_in = explode(PHP_EOL, $csv_in);
 array_shift($csv_in); // remove headers
 $insert = [];
 
-$insert_query = 'INSERT INTO `locus` (`zip`, `locality`, `isSub`, `commune`, `province`) VALUES ';
+$insert_query = 'INSERT INTO `locus` (`zip`, `label`, `isSub`, `commune`, `province`) VALUES ';
 foreach($csv_in as $locus)
 {
   // "Code postal","Localité","Sous-commune","Commune Principale","Province"
-  list($zip, $locality, $isSub, $commune, $province) = explode(',', $locus);
+  list($zip, $label, $isSub, $commune, $province) = explode(',', $locus);
   $isSub = ($isSub == '"Oui"') ? 1 : (($isSub == '"Non"') ? 0 : 'NULL');
   $province = empty($province) ? 'NULL' : $province;
-  $inserts[]= sprintf('(%d, %s, %s, %s, %s)', $zip, $locality, $isSub, $commune, $province);
+  $inserts[]= sprintf('(%d, %s, %s, %s, %s)', $zip, $label, $isSub, $commune, $province);
 }
 
 $insert_query .= PHP_EOL.implode(','.PHP_EOL, $inserts) . ';';

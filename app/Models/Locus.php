@@ -8,10 +8,10 @@ use HexMakina\TightORM\TightModel;
 class Locus extends TightModel
 {
     use Abilities\FiltersOnFirstChar;
-
+    
     public function __toString()
     {
-        return $this->get('commune');
+        return $this->get('label');
     }
     
 
@@ -20,7 +20,7 @@ class Locus extends TightModel
         $Query = parent::query_retrieve($filters, $options);
 
         if(isset($filters['FiltersOnFirstChar'])){
-            self::applyFirstCharFilter($filters['FiltersOnFirstChar'], $Query, 'locality');
+            self::applyFirstCharFilter($filters['FiltersOnFirstChar'], $Query, 'label');
         }
         
         $Query->orderBy(['zip', 'ASC']);

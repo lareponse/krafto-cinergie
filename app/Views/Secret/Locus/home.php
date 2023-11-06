@@ -1,6 +1,6 @@
 <?php $this->layout('Secret::dashboard', ['title' => 'Localités']) ?>
 
-<div class="card border-0 flex-fill w-100" data-list='{"valueNames": ["zip", "locality", "commune", "province", "isSub"], "page": 20}' id="filesTable">
+<div class="card border-0 flex-fill w-100" data-list='{"valueNames": ["zip", "label", "commune", "province", "isSub"], "page": 20}' id="filesTable">
     <div class="card-header border-0">
         <?= isset($filters) ? $this->insert('Secret::_partials/filters/FiltersOnFirstChar', ['count' => count($listing)]) : '' ?>
     </div>
@@ -14,7 +14,7 @@
                         </a>
                     </th>
                     <th>
-                        <a href="javascript: void(0);" class="text-muted list-sort" data-sort="locality">
+                        <a href="javascript: void(0);" class="text-muted list-sort" data-sort="label">
                             Localité
                         </a>
                     </th>
@@ -45,8 +45,8 @@
                     <td class="zip">
                             <strong><?= $model->get('zip'); ?></strong>
                         </td>
-                        <td class="locality">
-                            <strong><?= $model->get('locality'); ?></strong>
+                        <td class="label">
+                            <strong><?= $model->get('label'); ?></strong>
                         </td>
                         <td class="commune">
                             <strong><?= $model->get('commune'); ?></strong>
