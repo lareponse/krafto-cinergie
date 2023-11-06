@@ -1,6 +1,6 @@
 <?php $this->layout('Secret::dashboard', ['title' => 'Qualifiants']) ?>
 
-<div class="card border-0 flex-fill w-100" data-list='{"valueNames": ["label", "reference", "parent", "active"], "page": 20}' id="filesTable">
+<div class="card border-0 flex-fill w-100" data-list='{"valueNames": ["label", "slug", "parent", "active"], "page": 20}' id="filesTable">
     <div class="card-header border-0">
         <?= isset($filters) ? $this->insert('Secret::_partials/filters/FiltersOnFirstChar', ['count' => count($listing)]) : '' ?>
     </div>
@@ -9,12 +9,12 @@
             <thead class="thead-light">
                 <tr>
                     <th>
-                        <a href="javascript: void(0);" class="text-muted list-sort" data-sort="reference">
+                        <a href="javascript: void(0);" class="text-muted list-sort" data-sort="label">
                             Nom
                         </a>
                     </th>
                     <th>
-                        <a href="javascript: void(0);" class="text-muted list-sort" data-sort="reference">
+                        <a href="javascript: void(0);" class="text-muted list-sort" data-sort="slug">
                             Référence
                         </a>
                     </th>
@@ -42,8 +42,8 @@
                         <td class="label">
                             <strong><?= $model; ?></strong>
                         </td>
-                        <td class="reference">
-                            <?= $model->get('reference'); ?>
+                        <td class="slug">
+                            <?= $model->slug(); ?>
                         </td>
                         <td class="parent">
                             <strong><?= $model->get('parent_label'); ?></strong>

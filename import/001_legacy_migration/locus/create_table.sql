@@ -10,7 +10,8 @@ CREATE TABLE `locus` (
   
   `isSub` tinyint DEFAULT NULL COMMENT 'true for child, false for parent, null for special',
 
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  INDEX(`label`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 --

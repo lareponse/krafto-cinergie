@@ -113,5 +113,5 @@ SELECT
   `theme` as `legacy_theme`
 
 FROM `a7_cinergie_beta`.`content_item`
-LEFT OUTER JOIN `tag` ON `tag`.`reference` = `content_item`.`theme`
+LEFT OUTER JOIN `tag` ON `tag`.`slug` = `content_item`.`theme`
 WHERE area = 'annonce' AND category = 'annonce';

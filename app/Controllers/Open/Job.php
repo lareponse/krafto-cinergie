@@ -25,12 +25,12 @@ class Job extends Kortex
 
         $job_payment = [];
         foreach(Tag::filter(['parent' => 'job_payment']) as $tag)
-            $job_payment[$tag->reference()] = $tag;
+            $job_payment[$tag->slug()] = $tag;
         $this->viewport('job_payment', $job_payment);
 
         $job_proposal = [];
         foreach(Tag::filter(['parent' => 'job_proposal']) as $tag)
-            $job_proposal[$tag->reference()] = $tag;
+            $job_proposal[$tag->slug()] = $tag;
 
         $this->viewport('job_proposal', $job_proposal);
 
@@ -74,7 +74,7 @@ class Job extends Kortex
         if ($this->router()->params('categories')) {
             $ids = [];
             foreach ($this->categories as $category) {
-                if (in_array($category->get('reference'), $this->router()->params('categories'))) {
+                if (in_array($category->get('slug'), $this->router()->params('categories'))) {
                     $ids[] =  $category->id();
                 }
             }

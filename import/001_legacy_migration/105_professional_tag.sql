@@ -1,13 +1,13 @@
 -- Insert the parent tag
-INSERT INTO `cinergie`.`tag` (`label`, `reference`) VALUES ('Métiers', 'professional_praxis');
+INSERT INTO `cinergie`.`tag` (`label`, `slug`) VALUES ('Métiers', 'professional_praxis');
 
 -- Get parent tag ID
-SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `reference`='professional_praxis' AND parent_id IS NULL);
+SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `slug`='professional_praxis' AND parent_id IS NULL);
 
 -- Insert tag from categoriep
-INSERT INTO `cinergie`.`tag` (`reference`,`label`, `content`, `parent_id`, `legacy_id`)
+INSERT INTO `cinergie`.`tag` (`slug`,`label`, `content`, `parent_id`, `legacy_id`)
 SELECT
- CONCAT('pro-praxis-', `categoriep`.`id`) as `reference`,
+ CONCAT('pro-praxis-', `categoriep`.`id`) as `slug`,
  `nom` as `label`,
  `description` as `content`,
  @parent_id,

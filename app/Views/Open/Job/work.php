@@ -30,7 +30,7 @@ use \HexMakina\Marker\Marker; ?>
                         <?php $tag = $categories[$record->get('category_id')]; ?>
                         <li class="meta-head">
                             <span><i class="bi bi-bookmarks-fill icon"></i>Catégorie :</span>
-                            <span><a href="<?= $controller->router()->hyp('works')?>?categories%5B%5D=<?=$tag->reference()?>"><?= $tag ?></a></span>
+                            <span><a href="<?= $controller->router()->hyp('works')?>?categories%5B%5D=<?=$tag->slug()?>"><?= $tag ?></a></span>
                         </li>
 
                         <?php 
@@ -39,14 +39,14 @@ use \HexMakina\Marker\Marker; ?>
 
                         <li class="meta-head">
                             <span><i class="bi bi-bookmarks-fill icon"></i>Type :</span>
-                            <span><a href="<?= $controller->router()->hyp('works')?>?types%5B%5D=<?=$tag->reference()?>"><?= $tag ?></a></span>
+                            <span><a href="<?= $controller->router()->hyp('works')?>?types%5B%5D=<?=$tag->slug()?>"><?= $tag ?></a></span>
                         </li>
 
 
                         <?php $tag = $work_payment[$record->isPaid() ? 'work_paid' : 'work_free'];?>
                         <li class="meta-head">
                             <span><i class="bi bi-bookmarks-fill icon"></i>Rémunéré :</span>
-                            <span><a href="<?= $controller->router()->hyp('works')?>?remun=<?=$tag->reference()?>"><?=  $tag ?></a></span>
+                            <span><a href="<?= $controller->router()->hyp('works')?>?remun=<?=$tag->slug()?>"><?=  $tag ?></a></span>
                         </li>
 
                         <li class="meta-head-date "><i class="bi bi-calendar-event icon"></i><span class="otto-date"><?= $record->get('starts') ?></span></li>

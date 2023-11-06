@@ -51,7 +51,7 @@ ALTER TABLE `movie`
 
 TRUNCATE `cinergie`.`movie`;
 
-SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `reference`='movie_footage' AND parent_id IS NULL);
+SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `slug`='movie_footage' AND parent_id IS NULL);
 
 INSERT INTO `cinergie`.`movie` (
   `id`,
@@ -105,7 +105,7 @@ SELECT
     `maj` as `legacy_maj`
 
 FROM `a7_cinergie_beta`.`film`
-LEFT OUTER JOIN `cinergie`.`tag` itm_genre ON itm_genre.`reference` = `film`.`genre`
+LEFT OUTER JOIN `cinergie`.`tag` itm_genre ON itm_genre.`slug` = `film`.`genre`
 LEFT OUTER JOIN `cinergie`.`tag` itm_metrage ON itm_metrage.`content` = `film`.`metrage` AND `itm_metrage`.`parent_id` = @parent_id;
 
 

@@ -1,13 +1,13 @@
 -- Insert the parent tag
-INSERT INTO `cinergie`.`tag` (`label`, `reference`) VALUES ('Activités', 'organisation_praxis');
+INSERT INTO `cinergie`.`tag` (`label`, `slug`) VALUES ('Activités', 'organisation_praxis');
 
 -- Get parent tag ID
-SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `reference`='organisation_praxis' AND parent_id IS NULL);
+SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `slug`='organisation_praxis' AND parent_id IS NULL);
 
 -- Insert tag from categorieo
-INSERT INTO `cinergie`.`tag` (`reference`, `label`, `content`, `parent_id`)
+INSERT INTO `cinergie`.`tag` (`slug`, `label`, `content`, `parent_id`)
 SELECT
-  CONCAT('org_praxis_', `categorieo`.`id`) as `reference`,
+  CONCAT('org_praxis_', `categorieo`.`id`) as `slug`,
 
   TRIM(`nom`) as `label`,
   TRIM(`description`) as `content`,

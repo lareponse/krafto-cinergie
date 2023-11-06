@@ -44,11 +44,11 @@
             <div class="control-group">
                 <?php
                 foreach ($categories as $category) {
-                    $checked = in_array($category->get('reference'), $controller->router()->params('categories') ?? []) ? 'checked="checked"' : '';
+                    $checked = in_array($category->slug(), $controller->router()->params('categories') ?? []) ? 'checked="checked"' : '';
                 ?>
                     <label class="control control-checkbox">
                         <?= $category ?>
-                        <input type="checkbox" <?= $checked ?> id="category_<?= $category->get('reference') ?>" name="categories[]" value="<?= $category->get('reference') ?>">
+                        <input type="checkbox" <?= $checked ?> id="category_<?= $category->slug() ?>" name="categories[]" value="<?= $category->slug() ?>">
                         <div class="control_indicator"></div>
                     </label>
                 <?php

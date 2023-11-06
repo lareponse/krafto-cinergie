@@ -117,7 +117,7 @@ SELECT
   field19 as legacy_field19,
   field20 as legacy_field20
 FROM `a7_cinergie_beta`.`content_item`
-LEFT OUTER JOIN `tag` ON `tag`.`reference` = `content_item`.`subject`
+LEFT OUTER JOIN `tag` ON `tag`.`slug` = `content_item`.`subject`
 WHERE area = 'actualite' AND category = 'actualite'
 ORDER BY `legacy_subject`  DESC;
 

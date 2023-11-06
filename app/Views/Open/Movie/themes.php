@@ -5,7 +5,7 @@ use \HexMakina\Marker\Marker;
 $links = [];
 
 foreach($tags as $tag){
-    if($tag->get('parent_reference') != 'movie_theme')
+    if($tag->get('parent_slug') != 'movie_theme')
         continue;
 
     $href = $controller->router()->hyp('movies') . '?theme=' . $tag->id();

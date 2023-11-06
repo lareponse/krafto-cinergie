@@ -16,17 +16,17 @@ ALTER TABLE `movie_tag`
 INSERT INTO `cinergie`.`movie_tag` (`movie_id`,`tag_id`)
 SELECT `film`.`id` as `movie_id`, `itm_theme`.`id` as `tag_id`
 FROM `a7_cinergie_beta`.`film`
-INNER JOIN `cinergie`.`tag` `itm_theme` ON `itm_theme`.`reference` = `film`.`theme`;
+INNER JOIN `cinergie`.`tag` `itm_theme` ON `itm_theme`.`slug` = `film`.`theme`;
 
 INSERT INTO `cinergie`.`movie_tag` (`movie_id`,`tag_id`)
 SELECT `film`.`id` as `movie_id`, `itm_theme`.`id` as `tag_id`
 FROM `a7_cinergie_beta`.`film`
-INNER JOIN `cinergie`.`tag` `itm_theme` ON `itm_theme`.`reference` = `film`.`theme_bis`;
+INNER JOIN `cinergie`.`tag` `itm_theme` ON `itm_theme`.`slug` = `film`.`theme_bis`;
 
 INSERT INTO `cinergie`.`movie_tag` (`movie_id`,`tag_id`)
 SELECT `film`.`id` as `movie_id`, `itm_theme`.`id` as `tag_id`
 FROM `a7_cinergie_beta`.`film`
-INNER JOIN `cinergie`.`tag` `itm_theme` ON `itm_theme`.`reference` = `film`.`theme_ter`;
+INNER JOIN `cinergie`.`tag` `itm_theme` ON `itm_theme`.`slug` = `film`.`theme_ter`;
 
 
 -- Cleanup double theme

@@ -41,8 +41,8 @@ class Calendar extends \HexMakina\kadro\Controllers\Kadro
         $events = [];
         foreach($res as $event){
             $events[]= [
-                'categorie' => 'evt-'.$event->get('type_reference'),
-                'className' => 'evt-'.$event->get('type_reference'),
+                'categorie' => 'evt-'.$event->get('type_slug'),
+                'className' => 'evt-'.$event->get('type_slug'),
                 'title' => $event->__toString(),
                 'start' => $event->get('starts'),
                 'end' => $event->get('ends'),
