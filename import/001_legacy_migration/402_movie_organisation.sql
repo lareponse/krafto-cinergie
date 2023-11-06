@@ -12,10 +12,8 @@ ALTER TABLE `cinergie`.`movie_organisation`
   ADD KEY `movie_organisation-hasPraxis` (`praxis_id`);
 
 ALTER TABLE `cinergie`.`movie_organisation`
-  ADD CONSTRAINT `movie_organisation-hasMovie` FOREIGN KEY (`movie_id`) REFERENCES `movie` (`id`);
-ALTER TABLE `cinergie`.`movie_organisation`
-  ADD CONSTRAINT `movie_organisation-hasOrganisation` FOREIGN KEY (`organisation_id`) REFERENCES `organisation` (`id`);
-ALTER TABLE `cinergie`.`movie_organisation`
+  ADD CONSTRAINT `movie_organisation-hasOrganisation` FOREIGN KEY (`organisation_id`) REFERENCES `organisation` (`id`),
+  ADD CONSTRAINT `movie_organisation-hasMovie` FOREIGN KEY (`movie_id`) REFERENCES `movie` (`id`),
   ADD CONSTRAINT `movie_organisation-hasPraxis` FOREIGN KEY (`praxis_id`) REFERENCES `tag` (`id`);
 
 
@@ -24,8 +22,10 @@ SELECT
   `link_film_organisation`.`film` as `movie_id`,
   `link_film_organisation`.`organisation` as `organisation_id`,
   `tag`.`id` as `praxis_id`
+  
 FROM `a7_cinergie_beta`.`link_film_organisation`
+
 JOIN `a7_cinergie_beta`.`categorieo` ON `link_film_organisation`.`categorie` = `categorieo`.`id`
-JOIN `cinergie`.`tag` ON `tag`.`slug` = CONCAT('org_praxis_', `categorieo`.`id`)
 JOIN `cinergie`.`movie` ON `movie`.`id` = `link_film_organisation`.`film`
 JOIN `cinergie`.`organisation` ON `organisation`.`id` = `link_film_organisation`.`organisation`
+JOIN `cinergie`.`tag` ON `tag`.`slug` = CONCAT('org_praxis_', `categorieo`.`id`);
