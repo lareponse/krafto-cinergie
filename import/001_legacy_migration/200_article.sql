@@ -1,25 +1,28 @@
 DROP TABLE IF EXISTS `cinergie`.`article`;
 
 CREATE TABLE `cinergie`.`article` (
-  `id` int NOT NULL COMMENT '**NOT** parsed from legacy ID',
 
-  `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'leg:datestamp',
-  `active` tinyint(1) NOT NULL DEFAULT '0',
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '**NOT** parsed from legacy ID',
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'leg:datestamp',
+
   `slug` varchar(222) NOT NULL COMMENT 'leg:urlparm',
+
   `label` varchar(190) NOT NULL COMMENT 'leg:field01',
-  
+  `rank` smallint UNSIGNED DEFAULT NULL,
+
+  `avatar` varchar(255) DEFAULT NULL COMMENT 'leg:field04',
   `content` mediumtext COMMENT 'leg:field06',
+
+  `public` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0: view in backend only',
+  `pick` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'leg:field10, picked for home page',
+  `listable` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1: appears in general listings',
+  `searchable` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1: appears in search results',
 
   `type_id` int DEFAULT NULL COMMENT 'FK tag, parse from legacy_subject',
 
   `abstract` text COMMENT 'leg:field05',
   `publication` date NOT NULL COMMENT 'leg:field02',
   `embedVideo` text COMMENT 'leg:field07',
-  `isArchived` tinyint(1) DEFAULT NULL COMMENT 'leg:field11',
-  `isDiaporama` tinyint(1) DEFAULT NULL COMMENT 'leg:field10',
-  `rank` smallint UNSIGNED DEFAULT NULL,
-
-  `profilePicture` varchar(255) DEFAULT NULL COMMENT 'leg:field04',
 
   `legacy_id` varchar(40) DEFAULT NULL,
   `legacy_title` varchar(190) DEFAULT NULL,
@@ -28,49 +31,48 @@ CREATE TABLE `cinergie`.`article` (
   `legacy_user` varchar(13) DEFAULT NULL,
   `legacy_theme` varchar(17) DEFAULT NULL,
   `legacy_subject` varchar(17) DEFAULT NULL,
+  `legacy_field11` varchar(23) DEFAULT NULL COMMENT 'isArchived',
   `legacy_field13` varchar(23) DEFAULT NULL,
   `legacy_field14` varchar(14) DEFAULT NULL,
   `legacy_field18` varchar(10) DEFAULT NULL,
   `legacy_field19` varchar(14) DEFAULT NULL,
-  `legacy_field20` varchar(4) DEFAULT NULL
+  `legacy_field20` varchar(4) DEFAULT NULL,
+
+  PRIMARY KEY (`id`),
+  INDEX (`label`)
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
--- PRIMARY
-
-ALTER TABLE `cinergie`.`article` ADD PRIMARY KEY (`id`);
-ALTER TABLE `cinergie`.`article` MODIFY `id` int NOT NULL AUTO_INCREMENT;
-
-
 -- INDEX
-
-ALTER TABLE `cinergie`.`article` ADD UNIQUE `article-slug-unique` (`slug`);
+ALTER TABLE `cinergie`.`article` ADD UNIQUE KEY `article-unique-slug` (`slug`) USING BTREE;
 ALTER TABLE `cinergie`.`article` ADD CONSTRAINT `article-hasType` FOREIGN KEY (`type_id`) REFERENCES `tag` (`id`);
-
-CREATE INDEX idx_active ON `article`(`active`);
 
 -- DATA
 
 TRUNCATE `cinergie`.`article`;
 
 INSERT INTO `cinergie`.`article` (
-  `created_on`,
-  `active`,
+  `created`,
+  
   `slug`,
-  `rank`,
 
   `label`,
+  `rank`,
+
+  `avatar`,
   `content`,
+
+  `public`,
+  `pick`,
+  `listable`,
+  `searchable`,
 
   `publication`,
   `abstract`,
   `embedVideo`,
-  `isDiaporama`,
-  `isArchived`,
 
   `type_id`,
-
-  `profilePicture`,
 
   `legacy_id`,
   `legacy_theme`,
@@ -86,39 +88,42 @@ INSERT INTO `cinergie`.`article` (
   `legacy_field20`
 )
 SELECT
-  STR_TO_DATE(datestamp,'%Y-%m-%d %H:%i:%s') as `created_on`,
-  `active` as `active`,
+  STR_TO_DATE(datestamp,'%Y-%m-%d %H:%i:%s') as `created`,
+
   urlparms as `slug`,
-  tri as `rank`,
 
-  TRIM(field01) as `label`,
-  TRIM(field06) as `content`,
+  TRIM(`field01`) as `label`,
+  `tri` as `rank`,
 
-  STR_TO_DATE(field02, '%Y-%m-%d') as `publication`,
-  TRIM(field05) as `abstract`,
-  field07 as `embedVideo`,
-  field10 = '1' as `isDiaporama`,
-  field11 = '1' as `isArchived`,
+  TRIM(`field04`) as `avatar`,
+  TRIM(`field06`) as `content`,
+
+  `active` as `public`,
+  `field10` = '1' as `pick`,
+  `field11` = '1' as `listable`,
+  `field11` = '1' as `searchable`,
+
+  STR_TO_DATE(`field02`, '%Y-%m-%d') as `publication`,
+  TRIM(`field05`) as `abstract`,
+  `field07` as `embedVideo`,
 
   `tag`.`id` as `type_id`,
 
-  field04 as `profilePicture`,
-
-  `content_item`.id as legacy_id,
-  theme as legacy_theme,
-  subject as legacy_subject,
-  user as legacy_user,
-  title as legacy_title,
-  field09 as legacy_author_ids,
-  field03 as legacy_authors,
-  field13 as legacy_field13,
-  field14 as legacy_field14,
-  field18 as legacy_field18,
-  field19 as legacy_field19,
-  field20 as legacy_field20
+  `content_item`.`id` as `legacy_id`,
+  `theme` as `legacy_theme`,
+  subject as `legacy_subject`,
+  `user` as `legacy_user`,
+  `title` as `legacy_title`,
+  `field09` as `legacy_author_ids`,
+  `field03` as `legacy_authors`,
+  `field13` as `legacy_field13`,
+  `field14` as `legacy_field14`,
+  `field18` as `legacy_field18`,
+  `field19` as `legacy_field19`,
+  `field20` as `legacy_field20`
 FROM `a7_cinergie_beta`.`content_item`
 LEFT OUTER JOIN `tag` ON `tag`.`slug` = `content_item`.`subject`
-WHERE area = 'actualite' AND category = 'actualite'
+WHERE area = 'actualite' AND `category` = 'actualite'
 ORDER BY `legacy_subject`  DESC;
 
 
