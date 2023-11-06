@@ -1,7 +1,7 @@
 -- book
 SELECT IF(
-(SELECT count(id) FROM cinergie.`book`) = (SELECT count(id) FROM `a7_cinergie_beta`.content_item WHERE category = 'livre'), 'OK', 'NOK') as book_count_same,
-(SELECT count(id) FROM cinergie.`book`) as count_new,
+(SELECT count(id) FROM cinergie.`merchandise` WHERE isBook = 1) = (SELECT count(id) FROM `a7_cinergie_beta`.content_item WHERE category = 'livre'), 'OK', 'NOK') as book_count_same,
+(SELECT count(id) FROM cinergie.`merchandise` WHERE isBook = 1) as count_new,
 (SELECT count(id) FROM `a7_cinergie_beta`.content_item WHERE category = 'livre') as count_old;
 
 -- author
@@ -130,7 +130,7 @@ IF(
 
   ),
   'OK', 'NOK'
-) as article_professional_count_same,
+) as movie_organisation_count_same,
 (SELECT count(*) FROM cinergie.`movie_organisation`) as count_new,
 (
   SELECT count(*)
@@ -155,7 +155,7 @@ IF(
     JOIN `a7_cinergie_beta`.`categoriep` ON `link_film_personne`.categorie = `categoriep`.id
   ),
   'OK', 'NOK'
-) as article_professional_count_same,
+) as movie_professional_count_same,
 (SELECT count(*) FROM cinergie.`movie_professional`) as count_new,
 (
   SELECT count(*)
