@@ -2,52 +2,54 @@
 DROP TABLE IF EXISTS `author`;
 
 CREATE TABLE `author` (
-  `id` int NOT NULL COMMENT 'parsed and cast from legacy id',
+  `id` int NOT NULL AUTO_INCREMENT COMMENT 'parsed and cast from legacy id',
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'leg:datestamp',
 
-  `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'leg:datestamp',
-  `active` tinyint(1) NOT NULL DEFAULT '0',
-  `slug` varchar(222) DEFAULT NULL COMMENT 'leg:urlparm',
+  `slug` varchar(222) NOT NULL COMMENT 'leg:urlparm',
+
+  `label` varchar(255) NOT NULL COMMENT 'leg:field01',
   `rank` smallint UNSIGNED DEFAULT NULL COMMENT 'leg:tri',
-  
-  `profilePicture` varchar(255) DEFAULT NULL COMMENT 'leg:field04',
-  `url` varchar(255) DEFAULT NULL  COMMENT 'leg:field05',
 
-  `label` varchar(100) DEFAULT NULL COMMENT 'leg:field01',
+  `avatar` varchar(255) DEFAULT NULL COMMENT 'leg:field04',
+  `content` text DEFAULT NULL,
+
+  `public` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0: view in backend only',
+  `pick` tinyint(1) NOT NULL DEFAULT '0' COMMENT '1: picked for home page',
+  `listable` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1: appears in general listings',
+  `searchable` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1: appears in search results',
+
+  `url` varchar(255) DEFAULT NULL  COMMENT 'leg:field05',
 
   `isCollaborator` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'displayed on equipe page',
   `professional_slug` varchar(222) DEFAULT NULL,
   
   `legacy_id` varchar(40) DEFAULT NULL,
-  `legacy_user` varchar(13) DEFAULT NULL
+  `legacy_user` varchar(13) DEFAULT NULL,
+
+  PRIMARY KEY (`id`),
+  INDEX(`label`)
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
--- PRIMARY
-ALTER TABLE `author` ADD PRIMARY KEY (`id`);
-ALTER TABLE `author` MODIFY `id` int NOT NULL AUTO_INCREMENT;
-
-
--- INDEX
-ALTER TABLE `author` ADD UNIQUE `author-slug-unique` (`slug`);
-ALTER TABLE `author` ADD INDEX(`label`);
-
-
-CREATE INDEX idx_active ON `author`(`active`);
+ALTER TABLE `author` ADD UNIQUE KEY `author-unique-slug` (`slug`) USING BTREE;
 
 -- DATA
 TRUNCATE `cinergie`.`author`;
 
 INSERT INTO `cinergie`.`author` (
   `id`,
+  `created`,
 
-  `created_on`,
-  `active`,
   `slug`,
-  `rank`,
-  `profilePicture`,
-  `url`,
-
+  
   `label`,
+  `rank`,
+  
+  `avatar`,
+
+  `public`,
+
+  `url`,
 
   `isCollaborator`,
 
@@ -56,15 +58,19 @@ INSERT INTO `cinergie`.`author` (
 )
 SELECT
   CAST(REGEXP_SUBSTR(`id`, '[0-9]+$', 1) as UNSIGNED) as `id`,
+  STR_TO_DATE(datestamp,'%Y-%m-%d %H:%i:%s') as `created`,
 
-  STR_TO_DATE(datestamp,'%Y-%m-%d %H:%i:%s') as `created_on`,
-  `active` as `active`,
   `urlparms` as `slug`,
-  `tri` as `rank`,
-  `field04` as `profilePicture`,
-  `field05` as `url`,
 
   TRIM(`field01`) as `label`,
+  `tri` as `rank`,
+
+  `field04` as `avatar`,
+
+  `active` as `public`,
+
+  `field05` as `url`,
+
 
   `active` as `isCollaborator`,
 

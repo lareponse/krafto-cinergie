@@ -9,7 +9,7 @@ trait HasProfilePicture
     }
     
     public function profilePictureField():string {
-        return 'profilePicture';
+        return 'avatar';
     }
 
     public function hasProfilePicture(): bool
