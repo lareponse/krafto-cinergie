@@ -28,14 +28,12 @@ CREATE TABLE `contest` (
   `canShowForm` tinyint(1) DEFAULT '1' COMMENT 'leg:field09',
   `legacy_user` varchar(13) DEFAULT NULL,
 
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  INDEX(`label`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 ALTER TABLE `contest` ADD UNIQUE KEY `contest-unique-slug` (`slug`) USING BTREE;
-
--- INDEX
-ALTER TABLE `contest` ADD INDEX(`label`);
 
 
 -- DATA
