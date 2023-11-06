@@ -2,38 +2,39 @@
 DROP TABLE IF EXISTS `contest`;
 
 CREATE TABLE `contest` (
-  `id` int NOT NULL COMMENT 'parsed and cast from legacy id',
+  `id` int NOT NULL AUTO_INCREMENT COMMENT 'parsed and cast from legacy id',
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'leg:datestamp',
 
-  `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'leg:datestamp',
-  `active` tinyint(1) NOT NULL DEFAULT '0',
-  `slug` varchar(222) DEFAULT NULL COMMENT 'leg:urlparm',
+  `slug` varchar(222) NOT NULL COMMENT 'leg:urlparm',
+
+  `label` varchar(255) NOT NULL COMMENT 'leg:field01',
   `rank` smallint UNSIGNED DEFAULT NULL COMMENT 'leg:tri',
 
-  `label` varchar(100) DEFAULT NULL COMMENT 'leg:field01',
-  `content` text COMMENT 'leg:field06',
+  `avatar` varchar(255) DEFAULT NULL COMMENT 'leg:field04',
+  `content` text DEFAULT NULL COMMENT 'leg:field06',
+
+  `public` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0: view in backend only',
+  `pick` tinyint(1) NOT NULL DEFAULT '0' COMMENT '1: picked for home page',
+  `listable` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1: appears in general listings',
+  `searchable` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1: appears in search results',
 
   `starts` date DEFAULT NULL COMMENT 'leg:field02',
   `stops` date DEFAULT NULL COMMENT 'leg:field03',
-
-  `profilePicture` varchar(255) DEFAULT NULL COMMENT 'leg:field04',
 
   `abstract` text COMMENT 'leg:field05',
   `question` varchar(255) DEFAULT NULL COMMENT 'leg:field07',
   `email` varchar(100) DEFAULT NULL COMMENT 'leg:field08',
 
   `canShowForm` tinyint(1) DEFAULT '1' COMMENT 'leg:field09',
-  `legacy_user` varchar(13) DEFAULT NULL
+  `legacy_user` varchar(13) DEFAULT NULL,
+
+  PRIMARY KEY (`id`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
--- PRIMARY
-ALTER TABLE `contest` ADD PRIMARY KEY (`id`);
-ALTER TABLE `contest` MODIFY `id` int NOT NULL AUTO_INCREMENT;
-
+ALTER TABLE `contest` ADD UNIQUE KEY `contest-unique-slug` (`slug`) USING BTREE;
 
 -- INDEX
-ALTER TABLE `contest` ADD UNIQUE `contest-slug-unique` (`slug`);
 ALTER TABLE `contest` ADD INDEX(`label`);
 
 
@@ -42,15 +43,17 @@ TRUNCATE `cinergie`.`contest`;
 
 INSERT INTO `cinergie`.`contest` (
   `id`,
-  `created_on`,
-  `active`,
+  `created`,
+  
   `slug`,
+  
+  `label`,
   `rank`,
 
-  `label`,
+  `avatar`,
   `content`,
 
-  `profilePicture`,
+  `public`,
 
   `abstract`,
   `question`,
@@ -64,16 +67,18 @@ INSERT INTO `cinergie`.`contest` (
 )
 SELECT
   CAST(REGEXP_SUBSTR(`id`, '[0-9]+$', 1) as UNSIGNED) as `id`,
+  IF(`datestamp` IS NULL or TRIM(`datestamp`) = '' or `datestamp` LIKE '0000-00-00 00:00:00', STR_TO_DATE('2022-11-21 01:01:01','%Y-%m-%d %H:%i:%s'), STR_TO_DATE(`datestamp`,'%Y-%m-%d %H:%i:%s')) as `created`,
 
-  IF(`datestamp` IS NULL or TRIM(`datestamp`) = '' or `datestamp` LIKE '0000-00-00 00:00:00', STR_TO_DATE('2022-11-21 01:01:01','%Y-%m-%d %H:%i:%s'), STR_TO_DATE(`datestamp`,'%Y-%m-%d %H:%i:%s')) as `created_on`,
-  `active` as `active`,
   `urlparms` as `slug`,
-  `tri` as `rank`,
 
   TRIM(`field01`) as `label`,
+  `tri` as `rank`,
+
+
+  TRIM(`field04`) as `avatar`,
   TRIM(`field06`) as `content`,
 
-  TRIM(`field04`) as `profilePicture`,
+  `active` as `public`,
 
   TRIM(`field05`) as `abstract`,
   TRIM(`field07`) as `question`,

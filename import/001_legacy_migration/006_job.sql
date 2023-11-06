@@ -2,7 +2,7 @@
 DROP TABLE IF EXISTS `cinergie`.`job`;
 
 CREATE TABLE `job` (
-  `id` int NOT NULL COMMENT 'parsed and cast from legacy id',
+  `id` int NOT NULL AUTO_INCREMENT COMMENT 'parsed and cast from legacy id',
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
   `slug` varchar(222) NOT NULL COMMENT 'leg:urlparm',
@@ -38,18 +38,17 @@ CREATE TABLE `job` (
   `legacy_id` varchar(40) DEFAULT NULL,
   `legacy_title` varchar(190) DEFAULT NULL,
   `legacy_user` varchar(13) DEFAULT NULL,
-  `legacy_theme` varchar(17) DEFAULT NULL COMMENT 'process into category_id'
+  `legacy_theme` varchar(17) DEFAULT NULL COMMENT 'process into category_id',
+
+  PRIMARY KEY (`id`),
+  INDEX(`label`)
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- PRIMARY
-ALTER TABLE `job` ADD PRIMARY KEY (`id`);
-ALTER TABLE `job` MODIFY `id` int NOT NULL AUTO_INCREMENT;
-
 -- INDEX
-ALTER TABLE `job` ADD UNIQUE `job-slug-unique` (`slug`);
+ALTER TABLE `job` ADD UNIQUE KEY `job-unique-slug` (`slug`) USING BTREE;
 
 -- FK
-
 ALTER TABLE `job` ADD CONSTRAINT `job-hasCategoryTag` FOREIGN KEY (`category_id`) REFERENCES `tag` (`id`);
 
 -- DATA

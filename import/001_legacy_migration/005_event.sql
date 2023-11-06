@@ -7,7 +7,7 @@ CREATE TABLE `event` (
 
   `slug` varchar(222) NOT NULL COMMENT 'leg:urlparm',
 
-  `label` varchar(890) NOT NULL COMMENT 'leg:field01',
+  `label` varchar(900) NOT NULL COMMENT 'leg:field01',
   `rank` smallint UNSIGNED DEFAULT NULL COMMENT 'leg:tri',
 
   `avatar` varchar(255) DEFAULT NULL COMMENT 'image filename',
@@ -30,6 +30,7 @@ CREATE TABLE `event` (
   `legacy_title` varchar(190) DEFAULT NULL,
 
   PRIMARY KEY (`id`)
+  -- no index on label, too long
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
