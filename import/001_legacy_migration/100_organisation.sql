@@ -7,15 +7,21 @@
 DROP TABLE IF EXISTS `cinergie`.`organisation`;
 
 CREATE TABLE `cinergie`.`organisation` (
-  `id` int NOT NULL,
-
-  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `active` tinyint(1) NOT NULL DEFAULT '0',
-  `slug` varchar(222) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `rank` smallint UNSIGNED DEFAULT NULL COMMENT 'leg:tri',
+  `id` int NOT NULL AUTO_INCREMENT,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  
+  `slug` varchar(222) NOT NULL,
 
   `label` varchar(255) NOT NULL,
+  `rank` smallint UNSIGNED DEFAULT NULL COMMENT 'leg:tri',
+
+  `avatar` varchar(255) DEFAULT NULL COMMENT 'leg:legacy_photo',
   `content` text DEFAULT NULL,
+
+  `public` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0: view in backend only',
+  `pick` tinyint(1) NOT NULL DEFAULT '0' COMMENT '1: picked for home page',
+  `listable` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1: appears in general listings',
+  `searchable` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1: appears in search results',
 
   `abbrev` varchar(70) DEFAULT NULL,
 
@@ -40,34 +46,36 @@ CREATE TABLE `cinergie`.`organisation` (
   `numero_entreprise` varchar(30) DEFAULT NULL,
 
   `isPartner` tinyint(1) DEFAULT NULL,
-  `isLink` tinyint(1) DEFAULT NULL,
   `isListed` tinyint(1) DEFAULT NULL COMMENT 'dans annuaire ?',
 
-  `updated_on` datetime NULL COMMENT 'leg:maj',
+  `legacy_lien` tinyint(1) DEFAULT NULL,
+  `legacy_maj` datetime NULL,
 
-  `profilePicture` varchar(255) DEFAULT NULL COMMENT 'leg:legacy_photo'
+  PRIMARY KEY (`id`),
+  INDEX(`label`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- PRIMARY
-ALTER TABLE `cinergie`.`organisation` ADD PRIMARY KEY (`id`);
-ALTER TABLE `cinergie`.`organisation` MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
--- INDEX
-ALTER TABLE `cinergie`.`organisation` ADD UNIQUE `organisation-slug-unique` (`slug`);
-ALTER TABLE `cinergie`.`organisation` ADD INDEX(`label`);
+-- UNIQUE
+ALTER TABLE `cinergie`.`organisation` ADD UNIQUE KEY `organisation-unique-slug` (`slug`) USING BTREE;
+
 
 -- DATA
 TRUNCATE `cinergie`.`organisation`;
 
 INSERT INTO `cinergie`.`organisation` (
   `id`,
-  `active`,
-  `slug`,
-  `rank`,
 
+  `slug`,
+  
   `label`,
+
+  `avatar`,
   `content`,
+
+  `public`,
+  `listable`,
 
   `abbrev`,
   `filmography`,
@@ -86,21 +94,22 @@ INSERT INTO `cinergie`.`organisation` (
   `street`,
 
   `isPartner` ,
-  `isLink`,
-  `isListed`,
 
-  `updated_on`,
-
-  `profilePicture`
+  `legacy_maj`,
+  `legacy_lien`
 )
 SELECT
  `id` as `id`,
- '1' as `active`,
+
  `urlparms` as `slug`,
- null as `rank`,
 
  TRIM(`nom`) as `label`,
+ 
+ TRIM(`photo`) as `avatar`,
  TRIM(`presentation`) as `content`,
+
+'1' as `public`,
+ `inAnnuaire` as `listable`,
 
  TRIM(`abreviation`) as `abbrev`,
  TRIM(`filmographie`) as `filmography`,
@@ -119,11 +128,9 @@ SELECT
  TRIM(`adresse`) as `street`,
 
  `partenaire`  as `isPartner`,
- `lien` as `isLink`,
- `inAnnuaire` as `isListed`,
 
- `maj` as `updated_on`,
- TRIM(`photo`) as `profilePicture`
+ `maj` as `legacy_maj`,
+ `lien` as `legacy_lien`
 
 FROM `a7_cinergie_beta`.`organisation`;
 
@@ -140,30 +147,34 @@ UPDATE `organisation` SET `slug` = 'service-public-francophone-bruxellois-organi
 
 
 INSERT INTO `cinergie`.`organisation` (
-  `active`,
+  `created`,
+
   `slug`,
-  `rank`,
 
   `label`,
+  `rank`,
+
+  `avatar`,
+  `public`,
   `url`,
 
-  `isPartner` ,
-  `created_on`,
-
-  `profilePicture`
+  `isPartner`
 )
 SELECT
-  `active` as `active`,
-  urlparms as `slug`,
-  tri as `rank`,
+  STR_TO_DATE(datestamp,'%Y-%m-%d %H:%i:%s') as `created`,
 
-  title as `label`,
-  field03 as `url`,
+  `urlparms` as `slug`,
 
-  1 as `isPartner`,
-  STR_TO_DATE(datestamp,'%Y-%m-%d %H:%i:%s') as `created_on`,
+  TRIM(`title`) as `label`,
+  `tri` as `rank`,
 
-  field01 as `profilePicture`
+  `field01` as `avatar`,
+
+  `active` as `public`,
+
+  `field03` as `url`,
+  1 as `isPartner`
+
 
 FROM `a7_cinergie_beta`.`content_item`
 WHERE area = 'partenaire' AND category = 'partenaire'
