@@ -65,8 +65,6 @@ INSERT INTO `cinergie`.`article` (
 
   `public`,
   `pick`,
-  `listable`,
-  `searchable`,
 
   `publication`,
   `abstract`,
@@ -100,8 +98,6 @@ SELECT
 
   `active` as `public`,
   `field10` = '1' as `pick`,
-  `field11` = '1' as `listable`,
-  `field11` = '1' as `searchable`,
 
   STR_TO_DATE(`field02`, '%Y-%m-%d') as `publication`,
   TRIM(`field05`) as `abstract`,
@@ -122,7 +118,7 @@ SELECT
   `field19` as `legacy_field19`,
   `field20` as `legacy_field20`
 FROM `a7_cinergie_beta`.`content_item`
-LEFT OUTER JOIN `tag` ON `tag`.`slug` = `content_item`.`subject`
+LEFT OUTER JOIN `tag` ON `tag`.`slug` = CONCAT('article-cat-', `content_item`.`subject`)
 WHERE area = 'actualite' AND `category` = 'actualite'
 ORDER BY `legacy_subject`  DESC;
 

@@ -96,5 +96,5 @@ SELECT
 
 
 FROM `a7_cinergie_beta`.`content_item`
-LEFT OUTER JOIN `tag` ON `tag`.`slug` = `content_item`.`subject`
+LEFT OUTER JOIN `tag` ON `tag`.`slug` = CONCAT('event-cat-',`content_item`.`subject`)
 WHERE area = 'agenda' AND category = 'agenda';
