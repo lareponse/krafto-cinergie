@@ -28,13 +28,13 @@ class Home extends Kortex
             
             
         $events = Event::queryListing()
-            ->whereEQ('active', '1')
+            ->whereEQ('public', '1')
             ->limit(3)
             ->orderBy(['starts', 'ASC']);
         
         
         $jobs = Job::queryListingWithEvent(
-            Job::queryListing()->whereEQ('active', '1')->limit(5)->orderBy(['starts', 'DESC']),
+            Job::queryListing()->whereEQ('public', '1')->limit(5)->orderBy(['starts', 'DESC']),
             new \DateTimeImmutable('-1 month'), new \DateTimeImmutable('+2 month')
         );
         $jobs = $jobs->retObj(Job::class);

@@ -19,7 +19,7 @@ class DVD extends TightModel
 
     public function fieldsForCompletion()
     {
-        return ['label', 'content', 'price', 'active'];
+        return ['label', 'content', 'price', 'public'];
     }
 
     public static function query_retrieve($filters = [], $options = []): SelectInterface

@@ -63,7 +63,7 @@
                         </td>
 
                         <td class="active">
-                            <?= $model->get('active') ? 'Oui' : 'Non'; ?>
+                            <?= $model->get('public') ? 'Oui' : 'Non'; ?>
                         </td>
                     </tr>
                 <?php

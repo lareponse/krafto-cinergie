@@ -41,7 +41,7 @@
                         </td>
                         <td class="active">
                             <?php
-                            if ($model->get('active')) {
+                            if ($model->get('public')) {
                                 echo '<img src="/public/assets/dashly/icons/check-double.svg" class="nav-link-icon" height="18" width="18" />';
                             } else {
                                 echo '<img src="/public/assets/dashly/icons/disable.svg" class="nav-link-icon" height="18" width="18" />';

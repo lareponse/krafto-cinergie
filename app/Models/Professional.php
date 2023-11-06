@@ -36,8 +36,8 @@ class Professional extends TightModel
         ]);
 
         if(isset($options['withPraxis'])){
-            $select->join(['professional_tag', 'professional_tag'], [['professional_tag', 'professional_id', 'professional', 'id']], 'LEFT OUTER');
-            $select->selectAlso(['praxis_ids' => ["GROUP_CONCAT(DISTINCT professional_tag.tag_id SEPARATOR ', ')"]]);    
+            $select->join(['professional_praxis', 'professional_praxis'], [['professional_praxis', 'professional_id', 'professional', 'id']], 'LEFT OUTER');
+            $select->selectAlso(['praxis_ids' => ["GROUP_CONCAT(DISTINCT professional_praxis.tag_id SEPARATOR ', ')"]]);    
         }
         elseif(isset($options['withMoviePraxis'])){
             $movie = $options['withMoviePraxis'];
@@ -62,7 +62,7 @@ class Professional extends TightModel
     
     public static function idsByPraxis(int $praxis_id): array
     {
-        $query = 'SELECT `professional_tag`.`professional_id` FROM `professional_tag`  WHERE `professional_tag`.`tag_id` = :tag_id'; 
+        $query = 'SELECT `professional_praxis`.`professional_id` FROM `professional_praxis`  WHERE `professional_praxis`.`tag_id` = :tag_id'; 
         $query = self::raw($query, ['tag_id' => $praxis_id]);
 
         return $query->fetchAll(\PDO::FETCH_COLUMN);
@@ -85,7 +85,7 @@ class Professional extends TightModel
         $Query = parent::query_retrieve($filters, $options);
         $Query->selectAlso(['label' => "CONCAT(firstname,' ', lastname)"]);
 
-        $Query->join(['professional_tag', 'praxis'], [['praxis', 'professional_id', 'professional', 'id']], 'LEFT OUTER');
+        $Query->join(['professional_praxis', 'praxis'], [['praxis', 'professional_id', 'professional', 'id']], 'LEFT OUTER');
         $Query->join(['tag', 'tag'], [['tag', 'id', 'praxis', 'tag_id'], ['tag', 'parent_id', 97]], 'LEFT OUTER');
         $Query->groupBy(['professional', 'id']);
         $Query->selectAlso(['praxis_ids' => "GROUP_CONCAT(DISTINCT tag.id)"]);

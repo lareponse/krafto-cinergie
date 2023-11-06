@@ -33,8 +33,8 @@ class Organisation extends TightModel
         $select->columns(['id', 'slug', 'label', 'profilePicture']);
     
         if(isset($options['withPraxis'])) {
-            $select->join(['organisation_tag', 'organisation_tag'], [['organisation_tag', 'organisation_id', 'organisation', 'id']], 'LEFT OUTER');
-            $select->selectAlso(['praxis_ids' => ["GROUP_CONCAT(DISTINCT organisation_tag.tag_id SEPARATOR ', ')"]]);    
+            $select->join(['organisation_praxis', 'organisation_praxis'], [['organisation_praxis', 'organisation_id', 'organisation', 'id']], 'LEFT OUTER');
+            $select->selectAlso(['praxis_ids' => ["GROUP_CONCAT(DISTINCT organisation_praxis.tag_id SEPARATOR ', ')"]]);    
         }
         elseif(isset($options['withMoviePraxis'])){
             $movie = $options['withMoviePraxis'];
@@ -43,8 +43,8 @@ class Organisation extends TightModel
         }
 
         if(!isset($options['listAll']) || $options['listAll'] !== true){
-            $select->whereEQ('active', 1);
-            $select->whereEQ('isListed', 1);
+            $select->whereEQ('public', 1);
+            $select->whereEQ('listable', 1);
         }
 
         $select->groupBy(['organisation', 'id']);
@@ -85,12 +85,12 @@ class Organisation extends TightModel
                 break;
                 
                 case 'inactives':
-                    $Query->whereNotEQ('active',1);
+                    $Query->whereNotEQ('public',1);
                     $Query->orderBy(['rank', 'ASC']);
                 break;
 
                 case 'unlisted':
-                    $Query->whereNotEQ('isListed', 1);
+                    $Query->whereNotEQ('listable', 1);
                     $Query->orderBy(['rank', 'ASC']);
                 break;
 
@@ -133,7 +133,7 @@ class Organisation extends TightModel
         }
 
         if(!isset($options['eager']) || $options['eager'] !== false){
-            $Query->join(['organisation_tag', 'praxis'], [['organisation', 'id', 'praxis', 'organisation_id']], 'LEFT OUTER');
+            $Query->join(['organisation_praxis', 'praxis'], [['organisation', 'id', 'praxis', 'organisation_id']], 'LEFT OUTER');
             $Query->join(['tag', 'tag'], [['tag', 'id', 'praxis', 'tag_id'], ['tag', 'parent_id', 219]], 'LEFT OUTER');
             $Query->groupBy(['organisation', 'id']);
             $Query->selectAlso(["GROUP_CONCAT(DISTINCT tag.id) as praxis_ids"]);
@@ -151,7 +151,7 @@ class Organisation extends TightModel
 
     public static function idsByPraxis(int $praxis_id): array
     {
-        $query = 'SELECT `organisation_tag`.`organisation_id` FROM `organisation_tag`  WHERE `organisation_tag`.`tag_id` = :tag_id'; 
+        $query = 'SELECT `organisation_praxis`.`organisation_id` FROM `organisation_praxis`  WHERE `organisation_praxis`.`tag_id` = :tag_id'; 
         $query = self::raw($query, ['tag_id' => $praxis_id]);
 
         return $query->fetchAll(\PDO::FETCH_COLUMN);

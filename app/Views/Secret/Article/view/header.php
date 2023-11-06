@@ -32,13 +32,13 @@
                             <?php
                             $buttons = [
                                 [
-                                    'field' => 'active',
+                                    'field' => 'public',
                                     'true_title' => 'Rendre invisible sur site',
                                     'false_title' => 'Rendre visible sur le site',
                                     'icon' => 'recordIsLive',
                                 ],
                                 [
-                                    'field' => 'isDiaporama',
+                                    'field' => 'pick',
                                     'true_title' => 'Retirer du diaporama',
                                     'false_title' => 'Ajouter au diaporama',
                                     'icon' => 'slider',

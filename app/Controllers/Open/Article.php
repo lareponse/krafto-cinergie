@@ -31,7 +31,7 @@ class Article extends Kortex
 
     public function latest()
     {
-        return Model::filter(['active' => '1'], ['limit' => 5, 'order_by' => ['article', 'publication', 'desc']]);
+        return Model::filter(['public' => '1'], ['limit' => 5, 'order_by' => ['article', 'publication', 'desc']]);
     }
 
 

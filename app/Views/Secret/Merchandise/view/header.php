@@ -36,7 +36,7 @@
                                 <h4 class="h2 mb-0">
                                     
                                 <?php
-                                if($controller->formModel()->get('active')){
+                                if($controller->formModel()->get('public')){
                                     echo '<img src="/public/assets/dashly/icons/check-double.svg" class="nav-link-icon" height="18" width="18" />';
                                 }
                                 else{

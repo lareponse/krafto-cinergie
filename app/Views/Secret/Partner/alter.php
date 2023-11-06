@@ -52,7 +52,7 @@
     </div>
     <div class="card-footer text-muted">
         <?= $controller->formModel()->get('created_on') ?>
-        <br />active: <?= $controller->formModel()->get('active') ?>
+        <br />active: <?= $controller->formModel()->get('public') ?>
         <br />slug: <?= $controller->formModel()->get('slug') ?>
         <br />rank: <?= $controller->formModel()->get('rank') ?>
         <br />id:<?= $controller->formModel()->get('legacy_id') ?>

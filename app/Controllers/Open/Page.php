@@ -33,13 +33,13 @@ class Page extends Kortex
     {
         $this->pageSlug = 'l-equipe';
 
-        $everyone = Team::filter(['active' => '1'], ['order_by' => [['team', 'group','ASC'], ['team', 'rank', 'ASC']]]);
+        $everyone = Team::filter(['public' => '1'], ['order_by' => [['team', 'group','ASC'], ['team', 'rank', 'ASC']]]);
         $team = [];
         foreach($everyone as $person){
             $team[$person->get('group')][] = $person;
         }
 
-        $team['collaborateur'] = Author::filter(['active' => '1', 'isCollaborator' => '1'], ['order_by' => [['author', 'rank', 'ASC']]]);
+        $team['collaborateur'] = Author::filter(['public' => '1', 'isCollaborator' => '1'], ['order_by' => [['author', 'rank', 'ASC']]]);
         $this->viewport('team', $team);
     }
 

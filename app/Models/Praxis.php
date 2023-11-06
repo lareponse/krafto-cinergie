@@ -12,7 +12,7 @@ class Praxis
     public static function forOrganisation($organisation): array{
 
         $query = Tag::table()->select();
-        $query->join(['organisation_tag', 'hasPraxis'], [['hasPraxis', 'tag_id', 'tag', 'id']]);
+        $query->join(['organisation_praxis', 'hasPraxis'], [['hasPraxis', 'tag_id', 'tag', 'id']]);
         $query->whereEQ('organisation_id', $organisation->id(), 'hasPraxis');
         $res = $query->retObj(Tag::class);
 
@@ -22,7 +22,7 @@ class Praxis
     public static function forProfessional($professional): array{
 
         $query = Tag::table()->select();
-        $query->join(['professional_tag', 'hasPraxis'], [['hasPraxis', 'tag_id', 'tag', 'id']]);
+        $query->join(['professional_praxis', 'hasPraxis'], [['hasPraxis', 'tag_id', 'tag', 'id']]);
         $query->whereEQ('professional_id', $professional->id(), 'hasPraxis');
         $res = $query->retObj(Tag::class);
 

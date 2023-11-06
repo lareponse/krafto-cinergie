@@ -44,7 +44,7 @@ class Movie extends TightModel
         }
         
         
-        $select->whereEQ('active', ($options['isActive'] ?? true) === true ? '1' : '0');
+        $select->whereEQ('public', ($options['isActive'] ?? true) === true ? '1' : '0');
 
         $select->groupBy(['movie', 'id']);
   
@@ -74,7 +74,6 @@ class Movie extends TightModel
 
     public function tagIds(): array
     {
-        // parent_reference => id or [ids]
         return [
             'movie_genre' => $this->get('genre_id'),
             'movie_footage' => $this->get('metrage_id'),
@@ -90,7 +89,7 @@ class Movie extends TightModel
     public static function idsByOrganisationName(string $isLike): array
     {
         $res = Organisation::query_retrieve([
-            'active' => '1',
+            'public' => '1',
             'fullname' => $isLike
         ], [
             'eager' => false
@@ -103,7 +102,7 @@ class Movie extends TightModel
     public static function idsByProfessionalName(string $isLike, $praxis_id = null): array
     {
         $res = Professional::query_retrieve([
-            'active' => '1',
+            'public' => '1',
             'fullname' => $isLike
         ], [
             'eager' => false
@@ -136,7 +135,7 @@ class Movie extends TightModel
 
     public static function idsByThemeId(int $id): array
     {
-        $query = 'SELECT DISTINCT(`movie_tag`.`movie_id`) FROM `movie_tag`  WHERE `movie_tag`.`tag_id` = :tag_id';
+        $query = 'SELECT DISTINCT(`movie_theme`.`movie_id`) FROM `movie_theme`  WHERE `movie_theme`.`tag_id` = :tag_id';
         $query = self::raw($query, ['tag_id' => $id]);
         return is_null($query) ? [] : $query->fetchAll(\PDO::FETCH_COLUMN);
     }

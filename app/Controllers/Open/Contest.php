@@ -12,7 +12,7 @@ class Contest extends Kortex
     {
         $this->pageSlug = 'contests';
 
-        $contests = Model::filter(['active' => '1', ['order_by' => [['contest', 'starts', 'ASC']]]]);
+        $contests = Model::filter(['public' => '1', ['order_by' => [['contest', 'starts', 'ASC']]]]);
         $this->viewport('contests', $contests);
     }
 

@@ -14,7 +14,7 @@ trait IsActivable
     
     public static function activableField(): string
     {
-        return 'active';
+        return 'public';
     }
 
     public static function activableQuery(SelectInterface $select, $type): SelectInterface
