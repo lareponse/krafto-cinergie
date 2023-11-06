@@ -19,44 +19,44 @@ ORDER BY `nom`;
 
 
 -- Create the join table
-DROP TABLE IF EXISTS `organisation_tag`;
-CREATE TABLE `organisation_tag` (
+DROP TABLE IF EXISTS `organisation_praxis`;
+CREATE TABLE `organisation_praxis` (
   `tag_id` int NOT NULL COMMENT 'FK',
   `organisation_id` int DEFAULT NULL COMMENT 'FK'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Create an AI id to delete duplicates
-ALTER TABLE `organisation_tag`
+ALTER TABLE `organisation_praxis`
   ADD `id` INT NOT NULL AUTO_INCREMENT FIRST,
   ADD PRIMARY KEY (`id`);
 
 -- Insert relation data from link_organisation_categorie, categorieo, praxis, tag
-INSERT INTO `organisation_tag` (`tag_id`, `organisation_id`)
+INSERT INTO `organisation_praxis` (`tag_id`, `organisation_id`)
 SELECT `tag`.`id` as `tag_id`, `link_organisation_categorie`.`organisation` as `organisation_id`
 FROM `a7_cinergie_beta`.`link_organisation_categorie`
 JOIN `a7_cinergie_beta`.`categorieo` ON `categorieo`.id = `link_organisation_categorie`.`categorie`
 JOIN `cinergie`.`tag` ON `tag`.`label` = `categorieo`.`nom` AND `tag`.`parent_id` = @parent_id;
 
 -- remove duplicates
-DELETE FROM `organisation_tag`
-USING `organisation_tag`,
-    `organisation_tag` `dupe`
-WHERE `organisation_tag`.`id` > `dupe`.`id`
-    AND `organisation_tag`.`tag_id` = `dupe`.`tag_id`
-    AND `organisation_tag`.`organisation_id` = `dupe`.`organisation_id`;
+DELETE FROM `organisation_praxis`
+USING `organisation_praxis`,
+    `organisation_praxis` `dupe`
+WHERE `organisation_praxis`.`id` > `dupe`.`id`
+    AND `organisation_praxis`.`tag_id` = `dupe`.`tag_id`
+    AND `organisation_praxis`.`organisation_id` = `dupe`.`organisation_id`;
 
 -- remove dead relations
-DELETE FROM `organisation_tag`
+DELETE FROM `organisation_praxis`
 WHERE `organisation_id` NOT IN (select `id` from `organisation`);
 
 
-ALTER TABLE `organisation_tag`
-  ADD UNIQUE KEY `organisation_tag-UNIQUE` (`tag_id`,`organisation_id`),
-  ADD KEY `organisation_tag-hasOrganisation` (`organisation_id`);
+ALTER TABLE `organisation_praxis`
+  ADD UNIQUE KEY `organisation_praxis-UNIQUE` (`tag_id`,`organisation_id`),
+  ADD KEY `organisation_praxis-hasOrganisation` (`organisation_id`);
 
-ALTER TABLE `organisation_tag`
-  ADD CONSTRAINT `organisation_tag-hasTag` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`),
-  ADD CONSTRAINT `organisation_tag-hasOrganisation` FOREIGN KEY (`organisation_id`) REFERENCES `organisation` (`id`);
+ALTER TABLE `organisation_praxis`
+  ADD CONSTRAINT `organisation_praxis-hasTag` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`),
+  ADD CONSTRAINT `organisation_praxis-hasOrganisation` FOREIGN KEY (`organisation_id`) REFERENCES `organisation` (`id`);
 
 
   -- VERIFICATION
@@ -70,7 +70,7 @@ ALTER TABLE `organisation_tag`
 
   SELECT substring(o.label, 1,1) as letter, count(*) as counter
   FROM `cinergie`.organisation o
-  JOIN `cinergie`.`organisation_tag` ip on o.id = ip.organisation_id
+  JOIN `cinergie`.`organisation_praxis` ip on o.id = ip.organisation_id
   JOIN `cinergie`.`tag` on ip.tag_id = `tag`.id
   GROUP BY letter
   ORDER BY letter
