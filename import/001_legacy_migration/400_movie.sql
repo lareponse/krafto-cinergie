@@ -1,46 +1,53 @@
 -- STRUCTURE
 
-DROP TABLE IF EXISTS  `cinergie`.`movie`;
+DROP TABLE IF EXISTS `cinergie`.`movie`;
 CREATE TABLE `cinergie`.`movie` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `active` tinyint(1) NOT NULL DEFAULT '0',
   `slug` varchar(222) DEFAULT NULL COMMENT 'leg:urlparms',
 
   `label` varchar(255) NOT NULL COMMENT 'leg:nom',
-  `content` text COMMENT 'leg:synopsis',
+  `rank` smallint UNSIGNED DEFAULT NULL,
 
+  `avatar` varchar(255) DEFAULT NULL COMMENT 'leg:photo',
+  `content` text DEFAULT NULL COMMENT 'leg:synopsis',
+  
+  `public` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0: view in backend only',
+  `pick` tinyint(1) NOT NULL DEFAULT '0' COMMENT '1: picked for home page',
+  `listable` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1: appears in general listings',
+  `searchable` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1: appears in search results',
+  
   `original_title` varchar(255) DEFAULT NULL COMMENT 'leg:nomvo',
+  `casting` text COMMENT 'TODO parse ?',
+  
   `runtime` varchar(255) DEFAULT NULL COMMENT 'leg:duree',
   `released` year DEFAULT NULL COMMENT 'leg:datesortie',
-
+  `url` varchar(255) DEFAULT NULL COMMENT 'leg:site',
+  `url_trailer` varchar(255) DEFAULT NULL COMMENT 'leg:bande_annonce',
+  
   `genre_id` int DEFAULT NULL COMMENT 'parsed from leg:genre, but where is the source ??',
   `metrage_id` int DEFAULT NULL COMMENT 'parsed from leg:metrage, but where is the source ??',
-
-  `url` varchar(255) DEFAULT NULL COMMENT 'leg:site',
   `format` varchar(100) DEFAULT NULL COMMENT 'leg:format',
+
   `comment` text COMMENT 'leg:autre, TODO distinct avalues',
-  `casting` text COMMENT 'TODO parse ?',
-  `url_trailer` varchar(255) DEFAULT NULL COMMENT 'leg:bande_annonce',
-  `profilePicture` varchar(255) DEFAULT NULL COMMENT 'leg:photo',
-
+  
   `legacy_origine` varchar(255) DEFAULT NULL COMMENT 'leg:origine, TODO parse to Countries',
-  `legacy_maj` char(19) DEFAULT NULL COMMENT 'leg:maj'
+  `legacy_maj` char(19) DEFAULT NULL COMMENT 'leg:maj',
 
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `movie-unique-slug` (`slug`) USING BTREE,
+  INDEX(`label`),
+  INDEX(`released`),
+  INDEX(`genre_id`),
+  INDEX(`metrage_id`),
+  INDEX(`public`)
+  
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- PRIMARY
-ALTER TABLE `movie` ADD PRIMARY KEY (`id`);
-ALTER TABLE `movie` MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 -- INDEX
-ALTER TABLE `movie` ADD UNIQUE(`slug`);
 ALTER TABLE `movie` ADD KEY `movie-hasTagGenre` (`genre_id`);
-
-CREATE INDEX idx_active ON `movie`(`active`);
-CREATE INDEX idx_released ON `movie`(`released`);
-
 
 -- FK
 ALTER TABLE `movie`
@@ -48,66 +55,69 @@ ALTER TABLE `movie`
   ADD CONSTRAINT `movie-hasTagMetrage` FOREIGN KEY (`metrage_id`) REFERENCES `tag` (`id`);
 
 -- DATA
-
 TRUNCATE `cinergie`.`movie`;
-
 SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `slug`='movie_footage' AND parent_id IS NULL);
-
 INSERT INTO `cinergie`.`movie` (
   `id`,
 
   `slug`,
-  `active`,
 
   `label`,
+
+  `avatar`,
   `content`,
 
+  `public`,
+
   `original_title`,
+  `casting`,
+
   `runtime`,
   `released`,
-
   `url`,
-  `format`,
-  `comment`,
-  `casting`,
   `url_trailer`,
-  `profilePicture`,
 
   `genre_id`,
   `metrage_id`,
+  `format`,
+
+  `comment`,
 
   `legacy_origine`,
   `legacy_maj`
 )
 SELECT
-    `film`.`id` as `id`,
+  `film`.`id` as `id`,
 
-    `urlparms` as `slug`,
-    1 as `active`,
-    TRIM(`nom`) as `label`,
-    TRIM(`synopsis`) as `content`,
+  `urlparms` as `slug`,
 
-    TRIM(`nomvo`) as `original_title`,
-    TRIM(`duree`) as `runtime`,
-    `datesortie` as `released`,
+  TRIM(`nom`) as `label`,
 
-    `site` as `url`,
-    `format` as `format`,
-    `autre` as `comment`,
-    `casting` as `casting`,
-    `bande_annonce` as `url_trailer`,
-    `photo` as `profilePicture`,
+  `photo` as `avatar`,
+  TRIM(`synopsis`) as `content`,
 
-    `itm_genre`.`id` as `genre_id`,
-    `itm_metrage`.`id` as `metrage_id`,
+  1 as `public`,
 
-    TRIM(`origine`) as `legacy_origine`,
-    `maj` as `legacy_maj`
+  TRIM(`nomvo`) as `original_title`,
+  TRIM(`casting`) as `casting`,
 
+  TRIM(`duree`) as `runtime`,
+  `datesortie` as `released`,
+  `site` as `url`,
+  `bande_annonce` as `url_trailer`,
+
+  `itm_genre`.`id` as `genre_id`,
+  `itm_metrage`.`id` as `metrage_id`,
+  `format` as `format`,
+
+  `autre` as `comment`,
+
+  TRIM(`origine`) as `legacy_origine`,
+  `maj` as `legacy_maj`
+  
 FROM `a7_cinergie_beta`.`film`
 LEFT OUTER JOIN `cinergie`.`tag` itm_genre ON itm_genre.`slug` = `film`.`genre`
 LEFT OUTER JOIN `cinergie`.`tag` itm_metrage ON itm_metrage.`content` = `film`.`metrage` AND `itm_metrage`.`parent_id` = @parent_id;
-
 
 -- DATA CORRECTION
 UPDATE `cinergie`.`movie` SET legacy_origine = 'Belgique, France'
