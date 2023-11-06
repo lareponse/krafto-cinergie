@@ -47,13 +47,11 @@
 
     `leg_maj` datetime NOT NULL COMMENT 'updated on',
 
-
     PRIMARY KEY (`id`),
+    UNIQUE KEY `professional-unique-slug` (`slug`) USING BTREE,
     INDEX(`label`)
 
   ) ENGINE=InnoDB CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-
-  ALTER TABLE `cinergie`.`professional` ADD UNIQUE KEY `professional-unique-slug` (`slug`) USING BTREE;
 
 
   -- INDEX

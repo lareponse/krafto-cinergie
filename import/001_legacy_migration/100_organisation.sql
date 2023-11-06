@@ -52,13 +52,10 @@ CREATE TABLE `cinergie`.`organisation` (
   `legacy_maj` datetime NULL,
 
   PRIMARY KEY (`id`),
+  UNIQUE KEY `organisation-unique-slug` (`slug`) USING BTREE,
   INDEX(`label`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-
--- UNIQUE
-ALTER TABLE `cinergie`.`organisation` ADD UNIQUE KEY `organisation-unique-slug` (`slug`) USING BTREE;
 
 
 -- DATA

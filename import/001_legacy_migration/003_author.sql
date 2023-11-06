@@ -27,11 +27,11 @@ CREATE TABLE `author` (
   `legacy_user` varchar(13) DEFAULT NULL,
 
   PRIMARY KEY (`id`),
+  UNIQUE KEY `author-unique-slug` (`slug`) USING BTREE,
   INDEX(`label`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-ALTER TABLE `author` ADD UNIQUE KEY `author-unique-slug` (`slug`) USING BTREE;
 
 -- DATA
 TRUNCATE `cinergie`.`author`;

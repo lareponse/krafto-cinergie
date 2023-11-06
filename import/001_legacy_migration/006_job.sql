@@ -41,12 +41,10 @@ CREATE TABLE `job` (
   `legacy_theme` varchar(17) DEFAULT NULL COMMENT 'process into category_id',
 
   PRIMARY KEY (`id`),
+  UNIQUE KEY `job-unique-slug` (`slug`) USING BTREE,
   INDEX(`label`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- INDEX
-ALTER TABLE `job` ADD UNIQUE KEY `job-unique-slug` (`slug`) USING BTREE;
 
 -- FK
 ALTER TABLE `job` ADD CONSTRAINT `job-hasCategoryTag` FOREIGN KEY (`category_id`) REFERENCES `tag` (`id`);

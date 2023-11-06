@@ -29,11 +29,11 @@ CREATE TABLE `contest` (
   `legacy_user` varchar(13) DEFAULT NULL,
 
   PRIMARY KEY (`id`),
+  UNIQUE KEY `job-unique-slug` (`slug`) USING BTREE,
   INDEX(`label`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-ALTER TABLE `contest` ADD UNIQUE KEY `contest-unique-slug` (`slug`) USING BTREE;
 
 
 -- DATA

@@ -29,7 +29,8 @@ CREATE TABLE `event` (
   `legacy_user` varchar(13) DEFAULT NULL,
   `legacy_title` varchar(190) DEFAULT NULL,
 
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `event-unique-slug` (`slug`) USING BTREE
   -- no index on label, too long
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -37,7 +38,6 @@ CREATE TABLE `event` (
 
 -- INDEX
 ALTER TABLE `event` ADD KEY `event-hasTagType` (`type_id`);
-ALTER TABLE `event` ADD UNIQUE KEY `event-unique-slug` (`slug`) USING BTREE;
 
 -- FK
 ALTER TABLE `event`

@@ -39,13 +39,13 @@ CREATE TABLE `cinergie`.`article` (
   `legacy_field20` varchar(4) DEFAULT NULL,
 
   PRIMARY KEY (`id`),
-  INDEX (`label`)
+  UNIQUE KEY `article-unique-slug` (`slug`) USING BTREE,
+  INDEX(`label`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
--- INDEX
-ALTER TABLE `cinergie`.`article` ADD UNIQUE KEY `article-unique-slug` (`slug`) USING BTREE;
+-- FK
 ALTER TABLE `cinergie`.`article` ADD CONSTRAINT `article-hasType` FOREIGN KEY (`type_id`) REFERENCES `tag` (`id`);
 
 -- DATA
