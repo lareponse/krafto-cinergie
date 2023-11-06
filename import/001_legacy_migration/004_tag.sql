@@ -22,27 +22,30 @@ CREATE TABLE `tag` (
   `legacy_id` varchar(30) DEFAULT NULL,
 
   PRIMARY KEY (`id`),
+  UNIQUE KEY `tag-unique-slug` (`slug`) USING BTREE,
+  UNIQUE KEY `tag-label-unique-by-parent_id` (`label`,`parent_id`) USING BTREE,
+
   INDEX(`label`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- INDEX
-
-ALTER TABLE `tag` ADD UNIQUE KEY `tag-unique-slug` (`slug`) USING BTREE;
-ALTER TABLE `tag` ADD UNIQUE KEY `tag-label-unique-by-parent_id` (`label`,`parent_id`) USING BTREE;
 ALTER TABLE `tag` ADD KEY `tag-hasParent` (`parent_id`);
-ALTER TABLE `tag`  ADD CONSTRAINT `tag-hasParent` FOREIGN KEY (`parent_id`) REFERENCES `tag` (`id`);
+ALTER TABLE `tag` ADD CONSTRAINT `tag-hasParent` FOREIGN KEY (`parent_id`) REFERENCES `tag` (`id`);
+
 
 
 
 -- DATA
+
 TRUNCATE `cinergie`.`tag`;
 
 -- DATA :: Film :: theme from publisher_fixed_text
-INSERT INTO `cinergie`.`tag` (`label`, `slug`) VALUES ('Thème du film', 'movie_theme');
+SET @parent = 'movie_theme' COLLATE utf8mb4_general_ci;
+INSERT INTO `cinergie`.`tag` (`label`, `slug`) VALUES ('Thème du film', @parent);
 
 -- Get parent tag ID
-SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `slug`='movie_theme');
+SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `slug` = @parent);
 
 -- Insert tag from categoriep
 INSERT INTO `tag` (`label`, `slug`, `parent_id`, `legacy_id`)
@@ -57,13 +60,14 @@ WHERE `id` LIKE 'publisher_parm_theme_film_%'
 ORDER BY `text` ASC;
 
 
--- DATA :: Film :: genre from nowhere
+-- DATA :: Film :: genre, extracted from legacy data using DISTINCT
 
 -- Insert the parent tag
-INSERT INTO `cinergie`.`tag` (`label`, `slug`) VALUES ('Genre du film', 'movie_genre');
+SET @parent = 'movie_genre' COLLATE utf8mb4_general_ci;
+INSERT INTO `cinergie`.`tag` (`label`, `slug`) VALUES ('Genre du film', @parent);
 
 -- Get parent tag ID
-SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `slug`='movie_genre');
+SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `slug` = @parent);
 
 -- Insert tags
 INSERT INTO `cinergie`.`tag` (`slug`, `label`, `parent_id`) VALUES
@@ -73,14 +77,15 @@ INSERT INTO `cinergie`.`tag` (`slug`, `label`, `parent_id`) VALUES
 ('documentaire', 'Documentaire', @parent_id),
 ('fiction', 'Fiction', @parent_id);
 
--- DATA :: Film :: footage from nowhere
+
+-- DATA :: Film :: footage, extracted from legacy data using DISTINCT
 
 -- Insert the parent tag
-INSERT INTO `cinergie`.`tag` (`label`, `slug`) VALUES ('Métrage', 'movie_footage');
-
+SET @parent = 'movie_footage' COLLATE utf8mb4_general_ci;
+INSERT INTO `cinergie`.`tag` (`label`, `slug`) VALUES ('Métrage', @parent);
 
 -- Get parent tag ID
-SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `slug`='movie_footage');
+SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `slug` = @parent);
 
 -- Insert tags
 INSERT INTO `cinergie`.`tag` (`slug`, `label`, `content`, `parent_id`) VALUES
@@ -90,10 +95,11 @@ INSERT INTO `cinergie`.`tag` (`slug`, `label`, `content`, `parent_id`) VALUES
 
 
 -- DATA :: article type from layout_subject
-INSERT INTO `cinergie`.`tag` (`label`, `slug`) VALUES ('Catégorie', 'article_category');
+SET @parent = 'article_category' COLLATE utf8mb4_general_ci;
+INSERT INTO `cinergie`.`tag` (`label`, `slug`) VALUES ('Catégorie', @parent);
 
 -- Get parent tag ID
-SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `slug`='article_category');
+SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `slug` = @parent);
 
 -- Insert tag from layout_subject
 INSERT INTO `tag` (`parent_id`, `slug`, `label`, `content`, `legacy_id`)
@@ -113,10 +119,12 @@ DELETE FROM `tag` WHERE `parent_id` = @parent_id AND `slug` IN ('aide_a_la_produ
 
 
 -- DATA :: Event type theme from layout_subject
-INSERT INTO `cinergie`.`tag` (`label`, `slug`) VALUES ('Catégorie', 'event_category');
+SET @parent = 'event_category' COLLATE utf8mb4_general_ci;
+
+INSERT INTO `cinergie`.`tag` (`label`, `slug`) VALUES ('Catégorie', @parent);
 
 -- Get parent tag ID
-SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `slug`='event_category');
+SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `slug` = @parent);
 
 -- Insert tag from layout_subject
 INSERT INTO `tag` (`parent_id`, `slug`, `label`, `content`, `legacy_id`)
@@ -134,10 +142,12 @@ ORDER BY `description` ASC;
 
 
 -- DATA :: Event type theme from layout_subject
-INSERT INTO `cinergie`.`tag` (`label`, `slug`) VALUES ('Catégorie', 'job_category');
+SET @parent = 'job_category' COLLATE utf8mb4_general_ci;
+
+INSERT INTO `cinergie`.`tag` (`label`, `slug`) VALUES ('Catégorie', @parent);
 
 -- Get parent tag ID
-SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `slug`='job_category');
+SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `slug` = @parent);
 
 -- Insert tag from layout_subject
 INSERT INTO `tag` (`parent_id`, `slug`, `label`, `content`, `legacy_id`)
@@ -154,10 +164,12 @@ ORDER BY `description` ASC;
 
 
 
-INSERT INTO `tag` (`id`, `parent_id`, `slug`, `label`, `content`, `rank`) 
-VALUES (NULL, NULL, 'job_payment', 'Rémunéré ou pas ?', NULL, NULL);
+-- DATA :: Used as labels
+SET @parent = 'job_payment' COLLATE utf8mb4_general_ci;
+INSERT INTO `tag` (`label`, `slug`)  VALUES ('Rémunéré ou pas ?', @parent);
 
-SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `slug`='job_payment');
+-- Get parent tag ID
+SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `slug` = @parent);
 -- Insert tag from layout_subject
 INSERT INTO `tag` (`parent_id`, `slug`, `label`)
 VALUES 
@@ -165,10 +177,13 @@ VALUES
   (@parent_id, 'job-free', 'Non rémunéré');
 
 
-INSERT INTO `tag` (`id`, `parent_id`, `slug`, `label`, `content`, `rank`) 
-VALUES (NULL, NULL, 'job_proposal', 'Proposition ou demande ?', NULL, NULL);
+-- DATA :: Used as labels
+SET @parent = 'job_proposal' COLLATE utf8mb4_general_ci;
+INSERT INTO `tag` (`label`, `slug`) VALUES ('Proposition ou demande ?', @parent);
 
-SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `slug`='job_proposal');
+-- Get parent tag ID
+SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `slug` = @parent);
+
 -- Insert tag from layout_subject
 INSERT INTO `tag` (`parent_id`, `slug`, `label`)
 VALUES 
