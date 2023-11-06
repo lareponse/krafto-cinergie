@@ -3,14 +3,22 @@ DROP TABLE IF EXISTS `cinergie`.`job`;
 
 CREATE TABLE `job` (
   `id` int NOT NULL COMMENT 'parsed and cast from legacy id',
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `active` tinyint(1) NOT NULL DEFAULT '0',
-  `slug` varchar(222) DEFAULT NULL COMMENT 'leg:urlparm',
-  `rank` smallint UNSIGNED DEFAULT NULL COMMENT 'leg:tri',
+  `slug` varchar(222) NOT NULL COMMENT 'leg:urlparm',
 
   `label` varchar(255) DEFAULT NULL COMMENT 'leg:field01',
+  `rank` smallint UNSIGNED DEFAULT NULL COMMENT 'leg:tri',
+
+
+  `avatar` varchar(255) DEFAULT NULL COMMENT 'image filename',
   `content` text COMMENT 'leg:field02',
+
+  `public` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0: view in backend only',
+  `pick` tinyint(1) NOT NULL DEFAULT '0' COMMENT '1: picked for home page',
+  `listable` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1: appears in general listings',
+  `searchable` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1: appears in search results',
+
 
   `isOffer` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'parsed: subject=demande',
   `isPaid` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'leg:field09',
@@ -50,14 +58,16 @@ TRUNCATE `cinergie`.`job`;
 
 INSERT INTO `cinergie`.`job` (
   `id`,
+  `created`,
 
-  `created_on`,
-  `active`,
   `slug`,
-  `rank`,
 
   `label`,
+  `rank`,
+
   `content`,
+
+  `public`,
 
   `isOffer`,
   `isPaid`,
@@ -82,14 +92,16 @@ INSERT INTO `cinergie`.`job` (
 )
 SELECT
   CAST(REGEXP_SUBSTR(`content_item`.`id`, '[0-9]+$', 1) as UNSIGNED) as `id`,
+  STR_TO_DATE(datestamp,'%Y-%m-%d %H:%i:%s') as `created`,
 
-  STR_TO_DATE(datestamp,'%Y-%m-%d %H:%i:%s') as `created_on`,
-  `active` as `active`,
   `urlparms` as `slug`,
-  `tri` as `rank`,
 
   TRIM(`field01`) as `label`,
+  `tri` as `rank`,
+
   TRIM(`field02`) as `content`,
+
+  `active` as `public`,
 
   IF(`subject` = 'demande', 0, 1) as `isOffer`,
   `field09` as `isPaid`,
