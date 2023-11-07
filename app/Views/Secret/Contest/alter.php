@@ -1,4 +1,14 @@
-<?php $this->layout('Secret::alter') ?>
+<?php 
+$sidemenu = [
+    ['#signaletiqueSection', 'info', 'Signalétique'],
+    ['#contentSection', 'text', 'Contenu'],
+    ['#abstractSection', 'text', 'Abstract'],
+    ['#questionSection', 'question', 'Question'],
+    ['#publicationSection', 'info', 'Publication'],
+];
+
+$this->layout('Secret::alter', ['sidemenu' => $sidemenu]) 
+?>
 
 <div class="card border-0 scroll-mt-3" id="signaletiqueSection">
     <div class="card-header">
@@ -63,50 +73,7 @@
     </div>
 </div>
 
-
-<?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'question', 'title' => 'Question', 'id' => 'questionSection']) ?>
-<?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'abstract', 'title' => 'Abstract', 'id' => 'abstractSection']) ?>
 <?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'content', 'title' => 'Contenu', 'id' => 'contentSection']) ?>
-
-<div class="card border-0 scroll-mt-3" id="publicationSection">
-    <div class="card-header">
-        <h2 class="h3 mb-0">Publication</h2>
-    </div>
-
-    <div class="card-body">
-
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                <div class="me-2">
-                    <h3 class="h4 mb-0">Actif</h3>
-                    <p class="small text-muted mb-0">Visible sur le site ?</p>
-                </div>
-                <div class="form-check form-switch mb-0">
-                    <input class="form-check-input" type="checkbox" role="switch" id="active" name="active" <?= $controller->formModel()->isActive() ? 'checked="checked"' : '' ?>">
-                </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                <div class="me-2">
-                    <h3 class="h4 mb-0">Ordre</h3>
-                    <p class="small text-muted mb-0">Tri</p>
-                </div>
-                <div class="form-check form-switch mb-0">
-                    <input type="number" class="form-control" id="rank" name="rank" value="<?= $controller->formModel()->get('rank') ?>">
-                </div>
-            </li>
-        </ul>
-
-        <div class="row mb-4">
-            <div class="col-lg-3">
-                <label for="slug" class="col-form-label">Slug</label>
-            </div>
-
-            <div class="col-lg">
-                <input type="text" class="form-control" id="slug" name="slug" value="<?= $controller->formModel()->get('slug') ?>">
-                <div class="invalid-feedback">Ce champs n'est pas correct</div>
-            </div>
-        </div>
-        <?= $this->submitDashly(); ?>
-    </div>
-
-</div>
+<?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'abstract', 'title' => 'Abstract', 'id' => 'abstractSection']) ?>
+<?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'question', 'title' => 'Question', 'id' => 'questionSection']) ?>
+<?= $this->insert('Secret::_partials/form/alter-card-publication') ?>

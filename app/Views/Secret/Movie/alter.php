@@ -156,4 +156,7 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu]) ?>
 
 <?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'content', 'title' => 'Synopsis', 'id' => 'synopsisSection']) ?>
 <?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'casting', 'title' => 'Casting', 'id' => 'castingSection']) ?>
+
+<?= $this->insert('Secret::_partials/form/alter-card-publication') ?>
+
 <?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'comment', 'title' => 'Commentaires', 'id' => 'commentSection']) ?>
