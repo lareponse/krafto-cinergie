@@ -78,11 +78,11 @@ $publication_booleans = [
 
         <div class="row mt-4">
             <div class="col-lg-2">
-                <label for="created_on" class="col-form-label">Création</label>
+                <label for="created" class="col-form-label">Création</label>
             </div>
 
             <div class="col-lg-4">
-                <input disabled type="text" class="form-control" id="created_on" name="created_on" value="<?= $controller->formModel()->get('created') ?>">
+                <input disabled type="text" class="form-control" id="created" name="created" value="<?= $controller->formModel()->get('created') ?>">
             </div>
             <div class="col-lg-2">
                 <label for="updated_on" class="col-form-label">Mise à jour</label>

@@ -46,7 +46,6 @@ CREATE TABLE `cinergie`.`organisation` (
   `numero_entreprise` varchar(30) DEFAULT NULL,
 
   `isPartner` tinyint(1) DEFAULT NULL,
-  `isListed` tinyint(1) DEFAULT NULL COMMENT 'dans annuaire ?',
 
   `legacy_lien` tinyint(1) DEFAULT NULL,
   `legacy_maj` datetime NULL,

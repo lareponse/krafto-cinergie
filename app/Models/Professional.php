@@ -46,7 +46,7 @@ class Professional extends TightModel
         }
         
         if(!isset($options['listAll']) || $options['listAll'] !== true){
-            $select->whereEQ('isListed', 1);
+            $select->whereEQ('listable', 1);
         }
         $select->groupBy(['professional', 'id']);
         $select->orderBy(['lastname', 'ASC']);

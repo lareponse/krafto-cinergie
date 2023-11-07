@@ -33,17 +33,18 @@ class Organisation extends Krafto
         $counting = 'select count(id) FROM organisation';
         $counters = [
             'organisations' => null, 
-            'partners' => 'isPartner = 1', 
-            'inactives' => 'active = 0',
-            'unlisted' => 'isListed = 0',
-            'withoutProfilePicture' => "(TRIM(profilePicture) = '' OR profilePicture IS NULL)",
+            'partners' => '`isPartner` = 1', 
+            'inactives' => '`public` = 0',
+            'unlisted' => '`listable` = 0',
+            'withoutProfilePicture' => "(TRIM(avatar) = '' OR avatar IS NULL)",
             'withoutContent' => "(TRIM(content) = '' OR content IS NULL)"
         ];
 
         return array_map(function ($condition) use ($counting) {
             $query = $counting . ($condition ? ' where ' . $condition : '');
-            // vd($query);
-            return $this->modelClassName()::raw($query)->fetchColumn();
+            $query = $this->modelClassName()::raw($query);
+
+            return $query->fetchColumn();
         }, $counters);
 
     }
