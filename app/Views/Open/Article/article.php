@@ -1,21 +1,21 @@
 <?php $this->layout('Open::layout') ?>
 
 <div class="container my-5 pb-5" id="article-single">
-  <div class="row">
-    <img class="img-fluid mb-5" src="<?= $article->profilePicture(); ?>" alt="Photo de l'article <?= $article->get('label'); ?>" />
+<div class="row">
+    <img class="img-fluid mb-5" src="<?= $article->profilePicture(); ?>" alt="Couverture de l'article <?= $article; ?>" />
 
     <h2><?= $article->get('label'); ?></h2>
 
-    <section class="row g-0 mb-5 col-lg-8 order-1 align-items-start">
+    <div class="row g-0 mb-5 col-lg-8 align-items-start">
 
-      <div class="col-lg bg-light p-4 p-lg-5 text-justify">
+        <div class="col-lg bg-light p-4 p-lg-5 text-justify">
         <?= $article->get('abstract'); ?>
       </div>
 
-    </section>
+    </div>
 
-    <aside id="meta" class="col-lg-3 mb-5 order-3 order-sm-3 order-md-3 order-lg-2 offset-lg-1 shadow">
-      <ul class="meta-list">
+    <aside id="meta" class="col-lg-4 mb-5 d-none d-lg-block">
+        <ul class="meta-list">
         <?php if (!empty($article->get('type_label'))) {
         ?>
           <li class="type"><i class="bi bi-file-text icon"></i><?= $article->get('type_label') ?></li>
@@ -31,23 +31,21 @@
         }
         ?>
         <li class=""><i class="bi bi-calendar4 icon"></i></i><span class="otto-date"><?= $article->get('publication'); ?></span></li>
-        <hr>
-        <div class="share" id="share">
+      </ul>
+      <hr>
+      <div class="share">
           <span>Partager sur</span>
           <span class="socials">
-            <a href="#"><i class="bi bi-facebook icon"></i></a>
-            <a target="_blank" href="#">
-              <img class="twitter" src="./assets/img/icons/twitter-r.svg">
-            </a>
-            <a href="#"><i class="bi bi-envelope-fill icon"></i></a>
-            <a href="#"><i class="bi bi-instagram icon"></i></a>
-            <a onclick="window.print()" class="print"><i class="bi bi-printer-fill me-1"></i>Imprimer</a>
+              <a href="#"><i class="bi bi-facebook icon"></i></a>
+              <a href="#"><i class="bi bi-twitter-x icon"></i></a>
+              <a href="#"><i class="bi bi-envelope-fill icon"></i></a>
+              <a href="#"><i class="bi bi-instagram icon"></i></a>
+              <a onclick="window.print()" class="print"><i class="bi bi-printer-fill me-1"></i></a>
           </span>
-        </div>
-      </ul>
+      </div>
     </aside>
 
-    <section class="w-75 mb-5 order-2 order-sm-2 order-md-2 order-lg-3 mx-auto text-justify">
+    <div class="w-75 mb-5 mx-auto text-justify">
       <?= $article->get('content'); ?>
 
       <?= $this->insert('Open::_partials/share_print', ['label' => $article->get('label')]); ?>

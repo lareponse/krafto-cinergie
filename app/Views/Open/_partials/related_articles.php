@@ -2,10 +2,10 @@
 
 if (!empty($related_articles)) {
 ?>
-    <section class="my-5" id="related-posts">
+    <div class="row g-0 mt-5" id="related-posts">
         <h2 class="pb-0">Nos articles liés</h2>
         <hr />
-        <div class="slide dots" id="single-post-slider">
+        <div class="slide dots single-post-slider">
             <?php
             foreach ($related_articles as $article) {
                 $href = $controller->router()->hyp('article', ['slug' => $article->slug()]);
@@ -35,6 +35,6 @@ if (!empty($related_articles)) {
             }
             ?>
         </div>
-    </section>
+    </div>
 <?php
 }
