@@ -9,7 +9,7 @@ use \HexMakina\Marker\Marker; ?>
 
     <section class="row align-items-end pb-3 pe-lg-4">
         <div class="col-lg-8">
-            <?= $this->insert('Open::Work/form_filters'); ?>
+            <?= $this->insert('Open::Job/form_filters'); ?>
         </div>
 
         <!-- Modal nouvelles annonce -->
@@ -17,7 +17,7 @@ use \HexMakina\Marker\Marker; ?>
             <button type="button" class="btn btn-outline-primary add-btn" data-bs-toggle="modal" data-bs-target="#modal-nouvelle-annonce">
                 <i class="bi bi-plus-circle"></i> Ajoutez votre annonce
             </button>
-            <?= $this->insert('Open::Work/modal_new'); ?>
+            <?= $this->insert('Open::Job/modal_new'); ?>
 
         </div>
 

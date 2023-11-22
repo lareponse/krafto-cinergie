@@ -67,12 +67,6 @@ class Organisation extends Krafto
         $this->viewport('movies', Movie::filter(['model' => $this->loadModel()], ['eager' => false]));
     }
 
-    public function alter(): void
-    {
-        // if (is_null($this->loadModel()))
-        //     $this->router()->hopURL($this->url('list'));
-    }
-
     public function imagesDirectory(){
         return 'organisation';
     }

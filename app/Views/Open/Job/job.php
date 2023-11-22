@@ -1,7 +1,3 @@
-<?php
-
-use \HexMakina\Marker\Marker; ?>
-
 <?php $this->layout('Open::layout') ?>
 
 <div class="container my-5 pb-5" id="casting-single">
@@ -21,7 +17,7 @@ use \HexMakina\Marker\Marker; ?>
                     <i class="bi bi-plus-circle"></i>Ajoutez votre annonce
                 </button>
                 <!-- Modal -->
-                <?= $this->insert('Open::Work/modal_new'); ?>
+                <?= $this->insert('Open::Job/modal_new'); ?>
 
                 <aside id="meta" class="shadow order-1 order-sm-1 order-md-2">
 
@@ -34,7 +30,7 @@ use \HexMakina\Marker\Marker; ?>
                         </li>
 
                         <?php 
-                        $tag = $work_proposal[$record->isPaid() ? 'work_offer' : 'work_request'];
+                        $tag = $job_proposal[$record->isPaid() ? 'job_offer' : 'job_request'];
                         ?>
 
                         <li class="meta-head">
@@ -43,7 +39,7 @@ use \HexMakina\Marker\Marker; ?>
                         </li>
 
 
-                        <?php $tag = $work_payment[$record->isPaid() ? 'work_paid' : 'work_free'];?>
+                        <?php $tag = $job_payment[$record->isPaid() ? 'job_paid' : 'job_free'];?>
                         <li class="meta-head">
                             <span><i class="bi bi-bookmarks-fill icon"></i>Rémunéré :</span>
                             <span><a href="<?= $controller->router()->hyp('works')?>?remun=<?=$tag->slug()?>"><?=  $tag ?></a></span>

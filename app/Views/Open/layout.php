@@ -8,8 +8,8 @@
 <body data-bs-spy="scroll" data-bs-target="#navigation">
 
     <?php $this->insert('Open::_partials/header') ?>
+    <main id="content">
 
-    <main id="content" class="">
         <?php if (isset($title)) {
         ?>
             <div class="py-5">

@@ -13,8 +13,6 @@
 <meta property="og:site_name" content="Cinergie.be">
 <meta property="og:locale" content="fr_FR">
 
-<!-- Facebook App ID (optional but recommended) -->
-
 <!-- Twitter Card (optional) -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:title" content="<?= $controller->meta('title')?>" />
