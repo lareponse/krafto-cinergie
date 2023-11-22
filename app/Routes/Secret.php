@@ -27,7 +27,7 @@ array_push(
 
 array_push(
     $routes,
-    ['GET|POST', 'delete/[*:authority]/[i:id]', 'Delete::delete', 'delete'],
+    ['GET|POST', 'delete/[*:nid]/[i:id]', 'Delete::delete', 'delete'],
 
     ['GET', 'image/details/[a:externalController]/slug/[*:slug]/file/[*:filename]', 'Image::details', 'image_details'],
     ['POST', 'image/delete/[a:externalController]/slug/[*:slug]/file/[*:filename]', 'Image::delete', 'image_delete'],
@@ -70,6 +70,6 @@ array_walk($routes, function (&$v, $k) use ($route_prefix, $controller_prefix) {
     $v[3] = $route_prefix . '_' . $v[3];
 });
 
-array_unshift($routes, ['GET', 'dash', $controller_prefix . '\\Home::home', 'dashboard']);
+array_unshift($routes, ['GET', 'dash', $controller_prefix . '\\Article::home', 'dashboard']);
 
 return $routes;
