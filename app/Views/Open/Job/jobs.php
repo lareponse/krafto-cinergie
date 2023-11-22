@@ -36,7 +36,7 @@ use \HexMakina\Marker\Marker; ?>
                             <section class="card-text d-flex justify-content-between">
                                 <p><span class="categorie mb-2">
                                         <?= $work->get('isPaid') ? 'Rémunéré' : 'Non rémunéré' ?></span>
-                                    &bull; <span class="type"><?= $work->get('isOffer') ? $work_proposal['work_offer'] : $work_proposal['work_request']; ?></span>
+                                    &bull; <span class="type"><?= $work->get('isOffer') ? $job_proposal['job_offer'] : $job_proposal['job_request']; ?></span>
                                     &bull; <span class="type"><?= $work->get('category_label') ?></span>
                                 <p><span class="date-casting text-primary otto-date"><?= $work->get('starts') ?></span></p>
                             </section>
