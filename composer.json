@@ -13,7 +13,7 @@
           "HexMakina\\BlackBox\\"   : "lib/BlackBox/",
           "HexMakina\\LogLaddy\\"   : "lib/LogLaddy/src/",
           "HexMakina\\LocalFS\\"    : "lib/LocalFS/",
-          "HexMakina\\Hopper\\"     : "lib/Hopper/",
+          "HexMakina\\Hopper\\"     : "lib/Hopper/src",
           "HexMakina\\Deadites\\"   : "lib/Deadites/src",
           "HexMakina\\Debugger\\"   : "lib/Debugger/"
       }
