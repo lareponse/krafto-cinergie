@@ -12,17 +12,17 @@ class Home extends Kortex
     public function home()
     {
         $articlesDiaporama = Article::queryListing()
-            ->whereEQ('isDiaporama', '1')
+            ->whereEQ('pick', '1')
             ->limit(7);
-        
+            
         $entrevuesFilmees = Article::queryListing()
-            ->whereEQ('isDiaporama', '0')
+            ->whereEQ('pick', '0')
             ->whereEQ('type_id', '50')
             ->whereNotEmpty('embedVideo')
             ->limit(3);
 
         $sousLaLoupe = Article::queryListing()
-            ->whereEQ('isDiaporama', '0')
+            ->whereEQ('pick', '0')
             ->whereEmpty('embedVideo')
             ->limit(3);
             

@@ -85,7 +85,7 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
             </div>
 
             <div class="col-lg">
-                <input type="file" class="form-control" id="profilePicture" name="profilePicture" value="<?= $this->e($controller->formModel()->get('profilePicture')) ?>">
+                <input type="file" class="form-control" id="profilePicture" name="profilePicture" value="<?= $this->e($controller->formModel()->profilePicturePath()) ?>">
                 <div class="invalid-feedback">Please add your email</div>
             </div>
         </div>

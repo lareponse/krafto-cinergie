@@ -51,7 +51,7 @@
 
                     }
                     ?>
-                    <a href="<?= $href?>" class="control <?= $class ?> p-1"><?= $this->icon('profilePicture', 18, ['title' => $title]);?></a>
+                    <a href="<?= $href?>" class="control <?= $class ?> p-1"><?= $this->icon('avatar', 18, ['title' => $title]);?></a>
                     <?php
                     $route_params = [
                         'nid' => $controller->nid(), 

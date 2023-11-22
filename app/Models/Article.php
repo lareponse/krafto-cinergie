@@ -20,10 +20,10 @@ class Article extends TightModel
     {
         $select = self::table()->select();
         $select->columns([
-                'id', 'slug', 'label', 'publication', 'profilePicture', 'type_id'
+                'id', 'slug', 'label', 'publication', 'avatar', 'type_id'
             ]
         );
-
+        
         $select = self::activableQuery($select, $options['isActive'] ?? 1);
 
         return $select;

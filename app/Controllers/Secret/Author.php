@@ -35,7 +35,7 @@ class Author extends Krafto
     private function counters()
     {
         $counting = 'select count(id) FROM author';
-        $counters = ['collaborateur' => 'isCollaborator = 1', 'inactives' => 'active = 0'];
+        $counters = ['collaborateur' => 'isCollaborator = 1', 'inactives' => 'public <> 1'];
 
         return array_map(function ($condition) use ($counting) {
             $query = $counting . ($condition ? ' where ' . $condition : '');

@@ -94,7 +94,7 @@
                         <h2 class="mb-0"><?= $counters['withoutProfilePicture']; ?></h2>
                     </div>
                     <div class="col-auto">
-                        <?= $this->icon('profilePicture', 30, ['class' => 'text-primary']); ?>
+                        <?= $this->icon('avatar', 30, ['class' => 'text-primary']); ?>
                     </div>
                 </div>
             </div>

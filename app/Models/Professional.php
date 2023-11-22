@@ -32,7 +32,7 @@ class Professional extends TightModel
             'id',
             'slug',
             'label' => ["CONCAT(professional.firstname, ' ', professional.lastname)"],
-            'profilePicture'
+            'avatar'
         ]);
 
         if(isset($options['withPraxis'])){

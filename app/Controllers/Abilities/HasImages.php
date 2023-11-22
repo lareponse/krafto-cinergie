@@ -17,6 +17,7 @@ trait HasImages
         $controller = $this->get('Controllers\\Secret\\Image');
         $directory = $controller->buildRelativeLocator($this);
         $fs = new FileSystem($controller->imagesRootPath());
+
         try{
             $files = $fs->files($directory);
         }
@@ -35,6 +36,7 @@ trait HasImages
                 array_unshift($files, $filename);
             }
         }
+
         $this->viewport('images', $files);
         $this->viewport('directory', $directory);
         $this->viewport('fs', $fs);
@@ -44,14 +46,18 @@ trait HasImages
     
     public function setProfilePicture()
     {
-        $this->loadModel()->set('profilePicture', $this->router()->params('path'));
+        $avatar = $this->loadModel()->profilePictureField();
+
+        $this->loadModel()->set($avatar, $this->router()->params('path'));
         $this->loadModel()->save(0);
         $this->router()->hopBack();
     }
 
     public function unsetProfilePicture()
     {
-        $this->loadModel()->set('profilePicture', null);
+        $avatar = $this->loadModel()->profilePictureField();
+
+        $this->loadModel()->set($avatar, null);
         $this->loadModel()->save(0);
         $this->router()->hopBack();
     }

@@ -30,7 +30,7 @@ class Organisation extends TightModel
     public static function queryListing($filters=[], $options=[]): SelectInterface
     {
         $select = self::table()->select();
-        $select->columns(['id', 'slug', 'label', 'profilePicture']);
+        $select->columns(['id', 'slug', 'label', 'avatar']);
     
         if(isset($options['withPraxis'])) {
             $select->join(['organisation_praxis', 'organisation_praxis'], [['organisation_praxis', 'organisation_id', 'organisation', 'id']], 'LEFT OUTER');
@@ -99,7 +99,7 @@ class Organisation extends TightModel
                 break;
 
                 case 'withoutProfilePicture':
-                    $Query->whereEmpty('profilePicture');
+                    $Query->whereEmpty('avatar');
                 break;
             }
 

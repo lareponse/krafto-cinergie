@@ -27,7 +27,7 @@ class Movie extends TightModel
             'label',
             'released',
             'runtime',
-            'profilePicture',
+            'avatar',
             'genre_id',
             'metrage_id'
         ];
