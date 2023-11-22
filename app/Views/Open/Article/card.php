@@ -1,6 +1,5 @@
-<article class="card mb-4 shadow">
-
-    <a href="article-single.php">
+<article class="article-item card mb-4 shadow ">
+    <a href="<?= $controller->router()->hyp('article', ['slug' => $article->slug()]);?>">
         <img src="<?= $article->profilePicture() ?>" class="card-img-top" alt="<?= $article->get('label'); ?> - <?= $article->get('author_label'); ?>"" />
         <div class="card-body">
             <p class="btn btn-sm btn-primary taxo-cat">Catégorie</p>

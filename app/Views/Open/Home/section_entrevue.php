@@ -6,7 +6,7 @@
         foreach ($entrevues as $article) {
             $href = $controller->router()->hyp('article', ['slug' => $article->slug()]);
         ?>
-            <div class="col-lg-4 article-item">
+            <div class="col-lg-4">
                 <?= $this->insert('Open::Article/card', ['article' => $article]) ?>
             </div>
         <?php

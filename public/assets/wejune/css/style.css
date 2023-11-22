@@ -1260,14 +1260,14 @@ button.navbar-toggler:focus {
       border-radius: 0.7rem 0 0;
    }
 
-   div.article-item .card h5.card-title {
+   .article-item.card h5.card-title {
       min-height: 60px;
    }
 
-   div.article-item .card img,
-   div.professionnel-item .card img,
-   div.auteur-item .card img,
-   div.film-item .card img {
+   .article-item.card img,
+   .professionnel-item.card img,
+   .auteur-item.card img,
+   .film-item.card img {
       object-fit: cover;
       height: 250px;
       object-position: center center;
