@@ -7,103 +7,126 @@
 
         var calendar = new FullCalendar.Calendar(calendarEl, {
             headerToolbar: {
-                left: 'prev,next today',
+                left: 'prev, today',
                 center: 'title',
-                right: 'dayGridMonth,listWeek',
+                right: 'next',
             },
             locale: 'fr',
-            initialDate: '2023-09-18',
-            navLinks: true, // can click day/week names to navigate views
+            initialDate: '2023-09-01',
+            navLinks: true,
+            expandRows: true,
+            selectable: true,
             selectMirror: true,
-            dayMaxEvents: true, // allow "more" link when too many events
-
+            dayMaxEvents: true,
             events: '/api/events/events.json',
-        
+
+            eventClick: function(info) {
+                $('#modalTitle').html(info.event.title); // Le titre de l'événement
+                $('#modalBodyDescription').html(info.event.title); // Le titre de l'événement dans la modal
+                $('#eventUrlInternal').hide();
+                $('#eventUrlExternal').hide();
+
+                $('#eventUrlInternal').attr('href', info.event.extendedProps.url_internal);
+                if (info.event.extendedProps.url_internal.length > 0)
+                    $('#eventUrlInternal').show();
+
+                $('#eventUrlExternal').attr('href', info.event.extendedProps.url_site);
+                if (info.event.extendedProps.url_site.length > 0)
+                    $('#eventUrlExternal').show();
+
+                $('#fullCalModal').modal('show');
+                return false;
+            },
+
         });
 
-        calendar.render();
 
         var allEventsButton = document.getElementById('allEvents');
-        var category1Button = document.getElementById('category1');
-        var category2Button = document.getElementById('category2');
-        var category3Button = document.getElementById('category3');
-        var category4Button = document.getElementById('category4');
-        var category5Button = document.getElementById('category5');
-        var category6Button = document.getElementById('category6');
-        var category7Button = document.getElementById('category7');
+        var evtavant_premiereButton = document.getElementById('evt-avant_premiere');
+        var evtevenement_agendaButton = document.getElementById('evt-evenement_agenda');
+        var evtcineclubButton = document.getElementById('evt-cineclub');
+        var evtfestivalButton = document.getElementById('evt-festival');
+        var evtsortie_en_salleButton = document.getElementById('evt-sortie_en_salle');
+        var evtprogrammation_tvButton = document.getElementById('evt-programmation_tv');
+        var evt_autre_agendaButton = document.getElementById('evt-_autre_agenda');
 
         var allEvents = [];
-        var category1Events = [];
-        var category2Events = [];
-        var category3Events = [];
-        var category4Events = [];
-        var category5Events = [];
-        var category6Events = [];
-        var category7Events = [];
+        var evtavant_premiereEvents = [];
+        var evtevenement_agendaEvents = [];
+        var evtcineclubEvents = [];
+        var evtfestivalEvents = [];
+        var evtsortie_en_salleEvents = [];
+        var evtprogrammation_tvEvents = [];
+        var evt_autre_agendaEvents = [];
+
+        
+        console.log(calendar.getEvents());
 
         // Séparez les événements en fonction de la catégorie
         calendar.getEvents().forEach(function(event) {
+
             allEvents.push(event);
 
-        console.log(event.extendedProps.className)
-
-        if (event.extendedProps.className === 'evt-avant_premiere') {
-            category1Events.push(event);
-            } else if (event.extendedProps.className === 'categorie2') {
-            category2Events.push(event);
-            } else if (event.extendedProps.className === 'categorie3') {
-            category3Events.push(event);
-            } else if (event.extendedProps.className === 'categorie4') {
-            category4Events.push(event);
-            } else if (event.extendedProps.className === 'categorie5') {
-            category5Events.push(event);
-            } else if (event.extendedProps.className === 'categorie6') {
-            category6Events.push(event);
-            } else if (event.extendedProps.className === 'categorie7') {
-            category7Events.push(event);
+            if (event.extendedProps.categorie === 'evt-avant_premiere') {
+                evtavant_premiereEvents.push(event);
+            } else if (event.extendedProps.categorie === 'evt-evenement_agenda') {
+                evtevenement_agendaEvents.push(event);
+            } else if (event.extendedProps.categorie === 'evt-cineclub') {
+                evtcineclubEvents.push(event);
+            } else if (event.extendedProps.categorie === 'evt-festival') {
+                evtfestivalEvents.push(event);
+            } else if (event.extendedProps.categorie === 'evt-sortie_en_salle') {
+                evtsortie_en_salleEvents.push(event);
+            } else if (event.extendedProps.categorie === 'evt-programmation_tv') {
+                evtprogrammation_tvEvents.push(event);
+            } else if (event.extendedProps.categorie === 'evt-_autre_agenda') {
+                evt_autre_agendaEvents.push(event);
             }
 
         });
 
         allEventsButton.addEventListener('click', function() {
             calendar.removeAllEvents();
-        calendar.addEventSource(allEvents);
+            calendar.addEventSource(allEvents);
         });
 
-        category1Button.addEventListener('click', function() {
+        evtavant_premiereButton.addEventListener('click', function() {
             calendar.removeAllEvents();
-        calendar.addEventSource(category1Events);
+            calendar.addEventSource(evtavant_premiereEvents);
         });
 
-        category2Button.addEventListener('click', function() {
+        evtevenement_agendaButton.addEventListener('click', function() {
             calendar.removeAllEvents();
-        calendar.addEventSource(category2Events);
+            calendar.addEventSource(evtevenement_agendaEvents);
         });
 
-        category3Button.addEventListener('click', function() {
+        evtcineclubButton.addEventListener('click', function() {
             calendar.removeAllEvents();
-        calendar.addEventSource(category3Events);
+            calendar.addEventSource(evtcineclubEvents);
         });
 
-        category4Button.addEventListener('click', function() {
+        evtfestivalButton.addEventListener('click', function() {
             calendar.removeAllEvents();
-        calendar.addEventSource(category4Events);
+            calendar.addEventSource(evtfestivalEvents);
         });
 
-        category5Button.addEventListener('click', function() {
+        evtsortie_en_salleButton.addEventListener('click', function() {
             calendar.removeAllEvents();
-        calendar.addEventSource(category5Events);
+            calendar.addEventSource(evtsortie_en_salleEvents);
         });
 
-        category6Button.addEventListener('click', function() {
+        evtprogrammation_tvButton.addEventListener('click', function() {
             calendar.removeAllEvents();
-        calendar.addEventSource(category6Events);
+            calendar.addEventSource(evtprogrammation_tvEvents);
         });
 
-        category7Button.addEventListener('click', function() {
+        evt_autre_agendaButton.addEventListener('click', function() {
             calendar.removeAllEvents();
-        calendar.addEventSource(category7Events);
+            calendar.addEventSource(evt_autre_agendaEvents);
         });
+
+
+        calendar.render();
 
     });
-    </script>
+</script>
