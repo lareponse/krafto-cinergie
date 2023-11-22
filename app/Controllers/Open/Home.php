@@ -12,39 +12,59 @@ class Home extends Kortex
     public function home()
     {
         $articlesDiaporama = Article::queryListing()
+            ->whereEQ('public', '1')
             ->whereEQ('pick', '1')
             ->limit(7);
-            
-        $entrevuesFilmees = Article::queryListing()
-            ->whereEQ('pick', '0')
+        
+        $articlesDiaporama = $articlesDiaporama->retObj(Article::class);
+
+
+        $entrevues = Article::queryListing()
+            ->whereEQ('public', '1')
+            ->whereEQ('pick', '1')
             ->whereEQ('type_id', '50')
             ->whereNotEmpty('embedVideo')
             ->limit(3);
 
+        $entrevues = $entrevues->retObj(Article::class);
+
+
         $sousLaLoupe = Article::queryListing()
-            ->whereEQ('pick', '0')
+            ->whereEQ('public', '1')
+            ->whereEQ('pick', '1')
             ->whereEmpty('embedVideo')
             ->limit(3);
+        $sousLaLoupe = $sousLaLoupe->retObj(Article::class);
             
-            
+
+        $contests = Contest::queryListing()
+            ->whereEQ('public', '1')
+            ->whereEQ('pick', '1')
+            ->limit(1);
+
+        $contests = $contests->retObj(Contest::class);
+
         $events = Event::queryListing()
             ->whereEQ('public', '1')
+            ->whereEQ('pick', '1')
             ->limit(3)
             ->orderBy(['starts', 'ASC']);
+
+        $events = $events->retObj(Event::class);
         
-        
+
+        $window = [new \DateTimeImmutable('-1 month'), new \DateTimeImmutable('+2 month')];
         $jobs = Job::queryListingWithEvent(
             Job::queryListing()->whereEQ('public', '1')->limit(5)->orderBy(['starts', 'DESC']),
-            new \DateTimeImmutable('-1 month'), new \DateTimeImmutable('+2 month')
-        );
+            $window[0], $window[1]);
         $jobs = $jobs->retObj(Job::class);
             
-        $this->viewport('articlesDiaporama', $articlesDiaporama->retObj(Article::class));
-        $this->viewport('entrevuesFilmees', $entrevuesFilmees->retObj(Article::class));
-        $this->viewport('sousLaLoupe', $sousLaLoupe->retObj(Article::class));
+        $this->viewport('articlesDiaporama', $articlesDiaporama);
+        $this->viewport('entrevues', $entrevues);
+        $this->viewport('sousLaLoupe', $sousLaLoupe);
 
-        $this->viewport('contests', Contest::queryListing()->retObj(Contest::class));
-        $this->viewport('events', $events->retObj(Event::class));
+        $this->viewport('contests', $contests);
+        $this->viewport('events', $events);
         $this->viewport('jobs', $jobs);
     }
 }
