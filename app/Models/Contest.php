@@ -47,7 +47,7 @@ class Contest extends TightModel implements EventInterface
         $now = date('Y-m-d');
         $startsAfter = $select->addBinding('startsAfter', $now);
         $stopsBefore = $select->addBinding('stopsBefore', $now);
-        $select->whereWithBind(sprintf('starts >= %s AND stops IS NOT NULL AND (stops >= %s)', $startsAfter, $stopsBefore));
+        $select->whereWithBind(sprintf('starts <= %s AND stops IS NOT NULL AND (stops >= %s)', $startsAfter, $stopsBefore));
 
         $select->whereEQ('public', 1);
 
