@@ -33,33 +33,32 @@
         </button>
 
         <nav class="collapse navbar-collapse" id="navigation">
-            <?php
-            vd($controller->activeSection());
-            ?>
             <ul class="navbar-nav mx-auto">
+                <?php $activeSection = $controller->activeSection()?>
+
                 <li class="nav-item">
-                    <a class="nav-link <?= $controller->activeSection() == 'Article' ? 'active' : '' ?>" href="<?= $controller->router()->hyp('articles'); ?>">Articles</a>
+                    <a class="nav-link <?= $activeSection == 'Article' ? 'active' : '' ?>" href="<?= $controller->router()->hyp('articles'); ?>">Articles</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $controller->activeSection() == 'Event' ? 'active' : '' ?>" href="<?= $controller->router()->hyp('events'); ?>">Agenda</a>
+                    <a class="nav-link <?= $activeSection == 'Event' ? 'active' : '' ?>" href="<?= $controller->router()->hyp('events'); ?>">Agenda</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $controller->activeSection() == 'Movie' ? 'active' : '' ?>" href="<?= $controller->router()->hyp('movies'); ?>">Filmoth&egrave;que</a>
+                    <a class="nav-link <?= $activeSection == 'Movie' ? 'active' : '' ?>" href="<?= $controller->router()->hyp('movies'); ?>">Filmoth&egrave;que</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $controller->activeSection() == 'Professional' ? 'active' : '' ?>" href="<?= $controller->router()->hyp('professionals'); ?>">Professionnels</a>
+                    <a class="nav-link <?= $activeSection == 'Professional' ? 'active' : '' ?>" href="<?= $controller->router()->hyp('professionals'); ?>">Professionnels</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $controller->activeSection() == 'Organisation' ? 'active' : '' ?>" href="<?= $controller->router()->hyp('organisations'); ?>">Organisations</a>
+                    <a class="nav-link <?= $activeSection == 'Organisation' ? 'active' : '' ?>" href="<?= $controller->router()->hyp('organisations'); ?>">Organisations</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $controller->activeSection() == 'Job' ? 'active' : '' ?>" href="<?= $controller->router()->hyp('jobs'); ?>">Castings & Jobs</a>
+                    <a class="nav-link <?= $activeSection == 'Job' ? 'active' : '' ?>" href="<?= $controller->router()->hyp('jobs'); ?>">Castings & Jobs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $controller->activeSection() == 'Shop' ? 'active' : '' ?>" href="<?= $controller->router()->hyp('shop'); ?>">Boutique</a>
+                    <a class="nav-link <?= $activeSection == 'Shop' ? 'active' : '' ?>" href="<?= $controller->router()->hyp('shop'); ?>">Boutique</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $controller->activeSection() == 'Podcast' ? 'active' : '' ?>" href="https://www.cinergie.be/podcast">Podcast</a>
+                    <a class="nav-link" href="https://www.cinergie.be/podcast">Podcast</a>
                 </li>
             </ul>
             <div class="socials d-none d-xl-block">
