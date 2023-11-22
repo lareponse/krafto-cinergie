@@ -1,8 +1,9 @@
-<footer id="footer" class="text-center text-lg-start px-3 px-lg-0">
+<footer id="footer" class="text-lg-start px-3 px-lg-0">
+
     <div class="container">
 
         <section class="row">
-            <div class="col-lg-3">
+            <div class="col-md-6 col-xl-3">
                 <p>
                     <a href="<?=$controller->router()->hyp('home');?>">
                         <img src="/public/assets/img/logo-cinergie.svg" alt="Logo CINERGIE" id="logo">
@@ -18,9 +19,11 @@
                     <a target="_blank" href="https://www.facebook.com/cinergie.be/">
                         <i class="bi bi-facebook"></i>
                     </a>
+
                     <a target="_blank" href="https://twitter.com/cinergie">
-                        <img class="twitter" src="/public/assets/img/twitter.svg">
+                        <i class="bi bi-twitter-x"></i>
                     </a>
+
                     <a target="_blank" href="https://www.youtube.com/channel/UCyKdwOw0TYnSUL_vZ1BJ7jA/videos">
                         <i class="bi bi-youtube"></i>
                     </a>
@@ -33,9 +36,9 @@
                 </p>
             </div>
 
-            <div class="col-lg-5">
+            <div class="col-md-6 col-xl-5">
                 <section class="row" id="liens-utiles">
-                    <div class="col-lg-6">
+                    <div class="col-6">
                         <nav class="navigation-footer">
                             <ul>
                                 <li><a href="<?=$controller->router()->hyp('home');?>">Accueil</a></li>
@@ -49,7 +52,7 @@
                             </ul>
                         </nav>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-6">
                         <nav class="navigation-footer">
                             <ul>
                                 <li><a href="https://www.cinergie.be/podcast">Podcast</a></li>
@@ -65,31 +68,30 @@
                 </section>
             </div>
 
-            <div class="col-lg-4">
+            <div class="col-xl-4">
                 <?= $this->insert('Open::_partials/form_brevo')?>
-
-                <h5 class="text-center text-lg-end mt-5 text-uppercase">
-                    Nos partenaires
-                </h5>
-                <section id="partenaires">
+                <h5 class="text-left text-xl-end mt-5 text-uppercase">Nos partenaires</h5>
+                <div id="partenaires">
                     <a class="partenaire-item" href="https://www.maisondelafrancite.be/">
                         <img src="/public/assets/img/partenaires/logo_maison_de_la_francite.png" alt="Maison de la Francité" />
                     </a>
+
                     <a class="partenaire-item" href="https://be.brussels/">
-                        <img src="/public/assets/img/partenaires/iris_bruxelles.jpeg" alt="Région de Bruxelles-Capitale - Administration Economie et Emploi" />
+                        <img src="/public/assets/img/partenaires/iris_bruxelles.png" alt="Région de Bruxelles-Capitale - Administration Economie et Emploi" />
                     </a>
+
                     <a class="partenaire-item" href="https://ccf.brussels/wp-signup.php?new=www.spfb.brussels">
-                        <img src="/public/assets/img/partenaires/bruxelles-francophone.gif" alt="Service public francophone bruxellois" />
+                        <img src="/public/assets/img/partenaires/bruxelles-francophone.png" alt="Service public francophone bruxellois" />
                     </a>
+
                     <a class="partenaire-item" href="https://audiovisuel.cfwb.be/">
-                        <img src="/public/assets/img/partenaires/logofwb.jpeg" alt="Centre du Cinéma et de l'Audiovisuel de la Communauté Française" />
+                        <img src="/public/assets/img/partenaires/logofwb.png" alt="Centre du Cinéma et de l'Audiovisuel de la Communauté Française" />
                     </a>
-        <?php
-        /*            <a class="partenaire-item" href="https://lareponse.be">
+
+                    <a class="partenaire-item" href="https://lareponse.be">
                         <img src="https://avatars.githubusercontent.com/u/20891495?v=4" alt="La Réponse" />
                     </a>
-                    */?>
-                </section>
+                </div>
             </div>
         </section>
 
