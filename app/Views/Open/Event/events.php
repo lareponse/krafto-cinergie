@@ -5,14 +5,14 @@
 
         <div class="p-5 text-center">
             <div class="mb-5">
-                <button class="btn evt-all" id="allEvents">Tous</button>
-                <button class="btn evt-avant_premiere" id="evt-avant_premiere">Avant-première</button>
-                <button class="btn evt-evenement_agenda" id="evt-evenement_agenda">Évènement</button>
-                <button class="btn evt-cineclub" id="evt-cineclub">Ciné-club</button>
-                <button class="btn evt-festival" id="evt-festival">Festival</button>
-                <button class="btn evt-sortie_en_salle" id="evt-sortie_en_salle">Sortie</button>
-                <button class="btn evt-programmation_tv" id="evt-programmation_tv">Programmation TV</button>
-                <button class="btn evt-_autre_agenda" id="evt-_autre_agenda">Séances</button>
+                <button class="btn event-cat-all" id="allEvents">Tous</button>
+                <button class="btn event-cat-avant_premiere" id="event-cat-avant_premiere">Avant-première</button>
+                <button class="btn event-cat-evenement_agenda" id="event-cat-evenement_agenda">Évènement</button>
+                <button class="btn event-cat-cineclub" id="event-cat-cineclub">Ciné-club</button>
+                <button class="btn event-cat-festival" id="event-cat-festival">Festival</button>
+                <button class="btn event-cat-sortie_en_salle" id="event-cat-sortie_en_salle">Sortie</button>
+                <button class="btn event-cat-programmation_tv" id="event-cat-programmation_tv">Programmation TV</button>
+                <button class="btn event-cat-_autre_agenda" id="event-cat-_autre_agenda">Séances</button>
             </div>
             <div id='calendar'></div>
 

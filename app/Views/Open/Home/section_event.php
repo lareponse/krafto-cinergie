@@ -9,7 +9,7 @@ foreach ($events as $event) {
         <a href="#">
             <div class="row g-0">
                 <div class="col-md-4 date-item">
-                    <span>DD</span>
+                    <span><?= substr($event->get('starts'), -2, 2) ?></span>
                     <span>MMM</span>
                 </div>
                 <div class="col-md-8">

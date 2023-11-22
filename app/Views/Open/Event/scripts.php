@@ -42,13 +42,13 @@
 
 
         var allEventsButton = document.getElementById('allEvents');
-        var evtavant_premiereButton = document.getElementById('evt-avant_premiere');
-        var evtevenement_agendaButton = document.getElementById('evt-evenement_agenda');
-        var evtcineclubButton = document.getElementById('evt-cineclub');
-        var evtfestivalButton = document.getElementById('evt-festival');
-        var evtsortie_en_salleButton = document.getElementById('evt-sortie_en_salle');
-        var evtprogrammation_tvButton = document.getElementById('evt-programmation_tv');
-        var evt_autre_agendaButton = document.getElementById('evt-_autre_agenda');
+        var evtavant_premiereButton = document.getElementById('event-cat-avant_premiere');
+        var evtevenement_agendaButton = document.getElementById('event-cat-evenement_agenda');
+        var evtcineclubButton = document.getElementById('event-cat-cineclub');
+        var evtfestivalButton = document.getElementById('event-cat-festival');
+        var evtsortie_en_salleButton = document.getElementById('event-cat-sortie_en_salle');
+        var evtprogrammation_tvButton = document.getElementById('event-cat-programmation_tv');
+        var evt_autre_agendaButton = document.getElementById('event-cat-_autre_agenda');
 
         var allEvents = [];
         var evtavant_premiereEvents = [];
@@ -67,19 +67,19 @@
 
             allEvents.push(event);
 
-            if (event.extendedProps.categorie === 'evt-avant_premiere') {
+            if (event.extendedProps.categorie === 'event-cat-avant_premiere') {
                 evtavant_premiereEvents.push(event);
-            } else if (event.extendedProps.categorie === 'evt-evenement_agenda') {
+            } else if (event.extendedProps.categorie === 'event-cat-evenement_agenda') {
                 evtevenement_agendaEvents.push(event);
-            } else if (event.extendedProps.categorie === 'evt-cineclub') {
+            } else if (event.extendedProps.categorie === 'event-cat-cineclub') {
                 evtcineclubEvents.push(event);
-            } else if (event.extendedProps.categorie === 'evt-festival') {
+            } else if (event.extendedProps.categorie === 'event-cat-festival') {
                 evtfestivalEvents.push(event);
-            } else if (event.extendedProps.categorie === 'evt-sortie_en_salle') {
+            } else if (event.extendedProps.categorie === 'event-cat-sortie_en_salle') {
                 evtsortie_en_salleEvents.push(event);
-            } else if (event.extendedProps.categorie === 'evt-programmation_tv') {
+            } else if (event.extendedProps.categorie === 'event-cat-programmation_tv') {
                 evtprogrammation_tvEvents.push(event);
-            } else if (event.extendedProps.categorie === 'evt-_autre_agenda') {
+            } else if (event.extendedProps.categorie === 'event-cat-_autre_agenda') {
                 evt_autre_agendaEvents.push(event);
             }
 

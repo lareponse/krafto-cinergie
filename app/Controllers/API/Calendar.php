@@ -37,12 +37,12 @@ class Calendar extends \HexMakina\kadro\Controllers\Kadro
     {
 
         $res = Event::filter(['date_start' => $this->router()->params('start'), 'date_stop' => $this->router()->params('end')]);
-        // dd($res);
         $events = [];
         foreach($res as $event){
+            // dd($event);
             $events[]= [
-                'categorie' => 'evt-'.$event->get('type_slug'),
-                'className' => 'evt-'.$event->get('type_slug'),
+                'categorie' => $event->get('type_slug'),
+                'className' => $event->get('type_slug'),
                 'title' => $event->__toString(),
                 'start' => $event->get('starts'),
                 'end' => $event->get('ends'),

@@ -539,69 +539,69 @@ small.frais {
    border-color: #D3121B;
 }
 
-.evt-all {
+.event-cat-all {
    color: #000000;
 }
 
-.evt-avant_premiere {
+.event-cat-avant_premiere {
    color: #ea9909;
 }
 
-a.evt-avant_premiere {
+a.event-cat-avant_premiere {
    background-color: #ea9909;
    border: none;
 }
 
-.evt-evenement_agenda {
+.event-cat-evenement_agenda {
    color: #a6a6a6;
 }
 
-a.evt-evenement_agenda {
+a.event-cat-evenement_agenda {
    background-color: #a6a6a6;
    border: none;
 }
 
-.evt-cineclub {
+.event-cat-cineclub {
    color: #d3339a;
 }
 
-a.evt-cineclub {
+a.event-cat-cineclub {
    background-color: #d3339a;
    border: none;
 }
 
-.evt-festival {
+.event-cat-festival {
    color: #4f51cc;
 }
 
-a.evt-festival {
+a.event-cat-festival {
    background-color: #4f51cc;
    border: none;
 }
 
-.evt-sortie_en_salle {
+.event-cat-sortie_en_salle {
    color: #d1001d;
 }
 
-a.evt-sortie_en_salle {
+a.event-cat-sortie_en_salle {
    background-color: #d1001d;
    border: none;
 }
 
-.evt-programmation_tv {
+.event-cat-programmation_tv {
    color: #00712b;
 }
 
-a.evt-programmation_tv {
+a.event-cat-programmation_tv {
    background-color: #00712b;
    border: none;
 }
 
-.evt-_autre_agenda {
+.event-cat-_autre_agenda {
    color: #3a87ad;
 }
 
-a.evt-_autre_agenda {
+a.event-cat-_autre_agenda {
    background-color: #3a87ad;
    border: none;
 }
