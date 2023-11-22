@@ -37,19 +37,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script src="/public/assets/wejune/js/lightbox.min.js"></script>
     <script src="/public/assets/wejune/js/script.js"></script>
-    <script src="/public/assets/js/otto/otto-format-date.js"></script>
-    <script src="/public/assets/js/otto/otto-link.js"></script>
     <script type="module">
-      
-      import OttoIdLabel from '/public/assets/js/otto/otto-id-label.js';
+        import OttoIdLabel from '/public/assets/js/otto/otto-id-label.js';
+        import OttoLink from '/public/assets/js/otto/otto-link.js';
+        import OttoFormatDate from '/public/assets/js/otto/otto-format-date.js';
 
-      document.addEventListener("DOMContentLoaded", () => {
-        
-        const ottoIdLabel = new OttoIdLabel('.otto-id-label');
-        ottoIdLabel.replace();
+        document.addEventListener("DOMContentLoaded", () => {
 
-        <?= $this->section('onLoaded')?>
-      });
+            const ottoIdLabel = new OttoIdLabel('.otto-id-label');
+            ottoIdLabel.replace();
+
+            OttoLink.urlLinks()
+            OttoLink.emailLinks()
+            OttoLink.callLinks()
+
+            OttoFormatDate.searchAndFormat('.otto-date');
+
+            <?= $this->section('onLoaded') ?>
+        });
     </script>
 </body>
 
