@@ -26,11 +26,11 @@ $(document).ready(function () {
             }
         ]
     });
-    $('#concours-du-moment').slick({
+    $('#concoursdm').slick({
         centerMode: false,
         autoplay: true,
         autoplaySpeed: 2000,
-        dots: false,
+        dots: true,
         arrows: true,
         infinite: true,
         speed: 1000,
@@ -38,7 +38,7 @@ $(document).ready(function () {
         slidesToScroll: 1,
     });
 
-    $('#single-post-slider.slide.dots').slick({
+    $('.single-post-slider.slide.dots').slick({
         dots: true,
         arrows: false,
 
@@ -68,7 +68,7 @@ $(document).ready(function () {
         }]
     });
 
-    $('#single-post-slider.slide.arrow').slick({
+    $('.single-post-slider.slide.arrow').slick({
         dots: false,
         arrows: true,
 

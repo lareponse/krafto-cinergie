@@ -59,3 +59,8 @@ iframe{
 */
 
 .otto-suggestions li a{display:none;}
+
+.separator{
+
+    margin:  0 0.5em;
+}
