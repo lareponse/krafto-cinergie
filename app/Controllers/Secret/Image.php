@@ -165,11 +165,11 @@ class Image extends Krafto
     /**
      * Builds a relative locator for an image file.
      *
-     * @param string|null $file optional filename to include in the locator.
+     * @param string|null $filename optional filename to include in the locator.
      * @return string The relative locator for the image file.
      * @throws \Exception If the external controller or slug is not set.
      */
-    public function buildRelativeLocator($externalController=null, string $file = null): string
+    public function buildRelativeLocator($externalController=null, string $filename = null): string
     {
         if(!is_null($externalController))
             $this->externalController = $externalController;
@@ -191,9 +191,9 @@ class Image extends Krafto
         // Add the slug to the path
         $pathComponents[] = $this->slug();
 
-        // Add the file to the path, if provided
-        if (!is_null($file)) {
-            $pathComponents[] = $file;
+        // Add the filename to the path, if provided
+        if (!is_null($filename)) {
+            $pathComponents[] = $filename;
         }
 
         // Join the path components with the directory separator
