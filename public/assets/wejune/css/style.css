@@ -751,12 +751,15 @@ article.boutique .commander:hover {
    padding: 25px;
 }
 
-#sidebar #filtres h6 {
+aside header h6 {
    margin-bottom: 0px;
    line-height: initial;
 }
+aside header a {
+   text-transform: uppercase;
+}
 
-#sidebar #filtres header {
+aside header {
    display: flex;
    justify-content: space-between;
    align-items: center;
