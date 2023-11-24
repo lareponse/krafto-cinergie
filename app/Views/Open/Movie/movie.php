@@ -1,7 +1,5 @@
 <?php $this->layout('Open::layout');
 
-use \HexMakina\Marker\Marker;
-
 $collection_href = $controller->router()->hyp('movies');
 ?>
 
@@ -9,7 +7,7 @@ $collection_href = $controller->router()->hyp('movies');
     <article class="mx-auto">
 
         <h1><?= $record->get('label') ?></h1>
-        <h6 class="text-primary"><?= $this->insert('Open::Movie/themes')?></h6>
+        <h6 class="text-primary"><?= $this->insert('Open::Movie/themes') ?></h6>
         <hr class="my-4" />
 
         <div class="share" id="share">
@@ -22,83 +20,89 @@ $collection_href = $controller->router()->hyp('movies');
         </div>
 
 
-        <section class="row g-0 mt-4">
+        <div class="row g-0 mt-4">
 
             <div class="col-lg-5">
                 <img class="img-fluid w-100" src="<?= $record->profilePicture() ?>" alt="Photo du film <?= $record->get('label') ?>" />
             </div>
 
-            <div class="col-lg-7 ps-lg-5" id="infos">
-                <?php if(!empty($record->get('directors'))){
-                    ?>
-                    <p class="text-primary"><b><span class="text-dark">de </span> <?=$record->get('directors')?></b></p>
-                    <?php
+            <div class="col-lg-7 ps-lg-5 infos">
+
+                <?php if (!empty($record->get('directors'))) {
+                ?>
+                    <p class="text-primary"><b><span class="text-dark">de </span> <?= $record->get('directors') ?></b></p>
+                <?php
                 }
                 ?>
                 <?php if (!empty($record->get('released'))) {
-                    $href = $controller->router()->withFreeParams($collection_href, ['released' => $record->get('released')]);
-                    ?><p><b>Date de sortie :</b> <a href="<?= $href?>"><?= $record->get('released') ?></a></p><?php
-                }   
-                
-                ?>
+                    $href = $collection_href . '?' . http_build_query(['released' => $record->get('released')]);
+                ?><p><b>Date de sortie :</b> <a href="<?= $href ?>"><?= $record->get('released') ?></a></p><?php
+                                                                                                        }
+
+                                                                                                            ?>
 
                 <?php if (!empty($record->get('legacy_origine'))) {
-                    ?><p><b>Pays :</b> <?= $record->get('legacy_origine') ?></p><?php
-                }
-                ?>
-                <p><b>Genre :</b> 
-                <?php
-                $href = $controller->router()->withFreeParams($collection_href, ['type' => $record->get('genre_id')]);
-                ?>
-                
-                <a href="<?=$href?>" class="otto-id-label" otto-urn="Tag:<?= $record->get('genre_id');?>"><?= $record->get('genre_id');?></a>
-                
-                <p><b>Metrage :</b> 
-                <?php
-                $href = $controller->router()->withFreeParams($collection_href, ['metrage' => $record->get('metrage_id')]);
-                ?>
-                <a href="<?=$href?>" class="otto-id-label" otto-urn="Tag:<?= $record->get('metrage_id');?>"><?= $record->get('metrage_id');?></a>
-                
+                ?><p><b>Pays :</b> <?= $record->get('legacy_origine') ?></p><?php
+                                                                        }
+                                                                            ?>
+                <p><b>Genre :</b>
+                    <?php
+
+                    $href = $collection_href . '?' . http_build_query(['type' => $record->get('genre_id')]);
+
+                    ?>
+
+                    <a href="<?= $href ?>" class="otto-id-label" otto-urn="Tag:<?= $record->get('genre_id'); ?>"><?= $record->get('genre_id'); ?></a>
+
+                <p><b>Metrage :</b>
+                    <?php
+                    $href = $collection_href . '?' . http_build_query(['metrage' => $record->get('metrage_id')]);
+
+                    ?>
+                    <a href="<?= $href ?>" class="otto-id-label" otto-urn="Tag:<?= $record->get('metrage_id'); ?>"><?= $record->get('metrage_id'); ?></a>
+
                 <p><b>Durée :</b> <?= $record->get('runtime') ?></p>
+                <p><b>Casting :</b></p>
                 <?= $record->get('casting') ?>
 
+                <div class="mt-4">
                 <?php
                 foreach ($merchandise as $merch) {
                 ?>
-                    <p class="mt-5">
-                        <aside class="input-group big" id="commander-boutique">
-                            <button class="form-control"><?=$merch->get('isBook')? 'Livre' : 'DVD'?></button>
-                            <span class="input-group-text" id="prix">Boutique</span>
-                        </aside>
-                    </p>
+                    <aside class="input-group big commander-boutique">
+                        <button class="form-control btn-commander" data-bs-toggle="modal" data-bs-target="#modal-nouvelle-commande-dvd" data-titre="<?=$merch?>" data-prix="<?= $merch->get('price')?>">
+                            <i class="bi bi-cart-plus-fill"></i> </button>
+                        <span class="input-group-text prix"><?= $merch->get('price')?> &euro;</span>
+                    </aside>
                 <?php
                 }
                 ?>
+                </div>
             </div>
-        </section>
-            
+        </div>
+
         <?php
         if (!empty($record->get('content'))) {
         ?>
-        <section id="bio" class="my-5">
-            <h2 class="pb-0">Synopsis</h2>
-            <hr />
-            <p><?= $record->get('content') ?></p>
-        </section>
+            <div id="bio" class="my-5">
+                <h2 class="pb-0">Synopsis</h2>
+                <hr />
+                <p><?= $record->get('content') ?></p>
+            </div>
         <?php
         }
         ?>
-        
-        <?=$this->insert('Open::_partials/related_articles', ['related_articles' => $articles]);?>
+
+        <?= $this->insert('Open::_partials/related_articles', ['related_articles' => $articles]); ?>
 
         <?php
         if (!empty($record->get('url_trailer'))) {
         ?>
-            <section id="bande-annonce" class="my-5">
+            <div id="bande-annonce" class="my-5">
                 <h2 class="pb-0">Bande annonce</h2>
                 <hr />
                 <iframe class="iframe-size-single-post" src="<?= $record->get('url_trailer') ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </section>
+            </div>
         <?php
         }
         ?>
@@ -106,15 +110,19 @@ $collection_href = $controller->router()->hyp('movies');
         <?= $this->insert('Open::_partials/photos', ['photos' => $related_photos]); ?>
 
         <?php
-        if((count($professionals) + count($organisations)) > 1){
-            ?>
-            <section id="equipe-belge">
-            <h2 class="pb-0">L'équipe belge</h2>
-            <hr />
-            <?= $this->insert('Open::Movie/worked_on', ['professional' => $professionals, 'organisation' => $organisations]);?>
-        </section>
-            <?php
-        }
+        if ((count($professionals) + count($organisations)) > 1) {
         ?>
-    </article>
+            <div class="row my-5" id="equipe-belge">
+                <h2 class="pb-0">L'équipe belge</h2>
+                <hr />
+            </div>
+            <?= $this->insert('Open::Movie/worked_on', ['professional' => $professionals, 'organisation' => $organisations]); ?>
 </div>
+<?php
+        }
+?>
+</article>
+</div>
+
+
+<?php $this->insert('Open::Merchandise/modal_order');?>
