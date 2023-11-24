@@ -7,6 +7,11 @@ use \App\Models\{Professional};
 
 class IdLabel extends \HexMakina\kadro\Controllers\Kadro
 {
+    public function requiresOperator(): bool
+    {
+        return false;
+    }
+    
     public function byIds()
     {
         $ids = json_decode($this->router()->params('ids'));
