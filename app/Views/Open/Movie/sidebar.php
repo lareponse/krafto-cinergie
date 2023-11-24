@@ -1,4 +1,4 @@
-<div id="filtre-mobile" class="d-block d-lg-none">
+<div id="filtre-mobile" class="d-block d-xl-none">
     <button id="filtreBtn" class="btn btn-black" type="button" data-bs-toggle="offcanvas" data-bs-target="#filtre-sidebar">
         <i class="bi bi-sliders me-2"></i>Filtrer
     </button>
@@ -15,6 +15,6 @@
 </div>
 
 <h3 class="d-none d-xl-block">Rechercher</h3>
-<div id="filtres" class="shadow d-none d-lg-block d-xl-block">
+<div id="filtres" class="shadow d-none d-xl-block">
     <?= $this->insert('Open::Movie/form_filters') ?>
 </div>
