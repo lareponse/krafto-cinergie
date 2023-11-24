@@ -1,9 +1,6 @@
-<?php
-
-use \HexMakina\Marker\Marker; ?>
+<?php use \HexMakina\Marker\Marker; ?>
 
 <?php $this->layout('Open::layout', ['title' => $page->label()]) ?>
-
 
 <div class="container my-5">
     <div class="row">
