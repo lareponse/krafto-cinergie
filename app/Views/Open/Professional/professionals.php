@@ -8,38 +8,24 @@ use \HexMakina\Marker\Marker; ?>
     <section class="row">
         <?= $this->insert('Open::Professional/sidebar'); ?>
         <div class="col-12 col-xl-8 offset-xl-1">
-             <h3>Tous les professionnels</h3>
+            <h3>Tous les professionnels</h3>
 
-            <section class="row" id="professionnels">
+            <div class="row mb-5" id="professionnels">
+
                 <?php
                 if (empty($paginator->records()))
                     echo Marker::strong('Pas de résultats correspondant à vos critères');
                 else {
                     foreach ($paginator->records() as $record) {
                 ?>
-                        <div class="col-lg-4 col-md-6" id="professionnel-item">
-                            <article class="card mb-4 shadow">
-                                <a href="<?= $controller->router()->hyp('professional', ['slug' => $record->slug()]) ?>">
-                                    <div class="card-body">
-                                        <img src="<?= $record->profilePicture(); ?>" class="card-img-top mb-3" alt="Photo de <?= $record->fullName(); ?>">
-                                        <div class="p-3">
-                                            <h5 class="card-title"><?= $record; ?></h5>
-                                            <p class="card-text">
-                                                <?php
-                                                foreach($record->praxisIds() as $id) {
-                                                    echo '<small class="text-secondary" class="otto-id-label" otto-urn="Tag:'.$id.'">'.$id.'</small>';
-                                                }
-                                                ?>
-                                        </div>
-                                    </div>
-                                </a>
-                            </article>
+                        <div class="col-lg-4 col-md-6 ">
+                            <?= $this->insert('Open::Professional/card', ['record' => $record]); ?>
                         </div>
                 <?php
                     }
                 }
                 ?>
-            </section>
+            </div>
 
             <?= $this->insert('Open::_partials/pagination', ['route' => 'professionals', 'paginator' => $paginator]); ?>
         </div>
