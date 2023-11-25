@@ -5,8 +5,7 @@ trait HasSecrets
 {
     abstract public function get($prop);
 
-    private $secrets = null;
-    private $legacy_mapping = [
+    private static $legacy_mapping = [
         'country' => 'pays',
         'province' => 'region',
         'city' => 'ville',
@@ -23,24 +22,16 @@ trait HasSecrets
 
     public function isSecret(string $prop)
     {
-        if(!isset($this->legacy_mapping[$prop])){
+        if(!isset(self::$legacy_mapping[$prop])){
             throw new \InvalidArgumentException($prop.' IS NOT A VALID SECRET PROP');
         }
-
-        return in_array($this->legacy_mapping[$prop], $this->secretFields());
+        
+        return mb_strpos($this->get('secret'), self::$legacy_mapping[$prop]) !== false;
     }
 
     public function canDisplay(string $prop)
     {
         return !empty($this->get($prop)) && !$this->isSecret($prop);
-    }
-
-    private function secretFields()
-    {
-        if(is_null($this->secrets))
-            $this->secrets = explode(';', $this->get('secret'));
-        
-        return $this->secrets;
     }
 
 }
