@@ -47,7 +47,7 @@ class Merchandise extends TightModel
                 break;
                 
                 case 'book':
-                    $Query->whereNotEQ('isBook',1);
+                    $Query->whereEQ('isBook', 1);
                 break;
             }
 
