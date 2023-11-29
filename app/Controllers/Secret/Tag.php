@@ -11,6 +11,11 @@ class Tag extends Krafto
         return 'Settings';
     }
 
+    public function modelClassName(): string
+    {
+        return '\\HexMakina\\kadro\\Models\\' . $this->nid();
+    }
+
     public function home()
     {
         if (!$this->router()->params('FiltersOnFirstChar')) {
