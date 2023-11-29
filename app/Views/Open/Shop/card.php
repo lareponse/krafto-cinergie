@@ -1,24 +1,24 @@
 <article class="card shadow paysage boutique mb-4">
     <div class="row g-0">
 
-        <div class="col-md-5">
+        <div class="col-md-4">
             <a href="boutique-single.php">
                 <img src="<?= $record->profilePicture() ?>" class="img-fluid w-100 rounded-start" alt="DVD du film <?= $record ?>">
             </a>
         </div>
 
-        <div class="col-md-7">
+        <div class="col-md-8">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
                     <p class="genre">Fiction</p>
-                    <p class="date"><?= $record->get('year'); ?></p>
+                    <p class="date"><?= $record->get('released'); ?></p>
                 </div>
                 <h5 class="card-title mb-3 titre-film"><?= $record; ?></h5>
                 <p class="author"><i class="bi bi-person-fill pe-1"></i>Yvan Govar</p>
                 <aside class="input-group commander-boutique">
                     <button class="form-control btn-commander" 
                         data-bs-toggle="modal" 
-                        data-bs-target="#modal-nouvelle-commande-dvd" 
+                        data-bs-target="#modal-order" 
                         data-titre="<?= $record; ?>" 
                         data-prix="<?= $record->get('price'); ?>">
                             <i class="bi bi-cart-plus-fill"></i> </button>

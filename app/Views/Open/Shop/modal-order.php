@@ -1,5 +1,6 @@
 <!-- Modal -->
-<div class="modal fade" id="modal-order" tabindex="-1" aria-labelledby="modal-nouvelle-commande-label-dvd" aria-hidden="true">
+<div class="modal fade" id="modal-order" tabindex="-1" aria-labelledby="modal-nouvelle-commande-label-dvd"
+    aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -19,49 +20,49 @@
                     <div class="row mb-3">
                         <label for="nom-commande" class="col-lg-2 col-form-label">Nom <span>*</span></label>
                         <div class="col-lg-10">
-                            <input type="text" name="nom-commande" value="nom-commande" id="nom-commande" class="form-control" minlength="2" placeholder="votre nom..." required="">
+                            <input type="text" name="nom-commande" value="" id="nom-commande" class="form-control" minlength="2" placeholder="votre nom..." required="">
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <label for="prenom-commande" class="col-lg-2 col-form-label">Prénom <span>*</span></label>
                         <div class="col-lg-10">
-                            <input type="text" name="prenom-commande" value="prenom-commande" id="prenom-commande" class="form-control" minlength="2" placeholder="votre prénom..." required="">
+                            <input type="text" name="prenom-commande" value="" id="prenom-commande" class="form-control" minlength="2" placeholder="votre prénom..." required="">
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <label for="telephone-commande" class="col-lg-2 col-form-label">Téléphone <span>*</span></label>
                         <div class="col-lg-10">
-                            <input type="text" name="telephone-commande" value="telephone-commande" id="telephone-commande" class="form-control" minlength="2" placeholder="numéro de téléphone de contact..." required="">
+                            <input type="text" name="telephone-commande" value="" id="telephone-commande" class="form-control" minlength="2" placeholder="numéro de téléphone de contact..." required="">
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <label for="email-commande" class="col-lg-2 col-form-label">Email <span>*</span></label>
                         <div class="col-lg-10">
-                            <input type="email" name="email-commande" value="email-commande" id="email-commande" class="form-control" minlength="2" placeholder="adresse mail de contact..." required="">
+                            <input type="email" name="email-commande" value="" id="email-commande" class="form-control" minlength="2" placeholder="adresse mail de contact..." required="">
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <label for="adresse-commande" class="col-lg-2 col-form-label">Adresse <span>*</span></label>
                         <div class="col-lg-10">
-                            <input type="text" name="adresse-commande" value="adresse-commande" id="adresse-commande" class="form-control" minlength="2" placeholder="rue, numéro, boîte" required="">
+                            <input type="text" name="adresse-commande" value="" id="adresse-commande" class="form-control" minlength="2" placeholder="rue, numéro, boîte" required="">
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <label for="cp-commande" class="col-lg-2 col-form-label">Code postal <span>*</span></label>
                         <div class="col-lg-10">
-                            <input type="text" name="cp-commande" value="cp-commande" id="cp-commande" class="form-control" minlength="2" placeholder="code postal..." required="">
+                            <input type="text" name="cp-commande" value="" id="cp-commande" class="form-control"  minlength="2" placeholder="code postal..." required="">
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <label for="ville-commande" class="col-lg-2 col-form-label">Ville <span>*</span></label>
                         <div class="col-lg-10">
-                            <input type="text" name="ville-commande" value="ville-commande" id="ville-commande" class="form-control" minlength="2" placeholder="localité" required="">
+                            <input type="text" name="ville-commande" value="" id="ville-commande" class="form-control"  minlength="2" placeholder="localité" required="">
                         </div>
                     </div>
 
@@ -69,14 +70,14 @@
                         <label for="province-commande" class="col-lg-2 col-form-label">Province
                             <span>*</span></label>
                         <div class="col-lg-10">
-                            <input type="text" name="province-commande" value="province-commande" id="province-commande" class="form-control" minlength="2" placeholder="province..." required="">
+                            <input type="text" name="province-commande" value="" id="province-commande" class="form-control" minlength="2" placeholder="province..." required="">
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <label for="pays-commande" class="col-lg-2 col-form-label">Pays <span>*</span></label>
                         <div class="col-lg-10">
-                            <input type="text" name="pays-commande" value="pays-commande" id="pays-commande" class="form-control" minlength="2" placeholder="pays..." required="">
+                            <input type="text" name="pays-commande" value="" id="pays-commande" class="form-control" minlength="2" placeholder="pays..." required="">
                         </div>
                     </div>
 
@@ -97,55 +98,7 @@
                     </div>
                 </form>
             </div>
-
+            
         </div>
     </div>
 </div>
-
-<script>
-    const modal = document.getElementById('modal-order');
-    const titreModal = modal.querySelector('.modal-titre');
-    const prixModal = modal.querySelector('.modal-prix');
-
-    const btnsCommander = document.querySelectorAll('.btn-commander');
-    btnsCommander.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const titre = btn.getAttribute('data-titre');
-            const prix = btn.getAttribute('data-prix');
-
-            titreModal.textContent = titre;
-            prixModal.textContent = prix + ' €';
-        });
-    });
-</script>
-<script>
-    const compare = function(ids, asc) {
-        return function(row1, row2) {
-            const tdValue = function(row, ids) {
-                return row.querySelector('.card-title').textContent;
-            };
-
-            const tri = function(v1, v2) {
-                if (!isNaN(v1) && !isNaN(v2)) {
-                    return asc ? v1.localeCompare(v2) : v2.localeCompare(v1);
-                } else {
-                    return asc ? v1.localeCompare(v2) : v2.localeCompare(v1);
-                }
-            };
-
-            return tri(tdValue(row1, ids), tdValue(row2, ids));
-        };
-    };
-
-    const selectElement = document.querySelector('#filtreBoutique');
-    selectElement.addEventListener('change', function() {
-        const container = document.querySelector('.tab-pane.show.active .row');
-        const elementsToSort = Array.from(container.querySelectorAll('.item-boutique'));
-
-        let classe = elementsToSort.sort(compare(0, true)); // Triez par le titre
-
-        classe.forEach(function(element) {
-            container.appendChild(element);
-        });
-    });
-</script>
