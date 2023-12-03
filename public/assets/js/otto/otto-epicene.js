@@ -1,13 +1,13 @@
 class OttoEpicene {
 
 
-    static replace(attribute_name){
+    static choose(attribute_name){
         let selector = `[${attribute_name}]`
         let label, gender
 
         document.querySelectorAll(selector).forEach((element) => {
             label = element.innerHTML
-            gender = element.getAttribute('kx-gender')
+            gender = element.getAttribute(attribute_name)
             if(gender)
                 element.innerHTML = this.replaceEpiceneLabel(label, gender)
         })
@@ -70,6 +70,8 @@ class OttoEpicene {
         search_and_replace.forEach((item) => {
             regex = item.test;
             if(regex.test(label)){
+                regex = new RegExp(regex.source, regex.flags + 'g');
+
                 label = label.replace(regex, item[gender]);
             }
 
