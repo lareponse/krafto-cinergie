@@ -70,7 +70,7 @@ $collection_href = $controller->router()->hyp('movies');
                 foreach ($merchandise as $merch) {
                 ?>
                     <aside class="input-group big commander-boutique">
-                        <button class="form-control btn-commander" data-bs-toggle="modal" data-bs-target="#modal-nouvelle-commande-dvd" data-titre="<?=$merch?>" data-prix="<?= $merch->get('price')?>">
+                        <button class="form-control btn-commander" data-bs-toggle="modal" data-bs-target="#modal-order" data-titre="<?=$merch?>" data-prix="<?= $merch->get('price')?>">
                             <i class="bi bi-cart-plus-fill"></i> </button>
                         <span class="input-group-text prix"><?= $merch->get('price')?> &euro;</span>
                     </aside>
