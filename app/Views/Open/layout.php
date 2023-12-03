@@ -50,7 +50,7 @@
             const ottoIdLabel = new OttoIdLabel('.otto-id-label')
             ottoIdLabel.replace()
 
-            OttoEpicene.replace('kx-gender')
+            OttoEpicene.choose('kx-gender')
 
             OttoLink.urlLinks()
             OttoLink.emailLinks()
