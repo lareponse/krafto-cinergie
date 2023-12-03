@@ -20,9 +20,15 @@
             <div class="col-lg-5">
                 <img class="img-fluid w-100" src="<?= $record->profilePicture() ?>" alt="professionnel">
             </div>
-
             <div class="col-lg-7 ps-lg-5" id="infos">
-                <p class="text-primary"><strong><?= implode(', ', $praxes); ?></strong></p>
+
+                <p class="text-primary">
+                    <?php
+                    foreach($praxes as $praxis){
+                        echo $this->DOM()::strong("$praxis", ['kx-gender' => $record->get('gender'), 'class' => 'd-block']);
+                    }
+                    ?>
+                    </p>
 
                 <?= $this->insert('Open::_partials/contact_info', ['contact' => $record]); ?>
             </div>

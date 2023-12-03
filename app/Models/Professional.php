@@ -32,7 +32,8 @@ class Professional extends TightModel
             'id',
             'slug',
             'label' => ["CONCAT(professional.firstname, ' ', professional.lastname)"],
-            'avatar'
+            'avatar',
+            'gender'
         ]);
 
         if(isset($options['withPraxis'])){
@@ -83,12 +84,12 @@ class Professional extends TightModel
     {
         //---- JOIN & FILTER SERVICE
         $Query = parent::query_retrieve($filters, $options);
+        
         $Query->selectAlso(['label' => "CONCAT(firstname,' ', lastname)"]);
 
         $Query->join(['professional_praxis', 'praxis'], [['praxis', 'professional_id', 'professional', 'id']], 'LEFT OUTER');
-        $Query->join(['tag', 'tag'], [['tag', 'id', 'praxis', 'tag_id'], ['tag', 'parent_id', 97]], 'LEFT OUTER');
         $Query->groupBy(['professional', 'id']);
-        $Query->selectAlso(['praxis_ids' => "GROUP_CONCAT(DISTINCT tag.id)"]);
+        $Query->selectAlso(['praxis_ids' => ["GROUP_CONCAT(DISTINCT praxis.tag_id SEPARATOR ',')"]]);
 
         if(isset($filters['praxis_id'])){
             $Query->whereEQ('tag_id', ((int)$filters['praxis_id']), 'praxis');
@@ -130,12 +131,8 @@ class Professional extends TightModel
             ]);
         }
         
-        if(!isset($options['eager']) || $options['eager'] !== false){
-
-
-        }
-
         $Query->orderBy(['lastname', 'asc']);
+
         return $Query;
     }
 }

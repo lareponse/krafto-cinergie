@@ -43,11 +43,14 @@
         import OttoIdLabel from '/public/assets/js/otto/otto-id-label.js';
         import OttoLink from '/public/assets/js/otto/otto-link.js';
         import OttoFormatDate from '/public/assets/js/otto/otto-format-date.js';
+        import OttoEpicene from '/public/assets/js/otto/otto-epicene.js';
 
         document.addEventListener("DOMContentLoaded", () => {
 
-            const ottoIdLabel = new OttoIdLabel('.otto-id-label');
-            ottoIdLabel.replace();
+            const ottoIdLabel = new OttoIdLabel('.otto-id-label')
+            ottoIdLabel.replace()
+
+            OttoEpicene.replace('kx-gender')
 
             OttoLink.urlLinks()
             OttoLink.emailLinks()

@@ -6,7 +6,7 @@
                 <h5 class="card-title"><?= $record; ?></h5>
                 <p class="card-text"> <?php
                 foreach ($record->praxisIds() as $id) {
-                    printf('<small class="d-block text-secondary otto-id-label" otto-urn="Tag:%d">Tag:%d</small>', $id, $id);
+                    printf('<small class="d-block text-secondary otto-id-label " kx-gender="%s" otto-urn="Tag:%d">Tag:%d</small>', $record->get('gender'), $id, $id);
                 }
                 ?></p>
             </div>
