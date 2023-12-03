@@ -14,7 +14,7 @@
 
 </div>
 
-<h3 class="d-none d-xl-block">Rechercher</h3>
+<h3 class="d-none d-xl-block invisible">Rechercher</h3>
 <div id="filtres" class="shadow d-none d-xl-block">
     <?= $this->insert('Open::Movie/form_filters') ?>
 </div>
