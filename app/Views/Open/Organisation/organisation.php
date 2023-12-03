@@ -4,7 +4,7 @@ use \HexMakina\Marker\Marker; ?>
 
 <?php $this->layout('Open::layout') ?>
 
-<div class="container my-5 pb-5" id="organisation-single">
+<div id="organisation-single">
     <article class="w-75 mx-auto">
 
         <h1><?= $record ?></h1>
@@ -43,7 +43,7 @@ use \HexMakina\Marker\Marker; ?>
         }
         ?>
     </article>
-    
+
     <?= $this->insert('Open::_partials/related_articles', ['related_articles' => $related_articles ?? []]) ?>
 
     <article class="w-75 mx-auto">
@@ -59,8 +59,4 @@ use \HexMakina\Marker\Marker; ?>
         ?>
         <?= $this->insert('Open::Organisation/modal_alter', ['record' => $record, 'data-bs-target' => $modal_reference]); ?>
     </article>
-</div>
-
-
-
 </div>

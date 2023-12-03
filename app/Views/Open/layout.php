@@ -17,9 +17,11 @@
             </div>
         <?php
         }
-        ?>
+        ?>  
+        <div class="container my-5">
         <?= $this->section('content') ?>
-
+        </div>
+        
         <div id="scroll-to-top">
             <a href="#top">
                 <img src="/public/assets/wejune/img/icons/scroll-top.svg" alt="scroll to top" class="img-fluid w-100">
