@@ -1,4 +1,4 @@
-<div class="card border-0 flex-fill w-100" data-list='{"valueNames": ["title", {"name": "publication", "attr": "data-publication"}, "type"], "page": 10}' id="articleTable">
+<div class="card border-0 flex-fill w-100" data-list='{"valueNames": ["title", {"name": "publication", "attr": "data-publication"}, "type"]}' id="articleTable">
 
     <div class="card-header border-0">
         <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-end">
@@ -63,7 +63,7 @@
                             <?= $model->get('publication'); ?>
                         </td>
                         <td class="type" data-type="<?= $model->get('type_id'); ?>">
-                            <?= $model->get('type_label'); ?>
+                            <span class="otto-id-label" otto-urn="Tag:<?= $model->get('type_id'); ?>" ><?= $model->get('type_id'); ?></span>
                         </td>
                     </tr>
                 <?php
