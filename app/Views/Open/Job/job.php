@@ -1,14 +1,14 @@
 <?php $this->layout('Open::layout') ?>
 
-<div class="container my-5 pb-5" id="casting-single">
+<div id="casting-single">
 
     <div class="row">
 
         <div class="col-lg-7">
 
-            <span class="prefix">Annonce</span>
-            <h2><?= $record; ?></h2>
-            <?= $record->get('content'); ?>
+            <h2 class="line-left">Annonce</h2>
+            <h2 class="text-primary"><?= $record; ?></h2>
+            <p style="white-space: pre-line;"><?= $record->get('content'); ?></p>
         </div>
 
 
@@ -27,19 +27,19 @@
                         <?php $tag = $categories[$record->get('category_id')]; ?>
                         <li class="meta-head">
                             <span><i class="bi bi-bookmarks-fill icon"></i>Catégorie :</span>
-                            <span><a href="<?= $controller->router()->hyp('jobs')?>?categories%5B%5D=<?=$tag->slug()?>"><?= $tag ?></a></span>
+                            <span><a href="<?= $controller->router()->hyp('jobs') ?>?categories%5B%5D=<?= $tag->slug() ?>"><?= $tag ?></a></span>
                         </li>
 
                         <?php $tag = $job_proposal[$record->isOffer() ? 'job-offer' : 'job-request']; ?>
                         <li class="meta-head">
                             <span><i class="bi bi-bookmarks-fill icon"></i>Type :</span>
-                            <span><a href="<?= $controller->router()->hyp('jobs')?>?types%5B%5D=<?=$tag->slug()?>"><?= $tag ?></a></span>
+                            <span><a href="<?= $controller->router()->hyp('jobs') ?>?types%5B%5D=<?= $tag->slug() ?>"><?= $tag ?></a></span>
                         </li>
 
-                        <?php $tag = $job_payment[$record->isPaid() ? 'job-paid' : 'job-free'];?>
+                        <?php $tag = $job_payment[$record->isPaid() ? 'job-paid' : 'job-free']; ?>
                         <li class="meta-head">
                             <span><i class="bi bi-bookmarks-fill icon"></i>Rémunéré :</span>
-                            <span><a href="<?= $controller->router()->hyp('jobs')?>?remun=<?=$tag->slug()?>"><?=  $tag ?></a></span>
+                            <span><a href="<?= $controller->router()->hyp('jobs') ?>?remun=<?= $tag->slug() ?>"><?= $tag ?></a></span>
                         </li>
 
                         <li class="meta-head-date"><i class="bi bi-calendar-event icon"></i><span class="otto-date"><?= $record->get('starts') ?></span></li>
@@ -47,41 +47,38 @@
                     <hr>
                     <ul class="meta-list">
                         <?php if (!empty($record->get('ends'))) { ?>
-                        <li class="meta-el">
-                            <span><i class="bi bi-calendar-check icon"></i>Date de fin :</span> 
-                            <span><strong class="otto-date"><?= $record->get('ends') ?></strong></span>
-                        </li>
+                            <li class="meta-el">
+                                <span><i class="bi bi-calendar-check icon"></i>Date de fin :</span>
+                                <span><strong class="otto-date"><?= $record->get('ends') ?></strong></span>
+                            </li>
                         <?php } ?>
 
                         <?php if (!empty($record->get('identity'))) { ?>
-                        <li class="meta-el">
-                            <span><i class="bi bi-megaphone-fill icon"></i>Annonceur :</span>
-                            <span><strong><?= $record->get('identity') ?></strong></span>
-                        </li>
+                            <li class="meta-el">
+                                <span><i class="bi bi-megaphone-fill icon"></i>Annonceur :</span>
+                                <span><strong><?= $record->get('identity') ?></strong></span>
+                            </li>
                         <?php } ?>
 
                         <?php if (!empty($record->get('phone'))) { ?>
-                        <li class="meta-el">
-                            <span><i class="bi bi-telephone-fill icon"></i>Téléphone :</span> 
-                            <span> <strong class="otto-phone"><?= $record->get('phone') ?></strong></span>
-                        </li>
+                            <li class="meta-el">
+                                <span><i class="bi bi-telephone-fill icon"></i>Téléphone :</span>
+                                <span> <strong class="otto-phone"><?= $record->get('phone') ?></strong></span>
+                            </li>
                         <?php } ?>
 
                         <?php if (!empty($record->get('email'))) { ?>
-                        <li class="meta-el">
-                            <span><i class="bi bi-envelope icon"></i>Email :</span> 
-                            <span><strong 
-                                    class="otto-email" 
-                                    otto-subject="Votre annonce sur cinergie.be: <?= $record; ?>"
-                                    otto-content="Bonjour,<br><br>Je suis intéressé(e) par votre annonce et je souhaite en savoir plus. <br>Pourriez-vous me donner plus de détails ?<br><br>Cordialement,<br>[Votre Nom]"
-                                    ><?= $record->get('email') ?></strong></span>
-                        </li>
+                            <li class="meta-el">
+                                <span><i class="bi bi-envelope icon"></i>Email :</span>
+                                <span><strong class="otto-email" otto-subject="Votre annonce sur cinergie.be: <?= $record; ?>" otto-content="Bonjour,<br><br>Je suis intéressé(e) par votre annonce et je souhaite en savoir plus. <br>Pourriez-vous me donner plus de détails ?<br><br>Cordialement,<br>[Votre Nom]"><?= $record->get('email') ?></strong></span>
+                            </li>
                         <?php } ?>
 
                         <?php if (!empty($record->get('url'))) { ?>
-                        <li class="meta-el">
-                            <span><i class="bi bi-globe icon"></i>Site web :</span> 
-                            <span><strong class="otto-url"><?= $record->get('url') ?></strong></span></li>
+                            <li class="meta-el">
+                                <span><i class="bi bi-globe icon"></i>Site web :</span>
+                                <span><strong class="otto-url"><?= $record->get('url') ?></strong></span>
+                            </li>
                         <?php } ?>
 
                     </ul>
