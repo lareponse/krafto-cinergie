@@ -20,6 +20,7 @@ try {
         'Professional' => 'Professionnels',
         'Organisation' => 'Organisations',
         'Author' => 'Auteurs',
+        'Merchandise' => 'Boutique',
         'images' => 'Images'
     ];
     // $menu = array_merge($menu, $extras ?? []);
@@ -32,6 +33,9 @@ try {
     foreach ($menu as $linked_urn => $title) {
 
         if ($linked_urn == $controller->nid()) // no self linking
+            continue;
+
+        if(!in_array($linked_urn, ['Profile', 'images']) && !isset($relations[$linked_urn]))
             continue;
 
         $relation_config = $relations[$linked_urn] ?? null;
@@ -70,7 +74,7 @@ try {
     </div>
 
     <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
-        <?php $this->insert('Secret::_partials/tab-images', ['images' => $images]) ?>
+        <?php $this->insert('Secret::_partials/tab-images', ['images' => $images ?? []]) ?>
     </div>
 
     <?php

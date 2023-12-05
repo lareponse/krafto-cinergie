@@ -51,7 +51,7 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
             </div>
 
             <div class="col-md-2 col-lg-2">
-                <label for="deliveryBe" class="col-form-label">Frais Belgique</label>
+                <label for="deliveryBe" class="col-form-label d-block text-end">Frais Belgique</label>
             </div>
 
             <div class="col-md-2 col-lg-1">
@@ -59,7 +59,7 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
             </div>
 
             <div class="col-md-2">
-                <label for="deliveryEu" class="col-form-label">Frais Europe</label>
+                <label for="deliveryEu" class="col-form-label d-block text-end">Frais Europe</label>
             </div>
             <div class="col-md-2 col-lg-1">
                 <input type="number" class="form-control" id="deliveryEu" name="deliveryEu" value="<?= $controller->formModel()->get('deliveryEu') ?>">

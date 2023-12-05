@@ -6,98 +6,23 @@
                 <h2 class="modal-title fs-5" id="modal-nouvelle-commande-label-dvd">Nouvelle commande</h2>
                 <button type="button" class="btn-close  btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body p-5">
-                <form class="form-horizontal" id="nouvelle-commande-dvd" method="post">
-
-                    <div class="row mb-3">
-                        <div class="col-sm-10 titre-nouvelle-commande row">
-                            <h2 class="titrefilm modal-titre col-auto"></h2>
-                            <h3 class="prix-film modal-prix col-4 align-self-end"><span> &euro;</span></h3>
-                        </div>
+            <div class="modal-body">
+                <div class="row">
+                    <h2 class="titrefilm modal-titre text-right"></h2>
+                    <h3 class="prix-film modal-prix text-right"></h3>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <?= $this->insert('Open::Merchandise/form_order') ?>
                     </div>
-
-                    <div class="row mb-3">
-                        <label for="nom-commande" class="col-lg-2 col-form-label">Nom <span>*</span></label>
-                        <div class="col-lg-10">
-                            <input type="text" name="nom-commande" value="nom-commande" id="nom-commande" class="form-control" minlength="2" placeholder="votre nom..." required="">
-                        </div>
+                    <div class="col">
+                        <strong class="h4">Comment commander?</strong>
+                        <p>Pour commander un DVD ou un livre, il vous suffit de remplir ce formulaire avec vos nom, prénom, adresse, numéro de téléphone, etc..</p>
+                        <p>Les frais d'envoi <strong>en Belgique</strong> sont compris dans le prix du DVD/livre. Les frais d'envoi hors frontières sont calculés selon la destination (Europe +8€).</p>
+                        <p>Le numéro de compte bancaire de Cinergie asbl est:&nbsp;<br> IBAN : BE10 0012 4446 1904<br>BIC : GEBABEBB</p>
                     </div>
-
-                    <div class="row mb-3">
-                        <label for="prenom-commande" class="col-lg-2 col-form-label">Prénom <span>*</span></label>
-                        <div class="col-lg-10">
-                            <input type="text" name="prenom-commande" value="prenom-commande" id="prenom-commande" class="form-control" minlength="2" placeholder="votre prénom..." required="">
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label for="telephone-commande" class="col-lg-2 col-form-label">Téléphone <span>*</span></label>
-                        <div class="col-lg-10">
-                            <input type="text" name="telephone-commande" value="telephone-commande" id="telephone-commande" class="form-control" minlength="2" placeholder="numéro de téléphone de contact..." required="">
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label for="email-commande" class="col-lg-2 col-form-label">Email <span>*</span></label>
-                        <div class="col-lg-10">
-                            <input type="email" name="email-commande" value="email-commande" id="email-commande" class="form-control" minlength="2" placeholder="adresse mail de contact..." required="">
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label for="adresse-commande" class="col-lg-2 col-form-label">Adresse <span>*</span></label>
-                        <div class="col-lg-10">
-                            <input type="text" name="adresse-commande" value="adresse-commande" id="adresse-commande" class="form-control" minlength="2" placeholder="rue, numéro, boîte" required="">
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label for="cp-commande" class="col-lg-2 col-form-label">Code postal <span>*</span></label>
-                        <div class="col-lg-10">
-                            <input type="text" name="cp-commande" value="cp-commande" id="cp-commande" class="form-control" minlength="2" placeholder="code postal..." required="">
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label for="ville-commande" class="col-lg-2 col-form-label">Ville <span>*</span></label>
-                        <div class="col-lg-10">
-                            <input type="text" name="ville-commande" value="ville-commande" id="ville-commande" class="form-control" minlength="2" placeholder="localité" required="">
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label for="province-commande" class="col-lg-2 col-form-label">Province
-                            <span>*</span></label>
-                        <div class="col-lg-10">
-                            <input type="text" name="province-commande" value="province-commande" id="province-commande" class="form-control" minlength="2" placeholder="province..." required="">
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label for="pays-commande" class="col-lg-2 col-form-label">Pays <span>*</span></label>
-                        <div class="col-lg-10">
-                            <input type="text" name="pays-commande" value="pays-commande" id="pays-commande" class="form-control" minlength="2" placeholder="pays..." required="">
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label for="commentaire-commande" class="col-lg-2 col-form-label">Commentaire<span>*</span></label>
-                        <div class="col-lg-10">
-                            <textarea name="commentaire-commande" id="commentaire-commande" class="form-control" rows="10" placeholder="commentaire sur votre commande..."></textarea>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <p class="mb-0">
-                            <small>Les champs marqués<span style="color:#eb0101; font-size: 30px;"><sub>*</sub></span> sont obligatoires</small>
-                        </p>
-                    </div>
-                    <div class="modal-footer">
-                        <input class="btn btn-primary" type="submit" name="submit-nouvelle-annonce" value="Commander">
-                    </div>
-                </form>
+                </div>
             </div>
-
         </div>
     </div>
 </div>
@@ -118,6 +43,8 @@
         });
     });
 </script>
+
+
 <script>
     const compare = function(ids, asc) {
         return function(row1, row2) {

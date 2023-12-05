@@ -18,7 +18,7 @@ class Merchandise extends TightModel
         return $this->get('label');
     }
 
-    public function fieldsForCompletion()
+    public function fieldsForCompletion(): array
     {
         return ['label', 'content', 'price', 'isActive', 'deliveryBe', 'deliveryEu'];
     }
@@ -27,33 +27,10 @@ class Merchandise extends TightModel
     {
         $Query = parent::query_retrieve($filters, $options);
         
-        if(isset($filters['movie']))
-        {
-            $Query->join(['movie_merchandise', 'movie_merchandise'], [
-                ['movie_merchandise', 'merchandise_id', 'merchandise', 'id'],
-                ['movie_merchandise', 'movie_id', $filters['movie']->id()]
-            ]);
-        }
-
         if(isset($filters['FiltersOnFirstChar'])){
             self::applyFirstCharFilter($filters['FiltersOnFirstChar'], $Query, 'label');
         }
-
-        if(isset($filters['segment']))
-        {
-            switch($filters['segment']){
-                case 'dvd':
-                    $Query->whereEQ('isBook', 0);
-                break;
-                
-                case 'book':
-                    $Query->whereEQ('isBook', 1);
-                break;
-            }
-
-            $Query->orderBy(['rank', 'ASC']);
-                    
-        }
+        
         return $Query;
     }
 }

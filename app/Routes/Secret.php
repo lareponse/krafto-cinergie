@@ -16,7 +16,8 @@ array_push(
 
 array_push(
     $routes,
-    ['GET', 'Merchandise/segment/[a:segment]', 'Merchandise::home', 'merchandises_by_segment'],
+    ['GET', 'Merchandise/Books', 'Merchandise::books', 'bookshop'],
+    ['GET', 'Merchandise/DVDs', 'Merchandise::dvds', 'videostore'],
 );
 array_push(
     $routes,

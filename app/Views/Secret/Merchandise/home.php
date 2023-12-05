@@ -1,6 +1,6 @@
 <?php $this->layout('Secret::dashboard') ?>
 
-<div class="card border-0 flex-fill w-100" data-list='{"valueNames": ["fullName","price","active"], "page": 10}' id="filesTable">
+<div class="card border-0 flex-fill w-100" data-list='{"valueNames": ["fullName","price","deliveryBe", "deliveryEu","active"], "page": 100}' id="filesTable">
     <div class="card-header border-0">
         <?= isset($filters) ? $this->insert('Secret::_partials/filters/FiltersOnFirstChar', ['count' => count($listing)]) : '' ?>
     </div>
@@ -14,11 +14,9 @@
                             Titre
                         </a>
                     </th>
-                    <th>
-                        <a href="javascript: void(0);" class="text-muted list-sort" data-sort="price">
-                            Prix
-                        </a>
-                    </th>
+                    <th><a href="javascript: void(0);" class="text-muted list-sort" data-sort="price">Prix</a></th>
+                    <th><a href="javascript: void(0);" class="text-muted list-sort" data-sort="deliveryBe">BE</a></th>
+                    <th><a href="javascript: void(0);" class="text-muted list-sort" data-sort="deliveryEu">EU</a></th>
                     <th>
                         <a href="javascript: void(0);" class="text-muted list-sort" data-sort="active">
                             En vente
@@ -31,14 +29,14 @@
                 <?php
                 foreach ($listing as $model) {
                 ?>
-                    <tr data-action="<?= $controller->urlFor($controller->nid(), 'edit', $model) ?>">
+                    <tr data-action="<?= $controller->urlFor($controller->nid(), 'view', $model) ?>">
 
                         <td class="fullName">
                             <strong><?= $model->get('label'); ?></strong>
                         </td>
-                        <td class="price">
-                            <?= $model->get('price'); ?> &euro;
-                        </td>
+                        <td class="price"><?= $model->get('price'); ?> &euro;</td>
+                        <td class="deliveryBe"><?= $model->get('deliveryBe'); ?> &euro;</td>
+                        <td class="deliveryEu"><?= $model->get('deliveryEu'); ?> &euro;</td>
                         <td class="active">
                             <?php
                             if ($model->get('public')) {

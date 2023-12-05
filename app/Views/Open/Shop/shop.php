@@ -51,7 +51,7 @@ use \HexMakina\Marker\Marker; ?>
 
 </div>
 
-<?php $this->insert('Open::Shop/modal-order') ?>
+<?php $this->insert('Open::Merchandise/modal_order') ?>
 
 <script>
     let modal = document.getElementById('modal-order');
