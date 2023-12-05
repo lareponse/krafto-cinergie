@@ -47,9 +47,7 @@ $collection_href = $controller->router()->hyp('movies');
                                                                             ?>
                 <p><b>Genre :</b>
                     <?php
-
                     $href = $collection_href . '?' . http_build_query(['type' => $record->get('genre_id')]);
-
                     ?>
 
                     <a href="<?= $href ?>" class="otto-id-label" otto-urn="Tag:<?= $record->get('genre_id'); ?>"><?= $record->get('genre_id'); ?></a>
@@ -62,21 +60,29 @@ $collection_href = $controller->router()->hyp('movies');
                     <a href="<?= $href ?>" class="otto-id-label" otto-urn="Tag:<?= $record->get('metrage_id'); ?>"><?= $record->get('metrage_id'); ?></a>
 
                 <p><b>Durée :</b> <?= $record->get('runtime') ?></p>
-                <p><b>Casting :</b></p>
-                <?= $record->get('casting') ?>
-
-                <div class="mt-4">
-                <?php
-                foreach ($merchandise as $merch) {
-                ?>
-                    <aside class="input-group big commander-boutique">
-                        <button class="form-control btn-commander" data-bs-toggle="modal" data-bs-target="#modal-order" data-titre="<?=$merch?>" data-prix="<?= $merch->get('price')?>">
-                            <i class="bi bi-cart-plus-fill"></i> </button>
-                        <span class="input-group-text prix"><?= $merch->get('price')?> &euro;</span>
-                    </aside>
-                <?php
+                <?php 
+                if (!empty($record->get('runtime'))) {
+                    echo $this->DOM()::strong('Durée : ');
+                    echo $record->get('runtime');
+                }
+                if (!empty($record->get('casting'))) {
+                    echo $this->DOM()::strong('Casting : ');
+                    echo $record->get('casting');
                 }
                 ?>
+
+                <div class="mt-4">
+                    <?php
+                    foreach ($merchandises as $merch) {
+                    ?>
+                        <aside class="input-group big commander-boutique">
+                            <button class="form-control btn-commander" data-bs-toggle="modal" data-bs-target="#modal-order" data-titre="<?= $merch ?>" data-prix="<?= $merch->get('price') ?>">
+                                <i class="bi bi-cart-plus-fill"></i> </button>
+                            <span class="input-group-text prix"><?= $merch->get('price') ?> &euro;</span>
+                        </aside>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
         </div>
@@ -125,4 +131,4 @@ $collection_href = $controller->router()->hyp('movies');
 </div>
 
 
-<?php $this->insert('Open::Merchandise/modal_order');?>
+<?php $this->insert('Open::Merchandise/modal_order'); ?>

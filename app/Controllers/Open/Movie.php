@@ -10,7 +10,7 @@ use HexMakina\LocalFS\FileSystem;
 use App\Controllers\Abilities\Paginator;
 
 use App\Models\Movie as Model;
-use App\Models\{Professional, Organisation, DVD, Article, Merchandise};
+use App\Models\{Professional, Organisation, DVD};
 
 class Movie extends Kortex
 {
@@ -36,11 +36,11 @@ class Movie extends Kortex
     {
         $professionals = Professional::queryListing([], ['withMoviePraxis' => $this->record()])->retObj(Professional::class);
         $organisations = Organisation::queryListing([], ['withMoviePraxis' => $this->record()])->retObj(Organisation::class);
-        $merchandise = Merchandise::filter(['movie' => $this->record()]);
+        $merchandises = DVD::filter(['Movie' => $this->record()]);
         $this->viewport('tags', $this->record()->tags()); // TODO: only themes
         $this->viewport('professionals', $professionals);
         $this->viewport('organisations', $organisations);
-        $this->viewport('merchandise', $merchandise);
+        $this->viewport('merchandises', $merchandises);
 
         $this->viewport('articles', $this->record()->relatedArticles($professionals, $organisations));
         $this->viewport('related_photos', $this->relatedPhotos('film'));
