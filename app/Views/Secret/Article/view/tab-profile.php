@@ -43,9 +43,6 @@
             </div>
         </div>
         <?php $this->insert('Secret::_partials/legacy_view', ['model' => $controller->loadModel()]) ?>
-
-
-
     </div>
 
     <div class="col">
@@ -55,11 +52,11 @@
                 <h2 class="h3">Abstract</h2>
                 <?php
                 if (empty($controller->loadModel()->get('abstract'))) {
-                ?><a class="btn btn-sm btn-warning" href="<?= $controller->url('edit') ?>">Ajouter</a><?php
-                                                                                                    } else {
-                                                                                                        echo $controller->loadModel()->get('abstract');
-                                                                                                    }
-                                                                                                        ?>
+                    echo $this->DOM()::a($controller->url('edit').'#abstractSection', 'Ajouter', ['class' => 'btn btn-sm btn-warning']);
+                } else {
+                    echo $controller->loadModel()->get('abstract');
+                }
+                ?>
             </div>
         </div>
 
@@ -68,11 +65,11 @@
                 <h2 class="h3">Contenu</h2>
                 <?php
                 if (empty($controller->loadModel()->get('content'))) {
-                ?><a class="btn btn-sm btn-warning" href="<?= $controller->url('edit') ?>">Ajouter</a><?php
-                                                                                                    } else {
-                                                                                                        echo $controller->loadModel()->get('content');
-                                                                                                    }
-                                                                                                        ?>
+                    echo $this->DOM()::a($controller->url('edit').'#contentSection', 'Ajouter', ['class' => 'btn btn-sm btn-warning']);
+                } else {
+                    echo $controller->loadModel()->get('content');
+                }
+                ?>
             </div>
         </div>
 
@@ -81,13 +78,12 @@
                 <h2 class="h3">Vidéo</h2>
                 <?php
                 if (empty($controller->loadModel()->get('embedVideo'))) {
-                ?><a class="btn btn-sm btn-warning" href="<?= $controller->url('edit') ?>">Ajouter</a><?php
-                                                                                                    } else {
-                                                                                                        echo $controller->loadModel()->get('embedVideo');
-                                                                                                    }
-                                                                                                        ?>
+                    echo $this->DOM()::a($controller->url('edit').'#videoSection', 'Ajouter', ['class' => 'btn btn-sm btn-warning']);
+                } else {
+                    echo $controller->loadModel()->get('embedVideo');
+                }
+                ?>
             </div>
         </div>
-
     </div>
 </div>

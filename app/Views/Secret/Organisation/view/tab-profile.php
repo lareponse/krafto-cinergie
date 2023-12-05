@@ -5,7 +5,7 @@
     <div class="col">
         <div class="card border-0">
             <div class="card-body">
-                <h2 class="h3">Biographie</h2>
+                <h2 class="h3">Description</h2>
                 <?= $controller->loadModel()->get('content');?>
             </div>
         </div>
