@@ -51,14 +51,7 @@ class Movie extends Krafto
         $thesaurus = $relation->getIds($this->loadModel()->id());
         $this->viewport('thesaurus', $thesaurus);
 
-        $relations = $this->get('HexMakina\BlackBox\Database\DatabaseInterface')->relations();
-
-        foreach($relations->relationsBySource('movie') as $urn => $relation){
-            if($relation instanceof OneToMany){
-                $records = $relation->getTargets($this->loadModel()->id());
-                $this->viewport($urn, $records);
-            }
-        }
+        parent::view();
     }
 
     public function imagesDirectory(){

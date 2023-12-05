@@ -2,6 +2,9 @@
 
 namespace App\Controllers\Secret;
 
+use \HexMakina\Crudites\Relation\OneToMany;
+
+
 abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
 {
     protected $template = null;
@@ -63,6 +66,18 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
         // return $this->template;
         // echo $this->display($this->template);
         
+    }
+
+    public function view()
+    {
+        $table = $this->modelClassName()::table();
+        $relations = $this->get('HexMakina\BlackBox\Database\DatabaseInterface')->relations();
+        foreach($relations->relationsBySource($table->name()) as $urn => $relation){
+            if($relation instanceof OneToMany){
+                $records = $relation->getTargets($this->loadModel()->id());
+                $this->viewport($urn, $records);
+            }
+        }
     }
 
     protected function find_template($engine, $template_name): string
