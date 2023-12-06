@@ -13,13 +13,12 @@ foreach (['professional' => $professionals, 'organisation' => $organisations] as
             </div>
             <div class="titre-equipe col-lg-7">
                 <h4><a href="<?= $href ?>"><?= $item; ?></a></h4>
-
             </div>
             <div class="distributeur col-lg-3">
                 <p>
                     <?php
                     foreach ($item->praxisIds() as $id) {
-                        echo '<span class="d-block" otto-tag-id="' . $id . '">' . $id . '</span>';
+                        echo '<span class="d-block otto-id-label" otto-urn="Tag:' . $id . '">' . $id . '</span>';
                     }
                     ?>
                 </p>

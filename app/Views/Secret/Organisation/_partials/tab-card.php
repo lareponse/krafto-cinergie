@@ -34,7 +34,7 @@ $route = $controller->urlFor('Organisation', 'view', $model); ?>
                     $controller->router()->hyp('dash_relation_unlink')
                     , $common_fields
                     , $this->Form()::hidden('qualifier', $praxis_id)
-                    , $this->Form()::label('qualifier', $praxis_id, ['otto-tag-id' => $praxis_id])
+                    , $this->Form()::label('qualifier', $praxis_id, ['class' => 'otto-id-label', 'otto-urn' => 'Tag:'.$praxis_id])
                     , $button
             );
             }
