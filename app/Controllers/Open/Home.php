@@ -3,6 +3,7 @@
 namespace App\Controllers\Open;
 
 use App\Models\{Article, Contest, Event, Job};
+use \HexMakina\kadro\Models\Tag;
 
 class Home extends Kortex
 {
@@ -18,12 +19,13 @@ class Home extends Kortex
         
         $articlesDiaporama = $articlesDiaporama->retObj(Article::class);
 
-
+        $entrevue_tag = Tag::one('slug', 'article-cat-entrevue');
         $entrevues = Article::queryListing()
             ->whereEQ('public', '1')
             ->whereEQ('pick', '1')
-            ->whereEQ('type_id', '50')
+            ->whereEQ('type_id', $entrevue_tag->id())
             ->whereNotEmpty('embedVideo')
+            ->orderBy(['publication', 'DESC'])
             ->limit(3);
 
         $entrevues = $entrevues->retObj(Article::class);
