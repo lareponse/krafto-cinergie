@@ -3,8 +3,7 @@
 if (!empty($related_articles)) {
 ?>
     <div class="row g-0 mt-5" id="related-posts">
-        <h2 class="pb-0">Nos articles liés</h2>
-        <hr />
+        <h2 class="pb-0 line-left">Nos articles liés</h2>
         <div class="slide dots single-post-slider">
             <?php
             foreach ($related_articles as $article) {

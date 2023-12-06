@@ -1,7 +1,6 @@
 <?php if (count($photos) > 1) { ?>
     <div class="row galerie">
-        <h2 class="pb-0">Galerie photos</h2>
-        <hr />
+        <h2 class="pb-0 line-left">Galerie photos</h2>
         <div class="slide arrow single-post-slider">
             <?php
             foreach ($photos as $url) {
