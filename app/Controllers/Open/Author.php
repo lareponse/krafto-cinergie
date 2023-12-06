@@ -20,8 +20,9 @@ class Author extends Kortex
         if(is_null($this->record()))
             $this->router()->hopBack();
         
+        
         if($this->record()->get('professional_slug')){
-            $professional = Professional::exists(['slug' => $this->record()->get('professional_slug')]);
+            $professional = Professional::exists(['slug' => $this->record()->get('professional_slug')], ['withPraxis' => true]);
             $this->viewport('professional', $professional);
         }
         $articles = Article::filter(['public' => '1', 'author' => $this->record()], ['order_by' => ['article', 'publication', 'DESC']]);
