@@ -134,7 +134,7 @@ abstract class Kortex extends \HexMakina\kadro\Controllers\Kadro
                     continue;
         
                 // $names []= sprintf('%s/%s/%s', $this->get('settings.urls.images'), $directory, $filename);
-                $urls []= sprintf('%s/%s/%s', 'https://www.cinergie.be/images', $directory, $filename);
+                $urls []= sprintf('%s/%s/%s', $this->get('settings.urls.images'), $directory, $filename);
             }
         }
         return $urls;
