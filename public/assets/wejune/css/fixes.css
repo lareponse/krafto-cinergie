@@ -5,3 +5,34 @@ footer#footer {
 .sib-form {
     padding: 0;
 }
+
+form label span {
+    color: #eb0101;
+    font-size: 1.2em;
+}
+
+
+dl.signaletique dl {
+}
+
+dl.signaletique dt,
+dl.signaletique dd {
+    width: 50%;
+    box-sizing: border-box;
+    float: left;
+  }
+
+
+dl.signaletique dt {
+    font-weight: bold;
+    font-weight: bold;
+      clear: left;
+}
+dl.signaletique dd {
+}
+
+dl:after {
+    content: "";
+    display: table;
+    clear: both;
+  }

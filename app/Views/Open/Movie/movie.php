@@ -28,45 +28,53 @@ $collection_href = $controller->router()->hyp('movies');
 
             <div class="col-lg-7 ps-lg-5 infos">
 
-                <?php if (!empty($record->get('directors'))) {
-                ?>
-                    <p class="text-primary"><b><span class="text-dark">de </span> <?= $record->get('directors') ?></b></p>
+                <?php if (!empty($directors)) { ?>
+                    <p class="text-primary mb-2">
+                        <strong class="text-dark">de
+                            <?php
+                            foreach ($directors as $director) {
+                                $href = $controller->router()->hyp('professional', ['slug' => $director->slug()]);
+                                echo $this->DOM()::a($href, $director, ['class' => 'otto-id-label', 'otto-urn' => "Tag:{$director->id()}"]);
+                            }
+                            ?>
+                        </strong>
+                    </p>
+                <?php } ?>
+
+                <dl class="signaletique">
+                    <?php
+                    if (!empty($record->get('released'))) {
+                        $href = $collection_href . '?' . http_build_query(['released' => $record->get('released')]);
+                        $filter_link = $this->DOM()::a($href, $record->get('released'));
+                        echo $this->DOM()::dt('Date de sortie : ') . $this->DOM()::dd("$filter_link");
+                    }
+
+                    if (!empty($record->get('legacy_origine'))) {
+                        echo $this->DOM()::dt('Pays : ') . $this->DOM()::dd($record->get('legacy_origine'));
+                    }
+
+                    if (!empty($record->get('genre_id'))) {
+                        $href = $collection_href . '?' . http_build_query(['type' => $record->get('genre_id')]);
+                        $filter_link = $this->DOM()::a($href, $record->get('genre_id'), ['class' => 'otto-id-label', 'otto-urn' => "Tag:{$record->get('genre_id')}"]);
+                        echo $this->DOM()::dt('Genre : ') . $this->DOM()::dd("$filter_link");
+                    }
+
+                    if (!empty($record->get('metrage_id'))) {
+                        $href = $collection_href . '?' . http_build_query(['metrage' => $record->get('metrage_id')]);
+                        $filter_link = $this->DOM()::a($href, $record->get('genre_id'), ['class' => 'otto-id-label', 'otto-urn' => "Tag:{$record->get('metrage_id')}"]);
+                        echo $this->DOM()::dt('Metrage : ') . $this->DOM()::dd("$filter_link");
+                    }
+
+                    if (!empty($record->get('runtime'))) {
+                        echo $this->DOM()::dt('Durée : ') . $this->DOM()::dd($record->get('runtime'));
+                    }
+                    ?>
+                </dl>
                 <?php
-                }
-                ?>
-                <?php if (!empty($record->get('released'))) {
-                    $href = $collection_href . '?' . http_build_query(['released' => $record->get('released')]);
-                ?><p><b>Date de sortie :</b> <a href="<?= $href ?>"><?= $record->get('released') ?></a></p><?php
-                                                                                                        }
 
-                                                                                                            ?>
 
-                <?php if (!empty($record->get('legacy_origine'))) {
-                ?><p><b>Pays :</b> <?= $record->get('legacy_origine') ?></p><?php
-                                                                        }
-                                                                            ?>
-                <p><b>Genre :</b>
-                    <?php
-                    $href = $collection_href . '?' . http_build_query(['type' => $record->get('genre_id')]);
-                    ?>
-
-                    <a href="<?= $href ?>" class="otto-id-label" otto-urn="Tag:<?= $record->get('genre_id'); ?>"><?= $record->get('genre_id'); ?></a>
-
-                <p><b>Metrage :</b>
-                    <?php
-                    $href = $collection_href . '?' . http_build_query(['metrage' => $record->get('metrage_id')]);
-
-                    ?>
-                    <a href="<?= $href ?>" class="otto-id-label" otto-urn="Tag:<?= $record->get('metrage_id'); ?>"><?= $record->get('metrage_id'); ?></a>
-
-                <p><b>Durée :</b> <?= $record->get('runtime') ?></p>
-                <?php 
-                if (!empty($record->get('runtime'))) {
-                    echo $this->DOM()::strong('Durée : ');
-                    echo $record->get('runtime');
-                }
                 if (!empty($record->get('casting'))) {
-                    echo $this->DOM()::strong('Casting : ');
+                    echo $this->DOM()::strong('Casting : ', ['class' => 'd-block']);
                     echo $record->get('casting');
                 }
                 ?>
