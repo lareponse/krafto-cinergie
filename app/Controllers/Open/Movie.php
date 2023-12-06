@@ -3,14 +3,11 @@
 namespace App\Controllers\Open;
 
 use HexMakina\BlackBox\Database\SelectInterface;
-use HexMakina\Crudites\Crudites;
 use HexMakina\kadro\Models\Tag;
-use HexMakina\LocalFS\FileSystem;
 
 use App\Controllers\Abilities\Paginator;
-
 use App\Models\Movie as Model;
-use App\Models\{Professional, Organisation, DVD};
+use App\Models\{Professional, Organisation, DVD, Praxis, Thesaurus};
 
 class Movie extends Kortex
 {
@@ -34,20 +31,41 @@ class Movie extends Kortex
 
     public function movie()
     {
+        
         $professionals = Professional::queryListing([], ['withMoviePraxis' => $this->record()])->retObj(Professional::class);
-        $organisations = Organisation::queryListing([], ['withMoviePraxis' => $this->record()])->retObj(Organisation::class);
-        $merchandises = DVD::filter(['Movie' => $this->record()]);
-        $this->viewport('tags', $this->record()->tags()); // TODO: only themes
+        
+        $director_tag = Praxis::director();
+        $directors = [];
+        foreach($professionals as $professional){
+            if (in_array($director_tag->id(), $professional->praxisIds())) {
+                $directors[$professional->id()]= $professional;
+            }
+        }
         $this->viewport('professionals', $professionals);
+        $this->viewport('directors', $directors);
+
+        
+        $query = Tag::query_retrieve();
+        $query->join(['movie_theme', 'hasThemes'], [['hasThemes', 'tag_id', 'tag', 'id']]);
+        $query->whereEQ('movie_id', $this->record()->id(), 'hasThemes');
+        $themes = $query->retObj(Tag::class) ?? [];
+        $this->viewport('themes', $themes);
+
+
+        $query = Thesaurus::query_retrieve();
+        $query->join(['movie_thesaurus', 'hasThesaurus'], [['hasThesaurus', 'thesaurus_id', 'thesaurus', 'id']]);
+        $query->whereEQ('movie_id', $this->record()->id(), 'hasThesaurus');
+        $thesaurus = $query->retObj(Thesaurus::class) ?? [];
+        $this->viewport('thesaurus', $thesaurus);
+
+        $organisations = Organisation::queryListing([], ['withMoviePraxis' => $this->record()])->retObj(Organisation::class);
         $this->viewport('organisations', $organisations);
-        $this->viewport('merchandises', $merchandises);
+
+        $this->viewport('merchandises', DVD::filter(['Movie' => $this->record()]));
 
         $this->viewport('articles', $this->record()->relatedArticles($professionals, $organisations));
         $this->viewport('related_photos', $this->relatedPhotos('film'));
     }
-
-
-
 
    
     /**
@@ -86,7 +104,8 @@ class Movie extends Kortex
         }
 
         if ($this->router()->params('director')) {
-            $idFilters['director'] = Model::idsByProfessionalName($this->router()->params('director'), Professional::DIRECTOR_TAG_ID);
+            $director_tag = Praxis::director();
+            $idFilters['director'] = Model::idsByProfessionalName($this->router()->params('director'), $director_tag->id());
         }
 
         if ($this->router()->params('organisation')) {

@@ -5,25 +5,25 @@ $collection_href = $controller->router()->hyp('movies');
 
 <div class="container my-5 pb-5" id="boutique-single">
     <article class="mx-auto">
-
         <h1><?= $record->get('label') ?></h1>
-        <h6 class="text-primary"><?= $this->insert('Open::Movie/themes') ?></h6>
-        <hr class="my-4" />
-
-        <div class="share" id="share">
-            <span>Partager sur</span>
-            <span class="socials">
-                <a href="#"><i class="bi bi-facebook"></i></a>
-                <a href="#"><i class="mx-1 bi bi-twitter"></i></a>
-                <a href="#"><i class="bi bi-envelope-fill"></i></a>
-            </span>
+        <hr class="" />
+        <div class="d-flex justify-content-between">
+            <h6 class="text-primary"><?= $this->insert('Open::Movie/themes', ['themes' => $themes]) ?></h6>
+            <span><?= implode(' &bull; ', $thesaurus) ?></span>
         </div>
-
 
         <div class="row g-0 mt-4">
 
             <div class="col-lg-5">
                 <img class="img-fluid w-100" src="<?= $record->profilePicture() ?>" alt="Photo du film <?= $record->get('label') ?>" />
+                <div class="share mt-2" id="share">
+                <span>Partager sur</span>
+                <span class="socials">
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="mx-1 bi bi-twitter"></i></a>
+                    <a href="#"><i class="bi bi-envelope-fill"></i></a>
+                </span>
+            </div>
             </div>
 
             <div class="col-lg-7 ps-lg-5 infos">
@@ -99,8 +99,7 @@ $collection_href = $controller->router()->hyp('movies');
         if (!empty($record->get('content'))) {
         ?>
             <div id="bio" class="my-5">
-                <h2 class="pb-0">Synopsis</h2>
-                <hr />
+                <h2 class="pb-0 line-left">Synopsis</h2>
                 <p><?= $record->get('content') ?></p>
             </div>
         <?php
@@ -113,8 +112,7 @@ $collection_href = $controller->router()->hyp('movies');
         if (!empty($record->get('url_trailer'))) {
         ?>
             <div id="bande-annonce" class="my-5">
-                <h2 class="pb-0">Bande annonce</h2>
-                <hr />
+                <h2 class="pb-0 line-left ">Bande annonce</h2>
                 <iframe class="iframe-size-single-post" src="<?= $record->get('url_trailer') ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
         <?php
@@ -127,8 +125,7 @@ $collection_href = $controller->router()->hyp('movies');
         if ((count($professionals) + count($organisations)) > 1) {
         ?>
             <div class="row my-5" id="equipe-belge">
-                <h2 class="pb-0">L'équipe belge</h2>
-                <hr />
+                <h2 class="pb-0 line-left ">L'équipe belge</h2>
             </div>
             <?= $this->insert('Open::Movie/worked_on', ['professional' => $professionals, 'organisation' => $organisations]); ?>
 </div>
