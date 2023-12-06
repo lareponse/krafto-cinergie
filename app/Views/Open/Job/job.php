@@ -8,7 +8,9 @@
 
             <h2 class="line-left">Annonce</h2>
             <h2 class="text-primary"><?= $record; ?></h2>
-            <p style="white-space: pre-line;"><?= $record->get('content'); ?></p>
+            <pre class="bg-light p-4 p-lg-5 text-justify" style="white-space: pre-line;">
+            <?= ($record->get('content')); ?>
+            </pre>
         </div>
 
 
