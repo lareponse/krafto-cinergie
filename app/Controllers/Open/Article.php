@@ -3,7 +3,6 @@
 namespace App\Controllers\Open;
 
 use HexMakina\BlackBox\Database\SelectInterface;
-use \HexMakina\kadro\Models\Tag;
 use App\Controllers\Abilities\Paginator;
 
 use App\Models\Article as Model;
@@ -27,13 +26,13 @@ class Article extends Kortex
     {
         $article = Model::exists('slug', $this->router()->params('slug'));
         $this->viewport('article', $article);
+        $this->viewport('related_articles', [$article]);
     }
 
     public function latest()
     {
-        return Model::filter(['public' => '1'], ['limit' => 5, 'order_by' => ['article', 'publication', 'desc']]);
+        return Model::filter(['public' => '1'], ['limit' => 5, 'order_by' => ['publication', 'DESC']]);
     }
-
 
     public function routerParamsAsFilters($query): SelectInterface
     {
