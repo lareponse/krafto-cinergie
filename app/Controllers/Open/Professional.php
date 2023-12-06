@@ -43,7 +43,7 @@ class Professional extends Kortex
     {
         $movieIds = Movie::idsByProfessionalIds([$this->record()->id()]);
         if(!empty($movieIds)){
-            $query = Movie::queryListing();
+            $query = Movie::queryListing([], ['withDirectors' => true]);
             $query->whereNumericIn('id', $movieIds, $query->table());
             $related_movies = $query->retObj(Movie::class);
         }
