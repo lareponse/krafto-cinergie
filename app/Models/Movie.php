@@ -5,6 +5,7 @@ namespace App\Models;
 use HexMakina\BlackBox\Database\SelectInterface;
 use HexMakina\TightORM\TightModel;
 use App\Models\{Professional, Organisation};
+use HexMakina\kadro\Models\Tag;
 
 class Movie extends TightModel
 {
@@ -21,6 +22,7 @@ class Movie extends TightModel
 
     public static function queryListing($filters = [], $options = []): SelectInterface
     {
+        // written as part of refactoring, must be rewritten as a join using the PRAXIS_DIRECTOR_SLUG constant
         $fieldForListing = [
             'id',
             'slug',
@@ -35,9 +37,11 @@ class Movie extends TightModel
         
         $select->columns($fieldForListing);
         if(($options['withDirectors'] ?? false) !== false){
+            $director_tag = Praxis::director();
+
             $select->join(['movie_professional', 'withDirectors'], [
                 ['withDirectors', 'movie_id', 'movie', 'id'],
-                ['withDirectors', 'praxis_id', Professional::DIRECTOR_TAG_ID]
+                ['withDirectors', 'praxis_id', $director_tag->id()]
             ], 'LEFT OUTER');
             $select->join(['professional', 'director'], [['withDirectors', 'professional_id', 'director', 'id']], 'LEFT OUTER');
             $select->selectAlso(['directors' => ["GROUP_CONCAT(`director`.`firstname`, ' ', `director`.`lastname` SEPARATOR ', ')"]]);
@@ -147,6 +151,17 @@ class Movie extends TightModel
 
         if (isset($filters['FiltersOnFirstChar'])) {
             self::applyFirstCharFilter($filters['FiltersOnFirstChar'], $Query, 'label');
+        }
+
+        // written as part of refactoring, must be rewritten as a join using the PRAXIS_DIRECTOR_SLUG constant
+        if(($options['withDirectors'] ?? false) !== false){
+            $director_tag = Tag::one('slug', Praxis::director());
+            $Query->join(['movie_professional', 'withDirectors'], [
+                ['withDirectors', 'movie_id', 'movie', 'id'],
+                ['withDirectors', 'praxis_id', $director_tag->id()]
+            ], 'LEFT OUTER');
+            $Query->join(['professional', 'director'], [['withDirectors', 'professional_id', 'director', 'id']], 'LEFT OUTER');
+            $Query->selectAlso(['directors' => ["GROUP_CONCAT(`director`.`firstname`, ' ', `director`.`lastname` SEPARATOR ', ')"]]);
         }
 
         if (isset($filters['model'])) {

@@ -2,10 +2,7 @@
 
 namespace App\Models;
 
-use HexMakina\BlackBox\Database\SelectInterface;
-use HexMakina\TightORM\TightModel;
 use \HexMakina\kadro\Models\Tag;
-
 
 class Praxis 
 {
@@ -27,5 +24,10 @@ class Praxis
         $res = $query->retObj(Tag::class);
 
         return is_array($res) ? $res : [];
+    }
+
+    public static function director(): Tag
+    {
+        return Tag::one('slug', Professional::PRAXIS_DIRECTOR_SLUG);
     }
 }

@@ -18,8 +18,7 @@ class Professional extends TightModel
     use Abilities\FiltersOnFirstChar;
 
 
-    public const DIRECTOR_TAG_ID = 151;
-
+    public const PRAXIS_DIRECTOR_SLUG = 'pro-praxis-realisateur';
 
     public function __toString(){
         return $this->fullName();
