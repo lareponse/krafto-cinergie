@@ -35,4 +35,15 @@ dl:after {
     content: "";
     display: table;
     clear: both;
-  }
+}
+
+aside form label {
+   text-transform: uppercase;
+   color: var(--bs-primary);
+   font-weight: bold;
+}
+
+aside form {
+    background: var(--bs-white);
+    padding: 0.7em;
+ }
