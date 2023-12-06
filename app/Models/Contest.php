@@ -51,7 +51,6 @@ class Contest extends TightModel implements EventInterface
 
         $select->whereEQ('public', 1);
 
-        $select->orderBy(['starts', 'ASC']);
 
         return $select;
     }
@@ -59,6 +58,7 @@ class Contest extends TightModel implements EventInterface
     public static function query_retrieve($filters = [], $options = []): SelectInterface
     {
         $Query = parent::query_retrieve($filters, $options);
+
         if(isset($filters['year']))
         {
             $bindname = $Query->addBinding('filters_year', $filters['year']);
@@ -70,6 +70,9 @@ class Contest extends TightModel implements EventInterface
             $bindname = $Query->addBinding('filters_month', $filters['month']);
             $Query->whereWithBind('MONTH(`starts`) = '.$bindname);
         }
+
+        $Query->orderBy(['starts', 'ASC']);
+
         return $Query;
     }
 }
