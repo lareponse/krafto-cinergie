@@ -29,22 +29,10 @@ class Article extends TightModel
         return $select;
     }
 
-    public static function queryRecord(): SelectInterface
-    {
-        $select = self::queryListing();
-        $select->selectAlso(['*']);
-
-
-        $select->join(['tag', 'tag'], [['article', 'type_id', 'tag', 'id']], 'LEFT OUTER');
-
-        return $select;
-    }
-
     public static function query_retrieve($filters = [], $options = []): SelectInterface
     {
         //---- JOIN & FILTER SERVICE
-        $Query = self::queryRecord();
-
+        $Query = parent::query_retrieve($filters, $options);
         $Query->join(['article_author', 'writtenBy'], [['writtenBy', 'article_id', 'article', 'id']], 'LEFT OUTER');
         $Query->join(['author', 'author'], [['writtenBy', 'author_id', 'author', 'id']], 'LEFT OUTER');
         $Query->groupBy(['article', 'id']);
@@ -108,7 +96,7 @@ class Article extends TightModel
             $Query->whereFilterContent($filters['content']);
         }
 
-        $Query->orderBy('publication DESC');
+        $Query->orderBy(['publication','DESC']);
         return $Query;
     }
 }
