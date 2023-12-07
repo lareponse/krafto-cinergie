@@ -46,7 +46,7 @@ class Home extends Kortex
 
         $contests = $contests->retObj(Contest::class);
 
-        $events = Event::queryListing()
+        $events = Event::query_retrieve()
             ->whereEQ('public', '1')
             ->whereEQ('pick', '1')
             ->limit(3)

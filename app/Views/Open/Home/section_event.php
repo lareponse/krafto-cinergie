@@ -10,7 +10,7 @@ foreach ($events as $event) {
             <div class="row g-0">
                 <div class="col-md-4 date-item">
                     <span><?= substr($event->get('starts'), -2, 2) ?></span>
-                    <span>MMM</span>
+                    <span class="otto-date" otto-format='{"month":"short"}'><?= $event->get('starts')?></span>
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">

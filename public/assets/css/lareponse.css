@@ -60,3 +60,7 @@ aside form {
     background: var(--bs-white);
     padding: 0.7em;
  }
+
+ #home-rdv-annonce article.card .otto-date{
+    text-transform: uppercase;
+ }
