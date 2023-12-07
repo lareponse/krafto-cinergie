@@ -7,7 +7,9 @@
 
 <body data-bs-spy="scroll" data-bs-target="#navigation">
 
+    <?php $this->insert('Open::_partials/searchbar') ?>
     <?php $this->insert('Open::_partials/header') ?>
+
     <main id="content">
 
         <?php if (isset($title)) {
