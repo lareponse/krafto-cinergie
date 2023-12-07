@@ -3,12 +3,15 @@ class OttoFormatDate {
     static getFormat(container){
         if (container.getAttribute('otto-format')) {
             try {
-                let format = decodeURIComponent(container.getAttribute('otto-format'))
-                format = JSON.parse(format)
-                return format
+                const format = decodeURIComponent(container.getAttribute('otto-format'))
+                let parsedFormat = JSON.parse(format)
+                return parsedFormat
             } catch (exception) {
-                console.log(exception, this.container)
+                console.error('Error parsing JSON:', exception)
+                console.log('Container:', container)
+                console.log('parsedFormat:', parsedFormat)
             }
+            
         }
         return { dateStyle: "long" }
     }
@@ -19,14 +22,14 @@ class OttoFormatDate {
         document.querySelectorAll(selector).forEach(container => {
             dateText = container.innerText.trim();
 
-            date = new Date(dateText);
+            date = new Date(dateText)
             
             if (isNaN(date)) {
                 console.error('Invalid dateText', container.innerText)
             }
             else{
                 dateFormat = new Intl.DateTimeFormat('fr-FR', OttoFormatDate.getFormat(container))
-                container.innerText = dateFormat.format(date);
+                container.innerText = dateFormat.format(date)
             }
         });
     }
