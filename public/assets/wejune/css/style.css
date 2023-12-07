@@ -177,10 +177,6 @@ header#header {
    background: var(--bs-black);
 }
 
-header#header img.logo {
-   height: 45px;
-}
-
 header#header nav li.nav-item a {
    text-transform: uppercase;
    font-weight: 500;
@@ -251,14 +247,6 @@ button.btn-search {
 }
 
 /* CONTENT */
-main#content {
-   position: relative;
-}
-
-main#content:not(.home) {
-   margin-top: 50px;
-}
-
 .cta {
    font-weight: 500;
    display: inline-block;
