@@ -1,3 +1,11 @@
+main:not(.home) {
+    margin-top: 3em; /* 50em = 3.125em */
+}
+
+main {
+    position: relative;
+}
+
 footer#footer {
     margin-top: 4em;
 }
