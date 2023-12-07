@@ -10,7 +10,7 @@
     <?php $this->insert('Open::_partials/searchbar') ?>
     <?php $this->insert('Open::_partials/header') ?>
 
-    <main id="content">
+    <main id="content" class="<?php isset($pageClass) ? $pageClass : ''?>">
 
         <?php if (isset($title)) {
         ?>
