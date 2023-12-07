@@ -15,7 +15,7 @@
     </div>
 </aside>
 
-<header class="navbar navbar-expand-xl  py-3" id="header">
+<header class="navbar navbar-expand-xl py-3" id="header">
     <div class="container">
 
         <a class="navbar-brand" href="<?=$controller->router()->hyp('home')?>">

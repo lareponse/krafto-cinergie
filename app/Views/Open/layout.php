@@ -12,15 +12,12 @@
 
         <?php if (isset($title)) {
         ?>
-            <div class="py-5">
-                <h1 class="line-center"><?= $title; ?></h1>
-            </div>
+            <div class="py-5"><h1 class="line-center"><?= $title; ?></h1></div>
         <?php
         }
-        ?>  
-        <div class="container my-5">
-        <?= $this->section('content') ?>
-        </div>
+        ?>
+
+        <div class="container-fluid my-5"><?= $this->section('content') ?></div>
         
         <div id="scroll-to-top">
             <a href="#top">
