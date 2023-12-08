@@ -12,7 +12,7 @@ class Home extends Kortex
         
     public function home()
     {
-        $articlesDiaporama = Article::queryListing()
+        $articlesDiaporama = Article::query_retrieve()
             ->whereEQ('public', '1')
             ->whereEQ('pick', '1')
             ->limit(7);
@@ -30,15 +30,13 @@ class Home extends Kortex
 
         $entrevues = $entrevues->retObj(Article::class);
 
-
-        $sousLaLoupe = Article::queryListing()
+        $sousLaLoupe = Article::query_retrieve()
             ->whereEQ('public', '1')
             ->whereEQ('pick', '1')
             ->whereEmpty('embedVideo')
             ->limit(3);
         $sousLaLoupe = $sousLaLoupe->retObj(Article::class);
             
-
         $contests = Contest::queryListing()
             ->whereEQ('public', '1')
             ->whereEQ('pick', '1')
@@ -57,16 +55,22 @@ class Home extends Kortex
 
         $window = [new \DateTimeImmutable('-1 month'), new \DateTimeImmutable('+2 month')];
         $jobs = Job::queryListingWithEvent(
-            Job::queryListing()->whereEQ('public', '1')->limit(5)->orderBy(['starts', 'DESC']),
+            Job::query_retrieve()->whereEQ('public', '1')->limit(5)->orderBy(['starts', 'DESC']),
             $window[0], $window[1]);
         $jobs = $jobs->retObj(Job::class);
-            
+
+        
+        
         $this->viewport('articlesDiaporama', $articlesDiaporama);
         $this->viewport('entrevues', $entrevues);
         $this->viewport('sousLaLoupe', $sousLaLoupe);
-
+        
         $this->viewport('contests', $contests);
         $this->viewport('events', $events);
         $this->viewport('jobs', $jobs);
+
+        $job_controller = $this->get('Controllers\\Open\\Job');
+        foreach($job_controller->viewportTagLists() as $key => $tags)
+            $this->viewport($key, $tags);
     }
 }
