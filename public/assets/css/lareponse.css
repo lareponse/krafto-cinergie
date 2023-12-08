@@ -61,6 +61,15 @@ aside form {
     padding: 0.7em;
  }
 
- #home-rdv-annonce article.card .otto-date{
+ #home-rdv-annonce article .date-item .otto-date{
     text-transform: uppercase;
  }
+
+ article.card.event-item .date-item{
+    justify-content: flex-end;
+ }
+
+ /* h3.card-title, .card-text {color: var(--bs-white);} */
+.card-img-overlay h3, .card-img-overlay p {
+    color: var(--bs-white);
+} 

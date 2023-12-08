@@ -1,17 +1,16 @@
 <article class="card shadow listing mb-4">
-    <a href="<?= $controller->router()->hyp('job', ['slug' => $work->slug()]) ?>">
+    <a href="<?= $controller->router()->hyp('job', ['slug' => $job->slug()]) ?>">
         <div class="card-body">
             <div class="card-text d-flex justify-content-between">
-                <p>
-                    <span class="type"><?= $work->get('category_label') ?></span>
-                    <span class="categorie mb-2">&bull; <?= $work->get('isPaid') ? 'Rémunéré' : 'Non rémunéré' ?></span> 
-                    <span class="type"> &bull;  <?= $work->get('isOffer') ? $job_proposal['job-offer'] : $job_proposal['job-request']; ?></span></p>
-            </p>
-
-                <p><span class="date-casting text-primary otto-date"><?= $work->get('starts') ?></span></p>
+                <nav class="mb-1">
+                    <span class="type otto-id-label" otto-urn="Tag:<?= $job->get('category_id') ?>"><?= $job->get('category_id') ?></span>
+                    &bull; <span class="categorie mb-2"><?= $job->get('isPaid') ?  $job_payment['job-paid'] : $job_payment['job-free'] ?></span>
+                    &bull; <span class="type"><?= $job->get('isOffer') ? $job_proposal['job-offer'] : $job_proposal['job-request']; ?></span>
+                </nav>
+                <small class="date-casting text-secondary otto-date" otto-format='{"day": "numeric","month": "short","year": "numeric"}'><?= $job->get('starts') ?></small>
             </div>
-            <h5 class="card-title"><?= $work->get('label'); ?></h5>
-            <p class="cta">Lire l'annonce</p>
+            <h5 class="card-title"><?= $job ?></h5>
+            <p class="card-text text-primary text-end pe-3"><small class="cta">Lire l'annonce</small></p>
         </div>
     </a>
 </article>

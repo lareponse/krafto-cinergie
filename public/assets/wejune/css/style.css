@@ -60,9 +60,6 @@
    border: none;
 }
 
-h3.card-title, .card-text {
-   color: var(--bs-white);
-}
 
 html,
 body {
