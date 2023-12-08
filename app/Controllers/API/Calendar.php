@@ -3,6 +3,7 @@
 namespace App\Controllers\API;
 
 use \App\Models\{Contest, Job, Event};
+use \HexMakina\kadro\Models\Tag;
 
 class Calendar extends \HexMakina\kadro\Controllers\Kadro
 {
@@ -35,14 +36,17 @@ class Calendar extends \HexMakina\kadro\Controllers\Kadro
 
     public function events()
     {
+        $res = Tag::filter(['parent' => 'event_category']);
+        foreach($res as $t)
+            $tags[$t->id()] = $t->slug();
 
         $res = Event::filter(['date_start' => $this->router()->params('start'), 'date_stop' => $this->router()->params('end')]);
         $events = [];
         foreach($res as $event){
-            // dd($event);
+            $category = $event->get('type_id');
             $events[]= [
-                'categorie' => $event->get('type_slug'),
-                'className' => $event->get('type_slug'),
+                'categorie' => $tags[$category] ?? 'categorie1',
+                'className' => $tags[$category] ?? 'categorie1',
                 'title' => $event->__toString(),
                 'start' => $event->get('starts'),
                 'end' => $event->get('ends'),
