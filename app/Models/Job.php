@@ -49,6 +49,7 @@ class Job extends TightModel implements EventInterface
             'starts',
             'isOffer',
             'isPaid',
+            'category_id',
             'category_label' => ['tag', 'label']
         ]);
 
@@ -74,7 +75,6 @@ class Job extends TightModel implements EventInterface
         ];
         
         $select->whereWithBind(sprintf('(%s)', implode(') OR (', $clauses)));
-        
         return $select;
     }
 

@@ -12,33 +12,31 @@ use App\Models\Job as Model;
 class Job extends Kortex
 {
     private $categories = [];
+    public const TAG_PARENTS = ['job_payment', 'job_proposal', 'job_category'];
 
     public function prepare(): void
     {
         parent::prepare();
-        $this->categories = Tag::filter(['parent' => 'job_category']);
+    }
+
+    public function categories(): array
+    {   
+        if(empty($this->categories))
+            $this->categories = Tag::filter(['parent' => 'job_category']);
+        
+        return $this->categories;
     }
 
     public function conclude(): void
     {
-        $this->viewport('categories', $this->categories);
+        $this->viewport('categories', $this->categories());
         $this->viewportTagLists(['job_payment', 'job_proposal']);
-        // $job_payment = [];
-        // foreach(Tag::filter(['parent' => 'job_payment']) as $tag)
-        //     $job_payment[$tag->slug()] = $tag;
-        // $this->viewport('job_payment', $job_payment);
-
-        // $job_proposal = [];
-        // foreach(Tag::filter(['parent' => 'job_proposal']) as $tag)
-        //     $job_proposal[$tag->slug()] = $tag;
-        // $this->viewport('job_proposal', $job_proposal);
-
         parent::conclude();
     }
 
     public function jobs()
     {
-        $query = $this->routerParamsAsFilters(Model::queryListing());
+        $query = $this->routerParamsAsFilters(Model::query_retrieve());
         $paginator = new Paginator($this->router()->params('page') ?? 1, $query);
         $paginator->perPage(10);
         $paginator->setClass(Model::class);
@@ -58,22 +56,26 @@ class Job extends Kortex
     public function routerParamsAsFilters($query): SelectInterface
     {
         // Check if 'remun' router parameter is set and use it to filter by 'isPaid'
-        if ($this->router()->params('remun')) {
-            $query->whereEQ('isPaid', (int)($this->router()->params('remun') === 'job-paid'));
+        if ($this->router()->params('isPaid')) {
+            if(is_array($this->router()->params('isPaid')))
+                $query->whereNumericIn('isPaid', $this->router()->params('isPaid'));
+            else
+                $query->whereEQ('isPaid', (int)($this->router()->params('isPaid')));
         }
 
         // Check if 'types' router parameter is set and contains a single type, then filter by 'isOffer'
-        if ($this->router()->params('types') && count($this->router()->params('types')) === 1) {
-            $type = $this->router()->params('types');
-            $type = array_pop($type);
-            $query->whereEQ('isOffer', (int)($type === 'job-offer'));
+        if ($this->router()->params('isOffer')) {
+            if(is_array($this->router()->params('isOffer')))
+                $query->whereNumericIn('isOffer', $this->router()->params('isOffer'));
+            else
+                $query->whereEQ('isOffer', (int)($this->router()->params('isOffer')));
         }
 
         // Check if 'categories' router parameter is set and filter by matching category IDs
         if ($this->router()->params('categories')) {
             $ids = [];
-            foreach ($this->categories as $category) {
-                if (in_array($category->get('slug'), $this->router()->params('categories'))) {
+            foreach ($this->categories() as $category) {
+                if (in_array($category->get('slug'), $this->router()->params('categories')) || in_array($category->id(), $this->router()->params('categories'))) {
                     $ids[] =  $category->id();
                 }
             }
@@ -85,18 +87,19 @@ class Job extends Kortex
 
     public function viewportTagLists($parents = null): array
     {
-        $parents = is_null($parents) ? ['job_payment', 'job_proposal', 'job_category'] : $parents;
+        $parents = is_null($parents) ? self::TAG_PARENTS : $parents;
         foreach($parents as $slug){
 
-            if($slug == 'job_category' && !empty($this->categories))
-                $tags = $this->categories;
+            if($slug == 'job_category')
+                $tags = $this->categories();
             else
-                $tags = Tag::filter(['parent' => $slug]) ?? [];
+                $tags = Tag::filter(['parent' => $slug]);
 
             if(empty($tags)){
                 $this->logger()->debug('TAGS_NOT_FOUND', ['parent' => $slug]);
                 continue;
             }
+
             $tags_by_slug = [];
             foreach($tags as $tag)
                 $tags_by_slug[$tag->slug()] = "$tag";
