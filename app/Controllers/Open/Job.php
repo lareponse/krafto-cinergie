@@ -22,17 +22,16 @@ class Job extends Kortex
     public function conclude(): void
     {
         $this->viewport('categories', $this->categories);
+        $this->viewportTagLists(['job_payment', 'job_proposal']);
+        // $job_payment = [];
+        // foreach(Tag::filter(['parent' => 'job_payment']) as $tag)
+        //     $job_payment[$tag->slug()] = $tag;
+        // $this->viewport('job_payment', $job_payment);
 
-        $job_payment = [];
-        foreach(Tag::filter(['parent' => 'job_payment']) as $tag)
-            $job_payment[$tag->slug()] = $tag;
-        $this->viewport('job_payment', $job_payment);
-
-        $job_proposal = [];
-        foreach(Tag::filter(['parent' => 'job_proposal']) as $tag)
-            $job_proposal[$tag->slug()] = $tag;
-
-        $this->viewport('job_proposal', $job_proposal);
+        // $job_proposal = [];
+        // foreach(Tag::filter(['parent' => 'job_proposal']) as $tag)
+        //     $job_proposal[$tag->slug()] = $tag;
+        // $this->viewport('job_proposal', $job_proposal);
 
         parent::conclude();
     }
@@ -82,5 +81,29 @@ class Job extends Kortex
         }
 
         return $query;
+    }
+
+    public function viewportTagLists($parents = null): array
+    {
+        $parents = is_null($parents) ? ['job_payment', 'job_proposal', 'job_category'] : $parents;
+        foreach($parents as $slug){
+
+            if($slug == 'job_category' && !empty($this->categories))
+                $tags = $this->categories;
+            else
+                $tags = Tag::filter(['parent' => $slug]) ?? [];
+
+            if(empty($tags)){
+                $this->logger()->debug('TAGS_NOT_FOUND', ['parent' => $slug]);
+                continue;
+            }
+            $tags_by_slug = [];
+            foreach($tags as $tag)
+                $tags_by_slug[$tag->slug()] = "$tag";
+            
+            $this->viewport($slug, $tags_by_slug);
+        }
+
+        return $this->viewport();
     }
 }
