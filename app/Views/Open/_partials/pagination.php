@@ -1,13 +1,12 @@
-<?php 
+<?php
 if ($paginator->last() > 1) {
     $params = $controller->router()->params();
 ?>
     <section class="mt-5" id="pagination">
-        <div class="precedent" id="call-to-action">
-            <p>
-                <a class="cta" href="<?= $controller->router()->hyp($route) . '?' . http_build_query(array_merge($params, ['page' => $paginator->previous()])); ?>">Précédent</a>
-            </p>
+        <div class="precedent call-to-action">
+            <a class="cta" href="<?= $controller->router()->hyp($route) . '?' . http_build_query(array_merge($params, ['page' => $paginator->previous()])); ?>">Précédent</a>
         </div>
+
         <div class="pages-numbers text-center">
             <p>
                 <?php
@@ -33,18 +32,17 @@ if ($paginator->last() > 1) {
             </p>
 
         </div>
-        <div class="suivant" id="call-to-action">
-            <p>
-                <a class="cta" href="<?= $controller->router()->hyp($route). '?' . http_build_query(array_merge($params, ['page' => $paginator->next()])); ?>">Suivant</a>
-            </p>
+        <div class="suivant call-to-action">
+
+            <a class="cta" href="<?= $controller->router()->hyp($route) . '?' . http_build_query(array_merge($params, ['page' => $paginator->next()])); ?>">Suivant</a>
         </div>
     </section>
     <small class="d-block text-center text-secondary text-small">
-    <?php
-    list($first, $last, $total) = $paginator->nowShowing();
-    printf('%d-%d sur %d', $first, $last, $total);
-    ?>
-    
-            </small>
+        <?php
+        list($first, $last, $total) = $paginator->nowShowing();
+        printf('%d-%d sur %d', $first, $last, $total);
+        ?>
+
+    </small>
 <?php
 }
