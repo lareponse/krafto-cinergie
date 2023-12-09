@@ -1,9 +1,5 @@
-<?php
-
-use \HexMakina\Marker\Form; ?>
+<?php use \HexMakina\Marker\Form; ?>
 <form action="<?= $controller->router()->hyp('organisations'); ?>" method="GET">
-
-
     <header>
         <h6>Filtres</h6>
         <button class="clean-filtres">Tout effacer</button>
