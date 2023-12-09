@@ -4,13 +4,16 @@ use \HexMakina\Marker\Marker; ?>
 
 <?php $this->layout('Open::layout', ['title' => $page->label()]) ?>
 <div class="container">
+    <button id="filtreBtn" class="btn btn-black d-xl-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#filtre-sidebar">
+        <h5><i class="bi bi-sliders me-2"></i>Filtrer</h5>
+    </button>
+
     <div class="row">
-        <aside id="sidebar" class="col-12 col-xl-3 mb-5 mb-xl-0">
-            <?= $this->insert('Open::Movie/sidebar'); ?>
-        </aside>
+        <div class="col-xl-3">
+            <?= $this->insert('Open/Movie/sidebar_filters'); ?>
+        </div>
 
         <div class="col-12 col-xl-8 offset-xl-1">
-            <h3>Tous les films</h3>
             <div class="row filmotheque">
                 <?php
                 if (empty($paginator->records()))

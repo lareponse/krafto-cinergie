@@ -300,13 +300,13 @@ span.cta-card {
    flex-wrap: wrap;
 }
 
-#pagination #call-to-action.precedent a.cta::before {
+#pagination .call-to-action.precedent a.cta::before {
    content: '<';
    left: -25px;
    right: initial;
 }
 
-#pagination #call-to-action.precedent a.cta:hover::before {
+#pagination .call-to-action.precedent a.cta:hover::before {
    left: -35px;
 }
 
@@ -727,14 +727,6 @@ article.boutique .commander:hover {
 }
 
 /* ---- SIDEBAR ----- */
-#sidebar {
-   /* margin-bottom: 25px; */
-}
-
-#sidebar #filtres {
-   background: var(--bs-white);
-   padding: 25px;
-}
 
 aside header h6 {
    margin-bottom: 0px;
@@ -750,14 +742,7 @@ aside header {
    align-items: center;
 }
 
-#sidebar header button {
-   background: none;
-   border: none;
-   color: var(--bs-primary);
-   text-transform: uppercase;
-   font-weight: bold;
-   line-height: initial;
-}
+
 
 /* === SIDEBAR BUTTON : ADD ["Ajouter votre annonce"] */
 .add-btn {
@@ -792,7 +777,6 @@ aside header {
    margin-bottom: 10px;
 }
 
-#filtres label,
 #filtres-boutique label {
    text-transform: uppercase;
    color: var(--bs-primary);

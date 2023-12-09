@@ -10,23 +10,18 @@ use \HexMakina\Marker\Marker; ?>
             <h5><i class="bi bi-sliders me-2"></i>Filtrer</h5>
         </button>
 
-        <h5 class="d-none d-xl-block  invisible"><i class="bi bi-sliders me-2"></i>Filtrer</h5>
-
-        <button class="btn btn-outline-primary add-btn" data-bs-toggle="modal" data-bs-target="#modal-nouvelle-organisation">
+        <button class="btn btn-outline-primary add-btn ms-auto" data-bs-toggle="modal" data-bs-target="#modal-nouvelle-organisation">
             <i class="bi bi-plus-circle"></i>
-            Ajouter votre organisation
+            <span class="d-none d-lg-inline">Ajouter</span> votre organisation
         </button>
-
     </div>
 
     <div class="row">
-        <aside id="sidebar" class="col-12 col-xl-3 mb-5 mb-xl-0">
-            <div id="filtres" class="shadow d-none d-xl-block">
-                <?= $this->insert('Open/Organisation/form_filters'); ?>
-            </div>
-        </aside>
+        <div class="col-xl-3">
+            <?= $this->insert('Open/Organisation/sidebar_filters'); ?>
+        </div>
 
-        <div class="col-12 col-xl-8 offset-xl-1">
+        <div class="col-xl-8 offset-xl-1">
             <div class="row mb-5 organisations">
                 <?php
                 if (empty($paginator->records()))
@@ -34,7 +29,7 @@ use \HexMakina\Marker\Marker; ?>
                 else {
                     foreach ($paginator->records() as $record) {
                 ?>
-                        <div class="col-lg-4 col-md-6 organisation-item">
+                        <div class="col-lg-4 col-md-6">
                             <?= $this->insert('Open/Organisation/card', ['record' => $record]) ?>
                         </div>
                 <?php
@@ -48,13 +43,4 @@ use \HexMakina\Marker\Marker; ?>
     </div>
 </div>
 
-<div class="offcanvas offcanvas-start" tabindex="-1" id="filtre-sidebar">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasExampleLabel"><i class="bi bi-sliders me-2"></i>Filtrer</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-        <?= $this->insert('Open/Organisation/form_filters'); ?>
-    </div>
-</div>
 <?= $this->insert('Open/Organisation/modal_alter', ['data-bs-target' => "modal-nouvelle-organisation"]); ?>
