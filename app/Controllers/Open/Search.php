@@ -27,10 +27,13 @@ class Search extends Kortex
         $this->viewport('movieMetrages', Tag::filter(['parent' => 'movie_footage']));
         $this->viewport('movieThemes', Tag::filter(['parent' => 'movie_theme']));
         
-        $movieReleaseYears = Movie::raw(
-            'SELECT DISTINCT(`released`) FROM `movie` WHERE `active` = 1 AND `released` IS NOT NULL ORDER BY `released` DESC'
-        )->fetchAll(\PDO::FETCH_COLUMN);
-
+        $movieReleaseYears = Movie::table()
+            ->select(['released' => ['DISTINCT(`released`)']])
+            ->whereEQ('public', 1)
+            ->whereEQ('searchable', 1)
+            ->whereNotEmpty('released')
+            ->orderBy(['released', 'DESC']);
+        $movieReleaseYears = $movieReleaseYears->ret(\PDO::FETCH_COLUMN);
         $this->viewport('movieReleaseYears',array_combine($movieReleaseYears, $movieReleaseYears));
 
         $this->viewport('messageNoResults', 'Aucun résultat ne correspond à votre recherche');
