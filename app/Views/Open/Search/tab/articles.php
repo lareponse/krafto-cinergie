@@ -16,8 +16,8 @@ use \HexMakina\Marker\{Marker,Form};
                     $checked = in_array($category->get('id'), $controller->router()->params('ac') ?? []) ? 'checked="checked"' : '';
                 ?>
                     <label class="col-md-4 col-lg-2 control control-checkbox">
-                        <?= $category; ?>
                         <input type="checkbox" <?= $checked; ?> id="cat_<?= $category->get('id'); ?>" name="ac[]" value="<?= $category->get('id'); ?>" />
+                        <?= $category; ?>
                         <div class="control_indicator"></div>
                     </label>
                 <?php
