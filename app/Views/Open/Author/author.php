@@ -25,14 +25,8 @@
                     Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
                     sadipscing elitr, sed diam nonumy eirmod
                 </p>
-                <div class="share" id="share">
-                    <span>Partager sur</span>
-                    <span class="socials">
-                        <a href="#"><i class="bi bi-facebook"></i></a>
-                        <a href="#"><i class="mx-1 bi bi-twitter"></i></a>
-                        <a href="#"><i class="bi bi-envelope-fill"></i></a>
-                    </span>
-                </div>
+                <?= $this->insert('Open::_partials/share_print', ['class' => 'compact', 'label' => $record]); ?>
+
             </div>
         </div>
 

@@ -1,6 +1,6 @@
 <?php $this->layout('Open::layout') ?>
 
-<div id="article-single">
+<div class="container my-5 pb-5" id="article-single">
     <div class="row">
         <img class="img-fluid mb-5" src="<?= $article->profilePicture(); ?>" alt="Couverture de l'article <?= $article; ?>" />
 
@@ -8,13 +8,13 @@
 
         <div class="row g-0 mb-5 col-lg-8 align-items-start">
 
-            <div class="col-lg bg-light p-4 p-lg-5 text-justify">
+            <div class="bg-light p-4 p-lg-5 text-justify">
                 <?= $article->get('abstract'); ?>
             </div>
 
         </div>
 
-        <aside id="meta" class="col-lg-4 mb-5 d-none d-lg-block">
+        <aside id="meta" class="col-lg-4 mb-5">
             <ul class="meta-list">
                 <?php if (!empty($article->get('type_label'))) {
                 ?>
@@ -33,16 +33,8 @@
                 <li class=""><i class="bi bi-calendar4 icon"></i></i><span class="otto-date"><?= $article->get('publication'); ?></span></li>
             </ul>
             <hr>
-            <div class="share">
-                <span>Partager sur</span>
-                <span class="socials">
-                    <a href="#"><i class="bi bi-facebook icon"></i></a>
-                    <a href="#"><i class="bi bi-twitter-x icon"></i></a>
-                    <a href="#"><i class="bi bi-envelope-fill icon"></i></a>
-                    <a href="#"><i class="bi bi-instagram icon"></i></a>
-                    <a onclick="window.print()" class="print"><i class="bi bi-printer-fill me-1"></i></a>
-                </span>
-            </div>
+            <?= $this->insert('Open::_partials/share_print', ['class' => 'compact', 'label' => $article->get('label')]); ?>
+
         </aside>
 
         <div class="w-75 mb-5 mx-auto text-justify">
@@ -58,3 +50,4 @@
 
 
     </div>
+</div>

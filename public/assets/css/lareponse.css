@@ -106,3 +106,41 @@ article.card.event-item .date-item {
     font-weight: bold;
 
 }
+
+
+
+.share {
+    display:flex;
+    align-items: center;
+
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.share.compact {
+    display: block;
+}
+
+.share.compact .socials{
+    margin-left: 0;
+} 
+
+.share a {
+    margin-right: 0.5em;
+}
+
+.share i {
+    font-size: 1.2rem;
+    padding: 0;
+}
+
+.share .socials {
+    margin-left: 0.6rem;
+}
+
+.share .actions{
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+}

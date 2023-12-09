@@ -15,15 +15,9 @@ $collection_href = $controller->router()->hyp('movies');
         <div class="row g-0 mt-4">
 
             <div class="col-lg-5">
-                <img class="img-fluid w-100" src="<?= $record->profilePicture() ?>" alt="Photo du film <?= $record->get('label') ?>" />
-                <div class="share mt-2" id="share">
-                <span>Partager sur</span>
-                <span class="socials">
-                    <a href="#"><i class="bi bi-facebook"></i></a>
-                    <a href="#"><i class="mx-1 bi bi-twitter"></i></a>
-                    <a href="#"><i class="bi bi-envelope-fill"></i></a>
-                </span>
-            </div>
+                <img class="img-fluid w-100 mb-2" src="<?= $record->profilePicture() ?>" alt="Photo du film <?= $record->get('label') ?>" />
+                <?= $this->insert('Open::_partials/share_print', [ 'label' => $record]); ?>
+
             </div>
 
             <div class="col-lg-7 ps-lg-5 infos">

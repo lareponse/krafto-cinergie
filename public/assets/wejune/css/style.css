@@ -883,33 +883,6 @@ aside#meta hr {
    margin: 1.5rem 0;
 }
 
-#share {
-   font-size: 0.9rem;
-   text-transform: uppercase;
-   font-weight: 500;
-}
-
-#share a {
-   margin: 0 0.25em;
-}
-
-#share i {
-   font-size: 1.2rem;
-   padding: 0;
-}
-
-#share .socials {
-   margin-left: 0.6rem;
-}
-
-.twitter {
-   width: 2.5rem;
-   padding-bottom: 0.5em;
-}
-
-#share .twitter {
-   width: 1.5rem;
-}
 
 /* PAGE : BOUTIQUE */
 /* TABS (BOUTIQUE) */
@@ -995,13 +968,14 @@ aside#meta hr {
    padding: 3rem;
 }
 
+
 #contact-area {
    background: var(--bs-light);
    margin-top: 150px;
 }
 
 #contact-area>#contact {
-   transform: translateY(-150px);
+   transform: translateY(-130px);
    background: var(--bs-white);
 }
 
