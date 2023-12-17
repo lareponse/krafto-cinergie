@@ -128,3 +128,7 @@ VALUES (NULL, CURRENT_TIMESTAMP, '1', 'authors', 'Nos auteurs', NULL, NULL, NULL
 
 INSERT INTO `page` (`id`, `created`, `public`, `slug`, `label`, `content`, `abstract`, `legacy_id`, `legacy_title`, `legacy_user`) 
 VALUES (NULL, CURRENT_TIMESTAMP, '1', 'jobs', 'Les petites annonces Cinergie.be', NULL, NULL, NULL, NULL, NULL);
+
+
+UPDATE `page` SET  `content` = `abstract` WHERE `slug` = 'l-equipe';``
+UPDATE `page` SET  `abstract` = NULL WHERE `slug` = 'l-equipe';``
