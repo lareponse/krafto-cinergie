@@ -144,3 +144,7 @@ article.card.event-item .date-item {
     flex-grow: 1;
     justify-content: space-between;
 }
+
+.comma:not(:empty):not(:last-child):after {
+    content: ", ";
+  }
