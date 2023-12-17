@@ -1,5 +1,5 @@
 -- STRUCTURE
-DROP TABLE IF EXISTS `tag`;
+DROP TABLE IF EXISTS `cinergie`.`tag`;
 
 CREATE TABLE `tag` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -30,8 +30,8 @@ CREATE TABLE `tag` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- INDEX
-ALTER TABLE `tag` ADD KEY `tag-hasParent` (`parent_id`);
-ALTER TABLE `tag` ADD CONSTRAINT `tag-hasParent` FOREIGN KEY (`parent_id`) REFERENCES `tag` (`id`);
+ALTER TABLE `cinergie`.`tag` ADD KEY `tag-hasParent` (`parent_id`);
+ALTER TABLE `cinergie`.`tag` ADD CONSTRAINT `tag-hasParent` FOREIGN KEY (`parent_id`) REFERENCES `tag` (`id`);
 
 
 
@@ -48,9 +48,9 @@ INSERT INTO `cinergie`.`tag` (`label`, `slug`) VALUES ('Thème du film', @parent
 SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `slug` = @parent);
 
 -- Insert tag from categoriep
-INSERT INTO `tag` (`label`, `slug`, `parent_id`, `legacy_id`)
+INSERT INTO`cinergie`.`tag` (`label`, `slug`, `parent_id`, `legacy_id`)
 SELECT
-`text` as `label`,
+TRIM(`text`) as `label`,
 SUBSTR(id, 27) as `slug`,
 @parent_id, 
 SUBSTR(id, 27) as `legacy_id`
@@ -102,11 +102,11 @@ INSERT INTO `cinergie`.`tag` (`label`, `slug`) VALUES ('Catégorie', @parent);
 SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `slug` = @parent);
 
 -- Insert tag from layout_subject
-INSERT INTO `tag` (`parent_id`, `slug`, `label`, `content`, `legacy_id`)
+INSERT INTO `cinergie`.`tag` (`parent_id`, `slug`, `label`, `content`, `legacy_id`)
 SELECT
   @parent_id,
   CONCAT('article-cat-', `id`) as `slug`,
-  `description` as `label`,
+  TRIM(`description`) as `label`,
   `attr02` as `content`,
   `id` as `legacy_id`
 
@@ -115,7 +115,7 @@ WHERE `area` ='actualite'
 ORDER BY `description` ASC;
 
 -- REMOVE unused tags https://github.com/HexMakina/krafto-cinergie/issues/23
-DELETE FROM `tag` WHERE `parent_id` = @parent_id AND `slug` IN ('aide_a_la_production', 'musique_de_film');
+DELETE FROM `cinergie`.`tag` WHERE `parent_id` = @parent_id AND `slug` IN ('aide_a_la_production', 'musique_de_film');
 
 
 -- DATA :: Event type theme from layout_subject
@@ -127,12 +127,12 @@ INSERT INTO `cinergie`.`tag` (`label`, `slug`) VALUES ('Catégorie', @parent);
 SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `slug` = @parent);
 
 -- Insert tag from layout_subject
-INSERT INTO `tag` (`parent_id`, `slug`, `label`, `content`, `legacy_id`)
+INSERT INTO `cinergie`.`tag` (`parent_id`, `slug`, `label`, `content`, `legacy_id`)
 SELECT
   @parent_id,
   CONCAT('event-cat-', `id`) as `slug`,
-  `description` as `label`,
-  `attr02` as `content`,
+  TRIM(`description`) as `label`,
+  TRIM(`attr02`) as `content`,
   `id` as `legacy_id`
 FROM `a7_cinergie_beta`.`layout_subject`
 WHERE `area` = 'agenda'
@@ -150,12 +150,12 @@ INSERT INTO `cinergie`.`tag` (`label`, `slug`) VALUES ('Catégorie', @parent);
 SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `slug` = @parent);
 
 -- Insert tag from layout_subject
-INSERT INTO `tag` (`parent_id`, `slug`, `label`, `content`, `legacy_id`)
+INSERT INTO `cinergie`.`tag` (`parent_id`, `slug`, `label`, `content`, `legacy_id`)
 SELECT
   @parent_id,
   CONCAT('job-cat-', `id`) as `slug`,
-  `description` as `label`,
-  `attr02` as `content`,
+  TRIM(`description`) as `label`,
+  TRIM(`attr02`) as `content`,
   `id` as `legacy_id`
 
 FROM `a7_cinergie_beta`.`layout_theme`
@@ -163,29 +163,27 @@ WHERE `area` ='annonce'
 ORDER BY `description` ASC;
 
 
-
 -- DATA :: Used as labels
 SET @parent = 'job_payment' COLLATE utf8mb4_general_ci;
-INSERT INTO `tag` (`label`, `slug`)  VALUES ('Rémunéré ou pas ?', @parent);
+INSERT INTO `cinergie`.`tag` (`label`, `slug`)  VALUES ('Rémunéré ou pas ?', @parent);
 
 -- Get parent tag ID
 SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `slug` = @parent);
 -- Insert tag from layout_subject
-INSERT INTO `tag` (`parent_id`, `slug`, `label`)
+INSERT INTO `cinergie`.`tag` (`parent_id`, `slug`, `label`)
 VALUES 
   (@parent_id, 'job-paid', 'Rémunéré'),
   (@parent_id, 'job-free', 'Non rémunéré');
 
-
 -- DATA :: Used as labels
 SET @parent = 'job_proposal' COLLATE utf8mb4_general_ci;
-INSERT INTO `tag` (`label`, `slug`) VALUES ('Proposition ou demande ?', @parent);
+INSERT INTO `cinergie`.`tag` (`label`, `slug`) VALUES ('Proposition ou demande ?', @parent);
 
 -- Get parent tag ID
 SET @parent_id = (SELECT id FROM `cinergie`.`tag` WHERE `slug` = @parent);
 
 -- Insert tag from layout_subject
-INSERT INTO `tag` (`parent_id`, `slug`, `label`)
+INSERT INTO `cinergie`.`tag` (`parent_id`, `slug`, `label`)
 VALUES 
   (@parent_id, 'job-offer', 'Proposition'),
   (@parent_id, 'job-request', 'Demande');
