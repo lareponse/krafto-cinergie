@@ -33,16 +33,17 @@ use \HexMakina\Marker\Marker; ?>
             <div class="row mt-4">
                 <?php foreach ($dvds ?? [] as $record) { ?>
                     <div class="item-boutique col-12 col-md-6">
-                        <?php $this->insert('Open::Shop/card', ['record' => $record]); ?>
+                        <?php $this->insert('Open::Merchandise/card', ['record' => $record]); ?>
                     </div>
                 <?php } ?>
             </div>
         </div>
+
         <div class="tab-pane fade" id="livres">
             <div class="row mt-4 fBi">
                 <?php foreach ($books ?? [] as $record) { ?>
                     <div class="item-boutique col-12 col-md-6">
-                        <?php $this->insert('Open::Shop/card', ['record' => $record]); ?>
+                        <?php $this->insert('Open::Merchandise/card', ['record' => $record]); ?>
                     </div>
                 <?php } ?>
             </div>

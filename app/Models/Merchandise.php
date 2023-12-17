@@ -23,10 +23,16 @@ class Merchandise extends TightModel
         return ['label', 'content', 'price', 'isActive', 'deliveryBe', 'deliveryEu'];
     }
 
+    public function isBook(): bool
+    {
+        return !empty($this->get('isBook'));
+    }
+    
+
     public static function query_retrieve($filters = [], $options = []): SelectInterface
     {
         $Query = parent::query_retrieve($filters, $options);
-        
+
         if(isset($filters['FiltersOnFirstChar'])){
             self::applyFirstCharFilter($filters['FiltersOnFirstChar'], $Query, 'label');
         }

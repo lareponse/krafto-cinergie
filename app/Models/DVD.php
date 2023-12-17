@@ -16,8 +16,7 @@ class DVD extends Merchandise
     public static function query_retrieve($filters = [], $options = []): SelectInterface
     {
         $Query = parent::query_retrieve($filters, $options);
-        
-        $Query->whereEQ('isBook', '0');
+        $Query->whereEQ('isBook', 0);
         
         if(isset($filters['Movie']))
         {
