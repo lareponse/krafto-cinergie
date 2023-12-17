@@ -16,7 +16,7 @@ class Calendar extends \HexMakina\kadro\Controllers\Kadro
     {
         $start = $_GET['start'];
         $end = $_GET['end'];
-        $res = Contest::filter(['date_start' => $start, 'date_stop' => $end]);
+        $res = Contest::any(['date_start' => $start, 'date_stop' => $end]);
         $events = [];
         foreach($res as $event){
             $events[] = [
@@ -36,11 +36,11 @@ class Calendar extends \HexMakina\kadro\Controllers\Kadro
 
     public function events()
     {
-        $res = Tag::filter(['parent' => 'event_category']);
+        $res = Tag::any(['parent' => 'event_category']);
         foreach($res as $t)
             $tags[$t->id()] = $t->slug();
 
-        $res = Event::filter(['date_start' => $this->router()->params('start'), 'date_stop' => $this->router()->params('end')]);
+        $res = Event::any(['date_start' => $this->router()->params('start'), 'date_stop' => $this->router()->params('end')]);
         $events = [];
         foreach($res as $event){
             $category = $event->get('type_id');

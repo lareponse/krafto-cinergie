@@ -14,7 +14,7 @@ class Thesaurus extends \HexMakina\kadro\Controllers\Kadro
 
     public function filter()
     {
-        $res = Model::filter(['content' => ['fields' => [$this->router()->params('field')], 'term' => $this->router()->params('term')]]);
+        $res = Model::any(['content' => ['fields' => [$this->router()->params('field')], 'term' => $this->router()->params('term')]]);
         header('Content-Type: application/json');
         
         echo(json_encode(array_values($res)));
@@ -25,7 +25,7 @@ class Thesaurus extends \HexMakina\kadro\Controllers\Kadro
     public function labelsForIds()
     {
         $ids = json_decode($this->router()->params('ids'));
-        $res = Model::filter(['ids' => $ids]);
+        $res = Model::any(['ids' => $ids]);
         $res = array_map(function($tag){return ['id' => $tag->id(), 'label' => $tag->__toString()];}, array_values($res));
         
         header('Content-Type: application/json');

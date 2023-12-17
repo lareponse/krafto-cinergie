@@ -11,7 +11,7 @@ class Author extends Kortex
     {
         $this->pageSlug = 'authors';
 
-        $authors = Model::filter(['public' => '1', ['order_by' => [['author', 'label', 'ASC']]]]);
+        $authors = Model::any(['public' => '1', ['order_by' => [['author', 'label', 'ASC']]]]);
         $this->viewport('authors', $authors);
     }
 
@@ -25,7 +25,7 @@ class Author extends Kortex
             $professional = Professional::exists(['slug' => $this->record()->get('professional_slug')], ['withPraxis' => true]);
             $this->viewport('professional', $professional);
         }
-        $articles = Article::filter(['public' => '1', 'author' => $this->record()], ['order_by' => ['article', 'publication', 'DESC']]);
+        $articles = Article::any(['public' => '1', 'author' => $this->record()], ['order_by' => ['article', 'publication', 'DESC']]);
 
         $this->viewport('articles', $articles);
     }

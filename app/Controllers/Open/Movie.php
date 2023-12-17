@@ -20,9 +20,9 @@ class Movie extends Kortex
         $paginator->perPage(12);
         $paginator->setClass(Model::class);
 
-        $this->viewport('genres', Tag::filter(['parent' => 'movie_genre']));
-        $this->viewport('metrages', Tag::filter(['parent' => 'movie_footage']));
-        $this->viewport('themes', Tag::filter(['parent' => 'movie_theme']));
+        $this->viewport('genres', Tag::any(['parent' => 'movie_genre']));
+        $this->viewport('metrages', Tag::any(['parent' => 'movie_footage']));
+        $this->viewport('themes', Tag::any(['parent' => 'movie_theme']));
         $this->viewport('order_by', ['released' => 'Date de sortie', 'label' => 'Titre']);
         $this->viewport('paginator', $paginator);
 
@@ -61,7 +61,7 @@ class Movie extends Kortex
         $organisations = Organisation::queryListing([], ['withMoviePraxis' => $this->record()])->retObj(Organisation::class);
         $this->viewport('organisations', $organisations);
 
-        $this->viewport('merchandises', DVD::filter(['Movie' => $this->record()]));
+        $this->viewport('merchandises', DVD::any(['Movie' => $this->record()]));
 
         $this->viewport('articles', $this->record()->relatedArticles($professionals, $organisations));
         $this->viewport('related_photos', $this->relatedPhotos('film'));

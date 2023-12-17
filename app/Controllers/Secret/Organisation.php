@@ -62,9 +62,9 @@ class Organisation extends Krafto
 
         $this->viewport('praxis_ids', $this->praxisIds());
 
-        $this->viewport('articles', Article::filter(['organisation' => $this->loadModel()], ['eager' => false]));
-        $this->viewport('professionals', Professional::filter(['organisation' => $this->loadModel()], ['eager' => false]));
-        $this->viewport('movies', Movie::filter(['model' => $this->loadModel()], ['eager' => false]));
+        $this->viewport('articles', Article::any(['organisation' => $this->loadModel()], ['eager' => false]));
+        $this->viewport('professionals', Professional::any(['organisation' => $this->loadModel()], ['eager' => false]));
+        $this->viewport('movies', Movie::any(['model' => $this->loadModel()], ['eager' => false]));
     }
 
     public function imagesDirectory(){

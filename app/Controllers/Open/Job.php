@@ -22,7 +22,7 @@ class Job extends Kortex
     public function categories(): array
     {   
         if(empty($this->categories))
-            $this->categories = Tag::filter(['parent' => 'job_category']);
+            $this->categories = Tag::any(['parent' => 'job_category']);
         
         return $this->categories;
     }
@@ -93,7 +93,7 @@ class Job extends Kortex
             if($slug == 'job_category')
                 $tags = $this->categories();
             else
-                $tags = Tag::filter(['parent' => $slug]);
+                $tags = Tag::any(['parent' => $slug]);
 
             if(empty($tags)){
                 $this->logger()->debug('TAGS_NOT_FOUND', ['parent' => $slug]);

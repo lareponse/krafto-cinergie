@@ -16,7 +16,7 @@ class Tagging extends \HexMakina\kadro\Controllers\Kadro
     {
         $parent_slug = $this->router()->params('context_value');
         $term = $this->router()->params('term');
-        $res = Tag::filter([
+        $res = Tag::any([
             'parent' => $parent_slug, 
             'content' => ['fields' => ['label'], 'term' => $term]]
         );
@@ -29,7 +29,7 @@ class Tagging extends \HexMakina\kadro\Controllers\Kadro
     public function labelsForIds()
     {
         $ids = json_decode($this->router()->params('ids'));
-        $res = Tag::filter(['ids' => $ids]);
+        $res = Tag::any(['ids' => $ids]);
         $res = array_map(function($tag){return ['id' => $tag->id(), 'label' => $tag->__toString()];}, array_values($res));
         
         header('Content-Type: application/json');

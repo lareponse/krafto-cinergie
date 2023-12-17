@@ -21,14 +21,14 @@ class Merchandise extends Krafto
 
     public function books()
     {
-        $this->viewport('listing', Book::filter());
+        $this->viewport('listing', Book::any());
         $this->setTemplate('Secret::Merchandise/home');
         parent::home();
     }
 
     public function dvds()
     {
-        $this->viewport('listing', DVD::filter());
+        $this->viewport('listing', DVD::any());
         $this->setTemplate('Secret::Merchandise/home');
         parent::home();
 

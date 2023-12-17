@@ -19,7 +19,7 @@ class Organisation extends Kortex
         $paginator->setClass(Model::class);
 
         $this->viewport('paginator', $paginator);
-        $this->viewport('praxis', Tag::filter(['parent' => 'organisation_praxis']));
+        $this->viewport('praxis', Tag::any(['parent' => 'organisation_praxis']));
 
         $this->viewport('form_filters', $this->router()->params());
     }

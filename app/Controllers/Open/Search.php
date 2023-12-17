@@ -19,13 +19,13 @@ class Search extends Kortex
 
     public function conclude(): void
     {
-        $this->viewport('articleCategories',Tag::filter(['parent' => 'article_category']));
-        $this->viewport('professionalPraxes', Tag::filter(['parent' => 'professional_praxis']));
-        $this->viewport('organisationPraxes', Tag::filter(['parent' => 'organisation_praxis']));
+        $this->viewport('articleCategories',Tag::any(['parent' => 'article_category']));
+        $this->viewport('professionalPraxes', Tag::any(['parent' => 'professional_praxis']));
+        $this->viewport('organisationPraxes', Tag::any(['parent' => 'organisation_praxis']));
 
-        $this->viewport('movieGenres', Tag::filter(['parent' => 'movie_genre']));
-        $this->viewport('movieMetrages', Tag::filter(['parent' => 'movie_footage']));
-        $this->viewport('movieThemes', Tag::filter(['parent' => 'movie_theme']));
+        $this->viewport('movieGenres', Tag::any(['parent' => 'movie_genre']));
+        $this->viewport('movieMetrages', Tag::any(['parent' => 'movie_footage']));
+        $this->viewport('movieThemes', Tag::any(['parent' => 'movie_theme']));
         
         $movieReleaseYears = Movie::table()
             ->select(['released' => ['DISTINCT(`released`)']])

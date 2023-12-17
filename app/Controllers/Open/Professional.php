@@ -34,7 +34,7 @@ class Professional extends Kortex
         $paginator->setClass(Model::class);
 
         $this->viewport('paginator', $paginator);
-        $this->viewport('praxis', Tag::filter(['parent' => 'professional_praxis']));
+        $this->viewport('praxis', Tag::any(['parent' => 'professional_praxis']));
 
         $this->viewport('form_filters', $this->router()->params());
     }

@@ -31,7 +31,7 @@ class Article extends Kortex
 
     public function latest()
     {
-        return Model::filter(['public' => '1'], ['limit' => 5, 'order_by' => ['publication', 'DESC']]);
+        return Model::any(['public' => '1'], ['limit' => 5, 'order_by' => ['publication', 'DESC']]);
     }
 
     public function routerParamsAsFilters($query): SelectInterface

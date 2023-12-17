@@ -53,7 +53,7 @@ class Event extends Kortex
         $this->viewport('next', $next);
 
         
-        $events = Model::filter($filters);
+        $events = Model::any($filters);
         $this->viewport('events', $events);
 
     }

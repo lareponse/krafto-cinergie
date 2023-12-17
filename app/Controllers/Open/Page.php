@@ -32,14 +32,15 @@ class Page extends Kortex
     public function team()
     {
         $this->pageSlug = 'l-equipe';
+        $everyone = Team::any(['public' => '1']);
 
-        $everyone = Team::filter(['public' => '1'], ['order_by' => [['team', 'group','ASC'], ['team', 'rank', 'ASC']]]);
         $team = [];
         foreach($everyone as $person){
             $team[$person->get('group')][] = $person;
         }
 
-        $team['collaborateur'] = Author::filter(['public' => '1', 'isCollaborator' => '1'], ['order_by' => [['author', 'rank', 'ASC']]]);
+        $team['collaborateur'] = Author::any(['public' => '1', 'isCollaborator' => '1']);
+        
         $this->viewport('team', $team);
     }
 

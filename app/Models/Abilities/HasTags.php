@@ -19,12 +19,12 @@ trait HasTags
             else $flat_ids []= $id_or_ids;
         }
         
-        return Tag::filter(['ids' => $flat_ids]);
+        return Tag::any(['ids' => $flat_ids]);
     }
 
     public function tagsByParent($parent_id): array
     {
-        return Tag::filter(['parent_id' => $parent_id]);
+        return Tag::any(['parent_id' => $parent_id]);
     }
 
 }

@@ -37,7 +37,7 @@ class Event extends Krafto
 
     public function conclude(): void
     {
-        $this->viewport('types', Tag::filter(['parent' => 'event_category']));
+        $this->viewport('types', Tag::any(['parent' => 'event_category']));
         parent::conclude();
     }
 }

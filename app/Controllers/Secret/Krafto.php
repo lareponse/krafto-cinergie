@@ -143,7 +143,7 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
 
     public function home()
     {
-        $listing = $this->modelClassName()::filter($this->router()->params());
+        $listing = $this->modelClassName()::any($this->router()->params());
         $this->viewport('listing', $listing);
         $this->viewport('filters', $this->router()->params());
     }
