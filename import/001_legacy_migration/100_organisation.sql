@@ -140,7 +140,7 @@ WHERE `slug` = 'cinergie-be';
 
 -- SPF-BO recorded as an organisation and a partner, changing slug before importint partners
 UPDATE `organisation` SET `slug` = 'service-public-francophone-bruxellois-organisation' WHERE `slug` = 'service-public-francophone-bruxellois';
-
+UPDATE `organisation` SET `url` = 'https://www.maisondelafrancite.be/' WHERE `slug` = 'maison-de-la-francite';
 
 INSERT INTO `cinergie`.`organisation` (
   `created`,
