@@ -216,19 +216,19 @@ class Movie extends TightModel
         
         $articleIds = [];
 
-        $res = self::database()->inspect('article_movie')->select(['article_id'])->whereEQ('movie_id', $this->id())->retCol();
+        $res = self::database()->table('article_movie')->select(['article_id'])->whereEQ('movie_id', $this->id())->retCol();
         $articleIds = array_merge($articleIds, $res);
 
         if(!empty($professionals)){
             $ids = array_map(function($item) { return $item->id(); }, $professionals);
-            $res = self::database()->inspect('article_professional')->select(['articleIds' => ['DISTINCT(article_id)']])->whereNumericIn('professional_id', $ids)->limit(7);
+            $res = self::database()->table('article_professional')->select(['articleIds' => ['DISTINCT(article_id)']])->whereNumericIn('professional_id', $ids)->limit(7);
             $res = $res->retCol();
             $articleIds = array_merge($articleIds, $res);
         }
 
         if(!empty($organisations)) {
             $ids = array_map(function ($item) { return $item->id(); }, $organisations);
-            $res = self::database()->inspect('article_organisation')->select(['articleIds' => ['DISTINCT(article_id)']])->whereNumericIn('organisation_id', $ids)->limit(7)->retCol();
+            $res = self::database()->table('article_organisation')->select(['articleIds' => ['DISTINCT(article_id)']])->whereNumericIn('organisation_id', $ids)->limit(7)->retCol();
 
             $articleIds = array_merge($articleIds, $res);
         }
