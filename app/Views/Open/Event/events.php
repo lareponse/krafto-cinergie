@@ -11,4 +11,4 @@
     </div>
 
 </div>
-<?= $this->insert('Open::Event/scripts', ['current' => $current]) ?>
+<?= $this->insert('Open/Event/scripts', ['current' => $currentDate]) ?>

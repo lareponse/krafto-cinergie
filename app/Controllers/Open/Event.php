@@ -3,8 +3,7 @@
 namespace App\Controllers\Open;
 
 use DateTimeImmutable;
-use DateTimeZone;
-
+use \HexMakina\kadro\Models\Tag;
 use \App\Models\Event as Model;
 
 class Event extends Kortex
@@ -21,40 +20,52 @@ class Event extends Kortex
             'month' => $this->router()->params('month') ?? $currentDate->format('m')
         ];
         
-        $formatter = new \IntlDateFormatter('fr_FR', \IntlDateFormatter::NONE, \IntlDateFormatter::NONE, null, null, 'MMMM');
+        // $formatter = new \IntlDateFormatter('fr_FR', \IntlDateFormatter::NONE, \IntlDateFormatter::NONE, null, null, 'MMMM');
         
         if($this->router()->params('year') && $this->router()->params('month')){
             $currentDate = $currentDate->setDate($filters['year'], $filters['month'], 1);
         }
 
-        $current = [
-            'month_string' => $formatter->format($currentDate),
-            'month' => $currentDate->format('m'),
-            'year' => $currentDate->format('Y')
-        ];
-        
         $previousMonth = $currentDate->modify('-1 month');
-        $previous = [
-            'month_string' => $formatter->format($previousMonth),
-            'month' => $previousMonth->format('m'),
-            'year' => $previousMonth->format('Y')
-        ];
-
         $nextMonth = $currentDate->modify('+1 month');
-        $next = [
-            'month_string' => $formatter->format($nextMonth),
-            'month' => $nextMonth->format('m'),
-            'year' => $nextMonth->format('Y')
-        ];
 
-
-        $this->viewport('current', $current);
-        $this->viewport('previous', $previous);
-        $this->viewport('next', $next);
+        $this->viewport('currentDate', $currentDate);
+        $this->viewport('previousMonth', $previousMonth);
+        $this->viewport('nextMonth', $nextMonth);
 
         
-        $events = Model::any($filters);
-        $this->viewport('events', $events);
+        $events = Model::any(['year' => $currentDate->format('Y'), 'month' => $currentDate->format('m')]);
 
+        // $events = Model::any($filters);
+        $this->viewport('events', $events);
+        $this->viewport('events_json', $this->loadEvent($currentDate));
+
+    }
+
+    private function loadEvent($referenceDate): string
+    {
+        $res = Tag::any(['parent' => 'event_category']);
+        foreach($res as $t)
+            $tags[$t->id()] = $t->slug();
+
+        $start = $referenceDate->modify('-1 month');
+        $end = $referenceDate->modify('+3 month');
+        
+        $res = Model::any(['date_start' => $start->format('Y-m-d')]);
+
+        $events = [];
+        foreach($res as $event){
+            $category = $event->get('type_id');
+            $events[]= [
+                'categorie' => $tags[$category] ?? 'categorie1',
+                'className' => $tags[$category] ?? 'categorie1',
+                'title' => $event->__toString(),
+                'start' => $event->get('starts'),
+                'end' => $event->get('ends'),
+                'url_site' => $event->get('url_site'),
+                'url_internal' => $event->get('url_internal')
+            ];
+        }
+        return json_encode($events);
     }
 }

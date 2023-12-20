@@ -40,7 +40,11 @@ class Calendar extends \HexMakina\kadro\Controllers\Kadro
         foreach($res as $t)
             $tags[$t->id()] = $t->slug();
 
-        $res = Event::any(['date_start' => $this->router()->params('start'), 'date_stop' => $this->router()->params('end')]);
+        $start = $this->router()->params('start') ?? date('Y-m').'-01';
+        $end = $this->router()->params('end') ?? date('Y-m').'-31';
+        
+        $res = Event::any(['date_start' => $start, 'date_stop' => $end]);
+
         $events = [];
         foreach($res as $event){
             $category = $event->get('type_id');

@@ -110,7 +110,7 @@ article.card.event-item .date-item {
 
 
 .share {
-    display:flex;
+    display: flex;
     align-items: center;
 
     font-size: 0.9rem;
@@ -122,9 +122,9 @@ article.card.event-item .date-item {
     display: block;
 }
 
-.share.compact .socials{
+.share.compact .socials {
     margin-left: 0;
-} 
+}
 
 .share a {
     margin-right: 0.5em;
@@ -139,7 +139,7 @@ article.card.event-item .date-item {
     margin-left: 0.6rem;
 }
 
-.share .actions{
+.share .actions {
     display: flex;
     flex-grow: 1;
     justify-content: space-between;
@@ -147,4 +147,8 @@ article.card.event-item .date-item {
 
 .comma:not(:empty):not(:last-child):after {
     content: ", ";
-  }
+}
+
+article.card.listing .date-item {
+    justify-content: center;
+}
