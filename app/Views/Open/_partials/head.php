@@ -2,6 +2,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cinergie | <?= $controller->meta('title')?></title>
+<meta name="description" content="<?= $controller->meta('description')?>">
 <!-- Standard OG meta tags -->
 <meta property="og:title" content="<?= $controller->meta('title')?>">
 <meta property="og:description" content="<?= $controller->meta('description')?>">
@@ -24,10 +25,10 @@
 <link rel="stylesheet" href="/public/assets/wejune/css/bootstrap.min.css">
 <link rel="stylesheet" href="/public/assets/wejune/css/bootstrap-print.min.css" media="print">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
-<link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
+<link rel="stylesheet" href="/public/assets/wejune/css/slick-theme.css">
+<link rel="stylesheet" href="/public/assets/wejune/css/slick.min.css">
 <link rel="stylesheet" href="/public/assets/wejune/css/lightbox.min.css">
+<link rel="stylesheet" href="/public/assets/css/sib-styles.css">
 
 <link rel="stylesheet" href="/public/assets/wejune/css/style.css"><!-- original custom css -->
 <link rel="stylesheet" href="/public/assets/css/lareponse.css"><!-- fixes to the custom css -->

@@ -31,11 +31,9 @@
 
     <?php $this->insert('Open::_partials/footer') ?>
 
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="/public/assets/wejune/js/jquery.min.js"></script>
+    <script src="/public/assets/wejune/js/bootstrap.min.js"></script>
+    <script src="/public/assets/wejune/js/slick.min.js"></script>
     <script src="/public/assets/wejune/js/lightbox.min.js"></script>
     <script src="/public/assets/wejune/js/script.js"></script>
     <script type="module">
