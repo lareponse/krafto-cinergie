@@ -22,7 +22,7 @@ trait FiltersOnYearAndMonth
         $filters['month'] ??= 1;
 
         // Return an array of records based on filters
-        $listing = $this->modelClassName()::filter($filters);
+        $listing = $this->modelClassName()::any($filters);
 
         $this->viewport('listing', $listing);
         $this->viewport('filters', $filters);
