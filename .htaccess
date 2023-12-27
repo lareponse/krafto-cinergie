@@ -2,6 +2,9 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule . index.php [L]
 
+# Exclude robots.txt from rewriting
+RewriteCond %{REQUEST_URI} !^/robots\.txt$
+
 <ifModule mod_gzip.c>
 mod_gzip_on Yes
 mod_gzip_dechunk Yes
