@@ -34,9 +34,7 @@ class Event extends Kortex
         $this->viewport('nextMonth', $nextMonth);
 
         
-        $events = Model::any(['year' => $currentDate->format('Y'), 'month' => $currentDate->format('m')]);
-
-        // $events = Model::any($filters);
+        $events = Model::any(['public' => 1, 'year' => $currentDate->format('Y'), 'month' => $currentDate->format('m')]);
         $this->viewport('events', $events);
         $this->viewport('events_json', $this->loadEvent($currentDate));
 
