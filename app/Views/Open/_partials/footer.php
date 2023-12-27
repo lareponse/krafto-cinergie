@@ -69,7 +69,9 @@
             </div>
 
             <div class="col-xl-4">
+                
                 <?= $this->insert('Open::_partials/form_brevo')?>
+
                 <h5 class="text-left text-xl-end mt-5 text-uppercase">Nos partenaires</h5>
                 <div id="partenaires">
                     <a class="partenaire-item" href="https://www.maisondelafrancite.be/">
@@ -89,7 +91,7 @@
                     </a>
 
                     <a class="partenaire-item" href="https://lareponse.be">
-                        <img src="https://avatars.githubusercontent.com/u/20891495?v=4" alt="La Réponse" />
+                        <img src="/public/assets/img/partenaires/lareponse.png" alt="La Réponse" />
                     </a>
                 </div>
             </div>
