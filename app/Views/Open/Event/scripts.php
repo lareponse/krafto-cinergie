@@ -1,7 +1,7 @@
 <script src='/public/assets/js/fullcalendar/index.global.min.js'></script>
 <script src='/public/assets/js/fullcalendar/fr.global.min.js'></script>
 <script src='/public/assets/js/moment.min.js'></script>
-<script>
+<script  nonce="<?= $CSP_nonce?>">
   <?php
   $current = $current ?? new \DateTimeImmutable();
   ?>

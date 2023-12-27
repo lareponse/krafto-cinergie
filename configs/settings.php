@@ -2,12 +2,25 @@
 
 define('DOCUMENT_ROOT', $_SERVER['DOCUMENT_ROOT']);
 
+$nonce = bin2hex(random_bytes(16));
+
 $settings = array(
   'app' => [
 		'name' => 'Cinergie',
 		'production_host' => 'cinergie.be',
-    'session_start_options' => ['session_name' => 'krafto-cinergie']
-
+    'session_start_options' => ['session_name' => 'krafto-cinergie'],
+    'CSP_nonce' => $nonce,
+    'headers' => [
+      'Content-Security-Policy' => [
+        "default-src 'self';",
+        "script-src 'self' 'nonce-{$nonce}' https://cdn.jsdelivr.net;",
+        "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;",
+        "connect-src 'self' 'nonce-{$nonce}' https://api.example.com;",
+        "img-src 'self' 'nonce-{$nonce}' https://cdn.jsdelivr.net;",
+        "frame-src 'self' 'nonce-{$nonce}' https://www.youtube.com;",
+        "font-src 'self' 'nonce-{$nonce}' https://cdn.jsdelivr.net;",
+      ]
+    ]
 	],
 
   'locale' => [
@@ -33,7 +46,6 @@ $settings = array(
   'env' => require_once('env.php'),
   'api' => require_once('api.php')
 );
-
 
 $settings ['kortex'] = [
     'meta' => [

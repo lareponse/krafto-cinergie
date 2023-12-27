@@ -34,12 +34,16 @@ abstract class Kortex extends \HexMakina\kadro\Controllers\Kadro
     {
         $this->viewport('page', $this->page());
         $this->viewport('record', $this->record());
+        $this->viewport('CSP_nonce', $this->get('settings.app.CSP_nonce'));
+        
+
 
         if (is_null($this->template)) {
             $fallback = 'Open::' . $this->nid() . DIRECTORY_SEPARATOR . $this->router()->targetMethod();
             $this->template = $fallback;
         }
         
+        echo $this->headers();
         echo $this->display($this->template);
 
         parent::conclude();
