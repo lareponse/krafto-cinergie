@@ -27,7 +27,7 @@
     </div>
 </div>
 
-<script>
+<script  nonce="<?= $CSP_nonce?>">
     const modal = document.getElementById('modal-order');
     const titreModal = modal.querySelector('.modal-titre');
     const prixModal = modal.querySelector('.modal-prix');
@@ -44,35 +44,3 @@
     });
 </script>
 
-
-<script>
-    const compare = function(ids, asc) {
-        return function(row1, row2) {
-            const tdValue = function(row, ids) {
-                return row.querySelector('.card-title').textContent;
-            };
-
-            const tri = function(v1, v2) {
-                if (!isNaN(v1) && !isNaN(v2)) {
-                    return asc ? v1.localeCompare(v2) : v2.localeCompare(v1);
-                } else {
-                    return asc ? v1.localeCompare(v2) : v2.localeCompare(v1);
-                }
-            };
-
-            return tri(tdValue(row1, ids), tdValue(row2, ids));
-        };
-    };
-
-    const selectElement = document.querySelector('#filtreBoutique');
-    selectElement.addEventListener('change', function() {
-        const container = document.querySelector('.tab-pane.show.active .row');
-        const elementsToSort = Array.from(container.querySelectorAll('.item-boutique'));
-
-        let classe = elementsToSort.sort(compare(0, true)); // Triez par le titre
-
-        classe.forEach(function(element) {
-            container.appendChild(element);
-        });
-    });
-</script>

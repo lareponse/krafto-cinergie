@@ -54,23 +54,9 @@ use \HexMakina\Marker\Marker; ?>
 
 <?php $this->insert('Open::Merchandise/modal_order') ?>
 
-<script>
-    let modal = document.getElementById('modal-order');
-    let titreModal = modal.querySelector('.modal-titre');
-    let prixModal = modal.querySelector('.modal-prix');
 
-    let btnsCommander = document.querySelectorAll('.btn-commander');
-    btnsCommander.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const titre = btn.getAttribute('data-titre');
-            const prix = btn.getAttribute('data-prix');
 
-            titreModal.textContent = titre;
-            prixModal.textContent = prix + ' €';
-        });
-    });
-</script>
-<script>
+<script nonce="<?= $CSP_nonce?>">
     const compare = function(ids, asc) {
         return function(row1, row2) {
             const tdValue = function(row, ids) {
