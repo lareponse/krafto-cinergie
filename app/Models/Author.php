@@ -30,16 +30,11 @@ class Author extends TightModel
         return $this->get('email');
     }
 
-    public static function queryListing($filters = [], $options = []): SelectInterface
-    {
-        return self::query_retrieve($filters, $options);
-    }
-
-    public static function query_retrieve($filters = [], $options = []): SelectInterface
+    public static function filter($filters = [], $options = []): SelectInterface
     {
 
          //---- JOIN & FILTER SERVICE
-         $Query = parent::query_retrieve($filters, $options);
+         $Query = parent::filter($filters, $options);
 
 
         if(isset($filters['FiltersOnFirstChar'])){

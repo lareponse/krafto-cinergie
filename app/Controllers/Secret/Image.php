@@ -134,7 +134,7 @@ class Image extends Krafto
 
     public function deadlinks()
     {
-        $articles = Article::queryListing();
+        $articles = Article::filter();
         $articles->selectAlso(['article.content', 'article.id']);
         $articles->whereLike('content', '%src="%');
         $articles->limit(1, 0);

@@ -37,31 +37,10 @@ class Event extends TightModel implements EventInterface
      *
      * @return SelectInterface The constructed database query object.
      */
-    public static function queryListing(): SelectInterface
+
+    public static function filter($filters = [], $options = []): SelectInterface
     {
-        $select = self::table()->select([
-            'slug',
-            'label',
-            'starts',
-            'category_label' => ['tag', 'label']
-        ]);
-
-        $now = date('Y-m-d');
-        $startsAfter = $select->addBinding('startsAfter', $now);
-        $stopsBefore = $select->addBinding('stopsBefore', $now);
-        $select->whereWithBind(sprintf('starts >= %s AND stops IS NOT NULL AND (stops >= %s)', $startsAfter, $stopsBefore));
-        
-
-        $select->join(['tag', 'tag'], [['event', 'type_id', 'tag', 'id']], 'LEFT OUTER');
-
-        $select->orderBy(['starts', 'ASC']);
-
-        return $select;
-    }
-
-    public static function query_retrieve($filters = [], $options = []): SelectInterface
-    {
-        $Query = parent::query_retrieve($filters, $options);
+        $Query = parent::filter($filters, $options);
    
         if(isset($filters['year']))
         {
@@ -74,7 +53,7 @@ class Event extends TightModel implements EventInterface
             $bindname = $Query->addBinding('filters_month', $filters['month']);
             $Query->whereWithBind('MONTH(`starts`) = '.$bindname);
         }
-
+        $Query->orderBy(['starts', 'ASC']);
         return $Query;
     }
 }

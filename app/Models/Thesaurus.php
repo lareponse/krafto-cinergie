@@ -18,14 +18,9 @@ class Thesaurus extends TightModel
         return $this->get('label');
     }
 
-    public static function queryListing($filters = [], $options = []): SelectInterface
+    public static function filter($filters = [], $options = []): SelectInterface
     {
-        return self::query_retrieve($filters, $options);
-    }
-    
-    public static function query_retrieve($filters = [], $options = []): SelectInterface
-    {
-        $Query = parent::query_retrieve($filters, $options);
+        $Query = parent::filter($filters, $options);
 
         if(isset($filters['FiltersOnFirstChar'])){
             self::applyFirstCharFilter($filters['FiltersOnFirstChar'], $Query, 'label');

@@ -12,55 +12,43 @@ class Home extends Kortex
         
     public function home()
     {
-        $articlesDiaporama = Article::query_retrieve()
-            ->whereEQ('public', '1')
-            ->whereEQ('pick', '1')
+        $baseFilters = ['public' => 1, 'pick' => 1];
+        $select = Article::filter($baseFilters)
             ->limit(7);
-        
-        $articlesDiaporama = $articlesDiaporama->retObj(Article::class);
+        $articlesDiaporama = $select->retObj(Article::class);
 
         $entrevue_tag = Tag::one('slug', 'article-cat-entrevue');
-        $entrevues = Article::queryListing()
-            ->whereEQ('public', '1')
-            ->whereEQ('pick', '1')
+        $select = Article::filter($baseFilters)
             ->whereEQ('type_id', $entrevue_tag->id())
             ->whereNotEmpty('embedVideo')
             ->orderBy(['publication', 'DESC'])
             ->limit(3);
 
-        $entrevues = $entrevues->retObj(Article::class);
+        $entrevues = $select->retObj(Article::class);
 
-        $sousLaLoupe = Article::query_retrieve()
-            ->whereEQ('public', '1')
-            ->whereEQ('pick', '1')
+        $select = Article::filter($baseFilters)
             ->whereEmpty('embedVideo')
             ->limit(3);
-        $sousLaLoupe = $sousLaLoupe->retObj(Article::class);
+        $sousLaLoupe = $select->retObj(Article::class);
             
-        $contests = Contest::queryListing()
-            ->whereEQ('public', '1')
-            ->whereEQ('pick', '1')
+        $select = Contest::filter($baseFilters)
             ->limit(1);
 
-        $contests = $contests->retObj(Contest::class);
+        $contests = $select->retObj(Contest::class);
 
-        $events = Event::query_retrieve()
-            ->whereEQ('public', '1')
-            ->whereEQ('pick', '1')
+        $select = Event::filter($baseFilters)
             ->limit(3)
             ->orderBy(['starts', 'ASC']);
 
-        $events = $events->retObj(Event::class);
+        $events = $select->retObj(Event::class);
         
+        $select = Job::filter(['window' => [new \DateTimeImmutable('-1 month'), new \DateTimeImmutable('+2 month')]]);
+        $select->whereEQ('public', '1')
+               ->limit(5)
+               ->orderBy(['starts', 'DESC']);
 
-        $window = [new \DateTimeImmutable('-1 month'), new \DateTimeImmutable('+2 month')];
-        $jobs = Job::queryListingWithEvent(
-            Job::query_retrieve()->whereEQ('public', '1')->limit(5)->orderBy(['starts', 'DESC']),
-            $window[0], $window[1]);
-        $jobs = $jobs->retObj(Job::class);
+        $jobs = $select->retObj(Job::class);
 
-        
-        
         $this->viewport('articlesDiaporama', $articlesDiaporama);
         $this->viewport('entrevues', $entrevues);
         $this->viewport('sousLaLoupe', $sousLaLoupe);

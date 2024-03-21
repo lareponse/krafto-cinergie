@@ -19,128 +19,105 @@ class Organisation extends TightModel
 
     use Abilities\FiltersOnFirstChar;
 
-    public function __toString(){
+    public function __toString()
+    {
         return $this->get('label');
     }
 
-    public function tagIds(): array{
+    public function tagIds(): array
+    {
         return [];
     }
 
-    public static function queryListing($filters=[], $options=[]): SelectInterface
-    {
-        $select = self::table()->select();
-        $select->columns(['id', 'slug', 'label', 'avatar']);
-    
-        if(isset($options['withPraxis'])) {
-            $select->join(['organisation_praxis', 'organisation_praxis'], [['organisation_praxis', 'organisation_id', 'organisation', 'id']], 'LEFT OUTER');
-            $select->selectAlso(['praxis_ids' => ["GROUP_CONCAT(DISTINCT organisation_praxis.tag_id SEPARATOR ', ')"]]);    
-        }
-        elseif(isset($options['withMoviePraxis'])){
-            $movie = $options['withMoviePraxis'];
-            $select->join(['movie_organisation', 'workedOn'], [['workedOn','organisation_id', 'organisation', 'id'],['workedOn', 'movie_id', $movie->id()]], 'INNER');
-            $select->selectAlso(['praxis_ids' => ["GROUP_CONCAT(DISTINCT workedOn.praxis_id SEPARATOR ', ')"]]);
-        }
-
-        if(!isset($options['listAll']) || $options['listAll'] !== true){
-            $select->whereEQ('public', 1);
-            $select->whereEQ('listable', 1);
-        }
-
-        $select->groupBy(['organisation', 'id']);
-        $select->orderBy(['label', 'ASC']);
-        return $select;
-    }
-
-
-    public function fieldsForCompletion():array
+    public function fieldsForCompletion(): array
     {
         return [
             'label', 'content', 'abbrev', 'filmography',
-            ['tel','gsm', 'fax'], 'email', 'url','country','province','zip', 'city', 'street'];
+            ['tel', 'gsm', 'fax'], 'email', 'url', 'country', 'province', 'zip', 'city', 'street'
+        ];
     }
 
-    public static function query_retrieve($filters = [], $options = []): SelectInterface
+    public static function filter($filters = [], $options = []): SelectInterface
     {
         //---- JOIN & FILTER SERVICE
-        $Query = parent::query_retrieve($filters, $options);
+        $Query = parent::filter($filters, $options);
 
 
 
-        if(isset($filters['FiltersOnFirstChar'])){
+        if (isset($filters['FiltersOnFirstChar'])) {
             self::applyFirstCharFilter($filters['FiltersOnFirstChar'], $Query, 'label');
         }
 
-        
-        if(isset($filters['fullname'])){
-            $Query->whereLike('label','%'.$filters['fullname'] . '%', $Query->table());
+
+        if (isset($filters['fullname'])) {
+            $Query->whereLike('label', '%' . $filters['fullname'] . '%', $Query->table());
         }
 
-        if(isset($filters['segment']))
-        {
-            switch($filters['segment']){
+        if (isset($filters['segment'])) {
+            switch ($filters['segment']) {
                 case 'partenaires':
                     $Query->whereEQ('isPartner', 1);
                     $Query->orderBy(['rank', 'ASC']);
-                break;
-                
+                    break;
+
                 case 'inactives':
-                    $Query->whereNotEQ('public',1);
+                    $Query->whereNotEQ('public', 1);
                     $Query->orderBy(['rank', 'ASC']);
-                break;
+                    break;
 
                 case 'unlisted':
                     $Query->whereNotEQ('listable', 1);
                     $Query->orderBy(['rank', 'ASC']);
-                break;
+                    break;
 
                 case 'withoutContent':
                     $Query->whereEmpty('content');
-                break;
+                    break;
 
                 case 'withoutProfilePicture':
                     $Query->whereEmpty('avatar');
-                break;
+                    break;
             }
-
         }
         // all professionals linked to a movie
-        if(isset($filters['professional']))
-        {
+        if (isset($filters['professional'])) {
             $Query->join(['organisation_professional', 'organisation_professional'], [
                 ['organisation', 'id', 'organisation_professional', 'organisation_id'],
                 ['organisation_professional', 'professional_id', $filters['professional']->id()]
             ]);
         }
+        $Query->groupBy(['organisation', 'id']);
+
 
         // all organisations linked to a movie
-        if(isset($filters['movie']))
-        {
+        if (isset($filters['movie'])) {
             $Query->join(['movie_organisation', 'movie_organisation'], [
                 ['organisation', 'id', 'movie_organisation', 'organisation_id'],
                 ['movie_organisation', 'movie_id', $filters['movie']->id()],
 
             ]);
-            $Query->selectAlso(['worked_as' => 'GROUP_CONCAT(praxis_id)']);
+            $Query->selectAlso(['workedAs' => 'GROUP_CONCAT(praxis_id)']);
+            $Query->groupBy(['organisation', 'id']);
+
+        } else if (isset($options['withPraxis'])) {
+            $Query->join(['organisation_praxis', 'organisation_praxis'], [['organisation_praxis', 'organisation_id', 'organisation', 'id']], 'LEFT OUTER');
+            $Query->selectAlso(['praxis_ids' => ["GROUP_CONCAT(DISTINCT organisation_praxis.tag_id SEPARATOR ', ')"]]);
+            
+        } elseif (isset($options['withMoviePraxis'])) {
+            $movie = $options['withMoviePraxis'];
+            $Query->join(['movie_organisation', 'workedOn'], [['workedOn', 'organisation_id', 'organisation', 'id'], ['workedOn', 'movie_id', $movie->id()]], 'INNER');
+            $Query->selectAlso(['praxis_ids' => ["GROUP_CONCAT(DISTINCT workedOn.praxis_id SEPARATOR ', ')"]]);
+            $Query->groupBy(['organisation', 'id']);
+
         }
 
-        if(isset($filters['article']))
-        {
+        if (isset($filters['article'])) {
             $Query->join(['article_organisation', 'article_organisation'], [
                 ['organisation', 'id', 'article_organisation', 'organisation_id'],
                 ['article_organisation', 'article_id', $filters['article']->id()]
             ]);
-        }
-
-        if(!isset($options['eager']) || $options['eager'] !== false){
-            $Query->join(['organisation_praxis', 'praxis'], [['organisation', 'id', 'praxis', 'organisation_id']], 'LEFT OUTER');
-            $Query->join(['tag', 'tag'], [['tag', 'id', 'praxis', 'tag_id'], ['tag', 'parent_id', 219]], 'LEFT OUTER');
             $Query->groupBy(['organisation', 'id']);
-            $Query->selectAlso(["GROUP_CONCAT(DISTINCT tag.id) as praxis_ids"]);
 
-            if(isset($filters['praxis_id'])){
-                $Query->whereEQ('tag_id', ((int)$filters['praxis_id']), 'praxis');
-            }
         }
 
         $Query->orderBy(['label', 'asc']);
@@ -151,7 +128,7 @@ class Organisation extends TightModel
 
     public static function idsByPraxis(int $praxis_id): array
     {
-        $query = 'SELECT `organisation_praxis`.`organisation_id` FROM `organisation_praxis`  WHERE `organisation_praxis`.`tag_id` = :tag_id'; 
+        $query = 'SELECT `organisation_praxis`.`organisation_id` FROM `organisation_praxis`  WHERE `organisation_praxis`.`tag_id` = :tag_id';
         $query = self::raw($query, ['tag_id' => $praxis_id]);
 
         return $query->fetchAll(\PDO::FETCH_COLUMN);

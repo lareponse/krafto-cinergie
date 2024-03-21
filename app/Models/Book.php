@@ -13,8 +13,8 @@ class Book extends Merchandise
     use Abilities\HasProfilePicture;
     use Abilities\IsActivable;
 
-    public static function query_retrieve($filters = [], $options = []): SelectInterface
+    public static function filter($filters = [], $options = []): SelectInterface
     {
-        return parent::query_retrieve($filters, $options)->whereEQ('isBook', '1');
+        return parent::filter($filters, $options)->whereEQ('isBook', '1');
     }
 }

@@ -13,7 +13,7 @@ class Organisation extends Kortex
 {
     public function organisations()
     {
-        $query = $this->routerParamsAsFilters(Model::queryListing());
+        $query = $this->routerParamsAsFilters(Model::filter());
         $paginator = new Paginator($this->router()->params('page') ?? 1, $query);
         $paginator->perPage(12);
         $paginator->setClass(Model::class);
@@ -29,7 +29,7 @@ class Organisation extends Kortex
         $movieIds = Movie::idsByOrganisationIds([$this->record()->id()]);
 
         if (!empty($movieIds)) {
-            $query = Movie::queryListing();
+            $query = Movie::filter();
             $query->whereNumericIn('id', $movieIds, $query->table());
             $related_movies = $query->retObj(Movie::class);
         }

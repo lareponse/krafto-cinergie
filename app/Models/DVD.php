@@ -13,9 +13,9 @@ class DVD extends Merchandise
     use Abilities\HasProfilePicture;
     use Abilities\IsActivable;
 
-    public static function query_retrieve($filters = [], $options = []): SelectInterface
+    public static function filter($filters = [], $options = []): SelectInterface
     {
-        $Query = parent::query_retrieve($filters, $options);
+        $Query = parent::filter($filters, $options);
         $Query->whereEQ('isBook', 0);
         
         if(isset($filters['Movie']))

@@ -36,7 +36,7 @@ class Job extends Kortex
 
     public function jobs()
     {
-        $query = $this->routerParamsAsFilters(Model::query_retrieve());
+        $query = $this->routerParamsAsFilters(Model::filter());
         $paginator = new Paginator($this->router()->params('page') ?? 1, $query);
         $paginator->perPage(10);
         $paginator->setClass(Model::class);

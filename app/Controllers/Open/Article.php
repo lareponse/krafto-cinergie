@@ -11,10 +11,9 @@ class Article extends Kortex
 {
     protected $pageSlug = 'articles';
 
-
     public function articles()
     {
-        $query = $this->routerParamsAsFilters(Model::queryListing());
+        $query = $this->routerParamsAsFilters(Model::filter(['public' => 1]));
         $paginator = new Paginator($this->router()->params('page') ?? 1, $query);
         $paginator->perPage(12);
         $paginator->setClass(Model::class);

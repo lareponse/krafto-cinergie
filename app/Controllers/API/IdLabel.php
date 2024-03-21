@@ -20,7 +20,7 @@ class IdLabel extends \HexMakina\kadro\Controllers\Kadro
         $class = $this->get('App\\Models\\'.$class); 
 
 
-        $select = $class::queryListing();
+        $select = $class::filter();
         switch($this->router()->params('handle')){
             case 'Professional':
                 $select->columns(['id', 'label' => ["CONCAT(professional.firstname, ' ', professional.lastname)"]]);
@@ -45,7 +45,7 @@ class IdLabel extends \HexMakina\kadro\Controllers\Kadro
         $class = $this->router()->params('handle');
         $class = $this->get('App\\Models\\'.$class);
 
-        $select = $class::queryListing();
+        $select = $class::filter();
 
         switch($this->router()->params('handle')){
             case 'Professional':

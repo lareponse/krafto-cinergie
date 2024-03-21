@@ -35,52 +35,9 @@ class Job extends TightModel implements EventInterface
         return (bool)$this->get('isPaid');
     }
     
-         
-    /**
-     * Constructs a database query for listing advertisements with specific columns and filters.
-     *
-     * @return SelectInterface The constructed database query object.
-     */
-    public static function queryListing(): SelectInterface
+    public static function filter($filters = [], $options = []): SelectInterface
     {
-        $select = self::table()->select([
-            'slug',
-            'label',
-            'starts',
-            'isOffer',
-            'isPaid',
-            'category_id',
-            'category_label' => ['tag', 'label']
-        ]);
-
-
-        
-
-        $select->join(['tag', 'tag'], [[$select->table(), 'category_id', 'tag', 'id']], 'LEFT OUTER');
-
-        $select->orderBy(['starts', 'ASC']);
-
-        return $select;
-    }
-
-    public static function queryListingWithEvent($select, \DateTimeImmutable $starts, \DateTimeImmutable $stops)
-    {
-        $starts = $select->addBinding('starts', $starts->format('Y-m-d'));
-        $stops = $select->addBinding('stops', $stops->format('Y-m-d'));
-
-        $clauses = [
-            'startsBetween' => "starts BETWEEN $starts AND $stops",
-            'stopsBetween' => "stops BETWEEN $starts AND $stops",
-            'ongoing' => "starts < $starts AND stops > $starts"
-        ];
-        
-        $select->whereWithBind(sprintf('(%s)', implode(') OR (', $clauses)));
-        return $select;
-    }
-
-    public static function query_retrieve($filters = [], $options = []): SelectInterface
-    {
-        $Query = parent::query_retrieve($filters, $options);
+        $Query = parent::filter($filters, $options);
 
         if(isset($filters['isOffer']))
         {
@@ -112,6 +69,18 @@ class Job extends TightModel implements EventInterface
         {
             $bindname = $Query->addBinding('filters_month', $filters['month']);
             $Query->whereWithBind('MONTH(`starts`) = '.$bindname);
+        }
+
+        if(isset($filters['window'])){
+            [$starts, $stops] = $filters['window'];
+            $starts = $Query->addBinding('starts', $starts->format('Y-m-d'));
+            $stops = $Query->addBinding('stops', $stops->format('Y-m-d'));
+            $clauses = [
+                'startsBetween' => "starts BETWEEN $starts AND $stops",
+                'stopsBetween' => "stops BETWEEN $starts AND $stops",
+                'ongoing' => "starts < $starts AND stops > $starts"
+            ];
+            $Query->whereWithBind(sprintf('(%s)', implode(') OR (', $clauses)));
         }
 
         $Query->orderBy(['starts', 'asc']);

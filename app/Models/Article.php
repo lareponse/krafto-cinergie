@@ -16,23 +16,10 @@ class Article extends TightModel
         return $this->get('label');
     }
 
-    public static function queryListing($filters = [], $options = []): SelectInterface
-    {
-        $select = self::table()->select();
-        $select->columns([
-                'id', 'slug', 'label', 'publication', 'avatar', 'type_id'
-            ]
-        );
-        
-        $select = self::activableQuery($select, $options['isActive'] ?? 1);
-
-        return $select;
-    }
-
-    public static function query_retrieve($filters = [], $options = []): SelectInterface
+    public static function filter($filters = [], $options = []): SelectInterface
     {
         //---- JOIN & FILTER SERVICE
-        $Query = parent::query_retrieve($filters, $options);
+        $Query = parent::filter($filters, $options);
         $Query->join(['article_author', 'writtenBy'], [['writtenBy', 'article_id', 'article', 'id']], 'LEFT OUTER');
         $Query->join(['author', 'author'], [['writtenBy', 'author_id', 'author', 'id']], 'LEFT OUTER');
         $Query->groupBy(['article', 'id']);

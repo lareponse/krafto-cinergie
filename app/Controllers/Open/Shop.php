@@ -9,7 +9,7 @@ class Shop extends Kortex
     public function shop()
     {
         // $dvds = DVD::any(['public' => 1]);
-        $dvds = DVD::query_retrieve(['public' => 1]);
+        $dvds = DVD::filter(['public' => 1]);
         $dvds->join(['movie_merchandise', 'hasMerch'], [[$dvds->tableLabel(), 'id', 'hasMerch', 'merchandise_id']]);
         $dvds->join(['movie', 'movie'], [['movie', 'id', 'hasMerch', 'movie_id']]);
         $dvds->selectAlso([

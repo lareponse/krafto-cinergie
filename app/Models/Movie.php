@@ -20,52 +20,6 @@ class Movie extends TightModel
         return $this->get('label');
     }
 
-    public static function queryListing($filters = [], $options = []): SelectInterface
-    {
-        // written as part of refactoring, must be rewritten as a join using the PRAXIS_DIRECTOR_SLUG constant
-        $fieldForListing = [
-            'id',
-            'slug',
-            'label',
-            'released',
-            'runtime',
-            'avatar',
-            'genre_id',
-            'metrage_id'
-        ];
-        $select = self::table()->select();
-        
-        $select->columns($fieldForListing);
-        if(($options['withDirectors'] ?? false) !== false){
-            $director_tag = Praxis::director();
-
-            $select->join(['movie_professional', 'withDirectors'], [
-                ['withDirectors', 'movie_id', 'movie', 'id'],
-                ['withDirectors', 'praxis_id', $director_tag->id()]
-            ], 'LEFT OUTER');
-            $select->join(['professional', 'director'], [['withDirectors', 'professional_id', 'director', 'id']], 'LEFT OUTER');
-            $select->selectAlso(['directors' => ["GROUP_CONCAT(`director`.`firstname`, ' ', `director`.`lastname` SEPARATOR ', ')"]]);
-        }
-        
-        
-        $select->whereEQ('public', ($options['isActive'] ?? true) === true ? '1' : '0');
-
-        $select->groupBy(['movie', 'id']);
-  
-
-        return $select;
-    }
-
-    public static function queryRecord()
-    {
-        $select = self::queryListing();
-
-        // add movie_theme_ids from thesaurus join
-
-        return $select;
-
-    }
-
     public function fieldsForCompletion(): array
     {
         return [
@@ -92,7 +46,7 @@ class Movie extends TightModel
 
     public static function idsByOrganisationName(string $isLike): array
     {
-        $res = Organisation::query_retrieve([
+        $res = Organisation::filter([
             'public' => '1',
             'fullname' => $isLike
         ], [
@@ -105,7 +59,7 @@ class Movie extends TightModel
 
     public static function idsByProfessionalName(string $isLike, $praxis_id = null): array
     {
-        $res = Professional::query_retrieve([
+        $res = Professional::filter([
             'public' => '1',
             'fullname' => $isLike
         ], [
@@ -144,10 +98,10 @@ class Movie extends TightModel
         return is_null($query) ? [] : $query->fetchAll(\PDO::FETCH_COLUMN);
     }
 
-    public static function query_retrieve($filters = [], $options = []): SelectInterface
+    public static function filter($filters = [], $options = []): SelectInterface
     {
         //---- JOIN & FILTER SERVICE
-        $Query = parent::query_retrieve($filters, $options);
+        $Query = parent::filter($filters, $options);
 
         if (isset($filters['FiltersOnFirstChar'])) {
             self::applyFirstCharFilter($filters['FiltersOnFirstChar'], $Query, 'label');
@@ -238,7 +192,7 @@ class Movie extends TightModel
             return [];
         }
 
-        $query = Article::queryListing();
+        $query = Article::filter();
         $query = $query->whereNumericIn('id', $articleIds);
         $res = $query->retObj(Article::class);
 

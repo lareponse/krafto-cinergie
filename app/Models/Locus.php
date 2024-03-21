@@ -15,9 +15,9 @@ class Locus extends TightModel
     }
     
 
-    public static function query_retrieve($filters = [], $options = []): SelectInterface
+    public static function filter($filters = [], $options = []): SelectInterface
     {
-        $Query = parent::query_retrieve($filters, $options);
+        $Query = parent::filter($filters, $options);
 
         if(isset($filters['FiltersOnFirstChar'])){
             self::applyFirstCharFilter($filters['FiltersOnFirstChar'], $Query, 'label');

@@ -14,11 +14,4 @@ class Partner extends TightModel
     {
         
     }
-
-    public static function query_retrieve($filters = [], $options = []): SelectInterface
-    {
-        $Query = parent::query_retrieve($filters, $options);
-
-        return $Query;
-    }
 }

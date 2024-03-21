@@ -15,7 +15,7 @@ class Movie extends Kortex
 
     public function movies()
     {
-        $query = $this->routerParamsAsFilters(Model::queryListing([], ['withDirectors' => true]));
+        $query = $this->routerParamsAsFilters(Model::filter([], ['withDirectors' => true]));
         $paginator = new Paginator($this->router()->params('page') ?? 1, $query);
         $paginator->perPage(12);
         $paginator->setClass(Model::class);
@@ -32,7 +32,7 @@ class Movie extends Kortex
     public function movie()
     {
         
-        $professionals = Professional::queryListing([], ['withMoviePraxis' => $this->record()])->retObj(Professional::class);
+        $professionals = Professional::filter([], ['withMoviePraxis' => $this->record()])->retObj(Professional::class);
         
         $director_tag = Praxis::director();
         $directors = [];
@@ -44,21 +44,21 @@ class Movie extends Kortex
         $this->viewport('professionals', $professionals);
         $this->viewport('directors', $directors);
 
-        
-        $query = Tag::query_retrieve();
+        $query = Tag::filter();
         $query->join(['movie_theme', 'hasThemes'], [['hasThemes', 'tag_id', 'tag', 'id']]);
         $query->whereEQ('movie_id', $this->record()->id(), 'hasThemes');
+
         $themes = $query->retObj(Tag::class) ?? [];
         $this->viewport('themes', $themes);
 
 
-        $query = Thesaurus::query_retrieve();
+        $query = Thesaurus::filter();
         $query->join(['movie_thesaurus', 'hasThesaurus'], [['hasThesaurus', 'thesaurus_id', 'thesaurus', 'id']]);
         $query->whereEQ('movie_id', $this->record()->id(), 'hasThesaurus');
         $thesaurus = $query->retObj(Thesaurus::class) ?? [];
         $this->viewport('thesaurus', $thesaurus);
 
-        $organisations = Organisation::queryListing([], ['withMoviePraxis' => $this->record()])->retObj(Organisation::class);
+        $organisations = Organisation::filter([], ['withMoviePraxis' => $this->record()])->retObj(Organisation::class);
         $this->viewport('organisations', $organisations);
 
         $this->viewport('merchandises', DVD::any(['Movie' => $this->record()]));
@@ -83,7 +83,6 @@ class Movie extends Kortex
                 $query
             );
         }
-
         
         $idFilters = [];
         if ($this->router()->params('label')) {

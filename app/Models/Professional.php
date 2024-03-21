@@ -20,116 +20,85 @@ class Professional extends TightModel
 
     public const PRAXIS_DIRECTOR_SLUG = 'pro-praxis-realisateur';
 
-    public function __toString(){
+    public function __toString()
+    {
         return $this->fullName();
     }
 
-    public static function queryListing($filter=[], $options=[]): SelectInterface
+    public function tagIds(): array
     {
-        $select = self::table()->select();
-        $select->columns([
-            'id',
-            'slug',
-            'label' => ["CONCAT(professional.firstname, ' ', professional.lastname)"],
-            'avatar',
-            'gender'
-        ]);
-
-        if(isset($options['withPraxis'])){
-            $select->join(['professional_praxis', 'professional_praxis'], [['professional_praxis', 'professional_id', 'professional', 'id']], 'LEFT OUTER');
-            $select->selectAlso(['praxis_ids' => ["GROUP_CONCAT(DISTINCT professional_praxis.tag_id SEPARATOR ', ')"]]);    
-        }
-        elseif(isset($options['withMoviePraxis'])){
-            $movie = $options['withMoviePraxis'];
-            $select->join(['movie_professional', 'workedOn'], [['workedOn','professional_id', 'professional', 'id'],['workedOn', 'movie_id', $movie->id()]], 'INNER');
-            $select->selectAlso(['praxis_ids' => ["GROUP_CONCAT(DISTINCT workedOn.praxis_id SEPARATOR ', ')"]]);
-        }
-        
-        if(!isset($options['listAll']) || $options['listAll'] !== true){
-            $select->whereEQ('listable', 1);
-        }
-        $select->groupBy(['professional', 'id']);
-        $select->orderBy(['lastname', 'ASC']);
-        $select->orderBy(['firstname', 'ASC']);
-
-        return $select;
-    }
-
-    public function tagIds(): array{
         return [];
     }
 
-    
+
     public static function idsByPraxis(int $praxis_id): array
     {
-        $query = 'SELECT `professional_praxis`.`professional_id` FROM `professional_praxis`  WHERE `professional_praxis`.`tag_id` = :tag_id'; 
+        $query = 'SELECT `professional_praxis`.`professional_id` FROM `professional_praxis`  WHERE `professional_praxis`.`tag_id` = :tag_id';
         $query = self::raw($query, ['tag_id' => $praxis_id]);
 
         return $query->fetchAll(\PDO::FETCH_COLUMN);
     }
-    
-    public function fieldsForCompletion():array
+
+    public function fieldsForCompletion(): array
     {
-        return ['firstname','lastname', 'content', 'gender','birth', ['tel','gsm', 'fax'], 'email', 'url','country','province','zip', 'city', 'street'];
+        return ['firstname', 'lastname', 'content', 'gender', 'birth', ['tel', 'gsm', 'fax'], 'email', 'url', 'country', 'province', 'zip', 'city', 'street'];
     }
 
 
-    public function fullName() : string
+    public function fullName(): string
     {
-        return empty($this->get('label')) ? $this->get('lastname').' '.$this->get('firstname') : $this->get('label');
+        return empty($this->get('label')) ? $this->get('lastname') . ' ' . $this->get('firstname') : $this->get('label');
     }
-    
-    public static function query_retrieve($filters = [], $options = []): SelectInterface
+
+    public static function filter($filters = [], $options = []): SelectInterface
     {
         //---- JOIN & FILTER SERVICE
-        $Query = parent::query_retrieve($filters, $options);
-        
+        $Query = parent::filter($filters, $options);
+
         $Query->selectAlso(['label' => "CONCAT(firstname,' ', lastname)"]);
 
-        $Query->join(['professional_praxis', 'praxis'], [['praxis', 'professional_id', 'professional', 'id']], 'LEFT OUTER');
-        $Query->groupBy(['professional', 'id']);
-        $Query->selectAlso(['praxis_ids' => ["GROUP_CONCAT(DISTINCT praxis.tag_id SEPARATOR ',')"]]);
-
-        if(isset($filters['praxis_id'])){
-            $Query->whereEQ('tag_id', ((int)$filters['praxis_id']), 'praxis');
-        }
-
-        if(isset($filters['FiltersOnFirstChar'])){
-            self::applyFirstCharFilter($filters['FiltersOnFirstChar'], $Query, 'lastname');
-        }
-
-        if(isset($filters['movie']))
-        {
-            $Query->join(['movie_professional', 'movie_professional'], [
-                ['professional', 'id', 'movie_professional', 'professional_id'],
-                ['movie_professional', 'movie_id', $filters['movie']->id()]
-            ]);
-            $Query->selectAlso(['worked_as' => 'praxis_id']);
-        }
-
-        if(isset($filters['fullname'])){
-            
-            $isLike = '%' . $filters['fullname'] . '%';
-            $bindname = $Query->addBinding('fullNameSearch', $isLike);
-            $Query->whereWithBind('CONCAT(`professional`.`firstname`, \' \',`professional`.`lastname`) LIKE ' . $bindname);
-        }
-
-        if(isset($filters['organisation']))
-        {
+        if (isset($filters['organisation'])) {
             $Query->join(['organisation_professional', 'organisation_professional'], [
                 ['professional', 'id', 'organisation_professional', 'professional_id'],
                 ['organisation_professional', 'organisation_id', $filters['organisation']->id()]
             ]);
         }
 
-        if(isset($filters['article']))
-        {
+        if (isset($filters['article'])) {
             $Query->join(['article_professional', 'article_professional'], [
                 ['professional', 'id', 'article_professional', 'professional_id'],
                 ['article_professional', 'article_id', $filters['article']->id()]
             ]);
         }
-        
+
+        if (isset($options['withMoviePraxis'])) {
+            $movie = $options['withMoviePraxis'];
+            $Query->join(['movie_professional', 'workedOn'], [
+                ['workedOn','professional_id', 'professional', 'id'],
+                ['workedOn', 'movie_id', $movie->id()]
+            ]);
+            
+            $Query->selectAlso(['workedAs' => ["GROUP_CONCAT(DISTINCT workedOn.praxis_id SEPARATOR ', ')"]]);
+            $Query->groupBy(['professional', 'id']);
+        }
+        else if (!isset($options['withPraxis']) || $options['withPraxis'] !== false) {
+            $Query->join(['professional_praxis', 'praxis'], [['praxis', 'professional_id', 'professional', 'id']], 'LEFT OUTER');
+            $Query->selectAlso(['praxis_ids' => ["GROUP_CONCAT(DISTINCT praxis.tag_id SEPARATOR ',')"]]);
+            $Query->groupBy(['professional', 'id']);
+        }
+
+        if (isset($filters['FiltersOnFirstChar'])) {
+            self::applyFirstCharFilter($filters['FiltersOnFirstChar'], $Query, 'lastname');
+        }
+
+        if (isset($filters['fullname'])) {
+
+            $isLike = '%' . $filters['fullname'] . '%';
+            $bindname = $Query->addBinding('fullNameSearch', $isLike);
+            $Query->whereWithBind('CONCAT(`professional`.`firstname`, \' \',`professional`.`lastname`) LIKE ' . $bindname);
+        }
+        $Query->orderBy(['lastname', 'ASC']);
+        $Query->orderBy(['firstname', 'ASC']);
         $Query->orderBy(['lastname', 'asc']);
 
         return $Query;

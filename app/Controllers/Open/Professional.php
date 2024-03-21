@@ -28,7 +28,7 @@ class Professional extends Kortex
 
     public function professionals()
     {
-        $query = $this->routerParamsAsFilters(Model::queryListing([], ['withPraxis' => true]));
+        $query = $this->routerParamsAsFilters(Model::filter([], ['withPraxis' => true]));
         $paginator = new Paginator($this->router()->params('page') ?? 1, $query);
         $paginator->perPage(12);
         $paginator->setClass(Model::class);
@@ -43,7 +43,7 @@ class Professional extends Kortex
     {
         $movieIds = Movie::idsByProfessionalIds([$this->record()->id()]);
         if(!empty($movieIds)){
-            $query = Movie::queryListing([], ['withDirectors' => true]);
+            $query = Movie::filter([], ['withDirectors' => true]);
             $query->whereNumericIn('id', $movieIds, $query->table());
             $related_movies = $query->retObj(Movie::class);
         }
