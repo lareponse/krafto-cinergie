@@ -16,9 +16,9 @@ $settings = array(
         "script-src 'self' 'nonce-{$nonce}' https://cdn.jsdelivr.net;",
         "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;",
         "connect-src 'self' 'nonce-{$nonce}' https://api.example.com;",
-        "img-src 'self' 'nonce-{$nonce}' https://cdn.jsdelivr.net;",
-        "frame-src 'self' 'nonce-{$nonce}' https://www.youtube.com;",
-        "font-src 'self' 'nonce-{$nonce}' https://cdn.jsdelivr.net;",
+        "img-src 'self' 'nonce-{$nonce}' data: https://cdn.jsdelivr.net;",
+        "frame-src 'self' 'nonce-{$nonce}' https://www.youtube.com https://www.google.com;",
+        "font-src 'self' 'nonce-{$nonce}' data: https://cdn.jsdelivr.net;",
       ]
     ]
 	],
