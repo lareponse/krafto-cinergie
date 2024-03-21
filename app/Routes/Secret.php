@@ -32,6 +32,10 @@ array_push(
 
     ['GET', 'image/details/[a:externalController]/slug/[*:slug]/file/[*:filename]', 'Image::details', 'image_details'],
     ['POST', 'image/delete/[a:externalController]/slug/[*:slug]/file/[*:filename]', 'Image::delete', 'image_delete'],
+    
+    ['GET', 'image/avatar/[a:nid]/[i:id]/[*:filename]?', 'Image::avatar', 'image_set_avatar'],
+
+    ['GET', 'image/[*:filename]', 'Image::view', 'image_view'],
 
     ['GET', 'images/deadlinks/[a:externalController]', 'Image::deadlinks', 'images_deadlinks'],
     ['GET', 'images/alternates', 'Image::alternates', 'images_alternates'],

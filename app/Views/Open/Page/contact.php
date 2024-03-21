@@ -19,17 +19,17 @@
 
                 <div class="d-flex justify-content-between mt-3">
                     <h3>TVA</h3>
-                    <p><?= $cinergie->get('TVA'); ?></p>
+                    <p>BE 448655484</p>
                 </div>
 
                 <div class="d-flex justify-content-between">
                     <h3>N° d'entreprise</h3>
-                    <p><?= $cinergie->get('numero_entreprise'); ?></p>
+                    <p>448655484</p>
                 </div>
 
                 <div class="d-flex justify-content-between">
                     <h3>IBAN</h3>
-                    <p><?= $cinergie->get('IBAN'); ?></p>
+                    <p>BE10 0012 4446 1904</p>
                 </div>
             </div>
 

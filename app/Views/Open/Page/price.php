@@ -29,7 +29,7 @@ $this->layout('Open::layout', ['title' => $page->get('label')])
             </span>
         </div>
         <div class="mt-4" id="print">
-            <a onclick="window.print()" class="print"><i class="bi bi-printer-fill me-1"></i>Imprimer</a>
+            <a class="print"><i class="bi bi-printer-fill me-1"></i>Imprimer</a>
         </div>
     </ul>
 </aside>

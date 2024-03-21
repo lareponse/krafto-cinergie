@@ -19,7 +19,7 @@ $class = $class ?? '';
         </span>
 
         <span class="print">
-            <a onclick="window.print()" class="print"><i class="bi bi-printer-fill ms-3 me-2"></i>Imprimer</a>
+            <a class="print"><i class="bi bi-printer-fill ms-3 me-2"></i>Imprimer</a>
         </span>
     </div>
 </div>

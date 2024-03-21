@@ -1,13 +1,14 @@
-<?php use \HexMakina\Marker\Marker; ?>
+<?php
+
+use \HexMakina\Marker\Marker; ?>
 
 <?php $this->layout('Open::layout', ['title' => $page->get('label')]) ?>
 
-<div class="container">
-    <section class="row">
-
+<div class="container my-5">
+    <div class="row">
         <div class="col-12">
 
-        <section class="row my-5">
+            <section class="row my-5">
                 <?= Marker::p($page->get('content')) ?>
             </section>
 
@@ -21,7 +22,7 @@
                         <article class="card mb-4 shadow">
                             <div class="card-body">
                                 <a href="professionnel-single.php">
-                                    <img src="<?= $person->profilePicture(); ?>" class="card-img-top mb-3" alt="Photo de <?= $person->fullName() ?>">
+                                    <img src="/public<?= $person->profilePicture(); ?>" class="card-img-top mb-3" alt="Photo de <?= $person->fullName() ?>">
                                 </a>
                                 <div class="p-3">
                                     <h5 class="card-title"><?= $person->fullName() ?></h5>
@@ -45,8 +46,8 @@
                     <div class="col-lg-2 col-md-6" id="professionnel-item">
                         <article class="card mb-4 shadow">
                             <div class="card-body">
-                                <a href="<?= $controller->router()->hyp('author',['slug' => $person->slug()])?>">
-                                    <img src="<?= $person->profilePicture(); ?>" class="card-img-top mb-3" alt="...">
+                                <a href="<?= $controller->router()->hyp('author', ['slug' => $person->slug()]) ?>">
+                                    <img src="/public<?= $person->profilePicture(); ?>" class="card-img-top mb-3" alt="...">
                                 </a>
                                 <div class="p-3">
                                     <h5 class="card-title"><?= $person->fullName(); ?></h5>
@@ -66,9 +67,9 @@
                 if (isset($team['CA'])) {
                     $content = [];
                     foreach ($team['CA'] as $person) {
-                        $content[]= $person->get('title') . ' : ' . $person->fullName();
+                        $content[] = $person->get('title') . ' : ' . $person->fullName();
                     }
-                    
+
                     echo Marker::h3("Conseil d'administration");
                     echo Marker::p(implode(Marker::br(), $content));
                 }
@@ -77,7 +78,7 @@
 
                     $content = [];
                     foreach ($team['membre'] as $person) {
-                        $content[]= $person->fullName();
+                        $content[] = $person->fullName();
                     }
 
                     echo Marker::h3('Membres');
@@ -87,19 +88,16 @@
                 if (isset($team['observateur'])) {
 
                     $content = [];
-                    
+
                     foreach ($team['observateur'] as $person) {
-                        $content[]= Marker::strong($person->get('title')) . Marker::br() . $person->fullName() ;
+                        $content[] = Marker::strong($person->get('title')) . Marker::br() . $person->fullName();
                     }
                     echo Marker::h3('Observateur·trice·s');
                     echo Marker::p(implode(Marker::br(), $content));
                 }
                 ?>
-
-
             </section>
+        
         </div>
-
-
-    </section>
+    </div>
 </div>

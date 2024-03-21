@@ -100,7 +100,7 @@ $mail_message = "Bonjour,<br><br>Je suis intéressé(e) par votre annonce et je 
                             <a href="#"><i class="bi bi-twitter-x icon"></i></a>
                             <a href="#"><i class="bi bi-envelope-fill icon"></i></a>
                             <a href="#"><i class="bi bi-instagram icon"></i></a>
-                            <a onclick="window.print()" class="print"><i class="bi bi-printer-fill me-1"></i></a>
+                            <a class="print"><i class="bi bi-printer-fill me-1"></i></a>
                         </span>
                     </div>
                 </aside>

@@ -18,10 +18,16 @@
                 if (!$record->isBook()) {
                 ?>
                     <div class="d-flex justify-content-between">
-                        <p class="genre otto-id-label" otto-urn="Tag:<?=$record->get('movie_genre_id')?>">Genre</p>
-                        <p class="date"><?= $record->get('released'); ?></p>
+                        <?php
+                        $attr = ['class' => 'genre'];
+                        if(!empty($record->get('movie_genre_id'))){
+                            $attr['class'] .= ' otto-id-label';
+                            $attr['otto-urn'] = 'Tag:'.$record->get('movie_genre_id');
+                        }
+                        echo $this->DOM()::p('Genre', $attr);
+ ?>
                     </div>
-                <?php
+                    <?php
                 }
                 echo $this->DOM()::h5("$record", ['class' => 'card-title mb-3 titre-film']);
 

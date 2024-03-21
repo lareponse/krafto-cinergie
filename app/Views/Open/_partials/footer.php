@@ -30,7 +30,7 @@
                     <a target="_blank" href="https://www.instagram.com/cinergie.be/?hl=fr">
                         <i class="bi bi-instagram"></i>
                     </a>
-                    <a onclick="window.print()" class="print">
+                    <a class="print">
                         <i class="bi bi-printer-fill me-1"></i>
                     </a>
                 </p>

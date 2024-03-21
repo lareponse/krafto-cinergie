@@ -1,0 +1,1 @@
+rsync -avz --exclude='mcith/' --exclude='dump/' --exclude='.git/' --exclude='.vignettes/' --exclude='.trash/' --delete-excluded --prune-empty-dirs --no-links --progress sam@klarx1.argon7.be:/home/sam/cinergie/beta/ /home/lareponse/webdev/customers/be.cinergie/legacy/beta

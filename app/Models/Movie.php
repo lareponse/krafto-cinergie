@@ -109,13 +109,15 @@ class Movie extends TightModel
 
         // written as part of refactoring, must be rewritten as a join using the PRAXIS_DIRECTOR_SLUG constant
         if(($options['withDirectors'] ?? false) !== false){
-            $director_tag = Tag::one('slug', Praxis::director());
+            $director_tag = Praxis::director();
             $Query->join(['movie_professional', 'withDirectors'], [
                 ['withDirectors', 'movie_id', 'movie', 'id'],
                 ['withDirectors', 'praxis_id', $director_tag->id()]
             ], 'LEFT OUTER');
             $Query->join(['professional', 'director'], [['withDirectors', 'professional_id', 'director', 'id']], 'LEFT OUTER');
             $Query->selectAlso(['directors' => ["GROUP_CONCAT(`director`.`firstname`, ' ', `director`.`lastname` SEPARATOR ', ')"]]);
+            $Query->groupBy(['movie', 'id']);
+
         }
 
         if (isset($filters['model'])) {
@@ -129,6 +131,8 @@ class Movie extends TightModel
                         ['movie', 'id', 'merch', 'movie_id'],
                         ['merch', 'merchandise_id', $model->id()]
                     ]);
+                    $Query->selectAlso(['GROUP_CONCAT(merch.merchandise_id) as merchandise_ids']);
+                    $Query->groupBy(['movie', 'id']);
                     break;
     
                 case Organisation::class:
@@ -137,6 +141,7 @@ class Movie extends TightModel
                         ['actedAs', 'organisation_id', $model->id()]
                     ]);
                     $Query->selectAlso(['GROUP_CONCAT(actedAs.praxis_id) as actedAs']);
+                    $Query->groupBy(['movie', 'id']);
 
                     break;
 
@@ -146,6 +151,7 @@ class Movie extends TightModel
                         ['workedAs', 'professional_id', $model->id()]
                     ]);
                     $Query->selectAlso(['GROUP_CONCAT(workedAs.praxis_id) as wordedAs']);
+                    $Query->groupBy(['movie', 'id']);
 
                     break;
 
@@ -154,6 +160,8 @@ class Movie extends TightModel
                         ['movie', 'id', 'wroteAbout', 'movie_id'],
                         ['wroteAbout', 'article_id',  $model->id()]
                     ]);
+                    $Query->selectAlso(['GROUP_CONCAT(wroteAbout.article_id) as writtenAbout']);
+                    $Query->groupBy(['movie', 'id']);
                     break;
             }
         }

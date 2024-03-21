@@ -10,7 +10,12 @@ trait HasImages
     abstract public function viewport($key, $value);
     abstract public function addError($message, $context = []);
 
-    abstract public function imagesDirectory(): string;
+    // abstract public function imagesDirectory(): string;
+    
+    public function imagesDirectory(): string
+    {
+        return $this->nid();
+    }
     
 
     public function HasImages__Traitor_after_view(){
@@ -36,7 +41,6 @@ trait HasImages
                 array_unshift($files, $filename);
             }
         }
-
         $this->viewport('images', $files);
         $this->viewport('directory', $directory);
         $this->viewport('fs', $fs);
@@ -46,8 +50,9 @@ trait HasImages
     
     public function setProfilePicture()
     {
+        ddt($this->router()->params());
         $avatar = $this->loadModel()->profilePictureField();
-
+        
         $this->loadModel()->set($avatar, $this->router()->params('path'));
         $this->loadModel()->save(0);
         $this->router()->hopBack();

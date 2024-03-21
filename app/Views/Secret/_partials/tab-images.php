@@ -42,7 +42,7 @@
                     if($controller->loadModel()->hasProfilePicture() && $controller->loadModel()->profilePicturePath() === $path){
                         $class = 'text-success';
                         $href = $controller->router()->hyp('dash_record_unset_profile_picture', ['nid' => $controller->nid(), 'id' => $controller->loadModel()->id()]);
-                        $title = 'Retirer comme photo principale';
+                        $title = 'Ne plus utiliser comme photo principale';
                     }
                     else{
                         $class ='text-secondary';

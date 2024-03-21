@@ -9,10 +9,6 @@ class Merchandise extends Krafto
     use \App\Controllers\Abilities\HasORM;
     use \App\Controllers\Abilities\HasImages;
 
-    public function imagesDirectory(): string
-    {
-        return 'film';
-    }
 
     public function activeSection(): string
     {
