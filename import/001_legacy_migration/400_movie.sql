@@ -25,6 +25,9 @@ CREATE TABLE `cinergie`.`movie` (
   `released` year DEFAULT NULL COMMENT 'leg:datesortie',
   `url` varchar(255) DEFAULT NULL COMMENT 'leg:site',
   `url_trailer` varchar(255) DEFAULT NULL COMMENT 'leg:bande_annonce',
+  `dailymotion` varchar(255) DEFAULT NULL COMMENT 'dailymotion reference string',
+  `youtube` varchar(255) DEFAULT NULL COMMENT 'youtube reference string',
+  `vimeo` varchar(255) DEFAULT NULL COMMENT 'vimeo reference string',
   
   `genre_id` int DEFAULT NULL COMMENT 'parsed from leg:genre, but where is the source ??',
   `metrage_id` int DEFAULT NULL COMMENT 'parsed from leg:metrage, but where is the source ??',
@@ -77,6 +80,7 @@ INSERT INTO `cinergie`.`movie` (
   `url`,
   `url_trailer`,
 
+
   `genre_id`,
   `metrage_id`,
   `format`,
@@ -119,7 +123,7 @@ FROM `a7_cinergie_beta`.`film`
 LEFT OUTER JOIN `cinergie`.`tag` itm_genre ON itm_genre.`slug` = `film`.`genre`
 LEFT OUTER JOIN `cinergie`.`tag` itm_metrage ON itm_metrage.`content` = `film`.`metrage` AND `itm_metrage`.`parent_id` = @parent_id;
 
--- DATA CORRECTION
+-- DATA CORRECTION: Countries
 UPDATE `cinergie`.`movie` SET legacy_origine = 'Belgique, France'
 WHERE legacy_origine IN ('Belgique/France', 'Belgique-France', 'Belgique/ France', 'Belgique France  ', 'Belgique / France');
 
@@ -128,3 +132,54 @@ WHERE legacy_origine IN ('France/Belgique', 'France - Belgique', 'Franco-belge',
 
 UPDATE `cinergie`.`movie` SET legacy_origine = 'Belgique'
 WHERE legacy_origine IN ('Belgqiue', 'Belqique', 'Belgique,', 'Belg');
+
+
+-- DATA CORRECTION: Trailers
+
+-- Youtube
+UPDATE movie
+SET youtube = SUBSTRING_INDEX(url_trailer, '/', -1), url_trailer = NULL
+WHERE url_trailer LIKE '%https://youtu.be%';
+
+
+UPDATE movie
+SET youtube = 
+  CASE
+    WHEN url_trailer LIKE '%v=%' THEN SUBSTRING_INDEX(SUBSTRING_INDEX(url_trailer, 'v=', -1), '&', 1)
+    WHEN url_trailer LIKE '%v=%' THEN SUBSTRING_INDEX(SUBSTRING_INDEX(url_trailer, 'v=', -1), '#', 1)
+    ELSE NULL
+  END
+WHERE TRIM(url_trailer) LIKE 'https://www.youtube.com/watch%';
+
+
+-- Daily Motion
+UPDATE movie
+SET dailymotion = SUBSTRING_INDEX(url_trailer, '/', -1), url_trailer = NULL
+WHERE url_trailer LIKE '%https://dai.ly%';
+
+
+
+UPDATE movie
+SET dailymotion = 
+CASE
+    WHEN url_trailer LIKE '%#%' THEN SUBSTRING_INDEX(SUBSTRING_INDEX(url_trailer, '/', -1), '#', 1)
+    ELSE SUBSTRING_INDEX(url_trailer, '/', -1)
+END, url_trailer = NULL
+WHERE url_trailer LIKE 'https://www.dailymotion.com%';
+
+
+-- Vimeo
+
+UPDATE movie
+SET vimeo =
+  CASE 
+    WHEN LOCATE('?', url_trailer) > 0 THEN SUBSTRING_INDEX(SUBSTRING_INDEX(url_trailer, '/', -1), '?', 1)
+    WHEN LOCATE('#', url_trailer) > 0 THEN SUBSTRING_INDEX(SUBSTRING_INDEX(url_trailer, '/', -1), '#', 1)
+    ELSE SUBSTRING_INDEX(url_trailer, '/', -1)
+  END,
+  url_trailer = NULL
+WHERE url_trailer REGEXP '^https://vimeo.com/[0-9]+';
+
+UPDATE movie
+SET vimeo = SUBSTRING_INDEX(url_trailer, '/', -1), url_trailer = NULL
+WHERE url_trailer REGEXP '^https://player\.vimeo\.com/video/[0-9]+$';

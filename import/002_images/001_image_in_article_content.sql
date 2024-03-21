@@ -33,33 +33,33 @@ WHERE content LIKE '%/images/webzine/organisation/%';
 
 
 UPDATE article
-SET profilePicture = REPLACE(profilePicture, '/images/webzine/personne/', '/images/personne/')
-WHERE profilePicture LIKE '/images/webzine/personne/%';
+SET avatar = REPLACE(avatar, '/images/webzine/personne/', '/images/personne/')
+WHERE avatar LIKE '/images/webzine/personne/%';
 
 UPDATE article
-SET profilePicture = REPLACE(profilePicture, '/images/webzine/organisation/', '/images/organisation/')
-WHERE profilePicture LIKE '/images/webzine/organisation/%';
+SET avatar = REPLACE(avatar, '/images/webzine/organisation/', '/images/organisation/')
+WHERE avatar LIKE '/images/webzine/organisation/%';
 
 UPDATE article
-SET profilePicture = REPLACE(profilePicture, '/images/webzine/film/', '/images/film/')
-WHERE profilePicture LIKE '/images/webzine/film/%';
+SET avatar = REPLACE(avatar, '/images/webzine/film/', '/images/film/')
+WHERE avatar LIKE '/images/webzine/film/%';
 
 UPDATE article
-SET profilePicture = REPLACE(profilePicture, '/images/actualite/personne/', '/images/personne/')
-WHERE profilePicture LIKE '/images/actualite/personne/%';
+SET avatar = REPLACE(avatar, '/images/actualite/personne/', '/images/personne/')
+WHERE avatar LIKE '/images/actualite/personne/%';
 
 UPDATE article
-SET profilePicture = REPLACE(profilePicture, '/images/actualite/organisation/', '/images/organisation/')
-WHERE profilePicture LIKE '/images/actualite/organisation/%';
+SET avatar = REPLACE(avatar, '/images/actualite/organisation/', '/images/organisation/')
+WHERE avatar LIKE '/images/actualite/organisation/%';
 
 UPDATE article
-SET profilePicture = REPLACE(profilePicture, '/images/actualite/film/', '/images/film/')
-WHERE profilePicture LIKE '/images/actualite/film/%';
+SET avatar = REPLACE(avatar, '/images/actualite/film/', '/images/film/')
+WHERE avatar LIKE '/images/actualite/film/%';
 
 
 UPDATE article
-SET profilePicture = REPLACE(profilePicture, '/images/actualite/breve/', '/images/breve/')
-WHERE profilePicture LIKE '/images/actualite/breve/%';
+SET avatar = REPLACE(avatar, '/images/actualite/breve/', '/images/breve/')
+WHERE avatar LIKE '/images/actualite/breve/%';
 
 
 UPDATE article SET content = REPLACE(content, '/images/personne/_p/popovitch_mirko_dragolioub/mp0.png', '/images/personne/_p/popovitch-mirko-dragolioub/mp0.png') WHERE content LIKE '%/images/personne/_p/popovitch_mirko_dragolioub/mp0.png%';

@@ -131,13 +131,6 @@ SELECT
 FROM `a7_cinergie_beta`.`organisation`;
 
 
--- Cinergie details for contact & legal page
-UPDATE `organisation` SET
-  `IBAN` = 'BE10 0012 4446 1904',
-  `TVA` = 'BE 448655484',
-  `numero_entreprise` = '448655484'
-WHERE `slug` = 'cinergie-be';
-
 -- SPF-BO recorded as an organisation and a partner, changing slug before importint partners
 UPDATE `organisation` SET `slug` = 'service-public-francophone-bruxellois-organisation' WHERE `slug` = 'service-public-francophone-bruxellois';
 UPDATE `organisation` SET `url` = 'https://www.maisondelafrancite.be/' WHERE `slug` = 'maison-de-la-francite';
@@ -175,3 +168,5 @@ SELECT
 FROM `a7_cinergie_beta`.`content_item`
 WHERE area = 'partenaire' AND category = 'partenaire'
 ORDER BY `content_item`.`id`;
+
+

@@ -30,8 +30,8 @@
     `tel` varchar(50) DEFAULT NULL,
     `fax` varchar(33) DEFAULT NULL,
     `gsm` varchar(90) DEFAULT NULL COMMENT 'leg:mobile',
-    `url` varchar(200) DEFAULT NULL,
-    `email` varchar(70) DEFAULT NULL,
+    `url` varchar(255) DEFAULT NULL,
+    `email` varchar(255) DEFAULT NULL,
     `secret` varchar(55) DEFAULT NULL COMMENT 'leg:confidentiel',
 
     `country` varchar(30) DEFAULT NULL COMMENT 'leg:pays',
@@ -41,9 +41,9 @@
     `street` varchar(100) DEFAULT NULL COMMENT 'leg:adresse',
 
 
-    `declic_image` varchar(80) DEFAULT NULL,
-    `declic_texte` text,
-    `declic_signature` varchar(30) DEFAULT NULL,
+    `declic_image` varchar(255) DEFAULT NULL,
+    `declic_texte`  text DEFAULT NULL,
+    `declic_signature` varchar(255) DEFAULT NULL,
 
     `leg_maj` datetime NOT NULL COMMENT 'updated on',
 

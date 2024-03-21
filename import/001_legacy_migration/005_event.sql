@@ -98,3 +98,7 @@ SELECT
 FROM `a7_cinergie_beta`.`content_item`
 LEFT OUTER JOIN `tag` ON `tag`.`slug` = CONCAT('event-cat-',`content_item`.`subject`)
 WHERE area = 'agenda' AND category = 'agenda';
+
+
+-- picks the upcoming events in the home page
+UPDATE `event` set pick = 1 WHERE starts > NOW() OR stops > NOW()
