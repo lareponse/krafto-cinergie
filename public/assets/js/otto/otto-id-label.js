@@ -25,21 +25,24 @@ class OttoIdLabel {
         }
 
         let cacheMiss = {};
-
         for (const tag of tags) {
             const urn = tag.getAttribute('otto-urn');
             if (this.cache.has(urn) === true) {
-                console.log('replacing urn', urn, 'with', this.cache.get(urn))
+                // console.log('replacing urn', urn, 'with', this.cache.get(urn))
                 tag.innerText = this.cache.get(urn);
                 tag.setAttribute('otto-urn', null)
             }
             else {
-                console.log('missing urn', urn)
+                // console.log(urn, tag)
+                // console.log('missing urn', urn)
                 let [entity, id] = urn.split(':')
                 cacheMiss[entity] = cacheMiss[entity] || new Set();
                 cacheMiss[entity].add(id);
             }
         }
+
+        // console.log('cache miss', cacheMiss)
+
 
         if(fetchMissing === true && Object.entries(cacheMiss).length > 0){
             await this.refresh(cacheMiss)
@@ -55,10 +58,10 @@ class OttoIdLabel {
     async refresh(cacheMiss) {
         for (const entity in cacheMiss) {
             const url = this.url(entity, Array.from(cacheMiss[entity]))
-            console.log('refresh url', url)
+            // console.log('refresh url', url)
             const response = await fetch(url)
             const data = await response.json()
-            console.log('refresh data', data)
+            // console.log('refresh data', data)
             data.forEach(item => {
                 let urn = entity + ':' + item.id
                 this.cache.set(urn, item.label)

@@ -1,8 +1,11 @@
 class OttoLink {
     static urlLinks(selector = null) {
+        const rx = /^(http:\/\/|https:\/\/).+$/i
+
         document.querySelectorAll(selector || '.otto-url').forEach(container => {
             const anchorElement = document.createElement('a');
             const url = container.innerHTML.trim();
+            // console.log(url,rx.test(url));
 
             if (/^(http:\/\/|https:\/\/)[\w\.-]+\.\w+$/i.test(url)) {
                 anchorElement.href = url;
