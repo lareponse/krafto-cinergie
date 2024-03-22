@@ -1,4 +1,4 @@
-<?php 
+<?php
 $this->layout('Open::layout');
 
 $mail_message = "Bonjour,<br><br>Je suis intéressé(e) par votre annonce et je souhaite en savoir plus. <br>Pourriez-vous me donner plus de détails ?<br><br>Cordialement,<br>[Votre Nom]";
@@ -27,15 +27,15 @@ $mail_message = "Bonjour,<br><br>Je suis intéressé(e) par votre annonce et je 
                 <aside id="meta" class="shadow order-1 order-sm-1 order-md-2">
                     <ul class="meta-list">
 
-                        <?php $tag = $categories[$record->get('category_id')];?>
+                        <?php $tag = $categories[$record->get('category_id')]; ?>
                         <li class="meta-head">
                             <span><i class="bi bi-bookmarks-fill icon"></i>Catégorie :</span>
                             <span><a href="<?= $controller->router()->hyp('jobs') ?>?categories%5B%5D=<?= $tag->slug() ?>"><?= $tag ?></a></span>
                         </li>
 
                         <?php
-                         $tag_slug = $record->isOffer() ? 'job-offer' : 'job-request'; 
-                         $tag_label = $job_proposal[$tag_slug]; 
+                        $tag_slug = $record->isOffer() ? 'job-offer' : 'job-request';
+                        $tag_label = $job_proposal[$tag_slug];
                         ?>
                         <li class="meta-head">
                             <span><i class="bi bi-bookmarks-fill icon"></i>Type :</span>
@@ -43,8 +43,8 @@ $mail_message = "Bonjour,<br><br>Je suis intéressé(e) par votre annonce et je 
                         </li>
 
                         <?php
-                         $tag_slug = $record->isOffer() ? 'job-paid' : 'job-free'; 
-                         $tag_label = $job_payment[$tag_slug];
+                        $tag_slug = $record->isOffer() ? 'job-paid' : 'job-free';
+                        $tag_label = $job_payment[$tag_slug];
                         ?>
                         <li class="meta-head">
                             <span><i class="bi bi-bookmarks-fill icon"></i>Rémunéré :</span>
@@ -92,17 +92,8 @@ $mail_message = "Bonjour,<br><br>Je suis intéressé(e) par votre annonce et je 
 
                     </ul>
                     <hr>
+                    <?= $this->insert('Open::_partials/share_print', ['class' => 'compact', 'label' => $record->get('label')]); ?>
 
-                    <div class="share">
-                        <span>Partager sur</span>
-                        <span class="socials">
-                            <a href="#"><i class="bi bi-facebook icon"></i></a>
-                            <a href="#"><i class="bi bi-twitter-x icon"></i></a>
-                            <a href="#"><i class="bi bi-envelope-fill icon"></i></a>
-                            <a href="#"><i class="bi bi-instagram icon"></i></a>
-                            <a class="print"><i class="bi bi-printer-fill me-1"></i></a>
-                        </span>
-                    </div>
                 </aside>
             </div>
         </div>

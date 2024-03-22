@@ -1,8 +1,5 @@
-<?php
-$class = $class ?? '';
-?>
-<div class="share <?= $class ?>">
-    <span class="title">Partager sur</span>
+<div class="share <?= $class ?? '' ?>">
+    <span class="title me-4">Partager sur</span>
     <div class="actions">
         <span class="socials">
             <a href="https://twitter.com/intent/tweet?url=<?= urlencode($controller->router()->url()) ?>&text=<?= urlencode($page) ?>">
@@ -18,8 +15,6 @@ $class = $class ?? '';
                 <i class="bi bi-instagram icon"></i></a>
         </span>
 
-        <span class="print">
-            <a class="print"><i class="bi bi-printer-fill ms-3 me-2"></i>Imprimer</a>
-        </span>
+        <a class="print"><i class="bi bi-printer-fill"></i>Imprimer</a>
     </div>
 </div>

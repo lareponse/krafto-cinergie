@@ -5,15 +5,8 @@
 
         <h1><?= $record ?></h1>
         <hr class="my-4">
+        <?= $this->insert('Open::_partials/share_print', ['label' => $record->get('label')]); ?>
 
-        <div class="share" id="share">
-            <span>Partager sur</span>
-            <span class="socials">
-                <a href="#"><i class="bi bi-facebook"></i></a>
-                <a href="#"><i class="mx-1 bi bi-twitter"></i></a>
-                <a href="#"><i class="bi bi-envelope-fill"></i></a>
-            </span>
-        </div>
 
         <section class="row g-0 mt-4">
 
@@ -24,11 +17,11 @@
 
                 <p class="text-primary">
                     <?php
-                    foreach($praxes as $praxis){
+                    foreach ($praxes as $praxis) {
                         echo $this->DOM()::strong("$praxis", ['kx-gender' => $record->get('gender'), 'class' => 'd-block']);
                     }
                     ?>
-                    </p>
+                </p>
 
                 <?= $this->insert('Open::_partials/contact_info', ['contact' => $record]); ?>
             </div>

@@ -9,15 +9,8 @@ use \HexMakina\Marker\Marker; ?>
 
         <h1><?= $record ?></h1>
         <hr class="my-4">
+        <?= $this->insert('Open::_partials/share_print', ['class' => 'compact', 'label' => $record->get('label')]); ?>
 
-        <div class="share">
-            <span>Partager sur</span>
-            <span class="socials">
-                <a href="#"><i class="bi bi-facebook"></i></a>
-                <a href="#"><i class="mx-1 bi bi-twitter-x"></i></a>
-                <a href="#"><i class="bi bi-envelope-fill"></i></a>
-            </span>
-        </div>
         <div class="row g-0 mt-4">
 
             <div class="col-lg-5">
