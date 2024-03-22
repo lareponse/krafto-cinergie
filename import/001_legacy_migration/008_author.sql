@@ -82,6 +82,11 @@ FROM `a7_cinergie_beta`.`content_item`
 WHERE `area` = 'auteur' AND `category` = 'auteur'
 ORDER BY `id`;
 
+-- nullify empty url, using trim to avoid empty spaces
+UPDATE `cinergie`.`author` SET `url` = NULL WHERE TRIM(`url`) = '';
 
-UPDATE `cinergie`.`author` SET `url` = null WHERE `url` = '';
+-- update avatar path
+UPDATE `cinergie`.`author` SET `avatar` = CONCAT('/public', `avatar`) WHERE avatar IS NOT NULL AND avatar LIKE '/images/%'
+
+-- trimming the fat
 UPDATE `cinergie`.`author` SET `professional_slug` = REPLACE(`url`, 'https://www.cinergie.be/personne/', '');
