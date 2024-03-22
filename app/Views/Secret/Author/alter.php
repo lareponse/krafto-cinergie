@@ -1,6 +1,14 @@
-<?php $this->layout('Secret::alter') ?>
+<?php
 
-<div class="card border-0 scroll-mt-3" id="SignalétiqueSection">
+$sidemenu = [
+    ['#signaletiqueSection', 'info', 'Signalétique'],
+    ['#publicationSection', 'info', 'Publication'],
+];
+
+$this->layout('Secret::alter', ['sidemenu' => $sidemenu, 'controller' => $controller]);
+?>
+
+<div class="card border-0 scroll-mt-3" id="signaletiqueSection">
     <div class="card-header">
         <h2 class="h3 mb-0">Signalétique</h2>
     </div>
@@ -13,5 +21,5 @@
 <?= $this->insert('Secret::_partials/form/alter-card-publication', [
     'add' => [
         'isCollaborator' => ['Collaborateur', 'Présent dans les listes de collaborateurs ?']
-        ]
-    ]) ?>
+    ]
+]) ?>
