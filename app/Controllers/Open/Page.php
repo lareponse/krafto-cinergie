@@ -14,7 +14,7 @@ class Page extends Kortex
 
     public function price()
     {
-        $this->pageSlug = 'price';
+        $this->pageSlug = 'prix-cinergie';
     }
 
     public function legal()
