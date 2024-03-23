@@ -43,8 +43,7 @@
             <?= $this->insert('Open::_partials/share_print', ['label' => $article->get('label')]); ?>
             </section>
 
-
-            <?= $this->insert('Open::_partials/related_articles', ['related_articles' => $related_articles ?? []]) ?>
+            <?= $this->insert('Open::_partials/related_content', ['related_content' => $related_content ?? []]) ?>
 
         </div>
 

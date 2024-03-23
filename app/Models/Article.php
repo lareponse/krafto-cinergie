@@ -16,6 +16,33 @@ class Article extends TightModel
         return $this->get('label');
     }
 
+    public function related(): array
+    {
+        $related_ids = $this->related_ids();
+
+        
+        $ret = [];
+        $type_to_class = [
+            'movie_ids' => Movie::class,
+            'professional_ids' => Professional::class,
+            'organisation_ids' => Organisation::class,
+            'movie_article_ids' => Article::class,
+            'movie_professional_ids' => Professional::class,
+            'movie_organisation_ids' => Organisation::class
+        ];
+
+        foreach ($related_ids as $type => $ids) {
+            if(!isset($type_to_class[$type])){
+                dd('Cannot handle type '.$type);
+            }
+            $ret[$type] = [];
+            $ids = explode(',', $ids);
+            $ret[$type] = $type_to_class[$type]::any(['ids' => $ids]);
+        }
+
+        return $ret;
+    }
+
     public static function filter($filters = [], $options = []): SelectInterface
     {
         //---- JOIN & FILTER SERVICE
@@ -23,7 +50,7 @@ class Article extends TightModel
         $Query->join(['article_author', 'writtenBy'], [['writtenBy', 'article_id', 'article', 'id']], 'LEFT OUTER');
         $Query->join(['author', 'author'], [['writtenBy', 'author_id', 'author', 'id']], 'LEFT OUTER');
         $Query->groupBy(['article', 'id']);
-   
+
         $Query->selectAlso(['writtenBy' => ["GROUP_CONCAT(author.label SEPARATOR ', ')"], 'writtenBySlugs' => ["GROUP_CONCAT(author.slug SEPARATOR ', ')"]]);
 
         if (isset($filters['hasEmbedVideo'])) {
@@ -55,9 +82,16 @@ class Article extends TightModel
         }
 
         if (isset($filters['movie'])) {
+            if (isset($filters['movie_id']))
+                throw new \Exception('Article::filter() : movie and movie_id are mutually exclusive');
+
+            $filters['movie_id'] = $filters['movie']->id();
+        }
+
+        if (isset($filters['movie_id'])) {
             $Query->join(['article_movie', 'related'], [
                 ['article', 'id', 'related', 'article_id'],
-                ['related', 'movie_id', $filters['movie']->id()]
+                ['related', 'movie_id', $filters['movie_id']]
             ]);
         }
 
@@ -83,7 +117,45 @@ class Article extends TightModel
             $Query->whereFilterContent($filters['content']);
         }
 
-        $Query->orderBy(['publication','DESC']);
+        $Query->orderBy(['publication', 'DESC']);
         return $Query;
+    }
+
+    private function related_ids(): array
+    {
+        $sql = "
+            SELECT
+                GROUP_CONCAT(DISTINCT article_movie.movie_id SEPARATOR ',') AS movie_ids,
+                GROUP_CONCAT(DISTINCT article_professional.professional_id SEPARATOR ',') as professional_ids,
+                GROUP_CONCAT(DISTINCT article_organisation.organisation_id SEPARATOR ',') as organisation_ids,
+                GROUP_CONCAT(DISTINCT movie_article.article_id SEPARATOR ',') AS movie_article_ids,
+                GROUP_CONCAT(DISTINCT movie_professional.professional_id SEPARATOR ',') AS movie_professional_ids,
+                GROUP_CONCAT(DISTINCT movie_organisation.organisation_id SEPARATOR ',') AS movie_organisation_ids
+
+            FROM `article`
+
+            LEFT JOIN `article_movie` ON `article_movie`.`article_id` = `article`.`id`
+
+            LEFT JOIN `article_professional` ON `article_professional`.`article_id` = `article`.`id`
+
+            LEFT JOIN `article_organisation` ON `article_organisation`.`article_id` = `article`.`id`
+
+            LEFT JOIN `article_movie` `movie_article` 
+                ON `movie_article`.`movie_id` = `article_movie`.`movie_id`
+
+            LEFT JOIN `movie_professional` 
+                ON `movie_professional`.`movie_id` = `article_movie`.`movie_id`
+
+            LEFT JOIN `movie_organisation` 
+                ON `movie_organisation`.`movie_id` = `article_movie`.`movie_id`
+
+            WHERE `article`.`id` = " . $this->id() . "
+            AND `movie_article`.`article_id` <> " . $this->id() . "
+            
+            GROUP BY
+                `article`.`id`
+        ";
+        $res = Article::raw($sql)->fetch(\PDO::FETCH_ASSOC);
+        return $res;
     }
 }

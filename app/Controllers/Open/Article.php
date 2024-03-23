@@ -25,7 +25,7 @@ class Article extends Kortex
     {
         $article = Model::exists('slug', $this->router()->params('slug'));
         $this->viewport('article', $article);
-        $this->viewport('related_articles', [$article]);
+        $this->viewport('related_content', $article->related());
     }
 
     public function latest()
