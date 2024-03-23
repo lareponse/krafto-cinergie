@@ -12,10 +12,11 @@ class Image extends Home
         $path = $this->router()->params('path');
 
         $parts = pathinfo($path);
-        vd($parts, $path);
+
         foreach($this->possibleFileNames($parts) as $filename) {
             $relativePath = $parts['dirname'] . DIRECTORY_SEPARATOR . $filename . '.' . $parts['extension'];
             $absolutePath = $this->get('settings.folders.images') . DIRECTORY_SEPARATOR . $relativePath;
+
             if (file_exists($absolutePath)) {
                 header("HTTP/1.1 301 Moved Permanently");
                 header('Location: ' . $this->get('settings.urls.images') . DIRECTORY_SEPARATOR . $relativePath);
@@ -23,8 +24,12 @@ class Image extends Home
             }
         }
 
-        header("HTTP/1.1 404 Moved Permanently");
+        header("HTTP/1.1 301 Moved Permanently");
+        header('Location: ' . $this->get('settings.urls.images') . DIRECTORY_SEPARATOR . 'cinergie-avatar.svg');
         exit;
+
+        // header("HTTP/1.1 404 Moved Permanently");
+        // exit;
     }
 
     private function possibleFileNames($parts)
