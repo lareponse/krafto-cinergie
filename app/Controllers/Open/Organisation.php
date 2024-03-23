@@ -13,7 +13,7 @@ class Organisation extends Kortex
 {
     public function organisations()
     {
-        $query = $this->routerParamsAsFilters(Model::filter());
+        $query = $this->routerParamsAsFilters(Model::filter([], ['withPraxis' => true]));
         $paginator = new Paginator($this->router()->params('page') ?? 1, $query);
         $paginator->perPage(12);
         $paginator->setClass(Model::class);
