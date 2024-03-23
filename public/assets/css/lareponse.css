@@ -213,3 +213,53 @@ article.card.event-item .date-item {
 article.card.listing .date-item {
     justify-content: center;
 }
+
+.card .card-title{
+    color:var(--bs-primary);
+    text-transform: uppercase;
+}
+.card-complex{
+    background:black;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    border-radius: 0.7rem;
+}
+
+
+.card-complex *:first-child,
+.card-complex *:last-child{
+    grid-column: span 2;
+}
+
+.card-complex *:nth-child(2),
+.card-complex *:nth-child(3) {
+    padding:0.5rem 1rem 0rem 1rem;
+}
+.card-complex *:nth-child(3){
+    text-align:right;
+}
+.card-complex .card-title {
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+    padding:1rem 0;
+}
+
+.card-complex:not(.slide) img:hover {
+    filter: grayscale(99%);
+    transition: all 0.5s ease-in-out;
+}
+
+@media screen and (min-width: 769px) {
+    .card img{
+        object-fit: contain;
+        height: 250px;
+        object-position: center center;
+    }
+    .card-complex img {
+        object-fit: cover;
+        height: 250px;
+        object-position: center center;
+    }
+}
