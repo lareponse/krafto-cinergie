@@ -5,7 +5,6 @@ namespace App\Models;
 use HexMakina\BlackBox\Database\SelectInterface;
 use HexMakina\TightORM\TightModel;
 use App\Models\{Professional, Organisation};
-use HexMakina\kadro\Models\Tag;
 
 class Movie extends TightModel
 {
