@@ -155,7 +155,8 @@ class Article extends TightModel
             GROUP BY
                 `article`.`id`
         ";
+        
         $res = Article::raw($sql)->fetch(\PDO::FETCH_ASSOC);
-        return $res;
+        return $res ? $res : [];
     }
 }
