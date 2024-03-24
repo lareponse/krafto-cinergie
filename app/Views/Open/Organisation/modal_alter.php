@@ -1,36 +1,29 @@
 <?php
 $modal_reference ??= 'modal-nouvelle-organisation';
+$title = empty($record) ? 'Nouvelle organisation' : 'Modifier ' . $record;
 
-$title = $record ?? 'Nouvelle organisation';
-
-$route_options = [];
-
-if ($record) {
-    $title = $record;
-}
-
-$action = $controller->router()->hyp('submission_submit');
 ?>
 
 <!-- <class="form-horizontal" id="nouvelle-organisation"> -->
-<div class="modal fade" id="<?= $modal_reference ?>" tabindex="-1" aria-labelledby="<?= $modal_reference ?>-label" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-scrollable">
-        <form action="<?= $action ?>" class="modal-content" method="POST">
-            <div class="modal-header">
-                <h2 class="modal-title fs-5" id="<?= $modal_reference ?>-label"><?= $title ?></h2>
-                <button type="button" class="btn-close  btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-3">
-                <p>
-                    &rarr; Veuillez compléter les données
-                    <br>
-                    &rarr; Envoyez-nous votre logo par email à l'adresse <a href="mailto:info@cinergie.be">info@cinergie.be</a>
-                    <br /><strong>Cinergie vous remercie de votre collaboration!</strong>
-                </p>
+<form action="<?= $controller->router()->hyp('submission_submit') ?>" method="POST">
 
-                <hr>
+    <div class="modal fade" id="<?= $modal_reference ?>" tabindex="-1" aria-labelledby="<?= $modal_reference ?>-label" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="<?= $modal_reference ?>-label"><?= $title ?></h2>
+                    <button type="button" class="btn-close  btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-3">
+                    <p>
+                        &rarr; Veuillez compléter les données
+                        <br>
+                        &rarr; Envoyez-nous votre logo par email à l'adresse <a href="mailto:info@cinergie.be">info@cinergie.be</a>
+                        <br /><strong>Cinergie vous remercie de votre collaboration!</strong>
+                    </p>
 
-                <form action="<?= $action ?>" class="form-horizontal" id="nouvelle-organisation" method="POST">
+                    <hr>
+
 
                     <div class="row mb-3">
                         <label for="label" class="col-xl-3 col-form-label">Nom <span>*</span></label>
@@ -134,10 +127,10 @@ $action = $controller->router()->hyp('submission_submit');
                                 obligatoires</small>
                         </p>
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <input class="btn btn-primary" type="submit" value="Envoyer">
+                </div>
             </div>
-            <div class="modal-footer">
-                <input class="btn btn-primary" type="submit" value="Envoyer">
-            </div>
-        </form>
+        </div>
     </div>
-</div>

@@ -1,37 +1,27 @@
 <?php
-$modal_reference ??= 'modal-nouvelle-fiche';
-
-$title = $record ?? 'Nouvelle fiche professionelle';
-
-$route_options = [];
-$isUpdate = isset($oldFiche);
-if ($isUpdate) {
-    $action = $controller->router()->hyp('professional_edit');
-    $title = 'Mise à jour de la fiche professionnelle';
-} else {
-    $action = $controller->router()->hyp('professional_add');
-    $title = 'Nouvelle fiche professionnelle';
-}
+$modal_reference ??= 'modal-fiche-professionnel';
+$title = empty($record) ? 'Nouvelle fiche professionelle' : 'Modifier ' . $record;
 ?>
 
 <!-- Modal -->
-<div class="modal fade" id="modal-fiche-professionnel" tabindex="-1" aria-labelledby="modal-nouvelle-fiche-professionnel-label" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-scrollable">
-        <div class="modal-content shadow-lg">
-            <div class="modal-header">
-                <h1 class="modal-title p-3 fs-3" id="modal-nouvelle-fiche-professionnel-label"><?= $title ?></h1>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-5">
-                <p>
-                    &rarr; Veuillez compléter les données
-                    <br>
-                    &rarr; Envoyez-nous votre photo par email à l'adresse <a href="mailto:info@cinergie.be">info@cinergie.be</a>
-                    <br>
-                    <strong>Cinergie vous remercie de votre collaboration!</strong>
-                </p>
-                <hr>
-                <form action="<?= $action ?>" class="form-horizontal" id="nouvelle-fiche-professionnel" method="post" role="form">
+<form action="<?= $controller->router()->hyp('submission_submit') ?>" method="POST" role="form">
+
+    <div class="modal fade" id="<?= $modal_reference ?>" tabindex="-1" aria-labelledby="modal-nouvelle-fiche-professionnel-label" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content shadow-lg">
+                <div class="modal-header">
+                    <h1 class="modal-title p-3 fs-3" id="modal-nouvelle-fiche-professionnel-label"><?= $title ?></h1>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-5">
+                    <p>
+                        &rarr; Veuillez compléter les données
+                        <br>
+                        &rarr; Envoyez-nous votre photo par email à l'adresse <a href="mailto:info@cinergie.be">info@cinergie.be</a>
+                        <br>
+                        <strong>Cinergie vous remercie de votre collaboration!</strong>
+                    </p>
+                    <hr>
                     <section class="row mb-3">
                         <label for="nom-fiche-professionnel" class="col-lg-3 col-form-label">Nom <span>*</span></label>
                         <div class="col-lg-9">
@@ -135,11 +125,12 @@ if ($isUpdate) {
                                 obligatoires</small>
                         </p>
                     </section>
-                    <div class="modal-footer">
-                        <input class="btn btn-primary" type="submit" name="submit-nouvelle-fiche-professionnel" value="Envoyer">
-                    </div>
-                </form>
+
+                </div>
+                <div class="modal-footer">
+                    <input class="btn btn-primary" type="submit" name="submit-nouvelle-fiche-professionnel" value="Envoyer">
+                </div>
             </div>
         </div>
     </div>
-</div>
+    </div>
