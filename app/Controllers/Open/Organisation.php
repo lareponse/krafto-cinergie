@@ -34,41 +34,12 @@ class Organisation extends Kortex
             $related_movies = $query->retObj(Movie::class);
         }
 
-        $this->viewport('praxes', Praxis::forProfessional($this->record()));
+        $this->viewport('praxes', Praxis::forOrganisation($this->record()));
         $this->viewport('related_movies', $related_movies ?? []);
         $this->viewport('related_photos', $this->relatedPhotos('organisation'));
     }
 
-    public function alter()
-    {
-
-        // deny the request if the slug is not in the GET parameters
-        if (!$this->router()->params('slug')) {
-            $this->router()->hopBack();
-        }
-
-        $slug = $this->router()->params('slug');
-
-        // deny the request if the slug is not in the referer
-        if (mb_strpos($_SERVER['HTTP_REFERER'], $slug) === false) {
-            $this->router()->hopBack();
-        }
-
-        // deny the request if the record is not found through the slug
-        if (!$this->record()) {
-            $this->router()->hopBack();
-        }
-
-        vd($this->record());
-
-        // now we have a verified slug and a record, we can proceed with the form
-        $suggestion = new Submission();
-        $suggestion->set('urn', $this->record()->urn());
-        $suggestion->set('submitted', json_encode($this->router()->submitted()));
-        $suggestion->save(0);
-    }
-
-    /**
+     /**
      * Converts router parameters into filters for a database query.
      *
      * @param SelectInterface $query The database query object to apply filters to.

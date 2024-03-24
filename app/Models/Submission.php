@@ -9,10 +9,19 @@ class Submission extends TightModel
 {
     public function __construct()
     {
-        $this->set('emitted', json_encode(self::emitterInfo()));
+        $this->set('submitted_by', json_encode(self::submittedBy()));
     }
 
-    public static function emitterInfo(): array
+    /**
+     * Retrieves information about the emitter.
+     *
+     * This method returns an array containing various server-related information
+     * about the emitter, such as the IP address, user agent, referer, request URI,
+     * request method, request time, and more.
+     *
+     * @return array An associative array containing the emitter information.
+     */
+    public static function submittedBy(): array
     {
         $serverKeys = [
             'REMOTE_ADDR',
