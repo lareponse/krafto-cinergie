@@ -1,10 +1,14 @@
 <?php $this->layout('Open::layout') ?>
 
 <div class="container my-5 pb-5" id="article-single">
-    <div class="row">
-        <img class="img-fluid mb-5" src="<?= $article->profilePicture(); ?>" alt="Couverture de l'article <?= $article; ?>" />
 
-        <h2><?= $article->get('label'); ?></h2>
+    <header>
+        <img class="" src="<?= $article->profilePicture(); ?>" alt="Couverture de l'article <?= $article; ?>" />
+    </header>
+
+    <h2><?= $article->get('label'); ?></h2>
+
+    <div class="row">
 
         <div class="row g-0 mb-5 col-lg-8 align-items-start">
 
@@ -50,3 +54,7 @@
 
     </div>
 </div>
+<script nonce="<?= $CSP_nonce ?>">
+    //vanilla js to set the header background image to the article's profile picture
+    document.querySelector('#article-single header').style.backgroundImage = 'url("<?= $article->profilePicture(); ?>")';
+</script>
