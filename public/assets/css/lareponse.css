@@ -39,6 +39,24 @@
     font-display: swap;
 }
 
+:root {
+
+    --primary: #D3121B;
+    --secondary: #9E9EA7;
+    --secondary-dark: #6D6D73;
+    --light: #F5F7FD;
+    --dark: #4B4B4D;
+    --white: #ffffff;
+    --black: #000000;
+    --link-color-rgb: 212, 19, 25;
+    --primary-rgb: 212, 19, 25;
+    --link-hover-color-rgb: 212, 19, 25;
+    --shadow: rgba(0, 0, 0, .10);
+}
+
+
+
+
 body {
     font-family: 'Poppins', sans-serif;
     font-weight: normal;
@@ -293,4 +311,100 @@ article.card.listing .date-item {
 #article-single>header img {
     position: relative;
     height: 30rem;
+}
+
+.card-search {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+.card-search .card-description{
+    grid-column: span 2;
+    text-align:left;
+}
+
+.card-search img {
+    object-fit: cover;
+    object-position: center center;
+    width: 13rem;
+    height: 13rem;
+    border-radius: 50%;
+    grid-row: span 2;
+    
+}
+
+@media screen and (min-width: 576px) {
+    .card-search {
+        display: grid;
+        grid-template-columns: min-content auto min-content;
+        grid-template-rows: min-content auto;
+        align-items: center;
+        justify-content: start;
+        height: 13rem;
+        gap: 2rem;
+        padding:0 1rem 0 0 ;
+    }
+
+    .card-search .card-meta {
+        white-space: nowrap;
+        color: var(--primary);
+    }
+    .card-search img {
+        object-fit: cover;
+        object-position: center center;
+        width: 13rem;
+        height: 13rem;
+        border-radius: 1rem 0rem 0rem 1rem;
+        grid-row: span 2;
+
+    }
+    .card-search .card-heading {
+        margin: 0;
+        padding: 0;
+        text-transform: uppercase;
+        text-align: left;
+    }
+    .card-search .card-description {
+        grid-column: span 2;
+        height: 100%;
+        overflow: hidden;
+        margin-bottom:2rem;
+    }
+}
+.submission-form fieldset {
+    display: grid;
+}
+.submission-form fieldset label {
+    white-space: nowrap;
+    text-transform: uppercase;
+    color: var(--bs-primary);
+    font-weight: bold;
+    margin-top:1.5rem;
+}
+
+.submission-form fieldset label + [required] ::after {
+    content: '*';
+    color: var(--bs-primary);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+@media (min-width: 768px) {
+    .submission-form fieldset{
+        display: grid;
+        gap:1rem 2rem;
+        grid-template-columns: min-content 1fr;
+        align-items: center;
+    }
+
+    .submission-form fieldset label {
+        text-align: right;
+        margin-top: initial;
+    }
 }
