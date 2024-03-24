@@ -380,6 +380,7 @@ article.card.listing .date-item {
 .submission-form fieldset {
     display: grid;
 }
+
 .submission-form fieldset label {
     white-space: nowrap;
     text-transform: uppercase;
@@ -388,11 +389,9 @@ article.card.listing .date-item {
     margin-top:1.5rem;
 }
 
-.submission-form fieldset label + [required] ::after {
-    content: '*';
+.submission-form fieldset label:has(+[required])::after {
+    content: " *";
     color: var(--bs-primary);
-    padding: 0.5rem;
-    border-radius: 0.5rem;
 }
 
 @media (min-width: 768px) {
