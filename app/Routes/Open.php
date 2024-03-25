@@ -37,17 +37,12 @@ $routes = [
   ['GET', 'film/[*:slug]', 'Movie::movie', 'movie'],
 
   // professional
-  ['GET', 'personnes/[*:params]?', 'Professional::professionals', 'professionals'],
-  ['POST', 'personne/ajout', 'Professional::add', 'professional_add'],
-  ['GET|POST', 'personne/modifier/[*:slug]', 'Professional::edit', 'professional_edit'],
   ['GET', 'personne/metier/[*:praxis]', 'Professional::search', 'professional_by_praxis'],
+  ['GET', 'personnes/[*:params]?', 'Professional::professionals', 'professionals'],
   ['GET', 'personne/[*:slug]', 'Professional::professional', 'professional'],
 
   // organisations
   ['GET', 'organisations/[*:params]?', 'Organisation::organisations', 'organisations'],
-  ['POST', 'organisation/[*:slug]/modifier', 'Organisation::alter', 'organisation_alter'],
-  ['POST', 'organisation/suggerer', 'Organisation::alter', 'organisation_new'],
-  // ['GET', 'organisation/activite/[*:praxis]', 'Organisation::search', 'organisation_by_praxis'],
   ['GET', 'organisation/[*:slug]', 'Organisation::organisation', 'organisation'],
 
   // pages
@@ -61,8 +56,7 @@ $routes = [
 
   // shop
   ['GET', 'boutique', 'Shop::shop', 'shop'],
-  ['GET|POST', 'boutique/commander', 'Shop::order', 'shop_order'],
-
+  
   // jobs
   ['GET', 'annonces', 'Job::jobs', 'jobs'],
   ['GET', 'annonces/categorie/[*:category]', 'Job::search', 'job_by_category'],
@@ -72,6 +66,9 @@ $routes = [
   // search engine
   ['GET', 'recherche/[*:params]?', 'Search::search', 'search'],
 
+
+  // submissions
+  ['POST', 'soumettre', 'Submission::submit', 'submission_submit'],
 
 ];
 

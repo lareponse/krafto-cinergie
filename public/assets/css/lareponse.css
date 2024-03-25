@@ -68,6 +68,10 @@ body {
     background: var(--bs-white);
 }
 
+body>header nav li {
+    text-align: right;
+    /* padding-right: 1rem; removed on desktop view, confirm  */
+}
 
 /* header#header img.logo {height: 45px;} */
 .navbar-brand img {
@@ -314,7 +318,7 @@ article.card.listing .date-item {
 }
 
 .card-search {
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -324,9 +328,9 @@ article.card.listing .date-item {
     margin-bottom: 2rem;
 }
 
-.card-search .card-description{
+.card-search .card-description {
     grid-column: span 2;
-    text-align:left;
+    text-align: left;
 }
 
 .card-search img {
@@ -336,25 +340,26 @@ article.card.listing .date-item {
     height: 13rem;
     border-radius: 50%;
     grid-row: span 2;
-    
+
 }
 
 @media screen and (min-width: 576px) {
     .card-search {
         display: grid;
-        grid-template-columns: min-content auto min-content;
+        grid-template-columns: min-content 1fr min-content;
         grid-template-rows: min-content auto;
         align-items: center;
         justify-content: start;
         height: 13rem;
         gap: 2rem;
-        padding:0 1rem 0 0 ;
+        padding: 0 1rem 0 0;
     }
 
     .card-search .card-meta {
         white-space: nowrap;
         color: var(--primary);
     }
+
     .card-search img {
         object-fit: cover;
         object-position: center center;
@@ -364,19 +369,22 @@ article.card.listing .date-item {
         grid-row: span 2;
 
     }
+
     .card-search .card-heading {
         margin: 0;
         padding: 0;
         text-transform: uppercase;
         text-align: left;
     }
+
     .card-search .card-description {
         grid-column: span 2;
         height: 100%;
         overflow: hidden;
-        margin-bottom:2rem;
+        margin-bottom: 2rem;
     }
 }
+
 .submission-form fieldset {
     display: grid;
 }
@@ -386,7 +394,7 @@ article.card.listing .date-item {
     text-transform: uppercase;
     color: var(--bs-primary);
     font-weight: bold;
-    margin-top:1.5rem;
+    margin-top: 1.5rem;
 }
 
 .submission-form fieldset label:has(+[required])::after {
@@ -395,9 +403,9 @@ article.card.listing .date-item {
 }
 
 @media (min-width: 768px) {
-    .submission-form fieldset{
+    .submission-form fieldset {
         display: grid;
-        gap:1rem 2rem;
+        gap: 1rem 2rem;
         grid-template-columns: min-content 1fr;
         align-items: center;
     }
@@ -405,5 +413,15 @@ article.card.listing .date-item {
     .submission-form fieldset label {
         text-align: right;
         margin-top: initial;
+    }
+}
+
+
+@media (min-width: 1200px) {
+    #recherche-professionnels section.search-results {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+
     }
 }

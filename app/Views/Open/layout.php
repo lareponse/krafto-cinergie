@@ -10,17 +10,19 @@
     <?php $this->insert('Open::_partials/searchbar') ?>
     <?php $this->insert('Open::_partials/header') ?>
 
-    <main id="content" class="<?php isset($pageClass) ? $pageClass : ''?>">
+    <main id="content" class="<?php isset($pageClass) ? $pageClass : '' ?>">
 
         <?php if (isset($title)) {
         ?>
-            <div class="mb-5 d-none d-lg-block"><h1 class="line-center"><?= $title; ?></h1></div>
+            <div class="mb-5 d-none d-lg-block">
+                <h1 class="line-center"><?= $title; ?></h1>
+            </div>
         <?php
         }
         ?>
 
         <?= $this->section('content') ?>
-        
+
         <div id="scroll-to-top">
             <a href="#top">
                 <img src="/public/assets/wejune/img/icons/scroll-top.svg" alt="scroll to top" class="img-fluid w-100">
@@ -36,7 +38,7 @@
     <script src="/public/assets/wejune/js/slick.min.js"></script>
     <script src="/public/assets/wejune/js/lightbox.min.js"></script>
     <script src="/public/assets/wejune/js/script.js"></script>
-    <script type="module"  nonce="<?= $CSP_nonce?>">
+    <script type="module" nonce="<?= $CSP_nonce ?>">
         import OttoIdLabel from '/public/assets/js/otto/otto-id-label.js';
         import OttoLink from '/public/assets/js/otto/otto-link.js';
         import OttoFormatDate from '/public/assets/js/otto/otto-format-date.js';
@@ -54,6 +56,13 @@
             OttoLink.callLinks()
 
             OttoFormatDate.searchAndFormat('.otto-date');
+
+
+            document.querySelectorAll("a.print").forEach(function(link) {
+                link.addEventListener("click", function(e) {
+                    window.print();
+                });
+            });
 
             <?= $this->section('onLoaded') ?>
         });
