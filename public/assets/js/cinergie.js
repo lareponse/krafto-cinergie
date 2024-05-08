@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   // clickable table rows
-  const tables = document.querySelectorAll(".table-clickable");
-  tables.forEach(function (table) {
+
+  document.querySelectorAll(".table-clickable").forEach(function (table) {
     table.addEventListener("click", function (e) {
       const target = e.target;
       const row = target.closest("tr");
@@ -14,9 +14,4 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  document.querySelectorAll("a.print").forEach(function (link) {
-    link.addEventListener("click", function (e) {
-      window.print();
-    });
-  });
 });
