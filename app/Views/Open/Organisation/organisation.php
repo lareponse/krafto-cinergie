@@ -14,7 +14,7 @@ use \HexMakina\Marker\Marker; ?>
         <div class="row g-0 mt-4">
 
             <div class="col-lg-5">
-                <img class="img-fluid w-100" src="<?= $record->profilePicture() ?>" alt="organisation" />
+                <img class="img-fluid" src="<?= $record->profilePicture() ?>" alt="organisation" />
             </div>
 
 
