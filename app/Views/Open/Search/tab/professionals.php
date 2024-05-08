@@ -4,7 +4,7 @@ use \HexMakina\Marker\{Marker, Form};
 ?>
 <section class="mt-4 mb-2 recherche-page">
     <div id="filtres-checkbox">
-        <form action="<?= $controller->router()->hyp('search'); ?> class=" mt-3">
+        <form action="<?= $controller->router()->hyp('search'); ?>" class=" mt-3">
             <?= Form::hidden('tab', 'pro'); ?>
 
             <div class="row control-group justify-content-md-center mb-3">
