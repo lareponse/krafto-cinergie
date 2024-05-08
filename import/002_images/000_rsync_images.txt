@@ -1,9 +1,11 @@
+
+
 rsync -avz --exclude='mcith/' --exclude='.vignettes/' --exclude='.trash/' --delete-excluded --delete --prune-empty-dirs --no-links --progress sam@klarx1.argon7.be:/home/sam/cinergie/media/breve/ /var/www/dev.engine/krafto-cinergie/public/images/breve
 rsync -avz --exclude='mcith/' --exclude='.vignettes/' --exclude='.trash/' --delete-excluded --delete --prune-empty-dirs --no-links --progress sam@klarx1.argon7.be:/home/sam/cinergie/media/film/ /var/www/dev.engine/krafto-cinergie/public/images/film
 rsync -avz --exclude='mcith/' --exclude='.vignettes/' --exclude='.trash/' --delete-excluded --delete --prune-empty-dirs --no-links --progress sam@klarx1.argon7.be:/home/sam/cinergie/media/organisation/ /var/www/dev.engine/krafto-cinergie/public/images/organisation
 rsync -avz --exclude='mcith/' --exclude='.vignettes/' --exclude='.trash/' --delete-excluded --delete --prune-empty-dirs --no-links --progress sam@klarx1.argon7.be:/home/sam/cinergie/media/personne/ /var/www/dev.engine/krafto-cinergie/public/images/professional
 rsync -avz --exclude='mcith/' --exclude='.vignettes/' --exclude='.trash/' --delete-excluded --delete --prune-empty-dirs --no-links --progress sam@klarx1.argon7.be:/home/sam/cinergie/media/webzine/ /var/www/dev.engine/krafto-cinergie/public/images/webzine
-
+rsync -avz --exclude='mcith/' --exclude='.vignettes/' --exclude='.trash/' --delete-excluded --delete --prune-empty-dirs --no-links --progress sam@klarx1.argon7.be:/home/sam/cinergie/media/auteur/ /var/www/dev.engine/krafto-cinergie/public/images/auteur
 
 mv /var/www/dev.engine/krafto-cinergie/public/images/film/_c/c-039-est-assez-bien-d-039-etre-fou /var/www/dev.engine/krafto-cinergie/public/images/film/_c/c-est-assez-bien-d-etre-fou 
 mv /var/www/dev.engine/krafto-cinergie/public/images/film/_c/c-039-est-vrai-en-plus /var/www/dev.engine/krafto-cinergie/public/images/film/_c/c-est-vrai-en-plus
