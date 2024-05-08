@@ -1,0 +1,81 @@
+.title {
+  color: #d14242;
+}
+h4.grid__item-number {
+    color: black;
+}
+
+h3.grid__item-title {
+    font-size: 1.6em;
+}
+
+.video-container {
+    overflow: hidden;
+    position: relative;
+    width:100%;
+}
+
+.video-container::after {
+    padding-top: 56.25%;
+    display: block;
+    content: '';
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+article .qodef-e-read-more i, .qodef-episode-link i{color:#d14242;}
+
+
+.qodef-podcast-single .qodef-episode-links .qodef-e-title {
+  margin-top:2em;
+}
+
+
+.qodef-podcast-single h6{
+  margin-bottom:0.5em;
+}
+
+
+.qodef-social-icons-group img{
+  width:32px;
+  height:32px;
+  margin-right:5px;
+}
+
+
+.qodef-podcast-single .qodef-m-player-box{
+  padding: 0;
+  box-shadow: none;
+  background-color: transparent;
+  margin-top:-99px;
+}
+
+.qodef-podcast-content-holder p{
+  font-size:1.1em;
+}
+
+
+.glaneuses-diffusions {
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-content: center;
+  gap:23px 13px;
+}
+
+.glaneuses-diffusions img{
+  height:30px;
+}
+
+footer{
+  margin:3em 1em 1em 0;
+  text-align:right;
+  color:black;
+  font-family: monospace;
+  font-size:1.2em;
+}
