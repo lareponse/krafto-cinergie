@@ -12,7 +12,7 @@ return [
   'related' => [
     [
       'category' => 'personne',
-      'img' => 'https://cinergie.lareponse.be/play/S01E07/related_img/MassinMarie.jpg',
+      'img' => '/podcast/play/S01E07/related_img/MassinMarie.jpg',
       'links' => []
     ],
 
@@ -22,7 +22,7 @@ return [
       'title' => 'Et si on se passait de patrons ?',
       'title_link' => 'https://www.cinergie.be/film/et-si-on-se-passait-de-patrons',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E07/related_img/et_si_on_se_passait_de_patrons_-_ph__tournage_le_balai_libere_c_pascal_delaunois.jpg',
+      'img' => '/podcast/play/S01E07/related_img/et_si_on_se_passait_de_patrons_-_ph__tournage_le_balai_libere_c_pascal_delaunois.jpg',
 
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/et-si-on-se-passait-de-patrons'
@@ -35,7 +35,7 @@ return [
       'title' => 'Grosso Modo',
       'title_link' => 'https://www.cinergie.be/film/grosso-modo',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E07/related_img/GrossoModo.jpg',
+      'img' => '/podcast/play/S01E07/related_img/GrossoModo.jpg',
 
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/grosso-modo'
@@ -48,7 +48,7 @@ return [
       'title' => 'Rude de l\'Abondance',
       'title_link' => 'https://www.cinergie.be/film/rue-de-l-abondance',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E07/related_img/Ruedelabondance.jpg',
+      'img' => '/podcast/play/S01E07/related_img/Ruedelabondance.jpg',
 
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/rue-de-l-abondance',
@@ -62,7 +62,7 @@ return [
       'title' => 'Le bourgmestre a dit',
       'title_link' => 'https://www.cinergie.be/film/bourgmestre-a-dit-le',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E07/related_img/Lebourgemestreadit.jpg',
+      'img' => '/podcast/play/S01E07/related_img/Lebourgemestreadit.jpg',
 
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/bourgmestre-a-dit-le',
@@ -76,7 +76,7 @@ return [
       'title' => 'Petites filles',
       'title_link' => 'https://www.cinergie.be/film/petites-filles',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E07/related_img/PetitesFilles.jpg',
+      'img' => '/podcast/play/S01E07/related_img/PetitesFilles.jpg',
 
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/petites-filles',
@@ -90,7 +90,7 @@ return [
       'title' => 'Petits désordres',
       'title_link' => 'https://www.cinergie.be/film/petits-desordres',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E07/related_img/PetitsDesordres.jpg',
+      'img' => '/podcast/play/S01E07/related_img/PetitsDesordres.jpg',
 
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/petits-desordres',
@@ -104,7 +104,7 @@ return [
       'title' => 'C\'est notre pays pour toujours',
       'title_link' => 'https://www.cinergie.be/film/c-est-notre-pays-pour-toujours',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E07/related_img/Cestnotrepayspourtoujours.jpg',
+      'img' => '/podcast/play/S01E07/related_img/Cestnotrepayspourtoujours.jpg',
 
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/c-est-notre-pays-pour-toujours',

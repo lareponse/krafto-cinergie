@@ -12,7 +12,7 @@ return [
   'related' => [
     [
       'category' => 'personne',
-      'img' => 'https://cinergie.lareponse.be/play/S01E10/related_img/yaelandre.jpg',
+      'img' => '/podcast/play/S01E10/related_img/yaelandre.jpg',
       'links' => []
     ],
 
@@ -22,7 +22,7 @@ return [
       'title' => 'Quand je serai dictateur',
       'title_link' => 'https://www.cinergie.be/film/quand-je-serai-dictateur',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E10/related_img/Quandjeseraidictateur.jpg',
+      'img' => '/podcast/play/S01E10/related_img/Quandjeseraidictateur.jpg',
 
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/quand-je-serai-dictateur',
@@ -36,7 +36,7 @@ return [
       'title' => 'Chats errants',
       'title_link' => 'https://www.cinergie.be/film/chats-errants',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E10/related_img/ChatsErrants.jpg',
+      'img' => '/podcast/play/S01E10/related_img/ChatsErrants.jpg',
 
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/chats-errants',
@@ -50,7 +50,7 @@ return [
       'title' => 'Bureau des Inventaires systématiques de la mémoire résiduelle',
       'title_link' => 'https://www.cinergie.be/film/bureau-des-inventaires-systematiques-de-la-memoire-residuelle',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E10/related_img/BureaudesInventairessystematiquesdelamemoireresiduelle.jpg',
+      'img' => '/podcast/play/S01E10/related_img/BureaudesInventairessystematiquesdelamemoireresiduelle.jpg',
 
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/bureau-des-inventaires-systematiques-de-la-memoire-residuelle',
@@ -64,7 +64,7 @@ return [
       'title' => 'Les Filles en orange',
       'title_link' => 'https://www.cinergie.be/film/filles-en-orange-les',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E10/related_img/LesFillesenOrange.jpg',
+      'img' => '/podcast/play/S01E10/related_img/LesFillesenOrange.jpg',
 
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/filles-en-orange-les',
@@ -78,7 +78,7 @@ return [
       'title' => 'Histoires d\'amour',
       'title_link' => 'https://www.cinergie.be/film/une-vie-contre-l-oubli',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E10/related_img/Histoiredamour.jpg',
+      'img' => '/podcast/play/S01E10/related_img/Histoiredamour.jpg',
 
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/histoires-d-amour',

@@ -12,7 +12,7 @@ return [
   'related' => [
     [
       'category' => 'personne',
-      'img' => 'https://cinergie.lareponse.be/play/S01E02/ozdemirtullin.jpg',
+      'img' => '/podcast/play/S01E02/ozdemirtullin.jpg',
       'links' => []
     ],
 
@@ -22,7 +22,7 @@ return [
       'title' => 'Notre mariage',
       'title_link' => 'https://www.cinergie.be/film/notre-mariage',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E02/NotreMariage.jpg',
+      'img' => '/podcast/play/S01E02/NotreMariage.jpg',
 
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/notre-mariage'
@@ -34,7 +34,7 @@ return [
       'title' => 'Au-delà de l\'Ararat',
       'title_link' => 'https://www.cinergie.be/film/au-dela-de-l-ararat',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E02/ararat.jpg',
+      'img' => '/podcast/play/S01E02/ararat.jpg',
 
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/au-dela-de-l-ararat'
@@ -46,7 +46,7 @@ return [
       'title' => 'Les Lunes rousses',
       'title_link' => 'https://www.cinergie.be/film/lunes-rousses-les',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E02/Leslunesrousses.jpg',
+      'img' => '/podcast/play/S01E02/Leslunesrousses.jpg',
 
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/lunes-rousses-les',

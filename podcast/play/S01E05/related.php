@@ -11,7 +11,7 @@ return [
   'related' => [
     [
       'category' => 'personne',
-      'img' => 'https://cinergie.lareponse.be/play/S01E05/related_img/RosineMbakamPhotoPodcast.jpg',
+      'img' => '/podcast/play/S01E05/related_img/RosineMbakamPhotoPodcast.jpg',
       'links' => []
     ],
 
@@ -21,7 +21,7 @@ return [
       'title' => 'Mavambu ! Feddy Tsimba',
       'title_link' => 'https://www.cinergie.be/film/mavambu-feddy-tsimba',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E05/related_img/MavambuFreddyTsimba.jpg',
+      'img' => '/podcast/play/S01E05/related_img/MavambuFreddyTsimba.jpg',
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/mavambu-feddy-tsimba',
       ]
@@ -33,7 +33,7 @@ return [
       'title' => 'Les Deux visages d\'une femme bamiléké',
       'title_link' => 'https://www.cinergie.be/film/deux-visages-d-une-femme-bamileke-les',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E05/related_img/LesDeuxvisagesdunefemmebamildkd.jpg',
+      'img' => '/podcast/play/S01E05/related_img/LesDeuxvisagesdunefemmebamildkd.jpg',
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/deux-visages-d-une-femme-bamileke-les'
       ]
@@ -45,7 +45,7 @@ return [
       'title' => 'Chez Jolie coiffure',
       'title_link' => 'https://www.cinergie.be/film/chez-jolie-coiffure',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E05/related_img/Chezjoliecoifure.jpg',
+      'img' => '/podcast/play/S01E05/related_img/Chezjoliecoifure.jpg',
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/chez-jolie-coiffure',
         'La critique' => 'https://www.cinergie.be/actualites/chez-jolie-coiffure-de-rosine-mbakam'
@@ -58,7 +58,7 @@ return [
       'title' => 'Les Prières de Delphine',
       'title_link' => 'https://www.cinergie.be/film/prieres-de-delphine-les',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E05/related_img/LesprieresdeDelphine.jpg',
+      'img' => '/podcast/play/S01E05/related_img/LesprieresdeDelphine.jpg',
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/prieres-de-delphine-les',
         'La critique' => 'https://www.cinergie.be/actualites/les-prieres-de-delphine-de-rosine-mbakam',

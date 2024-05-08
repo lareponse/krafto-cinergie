@@ -39,7 +39,7 @@ $menu = [
     ],
     [
         'section' => 'Podcast',
-        'href' => 'https://www.cinergie.be/podcast',
+        'href' => '/podcast',
         'label' => 'Podcast'
     ]
 ];

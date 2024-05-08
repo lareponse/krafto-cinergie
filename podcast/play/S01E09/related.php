@@ -12,7 +12,7 @@ return [
   'related' => [
     [
       'category' => 'personne',
-      'img' => 'https://cinergie.lareponse.be/play/S01E09/related_img/BauchetKita.jpg',
+      'img' => '/podcast/play/S01E09/related_img/BauchetKita.jpg',
       'links' => []
     ],
 
@@ -22,7 +22,7 @@ return [
       'title' => 'Ce jour là, la Belgique dans l\'émotion',
       'title_link' => 'https://www.cinergie.be/film/ce-jour-la-la-belgique-dans-l-emotion',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E09/related_img/CejourlalaBelgiquedanslemotion.jpg',
+      'img' => '/podcast/play/S01E09/related_img/CejourlalaBelgiquedanslemotion.jpg',
 
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/ce-jour-la-la-belgique-dans-l-emotion'
@@ -35,7 +35,7 @@ return [
       'title' => 'Violette et Framboise',
       'title_link' => 'https://www.cinergie.be/film/violette-et-framboise',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E09/related_img/VioletteetFramboise.jpg',
+      'img' => '/podcast/play/S01E09/related_img/VioletteetFramboise.jpg',
 
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/violette-et-framboise'
@@ -48,7 +48,7 @@ return [
       'title' => 'Le temps d\'un soufflé',
       'title_link' => 'https://www.cinergie.be/film/temps-d-un-souffle-le',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E09/related_img/Letempsdunsouffle.jpg',
+      'img' => '/podcast/play/S01E09/related_img/Letempsdunsouffle.jpg',
 
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/temps-d-un-souffle-le'
@@ -61,7 +61,7 @@ return [
       'title' => 'Violette au travail',
       'title_link' => 'https://www.cinergie.be/film/violette-au-travail',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E09/related_img/Violetteautravail.jpg',
+      'img' => '/podcast/play/S01E09/related_img/Violetteautravail.jpg',
 
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/violette-au-travail',
@@ -88,7 +88,7 @@ return [
       'title' => 'La fabrique de panique',
       'title_link' => 'https://www.cinergie.be/film/fabrique-de-panique-la',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E09/related_img/Lafabriquedelapanique.jpg',
+      'img' => '/podcast/play/S01E09/related_img/Lafabriquedelapanique.jpg',
 
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/fabrique-de-panique-la'
@@ -101,7 +101,7 @@ return [
       'title' => 'Une vie contre l\'oubli',
       'title_link' => 'https://www.cinergie.be/film/une-vie-contre-l-oubli',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E09/related_img/Uneviecontreloubli.jpg',
+      'img' => '/podcast/play/S01E09/related_img/Uneviecontreloubli.jpg',
 
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/une-vie-contre-l-oubli',
@@ -115,7 +115,7 @@ return [
       'title' => 'Bains publics',
       'title_link' => 'https://www.cinergie.be/film/bains-publics',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E09/related_img/Bainspublics.jpg',
+      'img' => '/podcast/play/S01E09/related_img/Bainspublics.jpg',
 
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/bains-publics',

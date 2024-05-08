@@ -5,8 +5,8 @@
 
   <div class="qodef-m-image">
     <img width="800" height="791" class="attachment-full size-full" alt="Portrait de <?php echo $show_data['name'];?>" loading="lazy"
-      src="<?php echo 'https://cinergie.lareponse.be/play/'.$show.'/square_800.jpg';?>"
-      srcset="<?php echo 'https://cinergie.lareponse.be/play/'.$show.'/square_800.jpg';?> 800w, <?php echo 'https://cinergie.lareponse.be/play/'.$show.'/square_300.jpg';?> 300w, <?php echo 'https://cinergie.lareponse.be/play/'.$show.'/square_800.jpg';?> 768w, <?php echo 'https://cinergie.lareponse.be/play/'.$show.'/square_500.jpg';?> 600w, <?php echo 'https://cinergie.lareponse.be/play/'.$show.'/square_100.jpg';?> 100w"
+      src="<?php echo '/podcast/play/'.$show.'/square_800.jpg';?>"
+      srcset="<?php echo '/podcast/play/'.$show.'/square_800.jpg';?> 800w, <?php echo '/podcast/play/'.$show.'/square_300.jpg';?> 300w, <?php echo '/podcast/play/'.$show.'/square_800.jpg';?> 768w, <?php echo '/podcast/play/'.$show.'/square_500.jpg';?> 600w, <?php echo '/podcast/play/'.$show.'/square_100.jpg';?> 100w"
       sizes="(max-width: 800px) 100vw, 800px">
   </div>
 </div>

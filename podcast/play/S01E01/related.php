@@ -25,7 +25,7 @@ return [
       'title' => 'Petites Morts',
       'title_link' => 'https://www.cinergie.be/film/petites-morts',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E01/PetitesMorts.jpg',
+      'img' => '/podcast/play/S01E01/PetitesMorts.jpg',
 
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/petites-morts'
@@ -37,7 +37,7 @@ return [
       'title' => 'Palma',
       'title_link' => 'https://www.cinergie.be/film/palma',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E01/palma__1_square.jpg',
+      'img' => '/podcast/play/S01E01/palma__1_square.jpg',
 
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/palma',
@@ -50,7 +50,7 @@ return [
       'title' => 'Sans Frapper',
       'title_link' => 'https://www.cinergie.be/film/sans-frapper',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E01/sans-frapper-square.jpg',
+      'img' => '/podcast/play/S01E01/sans-frapper-square.jpg',
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/sans-frapper',
         'La critique' => 'https://www.cinergie.be/actualites/sans-frapper-d-alexe-poukine',

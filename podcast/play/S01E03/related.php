@@ -12,7 +12,7 @@ return
   'related' => [
     [
       'category' => 'personne',
-      'img' => 'https://cinergie.lareponse.be/play/S01E03/related_img/AlexandraKandyLonguet.jpg',
+      'img' => '/podcast/play/S01E03/related_img/AlexandraKandyLonguet.jpg',
       'links' => []
     ],
 
@@ -22,7 +22,7 @@ return
       'title' => 'Nouvelle-Orléans, laboratoire de l\'Amérique',
       'title_link' => 'https://www.cinergie.be/film/nouvelle-orleans-laboratoire-de-l-amerique',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E03/related_img/laboratoiramerique.jpg',
+      'img' => '/podcast/play/S01E03/related_img/laboratoiramerique.jpg',
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/nouvelle-orleans-laboratoire-de-l-amerique'
       ]
@@ -34,7 +34,7 @@ return
       'title' => 'Vacancy',
       'title_link' => 'https://www.cinergie.be/film/vacancy',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E03/related_img/Vacancy.jpg',
+      'img' => '/podcast/play/S01E03/related_img/Vacancy.jpg',
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/vacancy',
         'La critique' => 'https://www.cinergie.be/actualites/vacancy-d-alexandra-kandy-longuet',
@@ -48,7 +48,7 @@ return
       'title' => 'Chasser les dragons',
       'title_link' => 'https://www.cinergie.be/film/lunes-rousses-les',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E03/related_img/chasser_les_dragons-photo1.jpg',
+      'img' => '/podcast/play/S01E03/related_img/chasser_les_dragons-photo1.jpg',
 
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/chasser-les-dragons',

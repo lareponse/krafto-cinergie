@@ -12,7 +12,7 @@ return [
   'related' => [
     [
       'category' => 'personne',
-      'img' => 'https://cinergie.lareponse.be/play/S01E08/related_img/delphinewil.jpg',
+      'img' => '/podcast/play/S01E08/related_img/delphinewil.jpg',
       'links' => []
     ],
 
@@ -22,7 +22,7 @@ return [
       'title' => 'Mémoire de missionnaire',
       'title_link' => 'https://www.cinergie.be/film/memoire-de-missionnaires',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E08/related_img/memoiredemissionnaires.jpg',
+      'img' => '/podcast/play/S01E08/related_img/memoiredemissionnaires.jpg',
 
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/memoire-de-missionnaires',

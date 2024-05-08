@@ -12,7 +12,7 @@ return [
   'related' => [
     [
       'category' => 'personne',
-      'img' => 'https://cinergie.lareponse.be/play/S01E06/related_img/MessalineRaverdy.jpg',
+      'img' => '/podcast/play/S01E06/related_img/MessalineRaverdy.jpg',
       'links' => []
     ],
 
@@ -22,7 +22,7 @@ return [
       'title' => 'Derrière les volets',
       'title_link' => 'https://www.cinergie.be/film/derriere-les-volets',
 
-      'img' => 'https://cinergie.lareponse.be/play/S01E06/related_img/derrerevolet.jpg',
+      'img' => '/podcast/play/S01E06/related_img/derrerevolet.jpg',
 
       'links' => [
         'La fiche' => 'https://www.cinergie.be/film/derriere-les-volets',
