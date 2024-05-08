@@ -7,7 +7,7 @@ use \HexMakina\kadro\Models\Tag;
 
 use App\Controllers\Abilities\Paginator;
 use App\Models\Organisation as Model;
-use App\Models\{Movie, Praxis, Submission};
+use App\Models\{Movie, Praxis};
 
 class Organisation extends Kortex
 {
@@ -15,11 +15,12 @@ class Organisation extends Kortex
     {
         $query = $this->routerParamsAsFilters(Model::filter([], ['withPraxis' => true]));
         $paginator = new Paginator($this->router()->params('page') ?? 1, $query);
-        $paginator->perPage(12);
+        $paginator->perPage(14);
         $paginator->setClass(Model::class);
 
         $this->viewport('paginator', $paginator);
-        $this->viewport('praxis', Tag::any(['parent' => 'organisation_praxis']));
+        // dd(Praxis::forOrganisation());
+        $this->viewport('praxis', Praxis::forOrganisation());
 
         $this->viewport('form_filters', $this->router()->params());
     }
@@ -63,7 +64,10 @@ class Organisation extends Kortex
 
 
         if ($this->router()->params('activites')) {
-            $ids = Model::idsByPraxis($this->router()->params('activites'));
+            // vd($this->router()->params('activites'));
+            $ids = Praxis::organisationByPraxisId($this->router()->params('activites'));
+            // $ids = Model::idsByPraxis($this->router()->params('activites'));
+            // dd($ids);
             $query->whereNumericIn('id', $ids, $query->table());
         }
 
