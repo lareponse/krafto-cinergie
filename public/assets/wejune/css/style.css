@@ -588,11 +588,6 @@ a.event-cat-_autre_agenda {
    text-transform: uppercase;
 }
 
-#filmotheque h5 {
-   font-size: 1.1rem;
-   min-height: 53px;
-}
-
 #filmotheque .auteur {
    color: var(--bs-primary);
    font-size: 0.8rem;
