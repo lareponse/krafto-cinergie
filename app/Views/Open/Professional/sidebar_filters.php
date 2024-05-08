@@ -2,7 +2,7 @@
 
 use \HexMakina\Marker\Form;
 
-$this->layout('Open/_partials/sidebar_filters', ['action' => $controller->router()->hyp('organisations')]);
+$this->layout('Open/_partials/sidebar_filters', ['action' => $controller->router()->hyp('professionals')]);
 
 ?>
 
