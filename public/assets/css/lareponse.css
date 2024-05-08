@@ -277,6 +277,17 @@ article.card.listing .date-item {
     transition: all 0.5s ease-in-out;
 }
 
+.card-professional>:not(img) {
+    padding:0 1rem 0.5rem 1rem;
+}
+
+.card-professional img {
+    object-fit: cover;
+    height: 23rem;
+    object-position: center center;
+
+}
+
 @media screen and (min-width: 769px) {
     .card img {
         object-fit: contain;
@@ -406,8 +417,9 @@ article.card.listing .date-item {
     .submission-form fieldset {
         display: grid;
         gap: 1rem 2rem;
-        grid-template-columns: min-content 1fr;
+        grid-template-columns: 4fr 10fr 1fr;
         align-items: center;
+        margin-bottom:0.5rem;
     }
 
     .submission-form fieldset label {
@@ -425,3 +437,70 @@ article.card.listing .date-item {
 
     }
 }
+
+#organisations,
+#professionals {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    gap: 2rem;
+}
+
+#organisations .card,
+#professionals .card {
+    padding-top: 1rem;
+}
+
+#organisations>*:first-child,
+#professionals>*:first-child {
+    padding: 1rem;
+}
+
+#professionals>*:first-child {
+    grid-row: span 2;
+}
+
+
+
+
+
+/* Style for the label which will contain the checkbox */
+.secret-checkbox {
+    width:1.5rem;
+    height:1.5rem;
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    font-size: 22px;
+    user-select: none;
+}
+
+/* Hide the default checkbox */
+.secret-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.secret-checkbox .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1rem;
+    width: 1rem;
+    background-color: #FFF;
+    background-image:url('/public/assets/img/incognito.svg');
+    background-repeat: no-repeat
+    background-position:center;
+    border-radius:50%;
+
+    /* Border for the box */
+}
+
+
+/* When the checkbox is checked, add a blue background */
+.secret-checkbox input:checked~.checkmark {
+    background-color: var(--primary);
+}
+

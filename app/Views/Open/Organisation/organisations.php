@@ -16,31 +16,21 @@ use \HexMakina\Marker\Marker; ?>
         </button>
     </div>
 
-    <div class="row">
-        <div class="col-xl-3">
-            <?= $this->insert('Open/Organisation/sidebar_filters'); ?>
-        </div>
+    <div id="organisations">
 
-        <div class="col-xl-8 offset-xl-1">
-            <div class="row mb-5 organisations">
-                <?php
-                if (empty($paginator->records()))
-                    echo Marker::strong('Pas de résultats correspondant à vos critères');
-                else {
-                    foreach ($paginator->records() as $record) {
-                ?>
-                        <div class="col-lg-4 col-md-6">
-                            <?= $this->insert('Open/Organisation/card', ['record' => $record]) ?>
-                        </div>
-                <?php
-                    }
+        <?php
+            $this->insert('Open/Organisation/sidebar_filters');
+
+            if (empty($paginator->records()))
+                echo Marker::strong('Pas de résultats correspondant à vos critères');
+            else {
+                foreach ($paginator->records() as $record) {
+                    $this->insert('Open/Organisation/card', ['record' => $record]);
                 }
-                ?>
-            </div>
-            <?= $this->insert('Open/_partials/pagination', ['route' => 'organisations', 'paginator' => $paginator]); ?>
-        </div>
-
+            }
+            ?>
     </div>
+
 </div>
 
 <?= $this->insert('Open/Organisation/modal_alter', ['data-bs-target' => "modal-nouvelle-organisation"]); ?>

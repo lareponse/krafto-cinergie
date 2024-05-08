@@ -1,10 +1,8 @@
-<?php
-
-use \HexMakina\Marker\Marker; ?>
+<?php use \HexMakina\Marker\Marker; ?>
 
 <?php $this->layout('Open::layout', ['title' => $page->label()]) ?>
-<div class="container">
 
+<div class="container">
     <div class="d-flex justify-content-between mb-4">
         <button id="filtreBtn" class="btn btn-black d-xl-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#filtre-sidebar">
             <h5><i class="bi bi-sliders me-2"></i>Filtrer</h5>
@@ -16,31 +14,23 @@ use \HexMakina\Marker\Marker; ?>
         </button>
     </div>
 
-    <div class="row">
-        <div class="col-xl-3">
-            <?= $this->insert('Open/Professional/sidebar_filters'); ?>
-        </div>
+    <div id="professionals">
+        <?= $this->insert('Open/Professional/sidebar_filters'); ?>
+        <?php
+        if (empty($paginator->records()))
+            echo Marker::strong('Pas de résultats correspondant à vos critères');
+        else {
+            foreach ($paginator->records() as $record) {
+        ?>
+                <?= $this->insert('Open::Professional/card', ['record' => $record]); ?>
+        <?php
+            }
+        }
+        ?>
 
-        <div class="col-xl-8 offset-xl-1">
-            <div class="row mb-5" id="professionnels">
-                <?php
-                if (empty($paginator->records()))
-                    echo Marker::strong('Pas de résultats correspondant à vos critères');
-                else {
-                    foreach ($paginator->records() as $record) {
-                ?>
-                        <div class="col-lg-4 col-sm-6  ">
-                            <?= $this->insert('Open::Professional/card', ['record' => $record]); ?>
-                        </div>
-                <?php
-                    }
-                }
-                ?>
-            </div>
-
-            <?= $this->insert('Open::_partials/pagination', ['route' => 'professionals', 'paginator' => $paginator]); ?>
-        </div>
     </div>
+    <?= $this->insert('Open::_partials/pagination', ['route' => 'professionals', 'paginator' => $paginator]); ?>
+
 </div>
 
 <?= $this->insert('Open/Professional/modal_alter', ['data-bs-target' => 'modal-fiche-professionnel']); ?>

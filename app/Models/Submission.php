@@ -7,11 +7,6 @@ use HexMakina\TightORM\TightModel;
 
 class Submission extends TightModel
 {
-    public function __construct()
-    {
-        $this->set('submitted_by', json_encode(self::submittedBy()));
-    }
-
     /**
      * Retrieves information about the emitter.
      *
@@ -21,6 +16,18 @@ class Submission extends TightModel
      *
      * @return array An associative array containing the emitter information.
      */
+
+    public function record()
+    {
+        list($type, $id) = explode(':', $this->get('urn'));
+        $class = '\\App\\Models\\' . $type;
+
+        if(!empty($class) && !empty($id))
+            return $class::exists($id);
+
+        return null;
+    }   
+
     public static function submittedBy(): array
     {
         $serverKeys = [

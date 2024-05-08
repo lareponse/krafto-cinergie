@@ -43,7 +43,7 @@ $menu = [
         ]
     ],
     [
-        'Message' => ['label' => 'Messages', 'icon' => 'message'],
+        'Submission' => ['label' => 'Soumissions', 'icon' => 'message'],
 
         'User' => ['label' => 'Utilisateurs', 'icon' => 'image', 
             'subs' => [
