@@ -150,23 +150,18 @@ article.card.event-item .date-item {
     color: var(--bs-white);
 }
 
-/* #sidebar #filtres {background: var(--bs-white);padding: 25px; } */
-
-/* .sidebar {
-    margin-bottom: 2rem;
-} */
-
-.sidebar.filtres {
+aside.filtres {
     background: var(--bs-white);
+    padding:1rem;
 }
 
-.sidebar.filtres header {
+aside.filtres header {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.sidebar.filtres header button {
+aside.filtres header button {
     background: none;
     border: none;
     color: var(--bs-primary);
@@ -278,7 +273,7 @@ article.card.listing .date-item {
 }
 
 .card-professional>:not(img) {
-    padding:0 1rem 0.5rem 1rem;
+    padding: 0 1rem 0.5rem 1rem;
 }
 
 .card-professional img {
@@ -419,7 +414,7 @@ article.card.listing .date-item {
         gap: 1rem 2rem;
         grid-template-columns: 4fr 10fr 1fr;
         align-items: center;
-        margin-bottom:0.5rem;
+        margin-bottom: 0.5rem;
     }
 
     .submission-form fieldset label {
@@ -438,24 +433,16 @@ article.card.listing .date-item {
     }
 }
 
-#organisations,
-#professionals {
+.catalog{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
     gap: 2rem;
 }
 
-#organisations .card,
-#professionals .card {
-    padding-top: 1rem;
+#professionals.catalog>*:first-child {
+    grid-row: span 2;
 }
-
-#organisations>*:first-child,
-#professionals>*:first-child {
-    padding: 1rem;
-}
-
-#professionals>*:first-child {
+#filmotheque.catalog>*:first-child {
     grid-row: span 2;
 }
 
@@ -465,8 +452,8 @@ article.card.listing .date-item {
 
 /* Style for the label which will contain the checkbox */
 .secret-checkbox {
-    width:1.5rem;
-    height:1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
     display: block;
     position: relative;
     padding-left: 35px;
@@ -490,10 +477,9 @@ article.card.listing .date-item {
     height: 1rem;
     width: 1rem;
     background-color: #FFF;
-    background-image:url('/public/assets/img/incognito.svg');
-    background-repeat: no-repeat
-    background-position:center;
-    border-radius:50%;
+    background-image: url('/public/assets/img/incognito.svg');
+    background-repeat: no-repeat background-position:center;
+    border-radius: 50%;
 
     /* Border for the box */
 }
@@ -503,4 +489,3 @@ article.card.listing .date-item {
 .secret-checkbox input:checked~.checkmark {
     background-color: var(--primary);
 }
-

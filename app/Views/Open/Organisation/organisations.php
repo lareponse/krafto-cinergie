@@ -16,20 +16,21 @@ use \HexMakina\Marker\Marker; ?>
         </button>
     </div>
 
-    <div id="organisations">
+    <div id="organisations" class="catalog">
 
         <?php
-            $this->insert('Open/Organisation/sidebar_filters');
+        $this->insert('Open/Organisation/sidebar_filters');
 
-            if (empty($paginator->records()))
-                echo Marker::strong('Pas de résultats correspondant à vos critères');
-            else {
-                foreach ($paginator->records() as $record) {
-                    $this->insert('Open/Organisation/card', ['record' => $record]);
-                }
+        if (empty($paginator->records()))
+            echo Marker::strong('Pas de résultats correspondant à vos critères');
+        else {
+            foreach ($paginator->records() as $record) {
+                $this->insert('Open/Organisation/card', ['record' => $record]);
             }
-            ?>
+        }
+        ?>
     </div>
+    <?= $this->insert('Open::_partials/pagination', ['route' => 'organisations', 'paginator' => $paginator]); ?>
 
 </div>
 

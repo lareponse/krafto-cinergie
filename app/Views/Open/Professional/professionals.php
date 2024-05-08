@@ -1,4 +1,6 @@
-<?php use \HexMakina\Marker\Marker; ?>
+<?php
+
+use \HexMakina\Marker\Marker; ?>
 
 <?php $this->layout('Open::layout', ['title' => $page->label()]) ?>
 
@@ -14,7 +16,7 @@
         </button>
     </div>
 
-    <div id="professionals">
+    <div id="professionals" class="catalog">
         <?= $this->insert('Open/Professional/sidebar_filters'); ?>
         <?php
         if (empty($paginator->records()))

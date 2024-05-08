@@ -6,6 +6,7 @@ $this->layout('Open/_partials/sidebar_filters', ['action' => $controller->router
 
 ?>
 
+
 <label class="form-label mt-3">Type</label>
 
 <select class="form-select" name="type">
@@ -49,9 +50,7 @@ $this->layout('Open/_partials/sidebar_filters', ['action' => $controller->router
 
     <label class="form-label mt-3">Année de sortie</label>
     <input class="form-control" type="text" name="released" value="<?= $controller->router()->params('released') ?>" />
-
 </div>
-
 
 
 <hr>
