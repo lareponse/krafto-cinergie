@@ -12,8 +12,9 @@ $settings = array(
     'CSP_nonce' => $nonce,
     'headers' => [
       'Content-Security-Policy' => [
+        "base-uri 'none';",
         "default-src 'self';",
-        "script-src 'self' 'nonce-{$nonce}' https://cdn.jsdelivr.net;",
+        "script-src 'self' 'nonce-{$nonce}' https://cdn.jsdelivr.net https://cmp.osano.com http://dev.cinergie;",
         "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;",
         "connect-src 'self' 'nonce-{$nonce}' https://api.example.com;",
         "img-src 'self' 'nonce-{$nonce}' data: https://cdn.jsdelivr.net;",
