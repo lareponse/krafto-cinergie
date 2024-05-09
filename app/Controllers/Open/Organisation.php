@@ -15,11 +15,10 @@ class Organisation extends Kortex
     {
         $query = $this->routerParamsAsFilters(Model::filter([], ['withPraxis' => true]));
         $paginator = new Paginator($this->router()->params('page') ?? 1, $query);
-        $paginator->perPage(14);
+        $paginator->perPage(23);
         $paginator->setClass(Model::class);
 
         $this->viewport('paginator', $paginator);
-        // dd(Praxis::forOrganisation());
         $this->viewport('praxis', Praxis::forOrganisation());
 
         $this->viewport('form_filters', $this->router()->params());

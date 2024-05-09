@@ -30,7 +30,7 @@ class Professional extends Kortex
     {
         $query = $this->routerParamsAsFilters(Model::filter([], ['withPraxis' => true]));
         $paginator = new Paginator($this->router()->params('page') ?? 1, $query);
-        $paginator->perPage(13);
+        $paginator->perPage(22);
         $paginator->setClass(Model::class);
 
         $this->viewport('paginator', $paginator);

@@ -17,7 +17,7 @@ class Movie extends Kortex
     {
         $query = $this->routerParamsAsFilters(Model::filter([], ['withDirectors' => true]));
         $paginator = new Paginator($this->router()->params('page') ?? 1, $query);
-        $paginator->perPage(12);
+        $paginator->perPage(22);
         $paginator->setClass(Model::class);
 
         $this->viewport('genres', Tag::any(['parent' => 'movie_genre']));
