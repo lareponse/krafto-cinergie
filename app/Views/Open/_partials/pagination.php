@@ -1,4 +1,4 @@
-<div class="mt-5">
+<div class="my-5">
     <?php
     if ($paginator->last() > 1) {
         $params = $controller->router()->params();
