@@ -17,7 +17,9 @@ use \HexMakina\Marker\Marker; ?>
     </div>
 
     <div id="professionals" class="catalog">
-        <?= $this->insert('Open/Professional/sidebar_filters'); ?>
+        <div><!-- here for grid span 2 -->
+            <?= $this->insert('Open/Professional/sidebar_filters'); ?>
+        </div>
         <?php
         if (empty($paginator->records()))
             echo Marker::strong('Pas de résultats correspondant à vos critères');
