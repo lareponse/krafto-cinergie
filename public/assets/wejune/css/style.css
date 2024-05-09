@@ -578,23 +578,6 @@ a.event-cat-_autre_agenda {
    border: none;
 }
 
-/* === FILMOTHEQUE : CARD */
-#filmotheque .meta {
-   display: flex;
-   justify-content: space-between;
-}
-
-#filmotheque .meta .categorie {
-   text-transform: uppercase;
-}
-
-#filmotheque .auteur {
-   color: var(--bs-primary);
-   font-size: 0.8rem;
-   margin-bottom: 0;
-   margin-top: 1rem;
-}
-
 
 /* === CONCOURS : CARD */
 .concours-item p.date {
@@ -999,109 +982,7 @@ aside#meta hr {
 }
 
 
-/* ------ FOOTER ----- */
-footer#footer {
-   position: relative;
-   background: var(--bs-black);
-   padding: 3rem 0 1.2rem 0;
-   font-size: 0.9rem;
-   color: var(--bs-white);
-}
 
-footer#footer a {
-   color: var(--bs-primary);
-}
-
-footer#footer a:hover {
-   color: var(--bs-white);
-}
-
-footer#footer h4 {
-   font-size: 1.2rem;
-   color: var(--bs-white);
-}
-
-footer#footer h5,
-footer#footer h6 {
-   font-size: 1rem;
-}
-
-footer#footer i {
-   font-size: 1.5rem;
-   color: var(--bs-white);
-   margin: 0 7.5px;
-}
-
-footer img.logo {
-   max-width: 85%;
-   margin-bottom: 1em;
-}
-
-footer#footer nav.navigation-footer ul {
-   list-style: none;
-   padding-left: 0;
-}
-
-footer#footer nav.navigation-footer ul li {
-   margin-bottom: 0.75rem;
-}
-
-footer#footer nav.navigation-footer ul a {
-   text-transform: uppercase;
-   color: var(--bs-white);
-   font-weight: 500;
-}
-
-footer#footer nav.navigation-footer ul a:hover,
-footer #copyright a:hover {
-   color: var(--bs-primary);
-}
-
-footer#footer #partenaires {
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
-   flex-wrap: wrap;
-}
-
-footer#footer #partenaires .partenaire-item {
-   flex-basis: 23%;
-   border-radius: 1rem;
-   background: var(--bs-white);
-   padding: 0.5rem 1rem;
-   text-align: center;
-   margin: 0 1% 1rem;
-}
-
-footer#footer #partenaires .partenaire-item img {
-   max-height: 40px;
-   width: auto;
-   max-width: 100%;
-}
-
-footer #copyright {
-   margin-top: 5rem;
-   font-size: 0.7rem;
-   text-align: center;
-}
-
-footer #copyright a {
-   color: var(--bs-white);
-}
-
-/* Scroll to top ----- */
-#scroll-to-top {
-   opacity: 0.5;
-   height: 30px;
-   width: 30px;
-   position: fixed;
-   bottom: 10px;
-   left: 10px;
-}
-
-#scroll-to-top:hover {
-   opacity: 1;
-}
 
 
 

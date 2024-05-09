@@ -47,7 +47,7 @@
     --light: #F5F7FD;
     --dark: #4B4B4D;
     --white: #ffffff;
-    --black: #000000;
+    --black: #111111;
     --link-color-rgb: 212, 19, 25;
     --primary-rgb: 212, 19, 25;
     --link-hover-color-rgb: 212, 19, 25;
@@ -78,17 +78,13 @@ body>header nav li {
     height: 3rem;
 }
 
-main:not(.home) {
+body>main:not(.home) {
     margin-top: 3rem;
     /* 50px = 3.125em */
 }
 
-main {
+body>main {
     position: relative;
-}
-
-footer#footer {
-    margin-top: 4em;
 }
 
 .sib-form {
@@ -152,7 +148,7 @@ article.card.event-item .date-item {
 
 aside.filtres {
     background: var(--bs-white);
-    padding:1rem;
+    padding: 1rem;
 }
 
 aside.filtres header {
@@ -238,31 +234,48 @@ article.card.listing .date-item {
 
 }
 
-.card-movie{
-    display: grid;
-    gap: 0 1rem;
-    grid-template-columns: 1fr 1fr;
+.card-movie main {
+    padding: 0.5rem;
 }
 
-.card-movie *:first-child,
-.card-movie *:last-child {
-    grid-column: span 2;
-}
-
-.card-movie img{
-    height:15rem;
+.card-movie img {
+    height: 15rem;
     object-fit: cover;
 }
 
-.card-movie > *:nth-child(2){
-    text-align:right;
+.card-movie .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
 }
-.card-movie h5{
-    margin: 0.5rem 0;
+
+.card-movie .meta>* {
+    flex: 1;
+    text-align: center;
+}
+
+.card-movie .meta .categorie {
+    text-transform: uppercase;
+}
+
+.card-movie .meta.professional {
+    color: var(--bs-primary);
+    font-size: 0.8rem;
+    margin-bottom: 0;
+    display: block;
+    text-align: right;
+}
+
+.card-movie h5 {
     padding: 0;
-    text-align:center;
+    margin: 0;
+    grid-column: span 2;
+    text-align: center;
     font-size: 1.1rem;
+    color: var(--black);
 }
+
 
 .card-complex {
     background: black;
@@ -460,7 +473,7 @@ article.card.listing .date-item {
     }
 }
 
-.catalog{
+.catalog {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
     gap: 2rem;
@@ -469,6 +482,7 @@ article.card.listing .date-item {
 #professionals.catalog>*:first-child {
     grid-row: span 2;
 }
+
 #filmotheque.catalog>*:first-child {
     grid-row: span 2;
 }
@@ -515,4 +529,117 @@ article.card.listing .date-item {
 /* When the checkbox is checked, add a blue background */
 .secret-checkbox input:checked~.checkmark {
     background-color: var(--primary);
+}
+
+
+
+body>footer {
+    position: relative;
+    background: var(--bs-black);
+    padding: 3rem 0 1.2rem 0;
+    font-size: 0.9rem;
+    color: var(--bs-white);
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+body>footer+section {
+    background: var(--bs-black);
+    font-size: 0.7rem;
+    text-align: center;
+}
+body>footer+section > *{
+    color: var(--bs-white);
+}
+
+
+body>footer a {
+    color: var(--bs-primary);
+}
+
+
+body>footer #socials {
+    flex-grow: 1;
+    padding-left:1rem;
+}
+
+body>footer #socials .home img {
+    max-width: 400px;
+}
+
+body>footer #sitemap {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+}
+
+body>footer #partenaires {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+body>footer #partenaires .partenaire-item {
+    flex-basis: 23%;
+    border-radius: 1rem;
+    background: var(--bs-white);
+    padding: 0.5rem 1rem;
+    text-align: center;
+    margin: 0 1% 1rem;
+}
+
+body>footer #partenaires .partenaire-item img {
+    max-height: 40px;
+    width: auto;
+    max-width: 100%;
+}
+
+
+body>footer nav ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+body>footer nav li {
+    margin-bottom: 0.75rem;
+}
+
+body>footer nav li a {
+    text-transform: uppercase;
+    color: var(--bs-white);
+    font-weight: 500;
+    white-space: pre;
+}
+body>footer nav a:hover {
+    color: var(--bs-primary);
+}
+body>footer i {
+    font-size: 1.5rem;
+    color: var(--bs-white);
+    margin: 0 7.5px;
+}
+
+body>footer img.logo {
+    max-width: 85%;
+    margin-bottom: 1em;
+}
+
+/* Scroll to top ----- */
+#scroll-to-top {
+    opacity: 0.5;
+    height: 2rem;
+    width: 2rem;
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    z-index: 2;
+
+}
+
+#scroll-to-top:hover {
+    opacity: 1;
 }
