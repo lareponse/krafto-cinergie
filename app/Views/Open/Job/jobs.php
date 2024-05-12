@@ -2,7 +2,7 @@
 
 use \HexMakina\Marker\Marker;
 
-$modal_id = 'modal-nouvelle-annonce';
+$modal_id = 'modal_job';
 ?>
 
 <?php $this->layout('Open/layout', ['title' => $page->get('label')]) ?>
@@ -48,4 +48,4 @@ $modal_id = 'modal-nouvelle-annonce';
 </div>
 
 <!-- modal submit new advert -->
-<?= $this->insert('Open/Job/modal_new', ['modal_id' => $modal_id]); ?>
+<?= $this->insert('Open/Job/modal', ['modal_id' => $modal_id]); ?>

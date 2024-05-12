@@ -241,7 +241,7 @@ article.card.listing .date-item {
 .card-movie img {
     height: 15rem;
     object-fit: cover;
-    border-radius:0.7rem 0.7rem 0 0;
+    border-radius: 0.7rem 0.7rem 0 0;
 }
 
 .card-movie .meta {
@@ -250,8 +250,8 @@ article.card.listing .date-item {
     align-items: center;
 
 }
-.card-movie .meta>* {
-}
+
+.card-movie .meta>* {}
 
 .card-movie .meta .categorie {
     text-transform: uppercase;
@@ -429,11 +429,11 @@ article.card.listing .date-item {
     }
 }
 
-.submission-form fieldset {
+#modalter_prorg fieldset {
     display: grid;
 }
 
-.submission-form fieldset label {
+#modalter_prorg fieldset label {
     white-space: nowrap;
     text-transform: uppercase;
     color: var(--bs-primary);
@@ -441,13 +441,13 @@ article.card.listing .date-item {
     margin-top: 1.5rem;
 }
 
-.submission-form fieldset label:has(+[required])::after {
+#modalter_prorg fieldset label:has(+[required])::after {
     content: " *";
     color: var(--bs-primary);
 }
 
 @media (min-width: 768px) {
-    .submission-form fieldset {
+    #modalter_prorg fieldset {
         display: grid;
         gap: 1rem 2rem;
         grid-template-columns: 4fr 10fr 1fr;
@@ -455,7 +455,7 @@ article.card.listing .date-item {
         margin-bottom: 0.5rem;
     }
 
-    .submission-form fieldset label {
+    #modalter_prorg fieldset label {
         text-align: right;
         margin-top: initial;
     }
@@ -548,7 +548,8 @@ body>footer+section {
     font-size: 0.7rem;
     text-align: center;
 }
-body>footer+section > *{
+
+body>footer+section>* {
     color: var(--bs-white);
 }
 
@@ -560,7 +561,7 @@ body>footer a {
 
 body>footer #socials {
     flex-grow: 1;
-    padding-left:1rem;
+    padding-left: 1rem;
 }
 
 body>footer #socials .home img {
@@ -596,15 +597,17 @@ body>footer #partenaires .partenaire-item img {
     max-width: 100%;
 }
 
-body>footer>div:last-child{
-    display:flex;
+body>footer>div:last-child {
+    display: flex;
     justify-content: space-between;
-    gap:1rem;
+    gap: 1rem;
     flex-grow: 1;
 }
-body>footer>div:last-child > *{
-    flex-grow:1;
-}   
+
+body>footer>div:last-child>* {
+    flex-grow: 1;
+}
+
 body>footer nav ul {
     list-style: none;
     padding-left: 0;
@@ -620,9 +623,11 @@ body>footer nav li a {
     font-weight: 500;
     white-space: pre;
 }
+
 body>footer nav a:hover {
     color: var(--bs-primary);
 }
+
 body>footer i {
     font-size: 1.5rem;
     color: var(--bs-white);
@@ -648,4 +653,28 @@ body>footer img.logo {
 
 #scroll-to-top:hover {
     opacity: 1;
+}
+
+
+#modal_job fieldset>legend,
+#modal_job fieldset>label
+{
+    color: var(--bs-primary);
+    font-size:1rem;
+}
+
+#modal_job fieldset div {
+    display: grid;
+    grid-template-columns: min-content max-content;
+    gap: 0.5rem 1rem;
+}
+
+#modal_job .checkboxes-field{
+    display:flex;
+    flex-wrap:wrap;
+    gap:4rem;
+}
+
+#modal_job fieldset{
+    margin-top:2rem;
 }

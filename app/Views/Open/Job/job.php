@@ -19,10 +19,10 @@ $mail_message = "Bonjour,<br><br>Je suis intéressé(e) par votre annonce et je 
 
         <div class="offset-lg-1 col-lg-4">
             <div class="row">
-                <button type="button" class="btn btn-outline-primary add-btn order-2 order-sm-2 order-md-1 my-5 d-print-none" data-bs-toggle="modal" data-bs-target="#modal-nouvelle-annonce">
+                <button type="button" class="btn btn-outline-primary add-btn order-2 order-sm-2 order-md-1 my-5 d-print-none" data-bs-toggle="modal" data-bs-target="#modal_job">
                     <i class="bi bi-plus-circle"></i>Ajoutez votre annonce
                 </button>
-                <?= $this->insert('Open::Job/modal_new'); ?>
+                <?= $this->insert('Open::Job/modal'); ?>
 
                 <aside id="meta" class="shadow order-1 order-sm-1 order-md-2">
                     <ul class="meta-list">
