@@ -657,10 +657,9 @@ body>footer img.logo {
 
 
 #modal_job fieldset>legend,
-#modal_job fieldset>label
-{
+#modal_job fieldset>label {
     color: var(--bs-primary);
-    font-size:1rem;
+    font-size: 1rem;
 }
 
 #modal_job fieldset div {
@@ -669,12 +668,35 @@ body>footer img.logo {
     gap: 0.5rem 1rem;
 }
 
-#modal_job .checkboxes-field{
-    display:flex;
-    flex-wrap:wrap;
-    gap:4rem;
+#modal_job .checkboxes-field {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4rem;
 }
 
-#modal_job fieldset{
-    margin-top:2rem;
+#modal_job fieldset {
+    margin-top: 2rem;
+}
+
+#equipe-belge {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    gap: 2rem;
+}
+
+#equipe-belge>*:first-child {
+    grid-column: 1 / -1;
+}
+
+#equipe-belge article a:has(.avatar) {
+    display: flex;
+
+    width: 17rem;
+    height: 17rem;
+    overflow: hidden;
+}
+
+#equipe-belge article .avatar {
+    width: 100%;
+    object-fit:cover;
 }

@@ -1,11 +1,11 @@
 <!-- Modal -->
 <form class="submission-form" id="nouvelle-commande-dvd" method="POST" action="<?= $controller->router()->hyp('submission_submit');?>">
 
-    <div class="modal fade" id="modal-order" tabindex="-1" aria-labelledby="modal-nouvelle-commande-label-dvd" aria-hidden="true">
+    <div class="modal fade" id="modal-order" tabindex="-1" aria-labelledby="modal_order" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title fs-5" id="modal-nouvelle-commande-label-dvd">Nouvelle commande</h2>
+                    <h2 class="modal-title fs-5" id="modal_order">Nouvelle commande</h2>
                     <button type="button" class="btn-close  btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

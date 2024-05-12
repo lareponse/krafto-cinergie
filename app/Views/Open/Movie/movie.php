@@ -16,7 +16,7 @@ $collection_href = $controller->router()->hyp('movies');
 
             <div class="col-lg-5">
                 <img class="img-fluid w-100 mb-2" src="<?= $record->profilePicture() ?>" alt="Photo du film <?= $record->get('label') ?>" />
-                <?= $this->insert('Open::_partials/share_print', [ 'label' => $record]); ?>
+                <?= $this->insert('Open::_partials/share_print', ['label' => $record]); ?>
 
             </div>
 
@@ -118,10 +118,31 @@ $collection_href = $controller->router()->hyp('movies');
         <?php
         if ((count($professionals) + count($organisations)) > 1) {
         ?>
-            <div class="row my-5" id="equipe-belge">
+            <section class="row my-5" id="equipe-belge">
                 <h2 class="pb-0 line-left ">L'équipe belge</h2>
-            </div>
-            <?= $this->insert('Open::Movie/worked_on', ['professional' => $professionals, 'organisation' => $organisations]); ?>
+                <?php
+                foreach (['professional' => $professionals, 'organisation' => $organisations] as $route_name => $annuaire) {
+                    foreach ($annuaire as $item) {
+                        $href = $controller->router()->hyp($route_name, ['slug' => $item->slug()]);
+                ?>
+                        <article>
+                            <a href="<?= $href ?>">
+                                <img src="<?= $item->profilePicture() ?>" alt="Photo de profile de <?= $item; ?>" class="avatar">
+                            </a>
+                            <h4><a href="<?= $href ?>"><?= $item; ?></a></h4>
+                            <p>
+                                <?php
+                                foreach ($item->praxisIds() as $id) {
+                                    echo '<span class="d-block otto-id-label" otto-urn="Tag:' . $id . '">' . $id . '</span>';
+                                }
+                                ?>
+                            </p>
+                        </article>
+                <?php
+                    }
+                }
+                ?>
+            </section>
 </div>
 <?php
         }
