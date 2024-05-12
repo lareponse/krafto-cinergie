@@ -60,30 +60,32 @@
     <div>
         <?= $this->insert('Open::_partials/form_brevo') ?>
 
-        <h5 class=" text-left text-xl-end mt-5 text-uppercase">Nos partenaires</h5>
-                        <div id="partenaires">
-                            <a class="partenaire-item" href="https://www.maisondelafrancite.be/">
-                                <img src="/public/assets/img/partenaires/logo_maison_de_la_francite.png" alt="Maison de la Francité" />
-                            </a>
+        <section>
 
-                            <a class="partenaire-item" href="https://be.brussels/">
-                                <img src="/public/assets/img/partenaires/iris_bruxelles.png" alt="Région de Bruxelles-Capitale - Administration Economie et Emploi" />
-                            </a>
+            <h5 class=" text-left text-xl-end mt-5 text-uppercase">Nos partenaires</h5>
+            <div id="partenaires">
+                <a class="partenaire-item" href="https://www.maisondelafrancite.be/">
+                    <img src="/public/assets/img/partenaires/logo_maison_de_la_francite.png" alt="Maison de la Francité" />
+                </a>
 
-                            <a class="partenaire-item" href="https://ccf.brussels/wp-signup.php?new=www.spfb.brussels">
-                                <img src="/public/assets/img/partenaires/bruxelles-francophone.png" alt="Service public francophone bruxellois" />
-                            </a>
+                <a class="partenaire-item" href="https://be.brussels/">
+                    <img src="/public/assets/img/partenaires/iris_bruxelles.png" alt="Région de Bruxelles-Capitale - Administration Economie et Emploi" />
+                </a>
 
-                            <a class="partenaire-item" href="https://audiovisuel.cfwb.be/">
-                                <img src="/public/assets/img/partenaires/logofwb.png" alt="Centre du Cinéma et de l'Audiovisuel de la Communauté Française" />
-                            </a>
+                <a class="partenaire-item" href="https://ccf.brussels/wp-signup.php?new=www.spfb.brussels">
+                    <img src="/public/assets/img/partenaires/bruxelles-francophone.png" alt="Service public francophone bruxellois" />
+                </a>
 
-                            <a class="partenaire-item" href="https://lareponse.be">
-                                <img src="/public/assets/img/partenaires/lareponse.png" alt="La Réponse" />
-                            </a>
-                        </div>
+                <a class="partenaire-item" href="https://audiovisuel.cfwb.be/">
+                    <img src="/public/assets/img/partenaires/logofwb.png" alt="Centre du Cinéma et de l'Audiovisuel de la Communauté Française" />
+                </a>
+
+                <a class="partenaire-item" href="https://lareponse.be">
+                    <img src="/public/assets/img/partenaires/lareponse.png" alt="La Réponse" />
+                </a>
+            </div>
+        </section>
     </div>
-
 </footer>
 
 <section id="copyright">

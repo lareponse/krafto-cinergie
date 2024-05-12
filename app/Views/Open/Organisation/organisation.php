@@ -1,8 +1,9 @@
 <?php
 
-use \HexMakina\Marker\Marker; ?>
+use \HexMakina\Marker\Marker;
+$this->layout('Open::layout') 
 
-<?php $this->layout('Open::layout') ?>
+?>
 
 <div id="organisation-single">
     <article class="w-75 mx-auto">

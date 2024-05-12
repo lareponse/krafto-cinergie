@@ -21,7 +21,7 @@ class Organisation extends TightModel
 
     public function __toString()
     {
-        return $this->get('label');
+        return $this->get('label') ?? '';
     }
 
     public function tagIds(): array

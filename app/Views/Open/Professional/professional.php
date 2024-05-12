@@ -1,4 +1,10 @@
-<?php $this->layout('Open::layout') ?>
+<?php
+
+use \HexMakina\Marker\Marker;
+
+$this->layout('Open::layout')
+
+?>
 
 <div class="container my-5 pb-5" id="professionnel-single">
     <article class="w-75 mx-auto">
