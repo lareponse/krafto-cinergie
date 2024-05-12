@@ -97,9 +97,6 @@ class Professional extends TightModel
             $bindname = $Query->addBinding('fullNameSearch', $isLike);
             $Query->whereWithBind('CONCAT(`professional`.`firstname`, \' \',`professional`.`lastname`) LIKE ' . $bindname);
         }
-        $Query->orderBy(['lastname', 'ASC']);
-        $Query->orderBy(['firstname', 'ASC']);
-        $Query->orderBy(['lastname', 'asc']);
 
         return $Query;
     }
