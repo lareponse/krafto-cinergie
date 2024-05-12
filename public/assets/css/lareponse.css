@@ -429,6 +429,12 @@ article.card.listing .date-item {
     }
 }
 
+
+.modal-body label,
+.modal-body legend {
+    font-weight: 500;
+}
+
 #modalter_prorg fieldset {
     display: grid;
 }
@@ -441,7 +447,7 @@ article.card.listing .date-item {
     margin-top: 1.5rem;
 }
 
-#modalter_prorg fieldset label:has(+[required])::after {
+fieldset label:has(+[required])::after {
     content: " *";
     color: var(--bs-primary);
 }
@@ -664,15 +670,18 @@ body>footer img.logo {
 
 #modal_job fieldset div {
     display: grid;
-    grid-template-columns: min-content max-content;
+    grid-template-columns: min-content auto;
     gap: 0.5rem 1rem;
 }
 
-#modal_job .checkboxes-field {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4rem;
+@media screen and (min-width: 768px) {
+    #modal_job .checkboxes-field {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4rem;
+    }
 }
+
 
 #modal_job fieldset {
     margin-top: 2rem;
@@ -698,5 +707,5 @@ body>footer img.logo {
 
 #equipe-belge article .avatar {
     width: 100%;
-    object-fit:cover;
+    object-fit: cover;
 }

@@ -1,5 +1,5 @@
-<form class="form-horizontal submission-form" id="nouvelle-annonce" method="post">
-    <!-- Modal -->
+<form action="<?= $controller->router()->hyp('submission_submit') ?>" method="POST" class="form-horizontal submission-form">
+
     <div class="modal fade" id="<?= $modal_id ?? 'modal_job' ?>" tabindex="-1" aria-labelledby="modal_job-label" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-scrollable">
             <div class="modal-content">
@@ -7,10 +7,11 @@
                     <h1 class="modal-title fs-5" id="modal_job-label">Nouvelle annonce</h1>
                     <button type="button" class="btn-close  btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body p-5">
+
+                <div class="modal-body">
                     <div class="checkboxes-field">
 
-                    <fieldset>
+                        <fieldset>
                             <legend class="text-primary">Rémunéré</legend>
                             <div>
 
@@ -26,19 +27,19 @@
                             <legend class="text-primary">Catégorie *</legend>
 
                             <div>
-                                <input class="form-check-input" type="radio" name="categorie-annonce" value="benevolat" id="benevolat" />
+                                <input class="form-check-input" type="radio" name="categorie" value="benevolat" id="benevolat" />
                                 <label class="form-check-label" for="benevolat">Bénévolat</label>
 
-                                <input class="form-check-input" type="radio" name="categorie-annonce" value="casting-form" id="casting-form" />
+                                <input class="form-check-input" type="radio" name="categorie" value="casting-form" id="casting-form" />
                                 <label class="form-check-label" for="casting-form">Casting</label>
 
-                                <input class="form-check-input" type="radio" name="categorie-annonce" value="divers" id="divers" />
+                                <input class="form-check-input" type="radio" name="categorie" value="divers" id="divers" />
                                 <label class="form-check-label" for="divers">Divers</label>
 
-                                <input class="form-check-input" type="radio" name="categorie-annonce" value="job" id="job" />
+                                <input class="form-check-input" type="radio" name="categorie" value="job" id="job" />
                                 <label class="form-check-label" for="job">Job</label>
 
-                                <input class="form-check-input" type="radio" name="categorie-annonce" value="stage" id="stage" />
+                                <input class="form-check-input" type="radio" name="categorie" value="stage" id="stage" />
                                 <label class="form-check-label" for="stage">Stage</label>
                             </div>
                         </fieldset>
@@ -46,43 +47,43 @@
                         <fieldset>
                             <legend class="text-primary">Type *</legend>
                             <div>
-                                <input class="form-check-input" type="radio" name="type-annonce" value="proposition" id="proposition" />
+                                <input class="form-check-input" type="radio" name="type" value="proposition" id="proposition" />
                                 <label class="form-check-label" for="proposition">Proposition (vous proposez vos services, du matériel, etc.)</label>
 
-                                <input class="form-check-input" type="radio" name="type-annonce" value="demande" id="demande" />
+                                <input class="form-check-input" type="radio" name="type" value="demande" id="demande" />
                                 <label class="form-check-label" for="demande">Demande (vous recherchez quelqu'un ou quelque chose)</label>
                             </div>
                         </fieldset>
                     </div>
 
                     <fieldset>
-                        <label for="titre-annonce" class="text-primary">Titre</label>
-                        <input type="text" name="titre-annonce" id="titre-annonce" class="form-control" minlength="2" placeholder="libellé succinct de votre annonce..." required="">
+                        <label for="label" class="text-primary">Titre</label>
+                        <input type="text" name="label" id="label" class="form-control" minlength="2" placeholder="libellé succinct de votre annonce..." required="">
                     </fieldset>
 
                     <fieldset>
-                        <label for="text-annonce" class="text-primary">Texte</label>
-                        <textarea name="text-annonce" id="text-annonce" class="form-control text-annonce" minlength="3" placeholder="description complète de votre annonce..." required=""></textarea>
+                        <label for="content" class="text-primary">Texte</label>
+                        <textarea name="content" id="content" class="form-control text" minlength="3" placeholder="description complète de votre annonce..." required=""></textarea>
                     </fieldset>
 
                     <fieldset>
-                        <label for="auteur-annonce" class="text-primary">Auteur</label>
-                        <input type="text" name="auteur-annonce" id="auteur-annonce" class="form-control" minlength="2" placeholder="votre nom..." required="">
+                        <label for="identity" class="text-primary">Annonceur</label>
+                        <input type="text" name="identity" id="identity" class="form-control" minlength="2" placeholder="votre nom..." required="">
                     </fieldset>
 
                     <fieldset>
-                        <label for="telephone-annonce" class="text-primary">Téléphone</label>
-                        <input type="text" name="telephone-annonce" id="telephone-annonce" class="form-control" minlength="2" placeholder="numéro de téléphone de contact..." required="">
+                        <label for="phone" class="text-primary">Téléphone</label>
+                        <input type="text" name="phone" id="phone" class="form-control" minlength="2" placeholder="numéro de téléphone de contact..." required="">
                     </fieldset>
 
                     <fieldset>
-                        <label for="email-annonce" class="text-primary">Email</label>
-                        <input type="email" name="email-annonce" id="email-annonce" class="form-control" minlength="2" placeholder="adresse mail de contact..." required="">
+                        <label for="email" class="text-primary">Email</label>
+                        <input type="email" name="email" id="email" class="form-control" minlength="2" placeholder="adresse mail de contact..." required="">
                     </fieldset>
 
                     <fieldset>
-                        <label for="url-annonce" class="text-primary">Site web</label>
-                        <input type="text" name="url-annonce" id="url-annonce" class="form-control" minlength="2" placeholder="site web pour compléments d'information...">
+                        <label for="url" class="text-primary">Site web</label>
+                        <input type="text" name="url" id="url" class="form-control" minlength="2" placeholder="site web pour compléments d'information...">
                     </fieldset>
 
                 </div>
@@ -90,7 +91,7 @@
                 <div class="modal-footer">
                     <small>Les champs marqués <span style="color:#eb0101; font-size: 30px;"><sub>*</sub></span> sont
                         obligatoires</small>
-                    <input class="btn btn-primary" type="submit" name="submit-nouvelle-annonce" value="Envoyer">
+                    <input class="btn btn-primary" type="submit" value="Envoyer">
                 </div>
             </div>
         </div>

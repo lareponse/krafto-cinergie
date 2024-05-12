@@ -661,25 +661,12 @@ article.boutique .commander:hover {
    color: #000000;
 }
 
-.modal-body .text-annonce {
-   min-height: 160px;
-}
-
-.modal-body label {
-   font-weight: 500;
-}
-
 .modal-body .col-form-label {
    text-transform: uppercase;
    color: var(--bs-primary);
    font-weight: bold;
 }
 
-.modal-body #nouvelle-annonce label.form-check-label{
-   text-transform: initial;
-   color: #000000;
-   font-weight:normal;
-}
 
 /* ---- recherche ----- */
 
