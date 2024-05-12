@@ -47,9 +47,8 @@ use \HexMakina\Marker\Marker; ?>
 
         <!-- Modal -->
         <?php
-        $modal_reference = 'modal-nouvelle-organisation';
-        echo Marker::a('#', "Une erreur, une modification? Dites-le nous !", ['class' => 'cta', 'data-bs-toggle' => "modal", 'data-bs-target' => "#$modal_reference"]);
+        echo Marker::a('#', "Une erreur, une modification? Dites-le nous !", ['class' => 'cta', 'data-bs-toggle' => "modal", 'data-bs-target' => "#modalter_prorg"]);
         ?>
-        <?= $this->insert('Open::Organisation/modal_alter', ['record' => $record, 'data-bs-target' => $modal_reference]); ?>
+        <?= $this->insert('Open::_partials/modalter_prorg', ['record' => $record]); ?>
     </article>
 </div>

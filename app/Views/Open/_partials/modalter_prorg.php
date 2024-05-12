@@ -1,16 +1,20 @@
 <?php
-$modal_reference ??= 'modal-nouvelle-organisation';
-$title = empty($record) ? 'Nouvelle organisation' : 'Modifier ' . $record;
-$record ??= new App\Models\Organisation();
+if (!isset($record)) {
+    die('SET THE RECORD STRAIGHT');
+}
+
+
+$isPro = $record instanceof App\Models\Professional;
+
+$title = empty($record->id()) ? 'Ajouter une nouvelle fiche' : 'Modifier ' . $record;
 ?>
 
-<!-- <class="form-horizontal" id="nouvelle-organisation"> -->
 <form action="<?= $controller->router()->hyp('submission_submit') ?>" method="POST" class="submission-form">
-    <div class="modal fade" id="<?= $modal_reference ?>" tabindex="-1" aria-labelledby="<?= $modal_reference ?>-label" aria-hidden="true">
+    <div class="modal fade" id="modalter_prorg" tabindex="-1" aria-labelledby="modalter_prorg-label" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title fs-5" id="<?= $modal_reference ?>-label"><?= $title ?></h2>
+                    <h2 class="modal-title fs-5" id="modalter_prorg-label"><?= $title ?></h2>
                     <button type="button" class="btn-close  btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-3">
@@ -18,7 +22,8 @@ $record ??= new App\Models\Organisation();
                         &rarr; Veuillez compléter les données
                         <br>
                         &rarr; Envoyez-nous votre logo par email à l'adresse <a href="mailto:info@cinergie.be">info@cinergie.be</a>
-                        <br /><strong>Cinergie vous remercie de votre collaboration!</strong>
+                        <br />
+                        <strong>Cinergie vous remercie de votre collaboration!</strong>
                     </p>
 
                     <hr>
@@ -31,13 +36,30 @@ $record ??= new App\Models\Organisation();
                         </label>
                     </fieldset>
 
-                    <fieldset>
-                        <label for="abbrev">Abbréviation</label>
-                        <input type="text" id="abbrev" name="abbrev" value="<?= $_POST['abbrev'] ?? $record->get('abbrev') ?? '' ?>" class="form-control" minlength="2">
-                        <label class="secret-checkbox" title="Ne pas publier sur cinergie.be">
-                            &nbsp;
-                        </label>
-                    </fieldset>
+                    <?php if ($isPro) {
+                    ?>
+                        <fieldset>
+                            <label for="birth">Date de naissance</label>
+                            <input type="date" id="birth" name="birth" value="" class="form-control" required="">
+                            <label class="secret-checkbox" title="Ne pas publier sur cinergie.be">
+                                <input type="checkbox" name="secret[street]" value="1" <?= isset($_POST['secret']['street']) ? 'checked' : '' ?>>
+                                <span class="checkmark"></span>
+                            </label>
+                        </fieldset>
+                    <?php
+
+                    } else {
+                    ?>
+                        <fieldset>
+                            <label for="abbrev">Abbréviation</label>
+                            <input type="text" id="abbrev" name="abbrev" value="<?= $_POST['abbrev'] ?? $record->get('abbrev') ?? '' ?>" class="form-control" minlength="2">
+                            <label class="secret-checkbox" title="Ne pas publier sur cinergie.be">
+                                &nbsp;
+                            </label>
+                        </fieldset>
+                    <?php
+                    }
+                    ?>
 
                     <fieldset>
                         <label for="street">Adresse </label>
@@ -83,7 +105,7 @@ $record ??= new App\Models\Organisation();
                             <span class="checkmark"></span>
                         </label>
                     </fieldset>
-                    
+
                     <fieldset>
 
                         <label for="tel">Téléphone</label>
@@ -131,17 +153,16 @@ $record ??= new App\Models\Organisation();
                         </label>
                     </fieldset>
 
-
-                    <label for="commentaire">Commentaire</label>
-                    <textarea name="commentaire" id="commentaire" class="form-control" rows="10" placeholder="domaine(s) d'activité, remarque et/ou demande que vous auriez concernant la fiche de votre organisation sur notre site..."></textarea>
-
+                    <fieldset class="mt-5">
+                        <label for="commentaire">Commentaire</label>
+                        <textarea name="commentaire" id="commentaire" class="form-control" rows="10" placeholder="domaine(s) d'activité, remarque et/ou demande que vous auriez concernant votre fiche sur notre site..."></textarea>
                     </fieldset>
 
-                    <p class="mb-0">
+                    <!-- <p class="mb-0">
                         <small>Les champs marqués
                             <span style="color:#eb0101; font-size: 30px;"><sub>*</sub></span> sont
                             obligatoires</small>
-                    </p>
+                    </p> -->
                 </div>
                 <div class="modal-footer">
                     <input class="btn btn-primary" type="submit" value="Envoyer">

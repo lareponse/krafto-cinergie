@@ -10,7 +10,7 @@ use \HexMakina\Marker\Marker; ?>
             <h5><i class="bi bi-sliders me-2"></i>Filtrer</h5>
         </button>
 
-        <button class="btn btn-outline-primary add-btn ms-auto" data-bs-toggle="modal" data-bs-target="#modal-nouvelle-organisation">
+        <button class="btn btn-outline-primary add-btn ms-auto" data-bs-toggle="modal" data-bs-target="#modalter_prorg">
             <i class="bi bi-plus-circle"></i>
             <span class="d-none d-lg-inline">Ajouter</span> votre organisation
         </button>
@@ -34,4 +34,4 @@ use \HexMakina\Marker\Marker; ?>
 
 </div>
 
-<?= $this->insert('Open/Organisation/modal_alter', ['data-bs-target' => "modal-nouvelle-organisation"]); ?>
+<?= $this->insert('Open::_partials/modalter_prorg', ['record' => new \App\Models\Organisation()]); ?>
