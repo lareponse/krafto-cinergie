@@ -241,6 +241,7 @@ article.card.listing .date-item {
 .card-movie img {
     height: 15rem;
     object-fit: cover;
+    border-radius:0.7rem 0.7rem 0 0;
 }
 
 .card-movie .meta {
@@ -249,10 +250,7 @@ article.card.listing .date-item {
     align-items: center;
 
 }
-
 .card-movie .meta>* {
-    flex: 1;
-    text-align: center;
 }
 
 .card-movie .meta .categorie {
@@ -269,7 +267,7 @@ article.card.listing .date-item {
 
 .card-movie h5 {
     padding: 0;
-    margin: 0;
+    margin: 0.5rem 0;
     grid-column: span 2;
     text-align: center;
     font-size: 1.1rem;
@@ -542,7 +540,7 @@ body>footer {
 
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 2rem;
 }
 
 body>footer+section {
@@ -598,7 +596,15 @@ body>footer #partenaires .partenaire-item img {
     max-width: 100%;
 }
 
-
+body>footer>div:last-child{
+    display:flex;
+    justify-content: space-between;
+    gap:1rem;
+    flex-grow: 1;
+}
+body>footer>div:last-child > *{
+    flex-grow:1;
+}   
 body>footer nav ul {
     list-style: none;
     padding-left: 0;

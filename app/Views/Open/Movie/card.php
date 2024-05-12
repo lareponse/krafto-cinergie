@@ -7,8 +7,8 @@ $url = $controller->router()->hyp('movie', ['slug' => $record->slug()]);
     <main>
 
         <header class="meta">
-            <small class="date text-secondary"><?= $record->get('released'); ?></small>
             <small class="categorie otto-id-label" otto-urn="Tag:<?= $record->get('genre_id'); ?>"><?= $record->get('genre_id'); ?></small>
+            <small class="date text-secondary"><?= $record->get('released'); ?></small>
         </header>
         
         <h5><?= $record->get('label'); ?></h5>
