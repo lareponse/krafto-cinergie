@@ -52,7 +52,7 @@ use \HexMakina\Marker\Marker; ?>
 
 </div>
 
-<?php $this->insert('Open::Merchandise/modal_order') ?>
+<?php $this->insert('Open::Merchandise/modal') ?>
 
 
 

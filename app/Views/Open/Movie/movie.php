@@ -151,4 +151,4 @@ $collection_href = $controller->router()->hyp('movies');
 </div>
 
 
-<?php $this->insert('Open::Merchandise/modal_order'); ?>
+<?php $this->insert('Open::Merchandise/modal'); ?>
