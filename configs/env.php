@@ -3,7 +3,7 @@
 return [
   'production' => [
       'host' => 'cinergie.be',
-      'display_errors' => 0,
+      'display_errors' => 1,
       'reporting' => 0
     ],
 
@@ -14,7 +14,7 @@ return [
   ],
 
   'dev' => [
-      'host' => 'dev.cinergie',
+      'host' => 'dev.cinergie.be',
       'display_errors' => E_ALL,
       'reporting' => 1
     ]
