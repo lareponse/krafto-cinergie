@@ -12,7 +12,7 @@ if (empty($related_content)) {
             foreach ($related_items as $related) {
                 $href = $controller->router()->hyp($related::model_type(), ['slug' => $related->slug()]);
         ?>
-                <article class="card paysage mr-4 mb-4">
+                <div class="card paysage mr-4 mb-4">
                     <div class="row g-0">
                         <div class="col-md-4">
                             <a href="<?= $href ?>">
@@ -23,51 +23,50 @@ if (empty($related_content)) {
                         <div class="col-md-8">
                             <a href="<?= $href ?>">
                                 <div class="card-body">
-                                    <?php 
-                                        if($related->get('publication')){
-                                            echo '<p class="date otto-date">'.$related->get('publication').'</p>';
-                                        }
-                                        else if($related->get('released')){
-                                            echo '<p class="date">'.$related->get('released').'</p>';
-                                        }
+                                    <?php
+                                    if ($related->get('publication')) {
+                                        echo '<p class="date otto-date">' . $related->get('publication') . '</p>';
+                                    } else if ($related->get('released')) {
+                                        echo '<p class="date">' . $related->get('released') . '</p>';
+                                    }
                                     ?>
                                     <h5 class="card-title"><?= $related ?></h5>
-                                    <a href="<?= $href ?>" class="cta"> 
-                                    <?php 
-                                    switch(strtolower($related->nid())){
-                                        case 'article':
-                                            echo 'Lire l\'article';
-                                            break;
-                                        case 'event':
-                                            echo 'Voir l\'événement';
-                                            break;
-                                        case 'movie':
-                                            echo 'Voir la fiche du film';
-                                            break;
-                                        case 'organisation':
-                                            echo 'Voir l\'organisation';
-                                            break;
-                                        case 'professional':
-                                            echo 'Voir le professionnel';
-                                            break;
-                                        case 'author':
-                                            echo 'Voir l\'auteur';
-                                            break;
-                                        case 'contest':
-                                            echo 'Voir le concours';
-                                            break;
-                                            
-                                        default:
-                                            echo 'Lire la fiche';
-                                    }
+                                    <a href="<?= $href ?>" class="cta">
+                                        <?php
+                                        switch (strtolower($related->nid())) {
+                                            case 'article':
+                                                echo 'Lire l\'article';
+                                                break;
+                                            case 'event':
+                                                echo 'Voir l\'événement';
+                                                break;
+                                            case 'movie':
+                                                echo 'Voir la fiche du film';
+                                                break;
+                                            case 'organisation':
+                                                echo 'Voir l\'organisation';
+                                                break;
+                                            case 'professional':
+                                                echo 'Voir le professionnel';
+                                                break;
+                                            case 'author':
+                                                echo 'Voir l\'auteur';
+                                                break;
+                                            case 'contest':
+                                                echo 'Voir le concours';
+                                                break;
 
-                                    ?></a>
+                                            default:
+                                                echo 'Lire la fiche';
+                                        }
+
+                                        ?></a>
                                 </div>
                             </a>
                         </div>
 
                     </div>
-                </article>
+                </div>
         <?php
             }
         }
