@@ -48,7 +48,7 @@ $mail_message = "Bonjour,<br><br>Je suis intéressé(e) par votre annonce et je 
                         ?>
                         <li class="meta-head">
                             <span><i class="bi bi-bookmarks-fill icon"></i>Rémunéré :</span>
-                            <span><a href="<?= $controller->router()->hyp('jobs') ?>?remun=<?= $tag_slug ?>"><?= $tag_label ?></a></span>
+                            <span><a href="<?= $controller->router()->hyp('jobs') ?>?isPaid=<?= intval($tag_slug == 'job-offer') ?>"><?= $tag_label ?></a></span>
                         </li>
 
                         <li class="meta-head-date"><i class="bi bi-calendar-event icon"></i><span class="otto-date"><?= $record->get('starts') ?></span></li>
