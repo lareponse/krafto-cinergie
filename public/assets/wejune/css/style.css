@@ -653,14 +653,6 @@ article.boutique .commander:hover {
    color: #ffffff;
 }
 
-.modal-body span {
-   color: #D3121B;
-}
-
-.modal-body span.text-lable {
-   color: #000000;
-}
-
 .modal-body .col-form-label {
    text-transform: uppercase;
    color: var(--bs-primary);
@@ -1026,11 +1018,11 @@ button.navbar-toggler:focus {
    margin: 0;
 }
 
-@media screen and (max-width: 992px) {
+/* @media screen and (max-width: 992px) {
    .w-75 {
       width: 100% !important;
    }
-}
+} */
 
 @media screen and (min-width: 1921px) {
    .container-custom-banner {
@@ -1081,9 +1073,6 @@ button.navbar-toggler:focus {
 }
 
 @media screen and (max-width: 575px) {
-   #scroll-to-top {
-      opacity: 1;
-   }
 
    #banner .card-img-overlay {
       max-width: 100%;
@@ -1158,41 +1147,4 @@ button.navbar-toggler:focus {
    #pagination .suivant {
       order: 1;
    }
-}
-
-/* PRINT */
-@media print {
-
-   header#header,
-   footer#footer,
-   .single-post-slider,
-   #scroll-to-top,
-   #share,
-   #print,
-   aside#meta {
-      display: none !important;
-      position: absolute;
-      visibility: hidden;
-   }
-}
-
-/* WEJUNE*/
-
-.designedBy {
-   position: absolute;
-   bottom: 10px;
-   right: 10px;
-   z-index: 9999999;
-   height: 25px;
-   width: 25px;
-}
-
-.designedBy svg {
-   background: #ffffff;
-   border-radius: 50%;
-}
-
-.designedBy svg path,
-.designedBy svg polygon {
-   fill: #202020;
 }

@@ -121,6 +121,7 @@ $settings['folders'] = [
 $settings['urls'] = [
   'public' => '/public/',
   'images' => '/public/images',
+  'default_image' => '/public/images/cinergie.missing.png',
   'assets' => 'public/assets/'
 ];
 

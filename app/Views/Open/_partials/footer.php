@@ -1,6 +1,6 @@
 <footer>
 
-    <div id="socials">
+    <div id="branding">
         <a class="home" href="<?= $controller->router()->hyp('home'); ?>">
             <img src="/public/assets/img/logo-cinergie.svg" alt="Logo CINERGIE" id="logo">
         </a>
@@ -31,63 +31,57 @@
         </nav>
     </div>
 
-    <div id="sitemap">
+    <nav id="sitemap">
+        <ul>
+            <li><a href="<?= $controller->router()->hyp('home'); ?>">Accueil</a></li>
+            <li><a href="<?= $controller->router()->hyp('articles'); ?>">Articles</a></li>
+            <li><a href="<?= $controller->router()->hyp('events'); ?>">Agenda</a></li>
+            <li><a href="<?= $controller->router()->hyp('movies'); ?>">Filmoth&egrave;que</a></li>
+            <li><a href="<?= $controller->router()->hyp('professionals'); ?>">Professionnels</a></li>
+            <li><a href="<?= $controller->router()->hyp('organisations'); ?>">Organisations</a></li>
+            <li><a href="<?= $controller->router()->hyp('jobs'); ?>">Castings & Jobs</a></li>
+            <li><a href="<?= $controller->router()->hyp('shop'); ?>">Boutique</a></li>
+        </ul>
+
+        <ul>
+            <li><a href="https://www.cinergie.be/podcast">Podcast</a></li>
+            <li><a href="<?= $controller->router()->hyp('contests'); ?>">Les concours</a></li>
+            <li><a href="<?= $controller->router()->hyp('authors'); ?>">Nos auteurs</a></li>
+            <li><a href="<?= $controller->router()->hyp('history'); ?>">Notre histoire</a></li>
+            <li><a href="<?= $controller->router()->hyp('price'); ?>"">Prix Cinergie</a></li>
+                            <li><a href=" <?= $controller->router()->hyp('team'); ?>"">L'&eacute;quipe</a></li>
+            <li><a href="<?= $controller->router()->hyp('contact'); ?>"">Contactez-nous</a></li>
+        </ul>
+    </nav>
+
+    <?= $this->insert('Open::_partials/form_brevo') ?>
+
+    <section id="partenaires">
+        <h5 class="text-uppercase">Nos partenaires</h5>
         <nav>
-            <ul>
-                <li><a href="<?= $controller->router()->hyp('home'); ?>">Accueil</a></li>
-                <li><a href="<?= $controller->router()->hyp('articles'); ?>">Articles</a></li>
-                <li><a href="<?= $controller->router()->hyp('events'); ?>">Agenda</a></li>
-                <li><a href="<?= $controller->router()->hyp('movies'); ?>">Filmoth&egrave;que</a></li>
-                <li><a href="<?= $controller->router()->hyp('professionals'); ?>">Professionnels</a></li>
-                <li><a href="<?= $controller->router()->hyp('organisations'); ?>">Organisations</a></li>
-                <li><a href="<?= $controller->router()->hyp('jobs'); ?>">Castings & Jobs</a></li>
-                <li><a href="<?= $controller->router()->hyp('shop'); ?>">Boutique</a></li>
-            </ul>
+            <a class="partenaire-item" href="https://www.maisondelafrancite.be/">
+                <img src="/public/assets/img/partenaires/logo_maison_de_la_francite.png" alt="Maison de la Francité" />
+            </a>
+
+            <a class="partenaire-item" href="https://be.brussels/">
+                <img src="/public/assets/img/partenaires/iris_bruxelles.png" alt="Région de Bruxelles-Capitale - Administration Economie et Emploi" />
+            </a>
+
+            <a class="partenaire-item" href="https://ccf.brussels/wp-signup.php?new=www.spfb.brussels">
+                <img src="/public/assets/img/partenaires/bruxelles-francophone.png" alt="Service public francophone bruxellois" />
+            </a>
+
+            <a class="partenaire-item" href="https://audiovisuel.cfwb.be/">
+                <img src="/public/assets/img/partenaires/logofwb.png" alt="Centre du Cinéma et de l'Audiovisuel de la Communauté Française" />
+            </a>
+<!-- 
+            <a class="partenaire-item" href="https://lareponse.be">
+                <img src="/public/assets/img/partenaires/lareponse.png" alt="La Réponse" />
+            </a> -->
         </nav>
-        <nav>
-            <ul>
-                <li><a href="https://www.cinergie.be/podcast">Podcast</a></li>
-                <li><a href="<?= $controller->router()->hyp('contests'); ?>">Les concours</a></li>
-                <li><a href="<?= $controller->router()->hyp('authors'); ?>">Nos auteurs</a></li>
-                <li><a href="<?= $controller->router()->hyp('history'); ?>">Notre histoire</a></li>
-                <li><a href="<?= $controller->router()->hyp('price'); ?>"">Prix Cinergie</a></li>
-                                <li><a href=" <?= $controller->router()->hyp('team'); ?>"">L'&eacute;quipe</a></li>
-                <li><a href="<?= $controller->router()->hyp('contact'); ?>"">Contactez-nous</a></li>
-            </ul>
-        </nav>
-    </div>
+    </section>
 
-    <div>
-        <?= $this->insert('Open::_partials/form_brevo') ?>
-
-        <section>
-
-            <h5 class=" text-left text-xl-end mt-5 text-uppercase">Nos partenaires</h5>
-            <div id="partenaires">
-                <a class="partenaire-item" href="https://www.maisondelafrancite.be/">
-                    <img src="/public/assets/img/partenaires/logo_maison_de_la_francite.png" alt="Maison de la Francité" />
-                </a>
-
-                <a class="partenaire-item" href="https://be.brussels/">
-                    <img src="/public/assets/img/partenaires/iris_bruxelles.png" alt="Région de Bruxelles-Capitale - Administration Economie et Emploi" />
-                </a>
-
-                <a class="partenaire-item" href="https://ccf.brussels/wp-signup.php?new=www.spfb.brussels">
-                    <img src="/public/assets/img/partenaires/bruxelles-francophone.png" alt="Service public francophone bruxellois" />
-                </a>
-
-                <a class="partenaire-item" href="https://audiovisuel.cfwb.be/">
-                    <img src="/public/assets/img/partenaires/logofwb.png" alt="Centre du Cinéma et de l'Audiovisuel de la Communauté Française" />
-                </a>
-
-                <a class="partenaire-item" href="https://lareponse.be">
-                    <img src="/public/assets/img/partenaires/lareponse.png" alt="La Réponse" />
-                </a>
-            </div>
-        </section>
-    </div>
+    <section id="copyright">
+        &copy; <?= date('Y') ?> Cinergie &nbsp; | &nbsp; <a href="<?= $controller->router()->hyp('legal') ?>">Mentions légales</a>
+    </section>
 </footer>
-
-<section id="copyright">
-    <span class="mt-2">&copy; <?= date('Y') ?> Cinergie &nbsp; | &nbsp; <a href="<?= $controller->router()->hyp('legal') ?>">Mentions légales</a></span>
-</section>

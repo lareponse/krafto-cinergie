@@ -91,14 +91,6 @@ body>main {
     padding: 0;
 }
 
-form label span {
-    color: #eb0101;
-    font-size: 1.2em;
-}
-
-
-dl.signaletique dl {}
-
 dl.signaletique dt,
 dl.signaletique dd {
     width: 50%;
@@ -112,8 +104,6 @@ dl.signaletique dt {
     font-weight: bold;
     clear: left;
 }
-
-dl.signaletique dd {}
 
 dl:after {
     content: "";
@@ -171,6 +161,21 @@ aside.filtres header button {
     color: var(--bs-primary);
     font-weight: bold;
 
+}
+
+#scroll-to-top {
+    opacity: 0.5;
+    height: 2rem;
+    width: 2rem;
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    z-index: 2;
+
+}
+
+#scroll-to-top:hover {
+    opacity: 1;
 }
 
 
@@ -346,6 +351,22 @@ article.card.listing .date-item {
     overflow: hidden;
 }
 
+#article-single>header img {
+    position: relative;
+    height: 100%;
+}
+
+#article-single article+hr {
+    clear: both;
+    visibility: hidden;
+}
+
+#article-single article img {
+    width: 33%;
+    margin: 1rem;
+    height: auto;
+}
+
 #article-single>header::before {
     content: "";
     position: absolute;
@@ -356,10 +377,6 @@ article.card.listing .date-item {
     backdrop-filter: blur(10px);
 }
 
-#article-single>header img {
-    position: relative;
-    height: 30rem;
-}
 
 .card-search {
     display: flex;
@@ -536,131 +553,85 @@ fieldset label:has(+[required])::after {
 }
 
 
-
 body>footer {
-    position: relative;
+    padding:1rem;
     background: var(--bs-black);
-    padding: 3rem 0 1.2rem 0;
-    font-size: 0.9rem;
     color: var(--bs-white);
+
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem 1rem;
+}
+
+@media screen and (min-width: 768px) {
+    body>footer {
+        grid-template-columns: 1fr 1fr;
+    }
+    body>footer #copyright {
+        grid-column: span 2;
+    }
+}
+
+body>footer .partenaire-item {
+    border-radius: 1rem;
+    background: var(--bs-white);
 
     display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    width: 7rem;
+    height: 7rem;
 }
 
-body>footer+section {
-    background: var(--bs-black);
-    font-size: 0.7rem;
+body>footer .partenaire-item img {
+    object-fit: contain;
+    max-height: 77px;
+    border-radius: 1rem;
+}
+#branding {
     text-align: center;
 }
+body>footer #branding img {
+    max-width: 17rem;
+}
 
-body>footer+section>* {
+body>footer .bi {
     color: var(--bs-white);
-}
-
-
-body>footer a {
-    color: var(--bs-primary);
-}
-
-
-body>footer #socials {
-    flex-grow: 1;
-    padding-left: 1rem;
-}
-
-body>footer #socials .home img {
-    max-width: 400px;
+    font-size: 1.5rem;
+    margin: 0 0.5rem;
 }
 
 body>footer #sitemap {
-    flex: 1;
     display: flex;
-    justify-content: center;
-    gap: 3rem;
-}
-
-body>footer #partenaires {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-body>footer #partenaires .partenaire-item {
-    flex-basis: 23%;
-    border-radius: 1rem;
-    background: var(--bs-white);
-    padding: 0.5rem 1rem;
-    text-align: center;
-    margin: 0 1% 1rem;
-}
-
-body>footer #partenaires .partenaire-item img {
-    max-height: 40px;
-    width: auto;
-    max-width: 100%;
-}
-
-body>footer>div:last-child {
-    display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     gap: 1rem;
-    flex-grow: 1;
 }
 
-body>footer>div:last-child>* {
-    flex-grow: 1;
-}
-
-body>footer nav ul {
+body>footer #sitemap ul {
     list-style: none;
     padding-left: 0;
 }
 
-body>footer nav li {
-    margin-bottom: 0.75rem;
-}
-
-body>footer nav li a {
+body>footer  #sitemap li a {
     text-transform: uppercase;
     color: var(--bs-white);
-    font-weight: 500;
     white-space: pre;
 }
 
-body>footer nav a:hover {
+body>footer  #sitemap a:hover {
     color: var(--bs-primary);
 }
-
-body>footer i {
-    font-size: 1.5rem;
-    color: var(--bs-white);
-    margin: 0 7.5px;
+body>footer #partenaires nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
-body>footer img.logo {
-    max-width: 85%;
-    margin-bottom: 1em;
+body>footer #copyright {
+    text-align: center;
+    font-size: 0.9em;
+    padding: 1rem;
 }
-
-/* Scroll to top ----- */
-#scroll-to-top {
-    opacity: 0.5;
-    height: 2rem;
-    width: 2rem;
-    position: fixed;
-    bottom: 1rem;
-    left: 1rem;
-    z-index: 2;
-
-}
-
-#scroll-to-top:hover {
-    opacity: 1;
-}
-
 
 #modal_job fieldset>legend,
 #modal_job fieldset>label {
@@ -675,7 +646,7 @@ body>footer img.logo {
 }
 
 @media screen and (min-width: 768px) {
-    #modal_job .checkboxes-field {
+    #modal_job .checkboxes-fields {
         display: flex;
         flex-wrap: wrap;
         gap: 4rem;
@@ -708,4 +679,39 @@ body>footer img.logo {
 #equipe-belge article .avatar {
     width: 100%;
     object-fit: cover;
+}
+
+#modal_job .free-fields {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+#modal_job .free-fields>* {
+    flex-grow: 1;
+}
+
+#modal_job label:has(input) {
+    display: block;
+    color: #000;
+}
+
+#modal_job label input {
+    margin-right: 0.7rem;
+}
+
+
+/* PRINT */
+@media print {
+
+    body>footer,
+    .single-post-slider,
+    #scroll-to-top,
+    #share,
+    #print,
+    aside#meta {
+        display: none !important;
+        position: absolute;
+        visibility: hidden;
+    }
 }

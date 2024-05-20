@@ -23,12 +23,11 @@
 
         <?= $this->section('content') ?>
 
-        <div id="scroll-to-top">
+        <nav id="scroll-to-top">
             <a href="#top">
-                <img src="/public/assets/wejune/img/icons/scroll-top.svg" alt="scroll to top" class="img-fluid w-100">
+                <img src="/public/assets/img/scroll-top.svg" alt="scroll to top" class="img-fluid">
             </a>
-        </div>
-
+        </nav>
     </main>
 
     <?php $this->insert('Open::_partials/footer') ?>
@@ -67,6 +66,8 @@
             <?= $this->section('onLoaded') ?>
         });
     </script>
+
+    <!-- <script src="https://cmp.osano.com/AzZnJIUCHjnL131rn/2f06d2d4-d0d9-4a55-a88a-21b761aed3cd/osano.js"></script> -->
 </body>
 
 </html>
