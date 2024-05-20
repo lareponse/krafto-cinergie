@@ -25,9 +25,11 @@ class Author extends Kortex
             $professional = Professional::exists(['slug' => $this->record()->get('professional_slug')], ['withPraxis' => true]);
             $this->viewport('professional', $professional);
         }
-        $articles = Article::any(['public' => '1', 'author' => $this->record()], ['order_by' => ['article', 'publication', 'DESC']]);
 
-        $this->viewport('articles', $articles);
+        $this->viewport('articles', Article::any(['author' => $this->record()]));
     }
+
+
+
 }
 
