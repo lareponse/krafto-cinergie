@@ -17,6 +17,10 @@ class Submission extends TightModel
      * @return array An associative array containing the emitter information.
      */
 
+    public function __toString()
+    {
+        return $this->get('urn');
+    }
     public function record()
     {
         list($type, $id) = explode(':', $this->get('urn'));

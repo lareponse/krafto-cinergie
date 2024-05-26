@@ -1,7 +1,7 @@
 <div class="card border-0 scroll-mt-3" id="ContactSection">
-    <div class="card-header">
+    <header class="card-header">
         <h2 class="h3 mb-0">Contact</h2>
-    </div>
+    </header>
 
     <div class="card-body">
         <div class="row mb-4">
@@ -58,9 +58,9 @@
                 <div class="invalid-feedback">Please add your site address</div>
             </div>
         </div>
-
-        <?= $this->submitDashly(); ?>
-
     </div>
 
+    <footer class="card-footer">
+        <?= $this->submitDashly(); ?>
+    </footer>
 </div>

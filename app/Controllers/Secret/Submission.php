@@ -12,6 +12,15 @@ class Submission extends Krafto
         if (is_null($this->loadModel())) {
             $this->router()->hop('dash_submissions');
         }
-        $this->loadModel()->record();
+
+        list($class, $id) = explode(':', $this->loadModel()->get('urn'));
+        
+        $modified = $this->get('App\\Models\\'.$class);
+        $modified->import(json_decode($this->loadModel()->get('submitted'), true));
+        
+        $original = get_class($modified)::one($id);
+        
+        $this->viewport('original', $original);
+        $this->viewport('modified', $modified);
     }
 }

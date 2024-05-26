@@ -1,5 +1,5 @@
 <form action="<?= $controller->router()->hyp('submission_submit') ?>" method="POST" class="form-horizontal submission-form">
-
+    <input type="hidden" name="urn" value="<?= $record->urn() ?>">
     <div class="modal fade" id="modal_job" tabindex="-1" aria-labelledby="modal_job-label" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-scrollable">
             <div class="modal-content">

@@ -1,10 +1,10 @@
 <div class="card border-0 scroll-mt-3" id="<?= $idSection ?? 'AdresseSection' ?>">
-    <div class="card-header">
+    <header class="card-header">
         <h2 class="h3 mb-0">Adresse</h2>
-    </div>
+    </header>
 
     <div class="card-body">
-    <div class="row mb-4">
+        <div class="row mb-4">
             <div class="col-lg-3">
                 <label for="addressLine1" class="col-form-label">Rue</label>
             </div>
@@ -13,7 +13,7 @@
                 <input type="text" class="form-control" id="addressLine1" value="<?= $model->get('street') ?>">
                 <div class="invalid-feedback">Please add an address</div>
             </div>
-        </div> 
+        </div>
 
         <div class="row mb-4">
             <div class="col-md-3">
@@ -41,7 +41,7 @@
                 <div class="invalid-feedback">Please add your province</div>
             </div>
         </div>
-        
+
         <div class="row mb-4">
             <div class="col-lg-3">
                 <label for="country" class="col-form-label">Pays</label>
@@ -59,8 +59,10 @@
                 </div>
 
             </div>
-        </div> 
-
-        <?= $this->submitDashly(); ?>
+        </div>
     </div>
+
+    <footer class="card-footer">
+        <?= $this->submitDashly(); ?>
+    </footer>
 </div>

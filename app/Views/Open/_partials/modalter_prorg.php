@@ -10,6 +10,7 @@ $title = empty($record->id()) ? 'Ajouter une nouvelle fiche' : 'Modifier ' . $re
 ?>
 
 <form action="<?= $controller->router()->hyp('submission_submit') ?>" method="POST" class="submission-form">
+    <input type="hidden" name="urn" value="<?= $record->urn() ?>">
     <div class="modal fade" id="modalter_prorg" tabindex="-1" aria-labelledby="modalter_prorg-label" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
@@ -40,7 +41,7 @@ $title = empty($record->id()) ? 'Ajouter une nouvelle fiche' : 'Modifier ' . $re
                     ?>
                         <fieldset>
                             <label for="birth">Date de naissance</label>
-                            <input type="date" id="birth" name="birth" value="" class="form-control" required="">
+                            <input type="date" id="birth" name="birth" value="" class="form-control">
                             <label class="secret-checkbox" title="Ne pas publier sur cinergie.be">
                                 <input type="checkbox" name="secret[street]" value="1" <?= isset($_POST['secret']['street']) ? 'checked' : '' ?>>
                                 <span class="checkmark"></span>
@@ -170,3 +171,4 @@ $title = empty($record->id()) ? 'Ajouter une nouvelle fiche' : 'Modifier ' . $re
             </div>
         </div>
     </div>
+</form>

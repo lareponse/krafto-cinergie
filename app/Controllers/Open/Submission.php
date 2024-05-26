@@ -10,7 +10,10 @@ class Submission extends Kortex
     public function submit()
     {
         $submission = new Model();
+        // $submission->set('urn', $this->router()->submitted('urn'));
         $submission->set('submitted', json_encode($this->router()->submitted()));
+        $submission->set('submitted_by', json_encode(Model::submittedBy()));
+
 
 
         $res = explode('/', $this->router()->referer());
@@ -22,18 +25,17 @@ class Submission extends Kortex
         } else {
 
             list($type, $slug) = array_slice($res, -2);
-            try {
-                $type = ucfirst($type);
-                $new = $this->get('\\App\\Models\\' . ucfirst($type));
-            } catch (\Exception $e) {
-                $this->router()->hopBack();
-            }
+            $trans = [
+                'personne' => \App\Models\Professional::class,
+                'organisation' => \App\Models\Organisation::class,
+                'job' => Job::class
+            ];
+
+            // deny the request if the type is not found
+            $fqnClass = $trans[$type] ?? $this->router()->hopBack();
 
             // deny the request if the record is not found through the slug
-            $existing = get_class($new)::exists(['slug' => $slug]);
-            if (!$existing) {
-                $this->router()->hopBack();
-            }
+            $existing = $fqnClass::exists(['slug' => $slug]) ?? $this->router()->hopBack();
 
             // now we have a verified slug and a record, we can proceed with the form
             $submission->set('urn', $existing->urn());
