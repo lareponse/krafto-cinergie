@@ -4,18 +4,18 @@ $url = $controller->router()->hyp('movie', ['slug' => $record->slug()]);
 ?>
 <a class="card-movie shadow" href="<?= $url ?>">
     <img src="<?= $record->profilePicture() ?>" class="card-img-top" alt="Couverture du film <?= $record->get('label'); ?>">
-    <main>
+    <em>
 
-        <header class="meta">
+        <span class="meta">
             <small class="categorie otto-id-label" otto-urn="Tag:<?= $record->get('genre_id'); ?>"><?= $record->get('genre_id'); ?></small>
-            <small class="date text-secondary"><?= $record->get('released'); ?></small>
-        </header>
+            <small class="date"><?= $record->get('released'); ?></small>
+        </span>
         
-        <h5><?= $record->get('label'); ?></h5>
+        <strong><?= $record->get('label'); ?></strong>
         <?php
     if (!empty($record->get('directors'))) {
         echo $this->DOM()::strong('de ' . $record->get('directors'), ['class' => 'meta professional']);
     }
     ?>
-    </main>
+    </em>
 </a>
