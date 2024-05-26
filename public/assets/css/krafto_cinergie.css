@@ -64,3 +64,11 @@ iframe{
 
     margin:  0 0.5em;
 }
+
+input.form-control {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif !important;
+}
+
+.submission footer.card-footer{
+    display:none;
+}
