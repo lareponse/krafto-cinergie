@@ -1,5 +1,4 @@
 <?php $this->layout('Open::layout');
-
 $collection_href = $controller->router()->hyp('movies');
 ?>
 
@@ -99,22 +98,6 @@ $collection_href = $controller->router()->hyp('movies');
         <?php
         }
         ?>
-
-        <?= $this->insert('Open::_partials/related_articles', ['related_articles' => $articles]); ?>
-
-        <?php
-        if (!empty($record->get('url_trailer'))) {
-        ?>
-            <div id="bande-annonce" class="my-5">
-                <h2 class="pb-0 line-left ">Bande annonce</h2>
-                <iframe class="iframe-size-single-post" src="https://www.youtube.com/embed/<?= $record->get('url_trailer') ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
-        <?php
-        }
-        ?>
-
-        <?= $this->insert('Open::_partials/photos', ['photos' => $related_photos]); ?>
-
         <?php
         if ((count($professionals) + count($organisations)) > 1) {
         ?>
@@ -143,6 +126,22 @@ $collection_href = $controller->router()->hyp('movies');
                 }
                 ?>
             </section>
+                
+            <?= $this->insert('Open::_partials/related_articles', ['related_articles' => $articles]); ?>
+
+            <?php
+            if (!empty($record->get('url_trailer'))) {
+            ?>
+                <div id="bande-annonce" class="my-5">
+                    <h2 class="pb-0 line-left ">Bande annonce</h2>
+                    <iframe class="iframe-size-single-post" src="https://www.youtube.com/embed/<?= $record->get('url_trailer') ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            <?php
+            }
+            ?>
+
+            <?= $this->insert('Open::_partials/photos', ['photos' => $related_photos]); ?>
+
 </div>
 <?php
         }
