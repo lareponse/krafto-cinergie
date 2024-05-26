@@ -42,10 +42,9 @@
         </aside>
 
         <div class="w-75 mb-5 mx-auto text-justify">
-            <?= $article->get('content'); ?>
-
+            <article><?= $article->get('content'); ?></article>
+            <hr>
             <?= $this->insert('Open::_partials/share_print', ['label' => $article->get('label')]); ?>
-            </section>
 
             <?= $this->insert('Open::_partials/related_content', ['related_content' => $related_content ?? []]) ?>
 
