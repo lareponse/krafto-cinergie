@@ -3,7 +3,7 @@ CREATE TABLE `cinergie`.`professional` (
   `id` int NOT NULL AUTO_INCREMENT,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `slug` varchar(222) NOT NULL,
-  `label` varchar(255) NOT NULL COMMENT 'concat lastname and firstname',
+  `label` varchar(255) NOT NULL COMMENT 'concat firstname lastname',
   `rank` smallint UNSIGNED DEFAULT NULL COMMENT 'leg:tri',
   `avatar` varchar(255) DEFAULT NULL COMMENT 'leg:legacy_photo',
   `content` text DEFAULT NULL COMMENT 'leg:presentation',
