@@ -79,3 +79,24 @@ footer{
   font-family: monospace;
   font-size:1.2em;
 }
+body{
+  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+  padding:0;
+  margin:0;
+}
+body>header>img{
+  width:100%;
+}
+body>main{
+  max-width: 73rem;
+  margin:0 auto;
+}
+
+.g-2{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:0 2rem;
+}
+.slide > article{
+
+}

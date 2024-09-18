@@ -1,19 +1,17 @@
 <?php
 header("Access-Control-Allow-Origin: https://cinergie.lareponse.be");
 $data = require_once('S01.php');
-$url_data = null;
 
 
-if(!isset($_GET['s']) || !isset($data[$_GET['s']]) || preg_match('/^S([0-9]+)E([0-9]+)$/', $_GET['s'], $url_data) !== 1)
-  header('Location: ../');
+if (!isset($_GET['s']) || !isset($data[$_GET['s']]))
+header('Location: ../');
 
-$show = $_GET['s'];
+$url_data = [];
+preg_match('/^S([0-9]+)E([0-9]+)$/', $_GET['s'], $url_data);
 
-$show_data = $data[$show];
+list($show, $season, $episode) = $url_data;
 
-$season = $url_data[1];
-$episode = $url_data[2];
-
+$show_data = $data[$_GET['s']];
 
 $related_default_links = [
   'personne' => 'https://www.cinergie.be/personne',
@@ -26,9 +24,4 @@ $related_labels = [
 ];
 
 
-
-
-require_once('partial_head.html');
-require_once('partial_body.php');
-
-?>
+require_once('skeleton.php');

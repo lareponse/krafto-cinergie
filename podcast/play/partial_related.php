@@ -53,7 +53,7 @@
 
 */
 ?>
-<section class="my-5">
+<section>
   <div class="qodef-shortcode qodef-m qodef-podcast-list qodef-indent-slider--yes qodef-item-layout--info-right qodef-grid qodef-swiper-container qodef-gutter--huge qodef-col-num--3 qodef--no-bottom-space qodef-pagination--off qodef-responsive--predefined swiper-container-initialized swiper-container-horizontal qodef-swiper--initialized" data-options="{&quot;slidesPerView&quot;:&quot;3&quot;,&quot;spaceBetween&quot;:80,&quot;centeredSlides&quot;:true,&quot;loop&quot;:true,&quot;autoplay&quot;:true,&quot;speed&quot;:&quot;&quot;,&quot;speedAnimation&quot;:&quot;&quot;,&quot;slideAnimation&quot;:&quot;&quot;}">
 
     <div class="slider">
