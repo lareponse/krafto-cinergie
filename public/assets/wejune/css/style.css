@@ -201,7 +201,7 @@ header#header nav li.nav-item a:hover {
 #banner img {
    object-fit: cover;
    object-position: center center;
-   height: 600px;
+   height: 500px;
 }
 
 #banner article::before {
@@ -1060,7 +1060,7 @@ button.navbar-toggler:focus {
    .auteur-item.card img,
    .film-item.card img {
       object-fit: cover;
-      height: 250px;
+      height: 232px;
       object-position: center center;
    }
 }
@@ -1083,7 +1083,7 @@ button.navbar-toggler:focus {
    }
 
    #banner img {
-      height: 500px;
+      height: 00px;
    }
 
    #related-posts {
