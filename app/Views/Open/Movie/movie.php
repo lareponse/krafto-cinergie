@@ -16,7 +16,6 @@ $collection_href = $controller->router()->hyp('movies');
             <div class="col-lg-5">
                 <img class="img-fluid w-100 mb-2" src="<?= $record->profilePicture() ?>" alt="Photo du film <?= $record->get('label') ?>" />
                 <?= $this->insert('Open::_partials/share_print', ['label' => $record]); ?>
-
             </div>
 
             <div class="col-lg-7 ps-lg-5 infos">
@@ -109,7 +108,7 @@ $collection_href = $controller->router()->hyp('movies');
                         $href = $controller->router()->hyp($route_name, ['slug' => $item->slug()]);
                 ?>
                         <article>
-                            <a href="<?= $href ?>">
+                            <a class="d-none d-md-flex" href="<?= $href ?>">
                                 <img src="<?= $item->profilePicture() ?>" alt="Photo de profile de <?= $item; ?>" class="avatar">
                             </a>
                             <h4><a href="<?= $href ?>"><?= $item; ?></a></h4>
