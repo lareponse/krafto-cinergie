@@ -8,14 +8,15 @@ $url = $controller->router()->hyp('movie', ['slug' => $record->slug()]);
 
         <span class="meta">
             <small class="categorie otto-id-label" otto-urn="Tag:<?= $record->get('genre_id'); ?>"><?= $record->get('genre_id'); ?></small>
+            <?php if(!empty($record->get('runtime'))){ ?><small class="runtime"><?= $record->get('runtime'); ?></small><?php }?>
             <small class="date"><?= $record->get('released'); ?></small>
         </span>
-        
+
         <strong><?= $record->get('label'); ?></strong>
         <?php
-    if (!empty($record->get('directors'))) {
-        echo $this->DOM()::strong('de ' . $record->get('directors'), ['class' => 'meta professional']);
-    }
-    ?>
+        if (!empty($record->get('directors'))) {
+            echo $this->DOM()::strong('de ' . $record->get('directors'), ['class' => 'meta professional']);
+        }
+        ?>
     </em>
 </a>
