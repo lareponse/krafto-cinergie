@@ -12,8 +12,9 @@ class Contest extends Kortex
     {
         $this->pageSlug = 'contests';
 
-        $contests = Model::any(['public' => '1'], ['order_by' => [['starts', 'ASC']]]);
-
+        $contests = Model::any(['public' => '1'], ['order_by' => ['starts', 'ASC']]);
+        
+        
         $this->viewport('contests', $contests);
     }
 
