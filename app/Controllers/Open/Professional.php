@@ -50,6 +50,7 @@ class Professional extends Kortex
 
         $this->viewport('related_movies', $related_movies ?? []);
         $this->viewport('related_photos', $this->relatedPhotos('personne'));
+        $this->viewport('articles', $this->record()->relatedArticles());
 
         $this->viewport('praxes', Praxis::forProfessional($this->record()));
     }

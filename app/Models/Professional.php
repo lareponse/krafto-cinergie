@@ -50,6 +50,25 @@ class Professional extends TightModel
         return empty($this->get('label')) ? $this->get('lastname') . ' ' . $this->get('firstname') : $this->get('label');
     }
 
+
+    // TODO this is wrong, use join to select article in a single query (copy paste lazyness)
+    // check Article::related_ids()
+    public function relatedArticles(): array
+    {
+        $ret = [];
+
+        $articleIds = [];
+
+        $res = self::database()->table('article_professional')->select(['article_id'])->whereEQ('professional_id', $this->id());
+        $res = $res->retCol();
+        $articleIds = array_merge($articleIds, $res);
+        
+        $query = Article::filter();
+        $query = $query->whereNumericIn('id', $articleIds);
+        $res = $query->retObj(Article::class);
+        return $res ? $res : $ret;
+    }
+
     public static function filter($filters = [], $options = []): SelectInterface
     {
         //---- JOIN & FILTER SERVICE

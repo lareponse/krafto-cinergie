@@ -13,12 +13,12 @@ $this->layout('Open::layout')
         <hr class="my-4">
         <?= $this->insert('Open::_partials/share_print', ['label' => $record->get('label')]); ?>
 
-
-        <section class="row g-0 mt-4">
+        <section class="row g-0 my-4">
 
             <div class="col-lg-5">
                 <img class="img-fluid w-100" src="<?= $record->profilePicture() ?>" alt="professionnel">
             </div>
+            
             <div class="col-lg-7 ps-lg-5" id="infos">
 
                 <p class="text-primary">
@@ -62,6 +62,7 @@ $this->layout('Open::layout')
         }
         ?>
 
+        <?= $this->insert('Open::_partials/related_articles', ['related_articles' => $articles]); ?>
 
         <!-- Modal -->
         <?php
