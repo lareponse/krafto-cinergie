@@ -91,6 +91,10 @@ body>main {
     padding: 0;
 }
 
+dl.signaletique{
+    max-width:21rem;
+}
+
 dl.signaletique dt,
 dl.signaletique dd {
     width: 50%;
@@ -758,6 +762,10 @@ body>footer #copyright {
         display: none !important;
         position: absolute;
         visibility: hidden;
+    }
+
+    #article-single header{
+        margin-bottom:2rem;
     }
 }
 
