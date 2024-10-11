@@ -6,9 +6,7 @@ use \HexMakina\Marker\Marker; ?>
 
 <div class="container">
     <div class="d-flex justify-content-between mb-4">
-        <button id="filtreBtn" class="btn btn-black d-xl-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#filtre-sidebar">
-            <h5><i class="bi bi-sliders me-2"></i>Filtrer</h5>
-        </button>
+
 
         <button class="btn btn-outline-primary add-btn ms-auto" data-bs-toggle="modal" data-bs-target="#modalter_prorg">
             <i class="bi bi-plus-circle"></i>
