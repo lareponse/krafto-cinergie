@@ -15,21 +15,24 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   /* long text expander */
-  const labelFold = 'Masquer';
-  const labelExpand = 'Lire la suite';
+  const labelFold = "Masquer";
+  const labelExpand = "Lire la suite";
 
   const textContent = document.querySelector(".long-text-content");
-  const textContentHeight = textContent.offsetHeight;
+  if (textContent) {
+    const textContentHeight = textContent.offsetHeight;
 
-  if (textContentHeight > 500) {
-    textContent.classList.add("folded");
-    textContent.insertAdjacentHTML(
-      "afterend",
-      '<button class="btn btn-primary toggle-button">'+ labelExpand +'</button>'
-    );
+    if (textContentHeight > 500) {
+      textContent.classList.add("folded");
+      textContent.insertAdjacentHTML(
+        "afterend",
+        '<button class="btn btn-primary toggle-button">' +
+          labelExpand +
+          "</button>"
+      );
 
-    let toggleButton = document.querySelector(".toggle-button");
-    toggleButton.addEventListener("click", function () {
+      let toggleButton = document.querySelector(".toggle-button");
+      toggleButton.addEventListener("click", function () {
         textContent.classList.toggle("expanded");
         if (textContent.classList.contains("expanded")) {
           toggleButton.textContent = labelFold;
@@ -37,5 +40,6 @@ document.addEventListener("DOMContentLoaded", function () {
           toggleButton.textContent = labelExpand;
         }
       });
+    }
   }
 });
