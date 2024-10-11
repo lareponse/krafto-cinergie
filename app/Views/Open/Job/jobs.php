@@ -11,11 +11,11 @@ $modal_id = 'modal_job';
     <div class="row my-5">
         <section class="col-lg-8 col-xl-7 pe-lg-4" id="listing-casting">
             <h2 class="line-left"><span class="text-primary h3"></span>Offres et demandes dans le cinéma belge</h2>
-   
+
             <div class="d-flex justify-content-between mb-3">
-            <button id="filtreBtn" class="btn btn-black" type="button" data-bs-toggle="offcanvas" data-bs-target="#filtre-sidebar">
-                <i class="bi bi-sliders me-2"></i>Filtrer
-            </button>
+                <button id="filtreBtn" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#filtre-sidebar">
+                    <span class="text-white"><i class="bi bi-sliders me-2"></i>Filtrer</span>
+                </button>
                 <button type="button" class="btn btn-outline-primary add-btn" data-bs-toggle="modal" data-bs-target="#<?= $modal_id ?>">
                     <i class="bi bi-plus-circle"></i><span class="d-none d-sm-inline">Ajoutez</span> votre annonce
                 </button>
