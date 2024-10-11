@@ -652,8 +652,7 @@ body>footer .bi {
 
 body>footer #sitemap {
     display: flex;
-    justify-content: space-around;
-    gap: 1rem;
+    gap: 3rem;
 }
 
 body>footer #sitemap ul {
