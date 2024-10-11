@@ -37,6 +37,7 @@
     <script src="/public/assets/wejune/js/slick.min.js"></script>
     <script src="/public/assets/wejune/js/lightbox.min.js"></script>
     <script src="/public/assets/wejune/js/script.js"></script>
+    <script src="/public/assets/js/cinergie.js"></script>
     <script type="module" nonce="<?= $CSP_nonce ?>">
         import OttoIdLabel from '/public/assets/js/otto/otto-id-label.js';
         import OttoLink from '/public/assets/js/otto/otto-link.js';

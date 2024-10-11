@@ -122,7 +122,6 @@ class Movie extends TightModel
         if (isset($filters['model'])) {
             $model = $filters['model'];
             $class = get_class($model);
-
             switch ($class) {
                 
                 case Merchandise::class:
@@ -149,9 +148,10 @@ class Movie extends TightModel
                         ['movie', 'id', 'workedAs', 'movie_id'],
                         ['workedAs', 'professional_id', $model->id()]
                     ]);
-                    $Query->selectAlso(['GROUP_CONCAT(workedAs.praxis_id) as wordedAs']);
-                    $Query->groupBy(['movie', 'id']);
+                    $Query->selectAlso(['workedAs' => ["GROUP_CONCAT(workedAs.praxis_id)"]]);
 
+                    $Query->groupBy(['movie', 'id']);
+                   
                     break;
 
                 case Article::class:

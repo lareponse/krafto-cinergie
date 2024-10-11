@@ -13,8 +13,15 @@ $url = $controller->router()->hyp('movie', ['slug' => $record->slug()]);
         </span>
 
         <strong><?= $record->get('label'); ?></strong>
+        
         <?php
-        if (!empty($record->get('directors'))) {
+        if (!empty($record->get('workedAs'))) {
+            $praxis_ids = array_unique(explode(',', $record->get('workedAs')));
+            foreach($praxis_ids as $praxis_id){
+                echo $this->DOM()::small($record->get('workedAs'), ['class' => 'meta professional otto-id-label', 'otto-urn' => 'Tag:' . $praxis_id]);
+            }            
+        }
+        elseif (!empty($record->get('directors'))) {
             echo $this->DOM()::strong('de ' . $record->get('directors'), ['class' => 'meta professional']);
         }
         ?>
