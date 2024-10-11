@@ -1,8 +1,8 @@
 <section class="my-5" id="cinema-belge-loupe">
-    <h2 class="line-left"><span class="text-primary">Le cin&eacute;ma belge</span> sous la loupe</h2>
-    
+    <h2 class="line-left"><span class="text-primary">Regard sur </span> le cin&eacute;ma belge</h2>
+
     <div class="row">
-    <?php
+        <?php
         foreach ($sousLaLoupe as $article) {
             $href = $controller->router()->hyp('article', ['slug' => $article->slug()]);
         ?>

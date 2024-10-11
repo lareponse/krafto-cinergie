@@ -30,7 +30,7 @@ $this->layout('Open/_partials/sidebar_filters', ['action' => $controller->router
     <?= Form::options($themes, $controller->router()->params('theme')); ?>
 </select>
 
-<a href="#" class="mt-3 d-block text-secondary" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+<a href="#" class="mt-3 d-block text-primary fs-5" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
     <i class="bi bi-chevron-down"></i>
     D'autres critères ?
 </a>
