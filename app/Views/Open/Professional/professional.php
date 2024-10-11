@@ -46,19 +46,21 @@ $this->layout('Open::layout')
 
         <?= $this->insert('Open::_partials/photos', ['photos' => $related_photos]); ?>
 
+
+        <?= $this->insert('Open::Professional/filmotheque', ['movies' => $related_movies]); ?>
+
+
         <?php
         if (!empty($record->get('filmography'))) {
         ?>
-            <section class="my-5">
+            <section class="my-5 long-text-container" id="pro-filmography">
                 <h2 class="pb-0">Filmographie</h2>
                 <hr>
-                <p><?= $record->get('filmography') ?></p>
+                <div class="long-text-content"><?= $record->get('filmography') ?></div>
             </section>
         <?php
         }
         ?>
-
-        <?= $this->insert('Open::Professional/filmotheque', ['movies' => $related_movies]); ?>
 
 
         <!-- Modal -->

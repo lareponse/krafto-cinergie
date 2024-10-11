@@ -514,8 +514,48 @@ fieldset label:has(+[required])::after {
 }
 
 
+.filmographie .filmotheque .film-item img{
+    height:211px;
+    object-fit: cover;
+}
+#pro-filmography p{
+    line-height: 1;
+}
+.long-text-container{
+    position: relative;-
+}
+.long-text-content {
+    position: relative;
+    /* Ensure there's space for the blur effect */
+}
 
-
+.long-text-content::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1em;
+    background: inherit;
+    /* Inherit the background to blend in */
+    backdrop-filter: blur(5px);
+    /* Apply the blur effect */
+    pointer-events: none;
+    /* Ensure the pseudo-element doesn't interfere with interactions */
+}
+.long-text-content.folded{
+    max-height: 20em;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+.long-text-content.expanded {
+    max-height: none;
+}
+.toggle-button {
+    display: block;
+    margin-top: 1em;
+    cursor: pointer;
+}
 
 /* Style for the label which will contain the checkbox */
 .secret-checkbox {
