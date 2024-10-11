@@ -20,7 +20,7 @@ $menu = [
     [
         'section' => 'Professional',
         'href' => $controller->router()->hyp('professionals'),
-        'label' => 'Professionnels'
+        'label' => 'Professionnel&middot;le&middot;s'
     ],
     [
         'section' => 'Organisation',
