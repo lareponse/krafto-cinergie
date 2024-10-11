@@ -1,10 +1,19 @@
 <?php $this->layout('Open::layout') ?>
 
 <div class="container my-5 pb-5" id="article-single">
-
-    <header>
+    <?php
+    if(!empty($article->get('embedVideo'))){
+        ?><div class="embedVideo"><?= $article->get('embedVideo');?></div>
+        <?php
+    }
+    else{
+        ?>
+        <header> 
         <img class="" src="<?= $article->profilePicture(); ?>" alt="Couverture de l'article <?= $article; ?>" />
-    </header>
+        </header>
+        <?php
+    }
+    ?>
 
     <h2><?= $article->get('label'); ?></h2>
 

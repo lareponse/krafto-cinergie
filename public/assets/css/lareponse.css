@@ -769,4 +769,10 @@ body>footer #copyright {
     }
 }
 
-
+div.embedVideo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:black;
+    padding:1em 0;
+}
