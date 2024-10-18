@@ -1,10 +1,7 @@
-
-
-
 @import url("/public/assets/bootstrap-icons/font/bootstrap-icons.min.css");
 
 :root {
-  
+
    --bs-primary: #D3121B;
    --bs-secondary: #9E9EA7;
    --bs-secondary-dark: #6D6D73;
@@ -189,7 +186,14 @@ header#header nav li.nav-item a:hover {
 #banner article.card.slide {
    margin: 0 25px;
    background: var(--bs-black);
+   height: 500px;
 }
+
+/* @media screen and (min-width: 1024px)  {
+   #banner article.card.slide {
+      width: 70vw;
+   }
+} */
 
 #banner .card-img-overlay {
    padding: 50px 75px;
@@ -506,7 +510,9 @@ small.frais {
    border-color: #000000;
 }
 
-.fc .fc-button-primary:not(:disabled).fc-button-active, .fc .fc-button-primary:not(:disabled):active, .fc .fc-button-primary:hover {
+.fc .fc-button-primary:not(:disabled).fc-button-active,
+.fc .fc-button-primary:not(:disabled):active,
+.fc .fc-button-primary:hover {
    background-color: #D3121B;
    border-color: #D3121B;
 }
@@ -597,7 +603,10 @@ a.event-cat-_autre_agenda {
    text-transform: uppercase;
 }
 
-.professionnel-item .card-body, .filmotheque .card-body, .auteurs .card-body, .organisations .card-body {
+.professionnel-item .card-body,
+.filmotheque .card-body,
+.auteurs .card-body,
+.organisations .card-body {
    padding: 0;
 }
 
@@ -676,6 +685,7 @@ aside header h6 {
    margin-bottom: 0px;
    line-height: initial;
 }
+
 aside header a {
    text-transform: uppercase;
 }
@@ -734,13 +744,13 @@ aside header {
 
 /* FILTRE CHECKBOX - PAGE CASTING */
 
- .form-check-input {
+.form-check-input {
    background-color: #cccccc;
    border: none;
    border-radius: 0em !important;
- }
+}
 
- /* input[type="checkbox"].control_indicator:checked + span::before, 
+/* input[type="checkbox"].control_indicator:checked + span::before, 
  input[type="radio"].control_indicator:checked + span::before {
    background-color: #D3121B;
    left: 8px;
@@ -752,7 +762,7 @@ aside header {
    transform: rotate(45deg);
  } */
 
- .form-check-input:checked[type="radio"] {
+.form-check-input:checked[type="radio"] {
    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e") !important;
 }
 
@@ -1078,7 +1088,8 @@ button.navbar-toggler:focus {
       max-width: 100%;
       padding: 25px;
    }
-   #banner .card-img-overlay > p {
+
+   #banner .card-img-overlay>p {
       font-size: 0.8rem;
    }
 
