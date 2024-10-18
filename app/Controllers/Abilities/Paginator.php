@@ -135,12 +135,16 @@ class Paginator
     {
         if (!isset($this->total)) {
             $counter = clone $this->query;
+
             $counter->setClause('orderBy', null);
             
             $sql = sprintf('SELECT COUNT(*) FROM (%s) as subquery', $counter->statement());
-            $res = $this->query->connection()->query($sql);
-            if (!empty($res)) {
+            
+            $res = $this->query->connection()->prepare($sql);
+
+            if ($res->execute($counter->getBindings())) {
                 $res = $res->fetch(\PDO::FETCH_NUM);
+      
                 $this->total = (int)$res[0];
             } else {
                 $this->total = 0;
@@ -162,6 +166,10 @@ class Paginator
 
     public function nowShowing(): array
     {
+        if($this->totalRecords() === 0){
+            return [0,0,0];
+        }
+        
         $start = $this->offset() + 1;
         $last = min($this->offset() + $this->perPage(), $this->totalRecords());
 
