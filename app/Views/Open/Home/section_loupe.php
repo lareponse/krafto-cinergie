@@ -16,7 +16,7 @@
 
     <aside class="my-5 mx-auto text-center call-to-action">
         <p>
-            <a class="cta" href="<?= $controller->router()->hyp('articles') ?>">Plus d'actualit&eacute;</a>
+            <a class="cta" href="<?= $controller->router()->hyp('articles') ?>">Plus d'articles</a>
         </p>
     </aside>
 </section>
