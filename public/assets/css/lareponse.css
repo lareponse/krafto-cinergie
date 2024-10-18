@@ -630,8 +630,8 @@ body>footer {
 }
 
 body>footer .partenaire-item {
-    border-radius: 1rem;
-    background: var(--bs-white);
+    /* border-radius: 1rem; */
+    /* background: var(--bs-white); */
 
     display: flex;
     align-items: center;
