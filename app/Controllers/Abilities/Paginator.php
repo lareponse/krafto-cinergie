@@ -11,13 +11,13 @@ class Paginator
     // Properties to store current page, next page, previous page,
     // last page, number of clickable pages, and the range of pages.
     private $current, $next, $previous, $last, $clickable, $range, $perPage, $offset;
-    
+
     private $class, $records, $total;
 
     private $query;
 
     // Constructor to initialize the Paginator object.
-    public function __construct(int $current_page, SelectInterface $query, $total=100)
+    public function __construct(int $current_page, SelectInterface $query, $total = 100)
     {
         $this->current = max(1, $current_page);
 
@@ -30,7 +30,7 @@ class Paginator
 
     public function offset(): int
     {
-        if(!isset($this->offset)){
+        if (!isset($this->offset)) {
             $this->offset = ($this->current() - 1) * $this->perPage();
         }
 
@@ -39,8 +39,8 @@ class Paginator
 
     public function perPage(int $number = null)
     {
-        if(!is_null($number)){
-            $this->perPage = max(1,$number);
+        if (!is_null($number)) {
+            $this->perPage = max(1, $number);
         }
 
         return $this->perPage;
@@ -48,17 +48,17 @@ class Paginator
 
     public function clickable($number = null)
     {
-        if(!is_null($number)){
-            $this->clickable = max(1,$number);
+        if (!is_null($number)) {
+            $this->clickable = max(1, $number);
         }
 
         return $this->clickable;
     }
 
     // Get the current page number.
-    public function current($number=null): int
+    public function current($number = null): int
     {
-        if(!is_null($number)){
+        if (!is_null($number)) {
             $this->current = $number;
         }
 
@@ -90,8 +90,8 @@ class Paginator
     // Get the last page number.
     public function last(): int
     {
-        if(!isset($this->last)){
-            $this->last = ceil($this->totalRecords()/$this->perPage());
+        if (!isset($this->last)) {
+            $this->last = ceil($this->totalRecords() / $this->perPage());
         }
         return $this->last;
     }
@@ -133,16 +133,18 @@ class Paginator
 
     public function totalRecords(): int
     {
-        if(!isset($this->total)){
+        if (!isset($this->total)) {
             $counter = clone $this->query;
             $counter->setClause('orderBy', null);
-            $counter->statement('SELECT COUNT(*) FROM ('.$counter->statement().') as subquery'); 
-            $total = $counter->retCol();
-            if($total === false)
-                throw new \Exception('UNABLE TO COMPUTE TOTAL RECORD FOR PAGINATION');
-                
-            $total = array_pop($total);
-            $this->total = (int)$total;
+            
+            $sql = sprintf('SELECT COUNT(*) FROM (%s) as subquery', $counter->statement());
+            $res = $this->query->connection()->query($sql);
+            if (!empty($res)) {
+                $res = $res->fetch(\PDO::FETCH_NUM);
+                $this->total = (int)$res[0];
+            } else {
+                $this->total = 0;
+            }
         }
 
         return $this->total;
@@ -150,7 +152,7 @@ class Paginator
 
     public function records(): array
     {
-        if(!isset($this->records)) {
+        if (!isset($this->records)) {
 
             $this->query->limit($this->perPage, $this->offset());
             $this->records = $this->query->retObj($this->class);
@@ -160,12 +162,9 @@ class Paginator
 
     public function nowShowing(): array
     {
-        $start = $this->offset()+1;
-        $last = min($this->offset()+$this->perPage(), $this->totalRecords());
+        $start = $this->offset() + 1;
+        $last = min($this->offset() + $this->perPage(), $this->totalRecords());
 
-        return [$start,$last, $this->totalRecords()];
-
+        return [$start, $last, $this->totalRecords()];
     }
-
 }
-
