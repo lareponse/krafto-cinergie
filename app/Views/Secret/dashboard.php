@@ -34,9 +34,9 @@
         const ottoIdLabel = new OttoIdLabel('.otto-id-label');
         ottoIdLabel.replace();
 
-        OttoLink.urlLinks()
-        OttoLink.emailLinks()
-        OttoLink.callLinks()
+        OttoLink.urls('.otto-url');
+        OttoLink.emails('.otto-email');
+        OttoLink.calls('.otto-phone');
 
         OttoFormatDate.searchAndFormat('.otto-date');
         

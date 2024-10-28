@@ -1,8 +1,8 @@
 class OttoLink {
-    static urlLinks(selector = null) {
+    static urls(selector) {
         const rx = /^(http:\/\/|https:\/\/).+$/i
 
-        document.querySelectorAll(selector || '.otto-url').forEach(container => {
+        document.querySelectorAll(selector).forEach(container => {
             const anchorElement = document.createElement('a');
             const url = container.innerHTML.trim();
             // console.log(url,rx.test(url));
@@ -20,8 +20,8 @@ class OttoLink {
         });
     }
 
-    static emailLinks(selector = null) {
-        document.querySelectorAll(selector || '.otto-email').forEach(container => {
+    static emails(selector) {
+        document.querySelectorAll(selector).forEach(container => {
             const email = container.innerHTML.trim()
             const emailElement = document.createElement('a')
 
@@ -41,8 +41,8 @@ class OttoLink {
         });
     }
 
-    static callLinks(selector = null) {
-        document.querySelectorAll(selector || '.otto-phone').forEach(container => {
+    static calls(selector) {
+        document.querySelectorAll(selector).forEach(container => {
             const phoneNumber = container.innerHTML.trim();
             const phoneNormalized = phoneNumber.replace(/\s/g, '');
 

@@ -17,9 +17,9 @@
 
         OttoEpicene.choose('kx-gender')
 
-        OttoLink.urlLinks()
-        OttoLink.emailLinks()
-        OttoLink.callLinks()
+        OttoLink.urls('.otto-url')
+        OttoLink.emails('.otto-email')
+        OttoLink.calls('.otto-phone')
 
         OttoFormatDate.searchAndFormat('.otto-date');
 
