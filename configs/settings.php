@@ -18,7 +18,7 @@ $settings = array(
         "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;",
         "connect-src 'self' 'nonce-{$nonce}' https://api.example.com;",
         "img-src 'self' 'nonce-{$nonce}' data: https://cdn.jsdelivr.net;",
-        "frame-src 'self' 'nonce-{$nonce}' https://www.youtube.com https://www.google.com;",
+        "frame-src 'self' 'nonce-{$nonce}' https://www.youtube.com https://www.google.com https://geo.dailymotion.com;",
         "font-src 'self' 'nonce-{$nonce}' data: https://cdn.jsdelivr.net;",
       ]
     ]
