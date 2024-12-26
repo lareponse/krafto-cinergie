@@ -10,7 +10,7 @@ use \HexMakina\Marker\Marker; ?>
         $this->insert('Open/Movie/sidebar_filters');
 
         if (empty($paginator->records()))
-            echo Marker::strong('Pas de résultats correspondant à vos critères');
+            echo Marker::strong('Aucun résultat ne correspond à vos critères');
         else {
             foreach ($paginator->records() as $record) {
                 $this->insert('Open::Movie/card', ['record' => $record]);

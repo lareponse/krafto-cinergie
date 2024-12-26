@@ -20,7 +20,7 @@ use \HexMakina\Marker\Marker; ?>
         </div>
         <?php
         if (empty($paginator->records()))
-            echo Marker::strong('Pas de résultats correspondant à vos critères');
+            echo Marker::strong('Aucun résultat ne correspond à vos critères');
         else {
             foreach ($paginator->records() as $record) {
         ?>
