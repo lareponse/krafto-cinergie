@@ -2,16 +2,15 @@
 
 <div class="container my-5 pb-5" id="article-single">
     <?php
-    if(!empty($article->get('embedVideo'))){
-        ?><div class="embedVideo"><?= $article->get('embedVideo');?></div>
-        <?php
-    }
-    else{
-        ?>
-        <header> 
-        <img class="" src="<?= $article->profilePicture(); ?>" alt="Couverture de l'article <?= $article; ?>" />
+    if (!empty($article->get('embedVideo'))) {
+    ?><div class="embedVideo"><?= $article->get('embedVideo'); ?></div>
+    <?php
+    } else {
+    ?>
+        <header>
+            <img class="" src="<?= $article->profilePicture(); ?>" alt="Couverture de l'article <?= $article; ?>" />
         </header>
-        <?php
+    <?php
     }
     ?>
 
@@ -51,6 +50,7 @@
         </aside>
 
         <div class="w-75 mb-5 mx-auto text-justify">
+
             <article><?= $article->get('content'); ?></article>
             <hr>
             <?= $this->insert('Open::_partials/share_print', ['label' => $article->get('label')]); ?>
@@ -62,7 +62,8 @@
 
     </div>
 </div>
+
 <script nonce="<?= $CSP_nonce ?>">
     //vanilla js to set the header background image to the article's profile picture
-    document.querySelector('#article-single header').style.backgroundImage = 'url("<?= $article->profilePicture(); ?>")';
+    // document.querySelector('#article-single header').style.backgroundImage = 'url("<?= $article->profilePicture(); ?>")';
 </script>
