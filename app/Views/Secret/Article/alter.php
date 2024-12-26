@@ -35,8 +35,6 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
             <script>
                 let input = document.getElementById('label');
                 let counter = input.parentElement.querySelector('.caracter_count');
-                console.log(input, input.parentElement, counter);
-
                 counter.textContent = input.value.length;
 
                 input.addEventListener('input', function() {
