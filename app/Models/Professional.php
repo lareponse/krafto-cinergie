@@ -17,7 +17,6 @@ class Professional extends TightModel
 
     use Abilities\FiltersOnFirstChar;
 
-
     public const PRAXIS_DIRECTOR_SLUG = 'pro-praxis-realisateur';
 
     public function __toString()
@@ -57,16 +56,20 @@ class Professional extends TightModel
     {
         $ret = [];
 
-        $articleIds = [];
-
         $res = self::database()->table('article_professional')->select(['article_id'])->whereEQ('professional_id', $this->id());
         $res = $res->retCol();
-        $articleIds = array_merge($articleIds, $res);
         
-        $query = Article::filter();
-        $query = $query->whereNumericIn('id', $articleIds);
-        $res = $query->retObj(Article::class);
-        return $res ? $res : $ret;
+        if(!empty($res)){
+            
+            $query = Article::filter();
+            $query = $query->whereNumericIn('id', $res);
+            $res = $query->retObj(Article::class);
+            if(!empty($res)){
+                $ret = $res;
+            }
+        }
+
+        return $ret;
     }
 
     public static function filter($filters = [], $options = []): SelectInterface
