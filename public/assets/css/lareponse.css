@@ -795,3 +795,12 @@ div.embedVideo {
     background:white;
     color:black;
 }
+
+
+#casting-single aside#meta {
+    padding: 1.5rem 2rem;
+}
+
+#casting-single pre {
+    font-size: 1.2rem;
+}
