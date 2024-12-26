@@ -72,3 +72,8 @@ input.form-control {
 .submission footer.card-footer{
     display:none;
 }
+
+
+.form-control{
+    font-family: var(--bs-body-font-family);
+}
