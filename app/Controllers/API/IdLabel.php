@@ -15,7 +15,11 @@ class IdLabel extends \HexMakina\kadro\Controllers\Kadro
     public function byIds()
     {
         $ids = json_decode($this->router()->params('ids'));
-               
+        // filter out empty ids
+        $ids = array_filter($ids, function($id){
+            return is_numeric($id);
+        });
+
         $class = $this->router()->params('handle');
         $class = $this->get('App\\Models\\'.$class); 
 
@@ -30,7 +34,6 @@ class IdLabel extends \HexMakina\kadro\Controllers\Kadro
                 $select->columns(['id', 'label']);
                 break;
             }
-            
         $select->whereNumericIn('id', $ids);
         $res = $select->retObj();
         header('Content-Type: application/json');
