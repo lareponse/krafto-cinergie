@@ -1,5 +1,5 @@
-<div class="p-5 text-center">
-    <div class="mb-5"  id="fullcalendar-filters">
+<div class="text-center">
+    <div class="my-2"  id="fullcalendar-filters">
         <button class="btn event-cat-all" id="allEvents">Tous</button>
         <button class="btn event-cat-avant_premiere" id="event-cat-avant_premiere">Avant-première</button>
         <button class="btn event-cat-evenement_agenda" id="event-cat-evenement_agenda">Évènement</button>
