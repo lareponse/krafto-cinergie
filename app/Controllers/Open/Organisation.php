@@ -7,7 +7,7 @@ use \HexMakina\kadro\Models\Tag;
 
 use App\Controllers\Abilities\Paginator;
 use App\Models\Organisation as Model;
-use App\Models\{Movie, Praxis};
+use App\Models\{Movie, Praxis, Professional, Article};
 
 class Organisation extends Kortex
 {
@@ -37,6 +37,9 @@ class Organisation extends Kortex
         $this->viewport('praxes', Praxis::forOrganisation($this->record()));
         $this->viewport('related_movies', $related_movies ?? []);
         $this->viewport('related_photos', $this->relatedPhotos('organisation'));
+        $this->viewport('related_articles', Article::retrieve(Article::filter(['organisation' => $this->record()])));
+        $this->viewport('related_professionals', Professional::retrieve(Professional::filter(['organisation' => $this->record()])));
+
     }
 
      /**
