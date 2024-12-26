@@ -10,6 +10,7 @@ trait FiltersOnFirstChar
         if ($filter === '*')
             return;
 
+
         switch ($filter) {
 
             case '09':
@@ -21,10 +22,9 @@ trait FiltersOnFirstChar
                 break;
 
             default: // A to Z
-                $Query->whereLike($column, $filter . '%', $Query->table());
+                $Query->whereLike($column, $filter . '%');
                 break;
         }
-
         $Query->orderBy([$column, 'ASC']);
     }
 }
