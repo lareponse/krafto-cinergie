@@ -785,3 +785,13 @@ div.embedVideo {
     background: black;
     padding: 1em 0;
 }
+
+.sib-form-container a {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+.sib-form .input{
+    background:white;
+    color:black;
+}
