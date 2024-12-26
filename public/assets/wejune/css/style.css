@@ -189,12 +189,6 @@ header#header nav li.nav-item a:hover {
    height: 500px;
 }
 
-/* @media screen and (min-width: 1024px)  {
-   #banner article.card.slide {
-      width: 70vw;
-   }
-} */
-
 #banner .card-img-overlay {
    padding: 50px 75px;
    top: initial;
@@ -202,7 +196,7 @@ header#header nav li.nav-item a:hover {
    z-index: 9;
 }
 
-#banner img {
+article.card img {
    object-fit: cover;
    object-position: center center;
    height: 500px;

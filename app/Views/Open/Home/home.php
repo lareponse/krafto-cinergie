@@ -1,6 +1,6 @@
 <?php $this->layout('Open::layout') ?>
 <div class="container-fluid my-5">
-    <div id="banner" class="d-none d-lg-block container-custom-banner">
+    <div id="banner" class="container-custom-banner d-none d-lg-block">
         <?php
         foreach ($articlesDiaporama as $article) {
             $href = $controller->router()->hyp('article', ['slug' => $article->slug()]);
@@ -20,9 +20,21 @@
         }
         ?>
 
+
+    </div>
+    <div class="d-lg-none">
+        <?php
+        $article = array_shift($articlesDiaporama);
+        $href = $controller->router()->hyp('article', ['slug' => $article->slug()]);
+        ?>
+        <article class="card">
+            <img src="<?= $article->profilePicture() ?>" class="card-img" alt="<?= $article->get('label'); ?> - <?= $article->get('author_label'); ?>">
+            <h3 class="card-title bg-dark p-2"><?= $article->get('label'); ?></h3>
+            <p class="card-text"><small class="text-primary"><?= $article->get('author_label'); ?></small></p>
+            <p><a href="<?= $href ?>" class="btn btn-primary">En savoir plus</a></p>
+        </article>
     </div>
 </div>
-
 
 <div class="container">
     <?php
