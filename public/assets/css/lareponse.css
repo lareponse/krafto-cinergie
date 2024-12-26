@@ -642,7 +642,6 @@ body>footer .partenaire-item {
 
 body>footer .partenaire-item img {
     object-fit: contain;
-    max-height: 77px;
     border-radius: 1rem;
 }
 
@@ -683,7 +682,7 @@ body>footer #sitemap a:hover {
 body>footer #partenaires nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 2rem;
 }
 
 body>footer #copyright {
