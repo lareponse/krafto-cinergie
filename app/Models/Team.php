@@ -15,7 +15,7 @@ class Team extends TightModel
 
     public function profilePicture(): string
     {
-        return empty($this->get('photo')) ? '' : 'https://www.cinergie.be/images/' . $this->get('photo');
+        return empty($this->get('avatar')) ? '' : $this->get('avatar');
     }
     
     public function contactPoint(): string

@@ -22,7 +22,7 @@ use \HexMakina\Marker\Marker; ?>
                         <article class="card mb-4 shadow">
                             <div class="card-body">
                                 <a href="professionnel-single.php">
-                                    <img src="/public<?= $person->profilePicture(); ?>" class="card-img-top mb-3" alt="Photo de <?= $person->fullName() ?>">
+                                    <img src="/images/<?= $person->profilePicture(); ?>" class="card-img-top mb-3" alt="Photo de <?= $person->fullName() ?>">
                                 </a>
                                 <div class="p-3">
                                     <h5 class="card-title"><?= $person->fullName() ?></h5>
@@ -43,11 +43,11 @@ use \HexMakina\Marker\Marker; ?>
                 <?php
                 foreach ($team['collaborateur'] as $person) {
                 ?>
-                    <div class="col-lg-2 col-md-6" id="professionnel-item">
+                    <div class="col-lg-3 col-md-6" id="professionnel-item">
                         <article class="card mb-4 shadow">
                             <div class="card-body">
                                 <a href="<?= $controller->router()->hyp('author', ['slug' => $person->slug()]) ?>">
-                                    <img src="/public<?= $person->profilePicture(); ?>" class="card-img-top mb-3" alt="...">
+                                    <img src="<?= $person->profilePicture(); ?>" class="card-img-top mb-3" alt="...">
                                 </a>
                                 <div class="p-3">
                                     <h5 class="card-title"><?= $person->fullName(); ?></h5>
