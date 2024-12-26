@@ -339,41 +339,17 @@
                             <?= $this->icon('person', 40, ['class' => 'avatar-img']); ?>
                         </div>
                         <div class="flex-grow-1 ms-3">
-                            <h4 class="mb-0">Ellie Tucker</h4>
-                            <p class="card-text">ellie.tucker@dashly.com</p>
+                            <h4 class="mb-0"><?= $controller->operator(); ?></h4>
+                            <p class="card-text"><?= $controller->operator()->email(); ?></p>
                         </div>
                     </div>
                 </div>
 
                 <hr class="dropdown-divider">
 
-                <!-- Dropdown -->
-                <div class="dropdown dropend">
-                    <a class="dropdown-item dropdown-toggle" href="javascript: void(0);" id="statusDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="-16,10">
-                        Set status
-                    </a>
 
-                    <div class="dropdown-menu dropdown-menu-end navbar-dropdown-menu navbar-dropdown-menu-borderless navbar-dropdown-sub-menu" aria-labelledby="statusDropdown">
-                        <a class="dropdown-item" href="javascript: void(0);">
-                            <span class="legend-circle bg-success me-2"></span>Available
-                        </a>
-                        <a class="dropdown-item" href="javascript: void(0);">
-                            <span class="legend-circle bg-danger me-2"></span>Busy
-                        </a>
-                        <a class="dropdown-item" href="javascript: void(0);">
-                            <span class="legend-circle bg-warning me-2"></span>Away
-                        </a>
-                        <a class="dropdown-item" href="javascript: void(0);">
-                            <span class="legend-circle bg-gray-500 me-2"></span>Appear offline
-                        </a>
-                        <hr class="dropdown-divider">
-                        <a class="dropdown-item" href="javascript: void(0);">
-                            Reset status
-                        </a>
-                    </div>
-                </div>
-                <!-- End Dropdown -->
 
+                <a class="dropdown-item" href="/">cinergie.be</a>
                 <a class="dropdown-item" href="javascript: void(0);">Profile & account</a>
                 <a class="dropdown-item" href="javascript: void(0);">Settings</a>
 
