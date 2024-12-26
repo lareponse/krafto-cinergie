@@ -86,7 +86,7 @@ ORDER BY `id`;
 UPDATE `cinergie`.`author` SET `url` = NULL WHERE TRIM(`url`) = '';
 
 -- update avatar path
-UPDATE `cinergie`.`author` SET `avatar` = CONCAT('/public', `avatar`) WHERE avatar IS NOT NULL AND avatar LIKE '/images/%'
+UPDATE `cinergie`.`author` SET `avatar` = CONCAT('/public', `avatar`) WHERE avatar IS NOT NULL AND avatar LIKE '/images/%';
 
 -- trimming the fat
 UPDATE `cinergie`.`author` SET `professional_slug` = REPLACE(`url`, 'https://www.cinergie.be/personne/', '');
