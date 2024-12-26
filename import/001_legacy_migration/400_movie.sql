@@ -33,6 +33,7 @@ CREATE TABLE `cinergie`.`movie` (
   `metrage_id` int DEFAULT NULL COMMENT 'parsed from leg:metrage, but where is the source ??',
   `format` varchar(100) DEFAULT NULL COMMENT 'leg:format',
 
+  `prix_cinergie` varchar(255) DEFAULT NULL,
   `comment` text COMMENT 'leg:autre, TODO distinct avalues',
   
   `legacy_origine` varchar(255) DEFAULT NULL COMMENT 'leg:origine, TODO parse to Countries',

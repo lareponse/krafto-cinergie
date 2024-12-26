@@ -1,10 +1,11 @@
-<?php 
+<?php
 $sidemenu = [
     ['#signaletiqueSection', 'signaletique', 'Signalétique'],
     ['#techniqueSection', 'technique', 'Technique'],
     ['#synopsisSection', 'text', 'Synopsis'],
     ['#castingSection', 'text', 'Casting'],
     ['#publicationSection', 'info', 'Publication'],
+    ['#prixCinergieSection', 'text', 'Prix Cinergie'],
     ['#commentSection', 'comment', 'Commentaires']
 ];
 
@@ -78,20 +79,20 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu]) ?>
             </div>
 
             <div class="col-lg">
-                    <div class="mb-4">
+                <div class="mb-4">
 
-                        <select class="form-select" name="legacy_origine" id="legacy_origine" required autocomplete="off" data-select='{
+                    <select class="form-select" name="legacy_origine" id="legacy_origine" required autocomplete="off" data-select='{
                             "placeholder": "Pays"
                         }'
-                                data-option-template='<span class="d-flex align-items-center py-2"><span class="text-truncate ms-2">[[text]]</span></span>'
-                                data-item-template='<span class="d-flex align-items-center"><span class="text-truncate ms-2">[[text]]</span></span>'>
-                            <?php $this->insert('Secret::_partials/form/options-country', ['selected' => $controller->formModel()->get('country')]) ?>
-                        </select>
-                        <div class="invalid-feedback">Please select a country</div>
-                    </div>
+                        data-option-template='<span class="d-flex align-items-center py-2"><span class="text-truncate ms-2">[[text]]</span></span>'
+                        data-item-template='<span class="d-flex align-items-center"><span class="text-truncate ms-2">[[text]]</span></span>'>
+                        <?php $this->insert('Secret::_partials/form/options-country', ['selected' => $controller->formModel()->get('country')]) ?>
+                    </select>
+                    <div class="invalid-feedback">Please select a country</div>
+                </div>
 
             </div>
-        </div> 
+        </div>
 
 
         <?= $this->submitDashly(); ?>
@@ -159,4 +160,5 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu]) ?>
 
 <?= $this->insert('Secret::_partials/form/alter-card-publication') ?>
 
+<?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'prix_cinergie', 'title' => 'Prix cinergie', 'id' => 'prixCinergieSection']) ?>
 <?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'comment', 'title' => 'Commentaires', 'id' => 'commentSection']) ?>

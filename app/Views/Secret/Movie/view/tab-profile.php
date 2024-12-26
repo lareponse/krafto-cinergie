@@ -23,10 +23,15 @@
 
         <div class="card border-0">
             <div class="card-body">
+                <h2 class="h3">Prix Cinergie</h2>
+                <?= $controller->loadModel()->get('prix_cinergie'); ?>
+            </div>
+        </div>
+        <div class="card border-0">
+            <div class="card-body">
                 <h2 class="h3">Commentaires</h2>
                 <?= $controller->loadModel()->get('comment'); ?>
             </div>
         </div>
-
     </div>
 </div>

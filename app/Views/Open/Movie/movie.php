@@ -16,6 +16,13 @@ $collection_href = $controller->router()->hyp('movies');
             <div class="col-lg-5">
                 <img class="img-fluid w-100 mb-2" src="<?= $record->profilePicture() ?>" alt="Photo du film <?= $record->get('label') ?>" />
                 <?= $this->insert('Open::_partials/share_print', ['label' => $record]); ?>
+
+                <?php
+                    if (!empty($record->get('prix_cinergie'))) {
+                        echo $this->DOM()::img('/public/assets/img/prix_cinergie.png', 'Badge prix cinergie', ['width' => '120']);
+                        echo $this->DOM()::strong($record->get('prix_cinergie'));
+                    }
+                ?>
             </div>
 
             <div class="col-lg-7 ps-lg-5 infos">
@@ -63,7 +70,7 @@ $collection_href = $controller->router()->hyp('movies');
                     ?>
                 </dl>
                 <?php
-
+  
 
                 if (!empty($record->get('casting'))) {
                     echo $this->DOM()::strong('Casting : ', ['class' => 'd-block']);
