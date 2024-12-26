@@ -20,8 +20,8 @@ class DVD extends Merchandise
         
         if(isset($filters['Movie']))
         {
-            $Query->join(['movie_dvd', 'movie_dvd'], [
-                ['dvd', 'id', 'movie_dvd', 'dvd_id'],
+            $Query->join(['movie_merchandise', 'movie_dvd'], [
+                ['dvd', 'id', 'movie_dvd', 'merchandise_id'],
                 ['movie_dvd', 'movie_id', $filters['Movie']->id()]
             ]);
         }

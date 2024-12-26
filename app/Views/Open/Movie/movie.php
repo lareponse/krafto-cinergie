@@ -71,20 +71,24 @@ $collection_href = $controller->router()->hyp('movies');
                 }
                 ?>
 
-                <div class="mt-4">
-                    <?php
-                    foreach ($merchandises as $merch) {
-                    ?>
-                        <aside class="input-group big commander-boutique">
-                            <button class="form-control btn-commander" data-bs-toggle="modal" data-bs-target="#modal-order" data-titre="<?= $merch ?>" data-prix="<?= $merch->get('price') ?>">
-                                <i class="bi bi-cart-plus-fill"></i> </button>
-                            <span class="input-group-text prix"><?= $merch->get('price') ?> &euro;</span>
-                        </aside>
-                    <?php
-                    }
-                    ?>
-                </div>
+                <?php if (!empty($merchandises)) { ?>
+
+                    <div class="mt-4">
+                        <h2 class="pb-0 line-left">Boutique</h2>
+                        <?php
+                        foreach ($merchandises as $merch) {
+                        ?>
+                            <aside class="input-group big commander-boutique">
+                                <button class="form-control btn-commander" data-bs-toggle="modal" data-bs-target="#modal-order" data-delivery-be="<?= $merch->get('deliveryBe'); ?>" data-delivery-eu="<?= $merch->get('deliveryEu'); ?>" data-titre="<?= $merch ?>" data-prix="<?= $merch->get('price') ?>">
+                                    <i class="bi bi-cart-plus-fill"></i> </button>
+                                <span class="input-group-text prix"><?= $merch->get('price') ?> &euro;</span>
+                            </aside>
+                        <?php
+                        }
+                        ?>
+                    </div>
             </div>
+        <?php } ?>
         </div>
 
         <?php
@@ -111,7 +115,7 @@ $collection_href = $controller->router()->hyp('movies');
                 }
                 ?>
             </section>
-                
+
             <?= $this->insert('Open::_partials/related_articles', ['related_articles' => $articles]); ?>
 
             <?php
