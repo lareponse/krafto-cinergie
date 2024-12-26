@@ -1,4 +1,4 @@
-<?php 
+<?php
 $sidemenu = [
     ['#signaletiqueSection', 'info', 'Signalétique'],
     ['#abstractSection', 'text', 'Abstract'],
@@ -8,7 +8,7 @@ $sidemenu = [
     ['#commentSection', 'comment', 'Commentaires']
 ];
 
-$this->layout('Secret::alter', ['sidemenu' => $sidemenu]) 
+$this->layout('Secret::alter', ['sidemenu' => $sidemenu])
 ?>
 
 <div class="card border-0 scroll-mt-3" id="signaletiqueSection">
@@ -25,8 +25,24 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
 
             <div class="col-lg">
                 <input type="text" class="form-control" id="label" name="label" required value="<?= $controller->formModel()->get('label') ?>">
+
+                <div class="d-flex justify-content-between">
+                    <span class="small text-muted">Garder le titre court, dans les 100 caractères</span>
+                    <span class="caracter_count">0</span>
+                </div>
                 <div class="invalid-feedback">Please add your full name</div>
             </div>
+            <script>
+                let input = document.getElementById('label');
+                let counter = input.parentElement.querySelector('.caracter_count');
+                console.log(input, input.parentElement, counter);
+
+                counter.textContent = input.value.length;
+
+                input.addEventListener('input', function() {
+                    counter.textContent = input.value.length;
+                });
+            </script>
         </div>
 
         <div class="row mb-4">
