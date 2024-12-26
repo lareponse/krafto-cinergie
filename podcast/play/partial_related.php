@@ -53,35 +53,32 @@
 
 */
 ?>
-<section>
-  <div class="qodef-shortcode qodef-m qodef-podcast-list qodef-indent-slider--yes qodef-item-layout--info-right qodef-grid qodef-swiper-container qodef-gutter--huge qodef-col-num--3 qodef--no-bottom-space qodef-pagination--off qodef-responsive--predefined swiper-container-initialized swiper-container-horizontal qodef-swiper--initialized" data-options="{&quot;slidesPerView&quot;:&quot;3&quot;,&quot;spaceBetween&quot;:80,&quot;centeredSlides&quot;:true,&quot;loop&quot;:true,&quot;autoplay&quot;:true,&quot;speed&quot;:&quot;&quot;,&quot;speedAnimation&quot;:&quot;&quot;,&quot;slideAnimation&quot;:&quot;&quot;}">
+<div class="row g-0 mt-5">
+  <div class="slide dots single-post-slider">
 
-    <div class="slider">
+    <?php
 
-      <?php
+    $related_items = $show_data['related'];
 
-      $related_items = $show_data['related'];
+    foreach ($related_items as $related) {
+      $related_links = [];
+      if (isset($related['links']))
+        $related_links = $related['links'];
 
-      foreach ($related_items as $related) {
-        $related_links = [];
-        if (isset($related['links']))
-          $related_links = $related['links'];
-
-        if ($related['category'] == 'personne') {
-          $related['title'] = 'Réalisatrice';
-          $related['title_link'] = $show_data['cinergie'];
-          $related['links'] = array_merge([
-            'La fiche' => $related['title_link'],
-            'Les actualités' => 'https://www.cinergie.be/actualites?searchgo=go&actu_search%5Bsubject%5D=***&group=actualites&actu_search%5Bfreeterm%5D=' . str_replace(' ', '+', strtolower($show_data['name']))
-          ], $related_links);
-        }
-
-        require('partial_related_item.php');
+      if ($related['category'] == 'personne') {
+        $related['title'] = 'Réalisatrice';
+        $related['title_link'] = $show_data['cinergie'];
+        $related['links'] = array_merge([
+          'La fiche' => $related['title_link'],
+          'Les actualités' => 'https://www.cinergie.be/actualites?searchgo=go&actu_search%5Bsubject%5D=***&group=actualites&actu_search%5Bfreeterm%5D=' . str_replace(' ', '+', strtolower($show_data['name']))
+        ], $related_links);
       }
-      ?>
-    </div>
+
+      require('partial_related_item.php');
+    }
+    ?>
   </div>
-</section>
+</div>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
