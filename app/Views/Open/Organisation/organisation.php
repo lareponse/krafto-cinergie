@@ -39,6 +39,7 @@ $this->layout('Open::layout')
         ?>
         <?= $this->insert('Open::_partials/related_articles', ['related_articles' => $related_articles ?? []]) ?>
 
+        <?php if(!empty($related_professionals)) { ?>
         <section class="row my-5" id="equipe-belge">
             <h2 class="pb-0 line-left ">L'équipe belge</h2>
             <?php
@@ -48,6 +49,7 @@ $this->layout('Open::layout')
                 }
             ?>
         </section>
+        <?php } ?>
     </article>
 
 
