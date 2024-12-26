@@ -106,21 +106,7 @@ $collection_href = $controller->router()->hyp('movies');
                 foreach (['professional' => $professionals, 'organisation' => $organisations] as $route_name => $annuaire) {
                     foreach ($annuaire as $item) {
                         $href = $controller->router()->hyp($route_name, ['slug' => $item->slug()]);
-                ?>
-                        <article>
-                            <a class="d-none d-md-flex" href="<?= $href ?>">
-                                <img src="<?= $item->profilePicture() ?>" alt="Photo de profile de <?= $item; ?>" class="avatar">
-                            </a>
-                            <h4><a href="<?= $href ?>"><?= $item; ?></a></h4>
-                            <p>
-                                <?php
-                                foreach ($item->praxisIds() as $id) {
-                                    echo '<span class="d-block otto-id-label" otto-urn="Tag:' . $id . '">' . $id . '</span>';
-                                }
-                                ?>
-                            </p>
-                        </article>
-                <?php
+                        $this->insert('Open::_partials/related_prorg', ['item' => $item, 'href' => $href]);
                     }
                 }
                 ?>

@@ -1,7 +1,8 @@
 <?php
 
 use \HexMakina\Marker\Marker;
-$this->layout('Open::layout') 
+
+$this->layout('Open::layout')
 
 ?>
 
@@ -36,11 +37,21 @@ $this->layout('Open::layout')
         <?php
         }
         ?>
+        <?= $this->insert('Open::_partials/related_articles', ['related_articles' => $related_articles ?? []]) ?>
+
+        <section class="row my-5" id="equipe-belge">
+            <h2 class="pb-0 line-left ">L'équipe belge</h2>
+            <?php
+                foreach ($related_professionals as $item) {
+                    $href = $controller->router()->hyp('professional', ['slug' => $item->slug()]);
+                    $this->insert('Open::_partials/related_prorg', ['item' => $item, 'href' => $href]);
+                }
+            ?>
+        </section>
     </article>
 
-    <?= $this->insert('Open::_partials/related_articles', ['related_articles' => $related_articles ?? []]) ?>
 
-    <article class="w-75 mx-auto">
+    <article class="w-75 mx-auto mb-5">
 
         <?= $this->insert('Open::_partials/photos', ['photos' => $related_photos]); ?>
 
