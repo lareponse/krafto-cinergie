@@ -47,7 +47,7 @@ VALUES
 
 INSERT INTO `cinergie`.`team` (`rank`, `slug`,  `label`, `group`)
 VALUES
-(1,'Martine-Barbe',  'Martine Barbé', 'membre'),
+(1, 'Martine-Barbe',  'Martine Barbé', 'membre'),
 (2, 'Jean-Jacques-Bastien', 'Jean-Jacques Bastien', 'membre'),
 (3, 'Juliette-Duret', 'Juliette Duret', 'membre'),
 (4, 'Julie-Freres', 'Julie Frères', 'membre'),
