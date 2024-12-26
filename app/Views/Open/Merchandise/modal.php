@@ -16,7 +16,7 @@
                     <div>
                         <strong class="h4">Comment commander?</strong>
                         <p>Pour commander un DVD ou un livre, il vous suffit de remplir ce formulaire avec vos nom, prénom, adresse, numéro de téléphone, etc..</p>
-                        <p>Les frais d'envoi <strong>en Belgique</strong> sont compris dans le prix du DVD/livre. Les frais d'envoi hors frontières sont calculés selon la destination (Europe +8€).</p>
+                        <p>Les frais d'envoi <strong>en Belgique</strong> sont de <span class="deliveryBeCost"></span>. En europe, les frais sont de <span class="deliveryCostEu"></span>.</p>
                         <p>Le numéro de compte bancaire de Cinergie asbl est:&nbsp;<br> IBAN : BE10 0012 4446 1904<br>BIC : GEBABEBB</p>
                     </div>
 
@@ -71,15 +71,21 @@
     const modal = document.getElementById('modal-order');
     const titreModal = modal.querySelector('.modal-titre');
     const prixModal = modal.querySelector('.modal-prix');
+    const deliveryBeCost = modal.querySelector('.deliveryBeCost');
+    const deliveryCostEu = modal.querySelector('.deliveryCostEu');
 
     const btnsCommander = document.querySelectorAll('.btn-commander');
     btnsCommander.forEach(btn => {
         btn.addEventListener('click', function() {
             const titre = btn.getAttribute('data-titre');
             const prix = btn.getAttribute('data-prix');
+            const deliveryBe = btn.getAttribute('data-delivery-be');
+            const deliveryEu = btn.getAttribute('data-delivery-eu');
 
             titreModal.textContent = titre;
             prixModal.textContent = prix + ' €';
+            deliveryBeCost.textContent = deliveryBe + ' €';
+            deliveryCostEu.textContent = deliveryEu + ' €';
         });
     });
 </script>
