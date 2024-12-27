@@ -38,7 +38,7 @@ use \HexMakina\Marker\Marker; ?>
             </section>
 
             <section class="row my-5" id="collabo">
-                <h2>Collaborateurs réguliers</h2>
+                <h2>Collaborateur&middot;trice&middot;s régulier&middot;ère&middot;s</h2>
 
                 <?php
                 foreach ($team['collaborateur'] as $person) {
