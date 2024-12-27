@@ -184,8 +184,9 @@ aside.filtres header button {
 
 
 
-.share, .share.compact {
-    display:block;
+.share,
+.share.compact {
+    display: block;
     font-size: 0.9rem;
     text-transform: uppercase;
     font-weight: 500;
@@ -791,9 +792,9 @@ div.embedVideo {
     text-decoration: underline;
 }
 
-.sib-form .input{
-    background:white;
-    color:black;
+.sib-form .input {
+    background: white;
+    color: black;
 }
 
 
@@ -803,4 +804,5 @@ div.embedVideo {
 
 #casting-single pre {
     font-size: 1.2rem;
+    font-family: 'Poppins', sans-serif;
 }
