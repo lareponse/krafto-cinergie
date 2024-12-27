@@ -6,14 +6,14 @@
         </a>
         <div class="socials d-block d-xl-none ms-auto">
             <button type="button" data-bs-toggle="collapse" data-bs-target="#searchBAR" aria-controls="searchBAR" aria-expanded="false" aria-label="Toggle navigation" class="mx-1 btn-search">
-                <img src="/public/assets/wejune/img/icons/search.svg" alt="">
+                <?= $this->bi('search'); ?>
             </button>
         </div>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="bi bi-filter-right"></span>
+            <?= $this->bi('filter-right'); ?>
         </button>
-        <?= $this->insert('Open::_partials/navbar') ?>
 
+        <?= $this->insert('Open::_partials/navbar') ?>
     </div>
 </header>

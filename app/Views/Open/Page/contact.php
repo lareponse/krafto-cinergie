@@ -1,4 +1,7 @@
-<?php $this->layout('Open::layout', ['title' => $page->get('label')]) ?>
+<?php
+$this->layout('Open::layout', ['title' => $page->get('label')]);
+
+?>
 
 <div id="contact-area">
     <div class="container" id="contact">
@@ -6,15 +9,15 @@
             <div class="col-lg-6 contact-wrap">
                 <h2>Cinergie.be ASBL</h2>
 
-                <h3><i class="bi bi-geo-alt-fill"></i>Adresse</h3>
+                <h3><?= $this->bi('geo-alt-fill'); ?>Adresse</h3>
                 <p>Maison de la Francité</p>
                 <p><?= $cinergie->get('street'); ?></p>
                 <p class="mb-4"><?= $cinergie->get('zip'); ?> <?= $cinergie->get('city'); ?></p>
 
-                <h3><i class="bi bi-envelope-fill"></i>Email</h3>
+                <h3><?= $this->bi('envelope-fill'); ?>Email</h3>
                 <a class="mb-4 d-inline-block" href="mailto:<?= $cinergie->get('email'); ?>"><?= $cinergie->get('email'); ?></a>
 
-                <h3><i class="bi bi-telephone-fill"></i>Téléphone</h3>
+                <h3><?= $this->bi('telephone-fill') ?>Téléphone</h3>
                 <a class="mb-4 d-inline-block" href="tel:<?= $cinergie->get('tel'); ?>"><?= $cinergie->get('tel'); ?></a>
 
                 <div class="d-flex justify-content-between mt-3">

@@ -1,5 +1,3 @@
-@import url("/public/assets/bootstrap-icons/font/bootstrap-icons.min.css");
-
 :root {
 
    --bs-primary: #D3121B;
@@ -917,6 +915,12 @@ aside#meta hr {
    padding: 3rem;
 }
 
+#contact svg.bi{
+   color: var(--bs-primary);
+   width:16px;
+   height:16px;
+   margin-right:0.5rem;
+}
 
 #contact-area {
    background: var(--bs-light);

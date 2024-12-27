@@ -39,11 +39,11 @@ $href = $controller->router()->hyp('movie', ['slug' => $record->get('movie_slug'
                 }
 
                 if (!empty($people)) { ?>
-                    <p class="author"><i class="bi bi-person-fill pe-1"></i><?= $people; ?></p>
+                    <p class="author"><?= $this->bi('person-fill', ['class' => 'pe-1']); ?><?= $people; ?></p>
                 <?php } ?>
 
                 <aside class="input-group commander-boutique">
-                    <button class="form-control btn-commander" data-bs-toggle="modal" data-bs-target="#modal-order" data-titre="<?= $record; ?>" data-prix="<?= $record->get('price'); ?>" data-delivery-be="<?= $record->get('deliveryBe'); ?>" data-delivery-eu="<?= $record->get('deliveryEu'); ?>" data-id="<?= $record->get('id'); ?>"><i class="bi bi-cart-plus-fill"></i> </button>
+                    <button class="form-control btn-commander" data-bs-toggle="modal" data-bs-target="#modal-order" data-titre="<?= $record; ?>" data-prix="<?= $record->get('price'); ?>" data-delivery-be="<?= $record->get('deliveryBe'); ?>" data-delivery-eu="<?= $record->get('deliveryEu'); ?>" data-id="<?= $record->get('id'); ?>"><?= $this->bi('cart-plus-fill') ?> </button>
                     <span class="input-group-text prix"><?= number_format($record->get('price'), 2) ?> &euro;</span>
                 </aside>
                 <small class="mt-3 frais"><?= $record->get('price'); ?>&euro; + <?= $record->get('deliveryBe') ?>&euro; de frais d'envoi en Belgique ou <?= $record->get('deliveryEu') ?>&euro; en Europe</small>

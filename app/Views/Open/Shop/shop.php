@@ -1,16 +1,16 @@
 <?php
-
-use \HexMakina\Marker\Marker; ?>
+use \HexMakina\Marker\Marker;
+?>
 
 <?php $this->layout('Open::layout', ['title' => $page->label()]) ?>
 
 <div class="container my-lg-5 pb-5" id="boutique">
     <ul class="nav nav-tabs align-items-end d-flex justify-content-center" id="boutiqueTabs">
         <li class="nav-item pb-0 order-md-1 order-2">
-            <a href="#dvds" class="nav-link active" data-bs-toggle="tab"><i class="bi bi-disc-fill"></i>DVDs</a>
+            <a href="#dvds" class="nav-link active" data-bs-toggle="tab"><?= $this->bi('disc-fill', ['class' => 'me-2']); ?> DVDs</a>
         </li>
         <li class="nav-item pb-0 order-md-1 order-2">
-            <a href="#livres" class="nav-link" data-bs-toggle="tab"><i class="bi bi-book-fill"></i>Livres</a>
+            <a href="#livres" class="nav-link" data-bs-toggle="tab"><?= $this->bi('book-fill', ['class' => 'me-2']); ?> Livres</a>
         </li>
         <li id="filtres-boutique" class="col-12 col-md-4 ms-auto order-md-2 order-1 pb-1">
             <div class="row">
@@ -56,7 +56,7 @@ use \HexMakina\Marker\Marker; ?>
 
 
 
-<script nonce="<?= $CSP_nonce?>">
+<script nonce="<?= $CSP_nonce ?>">
     const compare = function(ids, asc) {
         return function(row1, row2) {
             const tdValue = function(row, ids) {

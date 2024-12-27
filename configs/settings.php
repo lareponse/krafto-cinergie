@@ -85,7 +85,8 @@ $settings['template'] = [
   
   'extensions' => [
     '\App\Views\CinergieStreamlineIcons',
-    '\App\Views\CinergieDashlyComponents'
+    '\App\Views\CinergieDashlyComponents', 
+    '\App\Views\CinergieBootstrapIcons',
   ],
 
   'registerClass' => [

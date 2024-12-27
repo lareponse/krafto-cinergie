@@ -24,9 +24,7 @@
         <?= $this->section('content') ?>
 
         <nav id="scroll-to-top">
-            <a href="#top">
-                <img src="/public/assets/img/scroll-top.svg" alt="scroll to top" class="img-fluid">
-            </a>
+            <a href="#top"><?=$this->bi('arrow-up-circle');?></a>
         </nav>
     </main>
 

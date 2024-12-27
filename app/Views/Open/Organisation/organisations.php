@@ -1,6 +1,8 @@
 <?php
 
-use \HexMakina\Marker\Marker; ?>
+use \HexMakina\Marker\Marker;
+
+?>
 
 <?php $this->layout('Open/layout', ['title' => $page->label()]) ?>
 <div class="container">
@@ -9,7 +11,7 @@ use \HexMakina\Marker\Marker; ?>
 
 
         <button class="btn btn-outline-primary add-btn ms-auto" data-bs-toggle="modal" data-bs-target="#modalter_prorg">
-            <i class="bi bi-plus-circle"></i>
+            <?= $this->bi('plus-circle') ?>
             <span class="d-none d-lg-inline">Ajouter</span> votre organisation
         </button>
     </div>

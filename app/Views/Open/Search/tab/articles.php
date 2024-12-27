@@ -41,7 +41,7 @@ use \HexMakina\Marker\{Marker,Form};
             <article class="card shadow p-0 listing mb-3 px-lg-0">
                 <div class="row g-0">
                     <div class="col-2 d-flex justify-content-center align-items-center">
-                        <i class="bi bi-newspaper"></i>
+                        <?= $this->bi('newspaper');?>
                     </div>
                     <div class="col-10">
                         <a href="<?=$controller->router()->hyp('article', ['slug' => $record->slug()])?>">

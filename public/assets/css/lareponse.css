@@ -213,9 +213,11 @@ aside.filtres header button {
     margin-top: 1rem;
 }
 
-.share i {
+.share svg {
+    width:23px;
+    height:23px;
     font-size: 1.2rem;
-    padding: 0;
+    margin-right:0.5rem;
 }
 
 .share .print {
@@ -631,14 +633,9 @@ body>footer {
 }
 
 body>footer .partenaire-item {
-    /* border-radius: 1rem; */
-    /* background: var(--bs-white); */
-
-    display: flex;
     align-items: center;
     justify-content: center;
-    width: 7rem;
-    height: 7rem;
+
 }
 
 body>footer .partenaire-item img {
@@ -654,6 +651,7 @@ body>footer #branding img {
     max-width: 17rem;
 }
 
+body>footer #branding svg,
 body>footer .bi {
     color: var(--bs-white);
     font-size: 1.5rem;
@@ -805,4 +803,23 @@ div.embedVideo {
 #casting-single pre {
     font-size: 1.2rem;
     font-family: 'Poppins', sans-serif;
+}
+
+body>header svg{
+    color:white;
+}
+
+body>header .navbar-toggler svg {
+    width: 48px;
+    height: 48px;
+    color: var(--primary);
+}
+
+.meta-list svg{
+    color:var(--primary);
+}
+
+svg.bi{
+    width:23px;
+    height:23px;
 }

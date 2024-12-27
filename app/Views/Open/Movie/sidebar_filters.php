@@ -31,7 +31,7 @@ $this->layout('Open/_partials/sidebar_filters', ['action' => $controller->router
 </select>
 
 <a href="#" class="mt-3 d-block text-primary fs-5" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    <i class="bi bi-chevron-down"></i>
+    <?=$this->bi('chevron-down')?>
     D'autres critères ?
 </a>
 <div class="collapse" id="collapseExample">

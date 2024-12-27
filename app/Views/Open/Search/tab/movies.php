@@ -1,5 +1,5 @@
 <?php
-use \HexMakina\Marker\{Marker,Form}; 
+use \HexMakina\Marker\{Marker, Form};
 ?>
 <section class="row mt-4 mb-2 recherche-page">
 
@@ -57,15 +57,16 @@ use \HexMakina\Marker\{Marker,Form};
     if (empty($movies->records())) {
         echo Marker::strong($messageNoResults);
     } else {
+
         foreach ($movies->records() as $record) {
     ?>
             <article class="card shadow p-0 listing mb-3 px-lg-0">
                 <div class="row g-0">
                     <div class="col-2 d-flex justify-content-center align-items-center">
-                        <i class="bi bi-film"></i>
+                        <?= $this->bi('film') ?>
                     </div>
                     <div class="col-10">
-                        <a href="<?= $controller->router()->hyp('movie', ['slug' => $record->slug()])?>">
+                        <a href="<?= $controller->router()->hyp('movie', ['slug' => $record->slug()]) ?>">
                             <div class="row card-body">
                                 <div class="col-12 col-sm-6 col-md-8">
                                     <h5 class="card-title mb-0"><?= $record ?></h5>

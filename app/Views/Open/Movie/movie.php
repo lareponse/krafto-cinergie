@@ -87,7 +87,7 @@ $collection_href = $controller->router()->hyp('movies');
                         ?>
                             <aside class="input-group big commander-boutique">
                                 <button class="form-control btn-commander" data-bs-toggle="modal" data-bs-target="#modal-order" data-delivery-be="<?= $merch->get('deliveryBe'); ?>" data-delivery-eu="<?= $merch->get('deliveryEu'); ?>" data-titre="<?= $merch ?>" data-prix="<?= $merch->get('price') ?>">
-                                    <i class="bi bi-cart-plus-fill"></i> </button>
+                                    <?= $this->bi('cart-plus-fill') ?> </button>
                                 <span class="input-group-text prix"><?= $merch->get('price') ?> &euro;</span>
                             </aside>
                         <?php

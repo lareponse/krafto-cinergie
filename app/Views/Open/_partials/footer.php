@@ -12,21 +12,23 @@
 
         <nav>
             <a target="_blank" href="https://www.facebook.com/cinergie.be/">
-                <i class="bi bi-facebook"></i>
+                <?= $this->bi('facebook') ?>
             </a>
 
             <a target="_blank" href="https://twitter.com/cinergie">
-                <i class="bi bi-twitter-x"></i>
+                <?= $this->bi('twitter') ?>
             </a>
 
             <a target="_blank" href="https://www.youtube.com/channel/UCyKdwOw0TYnSUL_vZ1BJ7jA/videos">
-                <i class="bi bi-youtube"></i>
+                <?= $this->bi('youtube') ?>
             </a>
+
             <a target="_blank" href="https://www.instagram.com/cinergie.be/?hl=fr">
-                <i class="bi bi-instagram"></i>
+                <?= $this->bi('instagram') ?>
             </a>
+            
             <a class="print">
-                <i class="bi bi-printer-fill me-1"></i>
+                <?= $this->bi('printer-fill') ?>
             </a>
         </nav>
     </div>
@@ -74,10 +76,10 @@
             <a class="partenaire-item" href="https://audiovisuel.cfwb.be/">
                 <img src="/public/assets/img/partenaires/logofwb.png" alt="Centre du Cinéma et de l'Audiovisuel de la Communauté Française" width="140" height="100" />
             </a>
-<!-- 
-            <a class="partenaire-item" href="https://lareponse.be">
-                <img src="/public/assets/img/partenaires/lareponse.png" alt="La Réponse" />
-            </a> -->
+            <!-- 
+    <a class="partenaire-item" href="https://lareponse.be">
+    <img src="/public/assets/img/partenaires/lareponse.png" alt="La Réponse" />
+    </a> -->
         </nav>
     </section>
 

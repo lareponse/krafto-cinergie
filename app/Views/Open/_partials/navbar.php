@@ -59,6 +59,7 @@ $menu = [
     </ul>
     <div class="socials d-none d-xl-block">
         <button type="button" data-bs-toggle="collapse" data-bs-target="#searchBAR" aria-controls="searchBAR" aria-expanded="false" aria-label="Toggle navigation" class="mx-1 btn-search">
-            <img src="/public/assets/wejune/img/icons/search.svg" alt="Search bar toggler"></button>
+            <?= $this->bi('search'); ?>
+        </button>
     </div>
 </nav>
