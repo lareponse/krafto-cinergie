@@ -1,3 +1,4 @@
+import ShadowBox from "./shadow-box.js";
 class CookieConsent {
   constructor() {
     this.defaultPreferences = {
@@ -6,8 +7,7 @@ class CookieConsent {
       marketing: true,
     };
     this.localStorageIndex = "cookie-consent-preferences";
-    this.modal = document.getElementById("cookie-modal");
-
+    this.modal = new ShadowBox("cookie-modal-template");
     this.init();
   }
 
@@ -101,106 +101,51 @@ class CookieConsent {
     }
   }
 
-  openModal() {
-    const focusableElements =
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
-
+  openModal(origin) {
+   
     let preferences = this.loadPreferences();
     if (!preferences) {
       preferences = this.defaultPreferences;
     }
-    //load and clone template #cookie-modal-template
-    let template = document.getElementById("cookie-modal-template");
-    template = document.importNode(template.content, true);
-    this.modal = template.querySelector("#cookie-modal");
-    this.modal.querySelector("#analytics-cookies").checked =
-      preferences.analytics;
-    this.modal.querySelector("#marketing-cookies").checked =
+    this.modal.html().querySelector("#analytics-cookies").checked = preferences.analytics;
+    this.modal.html().querySelector("#marketing-cookies").checked =
       preferences.marketing;
 
-    document.getElementById("backdrop").classList.add("active");
-
     // Handle "Close"
-    this.modal
+    this.modal.html()
       .querySelector("#btn-close-modal")
       .addEventListener("click", () => {
         this.closeModal();
       });
     // Save Preferences
     this.modal
+      .html()
       .querySelector("#btn-save-preferences")
       .addEventListener("click", () => {
         this.actionSavePreferences();
       });
 
-    // accessibility
-    this.modal.querySelector(focusableElements).focus();
-    document.addEventListener("keydown", (event) => {
-      this.handleKeyEvents(event);
-    });
-
-    // append modal to body
-    document.body.appendChild(this.modal);
-    this.modal.style.display = "block";
-    this.modal.setAttribute("aria-hidden", "false");
-    this.modal.focus();
+    this.modal.open();
   }
 
   closeModal() {
-    // loose focus from cookie-modal
-    this.modal.blur();
-    document.querySelector("a.cookie-preferences").focus();
-    // loose focus to origin point
-    this.modal.setAttribute("aria-hidden", "true");
-    this.modal.style.display = "none";
-    
-    document.getElementById("backdrop").classList.remove("active");
-    
-    // set focus to #cookie-banner
-    document.getElementById("cookie-banner").focus();
-
     // remove the event listeners
     this.modal
+      .html()
       .querySelector("#btn-close-modal")
       .removeEventListener("click", () => {
         this.closeModal();
       });
 
     this.modal
+    .html()
       .querySelector("#btn-save-preferences")
       .removeEventListener("click", () => {
         this.actionSavePreferences();
       });
 
-    // accessibility
 
-    // remove keydown event listener
-    document.removeEventListener("keydown", (event) => {
-      this.handleKeyEvents(event);
-    });
-
-    this.modal.parentNode.removeChild(this.modal);
-  }
-
-  handleKeyEvents(event) {
-    if (event.key === "Escape") this.closeModal();
-    if (event.key === "Tab") this.trapFocus(event);
-  }
-
-  trapFocus(event) {
-    const focusableElements = this.modal.querySelectorAll(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-    );
-    const firstElement = focusableElements[0];
-    const lastElement = focusableElements[focusableElements.length - 1];
-
-    if (event.shiftKey && document.activeElement === firstElement) {
-      event.preventDefault();
-      lastElement.focus();
-    } else if (!event.shiftkey && document.activeElement === lastElement) {
-      event.preventDefault();
-      firstElement.focus();
-    }
+    this.modal.close();
   }
 
   // Store preferences in localStorage
