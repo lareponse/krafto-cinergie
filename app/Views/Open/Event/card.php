@@ -1,21 +1,17 @@
-<article class="card shadow p-0 listing mb-3 px-lg-0">
-    <a href="<?= $event->link() ?>">
-        <div class="row g-0">
-            <div class="col-2 date-item">
-                <span><?= substr($event->get('starts'), -2, 2) ?></span>
-                <span class="otto-date text-uppercase" otto-format='{"month":"short"}'><?= $event->get('starts') ?></span>
-            </div>
+<a href="<?= htmlspecialchars($event->link(), ENT_QUOTES, 'UTF-8') ?>">
+    <article class="event shadow p-0 listing mb-3 px-lg-0">
+        <div class="date-item">
+            <span><?= htmlspecialchars(substr($event->get('starts'), -2, 2), ENT_QUOTES, 'UTF-8') ?></span>
+            <span class="otto-date text-uppercase" otto-format='{"month":"short"}'><?= htmlspecialchars($event->get('starts'), ENT_QUOTES, 'UTF-8') ?></span>
+        </div>
 
-            <div class="col-10">
-                <div class="card-body">
-                    <h6 class="card-title otto-id-label" otto-urn="Tag:<?= $event->get('type_id'); ?>"><?= $event->get('type_id') ?></span>
-                        <h5 class="card-title mb-0"><?= $event ?></h5>
-                        <div class="details">
-                            <p class="card-text text-secondary"><small>jusqu'au <span class="otto-date" otto-format='{"day": "numeric","month": "long","year": "numeric"}'><?= $event->get('stops'); ?></span></small></p>
-                            <p class="card-text cta"><small>En savoir plus</small></p>
-                        </div>
-                </div>
+        <div>
+            <strong class="otto-id-label" otto-urn="Tag:<?= htmlspecialchars($event->get('type_id'), ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($event->get('type_id'), ENT_QUOTES, 'UTF-8') ?></strong>
+            <h5><?= htmlspecialchars($event, ENT_QUOTES, 'UTF-8') ?></h5>
+            <div class="details">
+                <small>jusqu'au <span class="otto-date" otto-format='{"day": "numeric","month": "long","year": "numeric"}'><?= htmlspecialchars($event->get('stops'), ENT_QUOTES, 'UTF-8') ?></span></small>
+                <small class="cta">En savoir plus</small>
             </div>
         </div>
-    </a>
-</article>
+    </article>
+</a>

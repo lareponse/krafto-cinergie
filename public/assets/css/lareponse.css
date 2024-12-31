@@ -54,8 +54,11 @@
     --shadow: rgba(0, 0, 0, .10);
 }
 
-
-
+*,
+::after,
+::before {
+    box-sizing: border-box;
+}
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -66,6 +69,8 @@ body {
     letter-spacing: 0.4px;
     color: var(--bs-black);
     background: var(--bs-white);
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body>header nav li {
@@ -149,6 +154,7 @@ aside.filtres header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-weight:bold;
 }
 
 aside.filtres header button {
@@ -167,6 +173,9 @@ aside.filtres header button {
 
 }
 
+
+/** COMMON COMPONENTS */
+
 #scroll-to-top {
     opacity: 0.5;
     height: 2rem;
@@ -175,13 +184,70 @@ aside.filtres header button {
     bottom: 1rem;
     left: 1rem;
     z-index: 2;
-
 }
 
 #scroll-to-top:hover {
     opacity: 1;
 }
 
+
+.cta {
+    font-weight: 500;
+    display: inline-block;
+    position: relative;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: var(--primary);
+}
+
+.cta,
+.cta::before {
+    transition: all 0.5s ease-in-out;
+}
+
+.cta::before {
+    content: '>';
+    display: block;
+    position: absolute;
+    right: -15px;
+}
+
+.cta:hover::before {
+    right: -22.5px;
+}
+
+.pagination-module {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    flex-wrap: wrap;
+    margin: 5rem 0;
+}
+
+.pagination-module .precedent .cta::before {
+    content: '<';
+    left: -25px;
+    right: initial;
+}
+
+.pagination-module .precedent .cta:hover::before {
+    left: -35px;
+}
+
+.pagination-module .page-btn {
+    color: var(--black);
+
+}
+
+.pagination-module a.page-btn {
+    padding: 2.5px 11.5px;
+}
+
+.pagination-module a.page-btn.active,
+.pagination-module a.page-btn:hover {
+    color: var(--white);
+    background: var(--primary);
+}
 
 
 .share,
@@ -214,10 +280,10 @@ aside.filtres header button {
 }
 
 .share svg {
-    width:23px;
-    height:23px;
+    width: 23px;
+    height: 23px;
     font-size: 1.2rem;
-    margin-right:0.5rem;
+    margin-right: 0.5rem;
 }
 
 .share .print {
@@ -599,7 +665,8 @@ fieldset label:has(+[required])::after {
     width: 1rem;
     background-color: #FFF;
     background-image: url('/public/assets/img/incognito.svg');
-    background-repeat: no-repeat background-position:center;
+    background-repeat: no-repeat;
+    background-position: center;
     border-radius: 50%;
 
     /* Border for the box */
@@ -785,6 +852,7 @@ div.embedVideo {
     padding: 1em 0;
 }
 
+
 .sib-form-container a {
     color: var(--primary);
     text-decoration: underline;
@@ -805,8 +873,8 @@ div.embedVideo {
     font-family: 'Poppins', sans-serif;
 }
 
-body>header svg{
-    color:white;
+body>header svg {
+    color: white;
 }
 
 body>header .navbar-toggler svg {
@@ -815,11 +883,172 @@ body>header .navbar-toggler svg {
     color: var(--primary);
 }
 
-.meta-list svg{
-    color:var(--primary);
+.meta-list svg {
+    color: var(--primary);
 }
 
-svg.bi{
-    width:23px;
-    height:23px;
+svg.bi {
+    width: 23px;
+    height: 23px;
+}
+
+
+/* === AGENDA : CARD */
+
+#listing-agenda .title-agenda {
+    display: flex;
+    flex-wrap: wrap;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+article.event {
+    display: flex;
+    border-radius: 0.7rem;
+    overflow: hidden;
+    transition: 0.5s;
+    position: relative;
+    margin: 0 0.5em;
+}
+
+article.event h5 {
+    color: black;
+}
+
+article.event .date-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    text-align: center;
+    min-width: 7rem;
+}
+
+article.event .date-item span {
+    width: 100%;
+    padding: 0.75em;
+    width: 100%;
+    font-weight: 600;
+}
+
+article.event .date-item :first-child {
+    font-size: 1.5rem;
+}
+
+article.event .date-item :last-child {
+    font-size: 1rem;
+    background: var(--bs-primary);
+    color: var(--bs-white);
+}
+
+article.event .details {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 2rem;
+    color: var(--secondary-dark);
+}
+
+article.event>div:last-child {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+
+
+
+/** COOKIES BANNER */
+.cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #f8f9fa;
+    padding: 1em;
+    border-top: 2px solid var(--primary);
+    text-align: center;
+    z-index: 9999;
+}
+
+.cookie-banner button {
+    margin: 0 0.5em;
+    padding: 0.5em 1em;
+    cursor: pointer;
+}
+
+/* Modal styling */
+.cookie-modal {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    width: 100%;
+    max-width: 35rem;
+    /* Set a max height for the modal */
+    background: #fff;
+    border: 2px solid var(--primary);
+    border-bottom:0;
+    border-radius: 1rem 1rem 0 0 ;
+    transform: translate(-50%, 0%);
+    /* Enable scrolling for the modal content */
+    overflow-y: auto;
+    /* Initially hidden */
+    z-index: 10000;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+.cookie-modal>h2{
+    background: var(--black);
+    color: var(--white);
+    padding: 1rem;
+    /* background: rgba(255, 255, 255, 0.8); */
+}
+.cookie-modal>h2 span {
+    color: var(--primary);
+}
+.cookie-modal .cookie-modal-body{
+    padding: 1rem;
+}
+.cookie-modal .cookie-modal-body h2, h3{
+    margin:0;
+    padding:0;
+}
+
+.cookie-category {
+    margin-bottom: 1em;
+}
+
+.video-placeholder {
+    width: 560px;
+    height: 315px;
+    border: 2px dashed #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1em auto;
+    text-align: center;
+}
+
+.cookie-banner-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+html {
+    overflow: scroll;
+}
+
+html:not(:has(#cookie-banner.cookie-informed)) {
+    overflow: hidden;
+}
+
+#banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
 }
