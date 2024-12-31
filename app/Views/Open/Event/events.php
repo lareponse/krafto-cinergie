@@ -24,7 +24,7 @@
 
         <hr>
 
-        <div class="row mb-5 d-none d-sm-none d-md-none d-lg-block" id="agenda-widget">
+        <div class="mb-5 d-none d-sm-none d-md-none d-lg-block" id="agenda-widget">
             <?php $this->insert('Open/Event/fullcalendar'); ?>
         </div>
 

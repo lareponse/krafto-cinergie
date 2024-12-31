@@ -26,14 +26,14 @@
             <a target="_blank" href="https://www.instagram.com/cinergie.be/?hl=fr">
                 <?= $this->bi('instagram') ?>
             </a>
-            
+
             <a class="print">
                 <?= $this->bi('printer-fill') ?>
             </a>
         </nav>
     </div>
 
-    <nav id="sitemap">
+    <nav id="sitemap" role="navigation">
         <ul>
             <li><a href="<?= $controller->router()->hyp('home'); ?>">Accueil</a></li>
             <li><a href="<?= $controller->router()->hyp('articles'); ?>">Articles</a></li>
@@ -46,7 +46,7 @@
         </ul>
 
         <ul>
-            <li><a href="https://www.cinergie.be/podcast">Podcast</a></li>
+            <li><a href="<?= $controller->router()->hyp('glaneuses'); ?>">Podcast</a></li>
             <li><a href="<?= $controller->router()->hyp('contests'); ?>">Les concours</a></li>
             <li><a href="<?= $controller->router()->hyp('authors'); ?>">Nos auteurs</a></li>
             <li><a href="<?= $controller->router()->hyp('history'); ?>">Notre histoire</a></li>
@@ -59,31 +59,31 @@
     <?= $this->insert('Open::_partials/form_brevo') ?>
 
     <section id="partenaires">
-        <h5 class="text-uppercase">Nos partenaires</h5>
-        <nav>
-            <a class="partenaire-item" href="https://www.maisondelafrancite.be/">
-                <img src="/public/assets/img/partenaires/logo_maison_de_la_francite.png" alt="Maison de la Francité" width="140" height="100" />
-            </a>
+                    <h5 class="text-uppercase">Nos partenaires</h5>
+                    <nav>
+                        <a class="partenaire-item" href="https://www.maisondelafrancite.be/">
+                            <img src="/public/assets/img/partenaires/logo_maison_de_la_francite.png" alt="Maison de la Francité" width="140" height="100" />
+                        </a>
 
-            <a class="partenaire-item" href="https://be.brussels/">
-                <img src="/public/assets/img/partenaires/iris_bruxelles.png" alt="Région de Bruxelles-Capitale - Administration Economie et Emploi" width="140" height="100" />
-            </a>
+                        <a class="partenaire-item" href="https://be.brussels/">
+                            <img src="/public/assets/img/partenaires/iris_bruxelles.png" alt="Région de Bruxelles-Capitale - Administration Economie et Emploi" width="140" height="100" />
+                        </a>
 
-            <a class="partenaire-item" href="https://ccf.brussels/wp-signup.php?new=www.spfb.brussels">
-                <img src="/public/assets/img/partenaires/bruxelles-francophone.png" alt="Service public francophone bruxellois" width="140" height="100" />
-            </a>
+                        <a class="partenaire-item" href="https://ccf.brussels/wp-signup.php?new=www.spfb.brussels">
+                            <img src="/public/assets/img/partenaires/bruxelles-francophone.png" alt="Service public francophone bruxellois" width="140" height="100" />
+                        </a>
 
-            <a class="partenaire-item" href="https://audiovisuel.cfwb.be/">
-                <img src="/public/assets/img/partenaires/logofwb.png" alt="Centre du Cinéma et de l'Audiovisuel de la Communauté Française" width="140" height="100" />
-            </a>
-            <!-- 
-    <a class="partenaire-item" href="https://lareponse.be">
-    <img src="/public/assets/img/partenaires/lareponse.png" alt="La Réponse" />
-    </a> -->
-        </nav>
-    </section>
+                        <a class="partenaire-item" href="https://audiovisuel.cfwb.be/">
+                            <img src="/public/assets/img/partenaires/logofwb.png" alt="Centre du Cinéma et de l'Audiovisuel de la Communauté Française" width="140" height="100" />
+                        </a>
+                        <!-- 
+<a class="partenaire-item" href="https://lareponse.be">
+<img src="/public/assets/img/partenaires/lareponse.png" alt="La Réponse" />
+</a> -->
+                    </nav>
+                    </section>
 
-    <section id="copyright">
-        &copy; <?= date('Y') ?> Cinergie &nbsp; | &nbsp; <a href="<?= $controller->router()->hyp('legal') ?>">Mentions légales</a>
-    </section>
+                    <section id="copyright">
+                        &copy; <?= date('Y') ?> Cinergie &nbsp; | &nbsp; <a href="<?= $controller->router()->hyp('legal') ?>">Mentions légales</a> &nbsp; | &nbsp; <a class="cookie-preferences">Préférences cookies</a>
+                    </section>
 </footer>
