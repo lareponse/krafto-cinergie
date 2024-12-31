@@ -16,6 +16,27 @@ document.addEventListener("DOMContentLoaded", function () {
   OttoLink.calls(".otto-phone");
 
   OttoFormatDate.searchAndFormat(".otto-date");
+  let elt;
+
+  // navbar toggler
+  document
+    .querySelectorAll(".nav-controls .toggler[aria-controls]")
+    .forEach(function (toggler) {
+      toggler.addEventListener("click", function (e) {
+        toggler.setAttribute(
+          "arial-expanded",
+          this.getAttribute("arial-expanded") === "true" ? "false" : "true"
+        );
+
+        const target = document.querySelector(
+          "#" + toggler.getAttribute("aria-controls")
+        );
+
+        if (target) {
+          target.classList.toggle("toggled");
+        }
+      });
+    });
 
   document.querySelectorAll("a.print").forEach(function (link) {
     link.addEventListener("click", function (e) {
