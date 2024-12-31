@@ -14,7 +14,7 @@
 
 <template id="cookie-modal-template">
     <!-- Cookie Preferences Modal -->
-    <section id="cookie-modal" class="cookie-modal" role="dialog" aria-labelledby="cookie-modal-title" aria-describedby="cookie-modal-description" aria-hidden="true">
+    <section id="cookie-modal" class="cookie-modal shadow-box" role="dialog" aria-labelledby="cookie-modal-title" aria-describedby="cookie-modal-description" aria-hidden="true">
         <h2 id="cookie-modal-title">Préfér<span>e</span>nces de Cooki<span>e</span>s</h2>
         <div class="cookie-modal-body">
             <p id="cookie-modal-description">Personnalisez vos préférences pour les cookies. Certains cookies sont nécessaires pour le bon fonctionnement du site.</p>
