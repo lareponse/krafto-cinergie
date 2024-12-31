@@ -119,7 +119,7 @@ class CookieConsent {
       preferences.marketing;
 
     document.getElementById("backdrop").classList.add("active");
-    
+
     // Handle "Close"
     this.modal
       .querySelector("#btn-close-modal")
@@ -142,17 +142,20 @@ class CookieConsent {
     // append modal to body
     document.body.appendChild(this.modal);
     this.modal.style.display = "block";
-    this.modal.setAttribute("aria-hidden", "true");
+    this.modal.setAttribute("aria-hidden", "false");
     this.modal.focus();
   }
 
   closeModal() {
     // loose focus from cookie-modal
-    this.modal.setAttribute("aria-hidden", "false");
     this.modal.blur();
+    document.querySelector("a.cookie-preferences").focus();
+    // loose focus to origin point
+    this.modal.setAttribute("aria-hidden", "true");
     this.modal.style.display = "none";
+    
     document.getElementById("backdrop").classList.remove("active");
-
+    
     // set focus to #cookie-banner
     document.getElementById("cookie-banner").focus();
 
@@ -169,6 +172,9 @@ class CookieConsent {
         this.actionSavePreferences();
       });
 
+    // accessibility
+
+    // remove keydown event listener
     document.removeEventListener("keydown", (event) => {
       this.handleKeyEvents(event);
     });
