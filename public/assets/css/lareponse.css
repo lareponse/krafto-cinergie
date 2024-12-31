@@ -154,7 +154,7 @@ aside.filtres header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-weight:bold;
+    font-weight: bold;
 }
 
 aside.filtres header button {
@@ -988,8 +988,8 @@ article.event>div:last-child {
     /* Set a max height for the modal */
     background: #fff;
     border: 2px solid var(--primary);
-    border-bottom:0;
-    border-radius: 1rem 1rem 0 0 ;
+    border-bottom: 0;
+    border-radius: 1rem 1rem 0 0;
     transform: translate(-50%, 0%);
     /* Enable scrolling for the modal content */
     overflow-y: auto;
@@ -997,21 +997,26 @@ article.event>div:last-child {
     z-index: 10000;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
-.cookie-modal>h2{
+
+.cookie-modal>h2 {
     background: var(--black);
     color: var(--white);
     padding: 1rem;
     /* background: rgba(255, 255, 255, 0.8); */
 }
+
 .cookie-modal>h2 span {
     color: var(--primary);
 }
-.cookie-modal .cookie-modal-body{
+
+.cookie-modal .cookie-modal-body {
     padding: 1rem;
 }
-.cookie-modal .cookie-modal-body h2, h3{
-    margin:0;
-    padding:0;
+
+.cookie-modal .cookie-modal-body h2,
+h3 {
+    margin: 0;
+    padding: 0;
 }
 
 .cookie-category {
@@ -1051,4 +1056,208 @@ html:not(:has(#cookie-banner.cookie-informed)) {
     width: 100vw;
     height: 100vh;
     background: rgba(0, 0, 0, 0.5);
+}
+
+body>header {
+    background: var(--black);
+    padding: 0.5rem;
+
+}
+
+body>header>div {
+    display: flex;
+    flex-basis: 1 1 100%;
+    gap: 0 1rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+body>header>div>*{
+    flex: 1 1 auto;
+}
+body>header img {
+    height: 3rem;
+}
+
+body>header nav {
+    display:none;
+    order:3;
+    flex: 1 1 100%;
+}
+#search-bar{
+    display:none;
+    background: var(--dark);
+}
+
+
+#search-bar.toggled{
+    display: block;
+    
+} 
+#search-bar.toggled .fixed-layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding:2rem;
+}
+
+body>header nav.toggled{
+    display: flex;
+    justify-content: end;
+    padding-right:0.5rem;
+}
+
+body>header .nav-controls {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: end;
+}
+
+body>header .nav-controls button {
+    background: none;
+    border: none;
+}
+
+
+body>header nav a {
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--white);
+    font-size: 0.9rem;
+    transition: color 0.5s ease-in-out;
+}
+
+body>header nav ul a.active,
+body>header nav ul a:hover {
+    color: var(--primary);
+}
+
+body>header .nav-controls .toggler[aria-controls="primary-navigation"] svg {
+    width: 48px;
+    height: 48px;
+    color: var(--primary);
+}
+
+@media screen and (min-width: 1200px) {
+    body>header .nav-controls .toggler[aria-controls="primary-navigation"] {
+        display: none;
+    }
+    
+    body>header nav {
+        display: flex;
+        order: initial;
+        flex: 1 1 auto;
+    }
+
+    body>header nav>ul {
+        display: flex;
+        gap: 0.8rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+
+}
+
+@media screen and (min-width: 576px) {
+    .fixed-layout {
+        max-width: 540px;
+        margin: 0 auto;
+        flex-wrap: nowrap;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .fixed-layout {
+        max-width: 720px;
+    }
+}
+
+
+@media screen and (min-width: 992px) {
+    .fixed-layout {
+        max-width: 960px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .fixed-layout {
+        max-width: 1140px;
+    }
+}
+
+@media screen and (min-width: 1300px) {
+    .fixed-layout {
+        max-width: 1260px;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .fixed-layout {
+        max-width: 1320px;
+    }
+}
+
+
+@media print {
+    body>header,
+    body>footer,
+    .navbar,
+    .sidebar,
+    .pagination-module,
+    .cookie-banner,
+    .cookie-modal,
+    .video-placeholder,
+    .share,
+    .cta,
+    #scroll-to-top {
+        display: none !important;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    .card,
+    .card img,
+    .card-title,
+    .card-text {
+        color: black;
+        background: white;
+        border: none;
+        box-shadow: none;
+    }
+
+    .card img {
+        max-height: none;
+        object-fit: contain;
+    }
+
+    .card-title,
+    .card-text {
+        text-align: left;
+    }
+
+    .long-text-content::after {
+        display: none;
+    }
+
+    .long-text-content.folded {
+        max-height: none;
+        overflow: visible;
+    }
+
+    .toggle-button {
+        display: none;
+    }
+
+    .secret-checkbox {
+        display: none;
+    }
+
 }
