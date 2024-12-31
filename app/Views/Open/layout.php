@@ -14,9 +14,7 @@
 
         <?php if (isset($title)) {
         ?>
-            <div class="mb-5 d-none d-lg-block">
-                <h1 class="line-center"><?= $title; ?></h1>
-            </div>
+            <h1 class="mb-5 line-center"><?= $title; ?></h1>
         <?php
         }
         ?>
@@ -24,12 +22,12 @@
         <?= $this->section('content') ?>
 
         <nav id="scroll-to-top">
-            <a href="#top"><?=$this->bi('arrow-up-circle');?></a>
+            <a href="#top"><?= $this->bi('arrow-up-circle'); ?></a>
         </nav>
     </main>
 
     <?php $this->insert('Open::_partials/footer') ?>
-
+    <?php $this->insert('Open::_partials/cookie') ?>
     <?php $this->insert('Open::_partials/scripts') ?>
 </body>
 
