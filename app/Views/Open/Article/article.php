@@ -1,23 +1,14 @@
 <?php $this->layout('Open::layout') ?>
 
 <div class="container my-5 pb-5" id="article-single">
-    <?php
-    if (!empty($article->get('embedVideo'))) {
-    ?><div class="embedVideo"><?= $article->get('embedVideo'); ?></div>
-    <?php
-    } else {
-    ?>
-        <header>
-            <img class="" src="<?= $article->profilePicture(); ?>" alt="Couverture de l'article <?= $article; ?>" />
-        </header>
-    <?php
-    }
-    ?>
+
+    <header <?= empty($article->get('embedVideo')) ? '' : 'class="thirdPartyContent" data-consent-template="primaryEmbedVideo"'; ?>>
+        <img class="" src=" <?= $article->profilePicture(); ?>" alt="Couverture de l'article <?= $article; ?>" />
+    </header>
 
     <h2><?= $article->get('label'); ?></h2>
 
     <div class="row">
-
         <div class="row g-0 mb-5 col-lg-8 align-items-start">
 
             <div class="bg-light p-4 p-lg-5 text-justify">
@@ -58,12 +49,15 @@
             <?= $this->insert('Open::_partials/related_content', ['related_content' => $related_content ?? []]) ?>
 
         </div>
-
-
     </div>
 </div>
+
 
 <script nonce="<?= $CSP_nonce ?>">
     //vanilla js to set the header background image to the article's profile picture
     // document.querySelector('#article-single header').style.backgroundImage = 'url("<?= $article->profilePicture(); ?>")';
 </script>
+
+<template id="primaryEmbedVideo">
+    <div class="embedVideo"><?= $article->get('embedVideo'); ?></div>
+</template>
