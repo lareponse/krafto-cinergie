@@ -18,10 +18,10 @@ $collection_href = $controller->router()->hyp('movies');
                 <?= $this->insert('Open::_partials/share_print', ['label' => $record]); ?>
 
                 <?php
-                    if (!empty($record->get('prix_cinergie'))) {
-                        echo $this->DOM()::img('/public/assets/img/prix_cinergie.png', 'Badge prix cinergie', ['width' => '120']);
-                        echo $this->DOM()::strong($record->get('prix_cinergie'));
-                    }
+                if (!empty($record->get('prix_cinergie'))) {
+                    echo $this->DOM()::img('/public/assets/img/prix_cinergie.png', 'Badge prix cinergie', ['width' => '120']);
+                    echo $this->DOM()::strong($record->get('prix_cinergie'));
+                }
                 ?>
             </div>
 
@@ -45,32 +45,47 @@ $collection_href = $controller->router()->hyp('movies');
                     if (!empty($record->get('released'))) {
                         $href = $collection_href . '?' . http_build_query(['released' => $record->get('released')]);
                         $filter_link = $this->DOM()::a($href, $record->get('released'));
-                        echo $this->DOM()::dt('Date de sortie : ') . $this->DOM()::dd("$filter_link");
+                    ?>
+                        <dt>Date de sortie : </dt>
+                        <dd><?= $filter_link; ?></dd>
+                    <?php
                     }
 
                     if (!empty($record->get('legacy_origine'))) {
-                        echo $this->DOM()::dt('Pays : ') . $this->DOM()::dd($record->get('legacy_origine'));
+                        ?>
+                        <dt>Pays : </dt>
+                        <dd><?= $record->get('legacy_origine'); ?></dd>
+                    <?php
                     }
 
                     if (!empty($record->get('genre_id'))) {
                         $href = $collection_href . '?' . http_build_query(['type' => $record->get('genre_id')]);
                         $filter_link = $this->DOM()::a($href, $record->get('genre_id'), ['class' => 'otto-id-label', 'otto-urn' => "Tag:{$record->get('genre_id')}"]);
-                        echo $this->DOM()::dt('Genre : ') . $this->DOM()::dd("$filter_link");
+                        ?>
+                        <dt>Genre : </dt>
+                        <dd><?= $filter_link; ?></dd>
+                        <?php
                     }
 
                     if (!empty($record->get('metrage_id'))) {
                         $href = $collection_href . '?' . http_build_query(['metrage' => $record->get('metrage_id')]);
                         $filter_link = $this->DOM()::a($href, $record->get('genre_id'), ['class' => 'otto-id-label', 'otto-urn' => "Tag:{$record->get('metrage_id')}"]);
-                        echo $this->DOM()::dt('Metrage : ') . $this->DOM()::dd("$filter_link");
+                        ?>
+                        <dt>Metrage : </dt>
+                        <dd><?= $filter_link; ?></dd>
+                    <?php
                     }
 
                     if (!empty($record->get('runtime'))) {
-                        echo $this->DOM()::dt('Durée : ') . $this->DOM()::dd($record->get('runtime'));
+                        ?>
+                        <dt>Durée : </dt>
+                        <dd><?= $record->get('runtime'); ?></dd>
+                        <?php
                     }
                     ?>
                 </dl>
                 <?php
-  
+
 
                 if (!empty($record->get('casting'))) {
                     echo $this->DOM()::strong('Casting : ', ['class' => 'd-block']);
