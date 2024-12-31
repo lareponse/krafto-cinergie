@@ -102,6 +102,9 @@ class CookieConsent {
   }
 
   openModal() {
+    const focusableElements =
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
     let preferences = this.loadPreferences();
     if (!preferences) {
       preferences = this.defaultPreferences;
@@ -115,11 +118,8 @@ class CookieConsent {
     this.modal.querySelector("#marketing-cookies").checked =
       preferences.marketing;
 
-    this.modal.setAttribute("aria-hidden", "true");
-    this.modal.focus();
-
-    this.modal.style.display = "block";
-
+    document.getElementById("backdrop").classList.add("active");
+    
     // Handle "Close"
     this.modal
       .querySelector("#btn-close-modal")
@@ -133,8 +133,17 @@ class CookieConsent {
         this.actionSavePreferences();
       });
 
-      // append modal to body
+    // accessibility
+    this.modal.querySelector(focusableElements).focus();
+    document.addEventListener("keydown", (event) => {
+      this.handleKeyEvents(event);
+    });
+
+    // append modal to body
     document.body.appendChild(this.modal);
+    this.modal.style.display = "block";
+    this.modal.setAttribute("aria-hidden", "true");
+    this.modal.focus();
   }
 
   closeModal() {
@@ -142,6 +151,7 @@ class CookieConsent {
     this.modal.setAttribute("aria-hidden", "false");
     this.modal.blur();
     this.modal.style.display = "none";
+    document.getElementById("backdrop").classList.remove("active");
 
     // set focus to #cookie-banner
     document.getElementById("cookie-banner").focus();
@@ -152,15 +162,39 @@ class CookieConsent {
       .removeEventListener("click", () => {
         this.closeModal();
       });
-    
+
     this.modal
       .querySelector("#btn-save-preferences")
       .removeEventListener("click", () => {
         this.actionSavePreferences();
       });
 
-    this.modal.parentNode.removeChild(this.modal);
+    document.removeEventListener("keydown", (event) => {
+      this.handleKeyEvents(event);
+    });
 
+    this.modal.parentNode.removeChild(this.modal);
+  }
+
+  handleKeyEvents(event) {
+    if (event.key === "Escape") this.closeModal();
+    if (event.key === "Tab") this.trapFocus(event);
+  }
+
+  trapFocus(event) {
+    const focusableElements = this.modal.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    if (event.shiftKey && document.activeElement === firstElement) {
+      event.preventDefault();
+      lastElement.focus();
+    } else if (!event.shiftkey && document.activeElement === lastElement) {
+      event.preventDefault();
+      firstElement.focus();
+    }
   }
 
   // Store preferences in localStorage

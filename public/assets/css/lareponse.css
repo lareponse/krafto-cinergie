@@ -978,12 +978,29 @@ article.event>div:last-child {
     cursor: pointer;
 }
 
+#backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+#backdrop.active {
+    display: block;
+}
+
 /* Modal styling */
 .cookie-modal {
     position: fixed;
     bottom: 0;
     left: 50%;
     width: 100%;
+    height: 90vh;
+    overflow: scroll;
     max-width: 35rem;
     /* Set a max height for the modal */
     background: #fff;
@@ -1045,7 +1062,7 @@ html {
     overflow: scroll;
 }
 
-html:not(:has(#cookie-banner.cookie-informed)) {
+html:has(#backdrop.active) {
     overflow: hidden;
 }
 
@@ -1066,47 +1083,49 @@ body>header {
 
 body>header>div {
     display: flex;
-    flex-basis: 1 1 100%;
     gap: 0 1rem;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
 }
 
-body>header>div>*{
+body>header>div>* {
     flex: 1 1 auto;
 }
+
 body>header img {
     height: 3rem;
 }
 
 body>header nav {
-    display:none;
-    order:3;
+    display: none;
+    order: 3;
     flex: 1 1 100%;
 }
-#search-bar{
-    display:none;
+
+#search-bar {
+    display: none;
     background: var(--dark);
 }
 
 
-#search-bar.toggled{
+#search-bar.toggled {
     display: block;
-    
-} 
+
+}
+
 #search-bar.toggled .fixed-layout {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    padding:2rem;
+    padding: 2rem;
 }
 
-body>header nav.toggled{
+body>header nav.toggled {
     display: flex;
     justify-content: end;
-    padding-right:0.5rem;
+    padding-right: 0.5rem;
 }
 
 body>header .nav-controls {
@@ -1145,7 +1164,11 @@ body>header .nav-controls .toggler[aria-controls="primary-navigation"] svg {
     body>header .nav-controls .toggler[aria-controls="primary-navigation"] {
         display: none;
     }
-    
+
+    body>header .fixed-layout {
+        flex-wrap: nowrap;
+    }
+
     body>header nav {
         display: flex;
         order: initial;
@@ -1159,15 +1182,12 @@ body>header .nav-controls .toggler[aria-controls="primary-navigation"] svg {
         padding: 0;
         margin: 0;
     }
-
-
 }
 
 @media screen and (min-width: 576px) {
     .fixed-layout {
-        max-width: 540px;
         margin: 0 auto;
-        flex-wrap: nowrap;
+        max-width: 540px;
     }
 }
 
@@ -1204,6 +1224,7 @@ body>header .nav-controls .toggler[aria-controls="primary-navigation"] svg {
 
 
 @media print {
+
     body>header,
     body>footer,
     .navbar,

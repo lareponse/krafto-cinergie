@@ -38,6 +38,8 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
+
+
   document.querySelectorAll("a.print").forEach(function (link) {
     link.addEventListener("click", function (e) {
       window.print();
