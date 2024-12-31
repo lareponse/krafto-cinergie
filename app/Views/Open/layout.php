@@ -17,7 +17,6 @@
         ?>
 
         <?= $this->section('content') ?>
-        <div id="backdrop"></div>
         <nav id="scroll-to-top">
             <a href="#top"><?= $this->bi('arrow-up-circle'); ?></a>
         </nav>
