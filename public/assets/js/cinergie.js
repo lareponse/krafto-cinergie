@@ -3,6 +3,7 @@ import OttoIdLabel from "/public/assets/js/otto/otto-id-label.js";
 import OttoLink from "/public/assets/js/otto/otto-link.js";
 import OttoFormatDate from "/public/assets/js/otto/otto-format-date.js";
 import OttoEpicene from "/public/assets/js/otto/otto-epicene.js";
+import ShadowBox from "/public/assets/js/shadow-box.js";
 
 document.addEventListener("DOMContentLoaded", function () {
   // clickable table rows
@@ -86,4 +87,14 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   new CookieConsent();
+
+  document.querySelectorAll(".shadow-box-trigger[data-shadow-template]").forEach(function (elt) {
+    elt.addEventListener("click", function (e) {
+      e.preventDefault();
+      const shadowTemplateId = this.getAttribute("data-shadow-template");
+      const shadowBox = new ShadowBox(shadowTemplateId, e.target);
+      shadowBox.allowNativeClose();
+      shadowBox.open();
+    });
+  });
 });
