@@ -31,7 +31,10 @@ class ShadowBox {
   open() {
     document.body.appendChild(this.backdrop);
     document.body.appendChild(this.modal);
+    
     this.modal.setAttribute("aria-hidden", "false");
+    this.modal.setAttribute("aria-expanded", "true");
+
     this.backdrop.setAttribute("aria-hidden", "false");
 
     this.modal.querySelector(ShadowBox.FOCUSABLE).focus();
@@ -47,6 +50,8 @@ class ShadowBox {
     // ! add attribute to modal on opening to backtrack origin
 
     this.modal.setAttribute("aria-hidden", "true");
+    this.modal.setAttribute("aria-expanded", "false");
+
     this.backdrop.setAttribute("aria-hidden", "true");
     
     document.removeEventListener("keydown", (event) => {
