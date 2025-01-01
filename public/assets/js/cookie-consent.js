@@ -6,6 +6,10 @@ class CookieConsent {
       analytics: true,
       marketing: true,
     };
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.actionSavePreferences = this.actionSavePreferences.bind(this);
+    
     this.localStorageIndex = "cookie-consent-preferences";
     this.modal = new ShadowBox("cookie-modal-template");
     this.init();
@@ -113,17 +117,13 @@ class CookieConsent {
 
     // Handle "Close"
     this.modal.html()
-      .querySelector("#btn-close-modal")
-      .addEventListener("click", () => {
-        this.closeModal();
-      });
+      .querySelector("#btn-cancel-modal")
+      .addEventListener("click", this.closeModal);
     // Save Preferences
     this.modal
       .html()
-      .querySelector("#btn-save-preferences")
-      .addEventListener("click", () => {
-        this.actionSavePreferences();
-      });
+      .querySelector("#btn-confirm-modal")
+      .addEventListener("click", this.actionSavePreferences);
 
     this.modal.open();
   }
@@ -132,17 +132,13 @@ class CookieConsent {
     // remove the event listeners
     this.modal
       .html()
-      .querySelector("#btn-close-modal")
-      .removeEventListener("click", () => {
-        this.closeModal();
-      });
+      .querySelector("#btn-cancel-modal")
+      .removeEventListener("click", this.closeModal);
 
     this.modal
     .html()
-      .querySelector("#btn-save-preferences")
-      .removeEventListener("click", () => {
-        this.actionSavePreferences();
-      });
+      .querySelector("#btn-confirm-modal")
+      .removeEventListener("click", this.actionSavePreferences);
 
 
     this.modal.close();

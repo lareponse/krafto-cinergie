@@ -20,40 +20,30 @@
             <p id="cookie-modal-description">Personnalisez vos préférences pour les cookies. Certains cookies sont nécessaires pour le bon fonctionnement du site.</p>
 
             <!-- Necessary Cookies -->
-            <div class="cookie-category">
-                <h3>Cookies fonctionnels</h3>
-                <p>Ces cookies sont essentiels pour les fonctionnalités de base du site et ne peuvent pas être désactivés.</p>
-                <label>
-                    <input type="checkbox" checked disabled class="control_indicator form-check-input" />
-                    Activé
-                </label>
-            </div>
+            <fieldset class="cookie-category">
+                <input type="checkbox" id="functional-cookies" checked disabled class="control_indicator form-check-input" />
+                <label for="functional-cookies" class="h3 ms-2">Cookies fonctionnels activés</label>
+            </fieldset>
+            <p>Ces cookies sont essentiels pour les fonctionnalités de base du site et ne peuvent pas être désactivés.</p>
 
             <!-- Analytics Cookies -->
-            <div class="cookie-category">
-                <h3>Cookies d'analyse</h3>
-                <p>Ces cookies permettent de suivre l'utilisation du site pour améliorer nos services (Google Analytics).</p>
-                <label>
-                    <input type="checkbox" id="analytics-cookies" class="control_indicator form-check-input" />
-                    Activer les Cookies d'analyse
-                </label>
-            </div>
+            <fieldset class="cookie-category">
+                <input type="checkbox" id="analytics-cookies" class="control_indicator form-check-input" />
+                <label for="analytics-cookies" class="h3 ms-2">Activer les Cookies d'analyse</label>
+            </fieldset>
+            <p>Ces cookies permettent de suivre l'utilisation du site pour améliorer nos services (Google Analytics).</p>
 
             <!-- Marketing Cookies -->
-            <div class="cookie-category">
-                <h3>Cookies Multimedia & Marketing</h3>
-                <p>Ces cookies permettent d'intégrer nos vidéos originales ainsi que des extraits provenant de tiers (YouTube, Vimeo, Dailymotion).</p>
-                <label>
-                    <input type="checkbox" id="marketing-cookies" class="control_indicator form-check-input" />
-                    Activer les Cookies Multimedia & Marketing
-                </label>
-            </div>
+            <fieldset class="cookie-category">
+                <input type="checkbox" id="marketing-cookies" class="control_indicator form-check-input" />
+                <label for="marketing-cookies" class="h3 ms-2">Activer les Cookies Multimedia & Marketing</label>
+            </fieldset>
+            <p>Ces cookies permettent d'intégrer nos vidéos originales ainsi que des extraits provenant de tiers (YouTube, Vimeo, Dailymotion).</p>
 
-            <div class="d-flex gap-2">
-                <button type="submit" class="btn btn-primary submit-filters" id="btn-save-preferences" role="button" aria-label="Enregistrer les préférences de cookies">Enregistrer les Préférences</button>
-                <button type="cancel" class="btn btn-secondary" id="btn-close-modal" role="button" aria-label="Fermer la fenêtre de préférences">Fermer</button>
-            </div>
         </div>
-
+        <div class=" shadow-box-controls">
+            <button type="submit" role="button" id="btn-confirm-modal" class="btn btn-primary submit-filters" aria-label="Enregistrer les préférences de cookies">Enregistrer les Préférences</button>
+            <button type="button" role="button" id="btn-cancel-modal" class="btn btn-secondary" aria-label="Fermer la fenêtre de préférences">Fermer</button>
+        </div>
     </section>
 </template>
