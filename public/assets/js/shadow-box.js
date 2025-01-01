@@ -3,10 +3,9 @@
 /* accessible modal, using shadow dom */
 class ShadowBox {
   static FOCUSABLE =
-    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    'button, [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
   constructor(shadow_template_id) {
-
     // clone template
     this.modal = document.getElementById(shadow_template_id);
     this.modal = document.importNode(this.modal.content, true);
@@ -31,7 +30,7 @@ class ShadowBox {
   open() {
     document.body.appendChild(this.backdrop);
     document.body.appendChild(this.modal);
-    
+
     this.modal.setAttribute("aria-hidden", "false");
     this.modal.setAttribute("aria-expanded", "true");
 
@@ -53,7 +52,7 @@ class ShadowBox {
     this.modal.setAttribute("aria-expanded", "false");
 
     this.backdrop.setAttribute("aria-hidden", "true");
-    
+
     document.removeEventListener("keydown", (event) => {
       this.handleKeyEvents(event);
     });
@@ -68,20 +67,19 @@ class ShadowBox {
   }
 
   trapFocus(event) {
-    const focusableContent = this.modal.querySelectorAll(ShadowBox.FOCUSABLE);
+    const focusableContent = Array.from(this.focusableElements);
     const firstFocusableElement = focusableContent[0];
     const lastFocusableElement = focusableContent[focusableContent.length - 1];
 
-    if (event.shiftKey) {
-      if (document.activeElement === firstFocusableElement) {
-        lastFocusableElement.focus();
-        event.preventDefault();
-      }
-    } else {
-      if (document.activeElement === lastFocusableElement) {
-        firstFocusableElement.focus();
-        event.preventDefault();
-      }
+    if (event.shiftKey && document.activeElement === firstFocusableElement) {
+      lastFocusableElement.focus();
+      event.preventDefault();
+    } else if (
+      !event.shiftKey &&
+      document.activeElement === lastFocusableElement
+    ) {
+      firstFocusableElement.focus();
+      event.preventDefault();
     }
   }
 
