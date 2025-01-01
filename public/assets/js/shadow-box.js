@@ -5,8 +5,10 @@ class ShadowBox {
   static FOCUSABLE =
     'button, [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-  constructor(shadow_template_id) {
+  constructor(shadow_template_id, origin) {
     // clone template
+    this.origin = origin;
+
     this.modal = document.getElementById(shadow_template_id);
     this.modal = document.importNode(this.modal.content, true);
     this.modal = this.modal.querySelector(".shadow-box");
@@ -16,7 +18,15 @@ class ShadowBox {
 
     this.backdrop = this.makeBackdrop();
 
+    this.handleKeyEvents = this.handleKeyEvents.bind(this);
+
     this.focusableElements = this.modal.querySelectorAll(ShadowBox.FOCUSABLE);
+  }
+
+  allowNativeClose() {
+    this.modal.querySelector(".btn-cancel-modal").addEventListener("click", () => {
+      this.close();
+    } );
   }
 
   html() {
@@ -37,16 +47,12 @@ class ShadowBox {
     this.backdrop.setAttribute("aria-hidden", "false");
 
     this.modal.querySelector(ShadowBox.FOCUSABLE).focus();
-    document.addEventListener("keydown", (event) => {
-      this.handleKeyEvents(event);
-    });
+    document.addEventListener("keydown", this.handleKeyEvents);
   }
 
   close() {
     this.modal.blur();
-
-    // TODO add focus to origin point
-    // ! add attribute to modal on opening to backtrack origin
+    this.origin.focus();
 
     this.modal.setAttribute("aria-hidden", "true");
     this.modal.setAttribute("aria-expanded", "false");
