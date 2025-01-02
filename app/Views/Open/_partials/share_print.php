@@ -2,7 +2,7 @@
     <span class="title me-4">Partager sur</span>
     <div class="actions">
         <span class="socials">
-            <a href="https://twitter.com/intent/tweet?url=<?= urlencode($controller->router()->url()) ?>&text=<?= urlencode($page) ?>">
+            <a href="https://twitter.com/intent/tweet?url=<?= urlencode($controller->router()->url()) ?>&text=<?= urlencode($page ?? 'cinergie.be, le site du cinéma belge') ?>">
                 <?= $this->bi('twitter') ?>
             </a>
 
