@@ -18,8 +18,9 @@ $modal_id = 'modal_job';
                     <span class="text-white"><?= $this->bi('sliders', ['class' => 'me-2']); ?>Filtrer</span>
                 </button>
 
-                <button type="button" class="btn btn-outline-primary shadow-box-trigger" data-shadow-template="template_add_job">
-                    <?= $this->bi('plus-circle', ['class' => 'me-2']) ?><span class="d-none d-sm-inline">Ajoutez</span> votre annonce
+                <button type="button" class="btn btn-outline-primary shadow-box-trigger add-btn" data-shadow-template="template_add_job">
+                    <?= $this->bi('plus-circle') ?>
+                    <span><span class="d-none d-sm-inline">Ajoutez</span> votre annonce</span>
                 </button>
             </div>
 

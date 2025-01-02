@@ -10,7 +10,7 @@ use \HexMakina\Marker\Marker;
     <div class="text-right mb-4">
         <button class="btn btn-outline-primary add-btn ms-auto shadow-box-trigger" data-shadow-template="template_alter_prorg">
             <?= $this->bi('plus-circle') ?>
-            <span class="d-none d-lg-inline">Ajouter</span> votre organisation
+            <span><span class="d-none d-lg-inline">Ajouter</span> votre organisation</span>
         </button>
     </div>
 

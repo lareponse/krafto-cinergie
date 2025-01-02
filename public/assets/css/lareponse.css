@@ -210,7 +210,7 @@ body>main>h1::before {
     content: '';
     width: 50px;
     height: 3px;
-    background: var(--bs-primary);
+    background: var(--primary);
     display: block;
     transform: translateY(-10px);
     margin: 0 auto;
@@ -218,7 +218,7 @@ body>main>h1::before {
 
 fieldset label:has(+[required])::after {
     content: " *";
-    color: var(--bs-primary);
+    color: var(--primary);
 }
 
 .comma:not(:empty):not(:last-child):after {
@@ -252,7 +252,7 @@ dl:after {
 
 aside form label {
     text-transform: uppercase;
-    color: var(--bs-primary);
+    color: var(--primary);
     font-weight: bold;
 }
 
@@ -290,7 +290,7 @@ aside.filtres header {
 aside.filtres header button {
     background: none;
     border: none;
-    color: var(--bs-primary);
+    color: var(--primary);
     text-transform: uppercase;
     font-weight: bold;
     line-height: initial;
@@ -298,7 +298,7 @@ aside.filtres header button {
 
 .filtres label {
     text-transform: uppercase;
-    color: var(--bs-primary);
+    color: var(--primary);
     font-weight: bold;
 
 }
@@ -447,7 +447,7 @@ article.card.listing .date-item {
 }
 
 .card .card-title {
-    color: var(--bs-primary);
+    color: var(--primary);
     text-transform: uppercase;
 
 }
@@ -677,7 +677,7 @@ article.card.listing .date-item {
 #modalter_prorg fieldset label {
     white-space: nowrap;
     text-transform: uppercase;
-    color: var(--bs-primary);
+    color: var(--primary);
     font-weight: bold;
 }
 
@@ -859,7 +859,7 @@ body>footer #sitemap li a {
 }
 
 body>footer #sitemap a:hover {
-    color: var(--bs-primary);
+    color: var(--primary);
 }
 
 body>footer #partenaires nav {
@@ -899,7 +899,7 @@ body>footer #copyright {
 
 form.add-job fieldset>legend,
 form.add-job fieldset>label {
-    color: var(--bs-primary);
+    color: var(--primary);
     font-size: 1rem;
 }
 
@@ -1057,7 +1057,7 @@ article.event .date-item :first-child {
 
 article.event .date-item :last-child {
     font-size: 1rem;
-    background: var(--bs-primary);
+    background: var(--primary);
     color: var(--bs-white);
 }
 
@@ -1322,4 +1322,15 @@ article.event>div:last-child {
     padding-bottom: 3rem;
     display: flex;
     gap: 1rem;
+}
+
+.add-btn {
+    display:flex;
+    align-items:center;
+    gap:1rem;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.9rem;
+    line-height: 1rem;
 }

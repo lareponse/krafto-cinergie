@@ -18,8 +18,9 @@ $mail_message = "Bonjour,<br><br>Je suis intéressé(e) par votre annonce et je 
 
         <div class="offset-lg-1 col-lg-4">
             <div class="row">
-                <button type="button" class="btn btn-outline-primary add-btn order-2 order-sm-2 order-md-1 my-5 d-print-none" data-bs-toggle="modal" data-bs-target="#modal_job">
-                    <?= $this->bi('plus-circle') ?> Ajoutez votre annonce
+                <button type="button" class="btn btn-outline-primary shadow-box-trigger add-btn mb-2" data-shadow-template="template_add_job">
+                    <?= $this->bi('plus-circle') ?>
+                    <span><span class="d-none d-sm-inline">Ajoutez</span> votre annonce</span>
                 </button>
                 <?= $this->insert('Open::Job/modal'); ?>
 
