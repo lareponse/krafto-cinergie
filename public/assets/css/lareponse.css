@@ -539,7 +539,7 @@ article.card.listing .date-item {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin:1rem 0;
+    margin: 1rem 0;
 }
 
 #modalter_prorg fieldset input {
@@ -751,31 +751,6 @@ body>footer #copyright {
     padding: 1rem;
 }
 
-#modal_job fieldset>legend,
-#modal_job fieldset>label {
-    color: var(--bs-primary);
-    font-size: 1rem;
-}
-
-#modal_job fieldset div {
-    display: grid;
-    grid-template-columns: min-content auto;
-    gap: 0.5rem 1rem;
-}
-
-@media screen and (min-width: 768px) {
-    #modal_job .checkboxes-fields {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 4rem;
-    }
-}
-
-
-#modal_job fieldset {
-    margin-top: 2rem;
-}
-
 #equipe-belge {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
@@ -799,22 +774,47 @@ body>footer #copyright {
     object-fit: cover;
 }
 
-#modal_job .free-fields {
+form.add-job fieldset>legend,
+form.add-job fieldset>label {
+    color: var(--bs-primary);
+    font-size: 1rem;
+}
+
+form.add-job fieldset div {
+    display: grid;
+    grid-template-columns: min-content auto;
+    gap: 0.5rem 1rem;
+}
+
+@media screen and (min-width: 768px) {
+    form.add-job .checkboxes-fields {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4rem;
+    }
+}
+
+
+form.add-job fieldset {
+    margin-top: 2rem;
+}
+
+form.add-job .free-fields {
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
 }
 
-#modal_job .free-fields>* {
+form.add-job .free-fields>* {
     flex-grow: 1;
 }
 
-#modal_job label:has(input) {
+form.add-job label:has(input) {
     display: block;
     color: #000;
 }
 
-#modal_job label input {
+form.add-job label input {
     margin-right: 0.7rem;
 }
 

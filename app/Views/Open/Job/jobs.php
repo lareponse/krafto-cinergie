@@ -15,10 +15,11 @@ $modal_id = 'modal_job';
 
             <div class="d-flex justify-content-between mb-3">
                 <button id="filtreBtn" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#filtre-sidebar">
-                    <span class="text-white"><?=$this->bi('sliders', ['class' => 'me-2']);?>Filtrer</span>
+                    <span class="text-white"><?= $this->bi('sliders', ['class' => 'me-2']); ?>Filtrer</span>
                 </button>
-                <button type="button" class="btn btn-outline-primary add-btn" data-bs-toggle="modal" data-bs-target="#<?= $modal_id ?>">
-                    <?= $this->bi('plus-circle', ['class' => 'me-2'])?><span class="d-none d-sm-inline">Ajoutez</span> votre annonce
+
+                <button type="button" class="btn btn-outline-primary shadow-box-trigger" data-shadow-template="template_add_job">
+                    <?= $this->bi('plus-circle', ['class' => 'me-2']) ?><span class="d-none d-sm-inline">Ajoutez</span> votre annonce
                 </button>
             </div>
 
@@ -48,5 +49,4 @@ $modal_id = 'modal_job';
     </div>
 </div>
 
-<!-- modal submit new advert -->
-<?= $this->insert('Open/Job/modal', ['modal_id' => $modal_id]); ?>
+<?= $this->insert('Open/Job/modal'); ?>
