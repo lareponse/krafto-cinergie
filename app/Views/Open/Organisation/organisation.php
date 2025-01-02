@@ -61,8 +61,9 @@ $this->layout('Open::layout')
 
         <!-- Modal -->
         <?php
-        echo Marker::a('#', "Une erreur, une modification? Dites-le nous !", ['class' => 'cta', 'data-bs-toggle' => "modal", 'data-bs-target' => "#modalter_prorg"]);
+        echo Marker::a('#', "Une erreur, une modification? Dites-le nous !", ['class' => 'cta shadow-box-trigger', 'data-shadow-template' => 'template_alter_prorg']);
         ?>
-        <?= $this->insert('Open::_partials/modalter_prorg', ['record' => $record]); ?>
     </article>
 </div>
+
+<?= $this->insert('Open::_partials/modalter_prorg', ['record' => $record]); ?>
