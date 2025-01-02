@@ -24,7 +24,9 @@ class ShadowBox {
   }
 
   allowNativeClose() {
-    this.modal.querySelector(".btn-cancel-modal").addEventListener("click", () => {
+    let btn = this.modal.querySelector(".btn-cancel-modal");
+    if(btn)
+      btn.addEventListener("click", () => {
       this.close();
     } );
   }
