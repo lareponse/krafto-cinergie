@@ -5,11 +5,9 @@ use \HexMakina\Marker\Marker; ?>
 <?php $this->layout('Open::layout', ['title' => $page->label()]) ?>
 
 <div class="container">
-    <div class="d-flex justify-content-between mb-4">
-
-
-        <button class="btn btn-outline-primary add-btn ms-auto" data-bs-toggle="modal" data-bs-target="#modalter_prorg">
-            <?= $this->bi('plus-circle'); ?>
+    <div class="text-right mb-4">
+        <button class="btn btn-outline-primary add-btn ms-auto shadow-box-trigger" data-shadow-template="template_alter_prorg">
+            <?= $this->bi('plus-circle') ?>
             <span class="d-none d-lg-inline">Ajouter</span> votre fiche professionnelle
         </button>
     </div>
