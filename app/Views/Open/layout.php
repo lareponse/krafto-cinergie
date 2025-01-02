@@ -8,14 +8,8 @@
 <body data-bs-spy="scroll" data-bs-target="#navigation">
     <?php $this->insert('Open::_partials/header') ?>
     <main id="content" class="<?php isset($pageClass) ? $pageClass : '' ?>">
-
-        <?php if (isset($title)) {
-        ?>
-            <h1 class="mb-5 line-center"><?= $title; ?></h1>
-        <?php
-        }
-        ?>
-
+        
+        <?= isset($title) ? '<h1>' . $title . '</h1>' : '' ?>
         <?= $this->section('content') ?>
         <nav id="scroll-to-top">
             <a href="#top"><?= $this->bi('arrow-up-circle'); ?></a>
