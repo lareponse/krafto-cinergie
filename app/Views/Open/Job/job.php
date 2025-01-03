@@ -4,7 +4,7 @@ $this->layout('Open::layout');
 $mail_message = "Bonjour,<br><br>Je suis intéressé(e) par votre annonce et je souhaite en savoir plus. <br>Pourriez-vous me donner plus de détails ?<br><br>Cordialement,<br>[Votre Nom]";
 ?>
 
-<div class="container" id="casting-single">
+<div class="fixed-layout" id="casting-single">
 
     <section>
         <h2 class="line-left">Annonce</h2>
@@ -13,10 +13,8 @@ $mail_message = "Bonjour,<br><br>Je suis intéressé(e) par votre annonce et je 
     </section>
 
     <aside class="meta">
-        <button type="button" class="btn btn-outline-primary shadow-box-trigger add-btn" data-shadow-template="template_add_job">
-            <?= $this->bi('plus-circle') ?>
-            <span><span class="d-none d-sm-inline">Ajoutez</span> votre annonce</span>
-        </button>
+
+        <?= $this->insert('Open/Job/modal'); ?>
 
         <div class="shadow meta-list">
 

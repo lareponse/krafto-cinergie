@@ -1,10 +1,15 @@
+<button type="button" class="btn btn-outline-primary shadow-box-trigger add-btn" data-shadow-template="template_add_job">
+    <?= $this->bi('plus-circle') ?>
+    <span><span class="d-none d-sm-inline">Ajoutez</span> votre annonce</span>
+</button>
+
 <template id="template_add_job">
     <form
         action="<?= $controller->router()->hyp('submission_submit') ?>"
         method="POST"
         aria-labelledby="modal_job-label"
         aria-hidden="true"
-        class="shadow-box add-job">
+        class="shadow-box modal-box add-job">
         <header>
             <h2 id="modal_job-label">Nouvelle annonce</h1>
         </header>

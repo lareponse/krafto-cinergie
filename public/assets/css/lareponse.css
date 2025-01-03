@@ -195,7 +195,7 @@ body>header nav li {
 }
 
 body>main:not(.home) {
-    margin-top: 3rem;
+    padding: 3rem 0.5rem;
     /* 50px = 3.125em */
 }
 
@@ -573,7 +573,7 @@ article.card.listing .date-item {
     gap: 2rem;
 }
 
-#professionals.catalog>*:first-child {
+.professionals.catalog>*:first-child {
     grid-row: span 2;
 }
 
@@ -842,17 +842,17 @@ div.embedVideo {
     color: black;
 }
 
-body>main #casting {
+#casting {
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
 }
 
-body>main #casting>* {
+#casting>* {
     flex: 1;
 }
 
-body>main #casting aside {
+#casting aside {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -860,30 +860,39 @@ body>main #casting aside {
 }
 
 @media screen and (min-width: 1200px) {
-    body>main #casting {
+    #casting {
         flex-wrap: nowrap;
     }
 
-    body>main #casting aside .responsive-card {
+    #casting aside .responsive-card {
         flex-direction: column;
     }
 
-    body>main #casting aside .responsive-card img {
+    #casting aside .responsive-card img {
         max-width: max-content;
         border-radius: 0.7rem 0.7rem 0 0;
     }
 }
 
-body>main #casting section {
+#casting section {
     flex: 1 1 auto;
 }
 
-body>main #casting aside {
+#casting aside {
     flex: 1 1 300px;
 }
 
+#casting section nav{
+    display:flex;
+    gap:1rem;
+    justify-content: space-between;
+    margin-bottom:2rem;
+}
 
+#casting section article {
 
+    margin-bottom:2rem;
+}
 
 #casting-single pre {
     font-size: 1.2rem;
@@ -906,7 +915,6 @@ body>main #casting aside {
 
 #casting-single aside .add-btn {
     width: 100%;
-    margin: 2rem 0;
 }
 
 @media screen and (min-width: 992px) {
@@ -1226,4 +1234,29 @@ article.event>div:last-child {
         display: none;
     }
 
+}
+
+.card.card-job{
+    padding:1rem;
+    margin-bottom:1.7rem;
+}
+.card.card-job header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.card.card-job main{
+    color: var(--dark);
+}
+.card.card-job a{
+    text-transform: uppercase;
+}
+
+.card.card-job>a{
+    color:black
+}
+.card.card-job>a small{
+    text-align:right;
+    display:block;
+    margin-right:1rem;
 }

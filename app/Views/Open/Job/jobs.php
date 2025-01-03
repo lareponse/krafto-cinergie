@@ -1,21 +1,16 @@
 <?php $this->layout('Open/layout', ['title' => $page->get('label')]) ?>
 
-<div class="container" id="casting">
-    <section id="listing-casting">
+<div id="casting">
+    <section>
         <h2 class="line-left"><span class="text-primary h3"></span>Offres et demandes dans le cinéma belge</h2>
 
-        <div class="d-flex justify-content-between mb-3">
-            <button id="filtreBtn" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#filtre-sidebar">
-                <span class="text-white"><?= $this->bi('sliders', ['class' => 'me-2']); ?>Filtrer</span>
-            </button>
+        <nav>
             <button id="filter_jobs" class="btn btn-primary shadow-box-trigger" data-offcanvas-toggle="template_filtre_sidebar" type="button">
                 <span class="text-white"><?= $this->bi('sliders', ['class' => 'me-2']); ?>Filtrer</span>
             </button>
-            <button type="button" class="btn btn-outline-primary shadow-box-trigger add-btn" data-shadow-template="template_add_job">
-                <?= $this->bi('plus-circle') ?>
-                <span><span class="d-none d-sm-inline">Ajoutez</span> votre annonce</span>
-            </button>
-        </div>
+
+            <?= $this->insert('Open/Job/modal'); ?>
+        </nav>
 
         <?php
         foreach ($paginator->records() as $job) {
@@ -42,4 +37,3 @@
     </aside>
 </div>
 <?= $this->insert('Open/Job/filters'); ?>
-<?= $this->insert('Open/Job/modal'); ?>
