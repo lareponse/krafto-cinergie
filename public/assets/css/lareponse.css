@@ -672,7 +672,7 @@ article.card.listing .date-item {
 
 
 body>footer {
-    margin-top:3rem;
+    margin-top: 3rem;
     padding: 1rem;
     background: var(--bs-black);
     color: var(--bs-white);
@@ -817,25 +817,8 @@ form.add-job label input {
     margin-right: 0.7rem;
 }
 
-
 /* PRINT */
-@media print {
-
-    body>footer,
-    .single-post-slider,
-    #scroll-to-top,
-    #share,
-    #print,
-    aside#meta {
-        display: none !important;
-        position: absolute;
-        visibility: hidden;
-    }
-
-    #article-single header {
-        margin-bottom: 2rem;
-    }
-}
+@media print {}
 
 div.embedVideo {
     display: flex;
@@ -865,14 +848,15 @@ body>main #casting {
     gap: 2rem;
 }
 
-body>main #casting>*{
-    flex:1;
+body>main #casting>* {
+    flex: 1;
 }
+
 body>main #casting aside {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    min-width:23rem;
+    min-width: 23rem;
 }
 
 @media screen and (min-width: 1200px) {
@@ -886,7 +870,7 @@ body>main #casting aside {
 
     body>main #casting aside .responsive-card img {
         max-width: max-content;
-        border-radius: 0.7rem 0.7rem 0 0 ;
+        border-radius: 0.7rem 0.7rem 0 0;
     }
 }
 
@@ -898,14 +882,49 @@ body>main #casting aside {
     flex: 1 1 300px;
 }
 
-#casting-single aside#meta {
-    padding: 1.5rem 2rem;
-}
+
+
 
 #casting-single pre {
     font-size: 1.2rem;
     font-family: 'Poppins', sans-serif;
 }
+
+#casting-single aside {
+    max-width: 35rem;
+}
+
+#casting-single aside .meta-list {
+    padding: 1.5rem 2rem;
+}
+
+#casting-single aside .meta-list .meta-head a {
+    text-transform: uppercase;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+#casting-single aside .add-btn {
+    width: 100%;
+    margin: 2rem 0;
+}
+
+@media screen and (min-width: 992px) {
+    #casting-single {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 5rem;
+    }
+
+    #casting-single aside {
+        flex: 0 0 auto;
+        width: 33.33333333%;
+    }
+}
+
+
+
+
 
 /* ========== FILTRE : CASTING */
 #casting-filtre .input-group {
@@ -1132,13 +1151,28 @@ article.event>div:last-child {
 }
 
 
+@import url('print.css');
+
 @media print {
 
+    #article-single header {
+        margin-bottom: 2rem;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-size: 12pt;
+        line-height: 1.6;
+    }
+
+    #search-bar,
     body>header,
     body>footer,
     .navbar,
     .sidebar,
     .pagination-module,
+    .single-post-slider,
     .cookie-banner,
     .cookie-modal,
     .video-placeholder,
@@ -1146,6 +1180,8 @@ article.event>div:last-child {
     .cta,
     #scroll-to-top {
         display: none !important;
+        position: absolute;
+        visibility: hidden;
     }
 
     body {
