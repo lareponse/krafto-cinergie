@@ -5,11 +5,11 @@
         <h2 class="line-left"><span class="text-primary h3"></span>Offres et demandes dans le cinéma belge</h2>
 
         <nav>
-            <button id="filter_jobs" class="btn btn-primary shadow-box-trigger" data-offcanvas-toggle="template_filtre_sidebar" type="button">
+            <button id="filter_jobs" class="btn btn-primary shadow-box-trigger" data-shadow-box-template="template_filtre_sidebar" type="button">
                 <span class="text-white"><?= $this->bi('sliders', ['class' => 'me-2']); ?>Filtrer</span>
             </button>
 
-            <?= $this->insert('Open/Job/modal'); ?>
+            <?= $this->insert('Open/Job/add-btn'); ?>
         </nav>
 
         <?php
@@ -36,4 +36,6 @@
         ?>
     </aside>
 </div>
+
 <?= $this->insert('Open/Job/filters'); ?>
+<?= $this->insert('Open/Job/add-modal'); ?>

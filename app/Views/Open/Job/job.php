@@ -14,7 +14,8 @@ $mail_message = "Bonjour,<br><br>Je suis intéressé(e) par votre annonce et je 
 
     <aside class="meta">
 
-        <?= $this->insert('Open/Job/modal'); ?>
+        <?= $this->insert('Open/Job/add-btn'); ?>
+
 
         <div class="shadow meta-list">
 
@@ -94,3 +95,4 @@ $mail_message = "Bonjour,<br><br>Je suis intéressé(e) par votre annonce et je 
     </aside>
 
 </div>
+<?= $this->insert('Open/Job/add-modal'); ?>
