@@ -1,7 +1,8 @@
 <?php
-use \HexMakina\Marker\{Marker,Form}; 
+
+use \HexMakina\Marker\{Marker, Form};
 ?>
-<section class="row mt-4 mb-2 recherche-page">
+<section class="row mt-4 mb-2 recherche-page search articles">
     <section id="filtres-checkbox">
         <form action="<?= $controller->router()->hyp('search'); ?> class=" mt-3">
             <?= Form::hidden('tab', 'art'); ?>
@@ -34,33 +35,22 @@ use \HexMakina\Marker\{Marker,Form};
     <?php
     if (empty($articles->records())) {
         echo Marker::strong($messageNoResults);
-    } 
-    else {
+    } else {
         foreach ($articles->records() as $record) {
-        ?>
-            <article class="card shadow p-0 listing mb-3 px-lg-0">
-                <div class="row g-0">
-                    <div class="col-2 d-flex justify-content-center align-items-center">
-                        <?= $this->bi('newspaper');?>
-                    </div>
-                    <div class="col-10">
-                        <a href="<?=$controller->router()->hyp('article', ['slug' => $record->slug()])?>">
-                            <div class="row card-body">
-                                <div class="col-12 col-sm-6 col-md-8">
-                                    <h5 class="card-title mb-0"><?= $record ?></h5>
-                                </div>
-                                <div class="col-6 col-md-4">
-                                    <p class="text-right otto-date"><?= $record->get('publication')?></p>
-                                </div>
-                                <div class="details">
-                                    <p class="card-text text-secondary"><small><?=mb_substr(strip_tags($record->get('abstract')), 0, 400)?>....</small></p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </article>
-        <?php
+    ?>
+
+            <a href="<?= $controller->router()->hyp('article', ['slug' => $record->slug()]) ?>" class="result shadow listing">
+
+                <span>
+                    <?= $this->bi('newspaper'); ?>
+                </span>
+                <span class="details">
+                    <strong><?= $record ?></strong>
+                    <span class="otto-date"><?= $record->get('publication') ?></span>
+                    <small class="card-text text-secondary"><?= mb_substr(strip_tags($record->get('abstract')), 0, 400) ?>....</small>
+                </span>
+            </a>
+    <?php
         }
 
         echo $this->insert('Open::_partials/pagination', ['route' => 'search', 'paginator' => $articles]);
