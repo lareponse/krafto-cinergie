@@ -25,10 +25,12 @@
 <link rel="stylesheet" href="/public/assets/wejune/css/bootstrap.min.css">
 <link rel="stylesheet" href="/public/assets/wejune/css/bootstrap-print.min.css" media="print">
 
-<link rel="stylesheet" href="/public/assets/wejune/css/slick-theme.css">
-<link rel="stylesheet" href="/public/assets/wejune/css/slick.min.css">
-<link rel="stylesheet" href="/public/assets/wejune/css/lightbox.min.css">
-<link rel="stylesheet" href="/public/assets/css/sib-styles.css">
+<style data-import="slick, slick-time, lightbox, sib-styles">
+    <?= file_get_contents(DOCUMENT_ROOT. '/public/assets/wejune/css/slick.min.css') ?>
+    <?= file_get_contents(DOCUMENT_ROOT. '/public/assets/wejune/css/slick-theme.css') ?>
+    <?= file_get_contents(DOCUMENT_ROOT. '/public/assets/wejune/css/lightbox.min.css') ?>
+    <?= file_get_contents(DOCUMENT_ROOT. '/public/assets/css/sib-styles.css') ?>
+</style>
 
 <link rel="stylesheet" href="/public/assets/wejune/css/style.css"><!-- original custom css -->
 <link rel="stylesheet" href="/public/assets/css/lareponse.css"><!-- fixes to the custom css -->
