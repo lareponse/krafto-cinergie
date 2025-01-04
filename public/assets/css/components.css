@@ -1,3 +1,7 @@
+.text-primary{
+    color: var(--primary);
+}
+
 .cta {
     font-weight: 500;
     display: inline-block;
@@ -347,14 +351,73 @@
 
 .meta-list li.meta-head a {
     text-transform: uppercase;
-    color: var(--bs-primary);
+    color: var(--primary);
     font-weight: 600;
 }
 
 .meta-list hr {
-    color: var(--bs-primary);
+    color: var(--primary);
     height: 1.5px;
     margin: 2rem auto;
     max-width:18rem;
     width:90%;
+}
+
+
+
+
+
+.search .result {
+    border-radius: var(--border-radius);
+    margin-bottom: 1.25rem;
+}
+
+@media screen and (min-width: 992px) {
+    .search .result {
+        display: flex;
+    }
+}
+
+.search .result .details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.search .result .details .otto-date {
+    color: var(--primary);
+    text-align: right;
+}
+
+.search .result .details>* {
+    flex: 1 1 auto;
+    margin-left: 1rem;
+}
+
+.search .result .details>:last-child {
+    flex: 1 1 100%;
+}
+
+.search .result strong {
+    color: #000;
+    text-transform: uppercase;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.search .result>:first-child {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search .result svg {
+    color: var(--black);
+    object-fit: cover;
+    width: 5rem;
+    height: 5rem;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
 }
