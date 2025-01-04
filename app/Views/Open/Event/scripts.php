@@ -1,20 +1,22 @@
-<script src='/public/assets/js/fullcalendar/index.global.min.js'></script>
-<script src='/public/assets/js/fullcalendar/fr.global.min.js'></script>
-<script src='/public/assets/js/moment.min.js'></script>
 <script nonce="<?= $CSP_nonce ?>">
   <?php
+  echo '// START lib fullcalendar/index.global.min.js, fullcalendar/fr.global.min.js moment.min.js'.PHP_EOL;
+  echo file_get_contents(DOCUMENT_ROOT . '/public/assets/js/fullcalendar/index.global.min.js');
+  echo file_get_contents(DOCUMENT_ROOT . '/public/assets/js/fullcalendar/fr.global.min.js');
+  echo file_get_contents(DOCUMENT_ROOT . '/public/assets/js/moment.min.js');
+  echo '// EOF fullcalendar/index.global.min.js, fullcalendar/fr.global.min.js moment.min.js' . PHP_EOL;
   $current = $current ?? new \DateTimeImmutable();
   ?>
   document.addEventListener('DOMContentLoaded', function() {
 
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
-      
+
       headerToolbar: false,
       // {
-        // left: 'prev,today',
-        // center: 'title',
-        // right: 'next'
+      // left: 'prev,today',
+      // center: 'title',
+      // right: 'next'
       // },
       locale: 'fr',
       initialDate: '<?= $current->format('Y-m-d'); ?>',
