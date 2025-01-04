@@ -6,7 +6,7 @@ $this->layout('Open::layout')
 
 ?>
 
-<div class="container my-5 pb-5" id="professionnel-single">
+<div id="professionnel-single">
     <article class="w-75 mx-auto">
 
         <h1><?= $record ?></h1>
