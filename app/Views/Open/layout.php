@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <?php $this->insert('Open::_partials/head') ?>
 </head>
-<body data-bs-spy="scroll" data-bs-target="#navigation">
+
+<body data-bs-spy="scroll">
     <?php $this->insert('Open::_partials/header') ?>
-    <main <?= $page->get('slug') !== 'home' ? 'class="fixed-layout"' : '' ?>>
+    <main id="<?= $controller->activeSection() ?>" <?= $page !== null && $page->get('slug') !== 'home' ? 'class="fixed-layout"' : '' ?>>
 
         <?= isset($title) ? '<h1>' . $title . '</h1>' : '' ?>
         <?= $this->section('content') ?>
@@ -17,4 +19,5 @@
     <?php $this->insert('Open::_partials/cookie') ?>
     <?php $this->insert('Open::_partials/scripts') ?>
 </body>
+
 </html>

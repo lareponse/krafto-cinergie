@@ -54,6 +54,8 @@
     --primary-rgb: 212, 19, 25;
     --link-hover-color-rgb: 212, 19, 25;
     --shadow: rgba(0, 0, 0, .10);
+
+    --border-radius: 0.7rem;
 }
 
 *,
@@ -73,8 +75,8 @@ body {
     font-weight: 400;
     line-height: 1.7;
     letter-spacing: 0.4px;
-    color: var(--bs-black);
-    background: var(--bs-white);
+    color: var(--black);
+    background: var(--white);
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
 }
@@ -259,7 +261,7 @@ aside form label {
 }
 
 aside form {
-    background: var(--bs-white);
+    background: var(--white);
     padding: 0.7em;
 }
 
@@ -271,14 +273,14 @@ article.card.event-item .date-item {
     justify-content: flex-end;
 }
 
-/* h3.card-title, .card-text {color: var(--bs-white);} */
+/* h3.card-title, .card-text {color: var(--white);} */
 .card-img-overlay h3,
 .card-img-overlay p {
-    color: var(--bs-white);
+    color: var(--white);
 }
 
 aside.filtres {
-    background: var(--bs-white);
+    background: var(--white);
     padding: 1rem;
 }
 
@@ -312,7 +314,7 @@ aside.filtres header button {
 .catalog img {
     height: 15rem;
     object-fit: cover;
-    border-radius: 0.7rem 0.7rem 0 0;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
 }
 
 
@@ -324,7 +326,8 @@ article.card.listing .date-item {
 .card .card-title {
     color: var(--primary);
     text-transform: uppercase;
-
+    font-size: 1.25rem;
+    font-weight: 500;
 }
 
 .card-movie em {
@@ -336,12 +339,11 @@ article.card.listing .date-item {
     justify-content: space-evenly;
     align-items: center;
     text-transform: uppercase;
-    /* background:var(--bs-black); */
 }
 
 .card-movie .meta.professional {
     background-color: black;
-    color: var(--bs-white);
+    color: var(--white);
     font-size: 0.8rem;
     margin-bottom: 0;
     display: inline;
@@ -364,67 +366,6 @@ article.card.listing .date-item {
     color: var(--secondary-dark);
 }
 
-/*
-.card-complex {
-    background: black;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto;
-    border-radius: 0.7rem;
-}
-
-
-.card-complex *:first-child,
-.card-complex *:last-child {
-    grid-column: span 2;
-}
-
-.card-complex *:nth-child(2),
-.card-complex *:nth-child(3) {
-    padding: 0.5rem 1rem 0rem 1rem;
-}
-
-.card-complex *:nth-child(3) {
-    text-align: right;
-}
-
-.card-complex .card-title {
-    color: white;
-    text-transform: uppercase;
-    text-align: center;
-    padding: 1rem 0;
-}
-
-.card-complex:not(.slide) img:hover {
-    filter: grayscale(99%);
-    transition: all 0.5s ease-in-out;
-}
-
-.card-professional>:not(img) {
-    padding: 0 1rem 0.5rem 1rem;
-}
-
-.card-professional img {
-    object-fit: cover;
-    height: 17rem;
-    object-position: center center;
-
-}
-
-@media screen and (min-width: 769px) {
-    .card img {
-        object-fit: cover;
-        height: 250px;
-        object-position: center center;
-    }
-
-    .card-complex img {
-        object-fit: cover;
-        height: 250px;
-        object-position: center center;
-    }
-}
-*/
 #article-single>header {
     background-color: black;
     background-position: bottom;
@@ -674,8 +615,8 @@ article.card.listing .date-item {
 body>footer {
     margin-top: 3rem;
     padding: 1rem;
-    background: var(--bs-black);
-    color: var(--bs-white);
+    background:#000;
+    color: var(--white);
 
     display: grid;
     grid-template-columns: 1fr;
@@ -693,11 +634,32 @@ body>footer {
 }
 
 body>footer .partenaire-item {
-    align-items: center;
-    justify-content: center;
-
+    display:inline-block;
+    width:6rem;
+    height:6rem;
+    margin-right:1.7rem;
+    background-position:center;
+    background-repeat: no-repeat;
+}
+body>footer .partenaire-item span{
+    display:none;
+}
+body>footer .partenaire-item.francite{
+    background-image:url('/public/assets/img/partenaires/logo_maison_de_la_francite.png');
 }
 
+body>footer .partenaire-item.iris{
+    background-image:url('/public/assets/img/partenaires/iris_bruxelles.png');
+}
+
+body>footer .partenaire-item.spfb{
+    background-image:url('/public/assets/img/partenaires/bruxelles-francophone.png');
+        background-size: contain;
+}
+
+body>footer .partenaire-item.cfwb{
+    background-image:url('/public/assets/img/partenaires/logofwb.png');
+}
 body>footer .partenaire-item img {
     object-fit: contain;
     border-radius: 1rem;
@@ -713,7 +675,7 @@ body>footer #branding img {
 
 body>footer #branding svg,
 body>footer .bi {
-    color: var(--bs-white);
+    color: var(--white);
     font-size: 1.5rem;
     margin: 0 0.5rem;
 }
@@ -730,7 +692,7 @@ body>footer #sitemap ul {
 
 body>footer #sitemap li a {
     text-transform: uppercase;
-    color: var(--bs-white);
+    color: var(--white);
     white-space: pre;
 }
 
@@ -870,7 +832,7 @@ div.embedVideo {
 
     #casting aside .responsive-card img {
         max-width: max-content;
-        border-radius: 0.7rem 0.7rem 0 0;
+        border-radius: var(--border-radius) var(--border-radius) 0 0;
     }
 }
 
@@ -882,16 +844,16 @@ div.embedVideo {
     flex: 1 1 300px;
 }
 
-#casting section nav{
-    display:flex;
-    gap:1rem;
+#casting section nav {
+    display: flex;
+    gap: 1rem;
     justify-content: space-between;
-    margin-bottom:2rem;
+    margin-bottom: 2rem;
 }
 
 #casting section article {
 
-    margin-bottom:2rem;
+    margin-bottom: 2rem;
 }
 
 #casting-single pre {
@@ -964,6 +926,45 @@ svg.bi {
 
 
 /* === AGENDA : CARD */
+#agenda-widget {
+    display: none;
+}
+
+@media screen and (min-width: 992px) {
+    #agenda-widget {
+        display: block;
+        margin-bottom: 5rem;
+    }
+}
+
+#Event nav {
+    flex-wrap: wrap;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+#Event nav>:first-child {
+    margin: 0 auto 1rem 0;
+    padding: 0;
+    font-size: 1.25rem;
+    text-align: center;
+}
+
+#Event nav ol {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+@media screen and (min-width: 992px) {
+    #Event nav {
+        display: flex;
+        gap: 3rem;
+    }
+}
 
 #listing-agenda .title-agenda {
     display: flex;
@@ -974,11 +975,10 @@ svg.bi {
 
 article.event {
     display: flex;
-    border-radius: 0.7rem;
+    border-radius: var(--border-radius);
     overflow: hidden;
     transition: 0.5s;
     position: relative;
-    margin: 0 0.5em;
 }
 
 article.event h5 {
@@ -1008,7 +1008,7 @@ article.event .date-item :first-child {
 article.event .date-item :last-child {
     font-size: 1rem;
     background: var(--primary);
-    color: var(--bs-white);
+    color: var(--white);
 }
 
 article.event .details {
@@ -1236,27 +1236,38 @@ article.event>div:last-child {
 
 }
 
-.card.card-job{
-    padding:1rem;
-    margin-bottom:1.7rem;
+.card.card-job {
+    padding: 1rem;
+    margin-bottom: 1.7rem;
 }
-.card.card-job header{
+
+.card.card-job header {
     display: flex;
     justify-content: space-between;
 }
 
-.card.card-job main{
+.card.card-job main {
     color: var(--dark);
 }
-.card.card-job a{
+
+.card.card-job a {
     text-transform: uppercase;
 }
 
-.card.card-job>a{
-    color:black
+.card.card-job>a {
+    color: black
 }
-.card.card-job>a small{
-    text-align:right;
-    display:block;
-    margin-right:1rem;
+
+.card.card-job>a small {
+    text-align: right;
+    display: block;
+    margin-right: 1rem;
+}
+
+.catalog a {
+    text-align: center;
+}
+
+.catalog a.card :last-child {
+    padding: 0.5rem;
 }
