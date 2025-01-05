@@ -1,7 +1,8 @@
 class Korbo {
-  constructor() {
+  constructor(container_id, template_id) {
     this.items = this.load() || [];
     this.customer = localStorage.getItem("customer") || { name: "", email: "" };
+    this.ui = new KorboUI(this, container_id, template_id);
   }
 
   add(basket_item) {
@@ -29,20 +30,7 @@ class Korbo {
 
   save() {
     localStorage.setItem("korbo", JSON.stringify(this.items));
-
-    if (this.count() === 0) {
-      this.hideBasketTrigger();
-    } else {
-      this.showBasketTrigger();
-    }
-  }
-
-  showBasketTrigger() {
-    document.querySelector(".korbo-trigger").classList.remove("hidden");
-  }
-
-  hideBasketTrigger() {
-    document.querySelector(".korbo-trigger").classList.add("hidden");
+    this.ui.refresh();
   }
 
   load() {
@@ -53,8 +41,23 @@ class Korbo {
     return null;
   }
 
-  items() {
+  export() {
     return this.items;
+  }
+
+  update(id, props) {
+    if ("quantity" in props && props.quantity < 1) {
+      console.debug("removing item with quantity < 1");
+      this.remove(id);
+    }
+
+    console.debug("updating qty from ${item.quantity} to ${props.quantity}");
+    let item = this.items.find((item) => item.id === id);
+    if (item) {
+      Object.assign(item, props);
+      this.save();
+      this.ui.refresh();
+    }
   }
 
   count() {
@@ -63,6 +66,62 @@ class Korbo {
 
   total() {
     return this.items.reduce((total, item) => total + item.price, 0);
+  }
+}
+
+class KorboUI {
+  constructor(korbo, container_id, template_id) {
+    this.korbo = korbo;
+    this.lineContainer = document.querySelector(container_id);
+    this.lineTemplate = document.querySelector(template_id);
+
+    this.setLines();
+  }
+
+  refresh() {
+    let korboTrigger = document.querySelector(".korbo-trigger");
+    if (this.korbo.count() === 0) {
+      korboTrigger.classList.add("hidden");
+    } else {
+      korboTrigger.classList.remove("hidden");
+    }
+
+    this.setLines();
+  }
+
+  setLines() {
+    if (this.lineContainer !== null && this.lineTemplate !== null) {
+
+      this.lineContainer.innerHTML = "";
+      this.korbo.items.forEach((item) => {
+        let row = this.lineElement(item);
+        this.lineContainer.appendChild(row);
+      });
+
+      this.lineContainer.addEventListener("change", (e) => {
+        let id = e.target.closest(".korbo-item").dataset.itemId;
+        this.korbo.update(id, {
+          quantity: e.target.value,
+        });
+      });
+    }
+  }
+
+  lineElement(item) {
+    let row = this.lineTemplate.content.cloneNode(true);
+    row = row.querySelector(".korbo-item");
+
+    row.classList.add("korbo-item");
+    row.setAttribute("data-item-id", item.id);
+    row.querySelector('[data-kx-id="title"]').textContent = item.title;
+    row.querySelector('[data-kx-id="price"]').textContent = item.price;
+    row.querySelector('[data-kx-id="delivery"]').textContent = item.deliveryBe;
+    row.querySelector('[data-kx-id="quantity"]').value = item.quantity;
+    row.querySelector('[data-kx-id="total"]').textContent =
+      parseInt(item.quantity) *
+      (parseFloat(item.price) + parseFloat(item.deliveryBe));
+
+    return row;
   }
 }
 

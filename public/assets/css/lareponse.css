@@ -220,7 +220,7 @@ body>main>h1::before {
     margin: 0 auto;
 }
 
-fieldset label:has(+[required])::after{
+fieldset label:has(+[required])::after {
     content: " *";
     color: var(--primary);
 }
@@ -1315,10 +1315,11 @@ body>main>.add-btn {
 
 
 .korbo-trigger {
-
     position: fixed;
     display: flex;
     bottom: 1rem;
+    left: 0;
+    right: 0;
     justify-content: center;
     width: 100%;
     padding: 3rem;
@@ -1332,6 +1333,13 @@ body>main>.add-btn {
     gap: 1rem;
 }
 
+#korbo h2{
+    margin:0;
+    padding:0;
+}
+#korbo fieldset{
+    margin:1rem 0 2rem 0 ;
+}
 #korbo .bank {
     display: grid;
     grid-template-columns: 1fr 6fr;
@@ -1356,6 +1364,37 @@ body>main>.add-btn {
     flex: 1 1 auto;
 }
 
-#korbo label{
-    margin-top:0.7rem;
+#korbo label {
+    margin-top: 0.7rem;
 }
+
+.currency:not(:empty)::after {
+    content: '\20AC';
+}
+
+#korbo .korbo-item {
+    display: grid;
+    grid-template-columns:3fr 1fr 1fr 1fr;
+    gap: 0 1rem;
+    /* Adjust spacing as needed */
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#korbo .korbo-item>div:first-child {
+    grid-column: 1 / -1;
+    font-weight: 500;
+    /* Span the entire row */
+}
+
+.korbo-item small{
+    font-style: italic;
+}
+.korbo-item [data-kx-id="title"]{
+    color: var(--primary);
+}
+.korbo-item input {
+    width: 4rem;
+    text-align:center;
+}
+
