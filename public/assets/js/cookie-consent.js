@@ -1,17 +1,13 @@
 import ShadowBox from "./shadow-box.js";
 class CookieConsent {
   constructor() {
-    this.defaultPreferences = {
-      necessary: true,
-      analytics: true,
-      marketing: true,
-    };
+
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.actionSavePreferences = this.actionSavePreferences.bind(this);
     
     this.localStorageIndex = "cookie-consent-preferences";
-    this.modal = new ShadowBox("cookie-modal-template");
+    this.modal = new ShadowBox("cookie-modal-template", document.activeElement);
     this.init();
   }
 
@@ -109,17 +105,22 @@ class CookieConsent {
    
     let preferences = this.loadPreferences();
     if (!preferences) {
-      preferences = this.defaultPreferences;
+      preferences = {
+        necessary: true,
+        analytics: true,
+        marketing: true,
+      };
     }
+    
     this.modal.html().querySelector("#analytics-cookies").checked = preferences.analytics;
-    this.modal.html().querySelector("#marketing-cookies").checked =
-      preferences.marketing;
+    this.modal.html().querySelector("#marketing-cookies").checked = preferences.marketing;
 
     // Handle "Close"
     this.modal.html()
       .querySelector("#btn-cancel-modal")
       .addEventListener("click", this.closeModal);
-    // Save Preferences
+
+      // Save Preferences
     this.modal
       .html()
       .querySelector("#btn-confirm-modal")
