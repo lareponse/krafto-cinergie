@@ -1,5 +1,4 @@
 <script src="/public/assets/wejune/js/jquery.min.js"></script>
-<script src="/public/assets/wejune/js/bootstrap.min.js"></script>
 <script src="/public/assets/wejune/js/slick.min.js"></script>
 <script src="/public/assets/wejune/js/lightbox.min.js"></script>
 <script src="/public/assets/wejune/js/script.js"></script>
