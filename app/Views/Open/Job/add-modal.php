@@ -2,11 +2,11 @@
     <form
         action="<?= $controller->router()->hyp('submission_submit') ?>"
         method="POST"
-        aria-labelledby="modal_job-label"
+        aria-labelledby="add_job_label"
         aria-hidden="true"
         class="shadow-box modal-box add-job">
         <header>
-            <h2 id="modal_job-label">Nouvelle annonce</h1>
+            <h2 id="add_job_label">Nouvelle annonce</h1>
         </header>
 
         <main>
@@ -15,8 +15,10 @@
             <?php if ($record) { ?>
                 <input type="hidden" name="urn" value="<?= $record->urn() ?>">
             <?php } ?>
-            <fieldset>
-                <legend class="text-primary">Type *</legend>
+
+            <fieldset id="add_job_classified">
+                <legend class="line-left">Classification</legend>
+
                 <label for="proposition">
                     <input class="form-check-input" type="radio" name="type" value="proposition" id="proposition" required />
                     Proposition <small>(vous proposez vos services, du matériel, etc.)</small></label>
@@ -24,80 +26,63 @@
                 <label for="demande">
                     <input class="form-check-input" type="radio" name="type" value="demande" id="demande" />
                     Demande <small>(vous recherchez quelqu'un ou quelque chose)</small></label>
+
+                <div>
+                    <div>
+                        <label for="remun">Rémunéré</label>
+                        <select name="remun" id="remun" class="form-control" required>
+                            <option value="remun-oui">Oui</option>
+                            <option value="remun-non">Non</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="categorie">Catégorie</label>
+                        <select name="categorie" id="categorie" class="form-control" required>
+                            <option value="benevolat">Bénévolat</option>
+                            <option value="casting-form">Casting</option>
+                            <option value="divers">Divers</option>
+                            <option value="job">Job</option>
+                            <option value="stage">Stage</option>
+                        </select>
+                    </div>
+                </div>
             </fieldset>
-            </div>
 
-            <div class="free-fields">
-                <div>
-                    <fieldset>
-                        <label for="label" class="text-primary">Titre</label>
-                        <input type="text" name="label" id="label" class="form-control" minlength="2" required>
-                        <small>libellé succinct de votre annonce</small>
-                    </fieldset>
+            <fieldset id="add_job_content">
+                <legend class="line-left">Annonce</legend>
 
-                    <fieldset>
-                        <label for="content" class="text-primary">Texte</label>
-                        <textarea name="content" id="content" class="form-control text" minlength="3" rows="10" required></textarea>
-                        <small>description complète de votre annonce</small>
-                    </fieldset>
+                <label for="label">Titre</label>
+                <input type="text" name="label" id="label" class="form-control" minlength="2" required>
+                <small>libellé succinct de votre annonce</small>
+
+                <label for="content">Annonce</label>
+                <textarea name="content" id="content" class="form-control text" minlength="3" rows="10" required></textarea>
+                <small>description complète de votre annonce</small>
+
+                <div class="dates">
+                    <div>
+
+                        <label for="starts">Début</label>
+                        <input type="date" name="starts" id="starts" class="form-control" required>
+                    </div>
+                    <div>
+                        <label for="stops">Fin</label>
+                        <input type="date" name="stops" id="stops" class="form-control">
+                    </div>
                 </div>
-                <div>
-                    <fieldset>
-                        <legend class="text-primary">Rémunéré *</legend>
-                        <label for="remun-oui">
-                            <input class="form-check-input" type="radio" name="remun" value="remun-oui" id="remun-oui" required />
-                            Oui</label>
+            </fieldset>
 
-                        <label for="remun-non">
-                            <input class="form-check-input" type="radio" name="remun" value="remun-non" id="remun-non" />
-                            Non</label>
-                    </fieldset>
-
-                    <fieldset class="d-flex flex-column">
-                        <legend class="text-primary">Catégorie *</legend>
-
-                        <label>
-                            <input class="form-check-input" type="radio" name="categorie" value="benevolat" id="benevolat" required />
-                            Bénévolat</label>
-
-                        <label for="casting-form">
-                            <input class="form-check-input" type="radio" name="categorie" value="casting-form" id="casting-form" />
-                            Casting</label>
-
-                        <label for="divers">
-                            <input class="form-check-input" type="radio" name="categorie" value="divers" id="divers" />
-                            Divers</label>
-
-                        <label for="job">
-                            <input class="form-check-input" type="radio" name="categorie" value="job" id="job" />
-                            Job</label>
-
-                        <label for="stage">
-                            <input class="form-check-input" type="radio" name="categorie" value="stage" id="stage" />
-                            Stage</label>
-
-                    </fieldset>
-                    <fieldset>
-                        <label for="identity" class="text-primary">Annonceur</label>
-                        <input type="text" name="identity" id="identity" class="form-control" minlength="2" required>
-                    </fieldset>
-
-                    <fieldset>
-                        <label for="phone" class="text-primary">Téléphone</label>
-                        <input type="text" name="phone" id="phone" class="form-control" minlength="2" required>
-                    </fieldset>
-
-                    <fieldset>
-                        <label for="email" class="text-primary">Email</label>
-                        <input type="email" name="email" id="email" class="form-control" minlength="2" required>
-                    </fieldset>
-
-                    <fieldset>
-                        <label for="url" class="text-primary">Site web</label>
-                        <input type="text" name="url" id="url" class="form-control" minlength="2">
-                    </fieldset>
-                </div>
-            </div>
+            <fieldset id="add_job_annonceur">
+                <legend class="line-left">Annonceur</legend>
+                <label for="identity">Nom</label>
+                <input type="text" name="identity" id="identity" class="form-control" minlength="2" required>
+                <label for="phone">Téléphone</label>
+                <input type="text" name="phone" id="phone" class="form-control" minlength="2" required>
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" class="form-control" minlength="2" required>
+                <label for="url">Site web</label>
+                <input type="text" name="url" id="url" class="form-control" minlength="2">
+            </fieldset>
         </main>
         <footer>
             <input class="btn btn-primary btn-confirm-modal" type="submit" value="Envoyer">

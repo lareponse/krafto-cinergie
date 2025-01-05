@@ -615,7 +615,7 @@ article.card.listing .date-item {
 body>footer {
     margin-top: 3rem;
     padding: 1rem;
-    background:#000;
+    background: #000;
     color: var(--white);
 
     display: grid;
@@ -634,32 +634,35 @@ body>footer {
 }
 
 body>footer .partenaire-item {
-    display:inline-block;
-    width:6rem;
-    height:6rem;
-    margin-right:1.7rem;
-    background-position:center;
+    display: inline-block;
+    width: 6rem;
+    height: 6rem;
+    margin-right: 1.7rem;
+    background-position: center;
     background-repeat: no-repeat;
 }
-body>footer .partenaire-item span{
-    display:none;
-}
-body>footer .partenaire-item.francite{
-    background-image:url('/public/assets/img/partenaires/logo_maison_de_la_francite.png');
+
+body>footer .partenaire-item span {
+    display: none;
 }
 
-body>footer .partenaire-item.iris{
-    background-image:url('/public/assets/img/partenaires/iris_bruxelles.png');
+body>footer .partenaire-item.francite {
+    background-image: url('/public/assets/img/partenaires/logo_maison_de_la_francite.png');
 }
 
-body>footer .partenaire-item.spfb{
-    background-image:url('/public/assets/img/partenaires/bruxelles-francophone.png');
-        background-size: contain;
+body>footer .partenaire-item.iris {
+    background-image: url('/public/assets/img/partenaires/iris_bruxelles.png');
 }
 
-body>footer .partenaire-item.cfwb{
-    background-image:url('/public/assets/img/partenaires/logofwb.png');
+body>footer .partenaire-item.spfb {
+    background-image: url('/public/assets/img/partenaires/bruxelles-francophone.png');
+    background-size: contain;
 }
+
+body>footer .partenaire-item.cfwb {
+    background-image: url('/public/assets/img/partenaires/logofwb.png');
+}
+
 body>footer .partenaire-item img {
     object-fit: contain;
     border-radius: 1rem;
@@ -722,61 +725,68 @@ body>footer #copyright {
     grid-column: 1 / -1;
 }
 
-#equipe-belge article a:has(.avatar) {
-    display: flex;
 
+#equipe-belge .avatar {
     width: 17rem;
     height: 17rem;
     overflow: hidden;
-}
-
-#equipe-belge article .avatar {
-    width: 100%;
     object-fit: cover;
 }
 
-form.add-job fieldset>legend,
+#equipe-belge .prorg strong {
+    font-weight: 500;
+    font-size: 1.5rem;
+}
+
+#equipe-belge .prorg .meta {
+    color: var(--black);
+}
+
+form.add-job fieldset{
+    margin:2rem 0;
+}
+/* legends and labels serve as titles */
 form.add-job fieldset>label {
     color: var(--primary);
     font-size: 1rem;
 }
 
-form.add-job fieldset div {
-    display: grid;
-    grid-template-columns: min-content auto;
-    gap: 0.5rem 1rem;
-}
-
-@media screen and (min-width: 768px) {
-    form.add-job .checkboxes-fields {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 4rem;
-    }
-}
 
 
-form.add-job fieldset {
-    margin-top: 2rem;
-}
-
-form.add-job .free-fields {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-}
-
-form.add-job .free-fields>* {
-    flex-grow: 1;
-}
-
-form.add-job label:has(input) {
+form.add-job label:has(input[type="radio"]) {
     display: block;
     color: #000;
 }
 
+
 form.add-job label input {
     margin-right: 0.7rem;
+}
+
+form.add-job fieldset>div {
+    margin-top:2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+form.add-job fieldset>div>* {
+    flex: 1 1 auto;
+}
+#add_job_content .dates{
+    display:flex;
+    flex-wrap:wrap;
+}
+
+#add_job_annonceur label{
+    margin-top:1rem;
+}
+form.add-job legend {
+    color: var(--primary);
+    font-size: 1.5rem;
+}
+
+#add_job_annonceur label {
+    color: #000;
 }
 
 /* PRINT */
@@ -1270,4 +1280,32 @@ article.event>div:last-child {
 
 .catalog a.card :last-child {
     padding: 0.5rem;
+}
+
+body>main>.add-btn {
+    margin-bottom: 1.5rem;
+}
+
+
+.shadow-box {
+    border-radius: var(--border-radius);
+}
+
+.shadow-box header {
+    /* background-color: #000;
+    color: #FFF; */
+    padding: 0.7rem;
+    border-bottom: 1px solid black;
+}
+
+.shadow-box header h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.5rem;
+}
+
+.shadow-box footer {
+    /* background: var(--black);
+    color: var(--white); */
+    padding: 0.7rem;
 }
