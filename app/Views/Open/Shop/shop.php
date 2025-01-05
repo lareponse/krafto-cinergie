@@ -53,7 +53,7 @@ use \HexMakina\Marker\Marker;
 
 <?php $this->insert('Open::Merchandise/modal') ?>
 
-<div class="korbo-trigger"><button class="btn btn-primary" data-shadow-box-template="template_korbo"><?= $this->bi('cart-check')?> Votre panier</button></div>
+<div class="korbo-trigger"><button class="btn btn-primary" data-shadow-box-template="template_korbo"><?= $this->bi('cart-check') ?> Votre panier</button></div>
 
 <script type="module" nonce="<?= $CSP_nonce ?>">
     const compare = function(ids, asc) {
@@ -89,7 +89,7 @@ use \HexMakina\Marker\Marker;
 
     import Korbo from '/public/assets/js/korbo.js';
     let korbo = new Korbo('#korbo-container', '#template_korbo_item');
-    
+
     document.querySelectorAll('.add_to_cart').forEach(function(button) {
         button.addEventListener('click', function() {
             korbo.add({
@@ -106,9 +106,13 @@ use \HexMakina\Marker\Marker;
         link.addEventListener('click', function(e) {
             e.preventDefault();
             // hidde all tabs
-            document.querySelectorAll('.tab-pane').forEach(function(tab) {
-                tab.classList.remove('active');
-                tab.classList.remove('show');
+            document.querySelectorAll('.tab-pane.active.show').forEach(function(elt) {
+                elt.classList.remove('active');
+                elt.classList.remove('show');
+            });
+            
+            document.querySelectorAll('.nav.nav-tabs .nav-link.active').forEach(function(elt) {
+                elt.classList.remove('active');
             });
 
             let href = link.getAttribute('href');
