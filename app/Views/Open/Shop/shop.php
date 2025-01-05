@@ -103,8 +103,8 @@ use \HexMakina\Marker\Marker;
     });
 
     document.querySelectorAll('.nav.nav-tabs .nav-link').forEach(function(link) {
-        link.addEventListener('click', function() {
-            
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
             // hidde all tabs
             document.querySelectorAll('.tab-pane').forEach(function(tab) {
                 tab.classList.remove('active');
