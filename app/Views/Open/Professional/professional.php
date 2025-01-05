@@ -43,12 +43,8 @@ $this->layout('Open::layout')
         <?php
         }
         ?>
-
         <?= $this->insert('Open::_partials/photos', ['photos' => $related_photos]); ?>
-
-
         <?= $this->insert('Open::Professional/filmotheque', ['movies' => $related_movies]); ?>
-
 
         <?php
         if (!empty($record->get('filmography'))) {
@@ -61,12 +57,9 @@ $this->layout('Open::layout')
         <?php
         }
         ?>
-
         <?= $this->insert('Open::_partials/related_articles', ['related_articles' => $articles]); ?>
-
-        <!-- Modal -->
         <?php
-        echo Marker::a('#', "Une erreur, une modification? Dites-le nous !", ['class' => 'cta shadow-box-trigger', 'data-shadow-template' => 'template_alter_prorg']);
+        echo Marker::a('#', "Une erreur, une modification? Dites-le nous !", ['class' => 'cta', 'data-shadow-box-template' => 'template_alter_prorg']);
         ?>
     </article>
 </div>

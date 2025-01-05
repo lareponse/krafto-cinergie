@@ -61,7 +61,7 @@ $this->layout('Open::layout')
 
         <!-- Modal -->
         <?php
-        echo Marker::a('#', "Une erreur, une modification? Dites-le nous !", ['class' => 'cta shadow-box-trigger', 'data-shadow-template' => 'template_alter_prorg']);
+        echo Marker::a('#', "Une erreur, une modification? Dites-le nous !", ['class' => 'cta', 'data-shadow-box-template' => 'template_alter_prorg']);
         ?>
     </article>
 </div>

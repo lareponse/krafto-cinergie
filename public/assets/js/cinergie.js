@@ -1,9 +1,9 @@
-import CookieConsent from "./cookie-consent.js";
 import OttoIdLabel from "/public/assets/js/otto/otto-id-label.js";
 import OttoLink from "/public/assets/js/otto/otto-link.js";
 import OttoFormatDate from "/public/assets/js/otto/otto-format-date.js";
 import OttoEpicene from "/public/assets/js/otto/otto-epicene.js";
 import ShadowBox from "/public/assets/js/shadow-box.js";
+import CookieConsent from "/public/assets/js/cookie-consent.js";
 
 document.addEventListener("DOMContentLoaded", function () {
   // clickable table rows
@@ -41,24 +41,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-  document.querySelectorAll("a.print").forEach(function (link) {
+  document.querySelectorAll(".print").forEach(function (link) {
     link.addEventListener("click", function (e) {
       window.print();
     });
   });
 
-  document.querySelectorAll(".table-clickable").forEach(function (table) {
-    table.addEventListener("click", function (e) {
-      const target = e.target;
-      const row = target.closest("tr");
-      if (row) {
-        const action = row.getAttribute("data-action");
-        if (action) {
-          window.location.href = action;
-        }
-      }
-    });
-  });
+  // document.querySelectorAll(".table-clickable").forEach(function (table) {
+  //   table.addEventListener("click", function (e) {
+  //     const target = e.target;
+  //     const row = target.closest("tr");
+  //     if (row) {
+  //       const action = row.getAttribute("data-action");
+  //       if (action) {
+  //         window.location.href = action;
+  //       }
+  //     }
+  //   });
+  // });
 
   /* long text expander */
   const textContent = document.querySelector(".long-text-content");
@@ -87,14 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   new CookieConsent();
-
-  document.querySelectorAll(".shadow-box-trigger[data-shadow-template]").forEach(function (elt) {
-    elt.addEventListener("click", function (e) {
-      e.preventDefault();
-      const shadowTemplateId = this.getAttribute("data-shadow-template");
-      const shadowBox = new ShadowBox(shadowTemplateId, e.target);
-      shadowBox.allowNativeClose();
-      shadowBox.open();
-    });
-  });
+  // enable shadow box triggers
+  ShadowBox.listen('[data-shadow-box-template]');
+  
 });

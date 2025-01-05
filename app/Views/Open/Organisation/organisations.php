@@ -5,7 +5,7 @@ use \HexMakina\Marker\Marker;
 $this->layout('Open/layout', ['title' => $page->label()])
 ?>
 
-<button class="mb-4 btn btn-outline-primary add-btn ms-auto shadow-box-trigger" data-shadow-template="template_alter_prorg">
+<button class="btn btn-outline-primary add-btn ms-auto" data-shadow-box-template="template_alter_prorg">
     <?= $this->bi('plus-circle') ?>
     <span><span class="d-none d-lg-inline">Ajouter</span> votre organisation</span>
 </button>

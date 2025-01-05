@@ -9,7 +9,7 @@ $isPro = $record instanceof App\Models\Professional;
 $title = empty($record->id()) ? 'Ajouter une nouvelle fiche' : 'Modifier ' . $record;
 ?>
 <template id="template_alter_prorg">
-    <form action="<?= $controller->router()->hyp('submission_submit') ?>" method="POST" class="shadow-box" id="modalter_prorg" aria-labelledby="modalter_prorg-label" aria-hidden="true">
+    <form action="<?= $controller->router()->hyp('submission_submit') ?>" method="POST" class="shadow-box modal-box" id="modalter_prorg" aria-labelledby="modalter_prorg-label" aria-hidden="true">
         <header>
             <h2 id="modalter_prorg-label"><?= $title ?></h2>
         </header>
