@@ -2,6 +2,10 @@
     color: var(--primary);
 }
 
+.shadow {
+    box-shadow: 5px 5px 20px var(--shadow) !important;
+}
+
 .cta {
     font-weight: 500;
     display: inline-block;
