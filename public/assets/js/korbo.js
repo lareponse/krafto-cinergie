@@ -18,7 +18,11 @@ class Korbo {
     this.save();
   }
 
-  remove(basket_item) {
+  remove(basket_item_id) {
+    let basket_item = this.items.find((item) => item.id === basket_item_id);
+    if (!basket_item) {
+      return;
+    }
     this.items = this.items.filter((item) => item !== basket_item);
     this.save();
   }
@@ -75,7 +79,7 @@ class KorboUI {
     this.lineContainer = document.querySelector(container_id);
     this.lineTemplate = document.querySelector(template_id);
 
-    this.setLines();
+    this.refresh();
   }
 
   refresh() {
@@ -91,7 +95,6 @@ class KorboUI {
 
   setLines() {
     if (this.lineContainer !== null && this.lineTemplate !== null) {
-
       this.lineContainer.innerHTML = "";
       this.korbo.items.forEach((item) => {
         let row = this.lineElement(item);
@@ -104,6 +107,17 @@ class KorboUI {
           quantity: e.target.value,
         });
       });
+
+      this.lineContainer
+        .querySelector(".btn-delete-item")
+        .addEventListener("click", (e) => {
+          console.log("delete item", e.target);
+            let elt = e.target.closest(".korbo-item");
+            let id = elt.dataset.itemId;
+            this.korbo.remove(id);
+            // remove the element from the DOM
+            elt.remove();
+        });
     }
   }
 

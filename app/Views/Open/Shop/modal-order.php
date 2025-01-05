@@ -85,6 +85,6 @@
         </div>
         <input data-kx-id="quantity" type="number" name="quantity" value="1" min="1" />
         <div data-kx-id="total" class="currency"></div>
-        <button type="button" class="btn btn-danger" aria-label="Supprimer cet article">Supprimer</button>
+        <button type="button" class="btn btn-delete-item" aria-label="Supprimer cet article"><?= $this->bi('backspace')?></button>
     </article>
 </template>

@@ -53,7 +53,7 @@ use \HexMakina\Marker\Marker;
 
 <?php $this->insert('Open::Merchandise/modal') ?>
 
-<div class="korbo-trigger"><button class="btn btn-primary" data-shadow-box-template="template_korbo">Votre panier</button></div>
+<div class="korbo-trigger"><button class="btn btn-primary" data-shadow-box-template="template_korbo"><?= $this->bi('cart-check')?> Votre panier</button></div>
 
 <script type="module" nonce="<?= $CSP_nonce ?>">
     const compare = function(ids, asc) {

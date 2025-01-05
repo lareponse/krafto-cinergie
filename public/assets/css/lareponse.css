@@ -1312,7 +1312,9 @@ body>main>.add-btn {
     color: var(--white); */
     padding: 0.7rem;
 }
-
+.korbo-trigger.hidden {
+    display: none;
+}
 
 .korbo-trigger {
     position: fixed;
@@ -1325,6 +1327,20 @@ body>main>.add-btn {
     padding: 3rem;
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
+}
+.korbo-trigger button {
+    background: var(--primary);
+    color: var(--white);
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1.7rem;
+}
+.korbo-trigger .bi{
+    width:3rem;
+    height:3rem;
+    margin:1rem;
 }
 
 #korbo main {
