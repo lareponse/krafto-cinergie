@@ -4,6 +4,7 @@ import OttoFormatDate from "/public/assets/js/otto/otto-format-date.js";
 import OttoEpicene from "/public/assets/js/otto/otto-epicene.js";
 import ShadowBox from "/public/assets/js/shadow-box.js";
 import CookieConsent from "/public/assets/js/cookie-consent.js";
+import LazyLoader from "/public/assets/js/lazy-loader.js";
 
 document.addEventListener("DOMContentLoaded", function () {
   // clickable table rows
@@ -87,6 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   new CookieConsent();
+  new LazyLoader("[loading='lazy']");
   // enable shadow box triggers
   ShadowBox.listen('[data-shadow-box-template]');
   

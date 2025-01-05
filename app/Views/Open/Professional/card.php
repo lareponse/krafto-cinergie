@@ -1,5 +1,5 @@
 <a class="card shadow" href="<?= $controller->router()->hyp('professional', ['slug' => $record->slug()]) ?>">
-    <img src="<?= $record->profilePicture(); ?>" class="card-img-top mb-3" alt="Photo de <?= $record->fullName(); ?>" />
+   <img src="<?= $record->defaultProfilePicture();?>" loading="lazy" data-src=" <?= $record->profilePicture(); ?>" class="card-img-top mb-3" alt="Photo de <?= $record->fullName(); ?>" />
     <strong class="card-title"><?= $record; ?></strong>
     <p class="card-text">
         <?php
