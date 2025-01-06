@@ -52,7 +52,7 @@ $collection_href = $controller->router()->hyp('movies');
                     }
 
                     if (!empty($record->get('legacy_origine'))) {
-                        ?>
+                    ?>
                         <dt>Pays : </dt>
                         <dd><?= $record->get('legacy_origine'); ?></dd>
                     <?php
@@ -61,26 +61,26 @@ $collection_href = $controller->router()->hyp('movies');
                     if (!empty($record->get('genre_id'))) {
                         $href = $collection_href . '?' . http_build_query(['type' => $record->get('genre_id')]);
                         $filter_link = $this->DOM()::a($href, $record->get('genre_id'), ['class' => 'otto-id-label', 'otto-urn' => "Tag:{$record->get('genre_id')}"]);
-                        ?>
+                    ?>
                         <dt>Genre : </dt>
                         <dd><?= $filter_link; ?></dd>
-                        <?php
+                    <?php
                     }
 
                     if (!empty($record->get('metrage_id'))) {
                         $href = $collection_href . '?' . http_build_query(['metrage' => $record->get('metrage_id')]);
                         $filter_link = $this->DOM()::a($href, $record->get('genre_id'), ['class' => 'otto-id-label', 'otto-urn' => "Tag:{$record->get('metrage_id')}"]);
-                        ?>
+                    ?>
                         <dt>Metrage : </dt>
                         <dd><?= $filter_link; ?></dd>
                     <?php
                     }
 
                     if (!empty($record->get('runtime'))) {
-                        ?>
+                    ?>
                         <dt>Durée : </dt>
                         <dd><?= $record->get('runtime'); ?></dd>
-                        <?php
+                    <?php
                     }
                     ?>
                 </dl>
@@ -100,11 +100,11 @@ $collection_href = $controller->router()->hyp('movies');
                         <?php
                         foreach ($merchandises as $merch) {
                         ?>
-                            <aside class="input-group big commander-boutique">
-                                <button class="form-control btn-commander" data-bs-toggle="modal" data-bs-target="#modal-order" data-delivery-be="<?= $merch->get('deliveryBe'); ?>" data-delivery-eu="<?= $merch->get('deliveryEu'); ?>" data-titre="<?= $merch ?>" data-prix="<?= $merch->get('price') ?>">
-                                    <?= $this->bi('cart-plus-fill') ?> </button>
-                                <span class="input-group-text prix"><?= $merch->get('price') ?> &euro;</span>
+                            <aside class="input-group commander-boutique">
+                                <button class="form-control btn-commander" data-shadow-box-template="merchandise_order" data-titre="<?= $record; ?>" data-prix="<?= $record->get('price'); ?>" data-delivery-be="<?= $record->get('deliveryBe'); ?>" data-delivery-eu="<?= $record->get('deliveryEu'); ?>" data-id="<?= $record->get('id'); ?>"><?= $this->bi('cart-plus-fill') ?> </button>
+                                <span class="input-group-text prix"><?= number_format($record->get('price'), 2) ?> &euro;</span>
                             </aside>
+
                         <?php
                         }
                         ?>

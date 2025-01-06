@@ -1,6 +1,6 @@
-<a class="card-professional shadow" href="<?= $controller->router()->hyp('professional', ['slug' => $record->slug()]) ?>">
-    <img src="<?= $record->profilePicture(); ?>" class="card-img-top mb-3" alt="Photo de <?= $record->fullName(); ?>" />
-    <h5 class="card-title"><?= $record; ?></h5>
+<a class="card shadow" href="<?= $controller->router()->hyp('professional', ['slug' => $record->slug()]) ?>">
+   <img src="<?= $record->defaultProfilePicture();?>" loading="lazy" data-src=" <?= $record->profilePicture(); ?>" class="card-img-top mb-3" alt="Photo de <?= $record->fullName(); ?>" />
+    <strong class="card-title"><?= $record; ?></strong>
     <p class="card-text">
         <?php
         foreach ($record->praxisIds() as $id) {

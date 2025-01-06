@@ -6,27 +6,38 @@ class ShadowBox {
     'button, [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
   constructor(shadow_template_id, origin) {
-    // clone template
-    this.origin = origin;
-
-    this.modal = document.getElementById(shadow_template_id);
-    this.modal = document.importNode(this.modal.content, true);
-    this.modal = this.modal.querySelector(".shadow-box");
-    this.modal.setAttribute("role", "dialog");
-    this.modal.setAttribute("aria-modal", "true");
-    this.modal.setAttribute("aria-hidden", "true");
-
-    this.backdrop = this.makeBackdrop();
-
+    // bind this
+    this.close = this.close.bind(this);
+    this.open = this.open.bind(this);
     this.handleKeyEvents = this.handleKeyEvents.bind(this);
-
+    this.origin = origin;
+    this.modal = this.cloneTemplate(shadow_template_id);
+    this.backdrop = this.makeBackdrop();
     this.focusableElements = this.modal.querySelectorAll(ShadowBox.FOCUSABLE);
+
+    let btn = this.modal.querySelector(".btn-cancel-modal");
+    if (btn) btn.addEventListener("click", this.close);
+
+    btn = this.modal.querySelector(".btn-confirm-modal");
+    if (btn) btn.addEventListener("click", this.close);
+  }
+
+  static listen(selector) {
+    document.querySelectorAll(selector).forEach(function (elt) {
+      elt.addEventListener("click", function (e) {
+        e.preventDefault();
+        const shadowBox = new ShadowBox(
+          this.getAttribute("data-shadow-box-template"),
+          e.target
+        );
+        shadowBox.open();
+      });
+    });
   }
 
   allowNativeClose() {
-    this.modal.querySelector(".btn-cancel-modal").addEventListener("click", () => {
-      this.close();
-    } );
+    let btn = this.modal.querySelector(".btn-cancel-modal");
+    if (btn) btn.addEventListener("click", this.close);
   }
 
   html() {
@@ -59,9 +70,7 @@ class ShadowBox {
 
     this.backdrop.setAttribute("aria-hidden", "true");
 
-    document.removeEventListener("keydown", (event) => {
-      this.handleKeyEvents(event);
-    });
+    document.removeEventListener("keydown", this.handleKeyEvents);
 
     document.body.removeChild(this.backdrop);
     document.body.removeChild(this.modal);
@@ -107,6 +116,25 @@ class ShadowBox {
     ret.style.zIndex = "999";
 
     return ret;
+  }
+
+  cloneTemplate(shadow_template_id) {
+    let clone;
+
+    clone = document.getElementById(shadow_template_id);
+
+    if (clone == null || !"content" in clone) {
+      throw new Error("Shadow template not found: " + shadow_template_id);
+    }
+
+    clone = document.importNode(clone.content, true);
+
+    clone = clone.querySelector(":first-child");
+    clone.setAttribute("role", "dialog");
+    clone.setAttribute("aria-modal", "true");
+    clone.setAttribute("aria-hidden", "true");
+    clone.setAttribute("tabindex", "-1");
+    return clone;
   }
 }
 

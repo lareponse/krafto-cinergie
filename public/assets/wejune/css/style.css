@@ -64,10 +64,6 @@ body {
 }
 
 
-.shadow {
-   box-shadow: 0 5px 20px var(--shadow) !important;
-}
-
 a {
    text-decoration: none;
 }
@@ -115,65 +111,11 @@ h6+hr {
    opacity: 1;
 }
 
-.line-left,
-.title-center {
-   position: relative;
-   margin-bottom: 25px;
-}
-
-.line-left::before {
-   content: '';
-   width: 50px;
-   height: 3px;
-   background: var(--bs-primary);
-   display: inline-block;
-   transform: translateY(-10px);
-   margin-right: 15px;
-}
-
-.line-left.overflow::before {
-   position: absolute;
-   left: 0;
-   left: -70px;
-   top: 22.5px;
-}
-
-.line-center {
-   text-align: center;
-}
-
-.line-center::before {
-   content: '';
-   width: 50px;
-   height: 3px;
-   background: var(--bs-primary);
-   display: block;
-   transform: translateY(-10px);
-   margin: 0 auto;
-}
-
 .text-justify {
    text-align: justify;
    text-justify: inter-word;
 }
 
-/* HEADER */
-header#header {
-   background: var(--bs-black);
-}
-
-header#header nav li.nav-item a {
-   text-transform: uppercase;
-   font-weight: 500;
-   color: var(--bs-white);
-   font-size: 0.9rem;
-   transition: color 0.5s ease-in-out;
-}
-
-header#header nav li.nav-item a.active,
-header#header nav li.nav-item a:hover {
-   color: var(--bs-primary);
-}
 
 /* BANNER - HOME */
 #banner {
@@ -258,14 +200,6 @@ span.cta-card {
 }
 
 
-/* BUTTONS */
-.btn-simple {
-   background: var(--bs-primary);
-   color: var(--bs-white);
-}
-
-
-
 /* CARDS */
 article.card,
 article.card img {
@@ -273,7 +207,7 @@ article.card img {
    overflow: hidden;
    transition: 0.5s;
    position: relative;
-   margin: 0 0.5em;
+   /* margin: 0 0.5em; */
 }
 
 article.card img {
@@ -388,13 +322,6 @@ small.frais {
 .prix-film {
    color: var(--bs-primary);
 }
-
-/*.titre-nouvelle-commande {
-   margin-left: 10em;
-}$/
-
- */
-
 
 .fc-event-title {
    font-size: .85em;
@@ -599,14 +526,6 @@ aside header {
 
 
 /* === SIDEBAR BUTTON : ADD ["Ajouter votre annonce"] */
-.add-btn {
-   border: solid 1.5px var(--bs-primary);
-   text-transform: uppercase;
-   font-size: 0.9rem;
-   font-weight: 500;
-   padding: 12px;
-   line-height: 15px;
-}
 
 .white-btn {
    border: solid 1.5px var(--bs-primary);
@@ -614,9 +533,7 @@ aside header {
    width: 100%;
 }
 
-.add-btn i {
-   padding-right: 5px;
-}
+
 
 .submit-filters {
    text-transform: uppercase;
@@ -637,10 +554,7 @@ aside header {
    font-weight: bold;
 }
 
-/* ========== FILTRE : CASTING */
-#casting-filtre .input-group {
-   margin-bottom: 0 !important;
-}
+
 
 /* FILTRE CHECKBOX - PAGE CASTING */
 
@@ -697,45 +611,6 @@ span.prefix {
    color: var(--bs-primary);
    padding-bottom: 1rem;
    display: inline-block;
-}
-
-aside#meta {
-   padding: 2rem 3rem;
-   /* border-radius: 1rem; */
-}
-
-aside#meta ul {
-   list-style: none;
-   padding: 0;
-   margin: 0;
-}
-
-aside#meta li {
-   line-height: 2.6rem;
-   font-size: 0.9rem;
-}
-
-aside#meta li.meta-el,
-aside#meta li.meta-head {
-   display: flex;
-   justify-content: space-between;
-}
-
-.meta-list li.meta-head a {
-   text-transform: uppercase;
-   color: var(--bs-primary);
-   font-weight: 600;
-}
-
-aside#meta i.icon {
-   padding-right: 0.5rem;
-   color: var(--bs-primary);
-}
-
-aside#meta hr {
-   color: var(--bs-primary);
-   height: 1.5px;
-   margin: 1.5rem 0;
 }
 
 
@@ -1030,9 +905,6 @@ button.navbar-toggler:focus {
       margin-top: 25px;
    }
 
-   div#casting-filtre {
-      margin-bottom: 35px;
-   }
 
    #boutique article.paysage .card-body {
       padding: 0.5rem;

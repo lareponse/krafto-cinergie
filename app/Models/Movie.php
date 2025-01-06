@@ -64,8 +64,8 @@ class Movie extends TightModel
         ], [
             'eager' => false
         ]);
-
-        $res = $res->columns(['id']);
+        
+        $res->columns(['id']);
         $res = $res->retCol();
 
         return self::idsByProfessionalIds($res, $praxis_id);

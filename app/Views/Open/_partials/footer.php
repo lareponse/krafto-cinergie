@@ -2,7 +2,7 @@
 
     <div id="branding">
         <a class="home" href="<?= $controller->router()->hyp('home'); ?>">
-            <img src="/public/assets/img/logo-cinergie.svg" alt="Logo CINERGIE" id="logo">
+            <img src="/public/assets/img/logo-cinergie.svg" alt="Logo de Cinergie.be" class="logo" width="225" height="48">
         </a>
         <h6 class="text-uppercase">
             Le site du cin&eacute;ma belge
@@ -27,9 +27,9 @@
                 <?= $this->bi('instagram') ?>
             </a>
 
-            <a class="print">
+            <span class="print">
                 <?= $this->bi('printer-fill') ?>
-            </a>
+            </span>
         </nav>
     </div>
 
@@ -58,32 +58,28 @@
 
     <?= $this->insert('Open::_partials/form_brevo') ?>
 
-    <section id="partenaires">
+    <section id=" partenaires">
                     <h5 class="text-uppercase">Nos partenaires</h5>
                     <nav>
-                        <a class="partenaire-item" href="https://www.maisondelafrancite.be/">
-                            <img src="/public/assets/img/partenaires/logo_maison_de_la_francite.png" alt="Maison de la Francité" width="140" height="100" />
+                        <a class="partenaire-item francite" href="https://www.maisondelafrancite.be/" title="Maison de la Francité" arial-label="Maison de la Francité">
+                            <span>Maison de la Francité</span>
                         </a>
 
-                        <a class="partenaire-item" href="https://be.brussels/">
-                            <img src="/public/assets/img/partenaires/iris_bruxelles.png" alt="Région de Bruxelles-Capitale - Administration Economie et Emploi" width="140" height="100" />
+                        <a class="partenaire-item iris" href="https://be.brussels/" title="Région de Bruxelles-Capitale - Administration Economie et Emploi" arial-label="Région de Bruxelles-Capitale - Administration Economie et Emploi">
+                            <span>Région de Bruxelles-Capitale - Administration Economie et Emploi</span>
                         </a>
 
-                        <a class="partenaire-item" href="https://ccf.brussels/wp-signup.php?new=www.spfb.brussels">
-                            <img src="/public/assets/img/partenaires/bruxelles-francophone.png" alt="Service public francophone bruxellois" width="140" height="100" />
+                        <a class="partenaire-item spfb" href="https://ccf.brussels/wp-signup.php?new=www.spfb.brussels" title="Service public francophone bruxellois" arial-label="Service public francophone bruxellois">
+                            <span>Service public francophone bruxellois</span>
                         </a>
 
-                        <a class="partenaire-item" href="https://audiovisuel.cfwb.be/">
-                            <img src="/public/assets/img/partenaires/logofwb.png" alt="Centre du Cinéma et de l'Audiovisuel de la Communauté Française" width="140" height="100" />
+                        <a class="partenaire-item cfwb" href="https://audiovisuel.cfwb.be/" title="Centre du Cinéma et de l'Audiovisuel de la Communauté Française" arial-label="Centre du Cinéma et de l'Audiovisuel de la Communauté Française">
+                            <span>Centre du Cinéma et de l'Audiovisuel de la Communauté Française</span>
                         </a>
-                        <!-- 
-<a class="partenaire-item" href="https://lareponse.be">
-<img src="/public/assets/img/partenaires/lareponse.png" alt="La Réponse" />
-</a> -->
                     </nav>
                     </section>
 
                     <section id="copyright">
-                        &copy; <?= date('Y') ?> Cinergie &nbsp; | &nbsp; <a href="<?= $controller->router()->hyp('legal') ?>">Mentions légales</a> &nbsp; | &nbsp; <a class="cookie-preferences">Préférences cookies</a>
+                        &copy; <?= date('Y') ?> Cinergie &nbsp; | &nbsp; <a href="<?= $controller->router()->hyp('legal') ?>">Mentions légales</a> &nbsp; | &nbsp; <span class="text-primary cookie-preferences">Préférences cookies</span>
                     </section>
 </footer>

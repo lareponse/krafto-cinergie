@@ -26,7 +26,7 @@
 
     </div>
 
-    <h3 class="line-center articles-auteur my-4"><?= count($articles) ?> articles rédigés par cet auteur</h3>
+    <h3 class="articles-auteur my-4"><?= count($articles) ?> articles rédigés par cet auteur</h3>
 
     <div class="catalog">
         <?php

@@ -1,10 +1,11 @@
 <?php
+
 use \HexMakina\Marker\Marker;
 ?>
 
 <?php $this->layout('Open::layout', ['title' => $page->label()]) ?>
 
-<div class="container my-lg-5 pb-5" id="boutique">
+<div id="boutique">
     <ul class="nav nav-tabs align-items-end d-flex justify-content-center" id="boutiqueTabs">
         <li class="nav-item pb-0 order-md-1 order-2">
             <a href="#dvds" class="nav-link active" data-bs-toggle="tab"><?= $this->bi('disc-fill', ['class' => 'me-2']); ?> DVDs</a>
@@ -26,24 +27,22 @@ use \HexMakina\Marker\Marker;
             </div>
         </li>
     </ul>
-
-
     <div class="tab-content">
         <div class="tab-pane fade show active" id="dvds">
             <div class="row mt-4">
                 <?php foreach ($dvds ?? [] as $record) { ?>
                     <div class="item-boutique col-12 col-md-6">
-                        <?php $this->insert('Open::Merchandise/card', ['record' => $record]); ?>
+                        <?php $this->insert('Open::Merchandise/basket_item', ['record' => $record]); ?>
                     </div>
                 <?php } ?>
             </div>
         </div>
 
         <div class="tab-pane fade" id="livres">
-            <div class="row mt-4 fBi">
+            <div class="row mt-4">
                 <?php foreach ($books ?? [] as $record) { ?>
                     <div class="item-boutique col-12 col-md-6">
-                        <?php $this->insert('Open::Merchandise/card', ['record' => $record]); ?>
+                        <?php $this->insert('Open::Merchandise/basket_item', ['record' => $record]); ?>
                     </div>
                 <?php } ?>
             </div>
@@ -54,9 +53,9 @@ use \HexMakina\Marker\Marker;
 
 <?php $this->insert('Open::Merchandise/modal') ?>
 
+<div class="korbo-trigger"><button class="btn btn-primary" data-shadow-box-template="template_korbo"><?= $this->bi('cart-check') ?> Votre panier</button></div>
 
-
-<script nonce="<?= $CSP_nonce ?>">
+<script type="module" nonce="<?= $CSP_nonce ?>">
     const compare = function(ids, asc) {
         return function(row1, row2) {
             const tdValue = function(row, ids) {
@@ -86,4 +85,42 @@ use \HexMakina\Marker\Marker;
             container.appendChild(element);
         });
     });
+
+
+    import Korbo from '/public/assets/js/korbo.js';
+    let korbo = new Korbo('#korbo-container', '#template_korbo_item');
+
+    document.querySelectorAll('.add_to_cart').forEach(function(button) {
+        button.addEventListener('click', function() {
+            korbo.add({
+                id: button.dataset.id,
+                title: button.dataset.titre,
+                price: button.dataset.prix,
+                deliveryBe: button.dataset.deliveryBe,
+                deliveryEu: button.dataset.deliveryEu
+            });
+        });
+    });
+
+    document.querySelectorAll('.nav.nav-tabs .nav-link').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            // hidde all tabs
+            document.querySelectorAll('.tab-pane.active.show').forEach(function(elt) {
+                elt.classList.remove('active');
+                elt.classList.remove('show');
+            });
+            
+            document.querySelectorAll('.nav.nav-tabs .nav-link.active').forEach(function(elt) {
+                elt.classList.remove('active');
+            });
+
+            let href = link.getAttribute('href');
+            let tab = document.querySelector(href);
+            tab.classList.add('active');
+            tab.classList.add('show');
+        });
+    });
 </script>
+
+<?= $this->insert('Open::Shop/modal-order') ?>

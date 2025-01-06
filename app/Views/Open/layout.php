@@ -5,17 +5,11 @@
     <?php $this->insert('Open::_partials/head') ?>
 </head>
 
-<body data-bs-spy="scroll" data-bs-target="#navigation">
+<body data-bs-spy="scroll">
     <?php $this->insert('Open::_partials/header') ?>
-    <main id="content" class="<?php isset($pageClass) ? $pageClass : '' ?>">
+    <main id="<?= $controller->activeSection() ?>" <?= $page !== null && $page->get('slug') !== 'home' ? 'class="fixed-layout"' : '' ?>>
 
-        <?php if (isset($title)) {
-        ?>
-            <h1 class="mb-5 line-center"><?= $title; ?></h1>
-        <?php
-        }
-        ?>
-
+        <?= isset($title) ? '<h1>' . $title . '</h1>' : '' ?>
         <?= $this->section('content') ?>
         <nav id="scroll-to-top">
             <a href="#top"><?= $this->bi('arrow-up-circle'); ?></a>

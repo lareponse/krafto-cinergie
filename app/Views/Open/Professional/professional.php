@@ -6,7 +6,7 @@ $this->layout('Open::layout')
 
 ?>
 
-<div class="container my-5 pb-5" id="professionnel-single">
+<div id="professionnel-single">
     <article class="w-75 mx-auto">
 
         <h1><?= $record ?></h1>
@@ -43,12 +43,8 @@ $this->layout('Open::layout')
         <?php
         }
         ?>
-
         <?= $this->insert('Open::_partials/photos', ['photos' => $related_photos]); ?>
-
-
         <?= $this->insert('Open::Professional/filmotheque', ['movies' => $related_movies]); ?>
-
 
         <?php
         if (!empty($record->get('filmography'))) {
@@ -61,13 +57,10 @@ $this->layout('Open::layout')
         <?php
         }
         ?>
-
         <?= $this->insert('Open::_partials/related_articles', ['related_articles' => $articles]); ?>
-
-        <!-- Modal -->
         <?php
-        echo Marker::a('#', "Une erreur, une modification? Dites-le nous !", ['class' => 'cta', 'data-bs-toggle' => "modal", 'data-bs-target' => "#modalter_prorg"]);
+        echo Marker::a('#', "Une erreur, une modification? Dites-le nous !", ['class' => 'cta', 'data-shadow-box-template' => 'template_alter_prorg']);
         ?>
-        <?= $this->insert('Open::_partials/modalter_prorg', ['record' => $record]); ?>
     </article>
 </div>
+<?= $this->insert('Open::_partials/modalter_prorg', ['record' => $record]); ?>

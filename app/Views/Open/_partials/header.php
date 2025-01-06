@@ -14,7 +14,7 @@ $menu = [
     Marker::a('/podcast', 'Podcast', ['class' => ('Podcast' == $activeSection ? 'active' : '')])
 ];
 ?>
-<form id="search-bar" class="d-print-none" action="<?= $controller->router()->hyp('search') ?>">
+<form id="search-bar" action="<?= $controller->router()->hyp('search') ?>">
     <div class="fixed-layout">
         <input type="search" value="" autocomplete="off" placeholder="Rechercher" name="s" value="<?= $controller->router()->params('s') ?>" class="form-control">
         <button class="btn btn-primary" type="submit" title="Rechercher">
@@ -25,7 +25,7 @@ $menu = [
 <header>
     <div class="fixed-layout">
         <a href="<?= $controller->router()->hyp('home') ?>" title="CINERGIE">
-            <img src="/public/assets/img/logo-cinergie.svg" alt="Logo de Cinergie.be" class="logo">
+            <img src="/public/assets/img/logo-cinergie.svg" alt="Logo de Cinergie.be" class="logo" width="225" height="48">
         </a>
 
         <nav id="primary-navigation" role="navigation">

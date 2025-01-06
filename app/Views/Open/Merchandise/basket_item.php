@@ -8,7 +8,7 @@ $href = $controller->router()->hyp('movie', ['slug' => $record->get('movie_slug'
 
         <div class="col-md-4">
             <a href="<?= $href ?>">
-                <img src="<?= $avatar ?>" class="img-fluid w-100 rounded-start" alt="DVD du film <?= $record ?>">
+                <img src="<?= $record->defaultProfilePicture(); ?>" loading="lazy" data-src="<?= $avatar ?>" class="img-fluid w-100 rounded-start" alt="DVD du film <?= $record ?>">
             </a>
         </div>
 
@@ -43,7 +43,7 @@ $href = $controller->router()->hyp('movie', ['slug' => $record->get('movie_slug'
                 <?php } ?>
 
                 <aside class="input-group commander-boutique">
-                    <button class="form-control btn-commander" data-shadow-box-template="merchandise_order" data-titre="<?= $record; ?>" data-prix="<?= $record->get('price'); ?>" data-delivery-be="<?= $record->get('deliveryBe'); ?>" data-delivery-eu="<?= $record->get('deliveryEu'); ?>" data-id="<?= $record->get('id'); ?>"><?= $this->bi('cart-plus-fill') ?> </button>
+                    <button class="form-control add_to_cart btn-commander" data-titre="<?= $record; ?>" data-prix="<?= $record->get('price'); ?>" data-delivery-be="<?= $record->get('deliveryBe'); ?>" data-delivery-eu="<?= $record->get('deliveryEu'); ?>" data-id="<?= $record->get('id'); ?>"><?= $this->bi('cart-plus-fill') ?> </button>
                     <span class="input-group-text prix"><?= number_format($record->get('price'), 2) ?> &euro;</span>
                 </aside>
                 <small class="mt-3 frais"><?= $record->get('price'); ?>&euro; + <?= $record->get('deliveryBe') ?>&euro; de frais d'envoi en Belgique ou <?= $record->get('deliveryEu') ?>&euro; en Europe</small>
