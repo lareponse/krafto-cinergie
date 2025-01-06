@@ -25,7 +25,9 @@
     "philipp15b/php-i18n": "^4.0",
     "hexmakina/tempus": "^0.0.3",
     "hexmakina/local-fs": "^0.0.3",
-    "league/plates": "^3.4"
+    "league/plates": "^3.4",
+    "spatie/image-optimizer": "^1.8",
+    "spatie/image": "^2.0"
 
   },
   "require-dev": {

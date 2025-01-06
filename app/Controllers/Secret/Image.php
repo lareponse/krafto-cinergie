@@ -4,9 +4,15 @@ namespace App\Controllers\Secret;
 
 use App\Models\Article;
 use App\Controllers\Abilities\Imagine;
+use App\Controllers\Abilities\LargeImageFinder;
 use App\Controllers\Abilities\FileUploader;
+
 use \HexMakina\LocalFS\{FileSystem, File};
 use \HexMakina\Deadites\Deadites;
+
+use Spatie\ImageOptimizer\OptimizerChain;
+use Spatie\ImageOptimizer\Optimizers\Jpegoptim;
+use Spatie\Image\Image as Picture;
 
 class Image extends Krafto
 {
@@ -17,9 +23,46 @@ class Image extends Krafto
 
     public function home()
     {
+        $jpegOptimizer = (new OptimizerChain)
+            ->addOptimizer(new Jpegoptim([
+                '--strip-all',
+                '--all-progressive',
+                '--max = 100'
+            ]));
+
+
+        foreach (['film/_a', 'personne', 'organisation'] as $directory) {
+
+            $finder = new LargeImageFinder($this->fileSystem()->absolutePathFor($directory));
+            // $finder->setMaxBytes(5_000_000);
+            $finder->setMaxWidth(2000);
+            $finder->setMaxHeight(1200);
+            $finder->setExtensionsFilter(['jpg', 'jpeg']);
+            // $finder->setExtensionsFilter(['jpg', 'jpeg', 'png', 'gif', 'webp']);
+
+            $resized_pathes = [];
+            foreach ($finder->pathes() as $original_path => $issues) {
+                
+                $resized_path = $original_path.'-resized.jpg';
+                $image = Picture::load($original_path);
+       
+                if (isset($issues['maxWidth'])) {
+                    $image->width(1920); // image.png, image.webp, image.avif
+                }
+
+                if (isset($issues['maxHeight'])) {
+                    $image->height(1080); // image.png, image.webp, image.avif
+                }
+                $image->save($resized_path);
+                $jpegOptimizer->optimize($resized_path, $resized_path.'-optimized.jpg');
+                dd($issues, $original_path);
+                $resized_pathes[] = $resized_path;
+            }
+        }
+        dd($resized_pathes);
 
     }
-    
+
     public function imagesRootURL(): string
     {
         return $this->get('settings.urls.images');
@@ -59,19 +102,18 @@ class Image extends Krafto
         $path = $this->fileSystem()->absolutePathFor($relativePath);
         $file = new File($path);
 
-        
-        if(FileSystem::remove($path) === false){
+
+        if (FileSystem::remove($path) === false) {
             //add error message
             $this->router()->hopBack();
         }
-        
-        if(empty($this->fileSystem()->list($this->buildRelativeLocator())))
-        {
+
+        if (empty($this->fileSystem()->list($this->buildRelativeLocator()))) {
             $dir = $file->getFilePath()->dir();
             vd($dir);
             FileSystem::remove($dir);
         }
-        
+
         $this->router()->hopBack();
     }
 
@@ -169,11 +211,11 @@ class Image extends Krafto
      * @return string The relative locator for the image file.
      * @throws \Exception If the external controller or slug is not set.
      */
-    public function buildRelativeLocator($externalController=null, string $filename = null): string
+    public function buildRelativeLocator($externalController = null, string $filename = null): string
     {
-        if(!is_null($externalController))
+        if (!is_null($externalController))
             $this->externalController = $externalController;
-            
+
         if (is_null($this->externalController()))
             throw new \Exception('NO_EXTERNAL_CONTROLLER');
 

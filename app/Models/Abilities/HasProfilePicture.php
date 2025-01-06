@@ -5,7 +5,7 @@ trait HasProfilePicture
 {
 
     public function defaultProfilePicture():string{
-        return '/images/cinergie-avatar.svg';
+        return '/public/images/cinergie-avatar.svg';
     }
     
     public function profilePictureField():string {
