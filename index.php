@@ -21,8 +21,8 @@ try
   );
   //--- Setup database
   $database = $app->container()->get('HexMakina\BlackBox\Database\DatabaseInterface');
-  
   Crudites::setDatabase($database); // removable ?
+
   //--- Handle the request
   $app->container()->get('Controllers\Reception')->welcome(new Host(), $app->container());
 }
@@ -38,6 +38,8 @@ catch(\HexMakina\kadro\Auth\AccessRefusedException $e)
 }
 catch(\Throwable $e)
 {
+    ddt($e, '$app->isDevelopment()');
+
   if(isset($app) && $app->isDevelopment()){
     ddt($e, '$app->isDevelopment()');
   }
