@@ -45,7 +45,7 @@
                 <?php
                 foreach ($listing as $model) {
                 ?>
-                    <tr data-action="<?= $controller->urlFor('Author', 'edit', $model) ?>">
+                    <tr data-kx-href="<?= $controller->urlFor('Author', 'edit', $model) ?>">
                         <td class="fullName">
                             <strong><?= $model->get('label'); ?></strong>
                         </td>

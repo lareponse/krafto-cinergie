@@ -50,7 +50,7 @@
                 <?php
                 foreach ($listing as $model) {
                 ?>
-                    <tr data-action="<?= $controller->urlFor('Article', 'view', $model) ?>">
+                    <tr data-kx-href="<?= $controller->urlFor('Article', 'view', $model) ?>">
 
                         <td class="title">
                             <div class="d-flex align-items-center">

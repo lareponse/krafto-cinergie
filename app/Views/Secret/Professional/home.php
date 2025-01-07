@@ -32,7 +32,7 @@
                 <?php
                 foreach ($listing as $model) {
                 ?>
-                    <tr data-action="<?= $controller->urlFor('Professional', 'view', $model) ?>">
+                    <tr data-kx-href="<?= $controller->urlFor('Professional', 'view', $model) ?>">
                         <td class="fullName">
                             <strong><?= $model->fullName(); ?></strong>
                         </td>

@@ -41,12 +41,24 @@
       OttoFormatDate.searchAndFormat('.otto-date');
 
 
-      // select all .table-clickable rows and make them clickable using their data-action attribute
-      document.querySelectorAll('.table-clickable [data-action]').forEach(row => {
+      // select all data-kx-href and make them clickable links
+      document.querySelectorAll('[data-kx-href]').forEach(row => {
+        row.setAttribute('role', 'link');
+        row.setAttribute('tabindex', '0');
+
         row.addEventListener('click', () => {
-          const action = row.getAttribute('data-action');
+          const action = row.getAttribute('data-kx-href');
           if (action) {
             window.location.href = action;
+          }
+        });
+        
+        row.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            const action = row.getAttribute('data-kx-href');
+            if (action) {
+              window.location.href = action;
+            }
           }
         });
       });
