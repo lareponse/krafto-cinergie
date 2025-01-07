@@ -7,29 +7,62 @@ class Image extends Home
     public function legacy()
     {
         $path = $this->router()->params('path');
-        $parts = pathinfo($path);
 
-        foreach ($this->possibleFileNames($parts) as $filename) {
-            $relativePath = $parts['dirname'] . DIRECTORY_SEPARATOR . $filename . '.' . $parts['extension'];
-            $absolutePath = $this->get('settings.folders.images') . DIRECTORY_SEPARATOR . $relativePath;
-
-            if (file_exists($absolutePath)) {
-                $this->serveImageWithCaching($absolutePath);
-                exit;
-            }
-        }
-
+        $absolutePath = $this->supportSEODash($path) ?? $this->supportDefaultImage();
         // Serve the default image if the requested one isn't found
-        $defaultImagePath = $this->get('settings.folders.default_image');
-        if (file_exists($defaultImagePath)) {
-            $this->serveImageWithCaching($defaultImagePath);
+        if($absolutePath !== null) {
+            $this->serveImageWithCaching($absolutePath);
             exit;
         }
-
+        
         // Fallback to 404 if even the default image is missing
         header("HTTP/1.1 404 Not Found");
         exit;
     }
+
+    private function supportDefaultImage(): ?string
+    {
+        $defaultImagePath = $this->get('settings.folders.default_image');
+        if ($defaultImagePath && file_exists($defaultImagePath)) {
+            return $defaultImagePath;
+        }
+        return null;
+    }
+
+    private function supportSEODash($path): ?string
+    {
+        $parts = pathinfo($path);
+
+        // Validate that the required keys exist
+        if (!isset($parts['dirname'], $parts['filename'], $parts['extension'])) {
+            return null; // Invalid path
+        }
+
+        // Generate possible filenames
+        $parentDir = basename($parts['dirname']);
+        $grandparentDir = dirname($parts['dirname']); // Path excluding the direct parent directory
+        $replace = $parentDir.DIRECTORY_SEPARATOR.$parts['filename'];
+
+        $possibleFilenames = [
+            $replace,
+            str_replace('_', '-', $replace)
+        ];
+
+        // Iterate through possible filenames
+        foreach (array_unique($possibleFilenames) as $filename) {
+            $relativePath = $grandparentDir . DIRECTORY_SEPARATOR . $filename . '.' . $parts['extension'];
+            $absolutePath = $this->get('settings.folders.images') . DIRECTORY_SEPARATOR . $relativePath;
+
+            // Check if the file exists
+            if (file_exists($absolutePath)) {
+                return $absolutePath; // Return the first valid absolute path
+            }
+        }
+
+        // Return null if no valid path is found
+        return null;
+    }
+
 
     private function serveImageWithCaching($absolutePath)
     {
@@ -57,13 +90,5 @@ class Image extends Home
 
         // Serve the file content
         readfile($absolutePath);
-    }
-
-    private function possibleFileNames($parts)
-    {
-        return array_unique([
-                $parts['filename'], 
-                str_replace('_', '-', $parts['filename'])
-            ]);
     }
 }
