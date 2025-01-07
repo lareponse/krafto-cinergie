@@ -7,6 +7,9 @@ import CookieConsent from "/public/assets/js/cookie-consent.js";
 import LazyLoader from "/public/assets/js/lazy-loader.js";
 
 document.addEventListener("DOMContentLoaded", function () {
+
+  new LazyLoader("[loading='lazy']");
+
   // clickable table rows
   const ottoIdLabel = new OttoIdLabel(".otto-id-label");
   ottoIdLabel.replace();
@@ -18,7 +21,6 @@ document.addEventListener("DOMContentLoaded", function () {
   OttoLink.calls(".otto-phone");
 
   OttoFormatDate.searchAndFormat(".otto-date");
-  let elt;
 
   // navbar toggler
   document
@@ -48,19 +50,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // document.querySelectorAll(".table-clickable").forEach(function (table) {
-  //   table.addEventListener("click", function (e) {
-  //     const target = e.target;
-  //     const row = target.closest("tr");
-  //     if (row) {
-  //       const action = row.getAttribute("data-action");
-  //       if (action) {
-  //         window.location.href = action;
-  //       }
-  //     }
-  //   });
-  // });
-
   /* long text expander */
   const textContent = document.querySelector(".long-text-content");
 
@@ -88,7 +77,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   new CookieConsent();
-  new LazyLoader("[loading='lazy']");
   // enable shadow box triggers
   ShadowBox.listen('[data-shadow-box-template]');
   
