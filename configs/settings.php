@@ -116,13 +116,15 @@ $settings['Constructor'] = [
 $settings['folders'] = [
   'public' => DOCUMENT_ROOT.'/public/',
   'images' => DOCUMENT_ROOT.'/public/images',
-  'assets' => DOCUMENT_ROOT.'/public/assets/'
+  'assets' => DOCUMENT_ROOT.'/public/assets/',
+  'default_image' => DOCUMENT_ROOT.'/public/images/cinergie-avatar.svg',
+
 ];
 
 $settings['urls'] = [
   'public' => '/public/',
   'images' => '/public/images',
-  'default_image' => '/public/images/cinergie.missing.png',
+  'default_image' => '/public/images/cinergie-avatar.svg',
   'assets' => 'public/assets/'
 ];
 
