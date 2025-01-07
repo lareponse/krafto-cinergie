@@ -37,7 +37,7 @@ if (empty($professionals->records())) {
 
 ?>
         <a href="<?= $controller->router()->hyp('professional', ['slug' => $record->slug()]) ?>" class="card-search shadow">
-            <img src="<?= $record->profilePicture(); ?>" alt="Photo de <?= $record->fullName(); ?>">
+            <img src="<?= $controller->avatarFor($record) ?>" alt="Photo de <?= $record->fullName(); ?>">
             <h5 class="card-heading"><?= $record->fullName(); ?></h5>
             <span class="card-meta">
                 <?php

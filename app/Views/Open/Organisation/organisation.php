@@ -16,7 +16,7 @@ $this->layout('Open::layout')
         <div class="row g-0 mt-4">
 
             <div class="col-md-4 col-lg-5">
-                <img class="img-fluid" src="<?= $record->profilePicture() ?>" alt="organisation" />
+                <img class="img-fluid" src="<?= $controller->avatarFor($record) ?>" alt="organisation" />
             </div>
 
 

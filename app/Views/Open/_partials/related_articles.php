@@ -13,7 +13,7 @@ if (!empty($related_articles)) {
                     <div class="row g-0">
                         <div class="col-md-4">
                             <a href="<?= $href ?>">
-                                <img src="<?= $article->profilePicture() ?>" class="card-img-left img-fluid rounded-start" alt="...">
+                                <img src="<?= $controller->avatarFor($article) ?>" class="card-img-left img-fluid rounded-start" alt="...">
                             </a>
                         </div>
 

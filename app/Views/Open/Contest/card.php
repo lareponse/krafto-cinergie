@@ -1,6 +1,6 @@
 <article class="card concours mx-1">
     <a href="<?= $controller->router()->hyp('contest', ['slug' => $contest->slug()]) ?>">
-        <img src="<?= $contest->profilePicture() ?>" class="card-img-top" alt="Photo du concours <?= $contest->get('label') ?>" />
+        <img src="<?= $controller->avatarFor($contest) ?>" class="card-img-top" alt="Photo du concours <?= $contest->get('label') ?>" />
     </a>
     <div class="card-body px-4 py-3">
         <p class="date otto-date"><?= $contest->get('starts') ?></p>

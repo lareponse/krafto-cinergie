@@ -14,7 +14,7 @@ $collection_href = $controller->router()->hyp('movies');
         <div class="row g-0 mt-4">
 
             <div class="col-lg-5">
-                <img class="img-fluid w-100 mb-2" src="<?= $record->profilePicture() ?>" alt="Photo du film <?= $record->get('label') ?>" />
+                <img class="img-fluid w-100 mb-2" src="<?= $controller->avatarFor($record) ?>" alt="Photo du film <?= $record->get('label') ?>" />
                 <?= $this->insert('Open::_partials/share_print', ['label' => $record]); ?>
 
                 <?php

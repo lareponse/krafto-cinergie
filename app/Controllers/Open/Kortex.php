@@ -200,4 +200,25 @@ abstract class Kortex extends \HexMakina\kadro\Controllers\Kadro
 
         return $jsonData;
     }
+
+
+    public function avatarFor($record)
+    {
+        $root_path = $this->get('settings.folders.images');
+        $root_url = $this->get('settings.urls.images');
+        $res = $record->profilePicture();
+
+        // detect if the image path starts with /images/
+        if (strpos($res, '/images/') === 0) {
+            return $res;
+        }
+
+        if (empty($res) || !file_exists($root_path . $res)) {
+            $res = $this->get('settings.urls.default_image');
+        } else {
+            $res = $root_url . $res;
+        }
+
+        return $res;
+    }
 }

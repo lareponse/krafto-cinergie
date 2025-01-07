@@ -24,7 +24,7 @@
         <h2 class="h4 mb-4">Les dernières actualités</h2>
         <?php foreach ($latestArticles as $article) { ?>
             <a class="responsive-card shadow" href="<?= $controller->router()->hyp('article', ['slug' => $article->slug()]); ?>" title="">
-                <img src="<?= $article->profilePicture(); ?>" alt="Profile picture for article">
+                <img src="<?= $controller->avatarFor($article); ?>" alt="Profile picture for article">
                 <span>
                     <span class="otto-date date"><?= $article->get('publication'); ?></span>
                     <strong><?= $article->get('label'); ?></strong>

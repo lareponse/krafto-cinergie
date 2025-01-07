@@ -6,7 +6,7 @@ foreach ($articles as $item) {
             <div class="row g-0">
                 <div class="col-md-4">
                     <a href="<?= $href?>">
-                        <img src="<?= $item->profilePicture() ?>" class="card-img-left img-fluid rounded-start" alt="...">
+                        <img src="<?= $controller->avatarFor($item)?>" class="card-img-left img-fluid rounded-start" alt="...">
                     </a>
                 </div>
 

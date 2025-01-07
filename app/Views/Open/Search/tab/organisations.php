@@ -35,7 +35,7 @@ use \HexMakina\Marker\{Marker,Form};
             <article class="card shadow p-0 listing mb-3 px-lg-0">
                 <div class="row g-0">
                     <div class="col-2 d-flex justify-content-center align-items-center">
-                        <img src="<?= $record->profilePicture(); ?>" class="img-fluid" style="height:200px" alt="Photo de <?= $record; ?>">
+                        <img src="<?= $controller->avatarFor($record) ?>" class="img-fluid" style="height:200px" alt="Photo de <?= $record; ?>">
                     </div>
                     <div class="col-10">
                         <a href="<?= $controller->router()->hyp('organisation', ['slug' => $record->slug()]) ?>">

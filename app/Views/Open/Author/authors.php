@@ -6,7 +6,7 @@
                 <article class="card mb-4 shadow">
                     <a href="<?= $controller->router()->hyp('author', ['slug' => $author->slug()]); ?>">
                         <div class="card-body">
-                            <img src="<?= $author->profilePicture(); ?>" class="card-img-top mb-3" alt="Photo de <?= $author->fullName() ?>" />
+                            <img src="<?= $controller->avatarFor($author); ?>" class="card-img-top mb-3" alt="Photo de <?= $author->fullName() ?>" />
                             <div class="p-3">
                                 <h5 class="card-title text-center"><?= $author->fullName(); ?></h5>
                             </div>
