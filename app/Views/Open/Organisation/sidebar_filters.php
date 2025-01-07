@@ -6,7 +6,7 @@ $this->layout('Open/_partials/sidebar_filters', ['action' => $controller->router
 
 ?>
 
-<label class="form-label">Trier par catégorie</label>
+<label class="form-label">Filtrer par catégorie</label>
 <select class="form-select" name="activites">
     <option value="">Toutes</option>
     <?= Form::options($praxis, $controller->router()->params('activites')); ?>

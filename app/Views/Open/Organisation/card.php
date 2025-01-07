@@ -2,7 +2,7 @@
 $href = $href ?? $controller->router()->hyp('organisation', ['slug' => $record->slug()]);
 ?>
 <a class="card shadow" href="<?= $href ?>">
-   <img src="<?= $record->defaultProfilePicture();?>" loading="lazy" data-src="<?= $record->profilePicture(); ?>" class="card-img-top mb-3" alt="Photo <?= $record->get('label'); ?>" />
+   <img src="<?= $record->defaultProfilePicture();?>" loading="lazy" data-src="<?= $controller->avatarFor($record); ?>" class="card-img-top mb-3" alt="Photo <?= $record->get('label'); ?>" />
     <strong class="h5 card-title"><?= $record->get('label'); ?></strong>
     <span>
         <?php

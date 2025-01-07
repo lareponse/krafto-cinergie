@@ -32,7 +32,7 @@
                 <?php
                 foreach ($listing as $model) {
                 ?>
-                    <tr data-action="<?= $controller->urlFor('Movie', 'view', $model) ?>">
+                    <tr data-kx-href="<?= $controller->urlFor('Movie', 'view', $model) ?>">
 
                         <td class="fullName">
                             <strong><?= $model->get('label'); ?></strong>

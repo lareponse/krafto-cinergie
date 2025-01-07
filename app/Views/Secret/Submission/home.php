@@ -40,7 +40,7 @@
                 <?php
                 foreach ($listing as $model) {
                 ?>
-                    <tr data-action="<?= $controller->urlFor('Submission', 'view', $model) ?>">
+                    <tr data-kx-href="<?= $controller->urlFor('Submission', 'view', $model) ?>">
                         <td class="fullName">
                             <strong><?= $model; ?></strong>
                         </td>

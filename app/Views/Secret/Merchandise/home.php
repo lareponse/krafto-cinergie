@@ -29,7 +29,7 @@
                 <?php
                 foreach ($listing as $model) {
                 ?>
-                    <tr data-action="<?= $controller->urlFor($controller->nid(), 'view', $model) ?>">
+                    <tr data-kx-href="<?= $controller->urlFor($controller->nid(), 'view', $model) ?>">
 
                         <td class="fullName">
                             <strong><?= $model->get('label'); ?></strong>

@@ -10,7 +10,7 @@ $this->layout('Open/layout', ['title' => $page->label()])
     <span><span class="d-none d-lg-inline">Ajouter</span> votre organisation</span>
 </button>
 
-<div id="organisations" class="catalog">
+<div class="catalog">
 
     <?php
     $this->insert('Open/Organisation/sidebar_filters');

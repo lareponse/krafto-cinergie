@@ -31,7 +31,7 @@
                 <?php
                 foreach ($listing as $model) {
                 ?>
-                    <tr data-action="<?= $controller->urlFor('Page', 'edit', $model) ?>">
+                    <tr data-kx-href="<?= $controller->urlFor('Page', 'edit', $model) ?>">
                         <td class="slug">
                             <strong><?= $model->slug(); ?></strong>
                         </td>

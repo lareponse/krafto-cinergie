@@ -7,7 +7,7 @@
 
         ?>
             <article class="card slide">
-                <img src="<?= $article->profilePicture() ?>" class="card-img" alt="<?= $article->get('label'); ?> - <?= $article->get('author_label'); ?>">
+                <img src="<?= $controller->avatarFor($article) ?>" class="card-img" alt="<?= $article->get('label'); ?> - <?= $article->get('author_label'); ?>">
                 <div class="card-img-overlay">
                     <h3 class="card-title h1"><?= $article->get('label'); ?></h3>
                     <p class="card-text"><small class="text-primary"><?= $article->get('author_label'); ?></small></p>
@@ -28,7 +28,7 @@
         $href = $controller->router()->hyp('article', ['slug' => $article->slug()]);
         ?>
         <article class="card">
-            <img src="<?= $article->profilePicture() ?>" class="card-img" alt="<?= $article->get('label'); ?> - <?= $article->get('author_label'); ?>">
+            <img src="<?= $controller->avatarFor($article) ?>" class="card-img" alt="<?= $article->get('label'); ?> - <?= $article->get('author_label'); ?>">
             <h3 class="card-title bg-dark p-2"><?= $article->get('label'); ?></h3>
             <p class="card-text"><small class="text-primary"><?= $article->get('author_label'); ?></small></p>
             <p><a href="<?= $href ?>" class="btn btn-primary">En savoir plus</a></p>

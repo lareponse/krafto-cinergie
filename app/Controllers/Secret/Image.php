@@ -31,6 +31,7 @@ class Image extends Krafto
             ]));
 
 
+        $optimized_pathes = [];
         foreach (['film/_a', 'personne', 'organisation'] as $directory) {
 
             $finder = new LargeImageFinder($this->fileSystem()->absolutePathFor($directory));
@@ -39,8 +40,7 @@ class Image extends Krafto
             $finder->setMaxHeight(1200);
             $finder->setExtensionsFilter(['jpg', 'jpeg']);
             // $finder->setExtensionsFilter(['jpg', 'jpeg', 'png', 'gif', 'webp']);
-
-            $resized_pathes = [];
+            
             foreach ($finder->pathes() as $original_path => $issues) {
                 
                 $resized_path = $original_path.'-resized.jpg';
@@ -55,11 +55,11 @@ class Image extends Krafto
                 }
                 $image->save($resized_path);
                 $jpegOptimizer->optimize($resized_path, $resized_path.'-optimized.jpg');
-                dd($issues, $original_path);
-                $resized_pathes[] = $resized_path;
+                vd($issues, $original_path);
+                $optimized_pathes[] = $resized_path;
             }
+            dd($optimized_pathes);
         }
-        dd($resized_pathes);
 
     }
 

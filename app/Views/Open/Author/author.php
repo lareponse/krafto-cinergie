@@ -5,7 +5,7 @@
 
         <div class="row">
             <div class="col-lg-4">
-                <img class="img-fluid w-100" src="<?= $record->profilePicture() ?>" alt="auteur" />
+                <img class="img-fluid w-100" src="<?= $controller->avatarFor($record) ?>" alt="auteur" />
             </div>
 
             <div class="col-lg-8 ps-lg-5 mt-5 mt-lg-0">
@@ -38,7 +38,7 @@
                     <div class="row g-0">
                         <div class="col-md-4">
                             <a href="<?= $href ?>">
-                                <img src="<?= $article->profilePicture() ?>" class="card-img-left img-fluid rounded-start" alt="...">
+                                <img src="<?= $controller->avatarFor($article) ?>" class="card-img-left img-fluid rounded-start" alt="...">
                             </a>
                         </div>
 

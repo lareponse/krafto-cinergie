@@ -38,7 +38,7 @@
 
                     // vd($model);
                 ?>
-                    <tr data-action="<?= $controller->urlFor($controller->nid(), 'edit', $model) ?>">
+                    <tr data-kx-href="<?= $controller->urlFor($controller->nid(), 'edit', $model) ?>">
                         <td class="label">
                             <strong><?= $model; ?></strong>
                         </td>

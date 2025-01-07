@@ -16,7 +16,7 @@ if (empty($related_content)) {
                     <div class="row g-0">
                         <div class="col-md-4">
                             <a href="<?= $href ?>">
-                                <img src="<?= $related->profilePicture() ?>" class="card-img-left img-fluid rounded-start" alt="<?= $related . ''; ?>">
+                                <img src="<?= $controller->avatarFor($related) ?>" class="card-img-left img-fluid rounded-start" alt="<?= $related . ''; ?>">
                             </a>
                         </div>
 

@@ -3,7 +3,7 @@
 <div class="container my-5 pb-5" id="article-single">
 
     <header <?= empty($article->get('embedVideo')) ? '' : 'class="thirdPartyContent" data-consent-template="primaryEmbedVideo"'; ?>>
-        <img class="" src=" <?= $article->profilePicture(); ?>" alt="Couverture de l'article <?= $article; ?>" />
+        <img src=" <?= $controller->avatarFor($article); ?>" alt="Couverture de l'article <?= $article; ?>" />
     </header>
 
     <h2><?= $article->get('label'); ?></h2>
@@ -55,7 +55,7 @@
 
 <script nonce="<?= $CSP_nonce ?>">
     //vanilla js to set the header background image to the article's profile picture
-    // document.querySelector('#article-single header').style.backgroundImage = 'url("<?= $article->profilePicture(); ?>")';
+    // document.querySelector('#article-single header').style.backgroundImage = 'url("<?= $controller->avatarFor($article); ?>")';
 </script>
 
 <template id="primaryEmbedVideo">

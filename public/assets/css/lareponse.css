@@ -3,9 +3,9 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap'); */
 @font-face {
     font-family: 'Poppins';
-    src: local('Poppins Light'), local('Poppins-Light'),
-        url('/public/assets/font/Poppins-Light.woff2') format('woff2'),
-        url('/public/assets/font/Poppins-Light.woff') format('woff');
+    src: url('/public/assets/font/Poppins-Light.woff2') format('woff2'),
+         url('/public/assets/font/Poppins-Light.woff') format('woff'),
+         local('Poppins Light'), local('Poppins-Light');
     font-weight: 300;
     font-style: normal;
     font-display: swap;
@@ -13,19 +13,19 @@
 
 @font-face {
     font-family: 'Poppins';
-    src: local('Poppins Regular'), local('Poppins-Regular'),
-        url('/public/assets/font/Poppins-Regular.woff2') format('woff2'),
-        url('/public/assets/font/Poppins-Regular.woff') format('woff');
-    font-weight: normal;
+    src: url('/public/assets/font/Poppins-Regular.woff2') format('woff2'),
+         url('/public/assets/font/Poppins-Regular.woff') format('woff'),
+         local('Poppins Regular'), local('Poppins-Regular');
+    font-weight: 400; /* 'normal' is equivalent to 400 */
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
     font-family: 'Poppins';
-    src: local('Poppins Medium'), local('Poppins-Medium'),
-        url('/public/assets/font/Poppins-Medium.woff2') format('woff2'),
-        url('/public/assets/font/Poppins-Medium.woff') format('woff');
+    src: url('/public/assets/font/Poppins-Medium.woff2') format('woff2'),
+         url('/public/assets/font/Poppins-Medium.woff') format('woff'),
+         local('Poppins Medium'), local('Poppins-Medium');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
@@ -33,13 +33,14 @@
 
 @font-face {
     font-family: 'Poppins';
-    src: local('Poppins SemiBold'), local('Poppins-SemiBold'),
-        url('/public/assets/font/Poppins-SemiBold.woff2') format('woff2'),
-        url('/public/assets/font/Poppins-SemiBold.woff') format('woff');
+    src: url('/public/assets/font/Poppins-SemiBold.woff2') format('woff2'),
+         url('/public/assets/font/Poppins-SemiBold.woff') format('woff'),
+         local('Poppins SemiBold'), local('Poppins-SemiBold');
     font-weight: 600;
     font-style: normal;
     font-display: swap;
 }
+
 
 :root {
 

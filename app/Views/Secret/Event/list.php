@@ -54,7 +54,7 @@
                 foreach ($listing as $model) {
 
                 ?>
-                <tr data-action="<?= $controller->urlFor($controller->nid(), 'edit', $model)?>">
+                <tr data-kx-href="<?= $controller->urlFor($controller->nid(), 'edit', $model)?>">
 
 
                         <td class="title">

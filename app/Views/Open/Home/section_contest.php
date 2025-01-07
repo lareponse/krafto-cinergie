@@ -8,7 +8,7 @@
             <div class="slide concours-item">
                 <article class="card slide concours mx-1">
                     <a href="article-single.php">
-                        <img src="<?= $contest->profilePicture() ?>" class="card-img-top" alt="...">
+                        <img src="<?= $controller->avatarFor($contest) ?>" class="card-img-top" alt="...">
                     </a>
                     <div class="card-body px-4 py-3">
                         <p class="date">3 octobre 2022</p>
