@@ -3,6 +3,10 @@
 
 <head>
   <?php $this->insert('Secret::_partials/head') ?>
+
+  // section onLoaded
+  <?= $this->section('html_head') ?>
+  // EOF section onLoaded
 </head>
 
 <body>
@@ -52,7 +56,7 @@
             window.location.href = action;
           }
         });
-        
+
         row.addEventListener('keypress', (e) => {
           if (e.key === 'Enter') {
             const action = row.getAttribute('data-kx-href');
@@ -62,10 +66,15 @@
           }
         });
       });
+      console.log('ok');
 
       // section onLoaded
       <?= $this->section('onLoaded') ?>
       // EOF section onLoaded
+
+      console.log(options_for_wysiwyg_editor);
+      console.log(document.querySelectorAll('.wysiwyg'));
+
     });
   </script>
 </body>

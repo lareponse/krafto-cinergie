@@ -4,7 +4,7 @@
 <div class="card border-0 flex-fill w-100" data-list='{"valueNames": ["fullName","created_on","approved", "reviewed_by", "reviewed_on"], "page": 20}' id="filesTable">
 
     <div class="table-responsive">
-        <table class="table table-clickable align-middle table-hover table-nowrap mb-0">
+        <table class="table align-middle table-hover table-nowrap mb-0">
             <thead class="thead-light">
                 <tr>
                     <th>

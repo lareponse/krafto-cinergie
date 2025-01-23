@@ -4,8 +4,13 @@
     </div>
 
     <div class="card-body">
-        <textarea class="form-control tinymce" name="<?= $name?>" id="<?= $name?>" rows="<?= $rows ?? 4;?>"><?= $controller->formModel()->get($name); ?></textarea>
+        <div class="wysiwyg"><?= $controller->formModel()->get($name); ?></div>
+        <?php 
+        /*
+        <textarea class="form-control" name="<?= $name ?>" id="<?= $name ?>" rows="<?= $rows ?? 4; ?>"><?= $controller->formModel()->get($name); ?></textarea>
         <div class="invalid-feedback">Please tell something about yourself</div>
+        */
+        ?>
 
         <?= $this->submitDashly(); ?>
 

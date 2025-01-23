@@ -4,16 +4,7 @@
     </header>
 
     <div class="card-body">
-        <!-- <div class="row mb-4">
-            <div class="col-lg-3">
-                <label for="lastname" class="col-form-label">Nom</label>
-            </div>
 
-            <div class="col-lg">
-                <input type="text" class="form-control" id="lastname" value="<?= $model->get('lastname') ?>">
-                <div class="invalid-feedback">Vous n'avez pas précisé cette information</div>
-            </div>
-        </div>
 
         <div class="row mb-4">
             <div class="col-lg-3">
@@ -21,18 +12,17 @@
             </div>
 
             <div class="col-lg">
-                <input type="text" class="form-control" id="firstname" value="<?= $model->get('firstname') ?>">
+                <input type="text" class="form-control" id="firstname" name="firstname" value="<?= $model->get('firstname') ?>">
                 <div class="invalid-feedback">Vous n'avez pas précisé cette information</div>
             </div>
-        </div> -->
-
+        </div>
         <div class="row mb-4">
             <div class="col-lg-3">
-                <label for="label" class="col-form-label">Prénom</label>
+                <label for="lastname" class="col-form-label">Nom</label>
             </div>
 
             <div class="col-lg">
-                <input type="text" class="form-control" id="label" value="<?= $model->get('label') ?>">
+                <input type="text" class="form-control" id="lastname" name="lastname" value="<?= $model->get('lastname') ?>">
                 <div class="invalid-feedback">Vous n'avez pas précisé cette information</div>
             </div>
         </div>
@@ -69,7 +59,7 @@
             </div>
         </div>
     </div>
-    
+
     <footer class="card-footer">
         <?= $this->submitDashly(); ?>
     </footer>
