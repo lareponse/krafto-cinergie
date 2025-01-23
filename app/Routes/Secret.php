@@ -11,6 +11,7 @@ array_push(
 
 array_push(
     $routes,
+    ['GET', 'operators/segment/[a:segment]', 'Operator::home', 'operators_by_segment'],
     ['GET', 'organisations/segment/[a:segment]', 'Organisation::home', 'organisations_by_segment'],
 );
 
