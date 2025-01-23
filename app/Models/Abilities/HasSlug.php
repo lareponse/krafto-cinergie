@@ -33,8 +33,6 @@ trait HasSlug
     
         return $text;
     }
-    
-    
 
     public function slug():string
     {
@@ -42,5 +40,17 @@ trait HasSlug
             $this->set('slug', $this->slugify($this));
 
         return $this->get('slug');
+    }
+
+    public function HasSlug_Traitor_before_save(): array
+    {
+        try{
+            $this->slug();
+        }
+        catch(\Exception $e){
+            return [$e->getMessage()];
+        }
+        
+        return [];
     }
 }
