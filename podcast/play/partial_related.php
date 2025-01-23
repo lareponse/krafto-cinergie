@@ -53,7 +53,7 @@
 
 */
 ?>
-<div class="row g-0 mt-5">
+<div id="slider_related" class="container">
   <div class="slide dots single-post-slider">
 
     <?php

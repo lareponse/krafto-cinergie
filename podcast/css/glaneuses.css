@@ -92,12 +92,13 @@ body {
 }
 
 body>header {
-  height: 66%;
-
+  height: 60vh;
+  margin:0; padding:0;
 }
 
 body>header>img {
-  width: 100%;
+  height: 100%;
+  width: auto;
 }
 
 body>main {
@@ -145,6 +146,17 @@ body>footer img {
   max-width: 100%;
 }
 
+#youtube_making_of{
+  display:flex;
+  flex-wrap:wrap;
+  gap:2rem;
+  justify-content:center;
+  width: 90%;
+}
+#youtube_making_of > *{
+  width:30rem;
+  height:auto;
+}
 #credits {
   width: 60%;
   margin: 3em 0;
