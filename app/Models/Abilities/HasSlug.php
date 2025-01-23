@@ -45,7 +45,12 @@ trait HasSlug
     public function HasSlug_Traitor_before_save(): array
     {
         try{
-            $this->slug();
+            do{
+                $res = self::any(['slug' => $this->slug()]);
+                if (!empty($res)) {
+                    $this->set('slug', $this->slug() . '-' . time());
+                }
+            }while(!empty($res));
         }
         catch(\Exception $e){
             return [$e->getMessage()];
