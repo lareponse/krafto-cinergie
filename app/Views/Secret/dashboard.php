@@ -93,14 +93,21 @@
         const quill = new Quill(el, options_for_wysiwyg_editor);
       });
 
+      let editors, input, content;
       document.querySelectorAll('form:has(.wysiwyg)').forEach((el) => {
         el.addEventListener('submit', () => {
-          const editors = el.querySelectorAll('.wysiwyg');
+          editors = el.querySelectorAll('.wysiwyg');
           editors.forEach((editor) => {
-            const input = document.createElement('input');
+            
+            content = editor.querySelector('.ql-editor').innerHTML;
+            if (content.replace(/<(.|\n)*?>/g, '').trim().length === 0) {
+              content = '';
+            }
+
+            input = document.createElement('input');
             input.type = 'hidden';
             input.name = editor.getAttribute('data-name');
-            input.value = editor.querySelector('.ql-editor').innerHTML;
+            input.value = content;
             el.appendChild(input);
           });
         });
