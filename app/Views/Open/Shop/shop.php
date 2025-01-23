@@ -102,25 +102,6 @@ use \HexMakina\Marker\Marker;
         });
     });
 
-    document.querySelectorAll('.nav.nav-tabs .nav-link').forEach(function(link) {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            // hidde all tabs
-            document.querySelectorAll('.tab-pane.active.show').forEach(function(elt) {
-                elt.classList.remove('active');
-                elt.classList.remove('show');
-            });
-            
-            document.querySelectorAll('.nav.nav-tabs .nav-link.active').forEach(function(elt) {
-                elt.classList.remove('active');
-            });
-
-            let href = link.getAttribute('href');
-            let tab = document.querySelector(href);
-            tab.classList.add('active');
-            tab.classList.add('show');
-        });
-    });
 </script>
 
 <?= $this->insert('Open::Shop/modal-order') ?>
