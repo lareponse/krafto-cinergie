@@ -57,7 +57,7 @@ trait HasORM
             foreach($this->errors() as $err){
                 $this->logger()->warning($err);
             }
-            $this->setTemplate('alter');
+            $this->setTemplate($this->nid().'/alter');
         }
     }
 
