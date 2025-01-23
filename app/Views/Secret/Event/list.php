@@ -27,7 +27,7 @@
     </div>
 
     <div id="eventTable" class="table-responsive" data-list='{"valueNames": ["title", {"name": "starts", "attr": "data-starts"}, {"name": "stops", "attr": "data-stops"}], "page": 20}'>
-        <table class="table table-clickable align-middle table-hover table-nowrap mb-0">
+        <table class="table align-middle table-hover table-nowrap mb-0">
             <thead class="thead-light">
                 <tr>
 
