@@ -122,4 +122,10 @@ class Professional extends TightModel
 
         return $Query;
     }
+
+    public function before_save(): array
+    {
+        $this->set('label', $this->fullName());
+        return parent::before_save();
+    }
 }
