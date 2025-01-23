@@ -14,9 +14,10 @@ if (empty($sidemenu) || empty($controller))
             
             foreach ($sidemenu as [$href, $icon, $label]) {
                 $content = $this->icon($icon, 14, ['class' => 'me-2']) . ' ' . $label;
+                // vd($content);
                 echo $this->DOM()::li(
-                    '' . $this->DOM()::a($href, $content, ['class' => 'd-flex align-items-center py-3'])
-                );
+                    (string)$this->DOM()::a($href, $content, ['class' => 'd-flex align-items-center py-3'], false)
+                ,[], false);
             }
             ?>
 
