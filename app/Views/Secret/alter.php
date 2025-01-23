@@ -27,36 +27,10 @@
     </div>
 </div>
 
+<?php $this->unshift('scripts') ?>
 <script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js"></script>
+<?php $this->end() ?>
 
 <?php $this->unshift('html_head') ?>
 <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
-<?php $this->end() ?>
-
-<?php $this->unshift('onLoaded') ?>
-<script>
-    const options_for_wysiwyg_editor = {
-        modules: {
-            toolbar: [
-                [{
-                    header: [1, 2, false]
-                }],
-                ['bold', 'italic', 'underline'],
-                ['link', 'code-block'],
-            ],
-            history: {
-                delay: 2000,
-                maxStack: 500,
-                userOnly: true
-            },
-        },
-        placeholder: 'Compose an epic...',
-        theme: 'snow', // or 'bubble'
-    };
-
-    document.querySelectorAll('.wysiwyg').forEach((el) => {
-        console.log('applying quill to', el);
-        const quill = new Quill(el, options_for_wysiwyg_editor);
-    });
-</script>
 <?php $this->end() ?>

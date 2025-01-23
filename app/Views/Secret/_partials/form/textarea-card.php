@@ -4,7 +4,7 @@
     </div>
 
     <div class="card-body">
-        <div class="wysiwyg"><?= $controller->formModel()->get($name); ?></div>
+        <div class="wysiwyg" data-name="<?= $name?>"><?= $controller->formModel()->get($name); ?></div>
         <?php 
         /*
         <textarea class="form-control" name="<?= $name ?>" id="<?= $name ?>" rows="<?= $rows ?? 4; ?>"><?= $controller->formModel()->get($name); ?></textarea>

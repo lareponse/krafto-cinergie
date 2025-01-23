@@ -4,9 +4,7 @@
 <head>
   <?php $this->insert('Secret::_partials/head') ?>
 
-  // section onLoaded
   <?= $this->section('html_head') ?>
-  // EOF section onLoaded
 </head>
 
 <body>
@@ -28,6 +26,7 @@
   <script type="text/javascript" src="/public/assets/dashly/js/theme.bundle.js"></script>
 
   <?= $this->section('scripts') ?>
+
   <script type="module">
     import OttoIdLabel from '/public/assets/js/otto/otto-id-label.js';
     import OttoLink from '/public/assets/js/otto/otto-link.js';
@@ -47,6 +46,7 @@
 
       // select all data-kx-href and make them clickable links
       document.querySelectorAll('[data-kx-href]').forEach(row => {
+        console.log(row)
         row.setAttribute('role', 'link');
         row.setAttribute('tabindex', '0');
 
@@ -66,15 +66,46 @@
           }
         });
       });
-      console.log('ok');
 
-      // section onLoaded
-      <?= $this->section('onLoaded') ?>
-      // EOF section onLoaded
 
-      console.log(options_for_wysiwyg_editor);
-      console.log(document.querySelectorAll('.wysiwyg'));
+      // Quill.js
+      const options_for_wysiwyg_editor = {
+        modules: {
+          toolbar: [
+            [{
+              header: [1, 2, false]
+            }],
+            ['bold', 'italic', 'underline'],
+            ['link', 'code-block'],
+          ],
+          history: {
+            delay: 2000,
+            maxStack: 500,
+            userOnly: true
+          },
+        },
+        placeholder: 'Compose an epic...',
+        theme: 'snow', // or 'bubble'
+      };
 
+      document.querySelectorAll('.wysiwyg').forEach((el) => {
+        console.log('applying quill to', el);
+        const quill = new Quill(el, options_for_wysiwyg_editor);
+      });
+
+      document.querySelectorAll('form:has(.wysiwyg)').forEach((el) => {
+        el.addEventListener('submit', () => {
+          const editors = el.querySelectorAll('.wysiwyg');
+          editors.forEach((editor) => {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = editor.getAttribute('data-name');
+            input.value = editor.querySelector('.ql-editor').innerHTML;
+            el.appendChild(input);
+          });
+        });
+      });
+      // EOF Quill.js
     });
   </script>
 </body>
