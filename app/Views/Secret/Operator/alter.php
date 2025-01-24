@@ -18,7 +18,6 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu, 'controller' => $contro
         $fields = [
             'name' => 'Nom',
             'email' => 'Email',
-            'active' => 'Actif',
             'home' => 'Accueil',
             'phone' => 'Téléphone',
             'language_code' => 'Code de langue',
@@ -34,8 +33,11 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu, 'controller' => $contro
                     <input type="text" class="form-control" id="<?= $field ?>" name="<?= $field ?>" value="<?= $controller->formModel()->get($field) ?>">
                 </div>
             </div>
+
         <?php
         }
+
+
         ?>
 
 
@@ -72,6 +74,24 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu, 'controller' => $contro
             </div>
             <div class="col-lg">
                 <input type="text" class="form-control" id="<?= $field ?>" name="<?= $field ?>" value="">
+            </div>
+        </div>
+
+        <?php
+
+        $label = 'Actif';
+        $name = 'active';
+        $description = 'L\'opérateur peut se connecter';
+        ?>
+        <div class="row mb-4">
+            <div class="col-lg-3">
+                <label for="publication-form-<?= $name ?>" class="col-form-label"><?= $label ?></label>
+            </div>
+            <div class="col-lg">
+                <div class="form-check form-switch mb-0">
+                    <input class="form-check-input" type="checkbox" role="switch" id="publication-form-<?= $name ?>" name="<?= $name ?>" <?= $controller->formModel()->get($name) ? 'checked="checked"' : '' ?>">
+                    <span class="d-block small text-muted mb-0"><?= $description ?></spân>
+                </div>
             </div>
         </div>
         <?= $this->submitDashly(); ?>
