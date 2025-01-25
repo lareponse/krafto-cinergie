@@ -1,7 +1,7 @@
 class Korbo {
   constructor(container_id, template_id) {
     this.items = this.load() || [];
-    this.customer = localStorage.getItem("customer") || { name: "", email: "" };
+    this.customer = localStorage.getItem('customer') || { name: '', email: '' };
     this.ui = new KorboUI(this, container_id, template_id);
   }
 
@@ -33,12 +33,12 @@ class Korbo {
   }
 
   save() {
-    localStorage.setItem("korbo", JSON.stringify(this.items));
+    localStorage.setItem('korbo', JSON.stringify(this.items));
     this.ui.refresh();
   }
 
   load() {
-    let res = localStorage.getItem("korbo");
+    let res = localStorage.getItem('korbo');
     if (res !== null) {
       return JSON.parse(res);
     }
@@ -50,12 +50,12 @@ class Korbo {
   }
 
   update(id, props) {
-    if ("quantity" in props && props.quantity < 1) {
-      console.debug("removing item with quantity < 1");
+    if ('quantity' in props && props.quantity < 1) {
+      console.debug('removing item with quantity < 1');
       this.remove(id);
     }
 
-    console.debug("updating qty from ${item.quantity} to ${props.quantity}");
+    console.debug('updating qty from ${item.quantity} to ${props.quantity}');
     let item = this.items.find((item) => item.id === id);
     if (item) {
       Object.assign(item, props);
@@ -83,11 +83,11 @@ class KorboUI {
   }
 
   refresh() {
-    let korboTrigger = document.querySelector(".korbo-trigger");
+    let korboTrigger = document.querySelector('.korbo-trigger');
     if (this.korbo.count() === 0) {
-      korboTrigger.classList.add("hidden");
+      korboTrigger.classList.add('hidden');
     } else {
-      korboTrigger.classList.remove("hidden");
+      korboTrigger.classList.remove('hidden');
     }
 
     this.setLines();
@@ -95,38 +95,37 @@ class KorboUI {
 
   setLines() {
     if (this.lineContainer !== null && this.lineTemplate !== null) {
-      this.lineContainer.innerHTML = "";
+      this.lineContainer.innerHTML = '';
       this.korbo.items.forEach((item) => {
         let row = this.lineElement(item);
         this.lineContainer.appendChild(row);
       });
 
-      this.lineContainer.addEventListener("change", (e) => {
-        let id = e.target.closest(".korbo-item").dataset.itemId;
+      this.lineContainer.addEventListener('change', (e) => {
+        let id = e.target.closest('.korbo-item').dataset.itemId;
         this.korbo.update(id, {
           quantity: e.target.value,
         });
       });
 
-      this.lineContainer
-        .querySelector(".btn-delete-item")
-        .addEventListener("click", (e) => {
-          console.log("delete item", e.target);
-            let elt = e.target.closest(".korbo-item");
-            let id = elt.dataset.itemId;
-            this.korbo.remove(id);
-            // remove the element from the DOM
-            elt.remove();
-        });
+      this.lineContainer.addEventListener('click', (e) => {
+        if (e.target.closest('.btn-delete-item')) {
+          console.log('delete item', e.target.closest('.btn-delete-item'));
+          let elt = e.target.closest('.korbo-item');
+          let id = elt.dataset.itemId;
+          this.korbo.remove(id);
+          elt.remove();
+        }
+      });
     }
   }
 
   lineElement(item) {
     let row = this.lineTemplate.content.cloneNode(true);
-    row = row.querySelector(".korbo-item");
+    row = row.querySelector('.korbo-item');
 
-    row.classList.add("korbo-item");
-    row.setAttribute("data-item-id", item.id);
+    row.classList.add('korbo-item');
+    row.setAttribute('data-item-id', item.id);
     row.querySelector('[data-kx-id="title"]').textContent = item.title;
     row.querySelector('[data-kx-id="price"]').textContent = item.price;
     row.querySelector('[data-kx-id="delivery"]').textContent = item.deliveryBe;
