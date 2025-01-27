@@ -145,6 +145,7 @@
     </select>
 </div>
 
+
 <!-- Table -->
 <table id="image-table">
     <thead>
@@ -160,33 +161,47 @@
         </tr>
     </thead>
     <tbody>
-        <?php
-        // Populate table rows
-        foreach ($images as $image) {
-            echo "<tr>
-                    <td>{$image['id']}</td>
-                    <td>{$image['path']}</td>
-                    <td>{$image['extension']}</td>
-                    <td>{$image['size']}</td>
-                    <td>{$image['width']}</td>
-                    <td>{$image['height']}</td>
-                    <td>{$image['mime']}</td>
-                    <td>{$image['is_active']}</td>
-                </tr>";
-        }
-        ?>
     </tbody>
 </table>
-
+<script type="application/json" id="images">
+    <?= json_encode($images); ?>
+</script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+        const images = JSON.parse(document.getElementById("images").textContent);
+        let filteredImages = images;
+
         const table = document.getElementById("image-table");
         const headers = table.querySelectorAll("th");
         const searchInput = document.getElementById("search");
         const mimeFilter = document.getElementById("mime-filter");
         const pathFilter = document.getElementById("path-filter");
 
-        let filteredRows = Array.from(table.querySelectorAll("tbody tr"));
+        // load the JSON
+        function render() {
+            const LIMIT = 1000;
+            //create a fragment to append the new tr
+            const fragment = document.createDocumentFragment();
+
+            filteredImages.slice(0, LIMIT).forEach(image => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                <td>${image.id}</td>
+                <td>${image.path}</td>
+                <td>${image.extension}</td>
+                <td>${image.size}</td>
+                <td>${image.width}</td>
+                <td>${image.height}</td>
+                <td>${image.mime}</td>
+                <td>${image.is_active}</td>
+            `;
+                fragment.appendChild(row);
+            });
+            table.querySelector("tbody").innerHTML = "";
+            table.querySelector("tbody").appendChild(fragment);
+        }
+
+        // let filteredRows = Array.from(table.querySelectorAll("tbody tr"));
 
         // Function to filter rows based on search term, MIME type, and path
         function filterRows() {
@@ -194,19 +209,13 @@
             const selectedMime = mimeFilter.value;
             const selectedPath = pathFilter.value;
 
-            filteredRows = Array.from(table.querySelectorAll("tbody tr")).filter(row => {
-                const rowText = row.textContent.toLowerCase();
-                const mimeCell = row.querySelector("td:nth-child(7)").textContent;
-                const pathCell = row.querySelector("td:nth-child(2)").textContent;
-
-                return (selectedMime === "" || mimeCell === selectedMime) &&
-                    (selectedPath === "" || pathCell.includes(selectedPath)) &&
-                    rowText.includes(searchTerm);
+            filteredImages = images.filter(image => {
+                return (selectedMime === "" || image.mime === selectedMime) &&
+                    (selectedPath === "" || image.path.includes(selectedPath)) &&
+                    (searchTerm === "" || image.path.toLowerCase().includes(searchTerm));
             });
-
-            // Update the table
-            table.querySelector("tbody").innerHTML = "";
-            filteredRows.forEach(row => table.querySelector("tbody").appendChild(row));
+            console.log('count', filteredImages.length, 'total', images.length, 'search', searchTerm, 'mime', selectedMime, 'path', selectedPath);
+            render();
         }
 
         // Sorting functionality
@@ -223,26 +232,23 @@
 
                 // Sort rows
                 const column = header.getAttribute("data-column");
-                const rows = Array.from(filteredRows);
 
                 if (column === 'id' || column === 'size' || column === 'width' || column === 'height' || column === 'is_active') {
-                    rows.sort((a, b) => {
-                        const aValue = parseInt(a.querySelector(`td:nth-child(${Array.from(headers).indexOf(header) + 1})`).textContent);
-                        const bValue = parseInt(b.querySelector(`td:nth-child(${Array.from(headers).indexOf(header) + 1})`).textContent);
+                    filteredImages.sort((a, b) => {
+                        const aValue = parseInt(a[column]);
+                        const bValue = parseInt(b[column]);
                         return isAscending ? aValue - bValue : bValue - aValue;
                     });
                 } else {
-                    rows.sort((a, b) => {
-                        const aValue = a.querySelector(`td:nth-child(${Array.from(headers).indexOf(header) + 1})`).textContent;
-                        const bValue = b.querySelector(`td:nth-child(${Array.from(headers).indexOf(header) + 1})`).textContent;
+                    filteredImages.sort((a, b) => {
+                        const aValue = a[column];
+                        const bValue = b[column];
                         return isAscending ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
                     });
                 }
 
                 // Update filtered rows
-                filteredRows = rows;
-                table.querySelector("tbody").innerHTML = "";
-                filteredRows.forEach(row => table.querySelector("tbody").appendChild(row));
+                render();
             });
         });
 
@@ -250,5 +256,8 @@
         searchInput.addEventListener("input", filterRows);
         mimeFilter.addEventListener("change", filterRows);
         pathFilter.addEventListener("change", filterRows);
+
+        render(images);
+
     });
 </script>
