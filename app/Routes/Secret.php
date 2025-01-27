@@ -36,11 +36,12 @@ array_push(
 
     ['GET', 'image/avatar/[a:nid]/[i:id]/[*:filename]?', 'Image::avatar', 'image_set_avatar'],
 
-    ['GET', 'image/[*:filename]', 'Image::view', 'image_view'],
-
+    
     ['GET', 'images/deadlinks/[a:externalController]', 'Image::deadlinks', 'images_deadlinks'],
     ['GET', 'images/alternates', 'Image::alternates', 'images_alternates'],
-
+    ['GET', 'images/scan', 'Image::scan', 'images_scan'],
+    
+    ['GET', 'image/[*:filename]', 'Image::view', 'image_view'],
     ['POST',  '[a:nid]/[i:id]/upload', 'Image::dropzoneUpload', 'image_upload'],
 );
 

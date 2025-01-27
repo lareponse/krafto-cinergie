@@ -3,16 +3,17 @@
 namespace App\Controllers\Secret;
 
 use App\Models\Article;
+use App\Controllers\Abilities\ImageScanner;
 use App\Controllers\Abilities\Imagine;
-use App\Controllers\Abilities\LargeImageFinder;
+// use App\Controllers\Abilities\LargeImageFinder;
 use App\Controllers\Abilities\FileUploader;
 
 use \HexMakina\LocalFS\{FileSystem, File};
 use \HexMakina\Deadites\Deadites;
 
-use Spatie\ImageOptimizer\OptimizerChain;
-use Spatie\ImageOptimizer\Optimizers\Jpegoptim;
-use Spatie\Image\Image as Picture;
+// use Spatie\ImageOptimizer\OptimizerChain;
+// use Spatie\ImageOptimizer\Optimizers\Jpegoptim;
+// use Spatie\Image\Image as Picture;
 
 class Image extends Krafto
 {
@@ -23,44 +24,73 @@ class Image extends Krafto
 
     public function home()
     {
-        $jpegOptimizer = (new OptimizerChain)
-            ->addOptimizer(new Jpegoptim([
-                '--strip-all',
-                '--all-progressive',
-                '--max = 100'
-            ]));
+
+        $res = \App\Models\Image::filter()->limit(1000, 0)->retAss();
+        // $res = \App\Models\Image::filter()->retAss();
+        $this->viewport('images', $res);
+        // $jpegOptimizer = (new OptimizerChain)
+        //     ->addOptimizer(new Jpegoptim([
+        //         '--strip-all',
+        //         '--all-progressive',
+        //         '--max = 100'
+        //     ]));
 
 
-        $optimized_pathes = [];
-        foreach (['film/_a', 'personne', 'organisation'] as $directory) {
+        // $optimized_pathes = [];
+        // foreach (['film/_a', 'personne', 'organisation'] as $directory) {
 
-            $finder = new LargeImageFinder($this->fileSystem()->absolutePathFor($directory));
-            // $finder->setMaxBytes(5_000_000);
-            $finder->setMaxWidth(2000);
-            $finder->setMaxHeight(1200);
-            $finder->setExtensionsFilter(['jpg', 'jpeg']);
-            // $finder->setExtensionsFilter(['jpg', 'jpeg', 'png', 'gif', 'webp']);
+        //     $finder = new LargeImageFinder($this->fileSystem()->absolutePathFor($directory));
+        //     // $finder->setMaxBytes(5_000_000);
+        //     $finder->setMaxWidth(2000);
+        //     $finder->setMaxHeight(1200);
+        //     $finder->setExtensionsFilter(['jpg', 'jpeg']);
+        //     // $finder->setExtensionsFilter(['jpg', 'jpeg', 'png', 'gif', 'webp']);
             
-            foreach ($finder->pathes() as $original_path => $issues) {
+        //     foreach ($finder->pathes() as $original_path => $issues) {
                 
-                $resized_path = $original_path.'-resized.jpg';
-                $image = Picture::load($original_path);
+        //         $resized_path = $original_path.'-resized.jpg';
+        //         $image = Picture::load($original_path);
        
-                if (isset($issues['maxWidth'])) {
-                    $image->width(1920); // image.png, image.webp, image.avif
-                }
+        //         if (isset($issues['maxWidth'])) {
+        //             $image->width(1920); // image.png, image.webp, image.avif
+        //         }
 
-                if (isset($issues['maxHeight'])) {
-                    $image->height(1080); // image.png, image.webp, image.avif
-                }
-                $image->save($resized_path);
-                $jpegOptimizer->optimize($resized_path, $resized_path.'-optimized.jpg');
-                vd($issues, $original_path);
-                $optimized_pathes[] = $resized_path;
+        //         if (isset($issues['maxHeight'])) {
+        //             $image->height(1080); // image.png, image.webp, image.avif
+        //         }
+        //         $image->save($resized_path);
+        //         $jpegOptimizer->optimize($resized_path, $resized_path.'-optimized.jpg');
+        //         vd($issues, $original_path);
+        //         $optimized_pathes[] = $resized_path;
+        //     }
+        //     dd($optimized_pathes);
+        // }
+
+    }
+
+    public function scan()
+    {
+        $scanner = new ImageScanner($this->fileSystem());
+        $files = $scanner->scan();
+        vd(count($files), 'count($files)');
+        $max = 0;
+        foreach ($files as $item) {
+            $path = $item['path'];
+            $length = strlen($item['path']);
+            if($length > $max){
+                $max = $length;
             }
-            dd($optimized_pathes);
         }
 
+        vd($max, 'path max length');
+        
+        foreach($files as $file){
+            $img = new \App\Models\Image();
+            $img->import($file);
+            $img->save(0);
+        }
+
+        dd('STOP');
     }
 
     public function imagesRootURL(): string
@@ -76,7 +106,7 @@ class Image extends Krafto
     public function fileSystem(): FileSystem
     {
         if (is_null($this->fileSystem))
-            $this->fileSystem = new FileSystem($this->get('settings.folders.images'));
+            $this->fileSystem = new FileSystem($this->imagesRootPath());
 
         return $this->fileSystem;
     }
