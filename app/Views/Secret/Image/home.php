@@ -150,14 +150,14 @@
 <table id="image-table">
     <thead>
         <tr>
-            <th data-column="id">ID</th>
+            <th data-column="id" data-type="int">ID</th>
             <th data-column="path">Path</th>
             <th data-column="extension">Ext</th>
-            <th data-column="size">Size</th>
-            <th data-column="width">Width</th>
-            <th data-column="height">Height</th>
+            <th data-column="size" data-type="int">Size</th>
+            <th data-column="width" data-type="int">Width</th>
+            <th data-column="height" data-type="int">Height</th>
             <th data-column="mime">MIME Type</th>
-            <th data-column="is_active">Is Active</th>
+            <th data-column="is_active" data-type="int">Is Active</th>
         </tr>
     </thead>
     <tbody>
@@ -169,6 +169,7 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const images = JSON.parse(document.getElementById("images").textContent);
+
         let filteredImages = images;
 
         const table = document.getElementById("image-table");
@@ -176,10 +177,10 @@
         const searchInput = document.getElementById("search");
         const mimeFilter = document.getElementById("mime-filter");
         const pathFilter = document.getElementById("path-filter");
+        const LIMIT = 1000;
 
         // load the JSON
         function render() {
-            const LIMIT = 1000;
             //create a fragment to append the new tr
             const fragment = document.createDocumentFragment();
 
@@ -233,7 +234,7 @@
                 // Sort rows
                 const column = header.getAttribute("data-column");
 
-                if (column === 'id' || column === 'size' || column === 'width' || column === 'height' || column === 'is_active') {
+                if (header.getAttribute("data-type") === 'int') {
                     filteredImages.sort((a, b) => {
                         const aValue = parseInt(a[column]);
                         const bValue = parseInt(b[column]);
