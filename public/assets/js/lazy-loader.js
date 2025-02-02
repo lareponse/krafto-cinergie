@@ -5,7 +5,7 @@ class LazyLoader {
     const observer = new IntersectionObserver((entries, observer) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-            console.log('intersecting: ', entry.target);
+            // console.log('intersecting: ', entry.target);
           const img = entry.target;
           img.src = img.dataset.src; // Load the actual image
           img.removeAttribute("loading"); // Remove the loading attribute
