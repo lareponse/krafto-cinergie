@@ -58,6 +58,7 @@
     --shadow: rgba(0, 0, 0, .10);
 
     --border-radius: 0.7rem;
+    --inner-padding: 0.7rem;
 }
 
 *,
@@ -1433,4 +1434,29 @@ body>main>.add-btn {
 .korbo-item input {
     width: 4rem;
     text-align: center;
+}
+#page_team section{
+    margin-bottom:7rem;
+}
+
+#page_team section.team-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap:1rem;
+}
+#page_team section.team-grid>*:first-child {
+    grid-column: 1 / -1;
+}
+
+#page_team section.team-grid article {
+    border-radius: var(--border-radius);
+}
+
+#page_team section.team-grid article img{
+    width:100%;
+    height:18rem;
+    object-fit: cover;
+}
+#page_team section.team-grid article>div {
+    padding:var(--inner-padding);
 }
