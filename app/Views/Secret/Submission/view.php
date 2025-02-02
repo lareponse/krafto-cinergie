@@ -1,7 +1,8 @@
 <?php
 $this->layout('Secret::dashboard');
-
-$modified_array = $modified->to_table_row()->export();
+if(isset($original, $modified))
+{
+    $modified_array = $modified->to_table_row()->export();
 ?>
 
 <div class="container submission">
@@ -23,3 +24,12 @@ $modified_array = $modified->to_table_row()->export();
         </section>
     </div>
 </div>
+<?php
+}
+else
+{
+    if($submission->get('urn') === 'boutique'){
+        $this->insert('Secret::Submission/shop', ['submission' => $submission]);
+    }
+    dd($submission);
+}
