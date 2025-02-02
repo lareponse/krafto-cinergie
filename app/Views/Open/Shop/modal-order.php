@@ -84,7 +84,7 @@
             <span data-kx-id="price" class="currency"></span><small> +
                 <span data-kx-id="delivery" class="currency"></span> de frais d'envoi</small>
         </div>
-        <input data-kx-id="quantity" type="number" name="quantity" value="1" min="1" />
+        <input data-kx-id="quantity" type="number" value="1" min="1" />
         <div data-kx-id="total" class="currency"></div>
         <button type="button" class="btn btn-delete-item" aria-label="Supprimer cet article"><?= $this->bi('backspace') ?></button>
     </article>
