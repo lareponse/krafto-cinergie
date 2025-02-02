@@ -2,10 +2,10 @@
 
     <div class="card-body text-center">
         <?php
-        if(!empty($person->profilePicture())){
+        if(!empty($person->profilePicturePath())){
             ?>
             <div class="avatar avatar-xl avatar-circle">
-                <img src="<?= $person->profilePicture() ?>" alt="..." class="avatar-img">
+                <img src="<?= $person->profilePicturePath() ?>" alt="..." class="avatar-img">
             </div>
             <?php
         }

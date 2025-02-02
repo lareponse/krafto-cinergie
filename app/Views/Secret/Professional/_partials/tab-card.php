@@ -5,15 +5,13 @@ $model->import($target);
 $route = $controller->urlFor('Professional', 'view', $model); ?>
 
 <div class="card border-0">
-    <!-- <a href="<?= $route ?>" class="card-image-background" style="background-image:url('<?= $model->profilePicture(); ?>');"></a> -->
-
     <a href="<?= $route ?>" class="card-body text-center">
         <div class="avatar avatar-xl avatar-circle">
             <?php
-            if (empty($model->profilePicture()))
+            if (empty($model->profilePicturePath()))
                 echo $this->icon('professional', 60, ['class' => 'avatar-img']);
             else {
-                echo $this->DOM()::img($model->profilePicture(), 'photo du professionel', ['class' => 'avatar-img']);
+                echo $this->DOM()::img($model->profilePicturePath(), 'photo du professionel', ['class' => 'avatar-img']);
             }
             ?>
         </div>

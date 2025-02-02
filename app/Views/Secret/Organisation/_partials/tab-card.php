@@ -5,7 +5,7 @@ $model->import($target);
 $route = $controller->urlFor('Organisation', 'view', $model); ?>
 
 <div class="card border-0">
-    <a href="<?= $route ?>" class="card-image-background" style="background-image:url('<?= $model->profilePicture(); ?>');"></a>
+    <a href="<?= $route ?>" class="card-image-background" style="background-image:url('<?= $model->profilePicturePath(); ?>');"></a>
 
     <div class="card-body text-center">
         <h3 class="card-title mt-3 mb-1"><?= $model->get('label') ?></h3>

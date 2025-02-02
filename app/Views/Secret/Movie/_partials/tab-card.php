@@ -7,7 +7,7 @@ $route_view = $controller->urlFor('Movie', 'view', $model);
 ?>
 
 <div class="card">
-    <a href="<?= $route_view ?>" class="card-image-background" style="background-image:url('<?= $model->profilePicture(); ?>');"></a>
+    <a href="<?= $route_view ?>" class="card-image-background" style="background-image:url('<?= $model->profilePicturePath(); ?>');"></a>
     <a href="<?= $route_view ?>" class="card-body text-center">
 
         <h3 class="card-title mt-3 mb-1"><?= $model->get('label'); ?></h3>

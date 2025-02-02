@@ -3,11 +3,6 @@ namespace App\Models\Abilities;
 
 trait HasProfilePicture
 {
-
-    public function defaultProfilePicture():string{
-        return '/public/images/cinergie-avatar.svg';
-    }
-    
     public function profilePictureField():string {
         return 'avatar';
     }
@@ -21,10 +16,4 @@ trait HasProfilePicture
     {
         return $this->get($this->profilePictureField()) ?? '';
     }
-
-    public function profilePicture(): string
-    {
-        return $this->hasProfilePicture() ? $this->profilePicturePath() : $this->defaultProfilePicture();
-    }
-
 }
