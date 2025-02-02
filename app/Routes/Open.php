@@ -5,7 +5,6 @@ $routes = [
   ['GET', 'accueil', 'Home::home', 'legacy_home'],
   ['GET', 'actualites', 'Article::home', 'legacy_article'],
   ['GET', 'images/actualite/[*:path]', 'Image::legacy', 'legacy_image_actualite'],
-  // ['GET', 'images/webzine/[*:path]', 'Image::legacy', 'legacy_image_webzine'],
   ['GET', 'images/[*:path]', 'Image::legacy', 'legacy_image_path'],
   
   // articles
