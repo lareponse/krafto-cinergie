@@ -51,7 +51,7 @@ class Imagine
 
         $image = self::SUPPORTED_MIME[$mimeType]($this->file->path());
 
-        if($image === false)
+        if ($image === false)
             throw new \InvalidArgumentException('UNSUPPORTED_IMAGE_TYPE');
 
         return $image;
@@ -68,17 +68,17 @@ class Imagine
         $originalImage = $this->originalImage;
         $originalWidth = imagesx($originalImage);
         $originalHeight = imagesy($originalImage);
-    
+
         // $originalImageName = pathinfo($this->pathToOriginalImage, PATHINFO_FILENAME) . '.' . pathinfo($this->pathToOriginalImage, PATHINFO_EXTENSION);
         // $this->saveImage($originalImage, $originalImageName);
 
         foreach ($dimensions as $format => $dimension) {
             $expectedWidth = $dimension['width'];
-            $expectedHeight = $dimension['height']; 
+            $expectedHeight = $dimension['height'];
             // vd("$expectedWidth x $expectedHeight", 'expected');
-            
+
             list($newWidth, $newHeight) = $this->calculateNewDimensions($originalWidth, $originalHeight, $dimension);
-            
+
             $newImage = $this->resizeImage($originalImage, $newWidth, $newHeight);
             // if the new width or new height matches the original width or height, but the other dimension is bigger than the expected dimension, crop the image
             if (($newWidth == $expectedWidth && $newHeight > $expectedHeight) || ($newHeight == $expectedHeight && $newWidth > $expectedWidth)) {
@@ -86,8 +86,7 @@ class Imagine
                 $newWidth = imagesx($newImage);
                 $newHeight = imagesy($newImage);
                 // vd("$newWidth x $newHeight", 'cropped');
-            }
-            else{
+            } else {
                 // if the new width or new height matches the expected width or height, but the other dimenson is smaller than the expected dimension, slap it on black background that has the expected dimension
                 $newImage = $this->addBackgroundIfNeeded($newImage, $newWidth, $newHeight, $expectedWidth, $expectedHeight, $dimension['fill'] ?? self::DEFAULT_FILL);
             }
@@ -107,14 +106,18 @@ class Imagine
     {
         $basename = pathinfo($this->pathToOriginalImage, PATHINFO_FILENAME);
         $dirname = pathinfo($this->pathToOriginalImage, PATHINFO_DIRNAME);
-        
-        $saveFile = "{$format}.jpg";
+
+        $saveFile = "{$format}.webp"; // Save as WebP instead of JPEG
         $saveDirectory = "{$dirname}/{$basename}";
-        $absoluteSavePath = $this->fileSystem->absolutePathFor($saveDirectory);
+        $absoluteSavePath = $this->fileSystem->absolutePathFor("{$saveDirectory}/{$saveFile}");
 
         $this->fileSystem->ensureWritablePath($saveDirectory, $saveFile);
-        imagejpeg($newImage, $absoluteSavePath);
+
+        // Save the image as WebP with specified quality
+        $quality = $this->quality ?? 85; // Default quality is 85 if not set
+        imagewebp($newImage, $absoluteSavePath, $quality);
     }
+
 
     // write resizeImage method to resize image according to new dimensions
     private function resizeImage($originalImage, $newWidth, $newHeight)
@@ -153,11 +156,10 @@ class Imagine
         $newWidth = $dimension['width'];
         $newHeight = $dimension['height'];
 
-        if($newWidth < $originalWidth){
+        if ($newWidth < $originalWidth) {
             // compute the new dimensions based on the width
             $newHeight = $newWidth / $ratio;
-        }
-        else{
+        } else {
             // compute the new dimensions based on the height
             $newWidth = $newHeight * $ratio;
         }
@@ -203,14 +205,12 @@ class Imagine
     {
         if ($newWidth == $expectedWidth && $newHeight == $expectedHeight) {
             return $newImage;
-        }
-        elseif ($newWidth == $expectedWidth && $newHeight > $expectedHeight) {
+        } elseif ($newWidth == $expectedWidth && $newHeight > $expectedHeight) {
             $newImage = $this->addBackground($newImage, $newWidth, $expectedHeight, $hexFill);
-        }
-        else{
+        } else {
             $newImage = $this->addBackground($newImage, $expectedWidth, $newHeight, $hexFill);
         }
-        
+
         return $newImage;
     }
 
