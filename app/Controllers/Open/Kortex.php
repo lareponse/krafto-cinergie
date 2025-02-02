@@ -36,8 +36,6 @@ abstract class Kortex extends \HexMakina\kadro\Controllers\Kadro
         $this->viewport('record', $this->record());
         $this->viewport('CSP_nonce', $this->get('settings.app.CSP_nonce'));
         
-
-
         if (is_null($this->template)) {
             $fallback = 'Open::' . $this->nid() . DIRECTORY_SEPARATOR . $this->router()->targetMethod();
             $this->template = $fallback;
@@ -206,9 +204,9 @@ abstract class Kortex extends \HexMakina\kadro\Controllers\Kadro
     {
         $root_path = $this->get('settings.folders.images');
         $root_url = $this->get('settings.urls.images');
-        $res = $record->profilePicture();
-
-        // detect if the image path starts with /images/
+        $res = $record->profilePicturePath();
+        // vd($res,  $root_path);
+        // will be handled by the image controller
         if (strpos($res, '/images/') === 0) {
             return $res;
         }
@@ -220,5 +218,10 @@ abstract class Kortex extends \HexMakina\kadro\Controllers\Kadro
         }
 
         return $res;
+    }
+
+    public function defaultAvatar()
+    {
+        return $this->get('settings.urls.default_image');
     }
 }

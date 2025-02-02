@@ -8,7 +8,7 @@ $href = $controller->router()->hyp('movie', ['slug' => $record->get('movie_slug'
 
         <div class="col-md-4">
             <a href="<?= $href ?>">
-                <img src="<?= $record->defaultProfilePicture(); ?>" loading="lazy" data-src="<?= $avatar ?>" class="img-fluid w-100 rounded-start" alt="DVD du film <?= $record ?>">
+                <img src="<?= $controller->defaultAvatar(); ?>" loading="lazy" data-src="<?= $avatar ?>" class="img-fluid w-100 rounded-start" alt="DVD du film <?= $record ?>">
             </a>
         </div>
 
