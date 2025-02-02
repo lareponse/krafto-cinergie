@@ -1,4 +1,4 @@
-class Korbo {
+export default class Korbo {
   constructor(container_id, template_id) {
     this.items = this.load() || [];
     this.customer = localStorage.getItem('customer') || { name: '', email: '' };
@@ -121,6 +121,7 @@ class KorboUI {
   }
 
   lineElement(item) {
+    console.log(item)
     let row = this.lineTemplate.content.cloneNode(true);
     row = row.querySelector('.korbo-item');
 
@@ -134,8 +135,11 @@ class KorboUI {
       parseInt(item.quantity) *
       (parseFloat(item.price) + parseFloat(item.deliveryBe));
 
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'items[' + item.id + ']';
+    input.value = JSON.stringify([item.title, item.quantity]);
+    row.appendChild(input);
     return row;
   }
 }
-
-export default Korbo;
