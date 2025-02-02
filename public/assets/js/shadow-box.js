@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /* accessible modal, using dom fragment */
 export default class ShadowBox {
@@ -11,13 +11,31 @@ export default class ShadowBox {
     this.handleKeyEvents = this.handleKeyEvents.bind(this);
     this.origin = origin;
     this.modal = this.cloneTemplate(shadow_template_id);
+    console.log(this.modal.tagName);
     this.backdrop = this.makeBackdrop();
     this.focusableElements = this.modal.querySelectorAll(ShadowBox.FOCUSABLE);
 
-    let btn = this.modal.querySelector('.btn-cancel-modal');
-    if (btn) btn.addEventListener('click', this.close);
+    let btn;
+    // test if the modal is a FORM
+    if (this.modal.tagName === 'FORM') {
+      this.modal.addEventListener('invalid', (e) => {
+        e.preventDefault();
+      });
 
-    btn = this.modal.querySelector('.btn-confirm-modal');
+      this.modal.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formClone = this.modal.cloneNode(true);
+        formClone.style.display = 'none'; // Hide the clone (optional)
+        document.body.appendChild(formClone);
+        formClone.submit();
+        this.close();
+      });
+    } else {
+      btn = this.modal.querySelector('.btn-confirm-modal');
+      if (btn) btn.addEventListener('click', this.close);
+    }
+
+    btn = this.modal.querySelector('.btn-cancel-modal');
     if (btn) btn.addEventListener('click', this.close);
   }
 
@@ -113,7 +131,7 @@ export default class ShadowBox {
       width: '100%',
       height: '100%',
       background: 'rgba(0, 0, 0, 0.5)',
-      zIndex: '999'
+      zIndex: '999',
     });
 
     return ret;
@@ -138,4 +156,3 @@ export default class ShadowBox {
     return clone;
   }
 }
-
