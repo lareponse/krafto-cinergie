@@ -31,7 +31,7 @@ CREATE TABLE `cinergie`.`professional` (
   `declic_image` varchar(255) DEFAULT NULL,
   `declic_texte` text DEFAULT NULL,
   `declic_signature` varchar(255) DEFAULT NULL,
-  `leg_maj` datetime NOT NULL COMMENT 'updated on',
+  `leg_maj` datetime DEFAULT NULL COMMENT 'updated on',
   PRIMARY KEY (`id`),
   UNIQUE KEY `professional-unique-slug` (`slug`) USING BTREE,
   INDEX (`label`)

@@ -1,19 +1,13 @@
 class OttoLink {
     static urls(selector) {
-        const rx = /^(http:\/\/|https:\/\/).+$/i
+        const rx = /^(http:\/\/|https:\/\/)[\w\.-]+\.\w+$/i;
 
         document.querySelectorAll(selector).forEach(container => {
-            const anchorElement = document.createElement('a');
             const url = container.innerHTML.trim();
-            // console.log(url,rx.test(url));
+            const anchorElement = document.createElement('a');
 
-            if (/^(http:\/\/|https:\/\/)[\w\.-]+\.\w+$/i.test(url)) {
-                anchorElement.href = url;
-                anchorElement.textContent = url;
-            } else {
-                anchorElement.href = 'https://' + url;
-                anchorElement.textContent = url;
-            }
+            anchorElement.textContent = url;
+            anchorElement.href = rx.test(url) ? url : 'https://' + url;
 
             container.innerHTML = '';
             container.append(anchorElement);

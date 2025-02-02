@@ -31,7 +31,7 @@
     </div>
 
     <div class="col-lg">
-        <input type="text" class="form-control" id="profilePicture" name="profilePicture" value="<?= $controller->formModel()->get($controller->formModel()->profilePictureField()) ?>">
+        <input type="text" class="form-control" id="profilePicture" name="profilePicture" value="<?= $controller->formModel()->profilePicturePath(); ?>">
     </div>
 </div>
 

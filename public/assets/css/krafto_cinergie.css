@@ -77,3 +77,12 @@ input.form-control {
 .form-control{
     font-family: var(--bs-body-font-family);
 }
+
+
+[data-kx-href]{
+    cursor:pointer;
+}
+
+.wysiwyg .ql-editor{
+    height:30rem;
+}

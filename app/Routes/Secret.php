@@ -11,6 +11,7 @@ array_push(
 
 array_push(
     $routes,
+    ['GET', 'operators/segment/[a:segment]', 'Operator::home', 'operators_by_segment'],
     ['GET', 'organisations/segment/[a:segment]', 'Organisation::home', 'organisations_by_segment'],
 );
 
@@ -32,7 +33,7 @@ array_push(
 
     ['GET', 'image/details/[a:externalController]/slug/[*:slug]/file/[*:filename]', 'Image::details', 'image_details'],
     ['POST', 'image/delete/[a:externalController]/slug/[*:slug]/file/[*:filename]', 'Image::delete', 'image_delete'],
-    
+
     ['GET', 'image/avatar/[a:nid]/[i:id]/[*:filename]?', 'Image::avatar', 'image_set_avatar'],
 
     ['GET', 'image/[*:filename]', 'Image::view', 'image_view'],
@@ -48,22 +49,18 @@ array_push(
 // GENERIC CRUD ROUTES
 array_push(
     $routes,
-    ['GET',  '[a:nid]/new', '::alter', 'record_new'],
-    ['GET',  '[a:nid]/[i:id]', '::view', 'record'],
-    ['GET',  '[a:nid]/[i:id]/edit', '::alter', 'record_edit'],
-    ['GET',  '[a:nid]/modifier/[*:slug]', '::editBySlug', 'record_edit_by_slug'],
-    ['GET',  '[a:nid]/[*:params]?', '::home', 'records'],
-
+    ['GET',  '[a:nid]/[i:id]/images/setProfile/[*:path]', '::setProfilePicture', 'record_set_profile_picture'],
+    ['GET',  '[a:nid]/[i:id]/images/unsetProfile', '::unsetProfilePicture', 'record_unset_profile_picture'],
 
     ['POST', '[a:nid]/[i:id]/toggle/[a:field]', '::toggle', 'record_toggle'],
     ['POST', '[a:nid]/supprimer', '::delete', 'record_delete'],
     ['POST', '[a:nid]/enregistrer', '::save', 'record_save'],
 
-
-
-    ['GET',  '[a:nid]/[i:id]/images/setProfile/[*:path]', '::setProfilePicture', 'record_set_profile_picture'],
-    ['GET',  '[a:nid]/[i:id]/images/unsetProfile', '::unsetProfilePicture', 'record_unset_profile_picture']
-
+    ['GET',  '[a:nid]/new', '::alter', 'record_new'],
+    ['GET',  '[a:nid]/[i:id]', '::view', 'record'],
+    ['GET',  '[a:nid]/[i:id]/edit', '::alter', 'record_edit'],
+    ['GET',  '[a:nid]/modifier/[*:slug]', '::editBySlug', 'record_edit_by_slug'],
+    ['GET',  '[a:nid]/[*:params]?', '::home', 'records'],
 );
 
 $route_prefix = 'dash';

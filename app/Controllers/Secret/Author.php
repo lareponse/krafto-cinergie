@@ -46,12 +46,14 @@ class Author extends Krafto
 
     public function view()
     {
-        if(is_null($this->loadModel())){
-            $this->router()->hop('records', ['nid'=>'Author']);
-        }
-        $this->viewport('articles', Article::any(['professional' => $this->loadModel()], ['eager' => false]));
-        $this->viewport('movies', Movie::any(['professional' => $this->loadModel()], ['eager' => false]));
-        $this->viewport('organisations', Organisation::any(['professional' => $this->loadModel()], ['eager' => false]));
+        $this->router()->hop('records', ['nid' => 'Author']);
+
+        // if(is_null($this->loadModel())){
+        //     $this->router()->hop('records', ['nid'=>'Author']);
+        // }
+        // $this->viewport('articles', Article::any(['professional' => $this->loadModel()], ['eager' => false]));
+        // $this->viewport('movies', Movie::any(['professional' => $this->loadModel()], ['eager' => false]));
+        // $this->viewport('organisations', Organisation::any(['professional' => $this->loadModel()], ['eager' => false]));
     }
 
     public function edit():void

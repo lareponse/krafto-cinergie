@@ -6,7 +6,7 @@ foreach ($columns as $col) {
         $value = trim($controller->formModel()->get($col->name()));
         $icon = $this->icon('info', 18, ['class' => 'me-2', 'title' => $col->name(), 'alt' => $col->name()]);
         if('' !== $value) {
-            $legacyValues[] = $this->DOM()::li($icon.$value, ['class' => 'py-2']);
+            $legacyValues[] = $this->DOM()::li($icon.$value, ['class' => 'py-2'], false);
         }
     }
 }

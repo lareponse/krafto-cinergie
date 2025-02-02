@@ -27,21 +27,10 @@
     </div>
 </div>
 
-
 <?php $this->unshift('scripts') ?>
+<script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js"></script>
+<?php $this->end() ?>
 
-<!-- Include the Quill library -->
-<script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.core.js"></script>
-
-<!-- Initialize Quill editor -->
-<script>
-    document.querySelectorAll('.tinymce').forEach((el) => {
-        const quill = new Quill(el, {
-            theme: "snow",
-        });
-    });
-
-
-</script>
-
+<?php $this->unshift('html_head') ?>
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
 <?php $this->end() ?>

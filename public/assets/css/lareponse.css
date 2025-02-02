@@ -4,8 +4,8 @@
 @font-face {
     font-family: 'Poppins';
     src: url('/public/assets/font/Poppins-Light.woff2') format('woff2'),
-         url('/public/assets/font/Poppins-Light.woff') format('woff'),
-         local('Poppins Light'), local('Poppins-Light');
+        url('/public/assets/font/Poppins-Light.woff') format('woff'),
+        local('Poppins Light'), local('Poppins-Light');
     font-weight: 300;
     font-style: normal;
     font-display: swap;
@@ -14,9 +14,10 @@
 @font-face {
     font-family: 'Poppins';
     src: url('/public/assets/font/Poppins-Regular.woff2') format('woff2'),
-         url('/public/assets/font/Poppins-Regular.woff') format('woff'),
-         local('Poppins Regular'), local('Poppins-Regular');
-    font-weight: 400; /* 'normal' is equivalent to 400 */
+        url('/public/assets/font/Poppins-Regular.woff') format('woff'),
+        local('Poppins Regular'), local('Poppins-Regular');
+    font-weight: 400;
+    /* 'normal' is equivalent to 400 */
     font-style: normal;
     font-display: swap;
 }
@@ -24,8 +25,8 @@
 @font-face {
     font-family: 'Poppins';
     src: url('/public/assets/font/Poppins-Medium.woff2') format('woff2'),
-         url('/public/assets/font/Poppins-Medium.woff') format('woff'),
-         local('Poppins Medium'), local('Poppins-Medium');
+        url('/public/assets/font/Poppins-Medium.woff') format('woff'),
+        local('Poppins Medium'), local('Poppins-Medium');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
@@ -34,8 +35,8 @@
 @font-face {
     font-family: 'Poppins';
     src: url('/public/assets/font/Poppins-SemiBold.woff2') format('woff2'),
-         url('/public/assets/font/Poppins-SemiBold.woff') format('woff'),
-         local('Poppins SemiBold'), local('Poppins-SemiBold');
+        url('/public/assets/font/Poppins-SemiBold.woff') format('woff'),
+        local('Poppins SemiBold'), local('Poppins-SemiBold');
     font-weight: 600;
     font-style: normal;
     font-display: swap;
@@ -108,19 +109,28 @@ body>header {
 }
 
 body>header>div {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr;
     gap: 0 1rem;
-    flex-wrap: wrap;
-    justify-content: space-between;
     align-items: center;
 }
 
-body>header>div>* {
-    flex: 1 1 auto;
+@media screen and (min-width: 1200px) {
+    body>header>div {
+        grid-template-columns: auto 1fr auto;
+    }
 }
 
+body>header>div nav.toggled {
+    grid-column: span 2;
+}
+
+
+
 body>header img {
-    height: 3rem;
+    height: auto;
+    width: 100%;
+    max-height: 3rem;
 }
 
 body>header nav {
@@ -181,6 +191,7 @@ body>header .nav-controls .toggler[aria-controls="primary-navigation"] svg {
         display: flex;
         order: initial;
         flex: 1 1 auto;
+        justify-content: space-around;
     }
 
     body>header nav>ul {
@@ -1313,6 +1324,7 @@ body>main>.add-btn {
     color: var(--white); */
     padding: 0.7rem;
 }
+
 .korbo-trigger.hidden {
     display: none;
 }
@@ -1329,6 +1341,7 @@ body>main>.add-btn {
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
 }
+
 .korbo-trigger button {
     background: var(--primary);
     color: var(--white);
@@ -1338,10 +1351,11 @@ body>main>.add-btn {
     cursor: pointer;
     font-size: 1.7rem;
 }
-.korbo-trigger .bi{
-    width:3rem;
-    height:3rem;
-    margin:1rem;
+
+.korbo-trigger .bi {
+    width: 3rem;
+    height: 3rem;
+    margin: 1rem;
 }
 
 #korbo main {
@@ -1350,13 +1364,15 @@ body>main>.add-btn {
     gap: 1rem;
 }
 
-#korbo h2{
-    margin:0;
-    padding:0;
+#korbo h2 {
+    margin: 0;
+    padding: 0;
 }
-#korbo fieldset{
-    margin:1rem 0 2rem 0 ;
+
+#korbo fieldset {
+    margin: 1rem 0 2rem 0;
 }
+
 #korbo .bank {
     display: grid;
     grid-template-columns: 1fr 6fr;
@@ -1391,7 +1407,7 @@ body>main>.add-btn {
 
 #korbo .korbo-item {
     display: grid;
-    grid-template-columns:3fr 1fr 1fr 1fr;
+    grid-template-columns: 3fr 1fr 1fr 1fr;
     gap: 0 1rem;
     /* Adjust spacing as needed */
     align-items: center;
@@ -1404,13 +1420,15 @@ body>main>.add-btn {
     /* Span the entire row */
 }
 
-.korbo-item small{
+.korbo-item small {
     font-style: italic;
 }
-.korbo-item [data-kx-id="title"]{
+
+.korbo-item [data-kx-id="title"] {
     color: var(--primary);
 }
+
 .korbo-item input {
     width: 4rem;
-    text-align:center;
+    text-align: center;
 }

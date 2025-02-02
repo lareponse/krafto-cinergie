@@ -76,6 +76,10 @@ class Movie extends Kortex
      */
     public function routerParamsAsFilters($query): SelectInterface
     {
+        if (empty($this->operator()->permissions())) {
+            $query->whereEQ('public', 1);
+        }
+        
         if(!empty($this->router()->params('s'))){
             $this->freeSearchFor(
                 $this->router()->params('s'), 

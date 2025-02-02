@@ -7,7 +7,7 @@
     </div>
 
     <div class="table-responsive">
-        <table class="table table-clickable align-middle table-hover table-nowrap mb-0">
+        <table class="table align-middle table-hover table-nowrap mb-0">
             <thead class="thead-light">
                 <tr>
                     <th>
@@ -34,7 +34,7 @@
                 ?>
                     <tr data-kx-href="<?= $controller->urlFor('Professional', 'view', $model) ?>">
                         <td class="fullName">
-                            <strong><?= $model->fullName(); ?></strong>
+                            <?= $this->DOM()::a($controller->urlFor('Professional', 'view', $model), $model->fullName()); ?>
                         </td>
                         <td class="email">
                             <?= $model->get('email'); ?>

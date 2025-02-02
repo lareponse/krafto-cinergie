@@ -55,6 +55,9 @@ class Job extends Kortex
      */
     public function routerParamsAsFilters($query): SelectInterface
     {
+        if (empty($this->operator()->permissions())) {
+            $query->whereEQ('public', 1);
+        }
         // Check if 'remun' router parameter is set and use it to filter by 'isPaid'
         if ($this->router()->params('isPaid')) {
             if(is_array($this->router()->params('isPaid')))

@@ -5,7 +5,7 @@
         <?= isset($filters) ? $this->insert('Secret::_partials/filters/FiltersOnFirstChar', ['count' => count($listing)]) : '' ?>
     </div>
     <div class="table-responsive">
-        <table class="table table-clickable align-middle table-hover table-nowrap mb-0">
+        <table class="table align-middle table-hover table-nowrap mb-0">
             <thead class="thead-light">
                 <tr>
                     <th>

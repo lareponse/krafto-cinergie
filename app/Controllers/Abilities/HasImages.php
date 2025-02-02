@@ -50,10 +50,9 @@ trait HasImages
     
     public function setProfilePicture()
     {
-        ddt($this->router()->params());
         $avatar = $this->loadModel()->profilePictureField();
         
-        $this->loadModel()->set($avatar, $this->router()->params('path'));
+        $this->loadModel()->set($avatar, '/'.$this->router()->params('path'));
         $this->loadModel()->save(0);
         $this->router()->hopBack();
     }

@@ -23,8 +23,10 @@ $menu = [
                 'Contest' => ['label' => 'Concours']
             ]
         ],
-        'Shop' => ['label' => 'Boutique', 'icon' => 'euro',
-            'subs' => [ 
+        'Shop' => [
+            'label' => 'Boutique',
+            'icon' => 'euro',
+            'subs' => [
                 'DVD' => ['label' => 'DVDs', 'href' => $controller->router()->hyp('dash_videostore')],
                 'Book' => ['label' => 'Livres', 'href' => $controller->router()->hyp('dash_bookshop')]
             ]
@@ -32,8 +34,10 @@ $menu = [
     ],
     [
         'Image' => ['label' => 'Images', 'icon' => 'image'],
-        
-        'Page' => ['label' => 'Pages', 'icon' => 'page',
+
+        'Page' => [
+            'label' => 'Pages',
+            'icon' => 'page',
             'subs' => [
                 'Page' => ['label' => 'Toutes les pages'],
                 'authors' => ['label' => 'Nos auteurs', 'href' => $controller->router()->hyp('dash_records', ['nid' => 'Author'])],
@@ -44,17 +48,13 @@ $menu = [
     ],
     [
         'Submission' => ['label' => 'Soumissions', 'icon' => 'message'],
+        'Operator' => ['label' => 'Utilisateurs', 'icon' => 'image'],
 
-        'User' => ['label' => 'Utilisateurs', 'icon' => 'image', 
-            'subs' => [
-                'author' => ['label' => 'Auteurs', 'route' => ['dash_users', ['team' => 'author']]],
-                'moderator' => ['label' => 'Modérateurs', 'route' => ['dash_users', ['team' => 'moderator']]],
-                'editor' => ['label' => 'Editeurs', 'route' => ['dash_users', ['team' => 'editor']]]
-            ]
-        ]
     ],
     [
-        'Settings' => ['label' => 'Paramètres', 'icon' => 'settings',
+        'Settings' => [
+            'label' => 'Paramètres',
+            'icon' => 'settings',
             'subs' => [
                 'Thesaurus' => ['label' => 'Thesaurus'],
                 'Locus' => ['label' => 'Localités'],

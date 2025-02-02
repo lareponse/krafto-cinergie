@@ -11,7 +11,7 @@
                 <h2 class="h3">Biographie</h2>
                 <?php
                 if (empty($controller->loadModel()->get('content'))) {
-                    echo $this->DOM()::a($controller->url('edit'), 'Ajouter', ['class' => 'btn btn-sm btn-warning']);
+                    echo $this->DOM()::a($controller->url('edit'), 'Ajouter', ['class' => 'btn btn-sm btn-warning'], false);
                 } else {
                     echo $controller->loadModel()->get('content');
                 }
@@ -24,7 +24,7 @@
                 <h2 class="h3">Filmographie</h2>
                 <?php
                 if (empty($controller->loadModel()->get('filmography'))) {
-                    echo $this->DOM()::a($controller->url('edit'), 'Ajouter', ['class' => 'btn btn-sm btn-warning']);
+                    echo $this->DOM()::a($controller->url('edit'), 'Ajouter', ['class' => 'btn btn-sm btn-warning'], false);
                 } else {
                     echo $controller->loadModel()->get('filmography');
                 }
