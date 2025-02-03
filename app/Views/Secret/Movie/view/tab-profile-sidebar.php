@@ -28,7 +28,7 @@ $list_item = '<li class="py-2">%s %s</li>';
 
                         case 'metrage_id':
                         case 'genre_id':
-                            $label = $this->DOM()::span($label, ['class' => 'otto-id-label', 'otto-urn' => "Tag:$label"]);
+                            $label = $this->DOM()::span((string)$label, ['class' => 'otto-id-label', 'otto-urn' => "Tag:$label"]);
                             break;
                     }
                     printf($list_item, $this->icon($icon, 14, ['class' => 'me-2']), $label);
