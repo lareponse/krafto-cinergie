@@ -5,6 +5,7 @@ namespace App\Controllers\Secret;
 class Submission extends Krafto
 {
     use \App\Controllers\Abilities\HasORM;
+    use \App\Controllers\Abilities\RequiresEditorOrAbove;
 
 
     public function view()
@@ -13,14 +14,19 @@ class Submission extends Krafto
             $this->router()->hop('dash_submissions');
         }
 
-        list($class, $id) = explode(':', $this->loadModel()->get('urn'));
-        
-        $modified = $this->get('App\\Models\\'.$class);
-        $modified->import(json_decode($this->loadModel()->get('submitted'), true));
-        
-        $original = get_class($modified)::one($id);
-        
-        $this->viewport('original', $original);
-        $this->viewport('modified', $modified);
+        if(strpos($this->loadModel()->get('urn'), ':') !== false)
+        {
+            list($class, $id) = explode(':', $this->loadModel()->get('urn'));
+            $modified = $this->get('App\\Models\\' . $class);
+            $modified->import(json_decode($this->loadModel()->get('submitted'), true));
+            $original = get_class($modified)::one($id);
+            $this->viewport('original', $original);
+            $this->viewport('modified', $modified);
+        }
+        else
+        {
+            $this->viewport('submission', $this->loadModel());
+        }
+
     }
 }

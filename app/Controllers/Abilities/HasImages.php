@@ -34,7 +34,7 @@ trait HasImages
         // dd($files, $directory);
         // put profile picture first
         if($this->loadModel()->hasProfilePicture()){
-            $filename = $this->loadModel()->profilePicture();
+            $filename = $this->loadModel()->profilePicturePath();
             $filename = pathinfo($filename, PATHINFO_FILENAME).'.'.pathinfo($filename, PATHINFO_EXTENSION);
             if (($key = array_search($filename, $files)) !== false) {
                 unset($files[$key]);

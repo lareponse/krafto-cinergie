@@ -43,7 +43,7 @@
                 <?php
                 foreach ($listing as $model) {
                 ?>
-                    <tr data-kx-href="<?= $controller->urlFor('dash_user', 'edit', $model) ?>">
+                    <tr data-kx-href="<?= $controller->urlFor($controller->nid(), 'edit', $model) ?>">
                         <td class="username">
                             <strong><?= $model->get('username'); ?></strong>
                         </td>

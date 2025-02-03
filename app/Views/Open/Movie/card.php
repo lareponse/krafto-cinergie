@@ -3,7 +3,7 @@ $url = $controller->router()->hyp('movie', ['slug' => $record->slug()]);
 
 ?>
 <a class="card-movie shadow" href="<?= $url ?>">
-   <img src="<?= $record->defaultProfilePicture();?>" loading="lazy" data-src="<?= $controller->avatarFor($record) ?>" class="card-img-top" alt="Couverture du film <?= $record->get('label'); ?>">
+   <img src="<?= $controller->defaultAvatar();?>" loading="lazy" data-src="<?= $controller->avatarFor($record) ?>" class="card-img-top" alt="Couverture du film <?= $record->get('label'); ?>">
     <em>
 
         <span class="meta">

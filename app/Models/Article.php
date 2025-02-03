@@ -36,10 +36,13 @@ class Article extends TightModel
                 dd('Cannot handle type '.$type);
             }
             $ret[$type] = [];
+
+            if(empty($ids)){
+                continue;
+            }
             $ids = explode(',', $ids);
             $ret[$type] = $type_to_class[$type]::any(['ids' => $ids]);
         }
-
         return $ret;
     }
 

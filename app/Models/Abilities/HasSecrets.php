@@ -26,7 +26,7 @@ trait HasSecrets
             throw new \InvalidArgumentException($prop.' IS NOT A VALID SECRET PROP');
         }
         
-        return mb_strpos($this->get('secret'), self::$legacy_mapping[$prop]) !== false;
+        return mb_strpos($this->get('secret') ?? '', self::$legacy_mapping[$prop]) !== false;
     }
 
     public function canDisplay(string $prop)

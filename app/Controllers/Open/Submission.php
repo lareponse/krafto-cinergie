@@ -14,8 +14,6 @@ class Submission extends Kortex
         $submission->set('submitted', json_encode($this->router()->submitted()));
         $submission->set('submitted_by', json_encode(Model::submittedBy()));
 
-
-
         $res = explode('/', $this->router()->referer());
 
         // no slug
@@ -40,7 +38,6 @@ class Submission extends Kortex
             // now we have a verified slug and a record, we can proceed with the form
             $submission->set('urn', $existing->urn());
         }
-
         $submission->save(0);
 
         $this->viewport('submission', $submission);

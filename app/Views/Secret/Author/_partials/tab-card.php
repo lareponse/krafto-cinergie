@@ -9,10 +9,10 @@ $route = $controller->urlFor('Author', 'edit', $model); ?>
     <a href="<?= $route ?>" class="card-body text-center">
         <div class="avatar avatar-xl avatar-circle">
             <?php
-            if (empty($model->profilePicture()))
+            if (empty($model->profilePicturePath()))
                 echo $this->icon('author', 60, ['class' => 'avatar-img']);
             else {
-                echo $this->DOM()::img($model->profilePicture(), 'photo de auteur', ['class' => 'avatar-img']);
+                echo $this->DOM()::img($model->profilePicturePath(), 'photo de auteur', ['class' => 'avatar-img']);
             }
             ?>
         </div>

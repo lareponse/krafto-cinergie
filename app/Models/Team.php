@@ -13,9 +13,9 @@ class Team extends TightModel
         return $this->get('label');
     }
 
-    public function profilePicture(): string
+    public function profilePicturePath(): string
     {
-        return empty($this->get('avatar')) ? '' : $this->get('avatar');
+        return empty($this->get('avatar')) ? '' : '/images/'.$this->get('avatar');
     }
     
     public function contactPoint(): string

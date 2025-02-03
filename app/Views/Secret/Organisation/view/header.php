@@ -9,10 +9,10 @@
 
                         <div class="avatar avatar-circle avatar-xxl">
                         <?php
-                            if (empty($controller->loadModel()->profilePicture()))
+                            if (empty($controller->loadModel()->profilePicturePath()))
                                 echo $this->icon('relations', 60, ['class' => 'avatar-img']);
                             else {
-                                echo $this->DOM()::img($controller->loadModel()->profilePicture(), 'photo du professionel', ['class' => 'avatar-img', 'width' => 112, 'height' => 112]);
+                                echo $this->DOM()::img($controller->loadModel()->profilePicturePath(), 'photo du professionel', ['class' => 'avatar-img', 'width' => 112, 'height' => 112]);
                             }
                         ?>
                         </div>

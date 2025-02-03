@@ -30,6 +30,11 @@ class Author extends TightModel
         return $this->get('email');
     }
 
+    public function profilePicturePath(): string
+    {
+        return empty($this->get('avatar')) ? '' : '/auteur/' . $this->get('avatar');
+    }
+
     public static function filter($filters = [], $options = []): SelectInterface
     {
 
@@ -56,4 +61,5 @@ class Author extends TightModel
         }
         return $Query;
     }
+
 }

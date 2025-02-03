@@ -7,7 +7,7 @@
                 <div class="row align-items-center h-100">
                     <div class="col-auto d-flex ms-auto ms-md-0">
                         <div class="avatar avatar-circle avatar-xxl">
-                            <img src="<?= $controller->loadModel()->profilePicture() ?>" alt="..." class="avatar-img" width="112" height="112">
+                            <img src="<?= $controller->loadModel()->profilePicturePath() ?>" alt="..." class="avatar-img" width="112" height="112">
                         </div>
                     </div>
 
