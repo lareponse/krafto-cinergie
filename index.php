@@ -6,7 +6,6 @@ require_once 'vendor/autoload.php';
 set_include_path(implode(PATH_SEPARATOR, [get_include_path(),  __DIR__.'/']));
 
 use \HexMakina\kadro\Auth\{Operator as Host};
-use \HexMakina\kadro\Auth\{AccessRefusedException};
 use \HexMakina\Crudites\Crudites;
 
 try
@@ -28,7 +27,7 @@ try
 }
 catch(\HexMakina\Hopper\RouterException $e)
 {
-  $app->container()->get('Psr\Log\LoggerInterface')->warning($e->getMessage(), [$_SERVER['REQUEST_URI']]);
+  // $app->container()->get('Psr\Log\LoggerInterface')->warning($e->getMessage(), [$_SERVER['REQUEST_URI']]);
   $app->container()->get('HexMakina\BlackBox\RouterInterface')->hop();
 }
 catch(\HexMakina\kadro\Auth\AccessRefusedException $e)
@@ -62,6 +61,6 @@ finally
   if(isset($app))
     $app->container()->get('HexMakina\BlackBox\StateAgentInterface')->resetMessages();
 
-  echo("<!-- krafto by https://lareponse.be -->");
-  echo(sprintf("\n<!-- %0.4fms-->", (hrtime(true) - $start_time)/1e+6));
 }
+echo ("<!-- krafto by https://lareponse.be -->");
+echo (sprintf("\n<!-- %0.4fms-->", (hrtime(true) - $start_time) / 1e+6));
