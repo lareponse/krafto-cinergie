@@ -50,8 +50,6 @@ class Movie extends Krafto
         $relation = $relations->getRelation('movie-hasAndBelongsToMany-thesaurus');
         $thesaurus = $relation->getIds($this->loadModel()->id());
         $this->viewport('thesaurus', $thesaurus);
-
-        parent::view();
     }
 
     public function imagesDirectory(){
