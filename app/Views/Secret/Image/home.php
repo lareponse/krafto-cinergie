@@ -194,11 +194,16 @@
 
         let filteredImages = images;
 
+<<<<<<< HEAD
         const table = document.getElementById("image_table");
+=======
+        const table = document.getElementById("image-table");
+>>>>>>> cc60fa6f0baa632b9fa906ad09d03767110e476b
         const headers = table.querySelectorAll("th");
         const searchInput = document.getElementById("search");
         const mimeFilter = document.getElementById("mime-filter");
         const pathFilter = document.getElementById("path-filter");
+<<<<<<< HEAD
         const sizeFilter = document.getElementById("size-filter");
         const LIMIT = 1000;
 
@@ -250,10 +255,32 @@
                 row.addEventListener('unfocus', (e) => {
                     e.target.querySelector('img')?.remove();
                 });
+=======
+        const LIMIT = 1000;
+
+        // load the JSON
+        function render() {
+            //create a fragment to append the new tr
+            const fragment = document.createDocumentFragment();
+
+            filteredImages.slice(0, LIMIT).forEach(image => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                <td>${image.id}</td>
+                <td>${image.path}</td>
+                <td>${image.extension}</td>
+                <td>${image.size}</td>
+                <td>${image.width}</td>
+                <td>${image.height}</td>
+                <td>${image.mime}</td>
+                <td>${image.is_active}</td>
+            `;
+>>>>>>> cc60fa6f0baa632b9fa906ad09d03767110e476b
                 fragment.appendChild(row);
             });
             table.querySelector("tbody").innerHTML = "";
             table.querySelector("tbody").appendChild(fragment);
+<<<<<<< HEAD
 
             document.getElementById("image_table_total").textContent = `Total: ${images.length}`;
             document.getElementById("image_table_selected").textContent = `Selected: ${filteredImages.length}`;
@@ -261,10 +288,18 @@
         }
 
         // Function to filter rows based on search term, MIME type, path, and custom filters
+=======
+        }
+
+        // let filteredRows = Array.from(table.querySelectorAll("tbody tr"));
+
+        // Function to filter rows based on search term, MIME type, and path
+>>>>>>> cc60fa6f0baa632b9fa906ad09d03767110e476b
         function filterRows() {
             const searchTerm = searchInput.value.toLowerCase();
             const selectedMime = mimeFilter.value;
             const selectedPath = pathFilter.value;
+<<<<<<< HEAD
             const selectedSizeFilter = sizeFilter.value;
 
             filteredImages = images.filter(image => {
@@ -288,6 +323,15 @@
                 return matchesSearch && matchesMime && matchesPath && matchesSize;
             });
 
+=======
+
+            filteredImages = images.filter(image => {
+                return (selectedMime === "" || image.mime === selectedMime) &&
+                    (selectedPath === "" || image.path.includes(selectedPath)) &&
+                    (searchTerm === "" || image.path.toLowerCase().includes(searchTerm));
+            });
+            console.log('count', filteredImages.length, 'total', images.length, 'search', searchTerm, 'mime', selectedMime, 'path', selectedPath);
+>>>>>>> cc60fa6f0baa632b9fa906ad09d03767110e476b
             render();
         }
 
@@ -329,9 +373,15 @@
         searchInput.addEventListener("input", filterRows);
         mimeFilter.addEventListener("change", filterRows);
         pathFilter.addEventListener("change", filterRows);
+<<<<<<< HEAD
         sizeFilter.addEventListener("change", filterRows);
 
         // Initial render
         render();
+=======
+
+        render(images);
+
+>>>>>>> cc60fa6f0baa632b9fa906ad09d03767110e476b
     });
 </script>

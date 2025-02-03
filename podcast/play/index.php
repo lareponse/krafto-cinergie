@@ -2,7 +2,6 @@
 header("Access-Control-Allow-Origin: https://cinergie.lareponse.be");
 $data = require_once('S01.php');
 
-
 if (!isset($_GET['s']) || !isset($data[$_GET['s']]))
 header('Location: ../');
 
