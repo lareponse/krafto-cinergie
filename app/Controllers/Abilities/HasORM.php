@@ -38,10 +38,24 @@ trait HasORM
         return $this->load_model;
     }
 
+    public function view()
+    {
+        $table = $this->modelClassName()::table();
+        $relations = $this->get('HexMakina\BlackBox\Database\DatabaseInterface')->relations();
+        foreach ($relations->relationsBySource($table->name()) as $urn => $relation) {
+            if ($relation instanceof OneToMany) {
+                $records = $relation->getTargets($this->loadModel()->id());
+                $this->viewport($urn, $records);
+            }
+        }
+    }
 
     public function alter()
     {
-
+        if ($this->operator()->hasPermission('author')) {
+            $this->logger()->warning('Cette section est réservée aux administrateurs');
+            $this->router()->hopBack();
+        }
     }
 
     public function save()

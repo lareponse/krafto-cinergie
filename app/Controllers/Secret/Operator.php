@@ -5,7 +5,9 @@ namespace App\Controllers\Secret;
 class Operator extends Krafto
 {
     use \App\Controllers\Abilities\HasORM;
-    use \App\Controllers\Abilities\HasNoView;
+    use \App\Controllers\Abilities\HasNoView {
+        \App\Controllers\Abilities\HasNoView::view insteadof \App\Controllers\Abilities\HasORM;
+    }
     use \App\Controllers\Abilities\RequiresEditorOrAbove;
 
 
@@ -16,6 +18,7 @@ class Operator extends Krafto
         $this->viewport('filters', $this->router()->params());
         $this->viewport('counters', $this->counters());
     }
+    
     public function before_save(): array
     {
         if (!empty($this->formModel()->get('password'))) {

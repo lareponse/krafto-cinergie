@@ -9,6 +9,8 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
 {
     protected $template = null;
 
+    abstract public function modelClassName(): string;
+
     public function requiresOperator(): bool
     {
         return true;
@@ -68,17 +70,6 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
         
     }
 
-    public function view()
-    {
-        $table = $this->modelClassName()::table();
-        $relations = $this->get('HexMakina\BlackBox\Database\DatabaseInterface')->relations();
-        foreach($relations->relationsBySource($table->name()) as $urn => $relation){
-            if($relation instanceof OneToMany){
-                $records = $relation->getTargets($this->loadModel()->id());
-                $this->viewport($urn, $records);
-            }
-        }
-    }
 
     protected function find_template($engine, $template_name): string
     {
