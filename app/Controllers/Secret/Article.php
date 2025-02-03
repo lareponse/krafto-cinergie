@@ -18,6 +18,19 @@ class Article extends Krafto
         parent::conclude();
     }
 
+    public function alter()
+    {
+        if ($this->operator()->hasPermission('author')) {
+            dd('CHECK PERMISSIONS FOR AUTHOR OWN ARTICLE');
+            dd($this->loadModel(), $this->operator()->id());
+        }
+    }
+
+    public function after_save()
+    {
+        dd('AFTER SAVE RELATION TO AUTHOR');
+    }
+
     public function view()
     {
         if (is_null($this->loadModel())) {
