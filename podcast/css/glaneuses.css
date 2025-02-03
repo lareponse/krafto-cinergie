@@ -201,10 +201,6 @@ body>footer img {
   font-size: 1.7rem;
 }
 
-#podcast header>:first-child::before {
-  content: "<";
-}
-
 @media screen and (min-width: 768px) {
   #podcast main aside {
     font-size: 1.1em;

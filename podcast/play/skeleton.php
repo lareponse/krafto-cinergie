@@ -29,9 +29,9 @@
 <body id="podcast">
 
     <header style="background-image: url('/podcast/play/<?php echo $show . '/banner.jpg'; ?>');">
-        <h1>
-            <?= $show_data['name']; ?>
-
+        <h1><a href="/podcast">
+                &laquo; <?= $show_data['name']; ?>
+            </a>
         </h1>
         <!-- <img src="/podcast/play/<?php echo $show . '/banner.jpg'; ?>" /> -->
     </header>
