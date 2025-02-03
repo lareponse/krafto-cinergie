@@ -1460,3 +1460,7 @@ body>main>.add-btn {
 #page_team section.team-grid article>div {
     padding:var(--inner-padding);
 }
+
+#Job aside button{
+    margin-bottom:2rem;
+}
