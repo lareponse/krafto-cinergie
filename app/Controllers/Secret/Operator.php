@@ -5,6 +5,7 @@ namespace App\Controllers\Secret;
 class Operator extends Krafto
 {
     use \App\Controllers\Abilities\HasORM;
+    use \App\Controllers\Abilities\RequiresEditorOrAbove;
 
     public function home()
     {

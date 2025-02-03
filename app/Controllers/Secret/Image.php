@@ -17,6 +17,8 @@ use \HexMakina\Deadites\Deadites;
 
 class Image extends Krafto
 {
+    use \App\Controllers\Abilities\RequiresEditorOrAbove;
+
     private $fileSystem;
 
     private $externalController = null;
@@ -25,9 +27,12 @@ class Image extends Krafto
     public function home()
     {
 
-        $res = \App\Models\Image::filter()->limit(1000, 0)->retAss();
-        // $res = \App\Models\Image::filter()->retAss();
-        $this->viewport('images', $res);
+        // $res = \App\Models\Image::filter()->limit(1000, 0)->retAss();
+        $images = \App\Models\Image::filter()->retAss();
+        $this->viewport('images', $images);
+            $mimeTypes = array_unique(array_column($images, 'mime'));
+
+        $this->viewport('mime_types', array_unique(array_column($images, 'mime')));
         // $jpegOptimizer = (new OptimizerChain)
         //     ->addOptimizer(new Jpegoptim([
         //         '--strip-all',
