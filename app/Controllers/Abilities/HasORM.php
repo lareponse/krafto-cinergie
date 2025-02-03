@@ -41,6 +41,7 @@ trait HasORM
 
     public function alter()
     {
+
     }
 
     public function save()

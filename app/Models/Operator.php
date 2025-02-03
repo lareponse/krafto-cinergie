@@ -16,8 +16,10 @@ class Operator extends \HexMakina\kadro\Auth\Operator
 
     public static function filter($filters = [], $options = []): SelectInterface 
     {
-        $query = parent::filter($filters, $options);
+        
+        $options['withPermissions'] ??= true;
 
+        $query = parent::filter($filters, $options);
         // remove root from general listings
         $query->whereNotLike('name', '%root%', 'kadro_permission');
 
@@ -33,6 +35,7 @@ class Operator extends \HexMakina\kadro\Auth\Operator
                 $query->whereEQ('name', $filters['segment'], 'kadro_permission', ':operator_segment_filter');
             }
         }
+
         return $query;
     }
 }
