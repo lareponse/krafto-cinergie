@@ -1,6 +1,6 @@
 <article class="article-item card mb-4 shadow ">
     <a href="<?= $controller->router()->hyp('article', ['slug' => $article->slug()]); ?>">
-        <img src="<?= $controller->defaultAvatar();?>" loading="lazy" data-src="<?= $controller->avatarFor($article) ?>" class="card-img-top" alt="<?= $article->get('label'); ?> - <?= $article->get('author_label'); ?>"" />
+        <img src="<?= $controller->defaultAvatar();?>" loading="lazy" data-src="<?= $controller->avatarFor($article, 'thumbnail') ?>" class="card-img-top" alt="<?= $article->get('label'); ?> - <?= $article->get('author_label'); ?>"" />
         <div class=" card-body">
         <?php if (!isset($showCategory) || $showCategory === true) { ?>
             <p class="btn btn-sm btn-primary taxo-cat otto-id-label" otto-urn="Tag:<?= $article->get('type_id'); ?>">Tag:<?= $article->get('type_id'); ?></p>
