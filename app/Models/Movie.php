@@ -34,7 +34,7 @@ class Movie extends TightModel
         return [
             'movie_genre' => $this->get('genre_id'),
             'movie_footage' => $this->get('metrage_id'),
-            'movie_theme' => explode(',', $this->get('movie_theme_ids') ?? '')
+            'movie_theme' => $this->get('movie_theme_ids') ? explode(',', $this->get('movie_theme_ids')) : []
         ];
     }
 
