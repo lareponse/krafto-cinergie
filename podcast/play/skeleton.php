@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="/public/assets/wejune/css/slick.min.css">
     <link rel="stylesheet" href="/public/assets/wejune/css/style.css"><!-- original custom css -->
     <link rel="stylesheet" href="/public/assets/css/lareponse.css"><!-- fixes to the custom css -->
-    
+
     <link rel="stylesheet" href="/podcast/css/glaneuses.css" type="text/css" media="all">
 
 
@@ -26,10 +26,14 @@
     <link rel="apple-touch-icon" href="../favicon-1.png">
 </head>
 
-<body>
+<body id="podcast">
 
-    <header>
-        <img src="/podcast/play/<?php echo $show . '/banner.jpg'; ?>" />
+    <header style="background-image: url('/podcast/play/<?php echo $show . '/banner.jpg'; ?>');">
+        <h1>
+            <?= $show_data['name']; ?>
+
+        </h1>
+        <!-- <img src="/podcast/play/<?php echo $show . '/banner.jpg'; ?>" /> -->
     </header>
     <main>
 
@@ -38,50 +42,57 @@
             <script src="https://player.ausha.co/ausha-player.js"></script>
             <?php require_once('./' . $show . '/content.html'); ?>
         </section>
+
         <hr>
-        <div class="g-2">
-            <p>Les Glaneuses est un podcast qui s’immisce au creux de la vie de réalisatrices. À travers leur parcours, leurs souvenirs, leur intimité, nous partons à la découverte de noms de femmes, de combats inspirants, de paroles politiques.</p>
-            <p>Les Glaneuses est une production de Cinergie avec l'aide de la Cinémathèque de la Fédération Wallonie-Bruxelles, de la COCOF, de la Ville de Bruxelles-Egalité des chances, et en partenariat avec Radio Campus.</p>
-            <section>
-                <h4>Retrouvez Les Glaneuses sur</h4>
-                <nav class="glaneuses-diffusions">
-                    <a href="https://podcast.ausha.co/les-glaneuses" title="Les glaneuses sur Apple Podcast"><img src="/podcast/play/assets/platforms/apple-podcast.svg" alt="Les glaneuses sur Apple Podcast" /></a>
-                    <a href="https://podcastaddict.com/podcast/3696978" title="Les glaneuses sur podcastaddict"><img src="/podcast/play/assets/platforms/podcastaddict.svg" alt="Les glaneuses sur podcastaddict" /></a>
-                    <a href="https://music.amazon.com/podcasts/2ca9e1ee-7520-4393-9643-917dc2516771" title="Les glaneuses sur Amazon Music"><img src="/podcast/play/assets/platforms/amazon-music.svg" alt="Les glaneuses sur Amazon Music" /></a>
-                    <a href="https://open.spotify.com/show/6gTlFnDHPCh3Nns3kjvBc0" title="Les glaneuses sur Spotify"><img src="/podcast/play/assets/platforms/spotify.svg" alt="Les glaneuses sur Spotify" /></a>
-                    <a href="https://www.deezer.com/show/3134642" title="Les glaneuses sur Deezer"><img src="/podcast/play/assets/platforms/deezer.svg" alt="Les glaneuses sur Deezer" /></a>
-                    <a href="https://soundcloud.com/user-40361272" title="Les glaneuses sur SoundCloud"><img src="/podcast/play/assets/platforms/soundcloud.svg" alt="Les glaneuses sur SoundCloud" /></a>
-                    <a href="https://www.mixcloud.com/cinergie/" title="Les glaneuses sur MixCloud"><img src="/podcast/play/assets/platforms/mixcloud.svg"" alt=" Les glaneuses sur MixCloud" /></a>
-                </nav>
-            </section>
-            <nav>
-                <img style="width:23%" src="/podcast/play/assets/logo_cinematheque_fwb.jpg" />
-                <img style="width:23%" src="/podcast/play/assets/logo_FrancophonesBruxellesGRIS.png" />
-                <img style="width:23%" src="/podcast/play/assets/logo_FWBBLANC_CULT_black.png" />
-                <img style="width:23%" src="/podcast/play/assets/logo_vbx.png" />
-            </nav>
-        </div>
 
-        <section id="credits">
-            <h4>Crédits : </h4>
-            <div class="g-2">
-                <span>Enregistrement et réalisation :</span><span>Sarah Semana</span>
-                <span>Montage :</span><span>Constance Pasquier et Sarah Semana</span>
-                <span>Mixage et création sonore :</span><span>Alexia Baltsavias</span>
-                <span>Illustration :</span><span>Rocio Alvarez</span>
-                <span>Auteur des textes :</span><span>Bertrand Gevart</span>
-                <span>Coordinatrice et productrice :</span><span>Dimitra Bouras</span>
-                <?php
+        <aside>
+            <div>
+                <p>Les Glaneuses est un podcast qui s’immisce au creux de la vie de réalisatrices. À travers leur parcours, leurs souvenirs, leur intimité, nous partons à la découverte de noms de femmes, de combats inspirants, de paroles politiques.</p>
+                <article>
+                    <h4>Retrouvez Les Glaneuses sur</h4>
+                    <nav class="glaneuses-diffusions mt-5">
+                        <a href="https://podcast.ausha.co/les-glaneuses" title="Les glaneuses sur Apple Podcast"><img src="/podcast/play/assets/platforms/apple-podcast.svg" alt="Les glaneuses sur Apple Podcast" /></a>
+                        <a href="https://podcastaddict.com/podcast/3696978" title="Les glaneuses sur podcastaddict"><img src="/podcast/play/assets/platforms/podcastaddict.svg" alt="Les glaneuses sur podcastaddict" /></a>
+                        <a href="https://music.amazon.com/podcasts/2ca9e1ee-7520-4393-9643-917dc2516771" title="Les glaneuses sur Amazon Music"><img src="/podcast/play/assets/platforms/amazon-music.svg" alt="Les glaneuses sur Amazon Music" /></a>
+                        <a href="https://open.spotify.com/show/6gTlFnDHPCh3Nns3kjvBc0" title="Les glaneuses sur Spotify"><img src="/podcast/play/assets/platforms/spotify.svg" alt="Les glaneuses sur Spotify" /></a>
+                        <a href="https://www.deezer.com/show/3134642" title="Les glaneuses sur Deezer"><img src="/podcast/play/assets/platforms/deezer.svg" alt="Les glaneuses sur Deezer" /></a>
+                        <a href="https://soundcloud.com/user-40361272" title="Les glaneuses sur SoundCloud"><img src="/podcast/play/assets/platforms/soundcloud.svg" alt="Les glaneuses sur SoundCloud" /></a>
+                        <a href="https://www.mixcloud.com/cinergie/" title="Les glaneuses sur MixCloud"><img src="/podcast/play/assets/platforms/mixcloud.svg"" alt=" Les glaneuses sur MixCloud" /></a>
+                    </nav>
+                </article>
+                <article>
+                    <h4>Crédits : </h4>
+                    <div class="g-2">
+                        <span>Enregistrement et réalisation :</span><span>Sarah Semana</span>
+                        <span>Montage :</span><span>Constance Pasquier et Sarah Semana</span>
+                        <span>Mixage et création sonore :</span><span>Alexia Baltsavias</span>
+                        <span>Illustration :</span><span>Rocio Alvarez</span>
+                        <span>Auteur des textes :</span><span>Bertrand Gevart</span>
+                        <span>Coordinatrice et productrice :</span><span>Dimitra Bouras</span>
+                        <?php
 
-                if (isset($show_data['additionnal_credits'])) {
-                    foreach ($show_data['additionnal_credits'] as $k => $v) {
-                        echo '<span>' . $k . ' :</span><span>' . $v . '</span>';
-                    }
-                }
-                ?>
+                        if (isset($show_data['additionnal_credits'])) {
+                            foreach ($show_data['additionnal_credits'] as $k => $v) {
+                                echo '<span>' . $k . ' :</span><span>' . $v . '</span>';
+                            }
+                        }
+                        ?>
+                    </div>
+                </article>
+
             </div>
 
-        </section>
+            <section>
+                <p>Les Glaneuses est une production de Cinergie avec l'aide de la Cinémathèque de la Fédération Wallonie-Bruxelles, de la COCOF, de la Ville de Bruxelles-Egalité des chances, et en partenariat avec Radio Campus.</p>
+                <nav class="glaneuses-partners">
+                    <img style="width:23%" src="/podcast/play/assets/logo_cinematheque_fwb.jpg" />
+                    <img style="width:23%" src="/podcast/play/assets/logo_FrancophonesBruxellesGRIS.png" />
+                    <img style="width:23%" src="/podcast/play/assets/logo_FWBBLANC_CULT_black.png" />
+                    <img style="width:23%" src="/podcast/play/assets/logo_vbx.png" />
+                </nav>
+            </section>
+        </aside>
+
     </main>
 
     <?php
