@@ -34,13 +34,13 @@ class Movie extends TightModel
         return [
             'movie_genre' => $this->get('genre_id'),
             'movie_footage' => $this->get('metrage_id'),
-            'movie_theme' => explode(',', $this->get('movie_theme_ids'))
+            'movie_theme' => explode(',', $this->get('movie_theme_ids') ?? '')
         ];
     }
 
     public function thesaurusIds(): array
     {
-        return explode(',', $this->get('movie_thesaurus_ids'));
+        return explode(',', $this->get('movie_thesaurus_ids') ?? '');
     }
 
     public static function idsByOrganisationName(string $isLike): array
