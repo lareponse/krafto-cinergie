@@ -31,5 +31,11 @@ else
     if($submission->get('urn') === 'boutique'){
         $this->insert('Secret::Submission/shop', ['submission' => $submission]);
     }
-    dd($submission);
+    else if($submission->get('urn') === 'annonces'){
+        $this->insert('Secret::Submission/job', ['submission' => $submission]);
+    }
+    else
+    {
+        ddt($submission);
+    }
 }
