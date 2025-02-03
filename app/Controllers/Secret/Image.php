@@ -24,6 +24,11 @@ class Image extends Krafto
     private $externalController = null;
     private $slug = null;
 
+    public function modelClassName(): string
+    {
+        return \App\Models\Image::class;
+    }
+
     public function home()
     {
 
