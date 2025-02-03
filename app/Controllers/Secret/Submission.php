@@ -24,7 +24,6 @@ class Submission extends Krafto
         }
         else
         {
-            $class = $this->loadModel()->get('urn');
             $this->viewport('submission', $this->loadModel());
         }
 
