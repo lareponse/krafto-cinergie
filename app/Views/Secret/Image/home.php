@@ -191,7 +191,6 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const images = JSON.parse(document.getElementById("images").textContent);
-
         let filteredImages = images;
 
         const table = document.getElementById("image_table");
@@ -200,6 +199,7 @@
         const mimeFilter = document.getElementById("mime-filter");
         const pathFilter = document.getElementById("path-filter");
         const sizeFilter = document.getElementById("size-filter");
+
         const LIMIT = 1000;
 
         // Define thresholds for custom filters
@@ -209,6 +209,17 @@
         const TOO_BIG_HEIGHT = 1080; // Full HD height
         const TOO_SMALL_WIDTH = 320; // Mobile width
         const TOO_SMALL_HEIGHT = 480; // Mobile height
+
+
+        // Event listeners for search and filter
+        searchInput.addEventListener("input", filterRows);
+        mimeFilter.addEventListener("change", filterRows);
+        pathFilter.addEventListener("change", filterRows);
+        sizeFilter.addEventListener("change", filterRows);
+
+        // Initial render
+        render();
+
 
         function computeExpectedSize(width, height, qualityFactor = 0.2, compressionThreshold = 2) {
             return Math.round((width * height * qualityFactor) / (1024 * compressionThreshold));
@@ -325,13 +336,6 @@
             });
         });
 
-        // Event listeners for search and filter
-        searchInput.addEventListener("input", filterRows);
-        mimeFilter.addEventListener("change", filterRows);
-        pathFilter.addEventListener("change", filterRows);
-        sizeFilter.addEventListener("change", filterRows);
 
-        // Initial render
-        render();
     });
 </script>

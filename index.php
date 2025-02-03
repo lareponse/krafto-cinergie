@@ -1,6 +1,5 @@
 <?php
 $start_time = hrtime(true);
-
 require_once 'vendor/autoload.php';
 
 set_include_path(implode(PATH_SEPARATOR, [get_include_path(),  __DIR__.'/']));
