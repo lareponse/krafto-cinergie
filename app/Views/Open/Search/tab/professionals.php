@@ -48,7 +48,7 @@ if (empty($professionals->records())) {
             </span>
             <small class="card-description text-secondary">
                 <?php
-                $content = strip_tags($record->get('content'));
+                $content = strip_tags($record->get('content') ?? '');
                 if (mb_strlen($content) > 400) {
                     $content = mb_substr($content, 0, 400) . '...';
                 }

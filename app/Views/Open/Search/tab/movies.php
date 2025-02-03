@@ -75,7 +75,7 @@ use \HexMakina\Marker\{Marker, Form};
                                     <p class="text-right otto-date"><?= $record->get('publication'); ?></p>
                                 </div>
                                 <div class="details">
-                                    <p class="card-text text-secondary"><small><?= mb_substr(strip_tags($record->get('content')), 0, 400) ?>...</small></p>
+                                    <p class="card-text text-secondary"><small><?= mb_substr(strip_tags($record->get('content') ?? ''), 0, 400) ?>...</small></p>
                                 </div>
                             </div>
                         </a>

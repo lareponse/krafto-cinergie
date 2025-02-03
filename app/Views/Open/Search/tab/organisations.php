@@ -47,7 +47,7 @@ use \HexMakina\Marker\{Marker,Form};
                                     <p class="text-right">20 juillet 2023</p>
                                 </div>
                                 <div class="details">
-                                    <p class="card-text text-secondary"><small><?= mb_substr(strip_tags($record->get('content')), 0, 400) ?>...</small></p>
+                                    <p class="card-text text-secondary"><small><?= mb_substr(strip_tags($record->get('content') ?? ''), 0, 400) ?>...</small></p>
                                 </div>
                             </div>
                         </a>
