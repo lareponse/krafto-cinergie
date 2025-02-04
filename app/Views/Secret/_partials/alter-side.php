@@ -25,6 +25,6 @@ if (empty($sidemenu) || empty($controller))
     </div>
 
     <div class="card-footer text-center">
-        <a href="<?= $controller->loadModel() ? $controller->url('view') : $controller->url('list') ?>" class="btn btn-secondary">Retour</a>
+        <a href="<?= in_array(HasNoView::class, class_uses($controller)) ? $controller->url('view') : $controller->url('list') ?>" class="btn btn-secondary">Retour</a>
     </div>
 </div>
