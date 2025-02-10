@@ -68,9 +68,11 @@ trait HasORM
         } 
         else {
             $this->errors = $errors;
-
             foreach($this->errors() as $err){
-                $this->logger()->warning($err);
+                if(is_array($err))
+                    $this->logger()->warning(implode(', ', $err));
+                else
+                    $this->logger()->warning($err);
             }
             $this->setTemplate($this->nid().'/alter');
         }
