@@ -65,7 +65,8 @@ iframe{
     margin:  0 0.5em;
 }
 
-input.form-control {
+input.form-control,
+select.form-select {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif !important;
 }
 
