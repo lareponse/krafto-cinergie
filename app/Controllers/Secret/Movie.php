@@ -35,6 +35,14 @@ class Movie extends Krafto
         parent::home();
     }
 
+    public function before_alter()
+    {   
+        $genres = [];
+        $metrages = [];
+        $this->viewport('genres', $this->modelClassName()::genres());
+        $this->viewport('metrages', $this->modelClassName()::metrages());
+    }
+
     public function view()
     {
         if(is_null($this->loadModel())){

@@ -5,6 +5,7 @@ namespace App\Models;
 use HexMakina\BlackBox\Database\SelectInterface;
 use HexMakina\TightORM\TightModel;
 use App\Models\{Professional, Organisation};
+use HexMakina\kadro\Models\Tag;
 
 class Movie extends TightModel
 {
@@ -203,5 +204,16 @@ class Movie extends TightModel
         $res = $query->retObj(Article::class);
 
         return $res ? $res : $ret;
+    }
+
+
+    public static function genres()
+    {
+        return Tag::any(['parent' => 'movie_genre'], ['eager' => false]);
+    }
+
+    public static function metrages()
+    {
+        return Tag::any(['parent' => 'movie_footage'], ['eager' => false]);
     }
 }

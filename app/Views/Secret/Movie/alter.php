@@ -134,8 +134,7 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu]) ?>
             </div>
 
             <div class="col-lg">
-                <select class="form-select" name="genre_id" id="genre_id">
-                </select>
+                <?= $this->Form()::select('genre_id', $genres, $controller->formModel()->get('genre_id'), ['class' => 'form-select']);?>
                 <div class="invalid-feedback">Please add your genre</div>
             </div>
         </div>
@@ -146,8 +145,7 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu]) ?>
             </div>
 
             <div class="col-lg">
-                <select class="form-select" name="metrage_id" id="metrage_id">
-                </select>
+                <?= $this->Form()::select('metrage_id', $metrages, $controller->formModel()->get('metrage_id'), ['class' => 'form-select']);?>
                 <div class="invalid-feedback">Please add your metrage</div>
             </div>
         </div>
