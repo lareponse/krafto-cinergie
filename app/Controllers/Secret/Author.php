@@ -8,7 +8,9 @@ class Author extends Krafto
 {
     use \App\Controllers\Abilities\HasORM;
     use \App\Controllers\Abilities\HasImages;
-
+    use \App\Controllers\Abilities\HasNoView {
+        \App\Controllers\Abilities\HasNoView::view insteadof \App\Controllers\Abilities\HasORM;
+    }
     public function activeSection(): string
     {
       return 'Page';
@@ -42,18 +44,6 @@ class Author extends Krafto
             return $this->modelClassName()::raw($query)->fetchColumn();
         }, $counters);
 
-    }
-
-    public function view()
-    {
-        $this->router()->hop('records', ['nid' => 'Author']);
-
-        // if(is_null($this->loadModel())){
-        //     $this->router()->hop('records', ['nid'=>'Author']);
-        // }
-        // $this->viewport('articles', Article::any(['professional' => $this->loadModel()], ['eager' => false]));
-        // $this->viewport('movies', Movie::any(['professional' => $this->loadModel()], ['eager' => false]));
-        // $this->viewport('organisations', Organisation::any(['professional' => $this->loadModel()], ['eager' => false]));
     }
 
     public function edit():void
