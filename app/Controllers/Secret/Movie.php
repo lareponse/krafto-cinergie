@@ -18,6 +18,9 @@ class Movie extends Krafto
             $this->viewport('tagIdsByCategory', $this->loadModel()->tagIds());
             $this->viewport('tags', $this->loadModel()->tags());
         }
+
+        $this->viewport('genres', $this->modelClassName()::genres());
+        $this->viewport('metrages', $this->modelClassName()::metrages());
     }
 
     public function activeSection(): string
@@ -37,10 +40,7 @@ class Movie extends Krafto
 
     public function before_alter()
     {   
-        $genres = [];
-        $metrages = [];
-        $this->viewport('genres', $this->modelClassName()::genres());
-        $this->viewport('metrages', $this->modelClassName()::metrages());
+
     }
 
     public function view()
