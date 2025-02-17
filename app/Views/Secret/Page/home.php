@@ -30,17 +30,19 @@
             <tbody class="list">
                 <?php
                 foreach ($listing as $model) {
+                    $url = $controller->urlFor($controller->nid(), 'view', $model);
+
                 ?>
-                    <tr data-kx-href="<?= $controller->urlFor('Page', 'edit', $model) ?>">
+                    <tr>
                         <td class="slug">
-                            <strong><?= $model->slug(); ?></strong>
+                            <?= $this->DOM()::a($url,$model->slug()); ?>
                         </td>
                         <td class="label">
-                            <strong><?= $model; ?></strong>
+                            <?= $this->DOM()::a($url, $model); ?>
                         </td>
 
                         <td class="active">
-                            <?= $model->isActive() ? 'Oui' : 'Non'; ?>
+                            <?= $this->DOM()::a($url, $model->isActive() ? 'Oui' : 'Non'); ?>
                         </td>
                     </tr>
                 <?php

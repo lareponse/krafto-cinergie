@@ -29,24 +29,22 @@
             </thead>
 
             <tbody class="list">
-                <?php
-                foreach ($listing as $model) {
+                <?php foreach ($listing as $model):
+                    $url = $controller->urlFor($controller->nid(), 'view', $model);
                 ?>
-                    <tr data-kx-href="<?= $controller->urlFor('Movie', 'view', $model) ?>">
-
+                    <tr>
                         <td class="fullName">
-                            <strong><?= $model->get('label'); ?></strong>
+                            <?= $this->DOM()::a($url, $model); ?>
+
                         </td>
                         <td class="released">
-                            <?= $model->get('released'); ?>
+                            <?= $this->DOM()::a($url, $model->get('released') ?? ''); ?>
                         </td>
                         <td class="runtime">
-                            <?= $model->get('runtime'); ?>
+                            <?= $this->DOM()::a($url, $model->get('runtime') ?? ''); ?>
                         </td>
                     </tr>
-                <?php
-                }
-                ?>
+                <?php endforeach ?>
 
             </tbody>
         </table>

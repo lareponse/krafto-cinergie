@@ -1,8 +1,6 @@
 <?php $this->layout('Secret::dashboard') ?>
 
-
-
-<div class="card border-0 flex-fill w-100" data-list='{"valueNames": ["label","URL", "isCollaborator","hasProfilePicture", "active"], "page": 10}' id="filesTable">
+<div class="card border-0 flex-fill w-100" data-list='{"valueNames": ["label","hasProfilePicture","isCollaborator", "active"], "page": 20}' id="filesTable">
     <div class="card-header border-0">
         <?= isset($filters) ? $this->insert('Secret::_partials/filters/FiltersOnFirstChar', ['count' => count($listing)]) : '' ?>
 
@@ -18,11 +16,6 @@
                         </a>
                     </th>
 
-                    <th>
-                        <a href="javascript: void(0);" class="text-muted list-sort" data-sort="URL">
-                            URL
-                        </a>
-                    </th>
                     <th>
                         <a href="javascript: void(0);" class="text-muted list-sort" data-sort="hasProfilePicture">
                             Photo?
@@ -42,40 +35,32 @@
             </thead>
 
             <tbody class="list">
-                <?php
-                foreach ($listing as $model) {
+                <?php foreach ($listing as $model): 
+                    $url = $controller->urlFor($controller->nid(), 'view', $model);
                 ?>
-                    <tr data-kx-href="<?= $controller->urlFor('Author', 'edit', $model) ?>">
+                    <tr>
                         <td class="fullName">
-                            <strong><?= $model->get('label'); ?></strong>
-                        </td>
-
-                        <td class="URL">
-                            <?= $model->get('url')  ?>
+                            <?= $this->DOM()::a($url, $model->get('label') ?? ''); ?>
                         </td>
 
                         <td class="email">
-                            <?= $model->get('isCollaborator') ? 'Oui' : 'Non'; ?>
+                            <a href="<?= $url ?>"><?= $model->get('isCollaborator') ? 'Oui' : 'Non'; ?></a>
                         </td>
 
                         <td class="hasProfilePicture">
-                            <?= $model->hasProfilePicture() ? 'Oui' : 'Non'; ?>
+                            <a href="<?= $url ?>"><?= $model->hasProfilePicture() ? 'Oui' : 'Non'; ?></a>
                         </td>
 
                         <td class="active">
-                            <?= $model->get('public') ? 'Oui' : 'Non'; ?>
+                            <a href="<?= $url ?>"><?= $model->get('public') ? 'Oui' : 'Non'; ?></a>
                         </td>
                     </tr>
-                <?php
-                }
-                ?>
-
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>
 
     <div class="card-footer">
-
         <ul class="pagination justify-content-end list-pagination mb-0"></ul>
     </div>
 </div>

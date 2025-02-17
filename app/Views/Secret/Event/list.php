@@ -7,8 +7,8 @@
             if (isset($filters)) {
             ?>
                 <h2 class="card-header-title h4 text-uppercase">
-                    Pour  
-                    <span class="otto-date" otto-format="<?= urlencode(json_encode(['month' => 'long', 'year' => 'numeric']))?>"><?= $filters['year'] ?? '' ?>-<?= $filters['month'] ?? '' ?>-01</span>
+                    Pour
+                    <span class="otto-date" otto-format="<?= urlencode(json_encode(['month' => 'long', 'year' => 'numeric'])) ?>"><?= $filters['year'] ?? '' ?>-<?= $filters['month'] ?? '' ?>-01</span>
                     (<?= count($listing) ?>)
                 </h2>
             <?php
@@ -16,7 +16,7 @@
             ?>
             <input class="form-control list-search mw-md-300px ms-md-auto mt-5 mt-md-0 mb-3 mb-md-0" type="search" placeholder="Chercher">
 
-            <a href="<?= $controller->url('new');?>" class="btn btn-primary ms-md-4">Nouveau</a>
+            <a href="<?= $controller->url('new'); ?>" class="btn btn-primary ms-md-4">Nouveau</a>
         </div>
 
         <?php
@@ -50,30 +50,21 @@
             </thead>
 
             <tbody class="list">
-                <?php
-                foreach ($listing as $model) {
-
+                <?php foreach ($listing as $model):
+                    $url = $controller->urlFor($controller->nid(), 'view', $model);
                 ?>
-                <tr data-kx-href="<?= $controller->urlFor($controller->nid(), 'edit', $model)?>">
-
-
+                    <tr>
                         <td class="title">
-                            <div class="d-flex align-items-center">
-                                <div class="d-flex flex-column">
-                                    <span class="fw-bold d-block"><?= $model->get('label'); ?></span>
-                                </div>
-                            </div>
+                            <?= $this->DOM()::a($url, substr($model->get('label') ?? '', 0, 40) . '..'); ?>
                         </td>
-                        <td class="publication otto-format otto-date" data-starts="<?= $model->get('starts'); ?>">
-                            <?= $model->get('starts'); ?>
+                        <td class="publication " data-starts="<?= $model->get('starts'); ?>">
+                            <a class="otto-format otto-date" href="<?= $url ?>"><?= $model->get('starts'); ?></a>
                         </td>
-                        <td class="publication otto-format otto-date" data-stops="<?= $model->get('stops'); ?>">
-                            <?= $model->get('stops'); ?>
+                        <td class="publication" data-stops="<?= $model->get('stops'); ?>">
+                            <a class="otto-format otto-date" href="<?= $url ?>"><?= $model->get('stops'); ?></a>
                         </td>
                     </tr>
-                <?php
-                }
-                ?>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>

@@ -9,49 +9,26 @@
         <table class="table align-middle table-hover table-nowrap mb-0">
             <thead class="thead-light">
                 <tr>
-                    <th>
-                        <a href="javascript: void(0);" class="text-muted list-sort" data-sort="fullName">
-                            Titre
-                        </a>
-                    </th>
+                    <th><a href="javascript: void(0);" class="text-muted list-sort" data-sort="fullName">Titre</a></th>
                     <th><a href="javascript: void(0);" class="text-muted list-sort" data-sort="price">Prix</a></th>
                     <th><a href="javascript: void(0);" class="text-muted list-sort" data-sort="deliveryBe">BE</a></th>
                     <th><a href="javascript: void(0);" class="text-muted list-sort" data-sort="deliveryEu">EU</a></th>
-                    <th>
-                        <a href="javascript: void(0);" class="text-muted list-sort" data-sort="active">
-                            En vente
-                        </a>
-                    </th>
+                    <th><a href="javascript: void(0);" class="text-muted list-sort" data-sort="active">En vente</a></th>
                 </tr>
             </thead>
 
             <tbody class="list">
-                <?php
-                foreach ($listing as $model) {
+                <?php foreach ($listing as $model):
+                    $url = $controller->urlFor($controller->nid(), 'view', $model);
                 ?>
-                    <tr data-kx-href="<?= $controller->urlFor($controller->nid(), 'view', $model) ?>">
-
-                        <td class="fullName">
-                            <strong><?= $model->get('label'); ?></strong>
-                        </td>
-                        <td class="price"><?= $model->get('price'); ?> &euro;</td>
-                        <td class="deliveryBe"><?= $model->get('deliveryBe'); ?> &euro;</td>
-                        <td class="deliveryEu"><?= $model->get('deliveryEu'); ?> &euro;</td>
-                        <td class="active">
-                            <?php
-                            if ($model->get('public')) {
-                                echo '<img src="/public/assets/dashly/icons/check-double.svg" class="nav-link-icon" height="18" width="18" />';
-                            } else {
-                                echo '<img src="/public/assets/dashly/icons/disable.svg" class="nav-link-icon" height="18" width="18" />';
-                            }
-
-                            ?>
-                        </td>
+                    <tr>
+                        <td class="fullName"><?= $this->DOM()::a($url, $model->get('label') ?? '', ['class' => 'currency']); ?></td>
+                        <td class="price"><?= $this->DOM()::a($url, $model->get('price') ?? '', ['class' => 'currency']); ?></td>
+                        <td class="deliveryBe"><?= $this->DOM()::a($url, $model->get('deliveryBe') ?? '', ['class' => 'currency']); ?></td>
+                        <td class="deliveryEu"><?= $this->DOM()::a($url, $model->get('deliveryEu') ?? '', ['class' => 'currency']); ?></td>
+                        <td class="active"><?= $this->DOM()::a($url, $model->get('public') ? 'Oui' : 'Non'); ?></td>
                     </tr>
-                <?php
-                }
-                ?>
-
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>

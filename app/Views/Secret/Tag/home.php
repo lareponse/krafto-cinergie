@@ -37,12 +37,13 @@
                     </th>
                 </tr>
             </thead>
-
             <tbody class="list">
                 <?php
                 foreach ($listing as $model) {
+                    $url = $controller->urlFor($controller->nid(), 'view', $model);
+
                 ?>
-                    <tr data-kx-href="<?= $controller->urlFor($controller->nid(), 'edit', $model) ?>">
+                    <tr>
                         <td class="parent">
                             <strong><?= $model->get('parent_label'); ?></strong>
                         </td>

@@ -37,29 +37,26 @@
             </thead>
 
             <tbody class="list">
-                <?php
-                foreach ($listing as $model) {
-                ?>
-                    <tr data-kx-href="<?= $controller->urlFor('Submission', 'view', $model) ?>">
+                <?php foreach ($listing as $model): ?>
+                    <?php $url = $controller->urlFor($controller->nid(), 'view', $model); ?>
+                    <tr>
                         <td class="fullName">
-                            <strong><?= $model; ?></strong>
+                            <?= $this->DOM()::a($url, $model); ?>
                         </td>
                         <td class="created_on">
-                            <?= $model->get('created_on'); ?>
+                            <?= $this->DOM()::a($url, $model->get('created_on') ?? ''); ?>
                         </td>
                         <td class="approved">
-                            <?= empty($model->get('approved')) ? 'Non' : 'Oui'; ?>
+                            <?= $this->DOM()::a($url, empty($model->get('approved')) ? 'Non' : 'Oui'); ?>
                         </td>
                         <td class="reviewed_by">
-                            <?= empty($model->get('reviewed_by')) ? 'Non' : $model->get('reviewed_by'); ?>
+                            <?= $this->DOM()::a($url, empty($model->get('reviewed_by')) ? 'Non' : $model->get('reviewed_by')); ?>
                         </td>
                         <td class="approved">
-                            <?= empty($model->get('reviewed_on')) ? 'Non' : $model->get('reviewed_on'); ?>
+                            <?= $this->DOM()::a($url, empty($model->get('reviewed_on')) ? 'Non' : $model->get('reviewed_on')); ?>
                         </td>
                     </tr>
-                <?php
-                }
-                ?>
+                <?php endforeach; ?>
 
             </tbody>
         </table>

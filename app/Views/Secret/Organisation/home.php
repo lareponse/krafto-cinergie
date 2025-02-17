@@ -5,12 +5,12 @@
 
 <div class="card border-0 flex-fill w-100" data-list='{"valueNames": ["fullName","email","gsm"], "page": 10}' id="filesTable">
     <?php
-    if(!$controller->router()->params('segment')){
-        ?>
+    if (!$controller->router()->params('segment')) {
+    ?>
         <div class="card-header border-0">
             <?= isset($filters) ? $this->insert('Secret::_partials/filters/FiltersOnFirstChar', ['count' => count($listing)]) : '' ?>
         </div>
-        <?php
+    <?php
     }
     ?>
     <div class="table-responsive">
@@ -36,30 +36,26 @@
             </thead>
 
             <tbody class="list">
-                <?php
-                foreach ($listing as $model) {
+                <?php foreach ($listing as $model):
+                    $url = $controller->urlFor($controller->nid(), 'view', $model);
                 ?>
-                    <tr data-kx-href="<?= $controller->urlFor('Organisation', 'view', $model) ?>">
+                    <tr>
                         <td class="fullName">
-                            <strong><?= $model->get('label'); ?></strong>
+                            <?= $this->DOM()::a($url, $model->get('label') ?? ''); ?>
                         </td>
                         <td class="email">
-                            <?= $model->get('email'); ?>
+                            <?= $this->DOM()::a($url, $model->get('email') ?? ''); ?>
                         </td>
                         <td class="gsm">
-                            <?= $model->get('gsm'); ?>
+                            <?= $this->DOM()::a($url, $model->get('gsm') ?? ''); ?>
                         </td>
                     </tr>
-                <?php
-                }
-                ?>
-
+                <?php endforeach ?>
             </tbody>
         </table>
     </div>
 
     <div class="card-footer">
-
         <ul class="pagination justify-content-end list-pagination mb-0"></ul>
     </div>
 </div>

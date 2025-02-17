@@ -38,30 +38,27 @@
             </thead>
 
             <tbody class="list">
-                <?php
-                foreach ($listing as $model) {
+                <?php foreach ($listing as $model): 
+                    $url = $controller->urlFor($controller->nid(), 'view', $model);
                 ?>
                     <tr>
-                    <td class="zip">
-                            <strong><?= $model->get('zip'); ?></strong>
+                        <td class="zip">
+                            <?= $this->DOM()::a($url, $model->get('zip') ?? ''); ?>
                         </td>
                         <td class="label">
-                            <strong><?= $model->get('label'); ?></strong>
+                            <?= $this->DOM()::a($url, $model->get('label') ?? ''); ?>
                         </td>
                         <td class="commune">
-                            <strong><?= $model->get('commune'); ?></strong>
+                            <?= $this->DOM()::a($url, $model->get('commune') ?? ''); ?>
                         </td>
                         <td class="province">
-                            <?= $model->get('province'); ?>
+                            <?= $this->DOM()::a($url, $model->get('province') ?? ''); ?>
                         </td>
                         <td class="isSub">
-                            <strong><?= $model->get('isSub') ? 'Oui' : 'Non'; ?></strong>
+                            <?= $this->DOM()::a($url, $model->get('isSub') ? 'Oui' : 'Non'); ?>
                         </td>
                     </tr>
-                <?php
-                }
-                ?>
-
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>

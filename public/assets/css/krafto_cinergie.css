@@ -87,3 +87,25 @@ select.form-select {
 .wysiwyg .ql-editor{
     height:30rem;
 }
+
+
+
+table.table tbody.list td{
+    padding:0;
+}
+
+
+table.table tbody.list a{
+    color:var(--bs-card-cap-color);
+    display:block;
+    padding: 1rem 1.25rem;
+}
+table.table tbody tr td:first-child a{
+    font-weight: bold;
+}
+
+.currency::after{
+    content: '€';
+    margin-left: 0.5rem;
+    white-space: nowrap;
+}

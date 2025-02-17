@@ -40,28 +40,30 @@
             </thead>
 
             <tbody class="list">
-                <?php
-                foreach ($listing as $model) {
+                <?php foreach ($listing as $model):
+                    $url = $controller->urlFor($controller->nid(), 'view', $model);
                 ?>
-                    <tr data-kx-href="<?= $controller->urlFor($controller->nid(), 'edit', $model) ?>">
+                    <tr>
                         <td class="username">
-                            <strong><?= $model->get('username'); ?></strong>
+                            <?= $this->DOM()::a($url, $model->get('username') ?? ''); ?>
+
                         </td>
 
 
                         <td class="permission_names">
-                            <?= $model->get('permission_names')  ?>
+                            <?= $this->DOM()::a($url, $model->get('permission_names') ?? ''); ?>
+
                         </td>
                         <td class="email">
-                            <?= $model->get('email')  ?>
+                            <?= $this->DOM()::a($url, $model->get('email') ?? ''); ?>
+
                         </td>
                         <td class="active">
-                            <?= $model->get('active') ? 'Oui' : 'Non'; ?>
+                            <?= $this->DOM()::a($url, $model->get('active')  ? 'Oui' : 'Non'); ?>
                         </td>
                     </tr>
-                <?php
-                }
-                ?>
+                <?php endforeach; ?>
+
 
             </tbody>
         </table>

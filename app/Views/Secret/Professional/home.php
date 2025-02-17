@@ -31,16 +31,18 @@
             <tbody class="list">
                 <?php
                 foreach ($listing as $model) {
+                    $url = $controller->urlFor($controller->nid(), 'view', $model);
+
                 ?>
-                    <tr data-kx-href="<?= $controller->urlFor('Professional', 'view', $model) ?>">
+                    <tr>
                         <td class="fullName">
-                            <?= $this->DOM()::a($controller->urlFor('Professional', 'view', $model), $model->fullName()); ?>
+                            <?= $this->DOM()::a($url, $model->fullName() ?? ''); ?>
                         </td>
                         <td class="email">
-                            <?= $model->get('email'); ?>
+                            <?= $this->DOM()::a($url, $model->get('email') ?? ''); ?>
                         </td>
                         <td class="gsm">
-                            <?= $model->get('gsm'); ?>
+                            <?= $this->DOM()::a($url, $model->get('gsm')  ?? ''); ?>
                         </td>
                     </tr>
                 <?php
