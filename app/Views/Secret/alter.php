@@ -28,9 +28,9 @@
 </div>
 
 <?php $this->unshift('scripts') ?>
-<script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js"></script>
+<script src="/public/assets/quill/quill.js"></script>
 <?php $this->end() ?>
 
 <?php $this->unshift('html_head') ?>
-<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
+<link href="/public/assets/quill/quill.snow.css" rel="stylesheet" />
 <?php $this->end() ?>
