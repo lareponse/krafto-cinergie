@@ -21,8 +21,13 @@ class Article extends Krafto
     public function alter()
     {
         if ($this->operator()->hasPermission('author')) {
-            dd('CHECK PERMISSIONS FOR AUTHOR OWN ARTICLE');
-            dd($this->loadModel(), $this->operator()->id());
+            $isAuthor = explode(',', $this->loadModel()->get('writtenBySlugs') ?? '');
+            $isAuthor = in_array($this->operator()->get("username"), $isAuthor);
+            if(!$isAuthor)
+            {
+                $this->logger()->warning('Cette action est réservée aux auteurs du contenu');
+                $this->router()->hopBack();
+            }
         }
     }
 

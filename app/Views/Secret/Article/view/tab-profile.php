@@ -10,12 +10,7 @@
                     $fields = [
                         'slug' => 'http',
                         'publication' => 'calendar',
-                        'runtime' => 'time',
-                        'format' => 'video-format',
-                        'genre_id' => 'genre',
-                        'metrage_id' => 'metrage',
-                        'url' => 'http',
-                        'url_trailer' => 'video-player'
+                        'writtenBy' => 'person'
                     ];
                     $list_item = '<li class="py-2">%s %s</li>';
 
@@ -23,17 +18,8 @@
                         if (!empty($controller->loadModel()->get($name))) {
                             $label = $controller->loadModel()->get($name);
                             switch ($name) {
-                                case 'url':
-                                    $label = '<a href="' . $label . '">site</a>';
-                                    break;
-
-                                case 'metrage_id':
-                                case 'genre_id':
-                                    $label = $this->DOM()::span($label, ['class'=> "otto-id-label", 'otto-urn'=>"Tag:$label"]);
-                                    break;
                                 case 'publication':
                                     $label = $this->DOM()::span($label, ['class' => 'otto-date']);
-
                             }
                             printf($list_item, $this->icon($icon, 14, ['class' => 'me-2']), $label);
                         }
