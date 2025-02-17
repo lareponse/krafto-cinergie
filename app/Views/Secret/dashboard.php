@@ -84,7 +84,7 @@
             userOnly: true
           },
         },
-        placeholder: 'Compose an epic...',
+        placeholder: 'Votre texte...',
         theme: 'snow', // or 'bubble'
       };
 
