@@ -2,6 +2,7 @@
 
 use App\Views\Abilities\Menu;
 
+// basic menu for authors
 $menu = [
     [
         'Article' => ['label' => 'Articles', 'icon' => 'text'],
@@ -22,47 +23,55 @@ $menu = [
                 'Job' => ['label' => 'Annonces'],
                 'Contest' => ['label' => 'Concours']
             ]
-        ],
-        'Shop' => [
-            'label' => 'Boutique',
-            'icon' => 'euro',
-            'subs' => [
-                'DVD' => ['label' => 'DVDs', 'href' => $controller->router()->hyp('dash_videostore')],
-                'Book' => ['label' => 'Livres', 'href' => $controller->router()->hyp('dash_bookshop')]
-            ]
-        ]
-    ],
-    [
-        'Image' => ['label' => 'Images', 'icon' => 'image'],
-
-        'Page' => [
-            'label' => 'Pages',
-            'icon' => 'page',
-            'subs' => [
-                'Page' => ['label' => 'Toutes les pages'],
-                'authors' => ['label' => 'Nos auteurs', 'href' => $controller->router()->hyp('dash_records', ['nid' => 'Author'])],
-                'partners' => ['label' => 'Nos partenaires', 'href' => $controller->router()->hyp('dash_organisations_by_segment', ['segment' => 'partenaires'])],
-                'Team' => ['label' => 'Notre équipe'],
-            ]
-        ]
-    ],
-    [
-        'Submission' => ['label' => 'Soumissions', 'icon' => 'message'],
-        'Operator' => ['label' => 'Utilisateurs', 'icon' => 'image'],
-
-    ],
-    [
-        'Settings' => [
-            'label' => 'Paramètres',
-            'icon' => 'settings',
-            'subs' => [
-                'Thesaurus' => ['label' => 'Thesaurus'],
-                'Locus' => ['label' => 'Localités'],
-                'Tag' => ['label' => 'Qualifiants']
-            ]
         ]
     ]
 ];
+
+
+// add editor-specific menu items
+if ($controller->operator()->hasPermission('editor')) {
+    $menu = array_merge(
+        $menu,
+        [
+            'Shop' => [
+                'label' => 'Boutique',
+                'icon' => 'euro',
+                'subs' => [
+                    'DVD' => ['label' => 'DVDs', 'href' => $controller->router()->hyp('dash_videostore')],
+                    'Book' => ['label' => 'Livres', 'href' => $controller->router()->hyp('dash_bookshop')]
+                ]
+            ],
+            'Image' => ['label' => 'Images', 'icon' => 'image'],
+
+            'Page' => [
+                'label' => 'Pages',
+                'icon' => 'page',
+                'subs' => [
+                    'Page' => ['label' => 'Toutes les pages'],
+                    'authors' => ['label' => 'Nos auteurs', 'href' => $controller->router()->hyp('dash_records', ['nid' => 'Author'])],
+                    'partners' => ['label' => 'Nos partenaires', 'href' => $controller->router()->hyp('dash_organisations_by_segment', ['segment' => 'partenaires'])],
+                    'Team' => ['label' => 'Notre équipe'],
+                ]
+            ]
+        ],
+        [
+            'Submission' => ['label' => 'Soumissions', 'icon' => 'message'],
+            'Operator' => ['label' => 'Utilisateurs', 'icon' => 'image'],
+
+        ],
+        [
+            'Settings' => [
+                'label' => 'Paramètres',
+                'icon' => 'settings',
+                'subs' => [
+                    'Thesaurus' => ['label' => 'Thesaurus'],
+                    'Locus' => ['label' => 'Localités'],
+                    'Tag' => ['label' => 'Qualifiants']
+                ]
+            ]
+        ]
+    );
+}
 
 $menu = new Menu($controller, $menu, $this);
 
