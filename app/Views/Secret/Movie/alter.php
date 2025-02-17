@@ -73,27 +73,17 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu]) ?>
             </div>
         </div>
 
+
         <div class="row mb-4">
             <div class="col-lg-3">
                 <label for="legacy_origine" class="col-form-label">Pays</label>
             </div>
 
             <div class="col-lg">
-                <div class="mb-4">
-
-                    <select class="form-select" name="legacy_origine" id="legacy_origine" required autocomplete="off" data-select='{
-                            "placeholder": "Pays"
-                        }'
-                        data-option-template='<span class="d-flex align-items-center py-2"><span class="text-truncate ms-2">[[text]]</span></span>'
-                        data-item-template='<span class="d-flex align-items-center"><span class="text-truncate ms-2">[[text]]</span></span>'>
-                        <?php $this->insert('Secret::_partials/form/options-country', ['selected' => $controller->formModel()->get('country')]) ?>
-                    </select>
-                    <div class="invalid-feedback">Please select a country</div>
-                </div>
-
+                <input type="text" class="form-control" id="legacy_origine" name="legacy_origine" value="<?= $controller->formModel()->get('legacy_origine') ?>">
+                <div class="invalid-feedback">Please add your full name</div>
             </div>
         </div>
-
 
         <?= $this->submitDashly(); ?>
 
@@ -134,7 +124,7 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu]) ?>
             </div>
 
             <div class="col-lg">
-                <?= $this->Form()::select('genre_id', $genres, $controller->formModel()->get('genre_id'), ['class' => 'form-select']);?>
+                <?= $this->Form()::select('genre_id', $genres, $controller->formModel()->get('genre_id'), ['class' => 'form-select']); ?>
                 <div class="invalid-feedback">Please add your genre</div>
             </div>
         </div>
@@ -145,7 +135,7 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu]) ?>
             </div>
 
             <div class="col-lg">
-                <?= $this->Form()::select('metrage_id', $metrages, $controller->formModel()->get('metrage_id'), ['class' => 'form-select']);?>
+                <?= $this->Form()::select('metrage_id', $metrages, $controller->formModel()->get('metrage_id'), ['class' => 'form-select']); ?>
                 <div class="invalid-feedback">Please add your metrage</div>
             </div>
         </div>
