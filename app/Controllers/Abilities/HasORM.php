@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controllers\Abilities;
-
+use \HexMakina\Crudites\Relation\OneToMany;
 trait HasORM
 {
     protected $load_model = null;
@@ -38,7 +38,7 @@ trait HasORM
         return $this->load_model;
     }
 
-    public function view()
+    public function HasORM_Traitor_before_view()
     {
         $table = $this->modelClassName()::table();
         $relations = $this->get('HexMakina\BlackBox\Database\DatabaseInterface')->relations();
