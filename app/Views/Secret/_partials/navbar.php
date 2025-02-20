@@ -4,7 +4,7 @@ use App\Views\Abilities\Menu;
 
 // basic menu for authors
 $menu = [
-    [
+    'section0' => [
         'Article' => ['label' => 'Articles', 'icon' => 'text'],
         'Fiche' => [
             'label' => 'Fiches',
@@ -29,50 +29,54 @@ $menu = [
 
 
 // add editor-specific menu items
-if ($controller->operator()->hasPermission('editor')) {
+if ($controller->operator()->hasPermission('editor') || $controller->operator()->hasPermission('root')) {
     $menu = array_merge(
         $menu,
         [
-            'Shop' => [
-                'label' => 'Boutique',
-                'icon' => 'euro',
-                'subs' => [
-                    'DVD' => ['label' => 'DVDs', 'href' => $controller->router()->hyp('dash_videostore')],
-                    'Book' => ['label' => 'Livres', 'href' => $controller->router()->hyp('dash_bookshop')]
-                ]
+            [
+                'Shop' => [
+                    'label' => 'Boutique',
+                    'icon' => 'euro',
+                    'subs' => [
+                        'DVD' => ['label' => 'DVDs', 'href' => $controller->router()->hyp('dash_videostore')],
+                        'Book' => ['label' => 'Livres', 'href' => $controller->router()->hyp('dash_bookshop')]
+                    ]
+                ],
+
+                'Submission' => ['label' => 'Soumissions', 'icon' => 'message'],
             ],
-            'Image' => ['label' => 'Images', 'icon' => 'image'],
+            [
+                'Image' => ['label' => 'Images', 'icon' => 'image'],
+                'Page' => [
+                    'label' => 'Pages',
+                    'icon' => 'page',
+                    'subs' => [
+                        'Page' => ['label' => 'Toutes les pages'],
+                        'authors' => ['label' => 'Nos auteurs', 'href' => $controller->router()->hyp('dash_records', ['nid' => 'Author'])],
+                        'partners' => ['label' => 'Nos partenaires', 'href' => $controller->router()->hyp('dash_organisations_by_segment', ['segment' => 'partenaires'])],
+                        'Team' => ['label' => 'Notre équipe'],
+                    ]
+                ],
+            ],
 
-            'Page' => [
-                'label' => 'Pages',
-                'icon' => 'page',
-                'subs' => [
-                    'Page' => ['label' => 'Toutes les pages'],
-                    'authors' => ['label' => 'Nos auteurs', 'href' => $controller->router()->hyp('dash_records', ['nid' => 'Author'])],
-                    'partners' => ['label' => 'Nos partenaires', 'href' => $controller->router()->hyp('dash_organisations_by_segment', ['segment' => 'partenaires'])],
-                    'Team' => ['label' => 'Notre équipe'],
-                ]
-            ]
-        ],
-        [
-            'Submission' => ['label' => 'Soumissions', 'icon' => 'message'],
-            'Operator' => ['label' => 'Utilisateurs', 'icon' => 'image'],
+            [
 
-        ],
-        [
-            'Settings' => [
-                'label' => 'Paramètres',
-                'icon' => 'settings',
-                'subs' => [
-                    'Thesaurus' => ['label' => 'Thesaurus'],
-                    'Locus' => ['label' => 'Localités'],
-                    'Tag' => ['label' => 'Qualifiants']
+                'Operator' => ['label' => 'Utilisateurs', 'icon' => 'image'],
+
+                'Settings' => [
+                    'label' => 'Paramètres',
+                    'icon' => 'settings',
+                    'subs' => [
+                        'Thesaurus' => ['label' => 'Thesaurus'],
+                        'Locus' => ['label' => 'Localités'],
+                        'Tag' => ['label' => 'Qualifiants']
+                    ]
                 ]
             ]
         ]
+
     );
 }
-
 $menu = new Menu($controller, $menu, $this);
 
 ?>
