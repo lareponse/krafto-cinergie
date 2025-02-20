@@ -1,6 +1,8 @@
 <?php
 $model = new App\Models\Professional();
-$model->import($target);
+// $model->import($target);
+$model->import(['id' => $target]);
+
 
 $route = $controller->urlFor('Professional', 'view', $model); ?>
 
@@ -42,13 +44,13 @@ $route = $controller->urlFor('Professional', 'view', $model); ?>
 
     <div class="card-footer d-flex align-items-center justify-content-between">
         <?php
-    
+
         printf('<form action="%s" method="POST">', $controller->router()->hyp('dash_relation_unlink'));
         echo $this->Form()::hidden('return_to', $controller->router()->url() . '?tab=Professional');
         echo $this->Form()::hidden('relation', $relation);
         echo $this->Form()::hidden('source', $controller->loadModel()->id());
         echo $this->Form()::hidden('target', $model->id());
-        if($relationIsQualified){
+        if ($relationIsQualified) {
 
             echo $this->Form()::hidden('qualifier', $model->praxisIds());
         }
