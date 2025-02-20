@@ -50,7 +50,7 @@ $list_item = '<li class="py-2">%s %s</li>';
         <h3 class="h6 small text-secondary text-uppercase mb-3">Thèmes</h3>
 
         <?php
-        foreach ($themes as $id) {
+        foreach ($themes ?? [] as $id) {
         ?>
             <form method="POST" class="d-flex mb-2 align-items-center" action="<?= $controller->router()->hyp('dash_relation_unlink') ?>">
                 <input type="hidden" name="relation" value="movie-hasAndBelongsToMany-tag" />
@@ -80,7 +80,7 @@ $list_item = '<li class="py-2">%s %s</li>';
         <h3 class="h6 small text-secondary text-uppercase mb-3">Thésaurus</h3>
         <ul class="list-unstyled">
             <?php
-            foreach ($thesaurus as $id) {
+            foreach ($thesaurus ?? [] as $id) {
             ?>
 
             <form method="POST" class="d-flex mb-2 align-items-center" action="<?= $controller->router()->hyp('dash_relation_unlink') ?>">
