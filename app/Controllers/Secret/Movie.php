@@ -2,9 +2,6 @@
 
 namespace App\Controllers\Secret;
 
-use App\Models\{Article, Professional, Organisation, Thesaurus};
-use \HexMakina\Crudites\Relation\OneToMany;
-
 class Movie extends Krafto
 {
     use \App\Controllers\Abilities\HasORM;
@@ -48,16 +45,6 @@ class Movie extends Krafto
         if(is_null($this->loadModel())){
             $this->router()->hop('dash_movies');
         }
-        
-        $relations = $this->get('HexMakina\BlackBox\Database\DatabaseInterface')->relations();
-
-        $relation = $relations->getRelation('movie-hasAndBelongsToMany-tag');
-        $themes = $relation->getIds($this->loadModel()->id());
-        $this->viewport('themes', $themes);
-
-        $relation = $relations->getRelation('movie-hasAndBelongsToMany-thesaurus');
-        $thesaurus = $relation->getIds($this->loadModel()->id());
-        $this->viewport('thesaurus', $thesaurus);
     }
 
     public function imagesDirectory(){
