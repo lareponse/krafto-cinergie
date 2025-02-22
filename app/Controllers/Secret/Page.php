@@ -7,6 +7,7 @@ class Page extends Krafto
 {
     use \App\Controllers\Abilities\HasORM;
     use \App\Controllers\Abilities\RequiresEditorOrAbove;
+    use \App\Controllers\Abilities\HasNoView;
 
     public function activeSection(): string
     {
