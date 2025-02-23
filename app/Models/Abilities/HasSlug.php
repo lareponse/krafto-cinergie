@@ -17,7 +17,10 @@ trait HasSlug
     {
         try {
             do {
-                $res = self::any(['slug' => $this->slug()]);
+                $res = self::filter(['slug' => $this->slug()]);
+                $res->whereNotEQ('id', $this->id());
+                $res = $res->ret(\PDO::FETCH_ASSOC);
+                // check if slug is unique, if not add a timestamp and retry until unique slug is found
                 if (!empty($res)) {
                     $this->set('slug', $this->slug() . '-' . time());
                 }
