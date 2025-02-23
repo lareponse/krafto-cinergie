@@ -16,7 +16,19 @@ trait HasImages
     {
         return $this->nid();
     }
-    
+    public function HasImages__Traitor_after_save(){
+        if($this->loadModel()->slug() !== $this->formModel()->slug()){
+   
+            $controller = $this->get('Controllers\\Secret\\Image');
+            $directory = $controller->buildRelativeLocator($this);
+            $fs = new FileSystem($controller->imagesRootPath());
+
+            $old = $this->loadModel()->slug();
+            $new = $this->formModel()->slug();
+            $new = str_replace($old, $new, $fs->absolutePathFor($directory));
+            $res = FileSystem::move($fs->absolutePathFor($directory), $new);
+        }
+    }
 
     public function HasImages__Traitor_after_view(){
         $controller = $this->get('Controllers\\Secret\\Image');

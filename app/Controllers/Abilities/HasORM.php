@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Controllers\Abilities;
+
 use \HexMakina\Crudites\Relation\OneToMany;
+
 trait HasORM
 {
     protected $load_model = null;
@@ -11,28 +13,28 @@ trait HasORM
     abstract public function nid();
     abstract public function router();
     abstract public function logger();
-        
+
     public function modelClassName(): string
     {
         return '\\App\\Models\\' . $this->nid();
     }
 
-    public function formModel($model = null): ? \HexMakina\BlackBox\ORM\ModelInterface
+    public function formModel($model = null): ?\HexMakina\BlackBox\ORM\ModelInterface
     {
         // setter call ?
-        if (!is_null($model)) 
+        if (!is_null($model))
             $this->form_model = $model;
-        
-        elseif(is_null($this->form_model))
+
+        elseif (is_null($this->form_model))
             $this->form_model = $this->HasORM_autoFormModel();
-        
+
 
         return $this->form_model;
     }
 
-    public function loadModel(): ? \HexMakina\BlackBox\ORM\ModelInterface
+    public function loadModel(): ?\HexMakina\BlackBox\ORM\ModelInterface
     {
-        if(is_null($this->load_model))
+        if (is_null($this->load_model))
             $this->load_model = $this->HasORM_autoLoadModel();
 
         return $this->load_model;
@@ -64,25 +66,29 @@ trait HasORM
 
         if (empty($errors)) {
             $this->logger()->notice('CRUDITES_INSTANCE_ALTERED');
-            $this->router()->hop('dash_record', ['nid' => $this->nid(), 'id' => $this->formModel()->id()]);
-        } 
-        else {
+            // $this->router()->hop('dash_record', ['nid' => $this->nid(), 'id' => $this->formModel()->id()]);
+        } else {
             $this->errors = $errors;
-            foreach($this->errors() as $err){
-                if(is_array($err))
+            foreach ($this->errors() as $err) {
+                if (is_array($err))
                     $this->logger()->warning(implode(', ', $err));
                 else
                     $this->logger()->warning($err);
             }
-            $this->setTemplate($this->nid().'/alter');
+            $this->setTemplate($this->nid() . '/alter');
         }
+    }
+
+    public function HasORM_Traitor_conclude()
+    {
+        if($this->router()->targetMethod() === 'save')
+            $this->router()->hop('dash_record', ['nid' => $this->nid(), 'id' => $this->formModel()->id()]);
     }
 
     public function databaseRelations()
     {
         return $this->modelClassName()::database()->relations();
     }
-
 
     private function HasORM_autoFormModel()
     {
@@ -94,7 +100,7 @@ trait HasORM
         $fresh = $reflectionClass->newInstanceWithoutConstructor(); //That's it!
 
         if ($this->router()->submits()) {
-            
+
             $post_data = $this->router()->submitted();
 
             // quickly fixes booleans/checkboxes
@@ -103,7 +109,7 @@ trait HasORM
                     $post_data[$col->name()] = !empty($post_data[$col->name()]);
                 }
             }
-            
+
             // imports all data into model
             $fresh->import($post_data);
         }
@@ -114,16 +120,15 @@ trait HasORM
     private function HasORM_autoLoadModel()
     {
         $load = null;
-        
+
         // identify and load a hypothetical record using POST data
-        if($this->router()->submits())
+        if ($this->router()->submits())
             $load = $this->modelClassName()::exists($this->router()->submitted());
 
         // if not POST or no POST data matched, try to load a record using the router's params
-        if(is_null($load))
+        if (is_null($load))
             $load = $this->modelClassName()::exists($this->router()->params());
 
         return $load;
     }
-
 }
