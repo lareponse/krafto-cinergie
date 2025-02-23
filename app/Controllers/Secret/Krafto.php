@@ -2,8 +2,7 @@
 
 namespace App\Controllers\Secret;
 
-use \HexMakina\Crudites\Relation\OneToMany;
-
+use App\Models\Submission;
 
 abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
 {
@@ -20,6 +19,16 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
     public function activeSection(): string
     {
         return $this->nid();
+    }
+
+    public function allowedDomains(): array
+    {
+        return [
+            'youtube.com' => 'youtube',
+            'google.com' => 'google',
+            'dailymotion.com' => 'dailymotion',
+            'vimeo.com' => 'vimeo'
+        ];
     }
 
     // by default
@@ -63,11 +72,10 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
             $this->template = $fallback;
         }
 
+        $submissions = Submission::any();
+        $this->viewport('submissions', $submissions);
         $title = $this->breadcrumb();
         $this->viewport('title', $title);
-        // return $this->template;
-        // echo $this->display($this->template);
-        
     }
 
 

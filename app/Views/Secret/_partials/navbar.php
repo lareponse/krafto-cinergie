@@ -46,7 +46,6 @@ if ($controller->operator()->hasPermission('editor') || $controller->operator()-
                 'Submission' => ['label' => 'Soumissions', 'icon' => 'message'],
             ],
             [
-                'Image' => ['label' => 'Images', 'icon' => 'image'],
                 'Page' => [
                     'label' => 'Pages',
                     'icon' => 'page',
@@ -69,7 +68,9 @@ if ($controller->operator()->hasPermission('editor') || $controller->operator()-
                     'subs' => [
                         'Thesaurus' => ['label' => 'Thesaurus'],
                         'Locus' => ['label' => 'Localités'],
-                        'Tag' => ['label' => 'Qualifiants']
+                        'Tag' => ['label' => 'Qualifiants'],
+                        'Image' => ['label' => 'Images'],
+
                     ]
                 ]
             ]

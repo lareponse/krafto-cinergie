@@ -1,4 +1,4 @@
-<?php 
+<?php
 $sidemenu = [
     ['#signaletiqueSection', 'info', 'Signalétique'],
     ['#ContactSection', 'contact', 'Contact'],
@@ -8,7 +8,7 @@ $sidemenu = [
     ['#publicationSection', 'info', 'Publication'],
     ['#LegalSection', 'address', 'Légal']
 ];
-$this->layout('Secret::alter', ['sidemenu' => $sidemenu]) 
+$this->layout('Secret::alter', ['sidemenu' => $sidemenu])
 ?>
 
 <div class="card border-0 scroll-mt-3" id="signaletiqueSection">
@@ -23,7 +23,7 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
             </div>
 
             <div class="col-lg">
-                <input type="text" class="form-control" id="label" name="label" value="<?= $controller->formModel()->get('label') ?>">
+                <input type="text" class="form-control" id="label" name="label" required value="<?= $controller->formModel()->get('label') ?>">
             </div>
         </div>
 
@@ -37,7 +37,7 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
                 <input type="text" class="form-control" id="abbrev" name="abbrev" value="<?= $controller->formModel()->get('abbrev') ?>">
             </div>
         </div>
-        <div class="row mb-4">
+        <!-- <div class="row mb-4">
             <div class="col-lg-3">
                 <label for="profilePicture" class="col-form-label">Photo principale</label>
             </div>
@@ -45,7 +45,7 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
             <div class="col-lg">
                 <input type="text" class="form-control" id="profilePicture" name="profilePicture" value="<?= $controller->formModel()->profilePicturePath() ?>">
             </div>
-        </div>
+        </div> -->
 
 
 
@@ -116,6 +116,5 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
 <?= $this->insert('Secret::_partials/form/alter-card-publication', [
     'add' => [
         'isPartner' => ['Partenaire', 'Présent dans les listes de partenaires ?']
-        ]
-    ]) ?>
-
+    ]
+]) ?>

@@ -15,7 +15,8 @@ class Delete extends Krafto
 
     public function delete()
     {
-        dd($this->router()->requests());
+        $this->router()->hopBack();
+        /*
         $this->router()->validate('urn');
 
         $model = $this->loadModel();
@@ -25,5 +26,6 @@ class Delete extends Krafto
         }
 
         $this->router()->redirect($this->router()->route('records'));
+        */
     }
 }

@@ -2,17 +2,18 @@
     <div class="card-header">
         <h2 class="h3 mb-0"><?= $title ?? 'Contenu' ?></h2>
     </div>
-
     <div class="card-body">
-        <div class="wysiwyg" data-name="<?= $name?>"><?= $controller->formModel()->get($name); ?></div>
-        <?php 
-        /*
-        <textarea class="form-control" name="<?= $name ?>" id="<?= $name ?>" rows="<?= $rows ?? 4; ?>"><?= $controller->formModel()->get($name); ?></textarea>
-        <div class="invalid-feedback">Please tell something about yourself</div>
-        */
+        <?php
+        if (!isset($wysiwyg) || $wysiwyg == true) {
         ?>
-
+            <div class="wysiwyg" data-name="<?= $name ?>"><?= $controller->formModel()->get($name); ?></div>
+        <?php
+        } else {
+        ?>
+            <textarea class="form-control" name="<?= $name ?>" id="<?= $name ?>" rows="<?= $rows ?? 4; ?>"><?= $controller->formModel()->get($name); ?></textarea>
+        <?php
+        }
+        ?>
         <?= $this->submitDashly(); ?>
-
     </div>
 </div>

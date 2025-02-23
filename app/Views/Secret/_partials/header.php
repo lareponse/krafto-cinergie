@@ -85,7 +85,7 @@
                 <path d="M12,3a7.5,7.5,0,0,1,7.5,7.5c0,7.046,1.5,8.25,1.5,8.25H3s1.5-1.916,1.5-8.25A7.5,7.5,0,0,1,12,3Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
             </svg>
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-danger">
-                20+<span class="visually-hidden">unread messages</span>
+                <?= count($submissions ?? [])?><span class="visually-hidden">soumissions</span>
             </span>
         </a>
 

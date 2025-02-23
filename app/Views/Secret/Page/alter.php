@@ -10,7 +10,6 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
 ?>
 
 <form action="" method="POST">
-
     <div class="card border-0 scroll-mt-3" id="signaletiqueSection">
         <div class="card-header">
             <h2 class="h3 mb-0">Signalétique</h2>
@@ -41,8 +40,6 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
             <input disabled type="text" class="form-control" id="slug" name="slug" value="<?= $controller->formModel()->get('slug') ?>">
 
             <?= $this->submitDashly(); ?>
-
         </div>
-
     </div>
 </form>

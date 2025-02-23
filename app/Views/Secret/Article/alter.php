@@ -1,11 +1,11 @@
 <?php
 $sidemenu = [
     ['#signaletiqueSection', 'info', 'Signalétique'],
-    ['#abstractSection', 'text', 'Abstract'],
+    ['#abstractSection', 'text', 'Chapeau'],
     ['#contentSection', 'text', 'Contenu'],
     ['#videoSection', 'video', 'Video'],
     ['#publicationSection', 'info', 'Publication'],
-    ['#commentSection', 'comment', 'Commentaires']
+    ['#commentSection', 'comment', 'Notes internes']
 ];
 
 $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
@@ -45,7 +45,7 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
 
         <div class="row mb-4">
             <div class="col-lg-3">
-                <label for="publication" class="col-form-label">Sortie</label>
+                <label for="publication" class="col-form-label">Date de publication</label>
             </div>
 
             <div class="col-lg">
@@ -70,10 +70,10 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
     </div>
 </div>
 
-<?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'abstract', 'title' => 'Abstract', 'id' => 'abstractSection']) ?>
+<?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'abstract', 'title' => 'Chapeau', 'id' => 'abstractSection', 'wysiwyg' => false]) ?>
 <?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'content', 'title' => 'Contenu', 'id' => 'contentSection']) ?>
 <?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'embedVideo', 'title' => 'Vidéo', 'id' => 'videoSection']) ?>
 
 <?= $this->insert('Secret::_partials/form/alter-card-publication') ?>
 
-<?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'comment', 'title' => 'Commentaires', 'id' => 'commentSection']) ?>
+<?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'comment', 'title' => 'Notes internes', 'id' => 'commentSection']) ?>

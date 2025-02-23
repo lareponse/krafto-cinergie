@@ -12,7 +12,7 @@
                             if (empty($controller->loadModel()->profilePicturePath()))
                                 echo $this->icon('relations', 60, ['class' => 'avatar-img']);
                             else {
-                                echo $this->DOM()::img($controller->loadModel()->profilePicturePath(), 'photo du professionel', ['class' => 'avatar-img', 'width' => 112, 'height' => 112]);
+                                echo $this->DOM()::img($controller->loadModel()->profilePicturePath(), 'photo organisation', ['class' => 'avatar-img', 'width' => 112, 'height' => 112]);
                             }
                         ?>
                         </div>
@@ -20,17 +20,7 @@
 
                     <div class="col-auto me-auto d-flex flex-column">
                         <h3 class="mb-0"><?= $controller->loadModel()->get('label');?></h3>
-                        <span class="small text-secondary fw-bold d-block mb-4">
-                            <?php
-                                switch($controller->loadModel()->get('gender'))
-                                {
-                                    case 'h': $icon = 'male'; break;
-                                    case 'f': $icon = 'female'; break;
-                                    default : $icon = 'nonbinary'; break;
-                                }
-                                echo  $this->icon($icon, 18, ['class' => 'me-2']);
-                            ?>
-                        </span>
+                        
                         <div class="d-flex">
                             
                             <a class="btn btn-primary btn-sm me-2" href="<?= $controller->url('edit') ?>">Modifier</a>
@@ -40,21 +30,6 @@
                         </div>
                     </div>
 
-                    <div class="col-12 col-md-auto ms-auto text-center mt-8 mt-md-0">
-                        <div class="hstack d-inline-flex gap-6">
-                            <div>
-                                <h4 class="h2 mb-0"><img src="/public/assets/dashly/icons/birthday-cake.svg" height="18" width="18" /></h4>
-                                <p class="text-secondary mb-0"> <?= $controller->loadModel()->get('birth') ?? '&mdash;';?></p>
-                            </div>
-
-                            <div class="vr"></div>
-
-                            <div>
-                                <h4 class="h2 mb-0"><img src="/public/assets/dashly/icons/death-grave.svg" height="18" width="18" /></h4>
-                                <p class="text-secondary mb-0"><?= $controller->loadModel()->get('death') ?? '&mdash;';?></p>
-                            </div>
-                        </div>
-                    </div>
                 </div> 
 
             </div>

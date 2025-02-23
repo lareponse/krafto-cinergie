@@ -35,7 +35,7 @@
 
         <div class="card border-0">
             <div class="card-body">
-                <h2 class="h3">Abstract</h2>
+                <h2 class="h3">Chapeau</h2>
                 <?php
                 if (empty($controller->loadModel()->get('abstract'))) {
                     echo $this->DOM()::a($controller->url('edit').'#abstractSection', 'Ajouter', ['class' => 'btn btn-sm btn-warning']);

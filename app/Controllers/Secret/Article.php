@@ -8,7 +8,6 @@ use HexMakina\Crudites\Relation\OneToMany;
 class Article extends Krafto 
 {
     use \App\Controllers\Abilities\HasORM;
-    use \App\Controllers\Abilities\HasSlug;
     use \App\Controllers\Abilities\HasImages;
     use \App\Controllers\Abilities\FiltersOnYearAndMonth;
 
