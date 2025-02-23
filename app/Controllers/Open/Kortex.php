@@ -27,7 +27,15 @@ abstract class Kortex extends \HexMakina\kadro\Controllers\Kadro
         {
             $className = 'App\\Models\\'.(new \ReflectionClass(static::class))->getShortName();
             $this->record = $className::exists('slug', $this->router()->params('slug'));
+            if(!$this->record || !$this->isAllowed()){
+                $this->router()->hop(strtolower($this->nid()).'s', ['nid' => $this->nid()]);
+            }
         }
+    }
+
+    public function isAllowed(): bool
+    {
+        return !empty($this->record->get('public')) || !empty($this->operator()->permissions());
     }
 
     public function conclude(): void
