@@ -16,6 +16,7 @@ class Job extends Kortex
 
     public function prepare(): void
     {
+        $this->viewport('job_category', $this->categories());
         parent::prepare();
     }
 
@@ -36,7 +37,7 @@ class Job extends Kortex
 
     public function jobs()
     {
-        $query = $this->routerParamsAsFilters(Model::filter());
+        $query = $this->routerParamsAsFilters(Model::filter(['public' => 1]));
         $paginator = new Paginator($this->router()->params('page') ?? 1, $query);
         $paginator->perPage(10);
         $paginator->setClass(Model::class);

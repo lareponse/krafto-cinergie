@@ -1,7 +1,6 @@
 <?php
 $this->layout('Secret::dashboard');
 
-
 try {
     $path = 'Secret::' . $controller->nid() . '/view/header';
     echo $this->insert($path);
@@ -78,7 +77,7 @@ try {
     </div>
 
     <?php
-    foreach ($relations as $linked_urn => $relation) {
+    foreach ($relations ?? [] as $linked_urn => $relation) {
     ?>
         <div class="tab-pane fade <?= $activeTab === $linked_urn ? $activeClasses : '' ?>" id="<?= $linked_urn ?>" role="tabpanel" aria-labelledby="<?= $linked_urn ?>-tab">
 

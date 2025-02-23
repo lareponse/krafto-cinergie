@@ -24,15 +24,16 @@
                         </a>
                     </th>
                     <th>
-                        <a href="javascript: void(0);" class="text-muted list-sort" data-sort="reviewed_on">
-                            Revu le
-                        </a>
-                    </th>
-                    <th>
                         <a href="javascript: void(0);" class="text-muted list-sort" data-sort="reviewed_by">
                             Revu par
                         </a>
                     </th>
+                    <th>
+                        <a href="javascript: void(0);" class="text-muted list-sort" data-sort="reviewed_on">
+                            Revu le
+                        </a>
+                    </th>
+
                 </tr>
             </thead>
 
@@ -47,13 +48,13 @@
                             <?= $this->DOM()::a($url, $model->get('created_on') ?? ''); ?>
                         </td>
                         <td class="approved">
-                            <?= $this->DOM()::a($url, empty($model->get('approved')) ? 'Non' : 'Oui'); ?>
+                            <?= $this->DOM()::a($url, is_null($model->get('approved')) ? 'Pas encore' : (empty($model->get('approved')) ? 'Non' : 'Oui')); ?>
                         </td>
                         <td class="reviewed_by">
-                            <?= $this->DOM()::a($url, empty($model->get('reviewed_by')) ? 'Non' : $model->get('reviewed_by')); ?>
+                            <?= $this->DOM()::a($url, is_null($model->get('approved')) ? '-' : $model->get('reviewed_by')); ?>
                         </td>
-                        <td class="approved">
-                            <?= $this->DOM()::a($url, empty($model->get('reviewed_on')) ? 'Non' : $model->get('reviewed_on')); ?>
+                        <td class="reviewed_on otto-date otto-date-relative">
+                            <?= $this->DOM()::a($url, is_null($model->get('approved')) ? '-' : $model->get('reviewed_on')); ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

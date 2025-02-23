@@ -1,5 +1,5 @@
 <?php
-$this->layout('Secret::dashboard');
+
 if(isset($original, $modified))
 {
     $modified_array = $modified->to_table_row()->export();

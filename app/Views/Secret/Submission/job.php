@@ -5,19 +5,23 @@ $order = json_decode($submission->get('submitted'), true);
 ?>
 <div class="container submission">
 
-    <div class="order-details">
-        <h2>Détails de la Proposition</h2>
+    <h2>Détails de l'annonce</h2>
+    <div class="submission-job my-3">
+        <strong>isOffer :</strong> <span><?php echo htmlspecialchars($order['isOffer']); ?></span>
+        <strong>isPaid :</strong> <span><?php echo htmlspecialchars($order['isPaid']); ?></span>
+        <strong>Catégorie :</strong> <span><?php echo htmlspecialchars($order['category_id']); ?></span>
+        <strong>Label :</strong> <span><?php echo htmlspecialchars($order['label']); ?></span>
+        <strong>Contenu :</strong> <span><?php echo htmlspecialchars($order['content']); ?></span>
+        <strong>Date de début :</strong> <span><?php echo htmlspecialchars($order['starts']); ?></span>
+        <strong>Date de fin :</strong> <span><?php echo htmlspecialchars($order['stops']); ?></span>
+        <strong>Identité :</strong> <span><?php echo htmlspecialchars($order['identity']); ?></span>
+        <strong>Téléphone :</strong> <span><?php echo htmlspecialchars($order['phone']); ?></span>
+        <strong>Email :</strong> <span><?php echo htmlspecialchars($order['email']); ?></span>
+        <strong>URL :</strong> <span><?php echo htmlspecialchars($order['url']); ?></span>
 
-        <p><strong>Type :</strong> <?php echo htmlspecialchars($order['type']); ?></p>
-        <p><strong>Rémunération :</strong> <?php echo htmlspecialchars($order['remun']); ?></p>
-        <p><strong>Catégorie :</strong> <?php echo htmlspecialchars($order['categorie']); ?></p>
-        <p><strong>Label :</strong> <?php echo htmlspecialchars($order['label']); ?></p>
-        <p><strong>Contenu :</strong> <?php echo htmlspecialchars($order['content']); ?></p>
-        <p><strong>Date de début :</strong> <?php echo htmlspecialchars($order['starts']); ?></p>
-        <p><strong>Date de fin :</strong> <?php echo htmlspecialchars($order['stops']); ?></p>
-        <p><strong>Identité :</strong> <?php echo htmlspecialchars($order['identity']); ?></p>
-        <p><strong>Téléphone :</strong> <?php echo htmlspecialchars($order['phone']); ?></p>
-        <p><strong>Email :</strong> <?php echo htmlspecialchars($order['email']); ?></p>
-        <p><strong>URL :</strong> <?php echo htmlspecialchars($order['url']); ?></p>
+    </div>
+    <div class="btn-group mx-auto">
+        <a href="<?php echo $controller->router()->hyp('dash_submission_approve', ['id' => $submission->id()]); ?>" class="btn btn-success">Accepter</a>
+        <a href="<?php echo $controller->router()->hyp('dash_submission_reject', ['id' => $submission->id()]); ?>" class="btn btn-danger">Refuser</a>
     </div>
 </div>

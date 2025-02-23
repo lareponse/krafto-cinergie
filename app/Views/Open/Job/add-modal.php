@@ -20,30 +20,24 @@
                 <legend class="line-left">Classification</legend>
 
                 <label for="proposition">
-                    <input class="form-check-input" type="radio" name="type" value="proposition" id="proposition" required />
+                    <input class="form-check-input" type="radio" name="isOffer" value="1" id="proposition" required />
                     Proposition <small>(vous proposez vos services, du matériel, etc.)</small></label>
 
                 <label for="demande">
-                    <input class="form-check-input" type="radio" name="type" value="demande" id="demande" />
+                    <input class="form-check-input" type="radio" name="isOffer" value="0" id="demande" />
                     Demande <small>(vous recherchez quelqu'un ou quelque chose)</small></label>
 
                 <div>
                     <div>
-                        <label for="remun">Rémunéré</label>
-                        <select name="remun" id="remun" class="form-control" required>
-                            <option value="remun-oui">Oui</option>
-                            <option value="remun-non">Non</option>
+                        <label for="isPaid">Rémunéré</label>
+                        <select name="isPaid" id="isPaid" class="form-control" required>
+                            <option value="1">Oui</option>
+                            <option value="0">Non</option>
                         </select>
                     </div>
                     <div>
-                        <label for="categorie">Catégorie</label>
-                        <select name="categorie" id="categorie" class="form-control" required>
-                            <option value="benevolat">Bénévolat</option>
-                            <option value="casting-form">Casting</option>
-                            <option value="divers">Divers</option>
-                            <option value="job">Job</option>
-                            <option value="stage">Stage</option>
-                        </select>
+                        <label for="category_id">Catégorie</label>
+                        <?= $this->Form()::select('category_id', $job_category, null, ['class'=>'form-control', 'required']) ?>
                     </div>
                 </div>
             </fieldset>

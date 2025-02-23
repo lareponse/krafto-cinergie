@@ -9,7 +9,7 @@ class Home extends Kortex
 {
 
     protected $pageSlug = 'home';
-        
+
     public function home()
     {
         $baseFilters = ['public' => 1, 'pick' => 1];
@@ -30,7 +30,7 @@ class Home extends Kortex
             ->whereEmpty('embedVideo')
             ->limit(3);
         $sousLaLoupe = $select->retObj(Article::class);
-            
+
         $select = Contest::filter($baseFilters)
             ->limit(1);
 
@@ -41,24 +41,25 @@ class Home extends Kortex
             ->orderBy(['starts', 'ASC']);
 
         $events = $select->retObj(Event::class);
-        
+
         $select = Job::filter(['window' => [new \DateTimeImmutable('-1 month'), new \DateTimeImmutable('+2 month')]]);
         $select->whereEQ('public', '1')
-               ->limit(5)
-               ->orderBy(['starts', 'DESC']);
+            ->whereEQ('pick', '1')
+            ->limit(5)
+            ->orderBy(['starts', 'DESC']);
 
         $jobs = $select->retObj(Job::class);
 
         $this->viewport('articlesDiaporama', $articlesDiaporama);
         $this->viewport('entrevues', $entrevues);
         $this->viewport('sousLaLoupe', $sousLaLoupe);
-        
+
         $this->viewport('contests', $contests);
         $this->viewport('events', $events);
         $this->viewport('jobs', $jobs);
 
         $job_controller = $this->get('Controllers\\Open\\Job');
-        foreach($job_controller->viewportTagLists() as $key => $tags)
+        foreach ($job_controller->viewportTagLists() as $key => $tags)
             $this->viewport($key, $tags);
     }
 }

@@ -78,6 +78,17 @@ select.form-select {
     display:none;
 }
 
+.submission .submission-job{
+    display: grid;
+    grid-template-columns: max-content auto;
+    gap: 0.7rem;
+    padding:0.7rem;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
 
 .form-control{
     font-family: var(--bs-body-font-family);

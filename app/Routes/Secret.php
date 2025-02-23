@@ -26,6 +26,11 @@ array_push(
     ['POST', 'relations/unlink', 'Relation::unlink', 'relation_unlink'],
 );
 
+array_push(
+    $routes,
+    ['GET', 'Submission/[i:id]/approve', 'Submission::approve', 'submission_approve'],
+    ['GET', 'Submission/[i:id]/reject', 'Submission::reject', 'submission_reject'],
+);
 
 array_push(
     $routes,
