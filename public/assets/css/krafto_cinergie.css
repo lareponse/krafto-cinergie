@@ -115,14 +115,19 @@ table.table tbody.list a{
     display:block;
     padding: 1rem 1.25rem;
 }
-table.table tbody tr td:first-child a{
+table.table tbody tr td:first-child a {
     font-weight: bold;
+    max-width: 27rem;
+    overflow: hidden;
 }
 
-.currency::after{
-    content: '€';
+.currency::after {
+    content: "\20AC"; /* Unicode for € */
     margin-left: 0.5rem;
     white-space: nowrap;
+    font-weight: inherit; /* Ensure it follows the parent element's styling */
+    font-size: inherit; /* Keep size consistent */
+    display: inline-block; /* Ensures proper spacing */
 }
 
 .alert.alert-warning {

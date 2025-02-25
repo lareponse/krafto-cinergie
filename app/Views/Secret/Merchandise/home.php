@@ -22,7 +22,7 @@
                     $url = $controller->urlFor($controller->nid(), 'view', $model);
                 ?>
                     <tr>
-                        <td class="fullName"><?= $this->DOM()::a($url, $model->get('label') ?? '', ['class' => 'currency']); ?></td>
+                        <td class="fullName"><?= $this->DOM()::a($url, $model->get('label') ?? '', ['class' => '']); ?></td>
                         <td class="price"><?= $this->DOM()::a($url, $model->get('price') ?? '', ['class' => 'currency']); ?></td>
                         <td class="deliveryBe"><?= $this->DOM()::a($url, $model->get('deliveryBe') ?? '', ['class' => 'currency']); ?></td>
                         <td class="deliveryEu"><?= $this->DOM()::a($url, $model->get('deliveryEu') ?? '', ['class' => 'currency']); ?></td>

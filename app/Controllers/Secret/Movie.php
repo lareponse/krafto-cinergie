@@ -35,11 +35,6 @@ class Movie extends Krafto
         parent::home();
     }
 
-    public function before_alter()
-    {   
-
-    }
-
     public function view()
     {
         if(is_null($this->loadModel())){

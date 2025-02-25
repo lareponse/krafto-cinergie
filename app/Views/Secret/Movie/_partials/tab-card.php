@@ -2,8 +2,8 @@
 $model = new App\Models\Movie();
 $model->import($target);
 
-$route_edit = $controller->urlFor('Movie', 'edit', $model); 
-$route_view = $controller->urlFor('Movie', 'view', $model); 
+$route_edit = $controller->urlFor('Movie', 'edit', $model);
+$route_view = $controller->urlFor('Movie', 'view', $model);
 ?>
 
 <div class="card">

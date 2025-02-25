@@ -1,7 +1,7 @@
 <?php
 $model = new App\Models\Professional();
-// $model->import($target);
-$model->import(['id' => $target]);
+$model->import($target);
+// $model->import(['id' => $target]);
 
 
 $route = $controller->urlFor('Professional', 'view', $model); ?>

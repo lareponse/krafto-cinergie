@@ -157,6 +157,8 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
     
     public function urlFor(string $class, string $action, $model=null, $extras = [])
     {
+
+  
         $prefix = 'dash_record';
         $name = '';
 
@@ -179,8 +181,14 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
             $params['id'] = $model->id();
         }
 
-        $route_as_href = $this->router()->hyp($name, $params);
 
+        if($class === 'Organisation'){
+            // ddt($model);
+            // vd($name);
+            // vd($params);
+            // dd($class);
+        }
+        $route_as_href = $this->router()->hyp($name, $params);
         if (!empty($extras)) {
 
             $extras = implode('&', array_map(function ($key, $value) {

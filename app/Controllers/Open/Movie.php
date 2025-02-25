@@ -31,7 +31,6 @@ class Movie extends Kortex
 
     public function movie()
     {
-        
         $professionals = Professional::filter([], ['withMoviePraxis' => $this->record()])->retObj(Professional::class);
         
         $director_tag = Praxis::director();

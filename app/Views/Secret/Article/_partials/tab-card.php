@@ -1,6 +1,7 @@
 <?php 
 $model = new App\Models\Article();
-$model->import(['id' => $target]);
+$model->import($target);
+// $model->import(['id' => $target]);
 
 $route_edit = $controller->urlFor('Article', 'edit', $model);
 $route_view = $controller->urlFor('Article', 'view', $model); 

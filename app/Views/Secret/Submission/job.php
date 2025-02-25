@@ -18,10 +18,7 @@ $order = json_decode($submission->get('submitted'), true);
         <strong>Téléphone :</strong> <span><?php echo htmlspecialchars($order['phone']); ?></span>
         <strong>Email :</strong> <span><?php echo htmlspecialchars($order['email']); ?></span>
         <strong>URL :</strong> <span><?php echo htmlspecialchars($order['url']); ?></span>
+    </div>
 
-    </div>
-    <div class="btn-group mx-auto">
-        <a href="<?php echo $controller->router()->hyp('dash_submission_approve', ['id' => $submission->id()]); ?>" class="btn btn-success">Accepter</a>
-        <a href="<?php echo $controller->router()->hyp('dash_submission_reject', ['id' => $submission->id()]); ?>" class="btn btn-danger">Refuser</a>
-    </div>
+    <?= $this->insert('Secret::Submission/view/submitted_by', ['submitter' => $submitter]); ?>
 </div>
