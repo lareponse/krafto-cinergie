@@ -40,9 +40,14 @@ export default class Korbo {
   load() {
     let res = localStorage.getItem('korbo');
     if (res !== null) {
-      return JSON.parse(res);
+      try {
+        return JSON.parse(res);
+      } catch (e) {
+        console.error('Failed to parse korbo data:', e);
+        return [];
+      }
     }
-    return null;
+    return [];
   }
 
   export() {
@@ -53,14 +58,14 @@ export default class Korbo {
     if ('quantity' in props && props.quantity < 1) {
       console.debug('removing item with quantity < 1');
       this.remove(id);
+      return;
     }
 
-    console.debug('updating qty from ${item.quantity} to ${props.quantity}');
     let item = this.items.find((item) => item.id === id);
     if (item) {
+      console.debug(`updating qty from ${item.quantity} to ${props.quantity}`);
       Object.assign(item, props);
       this.save();
-      this.ui.refresh();
     }
   }
 
@@ -69,7 +74,10 @@ export default class Korbo {
   }
 
   total() {
-    return this.items.reduce((total, item) => total + item.price, 0);
+    return this.items.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
   }
 }
 
@@ -90,9 +98,19 @@ class KorboUI {
       korboTrigger.classList.remove('hidden');
     }
 
+    this.setEmptyButton();
     this.setLines();
   }
 
+  setEmptyButton() {
+    let emptyButton = document.querySelector('.btn-reset-modal');
+    if (emptyButton !== null) {
+      emptyButton.addEventListener('click', (e) => {
+        this.korbo.clear();
+      });
+    }
+  }
+  
   setLines() {
     if (this.lineContainer !== null && this.lineTemplate !== null) {
       this.lineContainer.innerHTML = '';
@@ -104,7 +122,7 @@ class KorboUI {
       this.lineContainer.addEventListener('change', (e) => {
         let id = e.target.closest('.korbo-item').dataset.itemId;
         this.korbo.update(id, {
-          quantity: e.target.value,
+          quantity: parseInt(e.target.value, 10),
         });
       });
 
@@ -121,7 +139,7 @@ class KorboUI {
   }
 
   lineElement(item) {
-    console.log(item)
+    console.log(item);
     let row = this.lineTemplate.content.cloneNode(true);
     row = row.querySelector('.korbo-item');
 
