@@ -20,12 +20,25 @@ class AbstractRelation
         let timeoutId;
         this.ui.container.querySelectorAll(".otto-search").forEach((search) => {
             search.addEventListener("input", function(e) {this.onSearch(e,  timeoutId)}.bind(this));
+            search.addEventListener('keydown', function (event) {
+              // For modern browsers, check using event.key
+              if (event.key === 'Enter') {
+                event.preventDefault();
+              }
+            });
         })
     }
 
     onSearch(e, listName=null) {
-        if(!this.validSearch(e))
-            return
+        const len = e.target.value.length;
+
+        if(len == 0){
+            console.log('empty search, remove all')
+            this.ui.resetAndHideSuggestions()
+        }
+
+        // if(!this.validSearch(e)) // ticket 64
+        //     return
 
         let endpoint = e.target.getAttribute('otto-endpoint')
         

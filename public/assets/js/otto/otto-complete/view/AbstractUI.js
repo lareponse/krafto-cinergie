@@ -34,8 +34,10 @@ class AbstractUI
     }
 
     resetAndHideSuggestions(suggestions, search){
+        search = search || this.search
         search.value=''
 
+        suggestions = suggestions || this.suggestions
         this.emptyContainer(suggestions)
         this.hide(suggestions)
     }
