@@ -1,0 +1,1 @@
+ALTER TABLE `merchandise` CHANGE `price` `price` FLOAT NOT NULL;
