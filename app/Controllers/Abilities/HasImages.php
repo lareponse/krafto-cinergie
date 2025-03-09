@@ -17,7 +17,7 @@ trait HasImages
         return $this->nid();
     }
     public function HasImages__Traitor_after_save(){
-        if($this->loadModel()->slug() !== $this->formModel()->slug()){
+        if($this->loadModel() && $this->loadModel()->slug() !== $this->formModel()->slug()){
    
             $controller = $this->get('Controllers\\Secret\\Image');
             $directory = $controller->buildRelativeLocator($this);
