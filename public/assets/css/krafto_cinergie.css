@@ -95,10 +95,6 @@ select.form-select {
 }
 
 
-[data-kx-href]{
-    cursor:pointer;
-}
-
 .wysiwyg .ql-editor{
     height:30rem;
 }

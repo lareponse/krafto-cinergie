@@ -43,31 +43,6 @@
 
       OttoFormatDate.searchAndFormat('.otto-date');
 
-
-      // select all data-kx-href and make them clickable links
-      document.querySelectorAll('[data-kx-href]').forEach(row => {
-        console.log(row)
-        row.setAttribute('role', 'link');
-        row.setAttribute('tabindex', '0');
-
-        row.addEventListener('click', () => {
-          const action = row.getAttribute('data-kx-href');
-          if (action) {
-            window.location.href = action;
-          }
-        });
-
-        row.addEventListener('keypress', (e) => {
-          if (e.key === 'Enter') {
-            const action = row.getAttribute('data-kx-href');
-            if (action) {
-              window.location.href = action;
-            }
-          }
-        });
-      });
-
-
       // Quill.js
       const options_for_wysiwyg_editor = {
         modules: {
@@ -98,7 +73,7 @@
         el.addEventListener('submit', () => {
           editors = el.querySelectorAll('.wysiwyg');
           editors.forEach((editor) => {
-            
+
             content = editor.querySelector('.ql-editor').innerHTML;
             if (content.replace(/<(.|\n)*?>/g, '').trim().length === 0) {
               content = '';
