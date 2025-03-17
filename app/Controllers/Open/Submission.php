@@ -14,32 +14,31 @@ class Submission extends Kortex
         $submission->set('submitted', json_encode($this->router()->submitted()));
         $submission->set('submitted_by', json_encode(Model::submittedBy()));
 
-        $res = explode('/', $this->router()->referer());
+        $path = parse_url($this->router()->referer());
+        $path = $path['path'];
 
-        // no slug
-        if (!isset($res[4])) {
-            $page = $res[3];
-            $submission->set('urn', $page);
-        } else {
-
-            list($type, $slug) = array_slice($res, -2);
+        if (preg_match('/(personnes|organisations|annonces|boutique)+/', $path, $res) > 0) {
+            $submission->set('urn', preg_replace('/[^a-zA-Z0-9]/', '', $path));
+        }
+        else{
+            $parts = trim($path, '/'); // Remove trailing slash if present
+            $parts = explode('/', $parts); // Split the path by slashes
+            $type = reset($parts); // Get the first non-empty element
+            $slug = end($parts); // Get the last non-empty element
+           
             $trans = [
                 'personne' => \App\Models\Professional::class,
                 'organisation' => \App\Models\Organisation::class,
-                'job' => Job::class
             ];
 
-            // deny the request if the type is not found
             $fqnClass = $trans[$type] ?? $this->router()->hopBack();
-
-            // deny the request if the record is not found through the slug
             $existing = $fqnClass::exists(['slug' => $slug]) ?? $this->router()->hopBack();
 
-            // now we have a verified slug and a record, we can proceed with the form
             $submission->set('urn', $existing->urn());
         }
-        $submission->save(0);
 
+     
+        $submission->save(0);
         $this->viewport('submission', $submission);
     }
 }
