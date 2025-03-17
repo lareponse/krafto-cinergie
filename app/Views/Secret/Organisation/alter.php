@@ -63,6 +63,14 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
 
 <?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'filmography', 'title' => 'Filmographie', 'id' => 'FilmographieSection']) ?>
 
+
+<?= $this->insert('Secret::_partials/form/alter-card-publication', [
+    'add' => [
+        'isPartner' => ['Partenaire', 'Présent dans les listes de partenaires ?']
+    ]
+]) ?>
+
+
 <div class="card border-0 scroll-mt-3" id="LegalSection">
     <div class="card-header">
         <h2 class="h3 mb-0">Entreprise</h2>
@@ -112,9 +120,3 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
         </div>
     </div>
 </div>
-
-<?= $this->insert('Secret::_partials/form/alter-card-publication', [
-    'add' => [
-        'isPartner' => ['Partenaire', 'Présent dans les listes de partenaires ?']
-    ]
-]) ?>
