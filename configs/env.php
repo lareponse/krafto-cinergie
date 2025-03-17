@@ -15,7 +15,7 @@ return [
 
   'staging' => [
     'host' => 'cinergie.lareponse.net',
-    'display_errors' => E_ALL & ~E_DEPRECATED & ~E_STRICT,
+    'display_errors' => E_ALL & ~E_DEPRECATED,
     'reporting' => 1,
     'database' => [
       'dsn' => sprintf($mysql_dsn, 'localhost', 3306, 'cinergie', 'utf8'),
