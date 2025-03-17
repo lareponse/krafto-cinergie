@@ -50,11 +50,19 @@
 
         <div class="row mb-4">
             <div class="col-lg-3">
-                <label for="site" class="col-form-label">Site</label>
+                <label for="url" class="col-form-label">Site</label>
             </div>
 
             <div class="col-lg">
-                <input type="text" class="form-control" name="site" id="site" value="<?= $model->get('url') ?>">
+                <input type="url"
+                    class="form-control"
+                    name="url"
+                    id="url"
+                    value="<?= $model->get('url') ?>"
+                    title="Please enter a valid URL (must start with http:// or https://)"
+                    placeholder="https://example.com"
+                    required>
+
                 <div class="invalid-feedback">Please add your site address</div>
             </div>
         </div>
