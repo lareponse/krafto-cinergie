@@ -1,0 +1,26 @@
+-- Shows all rows with parent_id = 1, indicating if they'll be kept or deleted
+SELECT id, 
+       label,
+       CASE WHEN label LIKE '--%' THEN 'KEEP' ELSE 'DELETE' END AS action
+FROM tag 
+WHERE parent_id = 1;
+
+-- Delete all rows where parent_id is 1 and label doesn't start with "--"
+-- This removes categories that don't follow the expected format
+DELETE FROM tag 
+WHERE parent_id = 1
+AND label NOT LIKE '--%';
+
+-- Shows both original and updated labels for comparison
+SELECT id, 
+       label AS current_label, 
+       SUBSTRING(label, 4) AS will_become 
+FROM tag 
+WHERE label LIKE '--%';
+
+-- Update remaining rows by removing the "-- " prefix from the label
+-- This transforms labels from "-- Category" format to just "Category"
+UPDATE tag 
+SET label = SUBSTRING(label, 4) 
+WHERE label LIKE '--%';
+
