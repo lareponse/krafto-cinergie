@@ -31,6 +31,7 @@
     import OttoIdLabel from '/public/assets/js/otto/otto-id-label.js';
     import OttoLink from '/public/assets/js/otto/otto-link.js';
     import OttoFormatDate from '/public/assets/js/otto/otto-format-date.js';
+    import OttoForm from '/public/assets/js/otto/otto-form.js';
 
     document.addEventListener("DOMContentLoaded", () => {
 
@@ -42,8 +43,13 @@
       OttoLink.calls('.otto-phone');
 
       OttoFormatDate.searchAndFormat('.otto-date');
+      OttoForm.enforceFormValidations();
+      
+      initialiseWYSIWYG_editors();
+    });
 
-      // Quill.js
+    // Quill.js
+    function initialiseWYSIWYG_editors() {
       const options_for_wysiwyg_editor = {
         modules: {
           toolbar: [
@@ -88,7 +94,7 @@
         });
       });
       // EOF Quill.js
-    });
+    }
   </script>
 </body>
 
