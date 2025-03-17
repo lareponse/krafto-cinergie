@@ -15,6 +15,7 @@ class Delete extends Krafto
 
     public function delete()
     {
+        $this->logger()->notice('Vous ne pouvez pas supprimer ce modèle');
         $this->router()->hopBack();
         /*
         $this->router()->validate('urn');
