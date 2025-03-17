@@ -6,27 +6,12 @@ use App\Views\Abilities\Menu;
 $menu = [
     'section0' => [
         'Article' => ['label' => 'Articles', 'icon' => 'text'],
-        'Fiche' => [
-            'label' => 'Fiches',
-            'icon' => 'database',
-            'subs' => [
-                'Movie' => ['label' => 'Films'],
-                'Professional' => ['label' => 'Professionnels'],
-                'Organisation' => ['label' => 'Organisations']
-            ]
-        ],
-        'Event' => [
-            'label' => 'Evènements',
-            'icon' => 'calendar',
-            'subs' => [
-                'Event' => ['label' => 'Agenda'],
-                'Job' => ['label' => 'Annonces'],
-                'Contest' => ['label' => 'Concours']
-            ]
-        ]
+        'Event' => ['label' => 'Agenda', 'icon' => 'calendar'],
+        'Movie' => ['label' => 'Films', 'icon' => 'video'],
+        'Professional' => ['label' => 'Professionnels', 'icon' => 'professional'],
+        'Organisation' => ['label' => 'Organisations', 'icon' => 'organisation'],
     ]
 ];
-
 
 // add editor-specific menu items
 if ($controller->operator()->hasPermission('editor') || $controller->operator()->hasPermission('root')) {
@@ -34,6 +19,8 @@ if ($controller->operator()->hasPermission('editor') || $controller->operator()-
         $menu,
         [
             [
+                'Job' => ['label' => 'Annonces', 'icon' => 'praxis'],
+                'Contest' => ['label' => 'Concours', 'icon' => 'balls-menu'],
                 'Shop' => [
                     'label' => 'Boutique',
                     'icon' => 'euro',
@@ -43,9 +30,10 @@ if ($controller->operator()->hasPermission('editor') || $controller->operator()-
                     ]
                 ],
 
-                'Submission' => ['label' => 'Soumissions', 'icon' => 'message'],
             ],
             [
+                'Submission' => ['label' => 'Soumissions', 'icon' => 'message'],
+
                 'Page' => [
                     'label' => 'Pages',
                     'icon' => 'page',
@@ -56,16 +44,12 @@ if ($controller->operator()->hasPermission('editor') || $controller->operator()-
                         'Team' => ['label' => 'Notre équipe'],
                     ]
                 ],
-            ],
-
-            [
-
-                'Operator' => ['label' => 'Utilisateurs', 'icon' => 'image'],
-
+                
                 'Settings' => [
                     'label' => 'Paramètres',
                     'icon' => 'settings',
                     'subs' => [
+                        'Operator' => ['label' => 'Utilisateurs'],
                         'Thesaurus' => ['label' => 'Thesaurus'],
                         'Locus' => ['label' => 'Localités'],
                         'Tag' => ['label' => 'Qualifiants'],
@@ -75,7 +59,6 @@ if ($controller->operator()->hasPermission('editor') || $controller->operator()-
                 ]
             ]
         ]
-
     );
 }
 $menu = new Menu($controller, $menu, $this);
