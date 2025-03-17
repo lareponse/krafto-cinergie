@@ -81,11 +81,21 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
 
         <div class="row mb-4">
             <div class="col-lg-3">
-                <label for="BIC" class="col-form-label">BIC</label>
+                <label for="BIC" class="col-form-label">BI2C</label>
             </div>
 
             <div class="col-lg">
-                <input type="text" class="form-control" id="BIC" name="BIC" value="<?= $controller->formModel()->get('BIC') ?>">
+                <input type="text"
+                    class="form-control"
+                    id="BIC"
+                    name="BIC"
+                    pattern="[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?"
+                    minlength="8"
+                    maxlength="11"
+                    placeholder="e.g., DEUTDEFF500"
+                    title="BIC format: 8 or 11 characters (letters or numbers)"
+                    value="<?= $controller->formModel()->get('BIC') ?>"
+                    autocapitalize="characters">
             </div>
         </div>
 
@@ -95,7 +105,18 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
             </div>
 
             <div class="col-lg">
-                <input type="text" class="form-control" id="IBAN" name="IBAN" value="<?= $controller->formModel()->get('IBAN') ?>">
+                <input type="text"
+                    class="form-control"
+                    id="IBAN"
+                    name="IBAN"
+                    pattern="[A-Z]{2}[0-9]{2}[A-Z0-9]{4}[0-9]{7}([A-Z0-9]?){0,16}"
+                    minlength="15"
+                    maxlength="34"
+                    placeholder="e.g., DE89370400440532013000"
+                    title="IBAN format: 15-34 characters starting with country code"
+                    value="<?= $controller->formModel()->get('IBAN') ?>"
+                    autocapitalize="characters"
+                    onkeyup="this.value = this.value.replace(/[^A-Z0-9]/g, '')">
             </div>
         </div>
 
@@ -105,7 +126,18 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
             </div>
 
             <div class="col-lg">
-                <input type="text" class="form-control" id="TVA" name="TVA" value="<?= $controller->formModel()->get('TVA') ?>">
+                <input type="text"
+                    class="form-control"
+                    id="TVA"
+                    name="TVA"
+                    pattern="[A-Z]{2}[0-9]{2,12}"
+                    minlength="4"
+                    maxlength="14"
+                    placeholder="e.g., FR12345678901"
+                    title="VAT format: 2-letter country code followed by 2-12 numbers"
+                    value="<?= $controller->formModel()->get('TVA') ?>"
+                    autocapitalize="characters"
+                    onkeyup="this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '')">
             </div>
         </div>
 
@@ -115,7 +147,17 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
             </div>
 
             <div class="col-lg">
-                <input type="text" class="form-control" id="numero_entreprise" name="numero_entreprise" value="<?= $controller->formModel()->get('numero_entreprise') ?>">
+                <input type="text"
+                    class="form-control"
+                    id="numero_entreprise"
+                    name="numero_entreprise"
+                    pattern="[0-9]{10}"
+                    minlength="10"
+                    maxlength="10"
+                    placeholder="e.g., 0123456789"
+                    title="Company number format: 10 digits"
+                    value="<?= $controller->formModel()->get('numero_entreprise') ?>"
+                    onkeyup="this.value = this.value.replace(/[^0-9]/g, '')">
             </div>
         </div>
     </div>

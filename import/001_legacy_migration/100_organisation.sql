@@ -40,7 +40,7 @@ CREATE TABLE `cinergie`.`organisation` (
   `city` varchar(44) DEFAULT NULL,
   `street` varchar(111) DEFAULT NULL,
 
-  `BIC` varchar(8) DEFAULT NULL COMMENT 'ISO 9362',
+  `BIC` varchar(11) DEFAULT NULL COMMENT 'ISO 9362, 6 az + 2 az09 + optional 3 az09',
   `IBAN` varchar(34) DEFAULT NULL,
   `TVA` varchar(20) DEFAULT NULL,
   `numero_entreprise` varchar(30) DEFAULT NULL,
