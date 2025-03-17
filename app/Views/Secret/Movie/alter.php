@@ -5,7 +5,6 @@ $sidemenu = [
     ['#synopsisSection', 'text', 'Synopsis'],
     ['#castingSection', 'text', 'Casting'],
     ['#publicationSection', 'info', 'Publication'],
-    ['#prixCinergieSection', 'text', 'Prix Cinergie'],
     ['#commentSection', 'comment', 'Commentaires']
 ];
 
@@ -85,6 +84,19 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu]) ?>
             </div>
         </div>
 
+
+        <div class="row mb-4">
+            <div class="col-lg-3">
+                <label for="prix_cinergie" class="col-form-label">Prix cinergie</label>
+            </div>
+
+            <div class="col-lg">
+                <input type="text" class="form-control" id="prix_cinergie" name="prix_cinergie" value="<?= $controller->formModel()->get('prix_cinergie') ?>">
+                <div class="invalid-feedback">Le film a t il ete recompense ?</div>
+            </div>
+        </div>
+
+
         <?= $this->submitDashly(); ?>
 
     </div>
@@ -148,5 +160,4 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu]) ?>
 
 <?= $this->insert('Secret::_partials/form/alter-card-publication') ?>
 
-<?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'prix_cinergie', 'title' => 'Prix cinergie', 'id' => 'prixCinergieSection']) ?>
 <?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'comment', 'title' => 'Commentaires', 'id' => 'commentSection']) ?>
