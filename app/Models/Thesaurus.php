@@ -26,6 +26,13 @@ class Thesaurus extends TightModel
             self::applyFirstCharFilter($filters['FiltersOnFirstChar'], $Query, 'label');
         }
 
+        if(isset($filters['movie'])){
+            $Query->join(['movie_thesaurus', 'movie_thesaurus'], [
+                ['movie_thesaurus', 'thesaurus_id', 'thesaurus', 'id'],
+                ['movie_thesaurus', 'movie_id', $filters['movie']->id()]
+            ]);
+
+        }
         $Query->orderBy(['label', 'ASC']);
         return $Query;
     }

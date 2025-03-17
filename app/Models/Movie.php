@@ -216,4 +216,19 @@ class Movie extends TightModel
     {
         return Tag::any(['parent' => 'movie_footage'], ['eager' => false]);
     }
+
+    public function themes()
+    {
+        $Query = Tag::filter();
+        $Query->join(['movie_theme', 'movie_theme'], [
+            ['movie_theme', 'tag_id', 'tag', 'id'],
+            ['movie_theme', 'movie_id', $this->id()]
+        ]);
+        return Tag::retrieve($Query);
+    }
+
+    public function thesaurus()
+    {
+        return Thesaurus::any(['movie' => $this]);
+    }
 }

@@ -40,6 +40,9 @@ class Movie extends Krafto
         if(is_null($this->loadModel())){
             $this->router()->hop('dash_movies');
         }
+
+        $this->viewport('themes', $this->loadModel()->themes());
+        $this->viewport('thesaurus', $this->loadModel()->thesaurus()); 
     }
 
     public function imagesDirectory(){
