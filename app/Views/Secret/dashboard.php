@@ -44,8 +44,15 @@
 
       OttoFormatDate.searchAndFormat('.otto-date');
       OttoForm.enforceFormValidations();
-      
+
       initialiseWYSIWYG_editors();
+      // const API_JSConnect_EstPresent = document.getElementById('antidoteapi_jsconnect_actif') !== null;
+      // if (API_JSConnect_EstPresent) {
+      //   console.log("Antidote API JS-Connect activée !");
+      // } else {
+      //   console.warn("Antidote API JS-Connect absente ou désactivée.");
+      // }
+
     });
 
     // Quill.js

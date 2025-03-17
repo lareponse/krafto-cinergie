@@ -1,0 +1,81 @@
+<html antidoteapi_jsconnect="true">
+<head>
+
+<meta charset="UTF-8">
+<link href="Antidote-API_JS-Connect.css" rel="stylesheet">
+<script src="Antidote-API_JS-Connect.js"></script>
+
+</head>
+<body>
+
+<br>
+<h2>Exemple de l'API JS-Connect d'Antidote</h2>
+<br>
+Appeler Antidote par l'un des boutons sous les champs.
+<br><br>
+
+<br>
+<hr>
+<h2>Exemple d’activation</h2>
+(voir le fichier Antidote-API_JS-Connect.js pour plus de détails)
+<table >
+   <tr><td><button id="initAntidote">Active boutons Antidote</button> Ceci active les boutons d'Antidote insérés.</td></tr>
+   <tr><td><button id="desinitAntidote">Désactive boutons Antidote</button> Ceci désactive les boutons d'Antidote insérés.</td></tr>     
+</table> 
+<br>
+<br>
+
+<hr>
+<h2>Cas 1 - Boutons non li&eacute;s</h2>
+
+Les 3 boutons ci-dessous ne sont li&eacute;s aucun champ de la page.<br>
+Cliquer sur l'un de ces boutons a le m&ecirc;me effet que d'appeler Antidote &agrave; partir du bouton de la barre du fureteur.
+<br><br>
+
+<textarea rows="10">
+Ce 1er champ n'est lié à aucun bouton.
+</textarea>
+
+<textarea rows="10">
+Ce 2e champ n'est lié à aucun bouton.
+</textarea>
+
+<table >
+	<tr><td class="menu"><button class="boutonAntidote" data-antidoteapi_jsconnect_lanceoutil="C"><img src="Antidote-Correcteur.png">  </button></td>
+	<td class="menu"><button class="boutonAntidote" data-antidoteapi_jsconnect_lanceoutil="D"><img src="Antidote-Dictionnaires.png">  </button></td>
+	<td class="menu"><button class="boutonAntidote" data-antidoteapi_jsconnect_lanceoutil="G"><img src="Antidote-Guides.png">  </button></td></tr>
+</table> 
+
+<br>
+<hr>
+<h2>Cas 2 - Boutons li&eacute;s &agrave; des champs</h2>
+
+Le champ ci-dessous est li&eacute; au bouton du correcteur situ&eacute; en-dessous.<br>
+Cliquer sur le bouton ne traitera que ce champ, peu importe la s&eacute;lection courante dans la page.
+<br><br>
+
+<div style="border: 5px dotted;">
+	<textarea rows="10" data-antidoteapi_jsconnect_groupe_id="01">Ce 3e champ est li&eacute; au bouton du correcteur ci-dessous.</textarea>
+	<table >
+		<tr><td class="menu"><button class="boutonAntidote" data-antidoteapi_jsconnect_groupe_id="01" data-antidoteapi_jsconnect_lanceoutil="C"><img src="Antidote-Correcteur.png">  </button></td></tr>
+	</table> 
+</div>
+
+
+<br>
+Les 2 champs ci-dessous sont li&eacute;s au bouton du correcteur situ&eacute; en-dessous.<br>
+Cliquer sur le bouton ne traitera que ces champs, peu importe la s&eacute;lection courante dans la page.
+<br><br>
+
+<div style="border: 5px dotted;">
+	<textarea rows="10" data-antidoteapi_jsconnect_groupe_id="02" >Ce 4e champ est lié au bouton ci-dessous.</textarea>
+	<textarea rows="10" data-antidoteapi_jsconnect_groupe_id="02" >Ce 5e champ est aussi lié au bouton ci-dessous.</textarea>
+
+	<table >
+		<tr><td class="menu"><button class="boutonAntidote" data-antidoteapi_jsconnect_groupe_id="02" data-antidoteapi_jsconnect_lanceoutil="C"><img src="Antidote-Correcteur.png">  </button></td></tr>
+	</table> 
+</div>
+
+
+</body>
+</html>

@@ -6,7 +6,9 @@
         <?php
         if (!isset($wysiwyg) || $wysiwyg == true) {
         ?>
-            <div class="wysiwyg" data-name="<?= $name ?>"><?= $controller->formModel()->get($name); ?></div>
+            <div class="wysiwyg"
+                data-name="<?= $name ?>"
+                data-antidoteapi_jsconnect_groupe_id="grp-01"><?= $controller->formModel()->get($name); ?></div>
         <?php
         } else {
         ?>

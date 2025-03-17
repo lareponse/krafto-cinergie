@@ -22,6 +22,11 @@
             <?= $this->section('content') ?>
 
         </form>
+        <!-- <button
+            data-antidoteapi_jsconnect_lanceoutil="C"
+            data-antidoteapi_jsconnect_groupe_id="grp-01">
+            Vérifier le texte avec Antidote
+        </button> -->
         <?= $this->section('afterForm') ?>
 
     </div>
@@ -29,8 +34,14 @@
 
 <?php $this->unshift('scripts') ?>
 <script src="/public/assets/quill/quill.js"></script>
+<script>
+
+</script>
 <?php $this->end() ?>
 
 <?php $this->unshift('html_head') ?>
+<!-- <script src="/public/assets/Antidote-API_JS-Connect-v2.2-R1-fr/Antidote-API_JS-Connect.js"></script>
+<link rel="stylesheet" href="/public/assets/Antidote-API_JS-Connect-v2.2-R1-fr/Antidote-API_JS-Connect.css"> -->
+
 <link href="/public/assets/quill/quill.snow.css" rel="stylesheet" />
 <?php $this->end() ?>
