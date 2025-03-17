@@ -28,13 +28,6 @@
                             Référence
                         </a>
                     </th>
-
-
-                    <th>
-                        <a href="javascript: void(0);" class="text-muted list-sort" data-sort="active">
-                            Actif
-                        </a>
-                    </th>
                 </tr>
             </thead>
             <tbody class="list">
@@ -45,18 +38,16 @@
                 ?>
                     <tr>
                         <td class="parent">
-                            <strong><?= $model->get('parent_label'); ?></strong>
+                            <?= $this->DOM()::a($url, substr($model->get('parent_label') ?? '', 0, 40)); ?>
                         </td>
 
-                        <td class="label"><?= $model->get('label'); ?></td>
+                        <td class="label"> <?= $this->DOM()::a($url, substr($model->get('label') ?? '', 0, 40)); ?>
+                        </td>
                         <td class="content">
-                            <strong><?= $model->get('content'); ?></strong>
+                            <?= $this->DOM()::a($url, substr($model->get('content') ?? '', 0, 40)); ?>
                         </td>
                         <td class="slug">
                             <?= $model->slug(); ?>
-                        </td>
-
-                        <td class="active">
                         </td>
                     </tr>
                 <?php

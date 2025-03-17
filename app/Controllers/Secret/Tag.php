@@ -36,6 +36,9 @@ class Tag extends Krafto
             $this->router()->hop($this->urlFor($this->nid(), 'list', null, ['FiltersOnFirstChar' => 'A']));
         }
         
+        $parents = $this->modelClassName()::any(['parent' => null]);
+        $this->viewport('parents', $parents);
+
         parent::home();
     }
 }
