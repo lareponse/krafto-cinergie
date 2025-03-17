@@ -81,7 +81,7 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
 
         <div class="row mb-4">
             <div class="col-lg-3">
-                <label for="BIC" class="col-form-label">BI2C</label>
+                <label for="BIC" class="col-form-label">BIC</label>
             </div>
 
             <div class="col-lg">
