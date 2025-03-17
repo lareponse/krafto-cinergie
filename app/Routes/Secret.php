@@ -32,6 +32,12 @@ array_push(
     ['GET', 'Submission/[i:id]/reject', 'Submission::reject', 'submission_reject'],
 );
 
+
+array_push(
+    $routes,
+    ['GET', 'Sanitize/Agenda', 'Sanitize::agenda', 'sanitize_agenda'],
+);
+
 array_push(
     $routes,
     ['GET|POST', 'delete/[*:nid]/[i:id]', 'Delete::delete', 'delete'],
@@ -49,6 +55,7 @@ array_push(
     ['GET', 'image/[*:filename]', 'Image::view', 'image_view'],
     ['POST',  '[a:nid]/[i:id]/upload', 'Image::dropzoneUpload', 'image_upload'],
 );
+
 
 
 
