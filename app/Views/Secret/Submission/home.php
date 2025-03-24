@@ -68,3 +68,9 @@
         <ul class="pagination justify-content-end list-pagination mb-0"></ul>
     </div>
 </div>
+
+<?php
+
+if(!empty($articles_for_review)){
+   $this->insert('Secret::Article/list', ['listing' => $articles_for_review, 'controller' => $articleController]);
+}

@@ -32,7 +32,11 @@ class Article extends Krafto
 
     public function after_save()
     {
-        dd('AFTER SAVE RELATION TO AUTHOR');
+        // dd($this->loadModel());
+        // TODO relation to authors
+
+        // TODO publication status
+        
     }
 
     public function view()

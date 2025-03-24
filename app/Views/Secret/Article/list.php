@@ -1,9 +1,13 @@
+<?php
+$hasTimeFilters = isset($filters['year']) && isset($filters['month']);
+?>
+
 <div class="card border-0 flex-fill w-100" data-list='{"valueNames": ["label", {"name": "publication", "attr": "data-publication"}, "type", "public"],"page": 100}' id="articleTable">
 
     <div class="card-header border-0">
         <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-end">
             <?php
-            if (isset($filters)) {
+            if ($hasTimeFilters) {
             ?>
                 <h2 class="card-header-title h4 text-uppercase">
                     Articles publiés en
@@ -18,7 +22,7 @@
         </div>
 
         <?php
-        if (isset($filters)) {
+        if ($hasTimeFilters) {
             $this->insert('Secret::_partials/filters/FiltersOnYearAndMonth', ['filters' => $filters, 'firstYear' => 1996, 'modelType' => $controller->modelClassName()::model_type()]);
         }
         ?>

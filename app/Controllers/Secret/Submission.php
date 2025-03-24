@@ -2,11 +2,19 @@
 
 namespace App\Controllers\Secret;
 
+use \App\Models\Article;
+
 class Submission extends Krafto
 {
     use \App\Controllers\Abilities\HasORM;
     use \App\Controllers\Abilities\RequiresEditorOrAbove;
-
+    public function home()
+    {
+        parent::home();
+        $articles = Article::any(['status' => 'review_requested']);
+        $this->viewport('articles_for_review', $articles);
+        $this->viewport('articleController', $this->get('Controllers\\Secret\\Article') );
+    }
     public function view()
     {
         if (is_null($this->loadModel())) {
