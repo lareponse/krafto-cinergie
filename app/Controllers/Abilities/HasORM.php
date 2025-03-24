@@ -79,6 +79,14 @@ trait HasORM
         }
     }
 
+    public function toggle()
+    {
+        $field = $this->router()->params('field');
+        $this->loadModel()->set($field, $this->loadModel()->get($field) ? 0 : 1);
+        $this->loadModel()->save($this->operator()->id());
+        $this->router()->hopBack();
+    }
+    
     public function HasORM_Traitor_conclude()
     {
         if($this->router()->targetMethod() === 'save')
