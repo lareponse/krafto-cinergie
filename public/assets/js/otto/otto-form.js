@@ -13,6 +13,35 @@ export default class OttoForm {
     });
   }
 
+  static caracterCounter(selector = '[data-kx-counter]') {
+    document.querySelectorAll(selector).forEach(function (element) {
+      // Find counter element - either specified by selector in the attribute value
+      // or create a counter element if the attribute is empty
+      let counterElement;
+
+      if (element.getAttribute('data-kx-counter')) {
+        // Use the selector provided in the attribute
+        counterElement = document.querySelector(
+          element.getAttribute('data-kx-counter')
+        );
+      } else {
+        // Create and insert a counter element after the input
+        counterElement = document.createElement('span');
+        counterElement.className = 'character-count';
+        element.parentNode.insertBefore(counterElement, element.nextSibling);
+      }
+
+      // Set initial count
+      if (counterElement) {
+        counterElement.textContent = element.value.length;
+
+        // Add event listener for input changes
+        element.addEventListener('input', function () {
+          counterElement.textContent = element.value.length;
+        });
+      }
+    });
+  }
   /**
    * Format input based on pattern attribute
    * @param {Event} event - Input event
