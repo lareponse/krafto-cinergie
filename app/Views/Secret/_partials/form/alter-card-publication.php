@@ -1,4 +1,7 @@
 <?php
+if (!$controller->operator()->hasPermission('editor') && !$controller->operator()->hasPermission('root')) {
+    return;
+}
 $publication_booleans = [
     'public' => ['Publique', 'Visible sur le site ?'],
     'pick' => ['Accueil', 'Présent dans les sélections de la page d\'accueil ?'],
@@ -9,37 +12,37 @@ $publication_booleans = [
 
 <div class="card border-0 scroll-mt-3" id="publicationSection">
 
-<div class="card-header">
+    <div class="card-header">
         <h2 class="h3 mb-0">Publication</h2>
     </div>
 
     <div class="card-body">
-    <?php
-        if(!empty($add)){
-            ?>
+        <?php
+        if (!empty($add)) {
+        ?>
             <ul class="list-group list-group-flush mb-4">
-            <?php
-            foreach ($add as $name => [$label, $description]) {
-            ?>
-                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                    <div class="me-2">
-                        <label for="publication-form-<?= $name ?>" class="h4 mb-0 text-primary"><?= $label ?></label>
-                        <span class="d-block small text-muted mb-0"><?= $description ?></spân>
-                    </div>
-                    <div class="form-check form-switch mb-0">
-                        <input class="form-check-input" type="checkbox" role="switch" id="publication-form-<?= $name ?>" name="<?= $name ?>" <?= $controller->formModel()->get($name) ? 'checked="checked"' : '' ?>">
-                    </div>
-                </li>
+                <?php
+                foreach ($add as $name => [$label, $description]) {
+                ?>
+                    <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                        <div class="me-2">
+                            <label for="publication-form-<?= $name ?>" class="h4 mb-0 text-primary"><?= $label ?></label>
+                            <span class="d-block small text-muted mb-0"><?= $description ?></spân>
+                        </div>
+                        <div class="form-check form-switch mb-0">
+                            <input class="form-check-input" type="checkbox" role="switch" id="publication-form-<?= $name ?>" name="<?= $name ?>" <?= $controller->formModel()->get($name) ? 'checked="checked"' : '' ?>">
+                        </div>
+                    </li>
 
-            <?php
-            }
-            ?>
+                <?php
+                }
+                ?>
             </ul>
-            <?php
+        <?php
         }
         ?>
         <ul class="list-group list-group-flush">
-            
+
             <?php
             foreach ($publication_booleans as $name => [$label, $description]) {
             ?>
@@ -73,7 +76,7 @@ $publication_booleans = [
         <input type="text" class="form-control border-primary" id="publication-form-slug" name="slug" value="<?= $controller->formModel()->get('slug') ?>">
         <span class="d-block small text-primary">Non, vraiment, faut pas toucher à ce truc..</span>
         <div class="invalid-feedback">Ce champs n'est pas correct</div>
-        
+
 
 
         <div class="row mt-4">
