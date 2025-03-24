@@ -25,7 +25,7 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu]) ?>
 
             <div class="col-lg">
                 <input type="text" class="form-control" id="label" name="label" value="<?= $controller->formModel()->get('label') ?>">
-                <div class="invalid-feedback">Please add your full name</div>
+                <div class="invalid-feedback">Veuillez ajouter un titre</div>
             </div>
         </div>
         <div class="row mb-4">
@@ -35,7 +35,18 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu]) ?>
 
             <div class="col-lg">
                 <input type="text" class="form-control" id="original_title" name="original_title" value="<?= $controller->formModel()->get('original_title') ?>">
-                <div class="invalid-feedback">Please add your full name</div>
+                <div class="invalid-feedback">Veuillez ajouter le titre original</div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-lg-3">
+                <label for="label_indexed" class="col-form-label">Titre catalogue</label>
+            </div>
+
+            <div class="col-lg">
+                <input type="text" class="form-control" id="label_indexed" name="label_indexed" value="<?= $controller->formModel()->get('label_indexed') ?>">
+                <div class="invalid-feedback">Veuillez ajouter le titre indexe</div>
             </div>
         </div>
 
@@ -46,7 +57,7 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu]) ?>
 
             <div class="col-lg">
                 <input type="text" class="form-control" id="released" name="released" value="<?= $controller->formModel()->get('released') ?>">
-                <div class="invalid-feedback">Please add your full name</div>
+                <div class="invalid-feedback">Veuillez indiquer la date de sortie</div>
             </div>
         </div>
 
@@ -57,7 +68,7 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu]) ?>
 
             <div class="col-lg">
                 <input type="text" class="form-control" id="url" name="url" value="<?= $controller->formModel()->get('url') ?>">
-                <div class="invalid-feedback">Please add your full name</div>
+                <div class="invalid-feedback">Veuillez ajouter l'URL du site</div>
             </div>
         </div>
 
@@ -68,7 +79,7 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu]) ?>
 
             <div class="col-lg">
                 <input type="text" class="form-control" id="url_trailer" name="url_trailer" value="<?= $controller->formModel()->get('url_trailer') ?>">
-                <div class="invalid-feedback">Please add your full name</div>
+                <div class="invalid-feedback">Veuillez ajouter l'URL de la bande annonce</div>
             </div>
         </div>
 
@@ -80,7 +91,7 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu]) ?>
 
             <div class="col-lg">
                 <input type="text" class="form-control" id="legacy_origine" name="legacy_origine" value="<?= $controller->formModel()->get('legacy_origine') ?>">
-                <div class="invalid-feedback">Please add your full name</div>
+                <div class="invalid-feedback">Veuillez indiquer le pays d'origine</div>
             </div>
         </div>
 
@@ -92,7 +103,7 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu]) ?>
 
             <div class="col-lg">
                 <input type="text" class="form-control" id="prix_cinergie" name="prix_cinergie" value="<?= $controller->formModel()->get('prix_cinergie') ?>">
-                <div class="invalid-feedback">Le film a t il ete recompense ?</div>
+                <div class="invalid-feedback">Veuillez indiquer si le film a été récompensé</div>
             </div>
         </div>
 
@@ -115,7 +126,7 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu]) ?>
 
             <div class="col-lg">
                 <input type="text" class="form-control" id="runtime" name="runtime" value="<?= $controller->formModel()->get('runtime') ?>">
-                <div class="invalid-feedback">Please add your full name</div>
+                <div class="invalid-feedback">Veuillez indiquer la durée du film</div>
             </div>
         </div>
 
@@ -126,7 +137,7 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu]) ?>
 
             <div class="col-lg">
                 <input type="text" class="form-control" id="format" name="format" value="<?= $controller->formModel()->get('format') ?>">
-                <div class="invalid-feedback">Please add your full name</div>
+                <div class="invalid-feedback">Veuillez indiquer le format</div>
             </div>
         </div>
 
@@ -137,7 +148,7 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu]) ?>
 
             <div class="col-lg">
                 <?= $this->Form()::select('genre_id', $genres, $controller->formModel()->get('genre_id'), ['class' => 'form-select']); ?>
-                <div class="invalid-feedback">Please add your genre</div>
+                <div class="invalid-feedback">Veuillez sélectionner un genre</div>
             </div>
         </div>
 
@@ -148,7 +159,7 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu]) ?>
 
             <div class="col-lg">
                 <?= $this->Form()::select('metrage_id', $metrages, $controller->formModel()->get('metrage_id'), ['class' => 'form-select']); ?>
-                <div class="invalid-feedback">Please add your metrage</div>
+                <div class="invalid-feedback">Veuillez sélectionner un métrage</div>
             </div>
         </div>
     </div>

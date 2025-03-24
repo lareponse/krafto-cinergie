@@ -104,7 +104,7 @@ class Movie extends TightModel
         $Query = parent::filter($filters, $options);
 
         if (isset($filters['FiltersOnFirstChar'])) {
-            self::applyFirstCharFilter($filters['FiltersOnFirstChar'], $Query, 'label');
+            self::applyFirstCharFilter($filters['FiltersOnFirstChar'], $Query, 'label_indexed');
         }
 
         // written as part of refactoring, must be rewritten as a join using the PRAXIS_DIRECTOR_SLUG constant

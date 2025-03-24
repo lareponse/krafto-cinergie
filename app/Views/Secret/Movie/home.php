@@ -12,7 +12,7 @@
                 <tr>
                     <th>
                         <a href="javascript: void(0);" class="text-muted list-sort" data-sort="fullName">
-                            Nom
+                            Titre
                         </a>
                     </th>
                     <th>
@@ -34,7 +34,7 @@
                 ?>
                     <tr>
                         <td class="fullName">
-                            <?= $this->DOM()::a($url, $model); ?>
+                            <?= $this->DOM()::a($url, $model->get('label_indexed')); ?>
 
                         </td>
                         <td class="released">
