@@ -7,7 +7,7 @@
 
         ?>
             <article class="card slide">
-                <img src="<?= $controller->avatarFor($article) ?>" class="card-img" alt="<?= $article->get('label'); ?> - <?= $article->get('author_label'); ?>">
+                <img src="<?= $controller->bannerFor($article) ?>" class="card-img" alt="<?= $article->get('label'); ?> - <?= $article->get('author_label'); ?>">
                 <div class="card-img-overlay">
                     <h3 class="card-title h1"><?= $article->get('label'); ?></h3>
                     <p class="card-text"><small class="text-primary"><?= $article->get('author_label'); ?></small></p>
