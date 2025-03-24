@@ -44,7 +44,8 @@
 
       OttoFormatDate.searchAndFormat('.otto-date');
       OttoForm.enforceFormValidations();
-
+      OttoForm.caracterCounter('[data-kx-counter]');
+      
       initialiseWYSIWYG_editors();
       // const API_JSConnect_EstPresent = document.getElementById('antidoteapi_jsconnect_actif') !== null;
       // if (API_JSConnect_EstPresent) {

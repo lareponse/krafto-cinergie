@@ -24,23 +24,10 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
             </div>
 
             <div class="col-lg">
-                <input type="text" class="form-control" id="label" name="label" required value="<?= $controller->formModel()->get('label') ?>">
+                <input type="text" class="form-control" id="label" data-kx-counter name="label" required value="<?= $controller->formModel()->get('label') ?>">
 
-                <div class="d-flex justify-content-between">
-                    <span class="small text-muted">Garder le titre court, dans les 100 caractères</span>
-                    <span class="caracter_count">0</span>
-                </div>
                 <div class="invalid-feedback">Please add your full name</div>
             </div>
-            <script>
-                let input = document.getElementById('label');
-                let counter = input.parentElement.querySelector('.caracter_count');
-                counter.textContent = input.value.length;
-
-                input.addEventListener('input', function() {
-                    counter.textContent = input.value.length;
-                });
-            </script>
         </div>
 
         <div class="row mb-4">

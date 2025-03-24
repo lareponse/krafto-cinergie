@@ -129,3 +129,8 @@ table.table tbody tr td:first-child a {
 .alert.alert-warning {
     color: black;
 }
+
+ .form-floating>.form-control[data-kx-counter] {
+     padding-bottom: 0rem;
+     padding-top: 0rem;
+ }

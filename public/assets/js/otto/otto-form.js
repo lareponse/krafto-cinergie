@@ -15,31 +15,56 @@ export default class OttoForm {
 
   static caracterCounter(selector = '[data-kx-counter]') {
     document.querySelectorAll(selector).forEach(function (element) {
-      // Find counter element - either specified by selector in the attribute value
-      // or create a counter element if the attribute is empty
-      let counterElement;
+      // Skip if element is already wrapped
+      if (element.closest('.input-group')) {
+        return;
+      }
 
-      if (element.getAttribute('data-kx-counter')) {
-        // Use the selector provided in the attribute
-        counterElement = document.querySelector(
-          element.getAttribute('data-kx-counter')
-        );
+      // Ensure ID and class
+      const id =
+        element.id ||
+        'floatingInputGroup-' + Math.random().toString(36).substr(2, 9);
+      element.id = id;
+      element.classList.add('form-control');
+
+      // Create the structure
+      const inputGroup = document.createElement('div');
+      inputGroup.className = 'input-group mb-3';
+
+      // Create floating div
+      const formFloating = document.createElement('div');
+      formFloating.className = 'form-floating';
+
+      // Get reference to element's position
+      const parent = element.parentNode;
+      const nextSibling = element.nextSibling;
+
+      // Build the structure
+      formFloating.appendChild(element);
+
+      // Do not add the label
+
+      inputGroup.appendChild(formFloating);
+
+      // Insert the structure
+      if (nextSibling) {
+        parent.insertBefore(inputGroup, nextSibling);
       } else {
-        // Create and insert a counter element after the input
-        counterElement = document.createElement('span');
-        counterElement.className = 'character-count';
-        element.parentNode.insertBefore(counterElement, element.nextSibling);
+        parent.appendChild(inputGroup);
       }
 
-      // Set initial count
-      if (counterElement) {
-        counterElement.textContent = element.value.length;
+      // Create character counter
+      const counterSpan = document.createElement('span');
+      counterSpan.className = 'input-group-text';
+      counterSpan.textContent = element.value.length;
 
-        // Add event listener for input changes
-        element.addEventListener('input', function () {
-          counterElement.textContent = element.value.length;
-        });
-      }
+      // Add the counter after the form-floating div
+      inputGroup.appendChild(counterSpan);
+
+      // Update counter on input
+      element.addEventListener('input', function () {
+        counterSpan.textContent = element.value.length;
+      });
     });
   }
   /**
