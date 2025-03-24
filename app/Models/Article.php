@@ -46,6 +46,21 @@ class Article extends TightModel
         return $ret;
     }
 
+    public function bannerPictureField(): string
+    {
+        return 'avatar_landscape';
+    }
+
+    public function hasBannerPicture(): bool
+    {
+        return !empty($this->bannerPicturePath());
+    }
+
+    public function bannerPicturePath(): string
+    {
+        return $this->get($this->bannerPictureField()) ?? '';
+    }
+
     public static function filter($filters = [], $options = []): SelectInterface
     {
         //---- JOIN & FILTER SERVICE

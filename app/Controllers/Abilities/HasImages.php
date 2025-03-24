@@ -9,13 +9,14 @@ trait HasImages
     abstract public function get($dependency);
     abstract public function viewport($key, $value);
     abstract public function addError($message, $context = []);
+    abstract public function nid(): string;
 
-    // abstract public function imagesDirectory(): string;
-    
     public function imagesDirectory(): string
     {
         return $this->nid();
     }
+
+    // if the slug changes, move all files to the new slug directory
     public function HasImages__Traitor_after_save(){
         if($this->loadModel() && $this->loadModel()->slug() !== $this->formModel()->slug()){
    
@@ -27,6 +28,7 @@ trait HasImages
             $new = $this->formModel()->slug();
             $new = str_replace($old, $new, $fs->absolutePathFor($directory));
             $res = FileSystem::move($fs->absolutePathFor($directory), $new);
+            // TODO delete old directory
         }
     }
 
@@ -34,7 +36,6 @@ trait HasImages
         $controller = $this->get('Controllers\\Secret\\Image');
         $directory = $controller->buildRelativeLocator($this);
         $fs = new FileSystem($controller->imagesRootPath());
-
         try{
             $files = $fs->files($directory);
         }
@@ -78,4 +79,22 @@ trait HasImages
         $this->router()->hopBack();
     }
 
+    public function setBannerPicture()
+    {
+        $banner = $this->loadModel()->bannerPictureField();
+
+        $this->loadModel()->set($banner, '/' . $this->router()->params('path'));
+        $this->loadModel()->save(0);
+        $this->router()->hopBack();
+    }
+
+    public function unsetBannerPicture()
+    {
+        $banner = $this->loadModel()->bannerPictureField();
+
+        $this->loadModel()->set($banner, null);
+        $this->loadModel()->save(0);
+        $this->router()->hopBack();
+    }
+    
 }

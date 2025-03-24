@@ -1,0 +1,1 @@
+ALTER TABLE `article` ADD `avatar_landscape` VARCHAR(255) NULL COMMENT 'banners and heroes' AFTER `avatar`;

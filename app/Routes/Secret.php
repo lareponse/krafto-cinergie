@@ -64,6 +64,8 @@ array_push(
     $routes,
     ['GET',  '[a:nid]/[i:id]/images/setProfile/[*:path]', '::setProfilePicture', 'record_set_profile_picture'],
     ['GET',  '[a:nid]/[i:id]/images/unsetProfile', '::unsetProfilePicture', 'record_unset_profile_picture'],
+    ['GET',  '[a:nid]/[i:id]/images/setBanner/[*:path]', '::setBannerPicture', 'record_set_banner_picture'],
+    ['GET',  '[a:nid]/[i:id]/images/unsetBanner', '::unsetBannerPicture', 'record_unset_banner_picture'],
 
     ['POST', '[a:nid]/[i:id]/toggle/[a:field]', '::toggle', 'record_toggle'],
     ['POST', '[a:nid]/supprimer', '::delete', 'record_delete'],
