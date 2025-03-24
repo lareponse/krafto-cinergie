@@ -19,14 +19,51 @@ class Movie extends TightModel
     {
         return $this->get('label');
     }
+    public function before_save(): array
+    {
+        // Only process if label exists and label_indexed is empty or unchanged
+        if ($this->get('label')) {
+            $label = $this->get('label');
+            $label_indexed = $label;
+            $separator = ', ';
+
+            // Define regex patterns to match French articles at the beginning of labels
+            // Capture groups: (1) the article with space, (2) the remainder of the label
+            $patterns = [
+                '/^(la )(.+)$/ui',  // Feminine article
+                '/^(le )(.+)$/ui',  // Masculine article
+                '/^(les )(.+)$/ui', // Plural article
+                '/^(l\')(.+)$/ui'   // Elided article before vowels
+            ];
+
+            foreach ($patterns as $pattern) {
+                if (preg_match($pattern, $label, $matches)) {
+                    // Reindex by moving article to the end: "La Fontaine" → "Fontaine, La"
+                    // rtrim() ensures no trailing spaces in articles
+                    $label_indexed = $matches[2] . $separator . rtrim($matches[1]);
+                    break; // Exit loop after first match
+                }
+            }
+            $this->set('label_indexed', $label_indexed);
+        }
+        return [];
+    }
 
     public function fieldsForCompletion(): array
     {
         return [
-            'label', 'content', 'original_title', 'runtime', 'released', 'url', 'url_trailer',
+            'label',
+            'content',
+            'original_title',
+            'runtime',
+            'released',
+            'url',
+            'url_trailer',
             ['unesco_id', 'unesco_bis_id', 'unesco_ter_id'],
-            'genre_id', 'metrage_id',
-            'comment', 'casting'
+            'genre_id',
+            'metrage_id',
+            'comment',
+            'casting'
         ];
     }
 
@@ -65,7 +102,7 @@ class Movie extends TightModel
         ], [
             'eager' => false
         ]);
-        
+
         $res->columns(['id']);
         $res = $res->retCol();
 
@@ -108,7 +145,7 @@ class Movie extends TightModel
         }
 
         // written as part of refactoring, must be rewritten as a join using the PRAXIS_DIRECTOR_SLUG constant
-        if(($options['withDirectors'] ?? false) !== false){
+        if (($options['withDirectors'] ?? false) !== false) {
             $director_tag = Praxis::director();
             $Query->join(['movie_professional', 'withDirectors'], [
                 ['withDirectors', 'movie_id', 'movie', 'id'],
@@ -117,14 +154,13 @@ class Movie extends TightModel
             $Query->join(['professional', 'director'], [['withDirectors', 'professional_id', 'director', 'id']], 'LEFT OUTER');
             $Query->selectAlso(['directors' => ["GROUP_CONCAT(`director`.`firstname`, ' ', `director`.`lastname` SEPARATOR ', ')"]]);
             $Query->groupBy(['movie', 'id']);
-
         }
 
         if (isset($filters['model'])) {
             $model = $filters['model'];
             $class = get_class($model);
             switch ($class) {
-                
+
                 case Merchandise::class:
                     $Query->join(['movie_merchandise', 'merch'], [
                         ['movie', 'id', 'merch', 'movie_id'],
@@ -133,7 +169,7 @@ class Movie extends TightModel
                     $Query->selectAlso(['GROUP_CONCAT(merch.merchandise_id) as merchandise_ids']);
                     $Query->groupBy(['movie', 'id']);
                     break;
-    
+
                 case Organisation::class:
                     $Query->join(['movie_organisation', 'actedAs'], [
                         ['movie', 'id', 'actedAs', 'movie_id'],
@@ -152,7 +188,7 @@ class Movie extends TightModel
                     $Query->selectAlso(['workedAs' => ["GROUP_CONCAT(workedAs.praxis_id)"]]);
 
                     $Query->groupBy(['movie', 'id']);
-                   
+
                     break;
 
                 case Article::class:
@@ -174,28 +210,32 @@ class Movie extends TightModel
     public function relatedArticles($professionals, $organisations): array
     {
         $ret = [];
-        
+
         $articleIds = [];
 
         $res = self::database()->table('article_movie')->select(['article_id'])->whereEQ('movie_id', $this->id())->retCol();
         $articleIds = array_merge($articleIds, $res);
 
-        if(!empty($professionals)){
-            $ids = array_map(function($item) { return $item->id(); }, $professionals);
+        if (!empty($professionals)) {
+            $ids = array_map(function ($item) {
+                return $item->id();
+            }, $professionals);
             $res = self::database()->table('article_professional')->select(['articleIds' => ['DISTINCT(article_id)']])->whereNumericIn('professional_id', $ids)->limit(7);
             $res = $res->retCol();
             $articleIds = array_merge($articleIds, $res);
         }
 
-        if(!empty($organisations)) {
-            $ids = array_map(function ($item) { return $item->id(); }, $organisations);
+        if (!empty($organisations)) {
+            $ids = array_map(function ($item) {
+                return $item->id();
+            }, $organisations);
             $res = self::database()->table('article_organisation')->select(['articleIds' => ['DISTINCT(article_id)']])->whereNumericIn('organisation_id', $ids)->limit(7)->retCol();
 
             $articleIds = array_merge($articleIds, $res);
         }
 
         $articleIds = array_unique($articleIds);
-        if(empty($articleIds)){
+        if (empty($articleIds)) {
             return [];
         }
 
