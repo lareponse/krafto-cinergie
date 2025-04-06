@@ -34,10 +34,14 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
             <div class="col-lg-3">
                 <label for="publication" class="col-form-label">Date de publication</label>
             </div>
+            <?php
+            $defaultDate = (new DateTime())->modify('+1 week')->format('Y-m-d');
+            $publicationDate = $controller->formModel()->get('publication') ?: $defaultDate;
+            ?>
 
             <div class="col-lg">
-                <input type="date" class="form-control" id="publication" name="publication" value="<?= $controller->formModel()->get('publication') ?>">
-                <div class="invalid-feedback">Please add your full name</div>
+                <input type="date" class="form-control" id="publication" name="publication" value="<?= $publicationDate?>">
+                <div class="invalid-feedback">Please add the publication date</div>
             </div>
         </div>
 
