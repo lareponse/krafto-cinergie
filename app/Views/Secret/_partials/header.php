@@ -85,7 +85,7 @@
                 <path d="M12,3a7.5,7.5,0,0,1,7.5,7.5c0,7.046,1.5,8.25,1.5,8.25H3s1.5-1.916,1.5-8.25A7.5,7.5,0,0,1,12,3Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
             </svg>
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-danger">
-                <?= count($submissions ?? [])?><span class="visually-hidden">soumissions</span>
+                <?= count($submissions ?? []) ?><span class="visually-hidden">soumissions</span>
             </span>
         </a>
 
@@ -173,30 +173,31 @@
                             <a href="https://www.instagram.com/cinergie.be" class="d-inline-block link-secondary fs-5 fw-semibold text-center p-3">
                                 <span class="avatar avatar-xs d-flex align-items-center mx-auto mb-1">
                                     <img src="/public/assets/img/tools/instagram.com.png" class="img-fluid">
-
                                 </span>
                                 Instagram
                             </a>
                         </div>
+
                         <div class="col-4 d-flex justify-content-center align-items-center">
                             <a href="https://twitter.com/cinergie" class="d-inline-block link-secondary fs-5 fw-semibold text-center p-3">
                                 <span class="avatar avatar-xs avatar-circle">
                                     <svg viewBox="0 0 24 24" aria-label="X" role="img" class="r-4qtqp9 r-yyyyoo r-dnmrzs r-bnwqim r-lrvibr r-m6rgpd r-1nao33i r-16y2uox r-lwhw9o">
                                         <g>
-                                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                                         </g>
                                     </svg>
                                 </span>
                                 &nbsp;X&nbsp;
                             </a>
                         </div>
+
                         <div class="col-4 d-flex justify-content-center align-items-center">
                             <a href="https://www.youtube.com/@Cinergiebe-cp7oe" class="d-inline-block link-secondary fs-5 fw-semibold text-center p-3">
                                 <span class="avatar avatar-xs d-flex align-items-center mx-auto mb-1">
                                     <svg id="yt-logo-updated_yt1" viewBox="0 0 90 20" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
                                         <g>
-                                            <path d="M27.9727 3.12324C27.6435 1.89323 26.6768 0.926623 25.4468 0.597366C23.2197 2.24288e-07 14.285 0 14.285 0C14.285 0 5.35042 2.24288e-07 3.12323 0.597366C1.89323 0.926623 0.926623 1.89323 0.597366 3.12324C2.24288e-07 5.35042 0 10 0 10C0 10 2.24288e-07 14.6496 0.597366 16.8768C0.926623 18.1068 1.89323 19.0734 3.12323 19.4026C5.35042 20 14.285 20 14.285 20C14.285 20 23.2197 20 25.4468 19.4026C26.6768 19.0734 27.6435 18.1068 27.9727 16.8768C28.5701 14.6496 28.5701 10 28.5701 10C28.5701 10 28.5677 5.35042 27.9727 3.12324Z" fill="#FF0000"></path>
-                                            <path d="M11.4253 14.2854L18.8477 10.0004L11.4253 5.71533V14.2854Z" fill="white"></path>
+                                            <path d="M27.9727 3.12324C27.6435 1.89323 26.6768 0.926623 25.4468 0.597366C23.2197 2.24288e-07 14.285 0 14.285 0C14.285 0 5.35042 2.24288e-07 3.12323 0.597366C1.89323 0.926623 0.926623 1.89323 0.597366 3.12324C2.24288e-07 5.35042 0 10 0 10C0 10 2.24288e-07 14.6496 0.597366 16.8768C0.926623 18.1068 1.89323 19.0734 3.12323 19.4026C5.35042 20 14.285 20 14.285 20C14.285 20 23.2197 20 25.4468 19.4026C26.6768 19.0734 27.6435 18.1068 27.9727 16.8768C28.5701 14.6496 28.5701 10 28.5701 10C28.5701 10 28.5677 5.35042 27.9727 3.12324Z" fill="#FF0000" />
+                                            <path d="M11.4253 14.2854L18.8477 10.0004L11.4253 5.71533V14.2854Z" fill="white" />
                                         </g>
                                     </svg>
                                 </span>
@@ -204,6 +205,23 @@
                             </a>
                         </div>
 
+                        <div class="col-4 d-flex justify-content-center align-items-center">
+                            <a href="https://www.dailymotion.com/Cinergie_Productions" class="d-inline-block link-secondary fs-5 fw-semibold text-center p-3">
+                                <span class="avatar avatar-xs d-flex align-items-center mx-auto mb-1">
+                                    <img src="/public/assets/img/tools/dailymotion.com.jpg" class="img-fluid">
+                                </span>
+                                Dailymotion
+                            </a>
+                        </div>
+
+                        <div class="col-4 d-flex justify-content-center align-items-center">
+                            <a href="https://podcast.ausha.co/les-podcasts-de-cinergie" class="d-inline-block link-secondary fs-5 fw-semibold text-center p-3">
+                                <span class="avatar avatar-xs d-flex align-items-center mx-auto mb-1">
+                                    <img src="/public/assets/img/tools/podcast.ausha.co.jpg" class="img-fluid">
+                                </span>
+                                Ausha
+                            </a>
+                        </div>
 
                     </div>
                 </div>
