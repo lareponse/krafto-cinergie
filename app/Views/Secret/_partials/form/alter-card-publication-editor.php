@@ -3,8 +3,8 @@
 $publication_booleans = [
     'public' => ['Publique', 'Visible sur le site ?'],
     'pick' => ['Accueil', 'Présent dans les sélections de la page d\'accueil ?'],
-    'listable' => ['Listable', 'Désactivé, ne pas montrer dans les listes. Toujours accessible par son url directe, recherche et données liées'],
-    'searchable' => ['Recherchable', 'Présent dans les résultats de recherche'],
+    // 'listable' => ['Listable', 'Désactivé, ne pas montrer dans les listes. Toujours accessible par son url directe, recherche et données liées'],
+    // 'searchable' => ['Recherchable', 'Présent dans les résultats de recherche'],
 ];
 ?>
 
