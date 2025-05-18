@@ -1,7 +1,6 @@
 <?php 
 $sidemenu = [
     ['#signaletiqueSection', 'info', 'Signalétique'],
-    ['#contentSection', 'text', 'Contenu'],
     ['#publicationSection', 'info', 'Publication']
 ];
 
@@ -93,7 +92,6 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
     </div>
 </div>
 
-<?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'content', 'title' => 'Contenu', 'id' => 'contentSection']) ?>
 
 <?= $this->insert('Secret::_partials/form/alter-card-publication') ?>
 
