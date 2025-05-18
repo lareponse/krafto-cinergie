@@ -16,11 +16,32 @@ class Professional extends Krafto
 
     public function home()
     {
-        if (!$this->router()->params('FiltersOnFirstChar')) {
+        if (empty($this->router()->params())) {
             $this->router()->hop($this->urlFor($this->nid(), 'list', null, ['FiltersOnFirstChar' => '*']));
         }
 
+        $this->viewport('counters', $this->counters());
+
         parent::home();
+    }
+
+    private function counters()
+    {
+        $counting = 'select count(id) FROM professional';
+        $counters = [
+            'professionals' => null,
+            'inactives' => '`public` = 0',
+            'unlisted' => '`listable` = 0',
+            'withoutProfilePicture' => "(TRIM(avatar) = '' OR avatar IS NULL)",
+            'withoutContent' => "(TRIM(content) = '' OR content IS NULL)"
+        ];
+
+        return array_map(function ($condition) use ($counting) {
+            $query = $counting . ($condition ? ' where ' . $condition : '');
+            $query = $this->modelClassName()::raw($query);
+
+            return $query->fetchColumn();
+        }, $counters);
     }
 
     private function praxisIds()

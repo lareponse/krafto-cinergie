@@ -20,7 +20,7 @@ class Article extends TightModel
     {
         $related_ids = $this->related_ids();
 
-        
+
         $ret = [];
         $type_to_class = [
             'movie_ids' => Movie::class,
@@ -32,12 +32,12 @@ class Article extends TightModel
         ];
 
         foreach ($related_ids as $type => $ids) {
-            if(!isset($type_to_class[$type])){
-                dd('Cannot handle type '.$type);
+            if (!isset($type_to_class[$type])) {
+                dd('Cannot handle type ' . $type);
             }
             $ret[$type] = [];
 
-            if(empty($ids)){
+            if (empty($ids)) {
                 continue;
             }
             $ids = explode(',', $ids);
@@ -73,6 +73,32 @@ class Article extends TightModel
 
         if (isset($filters['hasEmbedVideo'])) {
             $Query->whereNotEmpty('embedVideo');
+        }
+
+
+        if (isset($filters['segment'])) {
+            switch ($filters['segment']) {
+                case 'partenaires':
+                    $Query->whereEQ('isPartner', 1);
+                    $Query->orderBy(['rank', 'ASC']);
+                    break;
+
+                case 'inactives':
+                    $Query->whereNotEQ('public', 1);
+                    $Query->orderBy(['rank', 'ASC']);
+                    break;
+
+                case 'withoutContent':
+                    $Query->whereEmpty('content');
+                    break;
+                case 'withoutAbstract':
+                    $Query->whereEmpty('abstract');
+                    break;
+
+                case 'withoutProfilePicture':
+                    $Query->whereEmpty('avatar');
+                    break;
+            }
         }
 
         if (isset($filters['year'])) {
@@ -136,6 +162,7 @@ class Article extends TightModel
         }
 
         $Query->orderBy(['publication', 'DESC']);
+
         return $Query;
     }
 
@@ -173,7 +200,7 @@ class Article extends TightModel
             GROUP BY
                 `article`.`id`
         ";
-        
+
         $res = Article::raw($sql)->fetch(\PDO::FETCH_ASSOC);
         return $res ? $res : [];
     }

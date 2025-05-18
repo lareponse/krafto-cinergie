@@ -14,8 +14,13 @@ class Article extends Krafto
     public function conclude(): void
     {
         $this->viewport('types', Tag::any(['parent' => 'article_category']));
+        // this is wrong, just a quick fix because FiltersOnYear is preventing from creating home(), so 1.30 AM, 85% bugs corrected, trading optimisation for sleep time
+        $this->viewport('counters', $this->counters());
+
         parent::conclude();
     }
+
+
 
     public function alter()
     {
@@ -28,6 +33,25 @@ class Article extends Krafto
                 $this->router()->hopBack();
             }
         }
+    }
+
+    private function counters()
+    {
+        $counting = 'select count(id) FROM article';
+        $counters = [
+            'articles' => null,
+            'inactives' => '`public` = 0',
+            'withoutProfilePicture' => "(TRIM(avatar) = '' OR avatar IS NULL)",
+            'withoutAbstract' => "(TRIM(abstract) = '' OR abstract IS NULL)",
+            'withoutContent' => "(TRIM(content) = '' OR content IS NULL)"
+        ];
+
+        return array_map(function ($condition) use ($counting) {
+            $query = $counting . ($condition ? ' where ' . $condition : '');
+            $query = $this->modelClassName()::raw($query);
+
+            return $query->fetchColumn();
+        }, $counters);
     }
 
     public function after_save()

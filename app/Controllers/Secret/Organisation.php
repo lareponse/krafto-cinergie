@@ -40,13 +40,13 @@ class Organisation extends Krafto
             'withoutContent' => "(TRIM(content) = '' OR content IS NULL)"
         ];
 
-        return array_map(function ($condition) use ($counting) {
+        foreach ($counters as $key => $condition) {
             $query = $counting . ($condition ? ' where ' . $condition : '');
             $query = $this->modelClassName()::raw($query);
 
-            return $query->fetchColumn();
-        }, $counters);
-
+            $counters[$key] = $query->fetchColumn();
+        }
+        return $counters;
     }
 
     private function praxisIds(){

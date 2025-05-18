@@ -1,4 +1,5 @@
 <?php $this->layout('Secret::dashboard') ?>
+<?= $this->insert('Secret::Professional/_partials/dashboard-cards'); ?>
 
 
 <div class="card border-0 flex-fill w-100" data-list='{"valueNames": ["fullName","email","gsm"], "page": 10}' id="filesTable">
