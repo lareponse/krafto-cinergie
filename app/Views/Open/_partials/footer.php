@@ -2,7 +2,7 @@
 
     <div id="branding">
         <a class="home" href="<?= $controller->router()->hyp('home'); ?>">
-            <img src="/public/assets/img/logo-cinergie.svg" alt="Logo de Cinergie.be" class="logo" width="225" height="48">
+            <img src="/public/assets/img/logo-cinergie.png" alt="Logo de Cinergie.be" class="logo" width="225" height="48">
         </a>
         <h6 class="text-uppercase">
             Le site du cin&eacute;ma belge

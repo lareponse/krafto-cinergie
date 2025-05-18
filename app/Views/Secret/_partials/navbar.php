@@ -86,10 +86,10 @@ $menu = new Menu($controller, $menu, $this);
         <!-- Brand -->
         <a class="navbar-brand" href="<?= $controller->router()->hyp('dashboard'); ?>">
             <img src="/public/assets/dashly/images/logo-small.svg" class="navbar-brand-img logo-light logo-small" alt="..." width="19" height="25">
-            <img src="/public/assets/img/logo-cinergie.svg" class="navbar-brand-img logo-light logo-large" alt="..." width="125" height="25">
+            <img src="/public/assets/img/logo-cinergie.png" class="navbar-brand-img logo-light logo-large" alt="..." width="125" height="25">
 
             <img src="/public/assets/dashly/images/logo-dark-small.svg" class="navbar-brand-img logo-dark logo-small" alt="..." width="19" height="25">
-            <img src="/public/assets/img/logo-cinergie.svg" class="navbar-brand-img logo-dark logo-large" alt="..." width="125" height="25">
+            <img src="/public/assets/img/logo-cinergie.png" class="navbar-brand-img logo-dark logo-large" alt="..." width="125" height="25">
         </a>
 
         <!-- Navbar toggler -->

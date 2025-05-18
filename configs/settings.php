@@ -50,7 +50,7 @@ $settings = array(
 
 $settings ['kortex'] = [
     'meta' => [
-      'image' => '/public/assets/img/logo-cinergie.svg'
+      'image' => '/public/assets/img/logo-cinergie.png'
     ]
 ];
 

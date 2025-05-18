@@ -25,7 +25,7 @@ $menu = [
 <header>
     <div class="fixed-layout">
         <a href="<?= $controller->router()->hyp('home') ?>" title="CINERGIE">
-            <img src="/public/assets/img/logo-cinergie.svg" alt="Logo de Cinergie.be" class="logo" width="225" height="48">
+            <img src="/public/assets/img/logo-cinergie.png" alt="Logo de Cinergie.be" class="logo" width="225" height="48">
         </a>
 
         <nav id="primary-navigation" role="navigation">
