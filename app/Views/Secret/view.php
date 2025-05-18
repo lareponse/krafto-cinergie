@@ -105,7 +105,7 @@ try {
                                 'relation' => $relationName,
                                 'context' => $linked_urn,
                                 'ottoLinkEndPoint' => '/api/id-label/' . $linked_urn . '/term/',
-                                'placeholder' => 'Qualifié',
+                                'placeholder' => 'Qui ?',
                                 'qualifierContext' => $context,
                                 'childrenTemplate' => 'Secret::' . $linked_urn . '/_partials/tab-card'
                             ])

@@ -20,26 +20,29 @@ $route = $controller->urlFor('Organisation', 'view', $model);
             <li class="list-inline-item"><a class="badge text-bg-light p-2" href="mailto:<?= $model->get('email'); ?>"><?= $model->get('email'); ?></a></li>
         </ul>
     </div>
+
     <div class="card-footer d-flex align-items-center justify-content-between">
         <?php
 
-        $common_fields = $this->Form()::hidden('return_to', $controller->router()->url() . '?tab=Organisation')
+        $common_fields = 
+              $this->Form()::hidden('return_to', $controller->router()->url())
             . $this->Form()::hidden('relation', $relation)
             . $this->Form()::hidden('source', $controller->loadModel()->id())
             . $this->Form()::hidden('target', $model->id());
 
+
         if (!empty($model->get('praxis_ids'))) {
-            $button = $this->DOM()::button($this->icon('delete', 14, ['class' => 'me-2']), ['class' => 'btn btn-sm text-danger ms-auto pe-0']);
+            $button = $this->DOM()::button($this->icon('delete', 14, ['class' => 'me-2']), ['class' => 'btn btn-sm text-danger ms-auto pe-0'], false);
 
             echo '<div>';
             foreach ($model->praxisIds() as $praxis_id) {
                 printf(
-                    '<form class="d-flex mb-2 align-items-center" action="%s" method="POST">%s%s%s%s</form>',
+                    '<form class="d-flex mb-2 align-items-center" action="%s" method="POST">%s</form>',
                     $controller->router()->hyp('dash_relation_unlink'),
-                    $common_fields,
-                    $this->Form()::hidden('qualifier', $praxis_id),
-                    $this->Form()::label('qualifier', $praxis_id, ['class' => 'otto-id-label', 'otto-urn' => 'Tag:' . $praxis_id]),
-                    $button
+                    $common_fields
+                    . $this->Form()::hidden('qualifier', $praxis_id)
+                    . $this->Form()::label('qualifier', $praxis_id, ['class' => 'otto-id-label', 'otto-urn' => 'Tag:' . $praxis_id])
+                    . $button
                 );
             }
             echo '</div>';

@@ -2,7 +2,6 @@
 
 namespace App\Controllers\Secret;
 
-use HexMakina\Crudites\Relation\AbstractRelation;
 use HexMakina\Crudites\Relation\DatabaseRelations;
 
 class Relation extends Krafto
@@ -80,20 +79,21 @@ class Relation extends Krafto
         }
         $target = $this->router()->submitted('target');
 
-        $qualifier = null;
 
         $ids = [$target];
 
         if ($this->relation instanceof \HexMakina\Crudites\Relation\OneToManyQualified) {
+            
             if (!$this->router()->submitted('qualifier')) {
                 throw new \Exception('MISSING_QUALIFIER_IDENTIFIER');
             }
             array_push($ids, $this->router()->submitted('qualifier'));
         }
-
         $errors = $this->relation->unlink($this->source, $ids);
-
+        
         if (!empty($errors)) {
+            vd($errors);
+            die(__FUNCTION__ . ' ce ne doit pas arriver, copier lerreur dans un mail a un admin');
             // TODO message back to the user
         }
     }
