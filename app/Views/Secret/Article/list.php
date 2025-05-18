@@ -23,7 +23,7 @@ $hasTimeFilters = isset($filters['year']) && isset($filters['month']);
 
         <?php
         if ($hasTimeFilters) {
-            $this->insert('Secret::_partials/filters/FiltersOnYearAndMonth', ['filters' => $filters, 'firstYear' => 1996, 'modelType' => $controller->modelClassName()::model_type()]);
+            $this->insert('Secret::_partials/filters/FiltersOnYear', ['filters' => $filters, 'firstYear' => 1996, 'modelType' => $controller->modelClassName()::model_type()]);
         }
         ?>
     </div>

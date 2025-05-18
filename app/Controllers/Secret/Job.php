@@ -7,7 +7,7 @@ use HexMakina\kadro\Models\Tag;
 class Job extends Krafto
 {
     use \App\Controllers\Abilities\HasORM;
-    use \App\Controllers\Abilities\FiltersOnYearAndMonth;
+    use \App\Controllers\Abilities\FiltersOnYear;
     use \App\Controllers\Abilities\HasNoView;
 
     public function activeSection(): string

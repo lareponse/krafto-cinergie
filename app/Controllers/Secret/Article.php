@@ -9,7 +9,7 @@ class Article extends Krafto
 {
     use \App\Controllers\Abilities\HasORM;
     use \App\Controllers\Abilities\HasImages;
-    use \App\Controllers\Abilities\FiltersOnYearAndMonth;
+    use \App\Controllers\Abilities\FiltersOnYear;
 
     public function conclude(): void
     {

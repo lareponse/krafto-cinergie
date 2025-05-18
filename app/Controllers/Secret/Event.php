@@ -8,9 +8,7 @@ use App\Models\Article;
 class Event extends Krafto
 {
     use \App\Controllers\Abilities\HasORM;
-    use \App\Controllers\Abilities\FiltersOnYearAndMonth;
-
-    
+    use \App\Controllers\Abilities\FiltersOnYear;
 
     public function activeSection(): string
     {

@@ -7,9 +7,7 @@
             if (isset($filters)) {
             ?>
                 <h2 class="card-header-title h4 text-uppercase">
-                    Pour
-                    <span class="otto-date" otto-format="<?= urlencode(json_encode(['month' => 'long', 'year' => 'numeric'])) ?>"><?= $filters['year'] ?? '' ?>-<?= $filters['month'] ?? '' ?>-01</span>
-                    (<?= count($listing) ?>)
+                    Pour <span><?= $filters['year'] ?? '' ?></span> (<?= count($listing) ?>)
                 </h2>
             <?php
             }
@@ -21,7 +19,7 @@
 
         <?php
         if (isset($filters)) {
-            $this->insert('Secret::_partials/filters/FiltersOnYearAndMonth', ['filters' => $filters, 'firstYear' => 2010, 'modelType' => $controller->modelClassName()::model_type()]);
+            $this->insert('Secret::_partials/filters/FiltersOnYear', ['filters' => $filters, 'firstYear' => 2010, 'modelType' => $controller->modelClassName()::model_type()]);
         }
         ?>
     </div>
