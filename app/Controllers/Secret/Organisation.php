@@ -20,7 +20,7 @@ class Organisation extends Krafto
     public function home()
     {
         if (empty($this->router()->params())) {
-            $this->router()->hop($this->urlFor($this->nid(), 'list', null, ['FiltersOnFirstChar' => 'A']));
+            $this->router()->hop($this->urlFor($this->nid(), 'list', null, ['FiltersOnFirstChar' => '*']));
         }
 
         parent::home();

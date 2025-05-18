@@ -1,5 +1,5 @@
 <?php
-$filter = $filters['FiltersOnFirstChar'] ?? null;
+$filter = $filters['FiltersOnFirstChar'] ?? 'null';
 
 $menu = range('A', 'Z');
 $menu = array_combine($menu, $menu);

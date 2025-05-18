@@ -29,7 +29,7 @@ class Movie extends Krafto
     public function home()
     {
         if (!$this->router()->params('FiltersOnFirstChar')) {
-            $this->router()->hop($this->urlFor($this->nid(), 'list', null, ['FiltersOnFirstChar' => 'A']));
+            $this->router()->hop($this->urlFor($this->nid(), 'list', null, ['FiltersOnFirstChar' => '*']));
         }
 
         parent::home();
