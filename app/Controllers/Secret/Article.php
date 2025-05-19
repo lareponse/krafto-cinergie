@@ -9,18 +9,32 @@ class Article extends Krafto
 {
     use \App\Controllers\Abilities\HasORM;
     use \App\Controllers\Abilities\HasImages;
-    use \App\Controllers\Abilities\FiltersOnYear;
 
     public function conclude(): void
     {
         $this->viewport('types', Tag::any(['parent' => 'article_category']));
-        // this is wrong, just a quick fix because FiltersOnYear is preventing from creating home(), so 1.30 AM, 85% bugs corrected, trading optimisation for sleep time
         $this->viewport('counters', $this->counters());
+        // this is wrong, just a quick fix because FiltersOnYear is preventing from creating home(), so 1.30 AM, 85% bugs corrected, trading optimisation for sleep time
 
         parent::conclude();
     }
 
+    public function home()
+    {
+        if (
+            !$this->router()->params('year') 
+            && $this->router()->params('nid') 
+            && count($this->router()->params()) === 1){
+            $this->router()->hop($this->urlFor($this->nid(), 'list', null, ['year' => date('Y')]));
+        }
+        
+        $filters = $this->router()->params();
+        // Return an array of records based on filters
+        $listing = $this->modelClassName()::any($filters);
 
+        $this->viewport('listing', $listing);
+        $this->viewport('filters', $filters);
+    }
 
     public function alter()
     {
@@ -39,19 +53,22 @@ class Article extends Krafto
     {
         $counting = 'select count(id) FROM article';
         $counters = [
-            'articles' => null,
+            'published' => '`public` = 1',
             'inactives' => '`public` = 0',
             'withoutProfilePicture' => "(TRIM(avatar) = '' OR avatar IS NULL)",
             'withoutAbstract' => "(TRIM(abstract) = '' OR abstract IS NULL)",
             'withoutContent' => "(TRIM(content) = '' OR content IS NULL)"
         ];
 
-        return array_map(function ($condition) use ($counting) {
+        foreach($this->viewport('types') as $type){
+            $counters[$type->get('slug')] = "`type_id` = " . $type->get('id');
+        }
+        foreach($counters as $key => $condition){
             $query = $counting . ($condition ? ' where ' . $condition : '');
             $query = $this->modelClassName()::raw($query);
-
-            return $query->fetchColumn();
-        }, $counters);
+            $counters[$key] = $query->fetchColumn();
+        }
+        return $counters;
     }
 
     public function after_save()

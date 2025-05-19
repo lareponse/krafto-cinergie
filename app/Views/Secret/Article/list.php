@@ -6,25 +6,17 @@ $hasTimeFilters = isset($filters['year']) && isset($filters['month']);
 
     <div class="card-header border-0">
         <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-end">
-            <?php
-            if ($hasTimeFilters) {
-            ?>
                 <h2 class="card-header-title h4 text-uppercase">
                     Articles publiés en
-                    <span class="otto-date" otto-format="<?= urlencode(json_encode(['month' => 'long', 'year' => 'numeric'])) ?>"><?= $filters['year'] ?? '' ?>-<?= $filters['month'] ?? '' ?></span>
+                    <span class="otto-date" otto-format="<?= urlencode(json_encode(['year' => 'numeric'])) ?>"><?= $filters['year'] ?? '' ?>-<?= $filters['month'] ?? '' ?></span>
                     (<?= count($listing) ?>)
                 </h2>
-            <?php
-            }
-            ?>
             <input class="form-control list-search mw-md-300px ms-md-auto mt-5 mt-md-0 mb-3 mb-md-0" type="search" placeholder="Chercher">
             <a href="<?= $controller->url('new'); ?>" class="btn btn-primary ms-md-4">Nouveau</a>
         </div>
 
         <?php
-        if ($hasTimeFilters) {
             $this->insert('Secret::_partials/filters/FiltersOnYear', ['filters' => $filters, 'firstYear' => 1996, 'modelType' => $controller->modelClassName()::model_type()]);
-        }
         ?>
     </div>
 

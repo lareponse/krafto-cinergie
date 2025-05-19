@@ -15,6 +15,7 @@ array_push(
     ['GET', 'organisations/segment/[a:segment]', 'Organisation::home', 'organisations_by_segment'],
     ['GET', 'profesionnals/segment/[a:segment]', 'Professional::home', 'professionals_by_segment'],
     ['GET', 'articles/segment/[a:segment]', 'Article::home', 'articles_by_segment'],
+    ['GET', 'articles/type/[i:type_id]', 'Article::home', 'articles_by_type'],
 );
 
 array_push(

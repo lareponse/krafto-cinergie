@@ -1,13 +1,13 @@
 <div class="row">
 
     <div class="col-sm-6 col-lg-4 col-xl-3 d-flex">
-        <a href="<?= $controller->router()->hyp('dash_records', ['nid'=>$controller->nid()]); ?>" class="card border-0 flex-fill w-100">
+        <a href="<?= $controller->router()->hyp('dash_records', ['nid' => $controller->nid()]); ?>" class="card border-0 flex-fill w-100">
 
             <div class="card-body">
                 <div class="row">
                     <div class="col">
-                        <h5 class="text-uppercase text-muted fw-semibold mb-2">Total</h5>
-                        <h2 class="mb-0"><?= $counters['articles']; ?></h2>
+                        <h5 class="text-uppercase text-muted fw-semibold mb-2">Disponibles</h5>
+                        <h2 class="mb-0"><?= $counters['published']; ?></h2>
                     </div>
                     <div class="col-auto">
                         <?= $this->icon('relations', 30, ['class' => 'text-primary']); ?>
@@ -17,7 +17,9 @@
         </a>
     </div>
 
- 
+
+
+
     <div class="col-sm-6 col-lg-4 col-xl-3 d-flex">
         <a href="<?= $controller->router()->hyp('dash_articles_by_segment', ['segment' => 'inactives']); ?>" class="card border-0 flex-fill w-100">
 
@@ -85,4 +87,22 @@
             </div>
         </a>
     </div>
+    <div class="col-sm-6 col-lg-4 col-xl-3 d-flex">
+        <a href="<?= $controller->router()->hyp('dash_records', ['nid' => $controller->nid()]); ?>?show=type" class="card border-0 flex-fill w-100">
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h5 class="text-uppercase text-muted fw-semibold mb-2">PAR TYPE</h5>
+                        <?= $this->icon('relations', 30, ['class' => 'text-primary']); ?>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<div class="row">
+
+ 
+</div>
 </div>

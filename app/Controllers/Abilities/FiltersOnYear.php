@@ -12,13 +12,11 @@ trait FiltersOnYear
 
     public function home()
     {
-        // requires at least a year
-        if (!$this->router()->params('year')) {
+        if (!$this->router()->params('year') && !$this->router()->params('segment')) {
             $this->router()->hop($this->urlFor($this->nid(), 'list', null, ['year' => date('Y')]));
         }
         
         $filters = $this->router()->params();
-        
         // Return an array of records based on filters
         $listing = $this->modelClassName()::any($filters);
 
