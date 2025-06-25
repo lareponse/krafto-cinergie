@@ -97,7 +97,7 @@ INSERT INTO `cinergie`.`organisation` (
 SELECT
  `id` as `id`,
 
- `urlparms` as `slug`,
+  IF(`urlparms` IS NULL OR TRIM(`urlparms`) = '', `organisation`.`id`, `urlparms`) as `slug`,
 
  TRIM(`nom`) as `label`,
  
