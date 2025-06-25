@@ -62,7 +62,7 @@ INSERT INTO `cinergie`.`merchandise` (
   `legacy_lien`
 )
 SELECT
-  CAST(REGEXP_SUBSTR(`id`, '[0-9]+$', 1) as UNSIGNED) as `id`,
+  CAST( REGEXP_REPLACE(content_item.id, '^.*?([0-9]+)$', '\\1') AS UNSIGNED) as `id`,
   STR_TO_DATE(datestamp,'%Y-%m-%d %H:%i:%s') as `created`,
 
   urlparms as `slug`,

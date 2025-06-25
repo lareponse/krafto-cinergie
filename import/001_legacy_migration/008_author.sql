@@ -57,10 +57,11 @@ INSERT INTO `cinergie`.`author` (
   `legacy_user`
 )
 SELECT
-  CAST(REGEXP_SUBSTR(`id`, '[0-9]+$', 1) as UNSIGNED) as `id`,
+  CAST( REGEXP_REPLACE(content_item.id, '^.*?([0-9]+)$', '\\1') AS UNSIGNED) as `id`,
+
   STR_TO_DATE(datestamp,'%Y-%m-%d %H:%i:%s') as `created`,
 
-  `urlparms` as `slug`,
+  IF(`urlparms` IS NULL OR TRIM(`urlparms`) = '', `content_item`.`id`, `urlparms`) as `slug`,
 
   TRIM(`field01`) as `label`,
   `tri` as `rank`,

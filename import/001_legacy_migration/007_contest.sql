@@ -64,10 +64,12 @@ INSERT INTO `cinergie`.`contest` (
   `legacy_user`
 )
 SELECT
-  CAST(REGEXP_SUBSTR(`id`, '[0-9]+$', 1) as UNSIGNED) as `id`,
+  CAST( REGEXP_REPLACE(content_item.id, '^.*?([0-9]+)$', '\\1') AS UNSIGNED) as `id`,
+
   IF(`datestamp` IS NULL or TRIM(`datestamp`) = '' or `datestamp` LIKE '0000-00-00 00:00:00', STR_TO_DATE('2022-11-21 01:01:01','%Y-%m-%d %H:%i:%s'), STR_TO_DATE(`datestamp`,'%Y-%m-%d %H:%i:%s')) as `created`,
 
-  `urlparms` as `slug`,
+  IF(`urlparms` IS NULL OR TRIM(`urlparms`) = '', `content_item`.`id`, `urlparms`) as `slug`,
+
 
   TRIM(`field01`) as `label`,
   `tri` as `rank`,
