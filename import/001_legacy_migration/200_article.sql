@@ -10,7 +10,7 @@ CREATE TABLE `cinergie`.`article` (
   `label` varchar(190) NOT NULL COMMENT 'leg:field01',
   `rank` smallint UNSIGNED DEFAULT NULL,
 
-  `avatar` varchar(255) DEFAULT NULL COMMENT 'leg:field04',
+  `avatar` varchar(355) DEFAULT NULL COMMENT 'leg:field04',
   `content` mediumtext COMMENT 'leg:field06',
 
   `public` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0: view in backend only',
