@@ -1,25 +1,30 @@
 -- STRUCTURE
-DROP TABLE IF EXISTS `contact`;
+DROP TABLE IF EXISTS `cinergie`.`contact`;
 
-CREATE TABLE `contact` (
-    `id` INT AUTO_INCREMENT PRIMARY KEY,
+-- 1) Create the table without FKs
+CREATE TABLE `cinergie`.`contact` (
+  `id`              INT AUTO_INCREMENT PRIMARY KEY,
+  `organisation_id` INT DEFAULT NULL,
+  `professional_id` INT DEFAULT NULL,
+  `reference`       VARCHAR(10) NOT NULL,
+  `label`           VARCHAR(255) NOT NULL,
+  `public`          TINYINT DEFAULT 0,
+  INDEX (`reference`),
+  INDEX (`public`),
+  INDEX (`organisation_id`),
+  INDEX (`professional_id`)
+) ENGINE=InnoDB;
 
-    `organisation_id` INT DEFAULT NULL,
-    `professional_id` INT DEFAULT NULL,
 
-    `reference` VARCHAR(10) NOT NULL,
-    `label` VARCHAR(255) NOT NULL,
+-- 2) Add both foreign‐keys in one go
+ALTER TABLE `cinergie`.`contact`
+  ADD CONSTRAINT `fk_contact_organisation`
+    FOREIGN KEY (`organisation_id`)
+    REFERENCES `cinergie`.`organisation` (`id`),
+  ADD CONSTRAINT `fk_contact_professional`
+    FOREIGN KEY (`professional_id`)
+    REFERENCES `cinergie`.`professional` (`id`);
 
-    `public` TINYINT DEFAULT 0,
-
-    FOREIGN KEY (`organisation_id`) REFERENCES `organisation` (`id`),
-    FOREIGN KEY (`professional_id`) REFERENCES `professional` (`id`),
-
-    INDEX (`reference`),
-    INDEX (`public`),
-    INDEX (`organisation_id`),
-    INDEX (`professional_id`)
-);
 
 
 -- DATA COMES FROM organisation.sql & professional.sql
