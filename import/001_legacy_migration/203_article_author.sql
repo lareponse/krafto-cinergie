@@ -21,36 +21,33 @@ CREATE TABLE `cinergie`.`article_author` (
   -- 649 at least 2 authors
   -- 34 at least 3 authors
   -- 1 at least 4 authors
-
 -- author 1
 INSERT INTO `cinergie`.`article_author` (`article_id`, `author_id`)
-SELECT `article`.`id` as `article_id`, `author`.`id` as `author_id`
-FROM article
-JOIN author on `author`.`legacy_id` = IF(LENGTH(legacy_author_ids)>2, REGEXP_SUBSTR(legacy_author_ids, '[a-z0-9_]+', 1), 'MaZee1835')
-ORDER BY `article`.`legacy_author_ids`  DESC;
+SELECT a.`id` as `article_id`, auth.`id` as `author_id`
+FROM article a
+JOIN author auth ON auth.`legacy_id` = TRIM('|' FROM SUBSTRING_INDEX(SUBSTRING_INDEX(a.legacy_author_ids, '|', 2), '|', -1))
+WHERE a.legacy_author_ids IS NOT NULL AND a.legacy_author_ids != '';
 
 -- author 2
 INSERT INTO `cinergie`.`article_author` (`article_id`, `author_id`)
-SELECT `article`.`id` as `article_id`, `author`.`id` as `author_id`
-FROM article
-JOIN author on `author`.`legacy_id` = IF(LENGTH(legacy_author_ids)>12, REGEXP_SUBSTR(legacy_author_ids, '[a-z0-9_]+', 12), 'MaZee1835')
-ORDER BY length(`article`.`legacy_author_ids`)  DESC;
-
+SELECT a.`id` as `article_id`, auth.`id` as `author_id`
+FROM article a
+JOIN author auth ON auth.`legacy_id` = TRIM('|' FROM SUBSTRING_INDEX(SUBSTRING_INDEX(a.legacy_author_ids, '|', 3), '|', -1))
+WHERE a.legacy_author_ids LIKE '%|%|%';
 
 -- author 3
 INSERT INTO `cinergie`.`article_author` (`article_id`, `author_id`)
-SELECT `article`.`id` as `article_id`, `author`.`id` as `author_id`
-FROM article
-JOIN author on `author`.`legacy_id` = IF(LENGTH(legacy_author_ids)>23, REGEXP_SUBSTR(legacy_author_ids, '[a-z0-9_]+', 23), 'MaZee1835')
-ORDER BY length(`article`.`legacy_author_ids`)  DESC;
-
+SELECT a.`id` as `article_id`, auth.`id` as `author_id`
+FROM article a
+JOIN author auth ON auth.`legacy_id` = TRIM('|' FROM SUBSTRING_INDEX(SUBSTRING_INDEX(a.legacy_author_ids, '|', 4), '|', -1))
+WHERE a.legacy_author_ids LIKE '%|%|%|%';
 
 -- author 4
 INSERT INTO `cinergie`.`article_author` (`article_id`, `author_id`)
-SELECT `article`.`id` as `article_id`, `author`.`id` as `author_id`
-FROM article
-JOIN author on `author`.`legacy_id` = IF(LENGTH(legacy_author_ids)>34, REGEXP_SUBSTR(legacy_author_ids, '[a-z0-9_]+', 34), 'MaZee1835')
-ORDER BY length(`article`.`legacy_author_ids`)  DESC;
+SELECT a.`id` as `article_id`, auth.`id` as `author_id`
+FROM article a
+JOIN author auth ON auth.`legacy_id` = TRIM('|' FROM SUBSTRING_INDEX(SUBSTRING_INDEX(a.legacy_author_ids, '|', 5), '|', -1))
+WHERE a.legacy_author_ids LIKE '%|%|%|%|%';
 
 
 ALTER TABLE `article_author`
