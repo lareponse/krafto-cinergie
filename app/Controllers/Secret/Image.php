@@ -35,7 +35,7 @@ class Image extends Krafto
         // $res = \App\Models\Image::filter()->limit(1000, 0)->retAss();
         $images = \App\Models\Image::filter()->retAss();
         $this->viewport('images', $images);
-            $mimeTypes = array_unique(array_column($images, 'mime'));
+        $mimeTypes = array_unique(array_column($images, 'mime'));
 
         $this->viewport('mime_types', array_unique(array_column($images, 'mime')));
         // $jpegOptimizer = (new OptimizerChain)
@@ -55,12 +55,12 @@ class Image extends Krafto
         //     $finder->setMaxHeight(1200);
         //     $finder->setExtensionsFilter(['jpg', 'jpeg']);
         //     // $finder->setExtensionsFilter(['jpg', 'jpeg', 'png', 'gif', 'webp']);
-            
+
         //     foreach ($finder->pathes() as $original_path => $issues) {
-                
+
         //         $resized_path = $original_path.'-resized.jpg';
         //         $image = Picture::load($original_path);
-       
+
         //         if (isset($issues['maxWidth'])) {
         //             $image->width(1920); // image.png, image.webp, image.avif
         //         }
@@ -87,14 +87,14 @@ class Image extends Krafto
         foreach ($files as $item) {
             $path = $item['path'];
             $length = strlen($item['path']);
-            if($length > $max){
+            if ($length > $max) {
                 $max = $length;
             }
         }
 
         vd($max, 'path max length');
-        
-        foreach($files as $file){
+
+        foreach ($files as $file) {
             $img = new \App\Models\Image();
             $img->import($file);
             $img->save(0);
@@ -166,16 +166,36 @@ class Image extends Krafto
             'professional/_j/jacob-marine/13001204_1790519544509377_5333094279074092783_n.jpg'
         ];
 
+
         $formats = [
-            'thumbnail' => ['width' => 250, 'height' => 250],
-            'article-card' => ['width' => 400, 'height' => 250],
-            'slick-slide' => ['width' => 250, 'height' => 280, 'fill' => 'FFFFFF'],
-            'single-film' => ['width' => 540, 'height' => 360, 'fill' => 'FFFFFF'],
-            'single-professional' => ['width' => 400, 'height' => 450, 'fill' => '000000'],
-            'single-organisation' => ['width' => 400, 'height' => 400, 'fill' => '000000'],
-            'single-article' => ['width' => 1300, 'height' => 600, 'fill' => '000000'],
-            'banner' => ['width' => 1920, 'height' => 650, 'fill' => '000000'],
+            'thumbnail' => [
+                'width'  => 250,
+                'height' => 265,
+                'fill'   => 'FFFFFF', // Previously merged thumbnail & slick-slide
+            ],
+            'card' => [
+                'width'  => 400,
+                'height' => 338,
+                'fill'   => '000000', // Merged article-card & profile
+            ],
+            'single-film' => [
+                'width'  => 540,
+                'height' => 360,
+                'fill'   => 'FFFFFF',
+            ],
+            'single-article' => [
+                'width'  => 1300,
+                'height' => 600,
+                'fill'   => '000000',
+            ],
+            'banner' => [
+                'width'  => 1920,
+                'height' => 650,
+                'fill'   => '000000',
+            ],
         ];
+
+
 
         foreach ($testPictures as $testPicture) {
             $imageResizer = new Imagine($this->fileSystem(), $testPicture);
