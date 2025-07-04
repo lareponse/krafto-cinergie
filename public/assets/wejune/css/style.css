@@ -346,71 +346,36 @@ small.frais {
    background-color: #D3121B;
    border-color: #D3121B;
 }
-
 .event-cat-all {
    color: #000000;
 }
-
-.event-cat-avant_premiere {
-   color: #ea9909;
-}
-
-a.event-cat-avant_premiere {
-   background-color: #ea9909;
-   border: none;
-}
-
+/* Événement (mauve) */
 .event-cat-evenement_agenda {
-   color: #a6a6a6;
+   color: #8e44ad;
 }
 
 a.event-cat-evenement_agenda {
-   background-color: #a6a6a6;
+   background-color: #8e44ad;
    border: none;
 }
 
-.event-cat-cineclub {
-   color: #d3339a;
-}
-
-a.event-cat-cineclub {
-   background-color: #d3339a;
-   border: none;
-}
-
-.event-cat-festival {
-   color: #4f51cc;
-}
-
-a.event-cat-festival {
-   background-color: #4f51cc;
-   border: none;
-}
-
-.event-cat-sortie_en_salle {
+/* Sorties (rouge) */
+.event-cat-sorties {
    color: #d1001d;
 }
 
-a.event-cat-sortie_en_salle {
+a.event-cat-sorties {
    background-color: #d1001d;
    border: none;
 }
 
-.event-cat-programmation_tv {
-   color: #00712b;
+/* Séance (rose) */
+.event-cat-seance {
+   color: #054cc8;
 }
 
-a.event-cat-programmation_tv {
-   background-color: #00712b;
-   border: none;
-}
-
-.event-cat-_autre_agenda {
-   color: #3a87ad;
-}
-
-a.event-cat-_autre_agenda {
-   background-color: #3a87ad;
+a.event-cat-seance {
+   background-color: #054cc8;
    border: none;
 }
 
