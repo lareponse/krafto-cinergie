@@ -21,17 +21,19 @@ class Article extends Krafto
 
     public function home()
     {
+
         if (
             !$this->router()->params('year') 
             && $this->router()->params('nid') 
             && count($this->router()->params()) === 1){
-            $this->router()->hop($this->urlFor($this->nid(), 'list', null, ['year' => date('Y')]));
-        }
-        
-        $filters = $this->router()->params();
-        // Return an array of records based on filters
-        $listing = $this->modelClassName()::any($filters);
-
+                $this->router()->hop($this->urlFor($this->nid(), 'list', null, ['year' => date('Y')]));
+            }
+            
+            $filters = $this->router()->params();
+            // Return an array of records based on filters
+    
+            $listing = $this->modelClassName()::any($filters, ['limit' => 1000]);
+            
         $this->viewport('listing', $listing);
         $this->viewport('filters', $filters);
     }
