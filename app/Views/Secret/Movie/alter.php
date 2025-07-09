@@ -147,7 +147,7 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu]) ?>
             </div>
 
             <div class="col-lg">
-                <?= $this->Form()::select('genre_id', $genres, $controller->formModel()->get('genre_id'), ['class' => 'form-select']); ?>
+                <?= $this->Form()::select('genre_id', [null => ''] + $genres, $controller->formModel()->get('genre_id'), ['class' => 'form-select']); ?>
                 <div class="invalid-feedback">Veuillez sélectionner un genre</div>
             </div>
         </div>
@@ -158,7 +158,7 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu]) ?>
             </div>
 
             <div class="col-lg">
-                <?= $this->Form()::select('metrage_id', $metrages, $controller->formModel()->get('metrage_id'), ['class' => 'form-select']); ?>
+                <?= $this->Form()::select('metrage_id', [null => '']  + $metrages, $controller->formModel()->get('metrage_id'), ['class' => 'form-select']); ?>
                 <div class="invalid-feedback">Veuillez sélectionner un métrage</div>
             </div>
         </div>
