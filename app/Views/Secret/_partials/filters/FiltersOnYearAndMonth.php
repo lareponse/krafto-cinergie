@@ -1,7 +1,7 @@
 <div class="mt-4 text-left">
     <?php
     $firstYear ??= 1989;
-    $lastYear ??= intval(date('Y'));
+    $lastYear ??= intval(date('Y')) + 1;
 
     $lastDecade =  intval($lastYear / 10) * 10;
     $firstDecade =  intval($firstYear / 10) * 10;
