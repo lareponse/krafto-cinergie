@@ -209,7 +209,7 @@ body>header nav li {
     /* padding-right: 1rem; removed on desktop view, confirm  */
 }
 
-body>main:not(.home) {
+body>main:not(#Home) {
     padding: 3rem 0.5rem;
     /* 50px = 3.125em */
 }
