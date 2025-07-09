@@ -30,16 +30,15 @@ class OneToManyQualifiedUI extends AbstractUI
     }
 
     suggest(results, list=null) {
-        this.suggestions.innerHTML = "";
-
- 
+        let targetList = list === 'qualified' ? this.qualifiedSuggestions : this.qualifierSuggestions
+        targetList.innerHTML = ''
+    
         if(results.length == 0){
             let elt = new ListItem('Aucun résultat')
-            this.suggestions.appendChild(elt.dom())
+            targetList.appendChild(elt.dom());
         }
 
         results.map((result) => {
-            let targetList = list === 'qualified' ? this.qualifiedSuggestions : this.qualifierSuggestions
             targetList.appendChild(this.clickableSuggestion(result, list))
             targetList.classList.remove("d-none")
         })
