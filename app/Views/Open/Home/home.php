@@ -1,5 +1,5 @@
 <?php $this->layout('Open::layout') ?>
-<div class="container-fluid my-5">
+<div class="container-fluid my-5" style="max-width: 1920px;">
     <?php
     $article = array_shift($articlesDiaporama);
     $href = $controller->router()->hyp('article', ['slug' => $article->slug()]);
