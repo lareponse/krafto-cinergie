@@ -68,10 +68,11 @@ $publication_booleans = [
                     <div class="invalid-feedback">Ce champs n'est pas correct</div>
                 </div>
             </li>
-
-            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                <?= $this->insert('Secret::_partials/form/review_status'); ?>
-            </li>
+            <?php if ('App\Models\Article' === get_class($controller->formModel())): ?>
+                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                    <?= $this->insert('Secret::_partials/form/review_status'); ?>
+                </li>
+            <?php endif; ?>
         </ul>
 
         <label for="publication-form-slug" class="col-form-label text-primary">Slug</label>

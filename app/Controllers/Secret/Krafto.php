@@ -37,6 +37,17 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
         return $this->nid();
     }
 
+    public static function publicationStatuses(): array
+    {
+        return [
+            'draft'             => 'Brouillon',
+            'review_requested'  => 'Demande de révision',
+            'in_review'         => 'En révision',
+            'revision_requested' => 'Révision demandée',
+            'approved'          => 'Approuvé',
+            'declined'          => 'Refusé'
+        ];
+    }
 
     public function setTemplate($template): void
     {
@@ -65,6 +76,7 @@ abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
             $this->template = $fallback;
         }
 
+        $this->viewport('publicationStatuses', static::publicationStatuses());
         $submissions = Submission::any();
         $this->viewport('submissions', $submissions);
         $title = $this->breadcrumb();
