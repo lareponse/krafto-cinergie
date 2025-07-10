@@ -61,7 +61,7 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
     </div>
 </div>
 
-<?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'abstract', 'title' => 'Chapeau', 'id' => 'abstractSection', 'wysiwyg' => false]) ?>
+<?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'abstract', 'title' => 'Chapeau', 'id' => 'abstractSection']) ?>
 <?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'content', 'title' => 'Contenu', 'id' => 'contentSection']) ?>
 <?= $this->insert('Secret::_partials/form/textarea-card', ['name' => 'embedVideo', 'title' => 'Vidéo', 'id' => 'videoSection']) ?>
 
