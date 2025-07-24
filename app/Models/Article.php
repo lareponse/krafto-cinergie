@@ -106,6 +106,11 @@ class Article extends TightModel
             $Query->whereWithBind('YEAR(`publication`) = ' . $bindname);
         }
 
+        if (isset($filters['type_id'])) {
+            $bindname = $Query->addBinding('filters_type_id', $filters['type_id']);
+            $Query->whereWithBind('`type_id` = ' . $bindname);
+        }
+
         if (isset($filters['month'])) {
             $bindname = $Query->addBinding('filters_month', $filters['month']);
             $Query->whereWithBind('MONTH(`publication`) = ' . $bindname);
