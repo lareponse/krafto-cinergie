@@ -200,6 +200,7 @@ class CookieConsent {
   }
 
   removeThridPartyContent() {
+    console.log("Removing third-party content...");
     document
       .querySelectorAll(".thirdPartyContent")
       .forEach((thirdPartyContent) => {
@@ -210,6 +211,7 @@ class CookieConsent {
 
   // Load embedded videos (YouTube, Vimeo, Dailymotion)
   loadThirdPartyContent() {
+    console.log("Loading third-party content...");
     document
       .querySelectorAll(".thirdPartyContent")
       .forEach((thirdPartyContent) => {
@@ -217,6 +219,8 @@ class CookieConsent {
         template = document.getElementById(template);
         // clone and replace with the template
         let clone = document.importNode(template.content, true);
+        console.log("Replacing third-party content with template:", template);
+        console.log("Clone:", clone);
         thirdPartyContent.parentNode.replaceChild(clone, thirdPartyContent);
       });
   }

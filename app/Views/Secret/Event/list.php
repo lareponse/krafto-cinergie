@@ -55,7 +55,7 @@
                         <td class="title">
                             <?= $this->DOM()::a($url, substr($model->get('label') ?? '', 0, 40) . '..'); ?>
                         </td>
-                        <td class="publication " data-starts="<?= $model->get('starts'); ?>">
+                        <td class="publication" data-starts="<?= $model->get('starts'); ?>">
                             <a class="otto-format otto-date" href="<?= $url ?>"><?= $model->get('starts'); ?></a>
                         </td>
                         <td class="publication" data-stops="<?= $model->get('stops'); ?>">

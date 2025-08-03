@@ -91,7 +91,6 @@ class FileUploader
                 $this->validateFileUpload($files, $i, $filename);
 
                 $targetPath = $this->safeTargetPath($filename);
-
                 if (!move_uploaded_file($files['tmp_name'][$i], $targetPath)) {
                     throw new \Exception("Error moving '$filename' to destination");
                 }
