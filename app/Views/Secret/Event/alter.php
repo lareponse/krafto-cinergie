@@ -112,6 +112,17 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
         document.querySelectorAll('.otto-OneToMany').forEach(container => {
             new OneToMany(container);
         })
+
+        const startsInput = document.getElementById('starts');
+        const stopsInput = document.getElementById('stops');
+
+        if (startsInput && stopsInput) {
+            startsInput.addEventListener('change', function() {
+                if (this.value && !stopsInput.value) {
+                    stopsInput.value = this.value;
+                }
+            });
+        }
     });
 </script>
 <?php $this->end() ?>
