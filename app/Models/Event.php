@@ -48,11 +48,6 @@ class Event extends TightModel implements EventInterface
             $Query->whereWithBind('YEAR(`starts`) = '.$bindname);
         }
 
-        if(isset($filters['month']))
-        {
-            $bindname = $Query->addBinding('filters_month', $filters['month']);
-            $Query->whereWithBind('MONTH(`starts`) = '.$bindname);
-        }
         $Query->orderBy(['starts', 'ASC']);
         return $Query;
     }

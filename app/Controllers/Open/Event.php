@@ -59,7 +59,7 @@ class Event extends Kortex
                 'className' => $tags[$category] ?? 'categorie1',
                 'title' => $event->__toString(),
                 'start' => $event->get('starts'),
-                'end' => $event->get('ends'),
+                'end' => $event->get('stops'),
                 'url_site' => $event->get('url_site'),
                 'url_internal' => $event->get('url_internal')
             ];
