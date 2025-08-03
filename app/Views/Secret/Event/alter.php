@@ -1,10 +1,10 @@
-<?php 
+<?php
 $sidemenu = [
     ['#signaletiqueSection', 'info', 'Signalétique'],
     ['#publicationSection', 'info', 'Publication']
 ];
 
-$this->layout('Secret::alter', ['sidemenu' => $sidemenu]) 
+$this->layout('Secret::alter', ['sidemenu' => $sidemenu])
 ?>
 
 <div class="card border-0 scroll-mt-3" id="signaletiqueSection">
@@ -20,8 +20,19 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
             </div>
 
             <div class="col-lg">
-                <input type="text" class="form-control" id="label" name="label" value="<?= $this->e($controller->formModel()->get('label')) ?>">
-                <div class="invalid-feedback">Please add your full name</div>
+                <input type="text" class="form-control" id="label" name="label" value="<?= $this->e($controller->formModel()->get('label')) ?>" required>
+                <div class="invalid-feedback">Title is required</div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-lg-3">
+                <label for="slug" class="col-form-label">Slug</label>
+            </div>
+
+            <div class="col-lg">
+                <input type="text" class="form-control" id="slug" name="slug" value="<?= $this->e($controller->formModel()->get('slug')) ?>" required>
+                <div class="invalid-feedback">Slug is required</div>
             </div>
         </div>
 
@@ -31,13 +42,13 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
             </div>
 
             <div class="col-lg">
-                <input type="date" class="form-control" id="starts" name="starts" value="<?= $controller->formModel()->get('starts') ?>">
-                <div class="invalid-feedback">Please add your full name</div>
+                <input type="date" class="form-control" id="starts" name="starts" value="<?= $controller->formModel()->get('starts') ?>" required>
+                <div class="invalid-feedback">Start date is required</div>
             </div>
 
             <div class="col-lg">
-                <input type="date" class="form-control" id="stops" name="stops" value="<?= $controller->formModel()->get('stops') ?>">
-                <div class="invalid-feedback">Please add your full name</div>
+                <input type="date" class="form-control" id="stops" name="stops" value="<?= $controller->formModel()->get('stops') ?>" required>
+                <div class="invalid-feedback">End date is required</div>
             </div>
         </div>
 
@@ -48,10 +59,9 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
 
             <div class="col-lg">
                 <?= $this->Form()::select('type_id', $types, $controller->formModel()->get('type_id'), ['class' => 'form-control']); ?>
-                <div class="invalid-feedback">Please add your full name</div>
+                <div class="invalid-feedback">Category is required</div>
             </div>
         </div>
-
 
         <div class="row mb-4">
             <div class="col-lg-3">
@@ -65,8 +75,8 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
             </div>
 
             <div class="col-lg">
-                <input type="text" class="form-control" id="url_internal" name="laurl_internalbel" value="<?= $this->e($controller->formModel()->get('url_internal')) ?>">
-                <div class="invalid-feedback">Please add your full name</div>
+                <input type="text" class="form-control" id="url_internal" name="url_internal" value="<?= $this->e($controller->formModel()->get('url_internal')) ?>">
+                <div class="invalid-feedback">Valid internal URL required</div>
             </div>
         </div>
 
@@ -83,7 +93,7 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
 
             <div class="col-lg">
                 <input type="text" class="form-control" id="url_site" name="url_site" value="<?= $this->e($controller->formModel()->get('url_site')) ?>">
-                <div class="invalid-feedback">Please add your full name</div>
+                <div class="invalid-feedback">Valid external URL required</div>
             </div>
         </div>
 
@@ -92,20 +102,16 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu])
     </div>
 </div>
 
-
 <?= $this->insert('Secret::_partials/form/alter-card-publication') ?>
 
 <?php $this->unshift('scripts') ?>
-    <script type="module">
-        import OneToMany from '/public/assets/js/otto/otto-complete/OneToMany.js';
+<script type="module">
+    import OneToMany from '/public/assets/js/otto/otto-complete/OneToMany.js';
 
-        document.addEventListener("DOMContentLoaded", () => {
-            console.log(document.querySelectorAll('.otto-OneToMany'))
-
-            document.querySelectorAll('.otto-OneToMany').forEach(container => {
-                console.log(container)
-                new OneToMany(container);
-            })
-        });
-    </script>
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll('.otto-OneToMany').forEach(container => {
+            new OneToMany(container);
+        })
+    });
+</script>
 <?php $this->end() ?>
