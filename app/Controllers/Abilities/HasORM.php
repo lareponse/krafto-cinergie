@@ -66,14 +66,14 @@ trait HasORM
 
         if (empty($errors)) {
             $this->logger()->notice('CRUDITES_INSTANCE_ALTERED');
-            // $this->router()->hop('dash_record', ['nid' => $this->nid(), 'id' => $this->formModel()->id()]);
+            $this->router()->hop('dash_record', ['nid' => $this->nid(), 'id' => $this->formModel()->id()]);
         } else {
-            $this->errors = $errors;
-            foreach ($this->errors() as $err) {
+            foreach ($errors as $err) {
                 if (is_array($err))
-                    $this->logger()->warning(implode(', ', $err));
+                    $this->logger()->error(implode(', ', $err));
+             
                 else
-                    $this->logger()->warning($err);
+                    $this->logger()->error("$err");
             }
             $this->setTemplate($this->nid() . '/alter');
         }
@@ -89,8 +89,8 @@ trait HasORM
     
     public function HasORM_Traitor_conclude()
     {
-        if($this->router()->targetMethod() === 'save')
-            $this->router()->hop('dash_record', ['nid' => $this->nid(), 'id' => $this->formModel()->id()]);
+        // if($this->router()->targetMethod() === 'save')
+        //     $this->router()->hop('dash_record', ['nid' => $this->nid(), 'id' => $this->formModel()->id()]);
     }
 
     public function databaseRelations()
