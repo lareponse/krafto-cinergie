@@ -74,12 +74,12 @@ $this->layout('Secret::alter', ['sidemenu' => $sidemenu]) ?>
 
         <div class="row mb-4">
             <div class="col-lg-3">
-                <label for="url_trailer" class="col-form-label">Bande annonce</label>
+                <label for="url_trailer" class="col-form-label">Bande annonce </label>
             </div>
 
             <div class="col-lg">
                 <input type="text" class="form-control" id="url_trailer" name="url_trailer" value="<?= $controller->formModel()->get('url_trailer') ?>">
-                <div class="invalid-feedback">Veuillez ajouter l'URL de la bande annonce</div>
+                <div class="invalid-feedback">Veuillez ajouter l'identifiant de la bande annonce (youtube id)</div>
             </div>
         </div>
 
