@@ -6,6 +6,8 @@ use App\Models\Submission;
 
 abstract class Krafto extends \HexMakina\kadro\Controllers\Kadro
 {
+    use \App\Controllers\Abilities\HasAvatar;
+
     protected $template = null;
 
     abstract public function modelClassName(): string;

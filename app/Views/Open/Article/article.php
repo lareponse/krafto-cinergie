@@ -3,7 +3,7 @@
 <div class="container my-5 pb-5" id="article-single">
 
     <header <?= empty($article->get('embedVideo')) ? '' : 'class="thirdPartyContent" data-consent-template="primaryEmbedVideo"'; ?>>
-        <img src=" <?= $controller->avatarFor($article); ?>" alt="Couverture de l'article <?= $article; ?>" />
+        <img src="<?= $controller->avatarFor($article); ?>" alt="Couverture de l'article <?= $article; ?>" />
     </header>
 
     <h2><?= $article->get('label'); ?></h2>

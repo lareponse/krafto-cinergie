@@ -9,6 +9,8 @@ use App\Models\Page;
 
 abstract class Kortex extends \HexMakina\kadro\Controllers\Kadro
 {
+    use \App\Controllers\Abilities\HasAvatar;
+
     protected $template = null;
     protected $pageSlug = null;
     protected $page = null;
@@ -205,53 +207,5 @@ abstract class Kortex extends \HexMakina\kadro\Controllers\Kadro
         $jsonData = json_encode($clientInfo, JSON_PRETTY_PRINT);
 
         return $jsonData;
-    }
-
-
-    public function avatarFor($record)
-    {
-        $root_path = $this->get('settings.folders.images');
-        $root_url = $this->get('settings.urls.images');
-        $res = $record->profilePicturePath();
-        // vd($res,  $root_path);
-        // will be handled by the image controller
-        if (strpos($res, '/images/') === 0) {
-            return $res;
-        }
-
-        if (empty($res) || !file_exists($root_path . $res)) {
-            $res = $this->get('settings.urls.default_image');
-        } else {
-            $res = $root_url . $res;
-        }
-
-        return $res;
-    }
-
-    public function defaultAvatar()
-    {
-        return $this->get('settings.urls.default_image');
-    }
-
-
-    public function bannerFor($record)
-    {
-        $root_path = $this->get('settings.folders.images');
-        $root_url = $this->get('settings.urls.images');
-        $res = $record->bannerPicturePath();
-
-        // will be handled by the image controller
-        if (strpos($res, '/images/') === 0) {
-            return $res;
-        }
-
-        if (empty($res) || !file_exists($root_path . $res)) {
-            // Default to avatar if banner isn't available
-            return $this->avatarFor($record);
-        } else {
-            $res = $root_url . $res;
-        }
-
-        return $res;
     }
 }

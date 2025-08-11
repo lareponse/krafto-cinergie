@@ -1,13 +1,11 @@
 <div class="row">
     <div class="col-xl-9 d-flex">
-
-
         <div class="card border-0 flex-fill w-100">
             <div class="card-body p-7">
                 <div class="row align-items-center h-100">
                     <div class="col-auto d-flex ms-auto ms-md-0">
                         <div class="avatar avatar-circle avatar-xxl">
-                            <img src="<?= $controller->loadModel()->profilePicturePath() ?>" alt="..." class="avatar-img" width="112" height="112">
+                            <img src="<?= $controller->avatarFor($controller->loadModel()); ?>" alt="Avatar" class="avatar-img" width="112" height="112">
                         </div>
                     </div>
 
@@ -72,9 +70,8 @@
             </div>
         </div>
     </div>
+
     <div class="col-xl-3 d-none d-xl-flex">
-
-
         <div class="card border-0 flex-fill w-100">
             <div class="card-body text-center">
                 <div class="row align-items-center h-100">
