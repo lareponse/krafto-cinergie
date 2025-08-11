@@ -6,15 +6,7 @@
             <div class="card-body p-7">
                 <div class="row align-items-center h-100">
                     <div class="col-auto d-flex ms-auto ms-md-0">
-                        <div class="avatar avatar-circle avatar-xxl">
-                        <?php
-                            if (empty($controller->loadModel()->profilePicturePath()))
-                                echo $this->icon('professional', 60, ['class' => 'avatar-img']);
-                            else {
-                                echo $this->DOM()::img($controller->loadModel()->profilePicturePath(), 'photo du professionel', ['class' => 'avatar-img']);
-                            }
-                        ?>
-                        </div>
+                        <div class="avatar avatar-circle avatar-xxl"><?= $this->DOM()::img($controller->avatarFor($controller->loadModel()), 'photo organisation', ['class' => 'avatar-img', 'width' => 112, 'height' => 112]); ?></div>
                     </div>
 
                     <div class="col-auto me-auto d-flex flex-column">
@@ -36,7 +28,7 @@
                             ?>
                         </span>
                         <div class="d-flex">
-                            
+
                             <a class="btn btn-primary btn-sm me-2" href="<?= $controller->url('edit') ?>">Modifier</a>
 
                             <?= $this->insert('Secret::_partials/orm/action_dropdown'); ?>

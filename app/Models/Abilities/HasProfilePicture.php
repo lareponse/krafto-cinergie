@@ -16,4 +16,20 @@ trait HasProfilePicture
     {
         return $this->get($this->profilePictureField()) ?? '';
     }
+
+
+    public function bannerPictureField(): string
+    {
+        return 'avatar_landscape';
+    }
+
+    public function hasBannerPicture(): bool
+    {
+        return !empty($this->bannerPicturePath());
+    }
+
+    public function bannerPicturePath(): string
+    {
+        return $this->get($this->bannerPictureField()) ?? '';
+    }
 }

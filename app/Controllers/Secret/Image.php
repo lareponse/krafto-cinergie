@@ -209,25 +209,29 @@ class Image extends Krafto
         $controller = $this->router()->params('nid');
         $controller = $this->get('App\\Controllers\\Secret\\' . $controller);
 
-        $uploader = new FileUploader($this->fileSystem(), $this->buildRelativeLocator($controller));
+        try {
 
-        $uploader->setAllowedMIMETypes($this->get('settings.images.allowedMIMETypes'));
-        $uploader->handleUpload($_FILES);
+            $uploader = new FileUploader($this->fileSystem(), $this->buildRelativeLocator($controller));
+            $uploader->setAllowedMIMETypes($this->get('settings.images.allowedMIMETypes'));
+            $uploader->handleUpload($_FILES);
 
-        $response = [];
+            $response = [];
 
-        // dd($uploader->errors());
-
-        header('Content-Type: application/json');
-
-        if (empty($uploader->errors())) {
-            http_response_code(200);
-            $response = ["status" => "success", "message" => "Tous les fichiers ont été téléversés"];
-        } else {
-            http_response_code(400);
-            foreach ($uploader->errors() as $message) {
-                $response[] = ["status" => "error", "message" => $message];
+            // dd($uploader->errors());
+            header('Content-Type: application/json');
+            if (empty($uploader->errors())) {
+                http_response_code(200);
+                $response = ["status" => "success", "message" => "Tous les fichiers ont été téléversés"];
+            } else {
+                http_response_code(400);
+                foreach ($uploader->errors() as $message) {
+                    $response = ["status" => "error", "message" => $message];
+                }
             }
+            
+        } catch (\Exception $e) {
+            http_response_code(500);
+            $response = ["status" => "error", "message" => $e->getMessage()];
         }
 
         echo json_encode($response);

@@ -6,19 +6,18 @@
             <div class="card-body p-7">
                 <div class="row align-items-center h-100">
                     <div class="col-auto d-flex ms-auto ms-md-0">
-                        <div class="avatar avatar-circle avatar-xxl">
-                            <img src="<?= $controller->loadModel()->profilePicturePath() ?>" alt="..." class="avatar-img" width="112" height="112">
-                        </div>
+                        <div class="avatar avatar-circle avatar-xxl"><?= $this->DOM()::img($controller->avatarFor($controller->loadModel()), 'photo organisation', ['class' => 'avatar-img', 'width' => 112, 'height' => 112]); ?></div>
+
                     </div>
 
                     <div class="col-auto me-auto d-flex flex-column">
                         <h3 class="mb-0"><?= $controller->loadModel()->get('label'); ?></h3>
                         <span class="small text-secondary fw-bold d-block mb-4"><?= $controller->loadModel()->get('original_title'); ?></span>
                         <div class="d-flex">
-                        
+
                             <a class="btn btn-primary btn-sm me-2" href="<?= $controller->url('edit') ?>">Modifier</a>
 
-                            <?= $this->insert('Secret::_partials/orm/action_dropdown');?>
+                            <?= $this->insert('Secret::_partials/orm/action_dropdown'); ?>
 
                         </div>
                     </div>

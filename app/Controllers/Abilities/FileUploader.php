@@ -31,11 +31,11 @@ class FileUploader
      */
     public function __construct(FileSystem $fileSystem, string $targetDirectory)
     {
+        $this->errors = [];
         $this->fileSystem = $fileSystem;
         $this->uploadDirectory = $this->fileSystem->absolutePathFor($targetDirectory);
         $this->fileSystem->ensureWritablePath($this->uploadDirectory);
-
-        $this->errors = [];
+    
     }
 
     // add setter for allowedMimeTypes
@@ -213,7 +213,6 @@ class FileUploader
     {
         $finalPath = $this->uploadDirectory . DIRECTORY_SEPARATOR . $finalUniqueName;
         $realPath = dirname($finalPath);
-        vd($realPath);
         if (strpos($realPath, $this->uploadDirectory) !== 0) {
             throw new \InvalidArgumentException('POTENTIAL_DIRECTORY_TRAVERSAL_ATTACK');
         }
