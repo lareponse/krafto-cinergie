@@ -11,7 +11,7 @@
       expandRows: true,
       selectable: true,
       selectMirror: true,
-      dayMaxEvents: true,
+      dayMaxEvents: false,
       fixedWeekCount: false,
       events: <?= $events_json; ?>,
       themeSystem: 'bootstrap5',
