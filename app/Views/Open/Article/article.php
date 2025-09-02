@@ -1,4 +1,4 @@
-<?php $this->layout('Open::layout') ?>
+<?php $this->layout('Open::layout'); ?>
 
 <div class="container my-5 pb-5" id="article-single">
 
@@ -10,12 +10,16 @@
 
     <div class="row">
         <div class="row g-0 mb-5 col-lg-8 align-items-start">
+            <?php if (!empty($article->get('type_label'))) :?>
 
             <div class="bg-light p-4 p-lg-5 text-justify">
                 <?= $article->get('abstract'); ?>
             </div>
 
+            <?php endif;?>
         </div>
+
+
 
         <aside id="meta" class="col-lg-4 mb-5">
             <ul class="meta-list">
@@ -25,14 +29,25 @@
                 <?php
                 }
                 ?>
-                <?php if (!empty($article->get('author_label'))) {
+                <?php if (!empty($article->get('writtenBy'))) {
+                    // explode into arrays
+                    $authors     = explode(',', $article->get('writtenBy'));
+                    $authorSlugs = explode(',', $article->get('writtenBySlugs'));
+
+                    // trim in case GROUP_CONCAT leaves spaces
+                    $authors     = array_map('trim', $authors);
+                    $authorSlugs = array_map('trim', $authorSlugs);
                 ?>
-                    <li class=""><?= $this->bi('person-fill'); ?>
-                        <a href="<?= $controller->router()->hyp('author', ['slug' => $article->get('author_slug')]) ?>"><?= $article->get('author_label'); ?></a>
-                    </li>
-                <?php
-                }
-                ?>
+                    <?php foreach ($authors as $i => $author): ?>
+                        <li class="">
+                            <?= $this->bi('person-fill'); ?>
+                            <a href="<?= $controller->router()->hyp('author', ['slug' => $authorSlugs[$i]]) ?>">
+                                <?= htmlspecialchars($author) ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                <?php } ?>
+
                 <li class=""><?= $this->bi('calendar4', ['class' => 'me-2']); ?><span class="otto-date"><?= $article->get('publication'); ?></span></li>
             </ul>
             <hr>

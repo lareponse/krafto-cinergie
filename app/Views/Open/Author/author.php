@@ -47,7 +47,7 @@
                                 <div class="card-body">
                                     <p class="date otto-date"><?= $article->get('publication') ?></p>
                                     <h5 class="card-title"><?= $article ?></h5>
-                                    <a href="" class="cta">Lire l'article</a>
+                                    <span  class="cta">Lire l'article</span>
                                 </div>
                             </a>
                         </div>
