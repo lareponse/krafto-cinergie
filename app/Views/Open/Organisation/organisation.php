@@ -8,12 +8,11 @@ $this->layout('Open::layout')
 
 <div id="organisation-single">
     <article class="w-75 mx-auto">
-
         <h1><?= $record ?></h1>
         <hr class="my-4">
         <?= $this->insert('Open::_partials/share_print', ['class' => 'compact', 'label' => $record->get('label')]); ?>
 
-        <div class="row g-0 mt-4">
+        <div class="row g-0 mt-4 vignette">
 
             <div class="col-md-4 col-lg-5">
                 <img class="img-fluid" src="<?= $controller->avatarFor($record) ?>" alt="organisation" />

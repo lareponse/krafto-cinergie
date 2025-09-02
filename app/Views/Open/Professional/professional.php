@@ -13,12 +13,12 @@ $this->layout('Open::layout')
         <hr class="my-4">
         <?= $this->insert('Open::_partials/share_print', ['label' => $record->get('label')]); ?>
 
-        <section class="row g-0 my-4">
+        <section class="row g-0 my-4 vignette">
 
             <div class="col-lg-5">
-                <img class="img-fluid w-100" src="<?= $controller->avatarFor($record) ?>" alt="professionnel">
+                <img class="img-fluid" src="<?= $controller->avatarFor($record) ?>" alt="professionnel">
             </div>
-            
+
             <div class="col-lg-7 ps-lg-5" id="infos">
 
                 <p class="text-primary">

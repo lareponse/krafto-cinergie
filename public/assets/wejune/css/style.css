@@ -694,6 +694,31 @@ span.prefix {
    height: 2px;
 }
 
+.vignette div:has(img) {
+   max-width: 17rem;
+   max-height: 17rem;
+   width: 100%;
+   aspect-ratio: 1 / 1;
+   /* Optional: Forces a square shape */
+   overflow: hidden;
+   /* Prevents overflow if image is cropped */
+   position: relative;
+   /* Good practice for positioning children */
+}
+
+.vignette div img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   /* Fills the container while keeping aspect ratio */
+   display: block;
+   /* Removes unwanted whitespace below images */
+}
+
+#organisation-single .vignette div img{
+   object-fit: contain;
+}
+
 #professionnel-single p.role {
    color: var(--bs-primary);
 }
