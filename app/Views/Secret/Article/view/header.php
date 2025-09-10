@@ -16,7 +16,8 @@
                             publication le <span class="otto-date"><?= $controller->loadModel()->get('publication'); ?></span>
                         </span>
                         <div class="d-flex">
-                            <a class="btn btn-secondary btn-sm me-2" href="<?= $controller->url('edit') ?>">Modifier</a>
+                            <a class="btn btn-primary btn-sm me-2" href="<?= $controller->url('edit') ?>">Modifier</a>
+                            <a class="btn btn-secondary btn-sm me-2" target="_blank" href="<?= $controller->router()->hyp(strtolower($controller->nid()), ['slug' => $controller->loadModel()->slug()]) ?>">Voir en ligne</a>
 
                             <?= $this->insert('Secret::_partials/orm/action_dropdown'); ?>
 

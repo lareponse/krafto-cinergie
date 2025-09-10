@@ -1,34 +1,34 @@
 <div class="row">
     <div class="col-xl-9 d-flex">
 
-        
+
         <div class="card border-0 flex-fill w-100">
             <div class="card-body p-7">
                 <div class="row align-items-center h-100">
                     <div class="col-auto d-flex ms-auto ms-md-0">
-                        <div class="avatar avatar-circle avatar-xxl"><?= $this->DOM()::img($controller->avatarFor($controller->loadModel()), 'photo organisation', ['class' => 'avatar-img', 'width' => 112, 'height' => 112]);?></div>
+                        <div class="avatar avatar-circle avatar-xxl"><?= $this->DOM()::img($controller->avatarFor($controller->loadModel()), 'photo organisation', ['class' => 'avatar-img', 'width' => 112, 'height' => 112]); ?></div>
                     </div>
 
                     <div class="col-auto me-auto d-flex flex-column">
-                        <h3 class="mb-0"><?= $controller->loadModel()->get('label');?></h3>
-                        
-                        <div class="d-flex">
-                            
-                            <a class="btn btn-primary btn-sm me-2" href="<?= $controller->url('edit') ?>">Modifier</a>
+                        <h3 class="mb-0"><?= $controller->loadModel()->get('label'); ?></h3>
 
+                        <div class="d-flex">
+
+                            <a class="btn btn-primary btn-sm me-2" href="<?= $controller->url('edit') ?>">Modifier</a>
+                            <a class="btn btn-secondary btn-sm me-2" target="_blank" href="<?= $controller->router()->hyp(strtolower($controller->nid()), ['slug' => $controller->loadModel()->slug()]) ?>">Voir en ligne</a>
                             <?= $this->insert('Secret::_partials/orm/action_dropdown'); ?>
 
                         </div>
                     </div>
 
-                </div> 
+                </div>
 
             </div>
         </div>
     </div>
     <div class="col-xl-3 d-none d-xl-flex">
 
-        
+
         <div class="card border-0 flex-fill w-100">
             <div class="card-body text-center">
                 <div class="row align-items-center h-100">
@@ -41,12 +41,12 @@
 
                             <!-- Labels -->
                             <div class="position-absolute top-50 start-50 translate-middle text-center">
-                                <h3 class="mb-0"><?=$controller->loadModel()->profileCompletion();?>%</h3>
+                                <h3 class="mb-0"><?= $controller->loadModel()->profileCompletion(); ?>%</h3>
                             </div>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
         </div>
     </div>
-</div> 
+</div>
