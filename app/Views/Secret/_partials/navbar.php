@@ -54,6 +54,7 @@ if ($controller->operator()->hasPermission('editor') || $controller->operator()-
                         'Locus' => ['label' => 'Localités'],
                         'Tag' => ['label' => 'Qualifiants'],
                         'Image' => ['label' => 'Images'],
+                        'Export' => ['label' => 'Export'],
 
                     ]
                 ]

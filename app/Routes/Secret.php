@@ -39,6 +39,8 @@ array_push(
 array_push(
     $routes,
     ['GET', 'Sanitize/Agenda', 'Sanitize::agenda', 'sanitize_agenda'],
+    ['GET', 'Export', 'Export::home', 'admin_export'],
+    ['POST', 'Export/csv', 'Export::csv', 'export_csv'],
 );
 
 array_push(
