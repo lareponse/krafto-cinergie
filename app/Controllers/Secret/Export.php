@@ -3,70 +3,32 @@
 namespace App\Controllers\Secret;
 
 use \HexMakina\BlackBox\Database\DatabaseInterface;
+use App\Models\Export as Model;
 
 class Export extends Krafto
 {
     use \App\Controllers\Abilities\HasORM;
 
-    private array $presets = [
-        'movies_complete' => [
-            'name' => 'Movies with Relations',
-            'query' => '
-                SELECT 
-                    m.*,
-                    GROUP_CONCAT(DISTINCT CONCAT(p.firstname, " ", p.lastname, " (", pt.label, ")") SEPARATOR "; ") as professionals,
-                    GROUP_CONCAT(DISTINCT CONCAT(o.label, " (", ot.label, ")") SEPARATOR "; ") as organisations,
-                    GROUP_CONCAT(DISTINCT a.label SEPARATOR "; ") as articles
-                FROM movie m
-                LEFT JOIN movie_professional mp ON m.id = mp.movie_id
-                LEFT JOIN professional p ON mp.professional_id = p.id
-                LEFT JOIN tag pt ON mp.praxis_id = pt.id
-                LEFT JOIN movie_organisation mo ON m.id = mo.movie_id
-                LEFT JOIN organisation o ON mo.organisation_id = o.id
-                LEFT JOIN tag ot ON mo.praxis_id = ot.id
-                LEFT JOIN article_movie am ON m.id = am.movie_id
-                LEFT JOIN article a ON am.article_id = a.id
-                GROUP BY m.id
-            '
-        ],
-        'professionals_complete' => [
-            'name' => 'Professionals with Relations',
-            'query' => '
-                SELECT 
-                    p.*,
-                    GROUP_CONCAT(DISTINCT CONCAT(m.label, " (", pt.label, ")") SEPARATOR "; ") as movies,
-                    GROUP_CONCAT(DISTINCT o.label SEPARATOR "; ") as organisations,
-                    GROUP_CONCAT(DISTINCT a.label SEPARATOR "; ") as articles
-                FROM professional p
-                LEFT JOIN movie_professional mp ON p.id = mp.professional_id
-                LEFT JOIN movie m ON mp.movie_id = m.id
-                LEFT JOIN tag pt ON mp.praxis_id = pt.id
-                LEFT JOIN organisation_professional op ON p.id = op.professional_id
-                LEFT JOIN organisation o ON op.organisation_id = o.id
-                LEFT JOIN article_professional ap ON p.id = ap.professional_id
-                LEFT JOIN article a ON ap.article_id = a.id
-                GROUP BY p.id
-            '
-        ],
-        'articles_complete' => [
-            'name' => 'Articles with Relations',
-            'query' => '
-                SELECT 
-                    a.*,
-                    GROUP_CONCAT(DISTINCT m.label SEPARATOR "; ") as movies,
-                    GROUP_CONCAT(DISTINCT CONCAT(p.firstname, " ", p.lastname) SEPARATOR "; ") as professionals,
-                    GROUP_CONCAT(DISTINCT o.label SEPARATOR "; ") as organisations
-                FROM article a
-                LEFT JOIN article_movie am ON a.id = am.article_id
-                LEFT JOIN movie m ON am.movie_id = m.id
-                LEFT JOIN article_professional ap ON a.id = ap.article_id
-                LEFT JOIN professional p ON ap.professional_id = p.id
-                LEFT JOIN article_organisation ao ON a.id = ao.article_id
-                LEFT JOIN organisation o ON ao.organisation_id = o.id
-                GROUP BY a.id
-            '
-        ]
-    ];
+    /**
+     * Presets are defined in a static method because they depend on runtime calls (Model::...).
+     */
+    public static function presets(): array
+    {
+        return [
+            'movies_complete' => [
+                'name' => 'Films avec catégories',
+                'query' => Model::movies(),
+            ],
+            'professionals_complete' => [
+                'name' => 'Professionnels avec catégories',
+                'query' => Model::professionals(),
+            ],
+            'organisations_complete' => [
+                'name' => 'Organisations avec catégories',
+                'query' => Model::organisations(),
+            ],
+        ];
+    }
 
     public function home(): void
     {
@@ -74,7 +36,7 @@ class Export extends Krafto
         $tables = $database->connection()->query("SHOW TABLES")->fetchAll(\PDO::FETCH_COLUMN);
 
         $this->viewport('tables', $tables);
-        $this->viewport('presets', $this->presets);
+        $this->viewport('presets', self::presets());
     }
 
     public function csv(): void
@@ -82,7 +44,7 @@ class Export extends Krafto
         $table = $this->router()->submitted('table');
         $preset = $this->router()->submitted('preset');
 
-        if ($preset && isset($this->presets[$preset])) {
+        if ($preset && isset(self::presets()[$preset])) {
             $this->exportPreset($preset);
         } elseif ($table) {
             $this->exportTable($table);
@@ -93,7 +55,7 @@ class Export extends Krafto
 
     private function exportPreset(string $preset): void
     {
-        $config = $this->presets[$preset];
+        $config = self::presets()[$preset];
         $database = $this->get(DatabaseInterface::class);
 
         $filename = $preset . '_' . date('Y-m-d_H-i-s') . '.csv';
@@ -107,7 +69,6 @@ class Export extends Krafto
         $stmt = $database->connection()->prepare($config['query']);
         $stmt->execute();
 
-        // Write headers from first row
         if ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
             fputcsv($output, array_keys($row));
             fputcsv($output, $row);
