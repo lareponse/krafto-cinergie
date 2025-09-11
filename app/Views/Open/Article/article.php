@@ -10,7 +10,7 @@
 
     <div class="row">
         <div class="row g-0 mb-5 col-lg-8 align-items-start">
-            <?php if (!empty($article->get('type_label'))) :?>
+            <?php if (!empty($article->get('abstract'))) :?>
 
             <div class="bg-light p-4 p-lg-5 text-justify">
                 <?= $article->get('abstract'); ?>
