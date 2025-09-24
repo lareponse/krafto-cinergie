@@ -2,8 +2,6 @@
 
 namespace App\Controllers\Secret;
 
-use App\Models\{Organisation, Article, Movie};
-
 class Author extends Krafto
 {
     use \App\Controllers\Abilities\HasORM;
@@ -11,6 +9,7 @@ class Author extends Krafto
     use \App\Controllers\Abilities\HasNoView {
         \App\Controllers\Abilities\HasNoView::view insteadof \App\Controllers\Abilities\HasORM;
     }
+
     public function activeSection(): string
     {
       return 'Page';
