@@ -72,7 +72,6 @@ class IdLabel extends \HexMakina\kadro\Controllers\Kadro
                 $select->whereLike('label', "%$term%");
             break;
         }
-        vd($select);
         $res = $select->retObj();
         header('Content-Type: application/json');
         echo(json_encode(array_values($res)));
