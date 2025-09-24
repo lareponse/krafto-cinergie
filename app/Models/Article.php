@@ -160,37 +160,36 @@ class Article extends TightModel
     private function related_ids(): array
     {
         $sql = "
-            SELECT
-                GROUP_CONCAT(DISTINCT article_movie.movie_id SEPARATOR ',') AS movie_ids,
-                GROUP_CONCAT(DISTINCT article_professional.professional_id SEPARATOR ',') as professional_ids,
-                GROUP_CONCAT(DISTINCT article_organisation.organisation_id SEPARATOR ',') as organisation_ids,
-                GROUP_CONCAT(DISTINCT movie_article.article_id SEPARATOR ',') AS movie_article_ids,
-                GROUP_CONCAT(DISTINCT movie_professional.professional_id SEPARATOR ',') AS movie_professional_ids,
-                GROUP_CONCAT(DISTINCT movie_organisation.organisation_id SEPARATOR ',') AS movie_organisation_ids
+           SELECT
+            -- Movies directly linked to the article
+            (SELECT GROUP_CONCAT(DISTINCT am.movie_id) FROM article_movie am
+            WHERE am.article_id = a.id) AS movie_ids,
 
-            FROM `article`
+            -- Professionals directly linked to the article
+            (SELECT GROUP_CONCAT(DISTINCT ap.professional_id) FROM article_professional ap
+            WHERE ap.article_id = a.id) AS professional_ids,
 
-            LEFT JOIN `article_movie` ON `article_movie`.`article_id` = `article`.`id`
+            -- Organisations directly linked to the article
+            (SELECT GROUP_CONCAT(DISTINCT ao.organisation_id) FROM article_organisation ao
+            WHERE ao.article_id = a.id) AS organisation_ids,
 
-            LEFT JOIN `article_professional` ON `article_professional`.`article_id` = `article`.`id`
+            -- Other articles linked to the same movies (excluding the current article)
+            (SELECT GROUP_CONCAT(DISTINCT ma.article_id) FROM article_movie am
+            JOIN article_movie ma ON ma.movie_id = am.movie_id
+            WHERE am.article_id = a.id AND ma.article_id <> a.id) AS movie_article_ids,
 
-            LEFT JOIN `article_organisation` ON `article_organisation`.`article_id` = `article`.`id`
+            -- Professionals linked via movies
+            (SELECT GROUP_CONCAT(DISTINCT mp.professional_id) FROM article_movie am
+            JOIN movie_professional mp ON mp.movie_id = am.movie_id
+            WHERE am.article_id = a.id) AS movie_professional_ids,
 
-            LEFT JOIN `article_movie` `movie_article` 
-                ON `movie_article`.`movie_id` = `article_movie`.`movie_id`
+            -- Organisations linked via movies
+            (SELECT GROUP_CONCAT(DISTINCT mo.organisation_id) FROM article_movie am
+            JOIN movie_organisation mo ON mo.movie_id = am.movie_id
+            WHERE am.article_id = a.id) AS movie_organisation_ids
 
-            LEFT JOIN `movie_professional` 
-                ON `movie_professional`.`movie_id` = `article_movie`.`movie_id`
-
-            LEFT JOIN `movie_organisation` 
-                ON `movie_organisation`.`movie_id` = `article_movie`.`movie_id`
-
-            WHERE `article`.`id` = " . $this->id() . "
-            AND `movie_article`.`article_id` <> " . $this->id() . "
-            
-            GROUP BY
-                `article`.`id`
-        ";
+            FROM article a
+            WHERE a.id = " . $this->id();
 
         $res = Article::raw($sql)->fetch(\PDO::FETCH_ASSOC);
         return $res ? $res : [];
