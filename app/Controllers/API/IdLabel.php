@@ -50,19 +50,17 @@ class IdLabel extends \HexMakina\kadro\Controllers\Kadro
     public function byTerm()
     {
         $term = $this->router()->params('term');
-        
         $class = $this->router()->params('handle');
         $class = $this->get('App\\Models\\'.$class);
 
         $select = $class::filter();
-
         switch($this->router()->params('handle')){
             case 'Professional':
-                $select->columns(['id', 'label' => ["CONCAT(professional.firstname, ' ', professional.lastname)"]]);
+                $select->columns(['id', 'label']);
 
                 $bindname = $select->addBinding('labelSearch', '%'.$term.'%');
                 $orConditions = [];
-                foreach(['firstname', 'lastname'] as $searchField){
+                foreach(['firstname', 'lastname', 'label'] as $searchField){
                     $orConditions[]= "$searchField LIKE $bindname";
                 }
                 $select->whereWithBind(implode(' OR ', $orConditions));
@@ -75,7 +73,7 @@ class IdLabel extends \HexMakina\kadro\Controllers\Kadro
             $select->whereLike('label', "%$term%");
             break;
         }
-
+        
         $res = $select->retObj();
         header('Content-Type: application/json');
         echo(json_encode(array_values($res)));
