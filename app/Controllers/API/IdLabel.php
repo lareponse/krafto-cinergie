@@ -54,9 +54,10 @@ class IdLabel extends \HexMakina\kadro\Controllers\Kadro
         $class = $this->get('App\\Models\\'.$class);
 
         $select = $class::filter();
+        $select->columns(['id', 'label']);
+
         switch($this->router()->params('handle')){
             case 'Professional':
-                $select->columns(['id', 'label']);
 
                 $bindname = $select->addBinding('labelSearch', '%'.$term.'%');
                 $orConditions = [];
@@ -68,12 +69,10 @@ class IdLabel extends \HexMakina\kadro\Controllers\Kadro
             break;
 
             default: // Movie, Article, Organisation, Author
-            $select->columns(['id', 'label']);
-            
-            $select->whereLike('label', "%$term%");
+                $select->whereLike('label', "%$term%");
             break;
         }
-        
+        vd($select);
         $res = $select->retObj();
         header('Content-Type: application/json');
         echo(json_encode(array_values($res)));
