@@ -816,6 +816,11 @@ div.embedVideo {
     padding: 1em 0;
 }
 
+.embedVideo iframe{
+    width:720px !important;
+    height:405px !important;
+}
+
 .sib-form {
     padding: 0;
 }
