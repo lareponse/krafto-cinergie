@@ -11,13 +11,15 @@ if (empty($sidemenu) || empty($controller))
                 $delete_url = $controller->router()->hyp('dash_delete', ['nid' => $controller->loadModel()->nid(), 'id' => $controller->loadModel()->id()]);
                 array_push($sidemenu, [$delete_url, 'delete', 'Supprimer']);
             }
-            
+
             foreach ($sidemenu as [$href, $icon, $label]) {
                 $content = $this->icon($icon, 14, ['class' => 'me-2']) . ' ' . $label;
                 // vd($content);
                 echo $this->DOM()::li(
-                    (string)$this->DOM()::a($href, $content, ['class' => 'd-flex align-items-center py-3'], false)
-                ,[], false);
+                    (string)$this->DOM()::a($href, $content, ['class' => 'd-flex align-items-center py-3'], false),
+                    [],
+                    false
+                );
             }
             ?>
 
@@ -25,6 +27,6 @@ if (empty($sidemenu) || empty($controller))
     </div>
 
     <div class="card-footer text-center">
-        <a href="<?= in_array(HasNoView::class, class_uses($controller)) ? $controller->url('view') : $controller->url('list') ?>" class="btn btn-secondary">Retour</a>
+        <a href="<?= !in_array('App\Controllers\Abilities\HasNoView', class_uses($controller)) ? $controller->url('view') : $controller->url('list') ?>" class="btn btn-secondary">Retour</a>
     </div>
 </div>

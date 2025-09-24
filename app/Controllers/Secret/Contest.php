@@ -5,6 +5,9 @@ namespace App\Controllers\Secret;
 class Contest extends Krafto
 {
     use \App\Controllers\Abilities\HasORM;
+    use \App\Controllers\Abilities\HasNoView {
+        \App\Controllers\Abilities\HasNoView::view insteadof \App\Controllers\Abilities\HasORM;
+    }
     use \App\Controllers\Abilities\FiltersOnYear;
 
     public function activeSection(): string
