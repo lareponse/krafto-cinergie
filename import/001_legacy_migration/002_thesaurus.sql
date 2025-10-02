@@ -40,3 +40,8 @@ SELECT
 FROM `a7_cinergie_beta`.`content_item`
 WHERE area = 'autorite' AND category = 'autorite'
 ORDER BY title ASC;
+
+
+UPDATE `thesaurus` SET `label` = 'Irak' WHERE `label` = 'Iraq';
+UPDATE `thesaurus` SET `label` = 'LGBTQIA +' WHERE `label` = 'LGTBQIA +';
+INSERT INTO `thesaurus` (`label`, `active`, `slug`) VALUES ('Syrie', '1', 'thesaurus_syrie');
