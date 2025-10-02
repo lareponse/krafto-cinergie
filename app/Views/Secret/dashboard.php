@@ -45,7 +45,7 @@
       OttoFormatDate.searchAndFormat('.otto-date');
       OttoForm.enforceFormValidations();
       OttoForm.caracterCounter('[data-kx-counter]');
-      
+
       initialiseWYSIWYG_editors();
       // const API_JSConnect_EstPresent = document.getElementById('antidoteapi_jsconnect_actif') !== null;
       // if (API_JSConnect_EstPresent) {
@@ -83,24 +83,29 @@
       });
 
       let editors, input, content;
-      document.querySelectorAll('form:has(.wysiwyg)').forEach((el) => {
-        el.addEventListener('submit', () => {
-          editors = el.querySelectorAll('.wysiwyg');
-          editors.forEach((editor) => {
+      document.querySelectorAll('form').forEach((el) => {
+        if (el.querySelector('.wysiwyg')) {
+          el.addEventListener('submit', () => {
+            editors = el.querySelectorAll('.wysiwyg');
 
-            content = editor.querySelector('.ql-editor').innerHTML;
-            if (content.replace(/<(.|\n)*?>/g, '').trim().length === 0) {
-              content = '';
-            }
+            editors.forEach((editor) => {
+              content = editor.querySelector('.ql-editor').innerHTML;
 
-            input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = editor.getAttribute('data-name');
-            input.value = content;
-            el.appendChild(input);
+              // Strip tags and check if empty
+              if (content.replace(/<(.|\n)*?>/g, '').trim().length === 0) {
+                content = '';
+              }
+
+              input = document.createElement('input');
+              input.type = 'hidden';
+              input.name = editor.getAttribute('data-name');
+              input.value = content;
+              el.appendChild(input);
+            });
           });
-        });
+        }
       });
+
       // EOF Quill.js
     }
   </script>
