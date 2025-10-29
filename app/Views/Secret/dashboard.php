@@ -111,28 +111,51 @@
   </script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-
-      // wait for Dropzone to be available globally
       const check = setInterval(() => {
         if (window.Dropzone && window.Dropzone.instances && window.Dropzone.instances.length) {
           clearInterval(check);
 
-          // attach 'success' listener to all existing Dropzone instances
           window.Dropzone.instances.forEach(dz => {
+            // ✅ SUCCESS HANDLER
             dz.on("success", (file, response) => {
               console.log("📁 File uploaded:", response);
-              // your refresh logic here
-              location.href = window.location.pathname + '#images';
-              window.location.reload();
+
+              if (response && response.status === "success") {
+                // refresh logic
+                location.href = window.location.pathname + '#images';
+                window.location.reload();
+              } else if (response && response.status === "error") {
+                console.error(`❌ Erreur : ${response.message}`);
+                console.error("Upload error:", response.message);
+              }
             });
-            
+
+            // ✅ SERVER ERROR RESPONSE (non-JSON or 4xx/5xx)
+            dz.on("error", (file, errorMessage, xhr) => {
+              console.error("🚨 Dropzone error:", errorMessage);
+
+              if (xhr && xhr.responseText) {
+                try {
+                  const json = JSON.parse(xhr.responseText);
+                  console.error(`❌ Erreur serveur : ${json.message || 'Erreur inconnue.'}`);
+                } catch (e) {
+                  console.error("❌ Erreur serveur : réponse invalide.");
+                }
+              } else {
+                console.error(`❌ Erreur : ${errorMessage}`);
+              }
+            });
+
+            // OPTIONAL: upload progress
+            dz.on("uploadprogress", (file, progress) => {
+              console.log(`⬆️ Uploading ${file.name}: ${progress.toFixed(0)}%`);
+            });
           });
         }
       }, 300);
-
-
     });
   </script>
+
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const hash = window.location.hash;
@@ -190,4 +213,5 @@
   </script>
 
 </body>
+
 </html>

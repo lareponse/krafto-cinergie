@@ -116,7 +116,7 @@ class FileUploader
     private function validateFileUpload(array $files, int $i, string $filename): void
     {
         if (!is_uploaded_file($files['tmp_name'][$i])) {
-            throw new \Exception("Potential security risk with '$filename'");
+            throw new \Exception("Potential security risk with '$filename'" . var_export($_FILES, true));
         }
 
         if ($errorMessage = $this->hasUploadErrorMessage($files['error'][$i]) !== false) {
