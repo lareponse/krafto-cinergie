@@ -20,11 +20,11 @@ $publication_booleans = [
         ?>
             <ul class="list-group list-group-flush mb-4">
                 <?php
-                foreach ($add as $name => [$label, $description]) {
+                foreach ($add as $name => [$old_ref, $description]) {
                 ?>
                     <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                         <div class="me-2">
-                            <label for="publication-form-<?= $name ?>" class="h4 mb-0 text-primary"><?= $label ?></label>
+                            <label for="publication-form-<?= $name ?>" class="h4 mb-0 text-primary"><?= $old_ref ?></label>
                             <span class="d-block small text-muted mb-0"><?= $description ?></spân>
                         </div>
                         <div class="form-check form-switch mb-0">
@@ -42,11 +42,11 @@ $publication_booleans = [
         <ul class="list-group list-group-flush">
 
             <?php
-            foreach ($publication_booleans as $name => [$label, $description]) {
+            foreach ($publication_booleans as $name => [$old_ref, $description]) {
             ?>
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                     <div class="me-2">
-                        <label for="publication-form-<?= $name ?>" class="h4 mb-0"><?= $label ?></label>
+                        <label for="publication-form-<?= $name ?>" class="h4 mb-0"><?= $old_ref ?></label>
                         <span class="d-block small text-muted mb-0"><?= $description ?></spân>
                     </div>
                     <div class="form-check form-switch mb-0">
@@ -102,4 +102,60 @@ $publication_booleans = [
         <?= $this->submitDashly(); ?>
 
     </div>
+
+<?php if(method_exists($controller->formModel(), 'isSecret')): ?>
+    <div class="card-header">
+        <h2 class="h3 mb-0 text-danger">Champs confidentiels</h2>
+    </div>
+
+    <div class="card-body">
+        <p class="small text-muted mb-3">
+            Cochez les champs qui <strong>ne doivent pas être visibles publiquement</strong>.<br>
+            Ils resteront enregistrés mais seront masqués lors de l’affichage.
+        </p>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 mb-4">
+            <?php foreach ($controller->formModel()::legacyMapping() as $new_ref => $old_ref): ?>
+
+                <div class="col">
+                    <div class="border rounded-3 p-3 h-100 d-flex justify-content-between align-items-center">
+                        <div class="form-check form-switch mb-0">
+                            <label class="d-block small text-muted"><?= htmlspecialchars($old_ref) ?>
+                                <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    role="switch"
+                                    id="secret-form-<?= $new_ref ?>"
+                                    name="secret_fields[]"
+                                    value="<?= $old_ref ?>"
+                                    <?= $controller->formModel()->isSecret($new_ref) ? 'checked="checked"' : '' ?>>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+
+        </div>
+
+
+        <!-- hidden field that stores the final semicolon string -->
+        <input type="hidden" id="secret" name="secret" value="<?= ($raw) ?>">
+
+    </div>
+    <?php endif; ?>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const checkboxes = document.querySelectorAll('input[name="secret_fields[]"]');
+        const hidden = document.querySelector('#secret');
+
+        const updateHidden = () => {
+            const selected = Array.from(checkboxes)
+                .filter(c => c.checked)
+                .map(c => c.value);
+            hidden.value = selected.join(';');
+        };
+
+        checkboxes.forEach(c => c.addEventListener('change', updateHidden));
+    });
+</script>

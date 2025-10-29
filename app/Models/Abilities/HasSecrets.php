@@ -20,10 +20,15 @@ trait HasSecrets
         'birth' => 'datenaiss'
     ];
 
+    public static function legacyMapping(): array
+    {
+        return self::$legacy_mapping;
+    }
+
     public function isSecret(string $prop)
     {
         if(!isset(self::$legacy_mapping[$prop])){
-            throw new \InvalidArgumentException($prop.' IS NOT A VALID SECRET PROP');
+            return false;
         }
         
         return mb_strpos($this->get('secret') ?? '', self::$legacy_mapping[$prop]) !== false;
