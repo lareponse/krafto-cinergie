@@ -98,7 +98,7 @@ $collection_href = $controller->router()->hyp('movies');
                     <div class="mt-4">
                         <h2 class="pb-0 line-left">Boutique</h2>
                         <?php
-                        foreach ($merchandises as $merch) {
+                        foreach ($merchandises as $record) {
                         ?>
                             <aside class="input-group commander-boutique">
                                 <button class="form-control btn-commander" data-shadow-box-template="merchandise_order" data-titre="<?= $record; ?>" data-prix="<?= $record->get('price'); ?>" data-delivery-be="<?= $record->get('deliveryBe'); ?>" data-delivery-eu="<?= $record->get('deliveryEu'); ?>" data-id="<?= $record->get('id'); ?>"><?= $this->bi('cart-plus-fill') ?> </button>
