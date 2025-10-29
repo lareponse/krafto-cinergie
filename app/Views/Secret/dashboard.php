@@ -109,6 +109,85 @@
       // EOF Quill.js
     }
   </script>
-</body>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
 
+      // wait for Dropzone to be available globally
+      const check = setInterval(() => {
+        if (window.Dropzone && window.Dropzone.instances && window.Dropzone.instances.length) {
+          clearInterval(check);
+
+          // attach 'success' listener to all existing Dropzone instances
+          window.Dropzone.instances.forEach(dz => {
+            dz.on("success", (file, response) => {
+              console.log("📁 File uploaded:", response);
+              // your refresh logic here
+              location.href = window.location.pathname + '#images';
+              window.location.reload();
+            });
+            
+          });
+        }
+      }, 300);
+
+
+    });
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const hash = window.location.hash;
+      if (!hash) return;
+      const tabLink = document.querySelector(`[data-bs-target="${hash}"]`);
+      if (!tabLink) return;
+
+      console.log("Found tab link for hash:", tabLink);
+
+      // Try several possible bootstrap contexts
+      const Bs =
+        window.bootstrap || // global bootstrap
+        (window.Tab ? {
+          Tab: window.Tab
+        } : null) || // legacy global Tab
+        (window.jQuery && window.jQuery.fn.tab ? {
+          Tab: function(el) {
+            jQuery(el).tab('show');
+          }
+        } : null);
+
+      // Fallback: manually trigger tab if no bootstrap JS is found
+      if (!Bs || !Bs.Tab) {
+        console.warn('⚠️ Bootstrap Tab not found — falling back to manual tab activation.');
+        const target = document.querySelector(hash);
+        if (target) {
+          document.querySelectorAll('.tab-pane.active').forEach(el => el.classList.remove('active', 'show'));
+          target.classList.add('active', 'show');
+          document.querySelectorAll('.nav-link.active').forEach(el => el.classList.remove('active'));
+          tabLink.classList.add('active');
+        }
+        return;
+      }
+
+      // If we have bootstrap.Tab, use it
+      try {
+        console.log("Bootstrap context:", Bs);
+        console.log(new Bs.Tab(tabLink));
+        new Bs.Tab(tabLink).show();
+
+      } catch (e) {
+        console.warn('⚠️ Bootstrap.Tab failed — falling back to manual activation.', e);
+        const target = document.querySelector(hash);
+        if (target) {
+          document.querySelectorAll('.tab-pane.active').forEach(el => el.classList.remove('active', 'show'));
+          target.classList.add('active', 'show');
+          document.querySelectorAll('.nav-link.active').forEach(el => el.classList.remove('active'));
+          tabLink.classList.add('active');
+        }
+      }
+
+      // Clean the hash from URL
+      history.replaceState(null, null, window.location.pathname);
+    });
+  </script>
+
+</body>
 </html>
