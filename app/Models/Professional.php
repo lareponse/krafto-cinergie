@@ -93,6 +93,9 @@ class Professional extends TightModel
             ]);
         }
 
+        if (isset($options['withoutDeadites']) && $options['withoutDeadites'] === true) {
+            $Query->whereEmpty('death');
+        }
         if (isset($options['withMoviePraxis'])) {
             $movie = $options['withMoviePraxis'];
             $Query->join(['movie_professional', 'workedOn'], [
@@ -119,7 +122,6 @@ class Professional extends TightModel
             $bindname = $Query->addBinding('fullNameSearch', $isLike);
             $Query->whereWithBind('CONCAT(`professional`.`firstname`, \' \',`professional`.`lastname`) LIKE ' . $bindname);
         }
-
         return $Query;
     }
 

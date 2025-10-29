@@ -28,7 +28,7 @@ class Professional extends Kortex
 
     public function professionals()
     {
-        $query = $this->routerParamsAsFilters(Model::filter([], ['withPraxis' => true]));
+        $query = $this->routerParamsAsFilters(Model::filter([], ['withPraxis' => true, 'withoutDeadites' => true]));
         $paginator = new Paginator($this->router()->params('page') ?? 1, $query);
         $paginator->perPage(22);
         $paginator->setClass(Model::class);
