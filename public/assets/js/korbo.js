@@ -139,24 +139,29 @@ class KorboUI {
   }
 
   lineElement(item) {
-    console.log(item);
+    console.log(item.price);
     let row = this.lineTemplate.content.cloneNode(true);
     row = row.querySelector('.korbo-item');
+
+    let price = parseFloat(item.price || 0);
+    let deliv = parseFloat(item.deliveryBe || 5);
+    let qty = parseInt(item.quantity || 1);
+    let total = qty * (price + deliv);
+
+    console.log('price', price, 'deliv', deliv, 'qty', qty, 'total', total);
 
     row.classList.add('korbo-item');
     row.setAttribute('data-item-id', item.id);
     row.querySelector('[data-kx-id="title"]').textContent = item.title;
-    row.querySelector('[data-kx-id="price"]').textContent = item.price;
-    row.querySelector('[data-kx-id="delivery"]').textContent = item.deliveryBe;
-    row.querySelector('[data-kx-id="quantity"]').value = item.quantity;
-    row.querySelector('[data-kx-id="total"]').textContent =
-      parseInt(item.quantity) *
-      (parseFloat(item.price) + parseFloat(item.deliveryBe));
+    row.querySelector('[data-kx-id="price"]').textContent = price;
+    row.querySelector('[data-kx-id="delivery"]').textContent = deliv;
+    row.querySelector('[data-kx-id="quantity"]').value = qty;
+    row.querySelector('[data-kx-id="total"]').textContent = total;
 
     const input = document.createElement('input');
     input.type = 'hidden';
     input.name = 'items[' + item.id + ']';
-    input.value = JSON.stringify([item.title, item.quantity]);
+    input.value = JSON.stringify([item.title, qty]);
     row.appendChild(input);
     return row;
   }
