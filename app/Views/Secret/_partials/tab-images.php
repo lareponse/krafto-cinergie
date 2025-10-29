@@ -15,6 +15,17 @@
     foreach ($images as $image) {
         $path = $directory . '/' . $image;
         $url = $controller->get('settings.urls.images');
+
+        $fullPath = $controller->get('settings.folders.images') . '/' . $path;
+        $info = @getimagesize($fullPath);
+        $type = strtolower(pathinfo($image, PATHINFO_EXTENSION));
+
+        if ($info) {
+            $resolution = $info[0] . '×' . $info[1];
+            $mime = $info['mime'];
+        } else {
+            $resolution = '—';
+        }
     ?>
         <div class="col-md-6 col-xl-3">
 
@@ -74,6 +85,35 @@
                     ];
                     ?>
                     <a href="<?= $controller->router()->hyp('dash_image_details', $route_params) ?>" class="control text-secondary p-1"><?= $this->icon('eye', 18); ?></a>
+                </div>
+
+                <div class="card-footer small  text-center bg-light py-2">
+                    <?php
+                    switch ($type) {
+                        case 'jpg':
+                        case 'jpeg':
+                            $icon = '📸'; // camera
+                            break;
+                        case 'png':
+                            $icon = '🖼️'; // framed picture
+                            break;
+                        case 'gif':
+                            $icon = '🎞️'; // film frames
+                            break;
+                        case 'webp':
+                            $icon = '🧩'; // puzzle piece (modern, web-friendly)
+                            break;
+                        case 'svg':
+                            $icon = '✒️'; // pen (vector)
+                            break;
+                        case 'bmp':
+                            $icon = '🖨️'; // printer-like old bitmap
+                            break;
+                        default:
+                            $icon = '📁'; // generic file
+                    }
+
+                    echo $icon . ' ' . $resolution ?>
                 </div>
             </div>
         </div>
