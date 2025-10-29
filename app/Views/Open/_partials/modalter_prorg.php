@@ -21,7 +21,7 @@ $title = empty($record->id()) ? 'Ajouter une nouvelle fiche' : 'Modifier ' . $re
                 <p>
                     &rarr; Veuillez compléter les données
                     <br>
-                    &rarr; Envoyez-nous votre logo par email à l'adresse <a href="mailto:info@cinergie.be">info@cinergie.be</a>
+                    &rarr; Envoyez-nous votre <?= $isPro ? 'photo' : 'logo'?> par email à l'adresse <a href="mailto:info@cinergie.be">info@cinergie.be</a>
                     <br />
                     <strong>Cinergie vous remercie de votre collaboration!</strong>
                 </p>
